@@ -302,14 +302,22 @@ class ToolBox:
                 if " & " not in n
             }
 
-        sorted_contribs = sorted(
-            [{"feature": f, "contribution": v} for f, v in contribs.items()],
-            key=lambda x: -abs(x["contribution"]),
-        )
         feature_values = {
             col: _feat_val(instance.iloc[0][col])
             for col in self.X_test.columns
         }
+        sorted_contribs = sorted(
+            [
+                {
+                    "feature": f,
+                    "value": feature_values.get(f),
+                    "value_human": _humanize(f, feature_values.get(f)),
+                    "contribution": v,
+                }
+                for f, v in contribs.items()
+            ],
+            key=lambda x: -abs(x["contribution"]),
+        )
 
         return {
             "instance_id": instance_id,
@@ -319,7 +327,6 @@ class ToolBox:
             "contribution_space": "log",
             "note": "Positive Beiträge erhöhen, negative senken die Vorhersage (multiplikativ via exp).",
             "contributions": sorted_contribs,
-            "feature_values": feature_values,
         }
 
     def _tool_get_partial_dependence(
@@ -344,10 +351,15 @@ class ToolBox:
                     self.X_test[feature].dtype
                 )
             avg_pred = float(self.model.predict(X_copy).mean())
-            results.append({
-                "value": int(val) if feature in CATEGORICAL_COLS else round(float(val), 4),
+            raw_val = int(val) if feature in CATEGORICAL_COLS else round(float(val), 4)
+            entry = {
+                "value": raw_val,
                 "avg_prediction": round(avg_pred, 3),
-            })
+            }
+            human = _humanize(feature, raw_val)
+            if human is not None:
+                entry["value_human"] = human
+            results.append(entry)
 
         return {
             "feature": feature,
@@ -372,6 +384,7 @@ class ToolBox:
             return {
                 "feature": feature,
                 "instance_value": int(val),
+                "instance_value_human": _humanize(feature, val),
                 "type": "categorical",
                 "training_distribution": distribution,
             }
@@ -381,6 +394,7 @@ class ToolBox:
             return {
                 "feature": feature,
                 "instance_value": round(float(val), 4),
+                "instance_value_human": _humanize(feature, val),
                 "type": "numerical",
                 "percentile_in_train": round(percentile, 1),
                 "train_min": round(float(train_vals.min()), 4),
@@ -422,11 +436,13 @@ class ToolBox:
         for idx in top_k_idx:
             row = self.X_train.iloc[idx]
             fv = {col: _feat_val(row[col]) for col in self.X_train.columns}
+            fv_human = {col: h for col in fv if (h := _humanize(col, fv[col])) is not None}
             pred = float(self.model.predict(self.X_train.iloc[[idx]])[0])
             results.append({
                 "train_index": int(idx),
                 "distance": round(float(dists[idx]), 4),
                 "feature_values": fv,
+                "feature_values_human": fv_human,
                 "prediction": round(pred, 2),
             })
 
@@ -502,7 +518,7 @@ class ToolBox:
 # ------------------------------------------------------------------
 # Helfer
 # ------------------------------------------------------------------
-def _preview(obj: Any, max_len: int = 300) -> Any:
+def _preview(obj: Any, max_len: int = 1000) -> Any:
     if isinstance(obj, (dict, list)):
         s = repr(obj)
         return s if len(s) <= max_len else s[:max_len] + "…"
@@ -517,3 +533,22 @@ def _feat_val(val: Any) -> Any:
     if isinstance(val, (np.floating,)):
         return float(val)
     return val
+
+
+def _humanize(feature: str, value: Any) -> str | None:
+    """Konvertiert rohe Feature-Werte in lesbare Strings für das LLM."""
+    try:
+        if feature == "temp":       return f"~{float(value)*41:.1f} °C"
+        if feature == "hum":        return f"{float(value)*100:.0f} %"
+        if feature == "windspeed":  return f"{float(value)*67:.1f} km/h"
+        if feature == "hr":         return f"{int(value):02d}:00 Uhr"
+        if feature == "weekday":    return ["So","Mo","Di","Mi","Do","Fr","Sa"][int(value)]
+        if feature == "mnth":       return ["","Jan","Feb","Mär","Apr","Mai","Jun",
+                                            "Jul","Aug","Sep","Okt","Nov","Dez"][int(value)]
+        if feature == "weathersit": return {1:"klar/wenige Wolken",2:"Nebel/bewölkt",
+                                            3:"leichter Regen/Schnee",4:"Starkregen/Gewitter"}.get(int(value))
+        if feature == "yr":         return "2011" if int(value) == 0 else "2012"
+        if feature == "holiday":    return "Feiertag" if int(value) == 1 else "kein Feiertag"
+    except (ValueError, TypeError, IndexError):
+        pass
+    return None
