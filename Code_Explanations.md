@@ -1,9 +1,3 @@
-Ich lese jetzt alle 8 Notebooks vollständig und liefere danach ein zusammenhängendes Markdown-Dokument. Das wird lang.
-
-Hier ist das vollständige Markdown-Dokument für das gesamte Repository — `utils/*.py` und alle 8 Notebooks. Es ist lang; ich habe Strukturtreue über Wiederholung gestellt und nutze für jeden Codeblock weiter das definierte Schema.
-
----
-
 # Repository-Erklärung: LLM-gestützte XAI für Fahrradverleih-Prognosen
 
 # 1. Repo-Überblick
