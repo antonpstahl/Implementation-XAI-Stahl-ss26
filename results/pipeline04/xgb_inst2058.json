@@ -4,13 +4,13 @@
   "loss_key": "poisson_log",
   "xai_model": "xgb",
   "instance_id": 2058,
-  "explanation": "Das Modell sagt für diese Stunde rund 179 Ausleihvorgänge vorher, während tatsächlich 238 Fahrräder ausgeliehen wurden. Die Abweichung von knapp 60 Rädern entspricht etwa 25 Prozent — das ist ein mäßiges Ergebnis. Das Modell unterschätzt hier die Nachfrage merklich, trifft die Größenordnung aber grundsätzlich noch.\n\nDen stärksten bremsenden Effekt hat das Jahr 2011 selbst: Da der Verleih damals noch weniger bekannt war und das Netz kleiner war, rechnet das Modell generell mit niedrigeren Ausleihzahlen als in 2012. Das zieht die Vorhersage deutlich nach unten und ist der einflussreichste einzelne Faktor in dieser Stunde. Ebenfalls dämpfend wirkt die hohe Luftfeuchtigkeit von 82 Prozent — an feuchten Abenden scheuen viele Nutzer das Rad erfahrungsgemäß. Positiv wirkt hingegen die Uhrzeit: 20 Uhr ist noch Teil der Abendspitze, und das Modell erkennt, dass nach der Arbeit viele Menschen das Rad für die Heimfahrt nutzen. Die angenehme Temperatur von knapp 20 °C und der schwache Wind unterstützen die Nachfrage zusätzlich, schlagen aber weniger stark zu Buche.\n\nFür den Betrieb bedeutet das: An Dienstagabenden im Herbst, auch bei leichtem Nebel, sollten an zentralen Stationen genügend Räder bereitstehen, da die Abendnachfrage verlässlich hoch ist. Wartungs- und Umverteilungsarbeiten sollten besser nach 21 Uhr angesetzt werden, wenn der Feierabendverkehr abklingt und die Stationen wieder zugänglicher sind.",
-  "elapsed_s": 11.88,
+  "explanation": "Das Modell sagt für diese Stunde rund 194 ausgeliehene Fahrräder vorher, während tatsächlich 243 Räder unterwegs waren. Das ist eine Abweichung von etwa 20 Prozent — das Modell hat die Nachfrage damit mäßig getroffen und die tatsächliche Nutzung spürbar unterschätzt.\n\nDen stärksten bremsenden Einfluss übt das Jahr 2011 aus. Da das System damals noch vergleichsweise jung war, geht das Modell grundsätzlich von einer geringeren Gesamtnachfrage aus als in späteren Jahren — und zieht die Vorhersage entsprechend nach unten. Dem entgegen wirkt die angenehme Temperatur von rund 25 °C, die Lust aufs Radfahren macht und die Nachfrage klar ankurbelt. Ebenfalls bremsend ist die recht hohe Luftfeuchtigkeit von 83 %, die erfahrungsgemäß manche Nutzerinnen und Nutzer vom Fahrrad abhält — der Effekt ist aber schwächer als der der Temperatur. Dass es ein Samstagabend im September ist, sorgt zwar für eine gewisse Grundnachfrage durch Freizeit- und Abendaktivitäten, dämpft sie aber leicht, weil die typischen Pendlerspitzen ausbleiben.\n\nFür den Betrieb empfiehlt es sich, an warmen Samstagabenden im Spätsommer die Verfügbarkeit an beliebten Ausgehorten und Parks großzügig aufzustocken — das Modell scheint diese Kombination aus Wochenende und guter Stimmungslage zu unterschätzen. Wartungsarbeiten sollten dagegen nicht in die Abendstunden eines solchen Tages fallen, sondern auf feuchte oder kühle Nächte unter der Woche verlegt werden.",
+  "elapsed_s": 10.83,
   "usage": {
-    "input_tokens": 618,
-    "output_tokens": 503,
+    "input_tokens": 616,
+    "output_tokens": 498,
     "cache_read_input_tokens": 1212
   },
-  "prediction": 179.473,
-  "y_true": 238.0
+  "prediction": 194.0592,
+  "y_true": 243.0
 }

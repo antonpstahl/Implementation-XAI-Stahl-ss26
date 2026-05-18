@@ -4,14 +4,14 @@
   "loss_key": "poisson_log",
   "xai_model": "xgb",
   "instance_id": 580,
-  "explanation": "Das Modell sagt für diese Stunde rund 12 Fahrräder vorher, tatsächlich wurden jedoch nur 5 ausgeliehen. Das ist eine deutliche Überschätzung — die Vorhersage ist schlecht getroffen, das Modell liegt mehr als doppelt so hoch wie der reale Wert.\n\nDer mit Abstand stärkste Bremseffekt kommt von der Uhrzeit: Es ist Mitternacht (0 Uhr), und genau das zieht die Vorhersage massiv nach unten — es ist der größte einzelne Einflussfaktor im gesamten Diagramm. Nachts schläft die Stadt, kaum jemand leiht ein Fahrrad. Zusätzlich wirken Monat und Temperatur gemeinsam dämpfend: Januar ist der kälteste Wintermonat, und knapp 9 °C sorgen dafür, dass die meisten Menschen lieber drinbleiben. Auch das Jahr 2011 (der Verleih steckte noch in den Kinderschuhen) und der Montag drücken die erwartete Nachfrage weiter nach unten — Pendler auf dem Heimweg oder Freizeitfahrten gibt es um Mitternacht an einem Montag kaum. Das klare Wetter und die moderate Luftfeuchtigkeit heben die Vorhersage minimal an, können aber die negativen Einflüsse nicht ausgleichen.\n\nFür den Betrieb bedeutet das: In Winternächten — vor allem an Werktagen nach Mitternacht — reichen wenige bereitgestellte Fahrräder völlig aus; zwei bis fünf Räder an solchen Stationen genügen. Gleichzeitig bieten solche ruhigen Nachtstunden ideale Zeitfenster für Wartung, Umverteilung und Inspektion des Fuhrparks, ohne den laufenden Betrieb zu stören.",
+  "explanation": "Das Modell sagte für diese Stunde **64,6 Fahrradausleihen** vorher; tatsächlich wurden **63 Fahrräder** ausgeliehen. Das ist eine sehr gute Vorhersage – die Abweichung beträgt weniger als 3 %.\n\nAusgangspunkt war der Durchschnittswert des Modells von rund 191 Ausleihen (entspricht dem Basiswert im Plot). Von dort aus haben vier Merkmale die Vorhersage deutlich nach unten gedrückt: Am stärksten wirkte die **Uhrzeit 22:00 Uhr** – spätnachts ist das Ausleihgeschäft naturgemäß stark rückläufig, was den größten einzelnen Bremseffekt auslöste. Fast genauso stark bremste das **Jahr 2011** (yr = 0): Das System war damals noch weniger bekannt und hatte eine deutlich geringere Stammkundschaft als im Folgejahr. Auch der **Monat März** (mnth = 3) zieht die Vorhersage nach unten, da der Frühling noch nicht richtig begonnen hat und das Wetter die Leute weniger auf die Räder lockt. Schließlich dämpfte die **Temperatur von knapp 15 °C** die Nachfrage zusätzlich – angenehm, aber noch nicht warm genug für regen Freizeitverkehr. Die übrigen Faktoren wie klares Wetter, Samstag, kein Wind und kein Feiertag wirkten marginal positiv, konnten die Bremsen jedoch kaum kompensieren.\n\nFür den Betrieb bedeutet das: An Spätnächten im frühen Frühjahr reichen kleine Stationen mit wenigen bereitgestellten Rädern völlig aus. Wartungs- und Umverteilungsarbeiten lassen sich ideal in diesen ruhigen Nachtstunden nach 22:00 Uhr einplanen, ohne den laufenden Betrieb zu stören.",
   "plot_file": "waterfall_xgb_poisson_log_inst580.png",
-  "elapsed_s": 12.37,
+  "elapsed_s": 12.66,
   "usage": {
-    "input_tokens": 2308,
-    "output_tokens": 495,
+    "input_tokens": 2241,
+    "output_tokens": 524,
     "cache_read_input_tokens": 0
   },
-  "prediction": 12.1144,
-  "y_true": 5.0
+  "prediction": 64.5773,
+  "y_true": 63.0
 }

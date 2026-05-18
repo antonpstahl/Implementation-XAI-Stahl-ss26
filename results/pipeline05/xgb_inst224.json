@@ -4,14 +4,14 @@
   "loss_key": "poisson_log",
   "xai_model": "xgb",
   "instance_id": 224,
-  "explanation": "Das Modell sagt für diese Stunde 286,9 ausgeliehene Fahrräder vorher, während tatsächlich 270 Räder ausgeliehen wurden. Die Abweichung beträgt knapp 17 Fahrräder, was einer Genauigkeit von etwa 94 % entspricht — das ist eine gute Vorhersage, die den realen Wert sehr nah trifft.\n\nDen größten Auftrieb gibt die Uhrzeit 20:00 Uhr: Der Abend nach Feierabend ist noch eine aktive Phase, in der viele Menschen Fahrräder für den Heimweg oder Freizeitausflüge nutzen. Dieser Faktor erhöht die Vorhersage am stärksten. Deutlich gegenwirkend ist das Jahr 2011 (yr = 0): Da das Bikeshare-System damals noch relativ neu und weniger bekannt war, liegt die erwartete Nachfrage strukturell niedriger als in späteren Jahren — dieser Balken zieht die Vorhersage merklich nach unten. Als dritter wichtiger Treiber wirkt die angenehm warme Temperatur von rund 33 °C positiv: Solche Sommerwärme lädt zum Radfahren ein und erhöht die Nachfrage spürbar. Ergänzend dazu steigert der Monat Juli (Hochsommer) die Vorhersage zusätzlich leicht.\n\nFür den Betrieb empfiehlt es sich, an Sommerabenden in 2011 vergleichbaren Wachstumsphasen eines Systems ausreichend Fahrräder an gut frequentierten Stationen bereitzustellen, da trotz des noch geringeren Systemreifegrads bereits hohe Nachfrage herrscht. Wartungsarbeiten sollten gezielt in die Nachtstunden nach 22:00 Uhr gelegt werden, wenn die Nutzung stark zurückgeht.",
+  "explanation": "Das Modell sagt für diese Stunde 112 Ausleihen vorher, tatsächlich wurden 96 Fahrräder ausgeliehen. Die Abweichung von 16 Rädern entspricht etwa 17 % — das ist eine mäßige Schätzung: die Größenordnung stimmt, aber das Modell überschätzt die Nachfrage spürbar.\n\nDen stärksten Einfluss hat die Temperatur von nur etwa 8 °C: Dieser Wert liegt deutlich unter dem, was Radfahrer als angenehm empfinden, und drückt die Vorhersage kräftig nach unten. Ohne diesen Kälteeffekt wäre die vorhergesagte Zahl noch deutlich höher ausgefallen. Gegenläufig wirkt die Abendstunde 19 Uhr: Der Feierabendverkehr ist der zweitstärkste Treiber und hebt die Nachfrage erheblich an, da viele Berufspendler jetzt nach Hause fahren. Drittens zieht der Monat Februar die Vorhersage ebenfalls nach unten — der Februar gilt systemweit als ruhiger Wintermonat mit generell weniger Ausleihaktivität. Zusätzlich dämpft das Jahr 2011 die Schätzung leicht, da das Bikeshare-System damals noch weniger Nutzer hatte als im Folgejahr. Kleinere positive Einflüsse wie der Wochentag Donnerstag, niedrige Luftfeuchtigkeit und klares Wetter fallen kaum ins Gewicht.\n\nFür den Betrieb bedeutet das: An kalten Februarabenden reicht eine reduzierte Stationsbestückung aus — trotz der Pendlerspitze um 19 Uhr hält sich die Nachfrage in Grenzen. Wartungsarbeiten lassen sich gut in die frühen Morgenstunden oder den Nachmittag legen, bevor die Abendspitze einsetzt.",
   "plot_file": "waterfall_xgb_poisson_log_inst224.png",
-  "elapsed_s": 12.83,
+  "elapsed_s": 11.99,
   "usage": {
-    "input_tokens": 2309,
-    "output_tokens": 499,
+    "input_tokens": 2241,
+    "output_tokens": 520,
     "cache_read_input_tokens": 0
   },
-  "prediction": 286.8653,
-  "y_true": 270.0
+  "prediction": 111.9967,
+  "y_true": 96.0
 }

@@ -4,14 +4,14 @@
   "loss_key": "poisson_log",
   "xai_model": "ebm",
   "instance_id": 4454,
-  "explanation": "Das Modell sagt für diese Stunde 340 Fahrradausleihen vorher, während tatsächlich 311 Räder ausgeliehen wurden. Die Vorhersage liegt damit rund 9 % über dem realen Wert — das ist eine insgesamt gute, leicht überschätzte Schätzung.\n\nDen mit Abstand größten Schub nach oben liefert die Uhrzeit: 9 Uhr morgens fällt mitten in die Morgenspitze, wenn Pendlerinnen und Pendler auf dem Weg zur Arbeit sind — das Modell erkennt dieses Muster klar und hebt die Vorhersage dadurch stark an. An zweiter Stelle wirkt die Temperatur von rund 27 °C positiv: Angenehme Wärme lädt zum Radfahren ein, was die erwartete Nachfrage spürbar erhöht. Ebenfalls deutlich aufwärts zeigt der Jahres-Effekt: Da es sich um 2012 handelt, berücksichtigt das Modell das Wachstum des Verleihsystems im zweiten Betriebsjahr. Auch die Kombination aus Donnerstagmorgen verstärkt den Pendeleffekt zusätzlich. Leicht dämpfend wirkt hingegen das Zusammenspiel von Uhrzeit und Temperatur als kombinierter Faktor — das Modell korrigiert hier geringfügig nach unten, weil hohe Temperaturen zur Morgenstunde die Nachfrage im Vergleich zum Nachmittag etwas anders verteilen.\n\nFür den Betrieb bedeutet das: An klaren Donnerstagmorgen im Mai sollten in der Zeitspanne 7–9 Uhr ausreichend Fahrräder an zentralen Pendler-Stationen bereitgestellt werden. Wartungsarbeiten am Fuhrpark sollten dagegen in die ruhigen Nachtstunden verlegt werden, um das Angebot zur Spitzenzeit nicht zu gefährden.",
+  "explanation": "Das Modell sagt für diese Stunde 331,8 ausgeliehene Fahrräder vorher, während tatsächlich 354 Räder unterwegs waren. Die Vorhersage ist damit sehr gut gelungen — die Abweichung beträgt weniger als sieben Prozent, was für ein Prognosesystem dieser Art als zuverlässig gilt.\n\nDer mit Abstand stärkste Treiber ist die Uhrzeit: 19 Uhr liegt mitten in der Abendspitze, wenn Pendler und Freizeitradler gleichzeitig auf den Straßen sind. Dieser Effekt erhöht die Erwartung kräftig nach oben. Fast ebenso bedeutsam ist die Temperatur von rund 26 °C — angenehm warm, aber nicht drückend heiß — was die Nachfrage ebenfalls deutlich ankurbelt. Hinzu kommt, dass es sich um das Jahr 2012 handelt: Das Bikeshare-System war damals bereits im zweiten Betriebsjahr und hatte eine deutlich gewachsene Kundenbasis, was die Vorhersage nochmals nach oben verschiebt. Gegenläufig wirkt die Kombination aus Samstag und 19 Uhr: An Wochenenden fehlt der typische Berufsverkehr in der Abendspitze, weshalb das Modell diesen Zeitpunkt etwas schwächer einschätzt als einen vergleichbaren Werktag-Abend. Die Luftfeuchtigkeit von 78 % dämpft die Nachfrage leicht zusätzlich.\n\nFür den Betrieb bedeutet das: An warmen Sommerabenden — besonders im August 2012 und vergleichbaren Jahren — sollten an belebten Stationen bis 19 Uhr ausreichend Räder bereitstehen. Samstage erfordern dabei eine etwas andere Verteilung als Werktage: Die Nachfrage ist hoch, aber gleichmäßiger über den Abend verteilt, sodass Wartungsarbeiten besser auf die frühen Morgenstunden gelegt werden sollten.",
   "plot_file": "waterfall_ebm_poisson_log_inst4454.png",
-  "elapsed_s": 12.39,
+  "elapsed_s": 13.31,
   "usage": {
-    "input_tokens": 2070,
-    "output_tokens": 525,
+    "input_tokens": 2057,
+    "output_tokens": 552,
     "cache_read_input_tokens": 0
   },
-  "prediction": 340.2691,
-  "y_true": 311.0
+  "prediction": 331.8258,
+  "y_true": 354.0
 }

@@ -4,14 +4,14 @@
   "loss_key": "poisson_log",
   "xai_model": "xgb",
   "instance_id": 1041,
-  "explanation": "Das Modell sagt für diese Stunde 208 Ausleihen voraus, während tatsächlich 229 Fahrräder ausgeliehen wurden. Die Abweichung von rund 20 Rädern entspricht etwa 9 % — das ist eine solide, aber nicht perfekte Schätzung, die als gut bis mäßig einzustufen ist.\n\nDer stärkste Einzelfaktor ist der Wochentag (Dienstag). Obwohl 11 Uhr vormittags eine aktive Zeit ist, dämpft ein regulärer Arbeitstag die Nachfrage im Vergleich zum Durchschnitt leicht — vermutlich weil viele Pendler bereits im Büro sind und keine Freizeitfahrten stattfinden. Entgegen dieser Bremse wirkt die angenehme Temperatur von rund 27 °C stark nachfragesteigernd: Warmes, aber noch nicht drückendes Wetter lockt Menschen aufs Fahrrad und ist der zweitstärkste Treiber nach oben. Fast gleich stark wirkt das Jahr 2012 positiv — das System war damals noch im Wachstum, sodass generell mehr Nutzerinnen und Nutzer registriert waren als im Vorjahr. Die leichte Bewölkung und der moderate Wind von 19 km/h bremsen die Nachfrage nur minimal.\n\nFür den Betrieb empfiehlt es sich, an warmen Dienstagen im Mai gegen 10–11 Uhr ausreichend Räder an zentralen Stationen bereitzustellen, da Temperatur und Wachstumstrend gemeinsam die Nachfrage ankurbeln. Wartungsarbeiten sollten eher auf die frühen Morgenstunden vor 7 Uhr oder auf kühle, bewölkte Tage gelegt werden, wenn die Nachfrage deutlich geringer ausfällt.",
+  "explanation": "Das Modell sagt für diese Stunde 385 Fahrräder voraus — tatsächlich wurden 387 ausgeliehen. Das ist eine hervorragende Vorhersage mit einer Abweichung von weniger als einem halben Prozent.\n\nDer mit Abstand wichtigste Treiber ist die Uhrzeit 8 Uhr morgens. Der rote Balken ist der größte im gesamten Diagramm und zeigt: Die Morgenrushour kurz vor neun zieht massiv viele Pendlerinnen und Pendler auf die Räder — das Modell erkennt dieses Muster sehr deutlich und erhöht die Schätzung stark nach oben. Gegenläufig wirken zwei bremsende Faktoren: Das Jahr 2011 (Jahreskennzahl 0) zieht die Vorhersage spürbar nach unten, weil das Verleihsystem damals noch deutlich weniger bekannt und kleiner war als 2012. Zusätzlich drückt die sehr hohe Luftfeuchtigkeit von 88 % die erwartete Nachfrage etwas — feuchte, schwüle Luft hält erfahrungsgemäß einen Teil der Kundschaft vom Radfahren ab. Positiv wirkt dagegen der Freitag (Wochentag 5): An Freitagen ist die Pendlernachfrage am Morgen besonders hoch, was die Vorhersage leicht anhebt. Alle übrigen Merkmale wie Temperatur, Monat, Wind und Wetter spielen hier nur eine sehr untergeordnete Rolle.\n\nFür den Betrieb bedeutet das: An Freitagmorgen um 8 Uhr sollten alle Stationen entlang typischer Pendlerstrecken unbedingt gut befüllt sein. Da die Luftfeuchtigkeit bei über 85 % liegt, könnten geringfügig mehr Räder als üblich in Reserve gehalten werden — falls doch weniger Menschen ausfahren. Wartungsarbeiten sollten keinesfalls in dieses Zeitfenster fallen.",
   "plot_file": "waterfall_xgb_poisson_log_inst1041.png",
-  "elapsed_s": 11.76,
+  "elapsed_s": 13.01,
   "usage": {
-    "input_tokens": 2309,
-    "output_tokens": 491,
+    "input_tokens": 2297,
+    "output_tokens": 540,
     "cache_read_input_tokens": 0
   },
-  "prediction": 208.226,
-  "y_true": 229.0
+  "prediction": 385.3899,
+  "y_true": 387.0
 }

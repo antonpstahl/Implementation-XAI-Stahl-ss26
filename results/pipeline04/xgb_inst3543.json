@@ -4,13 +4,13 @@
   "loss_key": "poisson_log",
   "xai_model": "xgb",
   "instance_id": 3543,
-  "explanation": "Es ist Sonntag, der 16:00 Uhr im September 2012 — klarer Himmel, angenehme 24,6 °C, kaum Feuchtigkeit, Wind bei 22 km/h.\n\nDas Modell sagt 660 ausgeliehene Fahrräder vorher; tatsächlich wurden 691 gezählt. Die Abweichung beträgt rund 31 Räder, was weniger als 5 % entspricht — das ist gut getroffen. Mit einem Bestimmtheitsmaß von über 95 % arbeitet dieses Modell insgesamt sehr zuverlässig.\n\nDer mit Abstand stärkste Treiber ist die Uhrzeit: 16:00 Uhr liegt im nachmittäglichen Hochbetrieb, wenn viele Menschen Freizeitfahrten unternehmen — vor allem am Wochenende. Eng damit verknüpft ist das angenehme Wetter: Rund 25 °C und nur 33 % Luftfeuchtigkeit sind nahezu ideale Bedingungen fürs Radfahren, was die Nachfrage spürbar ankurbelt. Dritter wichtiger Faktor ist das Jahr 2012: Im Vergleich zu 2011 hat das Verleihsystem insgesamt deutlich mehr Nutzerinnen und Nutzer gewonnen, was die Grundnachfrage generell erhöht. Der September als Spätsommermonat verstärkt diesen Effekt zusätzlich, da das Wetter noch gut, aber die Sommerhitze bereits abgeflaut ist.\n\nFür den Betrieb bedeutet das: An sonnigen Sonntagnachmittagen im Spätsommer sollten möglichst viele Räder an den beliebtesten Freizeitstationen bereitstehen — Wartungsarbeiten an Fahrzeugen und Stationen sollten auf die frühen Morgenstunden (vor 8 Uhr) verlegt werden, wenn die Nachfrage gering ist. Eine vorausschauende Umverteilung der Räder in Richtung Park- und Ausflugsziele lohnt sich an solchen Tagen besonders.",
-  "elapsed_s": 12.15,
+  "explanation": "Das Modell sagt für diese Stunde **310 ausgeliehene Fahrräder** vorher; tatsächlich wurden 286 gezählt. Das ist eine Abweichung von knapp 8 Prozent — insgesamt eine **gute Vorhersage**, die die reale Nachfrage zuverlässig widerspiegelt.\n\nDer stärkste Treiber in dieser Stunde ist das **Jahr 2012**: Das Verleihsystem war 2012 deutlich weiter gewachsen als im Vorjahr — mehr Stationen, mehr bekannte Nutzer — und dieser generelle Boom schlägt sich spürbar positiv nieder. Ebenfalls wichtig ist die **Tageszeit: 20 Uhr** liegt knapp nach der Abendspitze und zeigt noch rege Nutzung, da viele Pendler nach der Arbeit oder Freizeit das Fahrrad zurückgeben oder noch eine Runde drehen. Drittens wirkt die **sehr geringe Luftfeuchtigkeit von 29 %** überraschend positiv: Ungewöhnlich trockene Luft in Verbindung mit dem klaren Wetter und angenehmen 20 °C macht die Fahrt besonders komfortabel und erhöht die Bereitschaft, das Rad zu nutzen. Der Freitag als Wochentag trägt ebenfalls leicht positiv bei — typischerweise ein Tag, an dem Pendler- und Freizeitnutzung sich überschneiden.\n\nFür den Betrieb bedeutet das: An klaren Freitagabenden im April sollten an zentralen Stationen **ausreichend Fahrräder verfügbar** sein, da die Nachfrage bis mindestens 20 Uhr auf hohem Niveau bleibt. Wartungsarbeiten und Umverteilungen sollten möglichst **nach 21 Uhr** eingeplant werden, wenn die Auslastung merklich nachlässt.",
+  "elapsed_s": 11.11,
   "usage": {
-    "input_tokens": 617,
-    "output_tokens": 557,
+    "input_tokens": 618,
+    "output_tokens": 505,
     "cache_read_input_tokens": 1212
   },
-  "prediction": 660.0004,
-  "y_true": 691.0
+  "prediction": 309.9225,
+  "y_true": 286.0
 }

@@ -4,13 +4,13 @@
   "loss_key": "poisson_log",
   "xai_model": "ebm",
   "instance_id": 580,
-  "explanation": "Das EBM-Modell sagt für diese Stunde rund 10 Fahrradausleihen voraus; tatsächlich wurden 5 gezählt. Das Modell überschätzt die Nachfrage damit um etwa den Faktor zwei — das ist eine mäßige Treffsicherheit, wobei die absolute Abweichung bei diesen sehr kleinen Zahlen nachts vergleichsweise gering bleibt.\n\nDer mit Abstand stärkste Bremseffekt in dieser Stunde ist die Tageszeit selbst: Mitternacht ist schlicht die ruhigste Phase im gesamten Tagesverlauf — kaum jemand leiht um 0 Uhr ein Fahrrad aus, weder Pendler noch Freizeitfahrende. Der zweite große Dämpfer ist die Temperatur: Mit knapp 9 °C ist es deutlich zu kalt für spontane Fahrradfahrten; die Kälte halbiert die erwartete Nachfrage gegenüber einer milden Nacht noch einmal spürbar. Verstärkt wird das durch den Monat Januar — der saisonale Tiefpunkt des Jahres — sowie die Tatsache, dass das Jahr 2011 das erste Betriebsjahr war, als der Verleih insgesamt noch deutlich weniger Stammkunden hatte. Das klare Wetter wirkt zwar leicht positiv, kann die übrigen Faktoren aber kaum aufwiegen.\n\nFür den Betrieb bedeutet das: In Winternächten genügen an den meisten Stationen zwei bis fünf Räder — mehr Verfügbarkeit bindet Kapital unnötig. Gleichzeitig bieten sich die späten Nachtstunden im Januar ideal für Wartungsarbeiten und Umverteilungsfahrten an, da der laufende Betrieb so gut wie nicht gestört wird.",
-  "elapsed_s": 11.73,
+  "explanation": "Das Modell sagt für diese Stunde 73 ausgeliehene Fahrräder vorher; tatsächlich wurden 63 gezählt. Die Abweichung von rund 10 Rädern entspricht etwa 16 Prozent — das ist eine mäßige Schätzung, die die Größenordnung gut trifft, aber etwas zu optimistisch ausfällt.\n\nDen stärksten dämpfenden Einfluss übt das Jahr aus: Da es sich um 2011 handelt, war das Bikeshare-System noch in seiner Aufbauphase mit insgesamt deutlich weniger registrierten Nutzern als ein Jahr später. Das zieht die Vorhersage spürbar nach unten. Ebenfalls bremsend wirkt die Temperatur von knapp 15 °C — das ist für einen Samstagsabend im März eher frisch, und erfahrungsgemäß meiden viele Gelegenheitsnutzer das Fahrrad bei solchen Temperaturen. Positiv schlägt dagegen die Uhrzeit zu Buche: 22 Uhr an einem Samstag ist eine typische Ausgehabendzeit, was die Nachfrage im Vergleich zu einer späteren Nachtstunde merklich stützt. Unterstützend kommt hinzu, dass der Himmel klar ist und praktisch kein Wind weht — beides angenehme Bedingungen für eine nächtliche Ausfahrt.\n\nFür den Betrieb empfiehlt es sich, an Samstagabenden im frühen Frühjahr die Stationen in der Innenstadt und in der Nähe von Unterhaltungsvierteln bis mindestens Mitternacht gut bestückt zu halten, auch wenn die Gesamtzahlen im Vergleich zum Sommer niedrig erscheinen. Gleichzeitig eignen sich die ruhigen Nachtstunden ab 23 Uhr gut für Wartung und Umverteilung, da die Nachfrage dann rasch abfällt.",
+  "elapsed_s": 12.31,
   "usage": {
-    "input_tokens": 1836,
-    "output_tokens": 480,
-    "cache_read_input_tokens": 0
+    "input_tokens": 615,
+    "output_tokens": 517,
+    "cache_read_input_tokens": 1212
   },
-  "prediction": 9.7278,
-  "y_true": 5.0
+  "prediction": 73.0919,
+  "y_true": 63.0
 }

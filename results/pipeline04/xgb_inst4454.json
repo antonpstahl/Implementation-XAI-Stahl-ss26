@@ -4,13 +4,13 @@
   "loss_key": "poisson_log",
   "xai_model": "xgb",
   "instance_id": 4454,
-  "explanation": "Das Modell sagte für diese Stunde 382 Ausleihungen vorher, während tatsächlich 311 Räder ausgeliehen wurden. Das entspricht einer Überschätzung von rund 23 Prozent — die Vorhersage ist damit nur mäßig getroffen, auch wenn das Modell insgesamt sehr zuverlässig arbeitet.\n\nDen stärksten Einfluss auf die hohe Vorhersage hatte die Tageszeit: 9 Uhr morgens liegt mitten in der Morgenspitze, wenn viele Menschen mit dem Fahrrad zur Arbeit fahren. Das trieb die erwartete Nachfrage deutlich nach oben. Fast genauso stark wirkte das Jahr 2012 — das System war in diesem zweiten Betriebsjahr bereits erheblich bekannter und hatte insgesamt mehr Nutzerinnen und Nutzer als im Vorjahr, was das Modell als dauerhaft höheres Nachfrageniveau verinnerlicht hat. Hinzu kommt die angenehme Temperatur von rund 27 °C an einem klaren Maitag: Solche Bedingungen ermutigen viele Menschen, spontan das Fahrrad zu wählen. Die niedrige Luftfeuchtigkeit von 47 Prozent und der moderate Wind von 17 km/h verstärkten diesen positiven Effekt noch leicht. Dass trotzdem weniger Räder ausgeliehen wurden als erwartet, könnte an einem lokalen Ereignis oder abweichendem Pendelverhalten an diesem konkreten Donnerstag liegen.\n\nFür den Betrieb bedeutet das: An Donnerstagmorgen im Mai sollten ausreichend Räder an Pendlerstationen bereitstehen — idealerweise mehr als an vergleichbaren Wintertagen. Da das Modell die Nachfrage tendenziell etwas überschätzt, empfiehlt sich ein kleiner Sicherheitspuffer bei der Stationsplanung, um unnötige Umverteilungsfahrten zu vermeiden. Wartungsarbeiten sollten klar außerhalb der Morgenspitze, etwa zwischen 2 und 5 Uhr, geplant werden.",
-  "elapsed_s": 12.5,
+  "explanation": "Das Modell hat für diese Stunde 297 Ausleihen vorhergesagt, während tatsächlich 354 Fahrräder ausgeliehen wurden. Die Abweichung von rund 57 Rädern entspricht etwa 16 Prozent — das ist ein mäßiges Ergebnis. Das Modell hat die Grundtendenz richtig erkannt, unterschätzt die Nachfrage in diesem Fall jedoch spürbar.\n\nDen größten Schub gibt die Uhrzeit: 19 Uhr ist generell eine der nachfragestarken Stunden, weil viele Menschen nach der Arbeit oder nach Freizeitaktivitäten unterwegs sind. Auch die angenehme Temperatur von rund 26 Grad wirkt sich positiv aus — das liegt genau im Wohlfühlbereich für Radfahrende. Zusätzlich stammt die Beobachtung aus dem Jahr 2012, als das Verleihsystem bereits deutlich mehr Nutzer hatte als im Vorjahr, was die Vorhersage ebenfalls nach oben treibt. Dämpfend wirkt hingegen der Samstag: An Wochenenden fehlt der typische Pendlerverkehr, der an Werktagen zur Abendspitze besonders ausgeprägt ist. Die Luftfeuchtigkeit von 78 Prozent und die leicht bewölkte Wetterlage drücken die Nachfrage noch etwas weiter nach unten, allerdings in deutlich geringerem Maß.\n\nFür den Betrieb bedeutet das: An warmen Sommerabenden sollten an belebten Stationen auch samstags ausreichend Räder bereitstehen, da Freizeitausflüge die fehlenden Pendler teilweise kompensieren — oder sogar übertreffen, wie dieser Fall zeigt. Gleichzeitig bieten die ruhigeren Samstagnächte ab etwa 22 Uhr ein gutes Fenster für Wartung und Umverteilung der Flotte.",
+  "elapsed_s": 11.42,
   "usage": {
-    "input_tokens": 1838,
-    "output_tokens": 561,
-    "cache_read_input_tokens": 0
+    "input_tokens": 617,
+    "output_tokens": 516,
+    "cache_read_input_tokens": 1212
   },
-  "prediction": 382.2661,
-  "y_true": 311.0
+  "prediction": 297.3312,
+  "y_true": 354.0
 }

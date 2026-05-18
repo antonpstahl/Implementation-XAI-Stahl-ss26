@@ -4,14 +4,14 @@
   "loss_key": "poisson_log",
   "xai_model": "ebm",
   "instance_id": 3847,
-  "explanation": "Das EBM-Modell sagte für diese Freitagsstunde um 6 Uhr morgens im Juni 2012 eine Nachfrage von 137 Fahrrädern voraus, während tatsächlich 122 ausgeliehen wurden. Die Vorhersage liegt damit etwa 12 % über dem realen Wert — das ist eine mäßige Abweichung, für eine einzelne Stunde aber noch akzeptabel.\n\nDer mit Abstand stärkste Dämpfer kommt von der frühen Uhrzeit: 6 Uhr morgens liegt kurz vor der eigentlichen Morgenspitze, und das Modell erkennt, dass um diese Zeit noch deutlich weniger los ist als etwa um 8 Uhr. Dieser Effekt zieht die Vorhersage kräftig nach unten. Dem entgegen wirkt die angenehme Temperatur von rund 30 °C: Warme Sommertemperaturen gehören zu den stärksten Treibern für Fahrradausflüge, und dieser Einfluss hebt die Vorhersage deutlich an. Zusätzlich wirkt das Jahr 2012 positiv — das System wuchs gegenüber 2011 stark, sodass das Modell generell mit höherer Nachfrage rechnet. Die Kombination aus Freitag und 6 Uhr begünstigt ebenfalls etwas mehr Ausleihen, was auf frühe Pendler hindeutet.\n\nFür den Betrieb bedeutet das: An warmen Freitagsmorgen im Juni sollten spätestens ab 6 Uhr ausreichend Fahrräder an den Pendler-Stationen bereitstehen, da die Nachfrage zur Hauptverkehrszeit kurz danach rasch anzieht. Der windstille, schwüle Morgen rechtfertigt zusätzlich eine großzügige Bereitstellung — Wartungsarbeiten sollten besser in die frühen Nachtstunden gelegt werden.",
+  "explanation": "Das EBM-Modell sagt für diese Stunde 593 Fahrradausleihen voraus, während tatsächlich 531 Räder ausgeliehen wurden. Das ist eine Überschätzung von rund 12 %, was als mäßig einzustufen ist — die Grundtendenz stimmt, aber das Modell greift etwas zu hoch.\n\nDen mit Abstand größten Schub nach oben liefert die Uhrzeit: Samstag, 12 Uhr mittags, ist eine klassische Hochsaison für Freizeitradler, und das Modell erkennt genau das. Der stärkste Einzelbeitrag stammt von der Stunde selbst, gefolgt vom Zusammenspiel aus Stunde und Wochentag — also dem Umstand, dass Mittag an einem Samstag besonders viele Ausflügler anzieht. Gemeinsam treiben diese beiden Faktoren die Vorhersage sehr deutlich in die Höhe. Ebenfalls positiv wirkt die angenehm warme Temperatur von knapp 33 °C: Sonniges Sommerwetter lädt zum Radfahren ein. Hinzu kommt der Jahrestrend (2012 war das Wachstumsjahr des Systems), der die Nachfrage weiter nach oben schiebt. Leicht dämpfend wirkt hingegen das Zusammenspiel aus Stunde und Temperatur — bei sehr hoher Mittagshitze fahren manche doch lieber nicht Rad, was das Modell als kleine Bremse einbaut.\n\nFür den Betrieb bedeutet das: An warmen Samstagmittagen im Sommer sollten besonders viele Räder an beliebten Freizeitstationen bereitstehen. Da die Nachfrage in solchen Stunden zuverlässig hoch ist, empfiehlt es sich, Wartungsarbeiten und Umlagerungen auf die frühen Morgenstunden zu legen, um das Angebot zur Mittagszeit zu maximieren.",
   "plot_file": "waterfall_ebm_poisson_log_inst3847.png",
-  "elapsed_s": 11.82,
+  "elapsed_s": 13.96,
   "usage": {
-    "input_tokens": 2069,
-    "output_tokens": 515,
+    "input_tokens": 2058,
+    "output_tokens": 528,
     "cache_read_input_tokens": 0
   },
-  "prediction": 137.0833,
-  "y_true": 122.0
+  "prediction": 593.3897,
+  "y_true": 531.0
 }

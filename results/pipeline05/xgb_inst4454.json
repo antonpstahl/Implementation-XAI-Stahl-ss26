@@ -4,14 +4,14 @@
   "loss_key": "poisson_log",
   "xai_model": "xgb",
   "instance_id": 4454,
-  "explanation": "Das Modell sagt für diese Stunde 382 Fahrradausleihen vorher, während tatsächlich 311 Räder ausgeliehen wurden. Das entspricht einer Überschätzung von rund 23 % — die Vorhersage ist damit als mäßig zu bewerten. Das Modell liegt in der richtigen Größenordnung, unterschätzt jedoch, dass an diesem konkreten Morgen weniger Nachfrage bestand als erwartet.\n\nDie drei stärksten Treiber der hohen Vorhersage zeigen allesamt nach oben. Den größten Einfluss hat die Uhrzeit: 9 Uhr fällt mitten in die Morgenspitze, wenn viele Pendler in die Stadt fahren — das treibt die erwartete Nachfrage deutlich nach oben. Fast gleichstark wirkt das Jahr 2012: Das Bikeshare-System wuchs von 2011 auf 2012 erheblich, sodass das Modell allein wegen des Jahres mehr Ausleihen erwartet. Den dritten wichtigen Schub liefert die angenehme Temperatur von rund 27 °C — warm genug, um viele Menschen aufs Fahrrad zu locken, ohne unangenehm heiß zu sein. Alle übrigen Merkmale wie Luftfeuchtigkeit, Wochentag, Monat, Wetter und Wind haben nur geringe zusätzliche Auswirkungen und verstärken die Vorhersage leicht.\n\nFür den Betrieb empfiehlt es sich, an einem klaren Donnerstagmorgen im Mai ausreichend Räder an Pendler-Knotenpunkten bereitzustellen — die echte Nachfrage bleibt aber möglicherweise etwas hinter der Modellprognose zurück. Wartungsarbeiten sollten in jedem Fall außerhalb der Morgenspitze geplant werden, da zwischen 7 und 9 Uhr die höchste Nutzungslast zu erwarten ist.",
+  "explanation": "Das Modell sagt für diese Stunde 297 Fahrradausleihen vorher, während tatsächlich 354 Fahrräder ausgeliehen wurden. Die Vorhersage liegt damit rund 16 % unter dem realen Wert — eine mäßige Treffergenauigkeit, die zeigt, dass das Modell die Nachfrage in diesem Fall spürbar unterschätzt.\n\nDer mit Abstand stärkste Antrieb für die hohe Vorhersage ist die Uhrzeit 19 Uhr. Die Abendspitze — wenn Pendler nach Hause fahren oder Freizeitnutzer unterwegs sind — ist der wichtigste Einzelfaktor und hebt die Vorhersage kräftig nach oben. Fast ebenso bedeutsam ist die angenehme Temperatur von rund 26 °C: Diese Wärme macht Radfahren attraktiv und steigert die erwartete Nachfrage zusätzlich deutlich. Auch das Jahr 2012 wirkt leicht positiv — das System war damals bereits gewachsen und hatte mehr Nutzer als im Vorjahr. Gegenläufig wirkt der Samstag: An Wochenenden fehlt der typische Pendlerverkehr, weshalb das Modell die Nachfrage etwas nach unten korrigiert. Ähnlich dämpft die Luftfeuchtigkeit von 78 % die Vorhersage leicht, da feuchte Luft das Radfahren weniger attraktiv macht. Bewölktes Wetter und Wind spielen hier nur eine sehr untergeordnete Rolle.\n\nFür den Betrieb bedeutet das: An warmen Sommerabenden — auch an Samstagen — sollte die Verfügbarkeit an belebten Stationen um 19 Uhr sichergestellt sein, da das Modell die Nachfrage an solchen Tagen tendenziell unterschätzt. Wartungsarbeiten sollten besser auf die Nacht- oder frühen Morgenstunden verlegt werden, wenn die Nachfrage gering ist.",
   "plot_file": "waterfall_xgb_poisson_log_inst4454.png",
-  "elapsed_s": 11.99,
+  "elapsed_s": 11.58,
   "usage": {
-    "input_tokens": 2310,
-    "output_tokens": 522,
+    "input_tokens": 2297,
+    "output_tokens": 532,
     "cache_read_input_tokens": 0
   },
-  "prediction": 382.2661,
-  "y_true": 311.0
+  "prediction": 297.3312,
+  "y_true": 354.0
 }

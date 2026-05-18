@@ -4,13 +4,13 @@
   "loss_key": "poisson_log",
   "xai_model": "xgb",
   "instance_id": 2510,
-  "explanation": "Das Modell sagt für diese Stunde rund 369 ausgeliehene Fahrräder vorher, während tatsächlich 337 gezählt wurden. Die Abweichung beträgt etwa 32 Räder, was einer Überschätzung von knapp 10 Prozent entspricht — insgesamt noch ein mäßig gutes Ergebnis, aber merklich daneben.\n\nDer mit Abstand stärkste Antrieb für die hohe Vorhersage ist die Uhrzeit: 19 Uhr fällt mitten in die Abendspitze, in der Berufstätige vom Büro nach Hause fahren und das Verleihsystem besonders intensiv genutzt wird. Zusätzlich begünstigt der Juli mit seiner warmen Jahreszeit die Nachfrage deutlich — Sommer bedeutet erfahrungsgemäß mehr Rad-Ausflüge und längere Abendtouren. Die Temperatur von etwa 34 °C wirkt ebenfalls noch leicht positiv, liegt aber bereits am oberen Rand des komfortablen Bereichs, was die Nachfrage etwas bremst. Spürbar dämpfend wirkt hingegen das Jahr 2011: Das Verleihsystem war damals noch weniger bekannt und hatte schlicht weniger registrierte Nutzer als im Folgejahr — das Modell zieht diesen Wachstumsrückstand korrekt nach unten.\n\nFür den Betrieb bedeutet das: An Dienstagabenden im Juli sollte die Flotte an zentralen Pendler-Knotenpunkten bereits ab 17 Uhr vollständig aufgefüllt sein, damit zur Abendspitze ausreichend Räder zur Verfügung stehen. Wartungsarbeiten und Umverteilungsfahrten sollten dagegen bevorzugt in den frühen Morgenstunden zwischen 1 und 5 Uhr gelegt werden, wo kaum Nachfrage zu erwarten ist.",
-  "elapsed_s": 12.72,
+  "explanation": "Das Modell sagt für diese Stunde 326 Ausleihen vorher, während tatsächlich 372 Fahrräder ausgeliehen wurden. Die Abweichung beträgt rund 46 Räder, was einer Unterschätzung von etwa 12 % entspricht — das ist ein mäßig gutes Ergebnis, das Modell erfasst die Größenordnung gut, verfehlt aber die genaue Spitze.\n\nDer bei Weitem stärkste Treiber ist die Tageszeit: 18 Uhr ist klassische Feierabendzeit, und das Modell erkennt diese Abendspitze deutlich als nachfragesteigernden Faktor — er hebt die Vorhersage stark nach oben. Gegenläufig wirkt das Jahr 2011: Das Verleihnetz war damals noch weniger bekannt und weniger ausgebaut als 2012, weshalb das Modell die generell niedrigere Nachfrage dieses Jahres als merklichen Dämpfer einrechnet. Auch die Temperatur von rund 16 °C wirkt leicht bremsend — noch angenehm, aber kühler als das für Fahrradfahrten optimale Sommerwetter, was etwas Zurückhaltung erzeugt. Positiv unterstützend wirkt der Freitag: Als letzter Werktag der Woche zeigt er erfahrungsgemäß etwas höhere Ausleihzahlen als andere Wochentage.\n\nFür den Betrieb bedeutet das: An Freitagabenden im Dezember sollten an belebten Stationen ausreichend Räder verfügbar sein, da die Feierabendspitze auch in den kühleren Wintermonaten spürbar bleibt. Da die Nachfrage im Dezember insgesamt geringer ist als im Sommer, bieten frühe Morgenstunden und ruhige Tagesstunden gute Fenster für Wartungsarbeiten und Umverteilungen — ohne das Verleihgeschäft nennenswert zu stören.",
+  "elapsed_s": 12.65,
   "usage": {
-    "input_tokens": 617,
-    "output_tokens": 515,
+    "input_tokens": 619,
+    "output_tokens": 536,
     "cache_read_input_tokens": 1212
   },
-  "prediction": 368.9001,
-  "y_true": 337.0
+  "prediction": 326.0351,
+  "y_true": 372.0
 }

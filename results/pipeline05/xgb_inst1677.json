@@ -4,14 +4,14 @@
   "loss_key": "poisson_log",
   "xai_model": "xgb",
   "instance_id": 1677,
-  "explanation": "Das Modell sagt für diese Stunde 180 Ausleihen vorher, während tatsächlich 145 Fahrräder ausgeliehen wurden. Die Vorhersage liegt damit rund 24 % über dem Realwert — das ist eine mäßige Schätzung, die die Nachfrage spürbar überschätzt.\n\nDer mit Abstand stärkste Einflussfaktor wirkt dämpfend: Das Jahr 2011 (yr = 0) zieht die Vorhersage deutlich nach unten. Das Modell weiß, dass das System damals noch weniger bekannt und weniger ausgelastet war als 2012 — der Wachstumstrend ist also eingepreist, senkt hier aber die Prognose. Dennoch treibt die angenehme Temperatur von fast 29 °C die Erwartung kräftig nach oben: Warme Frühlingstage locken erfahrungsgemäß viele Nutzer auf die Räder. Ebenfalls positiv wirkt die Mittagsstunde (12 Uhr), eine bekannte Nebenspitze im Tagesverlauf, wenn Menschen in der Pause unterwegs sind. Leicht bremsend kommt hinzu, dass es ein Mittwoch ist (weekday = 3): Unter der Woche fahren zwar Pendler, aber der Mittwoch zeigt im Modell etwas weniger Freizeitnutzung als Wochenendtage. Feuchtigkeit, Wind und Monat spielen nur eine untergeordnete Rolle.\n\nFür den Betrieb empfiehlt es sich, an warmen Apriltagen um die Mittagszeit ausreichend Fahrräder an zentralen Stationen bereitzuhalten — die Kombination aus Temperatur und Tageszeit erzeugt eine verlässliche Nachfragespitze. Wartungsarbeiten sollten besser in die frühen Morgenstunden oder an kühle, bewölkte Tage gelegt werden, wenn die Nachfrage deutlich geringer ausfällt.",
+  "explanation": "Das Modell sagt für diese Stunde 254 Fahrradausleihen voraus, während tatsächlich 286 Fahrräder ausgeliehen wurden. Die Abweichung von etwa 32 Fahrrädern entspricht rund 11 % — das ist eine mäßige Schätzung, die die Tendenz gut einfängt, die genaue Nachfrage aber etwas unterschätzt.\n\nDen stärksten positiven Einfluss hat die Uhrzeit 20 Uhr: Der frühe Abend ist noch eine aktive Stunde, in der viele Menschen nach der Arbeit oder beim Ausgehen Fahrräder nutzen — das Modell wertet dies als deutlichen Nachfragetreiber. Ebenfalls kräftig nach oben zeigt die Temperatur von knapp 29 °C: Warme Sommerabende laden zum Radfahren ein, was die Vorhersage spürbar anhebt. Dem gegenüber steht das Jahr 2011 als größter Bremser: Da das System damals noch weniger bekannt war und die Nutzerzahlen im Folgejahr 2012 deutlich stiegen, zieht dieser Faktor die Vorhersage merklich nach unten. Das leicht bewölkte, neblige Wetter senkt die Nachfrage ebenfalls minimal, hat aber kaum Gewicht.\n\nFür den Betrieb bedeutet das: An warmen Sommerabenden im August sollten an belebten Stationen ausreichend Fahrräder bereitstehen, da 20 Uhr noch eine nachfragestarke Stunde ist. Wartungs- und Umverteilungsarbeiten lassen sich besser in die Nachtstunden ab 23 Uhr verlegen, wenn die Ausleihe deutlich zurückgeht.",
   "plot_file": "waterfall_xgb_poisson_log_inst1677.png",
-  "elapsed_s": 13.84,
+  "elapsed_s": 12.39,
   "usage": {
-    "input_tokens": 2310,
-    "output_tokens": 533,
+    "input_tokens": 2297,
+    "output_tokens": 468,
     "cache_read_input_tokens": 0
   },
-  "prediction": 180.2743,
-  "y_true": 145.0
+  "prediction": 254.2623,
+  "y_true": 286.0
 }

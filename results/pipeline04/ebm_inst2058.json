@@ -4,13 +4,13 @@
   "loss_key": "poisson_log",
   "xai_model": "ebm",
   "instance_id": 2058,
-  "explanation": "Das Modell sagte für diese Stunde rund 165 ausgeliehene Fahrräder voraus, während tatsächlich 238 gezählt wurden. Die Abweichung von etwa 73 Rädern entspricht einem Fehler von rund 31 Prozent — das ist ein mäßiges Ergebnis, das Modell unterschätzt die Nachfrage hier deutlich.\n\nDer mit Abstand stärkste Treiber ist die Uhrzeit: 20 Uhr fällt in den späten Abend, kurz nach der Abendspitze, und das Modell erkennt dort noch erhebliche Nachfrage — dieser Faktor hebt die Vorhersage kräftig an. Gleichzeitig zieht das Jahr 2011 die Schätzung erheblich nach unten, denn das Verleihsystem war damals noch deutlich kleiner als 2012; das Modell berücksichtigt diesen Wachstumsrückstand, was die Prognose spürbar dämpft. Der November wirkt leicht bremsend durch die Herbstsaison, wird jedoch durch eine angenehme Temperatur von knapp 20 °C teilweise ausgeglichen — für November ein überdurchschnittlich milder Abend, der offenbar mehr Menschen als erwartet auf die Räder gelockt hat. Die hohe Luftfeuchtigkeit von 82 Prozent sowie Nebel und Bewölkung bremsen die Nachfrage nur geringfügig.\n\nFür den Betrieb bedeutet dies: An milden Novemberabenden um 20 Uhr sollte die Fahrradverfügbarkeit nicht zu früh reduziert werden — die Nachfrage bleibt unerwartet hoch. Da das Modell diese Abende systematisch unterschätzt, empfiehlt es sich, an solchen Tagen einen kleinen Sicherheitspuffer an Rädern vorzuhalten und Wartungsarbeiten eher in die frühen Morgenstunden zu legen.",
-  "elapsed_s": 12.08,
+  "explanation": "Es ist 20:00 Uhr an einem Samstag im September 2011, das Wetter ist klar und angenehm warm. Das Modell sagte 177 Fahrräder vorher, tatsächlich wurden 243 ausgeliehen — eine Abweichung von rund 27 %. Das ist ein mäßiges Ergebnis; die Richtung stimmt, aber die Nachfrage wurde spürbar unterschätzt.\n\nDer mit Abstand stärkste Treiber ist die Uhrzeit: 20:00 Uhr ist an einem Sommerabend eine aktive Phase — Menschen sind nach dem Abendessen unterwegs, besuchen Freunde oder erkunden die Stadt. Das Modell erkennt diese Abendaktivität und schätzt sie positiv ein. Ebenfalls deutlich positiv wirkt die Temperatur von etwa 25 °C — ein idealer Wert für Fahrradfahren, weder zu kalt noch zu heiß. Gegenläufig wirkt hingegen das Jahr 2011: Da das Verleihsystem damals noch deutlich kleiner war als 2012, zieht dieser Faktor die Vorhersage nach unten. Die Luftfeuchtigkeit von 83 % dämpft die Nachfrage zusätzlich leicht, weil feuchte Luft das Radfahren als weniger angenehm erscheinen lässt — auch wenn es nicht regnet.\n\nFür den Betrieb bedeutet das: An warmen Samstagabenden im September sollten mehr Fahrräder an belebten Freizeitstandorten bereitgestellt werden, da die tatsächliche Nachfrage regelmäßig höher ausfallen kann als erwartet. Da kein Wind herrscht und das Wetter klar ist, wäre ein solcher Abend außerdem ein schlechter Zeitpunkt für Wartungsarbeiten — besser wäre ein ruhiger Freitagvormittag im Winter.",
+  "elapsed_s": 10.92,
   "usage": {
-    "input_tokens": 1838,
-    "output_tokens": 518,
-    "cache_read_input_tokens": 0
+    "input_tokens": 616,
+    "output_tokens": 504,
+    "cache_read_input_tokens": 1212
   },
-  "prediction": 164.7105,
-  "y_true": 238.0
+  "prediction": 176.8649,
+  "y_true": 243.0
 }

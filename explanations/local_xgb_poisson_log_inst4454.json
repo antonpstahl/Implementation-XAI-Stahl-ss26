@@ -2,65 +2,65 @@
   "model": "xgb",
   "instance_id": 4454,
   "feature_values": {
-    "weathersit": 1.0,
-    "mnth": 5.0,
-    "hr": 9.0,
-    "weekday": 4.0,
+    "weathersit": 2.0,
+    "mnth": 8.0,
+    "hr": 19.0,
+    "weekday": 6.0,
     "yr": 1.0,
     "holiday": 0.0,
-    "temp": 0.66,
-    "hum": 0.47,
-    "windspeed": 0.2537
+    "temp": 0.64,
+    "hum": 0.78,
+    "windspeed": 0.2985
   },
-  "y_true": 311.0,
-  "prediction": 382.2661,
-  "base_value": 5.252517,
+  "y_true": 354.0,
+  "prediction": 297.3312,
+  "base_value": 5.2547,
   "contribution_space": "log",
   "contributions": [
     {
       "feature": "hr",
-      "value": 9.0,
-      "contribution": 0.200884
+      "value": 19.0,
+      "contribution": 0.352363
+    },
+    {
+      "feature": "temp",
+      "value": 0.64,
+      "contribution": 0.157513
     },
     {
       "feature": "yr",
       "value": 1.0,
-      "contribution": 0.191885
-    },
-    {
-      "feature": "temp",
-      "value": 0.66,
-      "contribution": 0.160743
-    },
-    {
-      "feature": "hum",
-      "value": 0.47,
-      "contribution": 0.057891
+      "contribution": 0.145253
     },
     {
       "feature": "weekday",
-      "value": 4.0,
-      "contribution": 0.036157
+      "value": 6.0,
+      "contribution": -0.108039
     },
     {
-      "feature": "mnth",
-      "value": 5.0,
-      "contribution": 0.020918
+      "feature": "hum",
+      "value": 0.78,
+      "contribution": -0.088831
     },
     {
       "feature": "weathersit",
-      "value": 1.0,
-      "contribution": 0.019286
+      "value": 2.0,
+      "contribution": -0.01894
+    },
+    {
+      "feature": "windspeed",
+      "value": 0.2985,
+      "contribution": -0.016125
+    },
+    {
+      "feature": "mnth",
+      "value": 8.0,
+      "contribution": 0.014844
     },
     {
       "feature": "holiday",
       "value": 0.0,
-      "contribution": 0.005044
-    },
-    {
-      "feature": "windspeed",
-      "value": 0.2537,
-      "contribution": 0.000793
+      "contribution": 0.002109
     }
   ]
 }

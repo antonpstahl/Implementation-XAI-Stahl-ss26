@@ -4,13 +4,13 @@
   "loss_key": "poisson_log",
   "xai_model": "ebm",
   "instance_id": 1481,
-  "explanation": "Das Modell sagt für diese Stunde rund 125 ausgeliehene Fahrräder vorher; tatsächlich wurden 113 gezählt. Die Abweichung von etwa 12 Rädern entspricht rund 10 Prozent — das ist ein gut getroffenes Ergebnis, das für die Einsatzplanung gut nutzbar ist.\n\nDer mit Abstand stärkste Bremseffekt kommt von der späten Uhrzeit: Es ist 23 Uhr, also tiefe Nacht, und die meisten potenziellen Fahrerinnen und Fahrer sind längst zu Hause. Das Modell gewichtet diesen Faktor deutlich nach unten. Entgegen dieser Bremse wirkt das Jahr 2012 als kräftiger Aufwärtsfaktor — das Verleihsystem war in diesem zweiten Betriebsjahr deutlich gewachsen, und das spiegelt sich in einem dauerhaft höheren Grundniveau wider. Überraschend positiv wirkt die sehr niedrige Luftfeuchtigkeit von nur 30 Prozent: Trockene Luft gilt als angenehm für Radfahrende, weshalb das Modell die Nachfrage dadurch leicht nach oben korrigiert. Das klare Wetter und der Freitag als Wochentag tragen ebenfalls moderat positiv bei — Freizeitnutzer verlängern abends ihren Ausflug gerne in die Nacht.\n\nFür den Betrieb bedeutet das: Auch spät am Freitagabend im April werden noch gut hundert Räder benötigt, weshalb die Stationen in der Innenstadt und in Ausgehvierteln bis Mitternacht ausreichend befüllt sein sollten. Gleichzeitig eignet sich die Zeit zwischen 1 und 5 Uhr nachts gut für Wartung und Umverteilung, da die Nachfrage dann auf ein Minimum fällt.",
-  "elapsed_s": 12.29,
+  "explanation": "Das Modell sagt für diese Stunde rund **242 Fahrradausleihen** vorher; tatsächlich wurden 277 gezählt. Die Abweichung beträgt etwa 35 Räder bzw. knapp 13 Prozent — das ist ein mäßig gutes Ergebnis. Das Modell erfasst die Größenordnung korrekt, unterschätzt die Nachfrage jedoch spürbar.\n\nDer mit Abstand wichtigste Treiber ist die **Uhrzeit**: 16:00 Uhr liegt am Beginn der Abendspitze, wenn viele Berufspendler ihre Rücktour starten. Das sorgt für einen sehr starken Anstieg der Nachfrage und ist der dominante Faktor dieser Stunde. Deutlich dämpfend wirkt hingegen das **Jahr 2011**: Das Verleihsystem war damals noch im Aufbau und hatte insgesamt eine geringere Nutzerbasis als 2012 — das Modell zieht die Vorhersage deshalb spürbar nach unten. Als dritter Einflussfaktor wirkt die **Temperatur von etwa 37 °C** leicht positiv, obwohl sie bereits an der Grenze des komfortablen Bereichs liegt; die moderate Luftfeuchtigkeit von 42 % verhindert, dass die Hitze abschreckend wirkt.\n\nFür den Betrieb empfiehlt sich an vergleichbaren Dienstagnachmittagen im Hochsommer eine **erhöhte Fahrradverfügbarkeit** ab 15:30 Uhr, besonders an pendlerstarken Stationen. Da die Temperaturen nahe der Komfortgrenze liegen, könnte zudem eine **Wasserversorgung oder Beschattung** an frequentierten Stationen die Attraktivität für Nutzer steigern und die Nachfrage weiter ankurbeln.",
+  "elapsed_s": 11.1,
   "usage": {
-    "input_tokens": 1838,
-    "output_tokens": 503,
-    "cache_read_input_tokens": 0
+    "input_tokens": 617,
+    "output_tokens": 495,
+    "cache_read_input_tokens": 1212
   },
-  "prediction": 124.9041,
-  "y_true": 113.0
+  "prediction": 241.7738,
+  "y_true": 277.0
 }

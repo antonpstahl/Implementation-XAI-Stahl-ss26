@@ -4,13 +4,13 @@
   "loss_key": "poisson_log",
   "xai_model": "xgb",
   "instance_id": 1481,
-  "explanation": "Es ist 23:00 Uhr an einem Freitagabend im April 2012, bei klarem Himmel und angenehmen 17 °C.\n\nDas Modell sagt für diese Stunde rund **108 Ausleihen** vorher. Der tatsächliche Wert liegt bei 113 — die Abweichung beträgt weniger als 5 %, was einer sehr guten Vorhersage entspricht.\n\nDie bei weitem wichtigste Rolle spielt die späte Nachtstunde. 23:00 Uhr liegt deutlich außerhalb der Abend- und Pendelspitze, sodass die Nachfrage gegenüber einem Spitzenwert erheblich gebremst wird — das ist der stärkste Einzeleffekt in diesem Beispiel und wirkt klar dämpfend. Dem entgegen wirkt das Jahr 2012: Da das Verleihsystem im zweiten Betriebsjahr bereits deutlich mehr Nutzerinnen und Nutzer gewonnen hatte als im Startjahr 2011, hebt dieser Wachstumseffekt die Basisnachfrage spürbar an. Ein weiterer positiver Faktor ist der Wochentag: Freitag ist ein Werktag, an dem Abendausgänge und später Heimweg zu einer höheren Nachfrage in den Abend- und Nachtstunden führen als etwa an einem Mittwoch — das Modell erkennt hier das typische Ausgehverhalten. Temperatur und Monat wirken leicht bremsend, da 17 °C zwar angenehm, aber noch etwas unter dem Nachfragemaximum liegen und April noch nicht zur Hochsaison gehört.\n\nFür den Betrieb bedeutet das: An Freitagabenden sollte auch nach 22:00 Uhr eine ausreichende Anzahl Fahrräder an zentralen Stationen bereitgehalten werden, da die Nachfrage spürbar über dem nächtlichen Durchschnitt liegt. Wartungsarbeiten und Umverteilungsfahrten sind besser auf die frühen Morgenstunden zwischen 2:00 und 6:00 Uhr zu legen, wenn die Nutzung auf ein Minimum sinkt.",
-  "elapsed_s": 13.1,
+  "explanation": "Das Modell sagt für diese Stunde rund 229 ausgeliehene Fahrräder voraus, während tatsächlich 277 gezählt wurden. Die Abweichung von etwa 48 Rädern entspricht rund 17 Prozent — das ist ein mäßiges Ergebnis, das Modell unterschätzt die Nachfrage hier merklich.\n\nDer mit Abstand stärkste Treiber ist die Uhrzeit: 16 Uhr liegt am Beginn der Abendspitze, wenn viele Pendler ihren Heimweg antreten. Dieser Effekt allein zieht die Vorhersage erheblich nach oben. Dem entgegen wirkt das Jahr 2011: Da der Verleih damals noch deutlich kleiner war als 2012, „erwartet\" das Modell generell weniger Ausleihen — dieser Wachstumsunterschied bremst die Vorhersage spürbar. Ein dritter, hier unerwarteter Faktor ist die extreme Hitze von fast 37 °C: Obwohl der Hochsommer grundsätzlich positiv wirkt, liegt die Temperatur leicht über dem optimalen Bereich, sodass das Modell einen kleinen Nachfragerückgang wegen Hitzeunbehagen annimmt — was offenbar in der Realität an diesem Tag weniger zutraf.\n\nFür den Betrieb bedeutet das: An heißen Julitagen gegen 16 Uhr sollte die Verfügbarkeit an stark frequentierten Stationen trotzdem hoch gehalten werden, denn die tatsächliche Nachfrage kann das Modell in solchen Extremsituationen unterschreiten. Gleichzeitig bietet eine Temperatur nahe 37 °C ein gutes Zeitfenster für kleinere Wartungsarbeiten am frühen Nachmittag, bevor die Abendspitze einsetzt.",
+  "elapsed_s": 11.64,
   "usage": {
-    "input_tokens": 618,
-    "output_tokens": 573,
+    "input_tokens": 617,
+    "output_tokens": 492,
     "cache_read_input_tokens": 1212
   },
-  "prediction": 108.3289,
-  "y_true": 113.0
+  "prediction": 228.5813,
+  "y_true": 277.0
 }

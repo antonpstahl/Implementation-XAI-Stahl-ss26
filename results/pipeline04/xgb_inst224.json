@@ -4,13 +4,13 @@
   "loss_key": "poisson_log",
   "xai_model": "xgb",
   "instance_id": 224,
-  "explanation": "Das Modell sagt für diese Stunde rund **287 ausgeliehene Fahrräder** vorher; tatsächlich wurden 270 gezählt. Die Abweichung von etwa 17 Rädern entspricht rund 6 % — das ist ein **gut getroffener** Wert, zumal das Modell insgesamt 95 % der Nachfrageschwankungen im Datensatz erklärt.\n\nDer bei weitem stärkste Hebel in dieser Stunde ist die **Tageszeit**: 20 Uhr fällt in den Abendauslauf nach der Hauptspitze (17–19 Uhr) — die Nachfrage ist noch klar erhöht, weil viele Pendler und Freizeitnutzer unterwegs sind. Dem steht ein deutlich dämpfender Effekt entgegen: Das **Jahr 2011** liegt früh in der Wachstumsgeschichte des Systems; der Verleih war noch weniger bekannt und weniger ausgebaut als 2012, was die Gesamtnachfrage spürbar nach unten zieht. Positiv wirkt hingegen die **Temperatur von knapp 33 °C** — das liegt zwar am oberen Rand des Komfortbereichs, treibt aber die Nachfrage noch an. Der Juli als Hochsaisonmonat verstärkt diesen Effekt zusätzlich. Klares Wetter und moderater Wind spielen ebenfalls eine leicht fördernde Rolle, sind in dieser Stunde aber nur Nebenakteure.\n\nFür den Betrieb bedeutet das: An Sommerabenden um 20 Uhr sollten ausreichend Fahrräder an zentralen Stationen verfügbar sein — Wartungsarbeiten sollten nicht auf dieses Zeitfenster fallen. Gleichzeitig lohnt es sich, bei vergleichbaren Wetterbedingungen im Juli frühzeitig umzuverteilen, da heiße Abende verlässlich hohe Nachfrage erzeugen.",
-  "elapsed_s": 11.8,
+  "explanation": "Das Modell sagt für diese Stunde 112 ausgeliehene Fahrräder vorher; tatsächlich waren es 96. Die Abweichung von rund 16 Fahrrädern entspricht etwa 17 Prozent — das ist eine mäßige Vorhersage, die die Größenordnung gut trifft, aber die Nachfrage etwas überschätzt.\n\nDer mit Abstand stärkste Bremsfaktor in dieser Stunde ist die Temperatur: Mit knapp 8 °C ist es spürbar kalt, und das schreckt viele Nutzerinnen und Nutzer vom Radfahren ab. Dieser Kälteeffekt drückt die erwartete Nachfrage deutlich nach unten. Verstärkt wird das durch den Monat Februar, der saisonal zu den schwächsten Monaten gehört — die Kombination aus Kälte und Wintermonat erklärt, warum die Zahlen trotz eines günstig gelegenen Feierabendzeit-Effekts moderat bleiben. Dass wir uns im Jahr 2011 befinden — dem ersten Betriebsjahr des Systems — wirkt sich ebenfalls dämpfend aus, da das Verleihsystem noch weniger bekannt war und die Nutzerbasis kleiner war. Positiv schlägt dagegen die Uhrzeit zu Buche: 19 Uhr liegt mitten in der Abendspitze, wenn viele Pendlerinnen und Pendler nach Hause fahren. An einem Donnerstag verstärkt sich dieser Werktags-Pendeleffekt zusätzlich.\n\nFür den Betrieb bedeutet das: Auch im Februar lohnt es sich, zur Abendspitze ausreichend Fahrräder an zentralen Pendler-Stationen bereitzuhalten — die Nachfrage ist trotz Kälte nennenswert. Wartungsarbeiten sollten bevorzugt in den frühen Morgenstunden oder an Wochenenden im Winter eingeplant werden, wenn die Auslastung am geringsten ist.",
+  "elapsed_s": 12.87,
   "usage": {
-    "input_tokens": 616,
-    "output_tokens": 522,
+    "input_tokens": 615,
+    "output_tokens": 532,
     "cache_read_input_tokens": 0
   },
-  "prediction": 286.8653,
-  "y_true": 270.0
+  "prediction": 111.9967,
+  "y_true": 96.0
 }

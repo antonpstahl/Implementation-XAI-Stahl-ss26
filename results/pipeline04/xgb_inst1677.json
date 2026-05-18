@@ -4,13 +4,13 @@
   "loss_key": "poisson_log",
   "xai_model": "xgb",
   "instance_id": 1677,
-  "explanation": "Das Modell sagt für diese Stunde 180 ausgeliehene Fahrräder vorher, während tatsächlich 145 gezählt wurden. Die Abweichung von rund 24 % ist spürbar, aber angesichts der hohen Gesamtgenauigkeit des Modells (R² = 0,95) noch im akzeptablen Bereich — insgesamt als mäßig getroffen zu bewerten.\n\nDer stärkste Einfluss in dieser Stunde geht vom Jahr aus: Da die Daten aus 2011 stammen, also dem ersten Betriebsjahr, war der Verleih noch weniger bekannt und die Nutzerzahlen insgesamt niedriger. Dieser Faktor zieht die Vorhersage bereits deutlich nach unten. Gegenläufig wirkt die angenehme Temperatur von knapp 29 °C, die für Radfahrende sehr attraktiv ist und die Nachfrage kräftig ankurbelt. Hinzu kommt der Wochentag: Ein Mittwoch ist ein klassischer Arbeitstag, an dem die Mittagsstunde weniger für spontane Ausflüge genutzt wird als etwa am Wochenende — das dämpft die Nachfrage moderat. Die Mittagszeit selbst (12 Uhr) sorgt für eine mittlere Grundauslastung, und das klare Wetter begünstigt zusätzlich die Bereitschaft, ein Fahrrad zu nehmen.\n\nFür den Betrieb bedeutet das: An warmen Aprilmittagen unter der Woche sollte eine solide Flotte bereitstehen, auch wenn die absolute Nachfrage noch überschaubar ist. Gleichzeitig eignen sich Mittwoch-Mittage im Frühjahr gut für schnelle Wartungsarbeiten an einzelnen Stationen, da die Spitzenlast eher morgens und abends anfällt — die Mittagspause bietet also ein nützliches Wartungsfenster.",
-  "elapsed_s": 11.58,
+  "explanation": "Das Modell sagt für diese Stunde rund **254 Ausleihungen** voraus; tatsächlich wurden **286 Fahrräder** ausgeliehen. Die Abweichung beträgt etwa 11 %, was als **mäßig getroffen** zu bewerten ist — das Modell unterschätzt die Nachfrage leicht, liegt aber in einer akzeptablen Größenordnung.\n\nDen größten Einfluss auf die Vorhersage hat die **Tageszeit**: 20 Uhr liegt am Ende der Abendspitze, zu der Pendler nach Hause fahren und Freizeitnutzende noch unterwegs sind — das treibt die Nachfrage spürbar nach oben. Fast ebenso stark wirkt das **Jahr 2011** in die entgegengesetzte Richtung: Das Bikeshare-System war damals noch weniger bekannt und hatte deutlich weniger Nutzerinnen und Nutzer als im Folgejahr, was die Vorhersage insgesamt dämpft. Positiv hinzu kommt die **angenehme Temperatur von knapp 29 °C**, die sich im optimalen Bereich für Radfahrten befindet und die Bereitschaft, ein Fahrrad auszuleihen, deutlich erhöht. Der August, ein Donnerstag sowie die moderate Bewölkung spielen ebenfalls eine Rolle, fallen aber weniger stark ins Gewicht.\n\nFür den Betrieb bedeutet das: An warmen Sommerabenden im Jahr 2012 und darüber hinaus ist mit noch höherer Nachfrage zu rechnen als 2011 — die Verfügbarkeit an beliebten Stationen sollte bis mindestens 21 Uhr sichergestellt sein. Wartungsarbeiten sollten bevorzugt in den frühen Morgenstunden zwischen 1 und 5 Uhr geplant werden, wenn die Nachfrage nahezu null ist.",
+  "elapsed_s": 10.76,
   "usage": {
-    "input_tokens": 618,
-    "output_tokens": 516,
+    "input_tokens": 615,
+    "output_tokens": 498,
     "cache_read_input_tokens": 1212
   },
-  "prediction": 180.2743,
-  "y_true": 145.0
+  "prediction": 254.2623,
+  "y_true": 286.0
 }

@@ -4,14 +4,14 @@
   "loss_key": "poisson_log",
   "xai_model": "xgb",
   "instance_id": 1481,
-  "explanation": "Das Modell sagt für diese Stunde 108 Fahrradausleihen vorher, während tatsächlich 113 Räder ausgeliehen wurden. Die Abweichung von knapp 5 Rädern ist sehr gering — das Modell trifft die Situation ausgezeichnet.\n\nDer mit Abstand wichtigste Einflussfaktor ist die späte Uhrzeit: Es ist 23 Uhr, also tief in der Nacht, und das Modell erkennt, dass zu dieser Zeit normalerweise deutlich weniger los ist als im Tagesdurchschnitt. Dieser Balken zieht die Vorhersage am stärksten nach unten — ohne diesen Effekt wäre die Erwartung erheblich höher. Gegenläufig wirkt das Jahr 2012: Das Bikeshare-System war in diesem Jahr bereits deutlich gewachsen, sodass generell mehr Räder unterwegs sind als im Vorjahr — dieser Effekt hebt die Vorhersage spürbar an. Auch der Wochentag Freitag (Wert 5) wirkt leicht positiv, was plausibel ist: Freitagabends sind mehr Menschen unterwegs als an typischen Werktagen. Der April sowie die etwas kühle Temperatur von rund 17 °C dämpfen die Vorhersage minimal, spielen aber nur eine Nebenrolle. Wetter, Luftfeuchtigkeit und Wind haben bei dieser Instanz kaum Einfluss.\n\nFür den Betrieb empfiehlt es sich, an späten Freitagabenden im Frühjahr eine moderate, aber nicht zu große Flotte bereitzuhalten — die Nachfrage ist zwar spürbar niedriger als tagsüber, aber mit rund 110 Ausleihen pro Stunde noch recht solide. Wartungsarbeiten sollten eher in die frühen Morgenstunden zwischen 0 und 5 Uhr gelegt werden, wenn die Nachfrage erfahrungsgemäß auf ein Minimum sinkt.",
+  "explanation": "Das Modell sagt für diese Stunde 228,6 ausgeliehene Fahrräder voraus, während tatsächlich 277 Räder ausgeliehen wurden. Die Abweichung von rund 48 Rädern bedeutet eine Unterschätzung von etwa 17 % — das ist eine mäßige Treffergenauigkeit. Das Modell erfasst die Grundtendenz richtig, verfehlt aber die tatsächliche Nachfragehöhe spürbar.\n\nDer mit Abstand stärkste Treiber ist die Uhrzeit 16 Uhr: Der rote Balken zeigt, dass der frühe Abend die Vorhersage kräftig nach oben schiebt — plausibel, da viele Pendler und Freizeitnutzer zu dieser Zeit das Rad wählen. Gleichzeitig zieht das Jahr 2011 (yr = 0) die Vorhersage deutlich nach unten. Das Modell weiß, dass das System damals noch kleiner war und weniger Stammnutzer hatte als 2012 — dieser Wachstumsrückstand bremst die Schätzung erheblich. Drittens wirkt die sehr hohe Temperatur von fast 37 °C leicht dämpfend (−0,06): Offenbar geht das Modell davon aus, dass extreme Hitze manche Nutzer vom Radfahren abhält. Juli und niedrige Luftfeuchtigkeit (42 %) liefern jeweils einen kleinen positiven Beitrag, da trockene Sommertage grundsätzlich beliebt sind.\n\nFür den Betrieb empfiehlt es sich, an warmen Dienstagnachmittagen im Juli rund um 16 Uhr ausreichend Räder an stark frequentierten Stationen bereitzuhalten — das Modell neigt hier zur Unterschätzung. Wartungsarbeiten sollten konsequent in die frühen Nachtstunden verlegt werden, wenn die Nachfrage minimal ist.",
   "plot_file": "waterfall_xgb_poisson_log_inst1481.png",
-  "elapsed_s": 11.89,
+  "elapsed_s": 12.26,
   "usage": {
-    "input_tokens": 2310,
-    "output_tokens": 526,
+    "input_tokens": 2298,
+    "output_tokens": 518,
     "cache_read_input_tokens": 0
   },
-  "prediction": 108.3289,
-  "y_true": 113.0
+  "prediction": 228.5813,
+  "y_true": 277.0
 }

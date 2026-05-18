@@ -4,13 +4,13 @@
   "loss_key": "poisson_log",
   "xai_model": "ebm",
   "instance_id": 4454,
-  "explanation": "Das Modell sagt für diese Stunde rund 340 ausgeliehene Fahrräder vorher, während tatsächlich 311 gezählt wurden. Die Abweichung beträgt knapp 10 %, was angesichts der schwankenden Nachfrage im Stadtverkehr als gut getroffen gilt — das Modell überschätzt leicht, liegt aber nah am realen Wert.\n\nDer mit Abstand stärkste Treiber ist die Uhrzeit: Es ist 9 Uhr morgens an einem Donnerstag, also mitten in der Morgen-Pendlerspitze. Das erklärt allein schon einen Großteil der hohen Nachfrage. Verstärkt wird dies durch die angenehme Temperatur von etwa 27 °C — das liegt im optimalen Bereich für Radfahren, weder zu kalt noch zu heiß, was deutlich mehr Menschen auf die Räder bringt. Dazu kommt der Jahreseffekt: Die Daten stammen aus 2012, dem zweiten Betriebsjahr, in dem das System insgesamt deutlich stärker genutzt wurde als beim Start 2011. Kleinere Zusatzfaktoren wie die geringe Luftfeuchtigkeit von 47 % und der klare Himmel unterstützen die hohe Nachfrage ebenfalls, spielen aber eine eher untergeordnete Rolle.\n\nFür den Betrieb bedeutet das: An Donnerstagmorgen im Mai sollte die Fahrradflotte an zentralen Pendler-Stationen bereits ab etwa 7:30 Uhr vollständig aufgefüllt sein, da die Spitze schnell einsetzt. Wartungsarbeiten sollten keinesfalls in den Zeitraum zwischen 7 und 10 Uhr fallen — besser geeignet sind die frühen Morgenstunden vor 6 Uhr, wenn die Nachfrage minimal ist.",
-  "elapsed_s": 10.71,
+  "explanation": "Das Modell sagt für diese Stunde 332 ausgeliehene Fahrräder vorher, während tatsächlich 354 Räder verliehen wurden. Die Abweichung beträgt knapp 22 Fahrräder, was einer relativen Abweichung von etwa 6 % entspricht — das ist ein gutes Ergebnis, die Vorhersage ist gut getroffen.\n\nDer mit Abstand wichtigste Faktor ist die Uhrzeit: 19 Uhr ist eine Hauptverkehrszeit, in der erfahrungsgemäß besonders viele Menschen das Fahrradverleihsystem nutzen — sei es für den Heimweg oder abendliche Freizeitfahrten. Dieser Zeitpunkt treibt die Nachfrage kräftig nach oben. Der zweite wesentliche Treiber ist die angenehme Temperatur von rund 26 °C, die sich im optimalen Bereich für Radfahrende befindet und die Nachfrage spürbar erhöht. Ergänzend wirkt das Jahr 2012 positiv: Das System war in diesem Jahr deutlich weiter gewachsen als noch 2011, was generell zu höheren Ausleihzahlen führt. Leicht dämpfend wirkt die Luftfeuchtigkeit von 78 %, die zwar noch nicht stark einschränkend ist, aber merklich in Richtung weniger komfortables Radfahren zeigt.\n\nFür den Betrieb bedeutet das: An sommerlichen Samstagabenden gegen 19 Uhr ist mit sehr hoher Nachfrage zu rechnen — alle Stationen sollten gut bestückt sein, insbesondere in beliebten Ausflugsbereichen. Da die Nachfrage nach 19 Uhr erfahrungsgemäß wieder abnimmt, bietet sich das späte Abend- und frühe Nachtfenster gut für Wartungsarbeiten und Umverteilungen an, bevor der nächste Morgen beginnt.",
+  "elapsed_s": 11.49,
   "usage": {
-    "input_tokens": 1838,
-    "output_tokens": 495,
-    "cache_read_input_tokens": 0
+    "input_tokens": 615,
+    "output_tokens": 513,
+    "cache_read_input_tokens": 1212
   },
-  "prediction": 340.2691,
-  "y_true": 311.0
+  "prediction": 331.8258,
+  "y_true": 354.0
 }

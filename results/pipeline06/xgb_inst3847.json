@@ -4,19 +4,20 @@
   "loss_key": "poisson_log",
   "xai_model": "xgb",
   "instance_id": 3847,
-  "explanation": "Alle Daten sind gesammelt — hier folgt die vollständige, verständliche Erklärung:\n\n---\n\n**[VORHERSAGE]** Das Modell sagt für diesen Freitagmorgen um 6:00 Uhr im Juni 2012 eine Ausleihe von **141 Fahrrädern** voraus, während tatsächlich **122 Fahrräder** ausgeliehen wurden. Die Abweichung von rund 19 Fahrrädern (~16 %) ist moderat — das Modell überschätzt hier leicht, liegt aber in einer plausiblen Größenordnung für eine frühmorgendliche Stunde mit ungewöhnlich guten Wetterbedingungen.\n\n**[TREIBER]** Der mit Abstand stärkste Einflussfaktor ist die **Uhrzeit 6:00 Uhr**, die die Vorhersage deutlich nach unten zieht. Dies ist der global wichtigste Faktor im gesamten Modell, und 6 Uhr ist eine Randstunde mit typischerweise wenig Betrieb — die Trainingsdaten sind über alle 24 Stunden gleichmäßig verteilt, der Effekt kommt also wirklich aus dem gelernten Tagesrhythmus. Wie dramatisch dieser Einfluss ist, zeigt ein Gedankenexperiment: Wäre es stattdessen **8:00 Uhr** (Hauptpendlerzeit), würde das Modell nicht 141, sondern sage und schreibe **589 Fahrräder** vorhersagen — also gut viermal so viele. Der zweite positive Treiber ist das **Jahr 2012** (zweites Betriebsjahr): Es liegt auf dem absoluten Maximum der Trainingsdaten (100. Perzentile) und reflektiert das starke Wachstum des Verleihs von 2011 auf 2012. Auch die **Temperatur von ~30 °C** wirkt leicht erhöhend; sie liegt im 91. Perzentile — also ausgesprochen warm und damit überdurchschnittlich fahrradförderlich. Die ähnlichsten Trainingsbeispiele bestätigen die Plausibilität: Eine fast identische Stunde (Fr., Juni, 6:00 Uhr, gleiche Bedingungen) lieferte im Training eine Vorhersage von 155 Fahrrädern — gut vergleichbar mit den 141 des Modells.\n\n**[EMPFEHLUNG]** Die extrem starke Abhängigkeit vom Tagesrhythmus sollte der Betrieb für die **Flottenplanung** nutzen: Zwischen 6 und 8 Uhr morgens liegt ein steiler Nachfrageanstieg, weshalb Fahrräder und Wartungspersonal spätestens um 7:30 Uhr verfügbar sein sollten, um die Pendlerwelle um 8 Uhr voll bedienen zu können. Darüber hinaus zeigt der Jahreseffekt, dass die **Gesamtnachfrage von Jahr zu Jahr wächst** — Kapazitätserweiterungen und Stationsausbau sollten daher proaktiv und nicht reaktiv geplant werden.",
+  "explanation": "Hier ist die vollständige, verständliche Analyse für Testinstanz 3847:\n\n---\n\n**[VORHERSAGE]** Das Modell sagt für diese Stunde **586 ausgeliehene Fahrräder** vorher, der tatsächliche Wert liegt bei **531 Fahrrädern** – eine Überschätzung von rund 10 %. Das ist für ein stündliches Prognosemodell eine solide Leistung; die Abweichung entspricht etwa einer typischen Schwankung an belebten Samstag-Mittagen. Das Modell hat die Größenordnung also klar richtig erkannt: eine nachfragestarke Stunde mit weit überdurchschnittlicher Ausleihe.\n\n---\n\n**[TREIBER]** Den stärksten Aufwärtsdruck erzeugt die **Uhrzeit 12:00 Uhr** – sie ist global mit Abstand der wichtigste Faktor im Modell. Im Tagesgang zeigen die Daten, dass 12 Uhr mittags durchschnittlich rund 211 Fahrräder pro Stunde generiert, während frühe Morgenstunden wie 4 Uhr auf nur 6 liegen – ein enormes Gefälle. Der Mittagspeak ist zwar kein absolutes Spitzen-Maximum (das liegt um 17–18 Uhr mit über 400 Rädern), aber dennoch deutlich überdurchschnittlich aktiv. Zweitstärkster Treiber ist der **Samstag**: Er hebt die Vorhersage spürbar an. Besonders deutlich wird das im Gegentest – wäre heute ein Dienstag statt Samstag, würde das Modell nur noch **299 Fahrräder** vorhersagen, also fast **287 weniger** (-49 %). Samstage ziehen offenbar besonders viele Freizeitfahrende an. Zusätzlich wirken die **32,8 °C** positiv: Die Temperatur liegt im **96. Perzentil** des Trainingssets – ein außergewöhnlich heißer Tag! Der Effekt ist allerdings bereits weitgehend eingepreist; eine Abkühlung auf den Durchschnittswert (~20,6 °C) würde die Vorhersage kaum verändern (nur –10 Räder auf 575), was zeigt, dass das Modell bei sehr hohen Temperaturen keinen weiteren großen Sprung mehr erwartet.\n\n---\n\n**[EMPFEHLUNG]** Samstag-Mittage im Sommer sind klare Hochlastzeiträume – die Flotte sollte spätestens ab 10 Uhr vollständig verfügbar sein, da die Nachfrage bereits auf dem Weg zum Nachmittagspeak (17 Uhr) anzieht. Da Hitzetage über 30 °C im oberen 4 % der Wetterbedingungen liegen, können sie als verlässliche Signal für erhöhte Nachfrage eingestuft werden: Bei solchen Temperaturen an Wochenenden lohnt sich ein gezielter Kapazitätsaufbau sowie vorausschauende Wartungs- und Umlagerungsplanung, um Engpässe an beliebten Ausleihstationen zu vermeiden.",
+  "stop_reason": "end_turn",
   "tool_calls": [
     {
       "tool": "get_shap_values",
       "arguments": {
         "instance_id": 3847
       },
-      "result_preview": "{'instance_id': 3847, 'y_true': 122.0, 'prediction': 141.35, 'base_value': 5.25252, 'contribution_space': 'log', 'note': 'Positive Beiträge erhöhen, negative senken die Vorhersage (multiplikativ via exp).', 'contributions': [{'feature': 'hr', 'contribution': -0.76387}, {'feature': 'yr', 'contributio…"
+      "result_preview": "{'instance_id': 3847, 'y_true': 531.0, 'prediction': 585.77, 'base_value': 5.2547, 'contribution_space': 'log', 'note': 'Positive Beiträge erhöhen, negative senken die Vorhersage (multiplikativ via exp).', 'contributions': [{'feature': 'hr', 'value': 12.0, 'value_human': '12:00 Uhr', 'contribution': 0.41305}, {'feature': 'weekday', 'value': 6.0, 'value_human': 'Sa', 'contribution': 0.21189}, {'feature': 'yr', 'value': 1.0, 'value_human': '2012', 'contribution': 0.1644}, {'feature': 'temp', 'value': 0.8, 'value_human': '~32.8 °C', 'contribution': 0.15197}, {'feature': 'hum', 'value': 0.29, 'value_human': '29 %', 'contribution': 0.11202}, {'feature': 'mnth', 'value': 6.0, 'value_human': 'Jun', 'contribution': 0.03592}, {'feature': 'weathersit', 'value': 1.0, 'value_human': 'klar/wenige Wolken', 'contribution': 0.03007}, {'feature': 'holiday', 'value': 0.0, 'value_human': 'kein Feiertag', 'contribution': -0.00118}, {'feature': 'windspeed', 'value': 0.2537, 'value_human': '17.0 km/h', 'con…"
     },
     {
       "tool": "get_feature_importance",
       "arguments": {},
-      "result_preview": "[{'rank': 1, 'feature': 'hr', 'importance': 0.84237}, {'rank': 2, 'feature': 'yr', 'importance': 0.20709}, {'rank': 3, 'feature': 'temp', 'importance': 0.18996}, {'rank': 4, 'feature': 'weekday', 'importance': 0.16116}, {'rank': 5, 'feature': 'mnth', 'importance': 0.12616}, {'rank': 6, 'feature': 'h…"
+      "result_preview": "[{'rank': 1, 'feature': 'hr', 'importance': 0.83257}, {'rank': 2, 'feature': 'yr', 'importance': 0.20042}, {'rank': 3, 'feature': 'temp', 'importance': 0.19712}, {'rank': 4, 'feature': 'weekday', 'importance': 0.17282}, {'rank': 5, 'feature': 'mnth', 'importance': 0.11826}, {'rank': 6, 'feature': 'hum', 'importance': 0.07722}, {'rank': 7, 'feature': 'weathersit', 'importance': 0.05091}, {'rank': 8, 'feature': 'windspeed', 'importance': 0.02031}, {'rank': 9, 'feature': 'holiday', 'importance': 0.012}]"
     },
     {
       "tool": "get_feature_value_context",
@@ -24,25 +25,15 @@
         "instance_id": 3847,
         "feature": "hr"
       },
-      "result_preview": "{'feature': 'hr', 'instance_value': 6, 'type': 'categorical', 'training_distribution': {0: {'count': 498, 'pct': 4.1}, 1: {'count': 516, 'pct': 4.2}, 2: {'count': 515, 'pct': 4.2}, 3: {'count': 456, 'pct': 3.7}, 4: {'count': 500, 'pct': 4.1}, 5: {'count': 510, 'pct': 4.2}, 6: {'count': 499, 'pct': 4…"
+      "result_preview": "{'feature': 'hr', 'instance_value': 12, 'instance_value_human': '12:00 Uhr', 'type': 'categorical', 'training_distribution': {0: {'count': 506, 'pct': 4.2}, 1: {'count': 506, 'pct': 4.2}, 2: {'count': 501, 'pct': 4.1}, 3: {'count': 487, 'pct': 4.0}, 4: {'count': 492, 'pct': 4.0}, 5: {'count': 498, 'pct': 4.1}, 6: {'count': 507, 'pct': 4.2}, 7: {'count': 508, 'pct': 4.2}, 8: {'count': 508, 'pct': 4.2}, 9: {'count': 508, 'pct': 4.2}, 10: {'count': 508, 'pct': 4.2}, 11: {'count': 508, 'pct': 4.2}, 12: {'count': 509, 'pct': 4.2}, 13: {'count': 510, 'pct': 4.2}, 14: {'count': 510, 'pct': 4.2}, 15: {'count': 510, 'pct': 4.2}, 16: {'count': 511, 'pct': 4.2}, 17: {'count': 511, 'pct': 4.2}, 18: {'count': 509, 'pct': 4.2}, 19: {'count': 509, 'pct': 4.2}, 20: {'count': 509, 'pct': 4.2}, 21: {'count': 509, 'pct': 4.2}, 22: {'count': 509, 'pct': 4.2}, 23: {'count': 509, 'pct': 4.2}}}"
     },
     {
       "tool": "get_feature_value_context",
       "arguments": {
         "instance_id": 3847,
-        "feature": "yr"
+        "feature": "weekday"
       },
-      "result_preview": "{'feature': 'yr', 'instance_value': 1.0, 'type': 'numerical', 'percentile_in_train': 100.0, 'train_min': 0.0, 'train_max': 1.0, 'train_mean': 0.5018, 'train_std': 0.5}"
-    },
-    {
-      "tool": "get_counterfactual_prediction",
-      "arguments": {
-        "instance_id": 3847,
-        "changes": {
-          "hr": 8
-        }
-      },
-      "result_preview": "{'instance_id': 3847, 'base_prediction': 141.35, 'counterfactual_prediction': 589.35, 'delta': 448.0, 'applied_changes': {'hr': 8}, 'unit': 'Fahrräder pro Stunde'}"
+      "result_preview": "{'feature': 'weekday', 'instance_value': 6, 'instance_value_human': 'Sa', 'type': 'categorical', 'training_distribution': {0: {'count': 2023, 'pct': 16.6}, 1: {'count': 1743, 'pct': 14.3}, 2: {'count': 1618, 'pct': 13.3}, 3: {'count': 1640, 'pct': 13.5}, 4: {'count': 1707, 'pct': 14.0}, 5: {'count': 1509, 'pct': 12.4}, 6: {'count': 1912, 'pct': 15.7}}}"
     },
     {
       "tool": "get_feature_value_context",
@@ -50,22 +41,41 @@
         "instance_id": 3847,
         "feature": "temp"
       },
-      "result_preview": "{'feature': 'temp', 'instance_value': 0.74, 'type': 'numerical', 'percentile_in_train': 90.6, 'train_min': 0.02, 'train_max': 1.0, 'train_mean': 0.4981, 'train_std': 0.1931}"
+      "result_preview": "{'feature': 'temp', 'instance_value': 0.8, 'instance_value_human': '~32.8 °C', 'type': 'numerical', 'percentile_in_train': 96.1, 'train_min': 0.02, 'train_max': 1.0, 'train_mean': 0.5031, 'train_std': 0.1904}"
     },
     {
-      "tool": "get_similar_instances",
+      "tool": "get_counterfactual_prediction",
       "arguments": {
         "instance_id": 3847,
-        "k": 5
+        "changes": {
+          "weekday": 2
+        }
       },
-      "result_preview": "{'instance_id': 3847, 'k': 5, 'similar_instances': [{'train_index': 1861, 'distance': 0.0893, 'feature_values': {'weathersit': 2.0, 'mnth': 6.0, 'hr': 4.0, 'weekday': 5.0, 'yr': 1.0, 'holiday': 0.0, 'temp': 0.76, 'hum': 0.66, 'windspeed': 0.0}, 'prediction': 8.42}, {'train_index': 8793, 'distance': …"
+      "result_preview": "{'instance_id': 3847, 'base_prediction': 585.77, 'counterfactual_prediction': 298.94, 'delta': -286.83, 'applied_changes': {'weekday': 2}, 'unit': 'Fahrräder pro Stunde'}"
+    },
+    {
+      "tool": "get_counterfactual_prediction",
+      "arguments": {
+        "instance_id": 3847,
+        "changes": {
+          "temp": 0.5
+        }
+      },
+      "result_preview": "{'instance_id': 3847, 'base_prediction': 585.77, 'counterfactual_prediction': 575.33, 'delta': -10.44, 'applied_changes': {'temp': 0.5}, 'unit': 'Fahrräder pro Stunde'}"
+    },
+    {
+      "tool": "get_partial_dependence",
+      "arguments": {
+        "feature": "hr"
+      },
+      "result_preview": "{'feature': 'hr', 'type': 'categorical', 'partial_dependence': [{'value': 0, 'avg_prediction': 50.291, 'value_human': '00:00 Uhr'}, {'value': 1, 'avg_prediction': 28.889, 'value_human': '01:00 Uhr'}, {'value': 2, 'avg_prediction': 19.21, 'value_human': '02:00 Uhr'}, {'value': 3, 'avg_prediction': 10.223, 'value_human': '03:00 Uhr'}, {'value': 4, 'avg_prediction': 6.352, 'value_human': '04:00 Uhr'}, {'value': 5, 'avg_prediction': 21.463, 'value_human': '05:00 Uhr'}, {'value': 6, 'avg_prediction': 83.922, 'value_human': '06:00 Uhr'}, {'value': 7, 'avg_prediction': 234.026, 'value_human': '07:00 Uhr'}, {'value': 8, 'avg_prediction': 384.27, 'value_human': '08:00 Uhr'}, {'value': 9, 'avg_prediction': 221.62, 'value_human': '09:00 Uhr'}, {'value': 10, 'avg_prediction': 154.572, 'value_human': '10:00 Uhr'}, {'value': 11, 'avg_prediction': 176.608, 'value_human': '11:00 Uhr'}, {'value': 12, 'avg_prediction': 210.619, 'value_human': '12:00 Uhr'}, {'value': 13, 'avg_prediction': 204.785, 'value…"
     }
   ],
-  "n_tool_calls": 7,
-  "elapsed_s": 34.93,
+  "n_tool_calls": 8,
+  "elapsed_s": 36.12,
   "usage": {
-    "input_tokens": 4663,
-    "output_tokens": 1386
+    "input_tokens": 5625,
+    "output_tokens": 1483
   },
-  "y_true": 122.0
+  "y_true": 531.0
 }

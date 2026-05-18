@@ -4,14 +4,14 @@
   "loss_key": "poisson_log",
   "xai_model": "xgb",
   "instance_id": 3847,
-  "explanation": "Das Modell sagte für diese Stunde 141 Fahrradausleihen vorher, tatsächlich wurden 122 Räder ausgeliehen. Die Vorhersage liegt damit rund 16 % über dem realen Wert — das ist eine mäßige Überschätzung, aber noch im vertretbaren Bereich für eine Einzelstunde.\n\nDer mit Abstand stärkste Einfluss geht von der Uhrzeit aus: Es ist 6 Uhr morgens, also kurz vor der eigentlichen Morgenspitze. Dieser Zeitpunkt zieht die Vorhersage deutlich nach unten — das Modell erkennt, dass um 6 Uhr noch deutlich weniger Pendler unterwegs sind als beispielsweise um 8 Uhr. Dennoch liegt die Erwartung durch zwei weitere starke Aufwärtstreiber vergleichsweise hoch: Zum einen ist es das Jahr 2012, in dem das Bikeshare-System insgesamt viel stärker genutzt wurde als im Startjahr 2011, was die Vorhersage spürbar anhebt. Zum anderen ist es ein Freitag — ein Werktag mit typisch hohem Pendelaufkommen — der ebenfalls positiv beiträgt. Ergänzend wirken die angenehmen rund 30 °C und der Sommermonat Juni leicht nachfragefördernd, während Bewölkung, Luftfeuchtigkeit und Windstille kaum eine Rolle spielen.\n\nFür den Betrieb bedeutet das: An Freitagmorgen im Sommer sollten bereits vor 6 Uhr ausreichend Räder an Pendler-Stationen bereitstehen, da die Nachfrage früh anzieht. Da 6 Uhr noch ruhig ist, eignet sich das frühe Morgenfenster gut für schnelle Nachfüllfahrten und kleinere Wartungsarbeiten, bevor die Spitze zwischen 7 und 9 Uhr einsetzt.",
+  "explanation": "Das Modell sagt für diese Stunde 585,8 ausgeliehene Fahrräder vorher, während tatsächlich 531 Räder ausgeliehen wurden. Die Vorhersage liegt damit rund 10 % über dem realen Wert — das ist eine mäßige Treffer­genauigkeit, die Größenordnung stimmt, aber das Modell überschätzt die Nachfrage etwas.\n\nDen größten Schub nach oben liefert die Uhrzeit: Mittags um 12 Uhr herrscht erfahrungs­gemäß reger Betrieb, da viele Menschen in der Mittagspause unterwegs sind. Dieser Faktor erhöht die Vorhersage am stärksten. Direkt dahinter folgt der Wochentag Samstag: An Samstagen fahren deutlich mehr Freizeit­radler als an Werkstagen, was die erwartete Nachfrage nochmals spürbar anhebt. Ebenfalls positiv wirkt das Jahr 2012 — das System war im zweiten Betriebsjahr bereits deutlich bekannter und beliebter als 2011, sodass generell mehr Ausleihen zu erwarten sind. Hinzu kommen die angenehm warme Temperatur von knapp 33 °C sowie die ungewöhnlich niedrige Luftfeuchtigkeit von nur 29 %, die das Radfahren besonders attraktiv machen. Klares Wetter, der Sommermonat Juni, kein Feiertag und moderater Wind spielen ebenfalls eine leicht positive Rolle, fallen aber kaum ins Gewicht.\n\nFür den Betrieb bedeutet das: An sonnigen Samstagen im Sommer rund um die Mittagszeit sollten ausreichend Räder an zentralen Stationen bereit­stehen — idealerweise etwas mehr als das Modell vorschlägt, da es hier tendenziell zu optimistisch rechnet. Wartungsarbeiten sollten auf die frühen Morgen­stunden oder Wochen­tage im Winter verlegt werden, wenn die Nachfrage deutlich geringer ist.",
   "plot_file": "waterfall_xgb_poisson_log_inst3847.png",
-  "elapsed_s": 12.17,
+  "elapsed_s": 12.99,
   "usage": {
-    "input_tokens": 2253,
-    "output_tokens": 526,
+    "input_tokens": 2298,
+    "output_tokens": 546,
     "cache_read_input_tokens": 0
   },
-  "prediction": 141.3505,
-  "y_true": 122.0
+  "prediction": 585.7666,
+  "y_true": 531.0
 }

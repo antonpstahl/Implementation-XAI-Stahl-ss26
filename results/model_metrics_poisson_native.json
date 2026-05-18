@@ -8,29 +8,29 @@
     "contribution_space": "native"
   },
   "training_time_seconds": {
-    "xgb": 1.9403431415557861,
-    "ebm": 13.147211074829102
+    "xgb": 1.9492669105529785,
+    "ebm": 12.610066890716553
   },
   "metrics": {
     "xgb": {
-      "rmse": 39.006034887008546,
-      "mae": 23.682693908554775,
-      "r2": 0.9518382315658074,
-      "poisson_deviance": 7.061543407263029,
-      "min_prediction": 1.906239628791809,
+      "rmse": 45.43951062043428,
+      "mae": 27.002631963473878,
+      "r2": 0.9353575594034751,
+      "poisson_deviance": 9.380072104704615,
+      "min_prediction": 1.8812179565429688,
       "n_negative_predictions": 0
     },
     "ebm": {
-      "rmse": 48.368916552780206,
-      "mae": 26.998732586218846,
-      "r2": 0.9259420758747715,
-      "poisson_deviance": 9.72424903648315,
-      "min_prediction": 0.4464578405783288,
+      "rmse": 48.20290142996842,
+      "mae": 28.1981562298493,
+      "r2": 0.9272560609239382,
+      "poisson_deviance": 10.814538455984227,
+      "min_prediction": 0.699434306752487,
       "n_negative_predictions": 0
     }
   },
-  "n_train": 12165,
-  "n_test": 5214,
+  "n_train": 12152,
+  "n_test": 5227,
   "hyperparameters": {
     "xgb": {
       "n_estimators": 800,
