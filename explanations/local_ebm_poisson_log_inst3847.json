@@ -2,65 +2,65 @@
   "model": "ebm",
   "instance_id": 3847,
   "feature_values": {
-    "weathersit": 2.0,
+    "weathersit": 1.0,
     "mnth": 6.0,
-    "hr": 6.0,
-    "weekday": 5.0,
+    "hr": 12.0,
+    "weekday": 6.0,
     "yr": 1.0,
     "holiday": 0.0,
-    "temp": 0.74,
-    "hum": 0.66,
-    "windspeed": 0.0
+    "temp": 0.8,
+    "hum": 0.29,
+    "windspeed": 0.2537
   },
-  "y_true": 122.0,
-  "prediction": 137.0833,
-  "base_value": 4.607797,
+  "y_true": 531.0,
+  "prediction": 593.3897,
+  "base_value": 4.611896,
   "contribution_space": "log",
   "contributions": [
     {
       "feature": "hr",
-      "value": 6.0,
-      "contribution": -0.364281
+      "value": 12.0,
+      "contribution": 0.661337
     },
     {
       "feature": "temp",
-      "value": 0.74,
-      "contribution": 0.288753
+      "value": 0.8,
+      "contribution": 0.27128
     },
     {
       "feature": "yr",
       "value": 1.0,
-      "contribution": 0.22748
+      "contribution": 0.207763
+    },
+    {
+      "feature": "hum",
+      "value": 0.29,
+      "contribution": 0.099167
+    },
+    {
+      "feature": "weathersit",
+      "value": 1.0,
+      "contribution": 0.046734
+    },
+    {
+      "feature": "weekday",
+      "value": 6.0,
+      "contribution": 0.019952
     },
     {
       "feature": "mnth",
       "value": 6.0,
-      "contribution": 0.041637
-    },
-    {
-      "feature": "weekday",
-      "value": 5.0,
-      "contribution": 0.03222
-    },
-    {
-      "feature": "hum",
-      "value": 0.66,
-      "contribution": 0.016746
-    },
-    {
-      "feature": "windspeed",
-      "value": 0.0,
-      "contribution": 0.01068
-    },
-    {
-      "feature": "weathersit",
-      "value": 2.0,
-      "contribution": -0.006104
+      "contribution": 0.01878
     },
     {
       "feature": "holiday",
       "value": 0.0,
-      "contribution": 0.004712
+      "contribution": 0.004065
+    },
+    {
+      "feature": "windspeed",
+      "value": 0.2537,
+      "contribution": 0.00396
     }
   ]
 }

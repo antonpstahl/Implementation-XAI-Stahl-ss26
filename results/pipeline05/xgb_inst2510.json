@@ -4,14 +4,14 @@
   "loss_key": "poisson_log",
   "xai_model": "xgb",
   "instance_id": 2510,
-  "explanation": "Das Modell sagt für diese Stunde rund 369 Fahrradausleihen vorher, tatsächlich wurden 337 Räder entliehen. Die Abweichung beträgt etwa 32 Fahrräder oder rund 9 %, was als gute, wenn auch leicht zu optimistische Schätzung gewertet werden kann.\n\nDen mit Abstand größten Einfluss auf die Vorhersage hat die Uhrzeit 19 Uhr. Das Modell erkennt hier die klassische Abendspitze: Viele Pendler kehren nach der Arbeit nach Hause zurück und nutzen genau in dieser Stunde besonders häufig die Leihräder. Dieser Faktor treibt die Erwartung deutlich nach oben. Gebremst wird die Vorhersage hingegen durch das Jahr 2011 — da das Bikeshare-System damals noch relativ neu war und die Nutzerzahlen insgesamt niedriger lagen als im Folgejahr 2012, zieht dieser Faktor die Schätzung spürbar nach unten. Positiv hinzu kommen der Monat Juli und die angenehm warme Temperatur von etwa 34 °C: Sommerliches Wetter in einem beliebten Ferienmonat macht Fahrradfahren attraktiver und erhöht die erwartete Nachfrage zusätzlich. Klares Wetter, moderate Luftfeuchtigkeit und mäßiger Wind spielen ebenfalls eine leicht unterstützende Rolle, fallen aber kaum ins Gewicht.\n\nFür den Betrieb empfiehlt es sich, an Dienstagabenden im Juli frühzeitig genügend Räder an stark frequentierten Pendelstationen bereitzustellen, da die Abendspitze verlässlich hohe Nachfrage erzeugt. Wartungsarbeiten sollten dagegen in die frühen Morgenstunden verlegt werden, wenn die Nachfrage erfahrungsgemäß minimal ist.",
+  "explanation": "Das Modell sagt für diese Stunde 326 Fahrradausleihen vorher, während tatsächlich 372 Räder ausgeliehen wurden. Die Vorhersage liegt damit rund 12 % unter dem realen Wert — das ist eine mäßige Schätzung, die die Grundtendenz richtig erfasst, die tatsächliche Nachfrage aber etwas unterschätzt.\n\nDer mit Abstand stärkste Treiber ist die Uhrzeit 18 Uhr. Der große rote Balken zeigt, dass der Feierabendverkehr die Nachfrage massiv nach oben treibt — Menschen kehren von der Arbeit zurück und greifen zu den Leihrädern. Dieser Effekt ist der dominante Faktor für diese Stunde. Gegenläufig wirkt das Jahr 2011 deutlich dämpfend: Da das System damals noch weniger bekannt und verbreitet war als 2012, erwartet das Modell grundsätzlich niedrigere Ausleihzahlen — das ist der zweite wichtigste Einfluss, diesmal bremsend. Die Temperatur von rund 16 °C im Dezember drückt die Vorhersage ebenfalls leicht nach unten, da für diese Jahreszeit mildere Bedingungen zwar akzeptabel, aber nicht besonders einladend sind. Positiv wirken hingegen der Freitag als Arbeitstag mit Pendlerverkehr sowie das klare Wetter und der völlige Windstille.\n\nFür den Betrieb bedeutet das: An Freitagabenden im Dezember sollten in der Abendspitze um 18 Uhr ausreichend Räder an zentralen Pendler-Stationen bereitstehen — die Nachfrage ist trotz Wintermonat beachtlich. Wartungsarbeiten und Umlagerungen sollten daher auf die Tagesstunden vor 16 Uhr gelegt werden, um das Spitzenangebot nicht zu gefährden.",
   "plot_file": "waterfall_xgb_poisson_log_inst2510.png",
-  "elapsed_s": 12.43,
+  "elapsed_s": 13.19,
   "usage": {
-    "input_tokens": 2310,
-    "output_tokens": 516,
+    "input_tokens": 2244,
+    "output_tokens": 523,
     "cache_read_input_tokens": 0
   },
-  "prediction": 368.9001,
-  "y_true": 337.0
+  "prediction": 326.0351,
+  "y_true": 372.0
 }

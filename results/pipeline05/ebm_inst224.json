@@ -4,14 +4,14 @@
   "loss_key": "poisson_log",
   "xai_model": "ebm",
   "instance_id": 224,
-  "explanation": "Das Modell sagt für diese Stunde 290 Ausleihen vorher, tatsächlich wurden 270 Fahrräder ausgeliehen. Die Abweichung beträgt rund 7 %, was einer guten bis mäßigen Treffsicherheit entspricht — das Modell überschätzt die Nachfrage leicht, liegt aber insgesamt im realistischen Bereich.\n\nDer bei weitem stärkste Treiber ist die Uhrzeit 20:00 Uhr: Der breite rote Balken zeigt, dass der frühe Abend die Nachfrage kräftig nach oben zieht. Das ist plausibel, denn nach Feierabend sind viele Menschen noch unterwegs oder nutzen das Fahrrad für den Heimweg. Ebenfalls stark positiv wirkt die Temperatur von knapp 33 °C — sehr warme Sommerabende laden zum Radfahren ein und steigern die Nachfrage spürbar. Hinzu kommt die Kombination aus Uhrzeit und Wochentag (Donnerstag, 20 Uhr): An einem regulären Werktag am Abend ist das Ausleihverhalten besonders aktiv, was diesen Wechselwirkungsbalken ebenfalls ins Rote drückt. Der einzige bremsende Faktor ist das Jahr 2011 — da das System damals noch weniger bekannt war, dämpft das Jahr den Basiswert deutlich nach unten, während 2012 erfahrungsgemäß höhere Ausleihzahlen aufweist.\n\nFür den Betrieb bedeutet das: An warmen Sommerabenden gegen 20 Uhr sollten ausreichend Fahrräder an frequentierten Stationen bereitgestellt sein. Wartungsarbeiten sollten keinesfalls in den Abendstunden warmer Wochentage geplant werden — Nachtstunden oder kühle, bewölkte Tage bieten sich dafür deutlich besser an.",
+  "explanation": "Das EBM-Modell sagt für diese Stunde 117 Fahrradausleihen vorher, während tatsächlich 96 Fahrräder ausgeliehen wurden. Das ist eine Überschätzung von rund 22 %, was als mäßig getroffen einzustufen ist — die Größenordnung stimmt, aber der Fehler ist spürbar.\n\nDer mit Abstand stärkste Treiber ist die Uhrzeit: 19:00 Uhr fällt mitten in die Abendspitze, wenn viele Pendler nach Hause fahren. Dieser Effekt erhöht die Vorhersage deutlich — er ist der größte rote Balken im Diagramm. Gleichzeitig bremst die niedrige Temperatur von nur etwa 8 °C die Nachfrage am stärksten: Kalte Temperaturen schrecken viele potenzielle Nutzer ab, was den größten negativen Einfluss im Plot erklärt. Hinzu kommen der Monat Februar sowie das Jahr 2011 — beides dämpft die Vorhersage ebenfalls, da der Bikeshare-Dienst 2011 noch weniger verbreitet war und der Februar als Wintermonat generell schwache Nachfrage zeigt. Positiv wirken sich dagegen die Kombination aus Donnerstagabend (typischer Pendlerverkehr) sowie die geringe Luftfeuchtigkeit von 40 % aus, die das Radfahren angenehmer macht.\n\nFür den Betrieb bedeutet das: Auch an einem klaren Donnerstagabend im Februar sollten ausreichend Fahrräder an zentralen Stationen bereitstehen, da die Abendspitze trotz Kälte für nennenswerte Nachfrage sorgt. Gleichzeitig bieten Wintermonate mit niedrigen Temperaturen gute Gelegenheitsfenster für Wartungsarbeiten während der Tagesstunden, wenn die Nutzung deutlich geringer ausfällt.",
   "plot_file": "waterfall_ebm_poisson_log_inst224.png",
-  "elapsed_s": 12.9,
+  "elapsed_s": 11.69,
   "usage": {
-    "input_tokens": 2069,
-    "output_tokens": 515,
+    "input_tokens": 2057,
+    "output_tokens": 520,
     "cache_read_input_tokens": 0
   },
-  "prediction": 290.092,
-  "y_true": 270.0
+  "prediction": 117.0012,
+  "y_true": 96.0
 }

@@ -4,14 +4,14 @@
   "loss_key": "poisson_log",
   "xai_model": "ebm",
   "instance_id": 1481,
-  "explanation": "Das Modell sagt für diese Stunde 124,9 ausgeliehene Fahrräder vorher, während tatsächlich 113 Fahrräder verliehen wurden. Die Vorhersage liegt damit etwa 11 Räder zu hoch, was einer Abweichung von rund 10 % entspricht — das ist insgesamt eine mäßig gute Schätzung, die die Größenordnung gut trifft, aber leicht überschätzt.\n\nDen mit Abstand stärksten positiven Einfluss hat die Kombination aus Uhrzeit und Wochentag: Ein Freitagabend um 23 Uhr zieht offenbar mehr Ausleihaktivität an als ein durchschnittlicher Abend — vermutlich durch Freizeitverkehr und Ausgehen am Wochenende. Dagegen wirkt die Stunde allein (23 Uhr) stark bremsend: So spät in der Nacht ist die generelle Nachfrage deutlich geringer als im Tagesdurchschnitt, was den größten negativen Beitrag im Plot erklärt. Ein weiterer wichtiger Treiber nach oben ist das Jahr 2012: Das Bikeshare-System war damals bereits deutlich gewachsen, sodass allein der Wachstumstrend die Vorhersage merklich anhebt. Die Kombination aus Uhrzeit und niedriger Luftfeuchtigkeit (30 %) dämpft die Vorhersage zusätzlich leicht — trockene Luft nachts scheint in dieser Stunde das Ausleihverhalten etwas zu bremsen.\n\nFür den Betrieb bedeutet das: An Freitagabenden lohnt es sich, auch nach 22 Uhr noch ausreichend Räder an zentralen Standorten bereitzuhalten, da die Nachfrage spürbar über dem nächtlichen Durchschnitt liegt. Wartungsarbeiten und Umverteilungsfahrten sollten besser in den frühen Morgenstunden zwischen 2 und 5 Uhr geplant werden, wenn die Nachfrage am geringsten ist.",
+  "explanation": "Das Modell sagt für diese Stunde 241,8 Fahrradausleihen vorher, während tatsächlich 277 Fahrräder ausgeliehen wurden. Das entspricht einer Abweichung von rund 13 %, was als mäßig gute Vorhersage einzustufen ist — die Größenordnung stimmt, aber die Nachfrage wird etwas unterschätzt.\n\nDer mit Abstand wichtigste Treiber ist die Uhrzeit 16:00 Uhr. Der große rote Balken zeigt, dass der Nachmittag kurz vor der Abendspitze die Nachfrage massiv nach oben treibt — das Modell erkennt, dass um diese Zeit viele Pendlerinnen und Pendler auf die Räder steigen. Als stärkster Gegenpol wirkt das Jahr 2011 (yr = 0): Da das Verleihsystem damals noch in der Aufbauphase war und 2012 deutlich mehr Nutzer hatte, dämpft dieser Faktor die Vorhersage spürbar nach unten. Interessant ist zudem, dass die Luftfeuchtigkeit von nur 42 % leicht positiv wirkt — trockene Luft macht das Radfahren angenehmer und steigert die Nachfrage ein wenig. Die Temperatur von fast 37 °C trägt ebenfalls leicht positiv bei, obwohl solch hohe Werte eigentlich grenzwertig sind; der Wechselwirkungsterm „hr & temp\" bremst diesen Effekt marginal ab.\n\nFür den Betrieb empfiehlt sich, an Werktagen im Sommer zwischen 15 und 19 Uhr genügend Räder an stark frequentierten Stationen bereitzuhalten, da der Nachmittagseffekt dominant ist. Wartungsarbeiten sollten dagegen in die frühen Morgenstunden verlegt werden, wenn die Nachfrage minimal ist und möglichst wenige Kundinnen und Kunden betroffen sind.",
   "plot_file": "waterfall_ebm_poisson_log_inst1481.png",
-  "elapsed_s": 12.87,
+  "elapsed_s": 11.01,
   "usage": {
-    "input_tokens": 2070,
-    "output_tokens": 544,
+    "input_tokens": 2058,
+    "output_tokens": 524,
     "cache_read_input_tokens": 0
   },
-  "prediction": 124.9041,
-  "y_true": 113.0
+  "prediction": 241.7738,
+  "y_true": 277.0
 }

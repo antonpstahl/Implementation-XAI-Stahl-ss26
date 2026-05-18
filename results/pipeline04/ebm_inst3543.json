@@ -4,13 +4,13 @@
   "loss_key": "poisson_log",
   "xai_model": "ebm",
   "instance_id": 3543,
-  "explanation": "Das Modell sagt für diese Stunde rund **654 ausgeliehene Fahrräder** vorher, während tatsächlich **691 Räder** unterwegs waren. Die Abweichung beträgt etwa 37 Räder, was bei einem Modell mit einem R²-Wert von 0,93 als gut getroffen gilt — die Vorhersage liegt also sehr nah an der Realität.\n\nDer mit Abstand stärkste Treiber ist die **Tageszeit**: 16 Uhr ist eine hochaktive Nachmittagsstunde, in der sowohl Freizeitfahrer als auch frühe Heimkehrer das System nutzen — das schiebt die erwartete Nachfrage deutlich nach oben. Ebenfalls sehr bedeutsam ist das **Jahr 2012**: Das Verleihsystem hatte bis dahin stark an Beliebtheit gewonnen, was sich in einer dauerhaft höheren Grundnachfrage gegenüber 2011 widerspiegelt. Die angenehme **Temperatur von rund 25 °C** unterstützt das zusätzlich — solche Bedingungen animieren viele Menschen spontan zur Fahrradtour. Leicht dämpfend wirkt lediglich der **Sonntag**: Ohne Pendlerverkehr fällt die Nachfrage etwas geringer aus als an vergleichbaren Werktagen.\n\nFür den Betrieb bedeutet das: An sonnigen Sonntagnachmittagen im September sollten möglichst viele Räder an gut frequentierten Freizeitstationen verfügbar sein — Umverteilungen aus Bürovierteln in Richtung Parks oder Uferwege lohnen sich. Da die Nachfrage in dieser Stunde zuverlässig hoch bleibt, sollten Wartungsarbeiten grundsätzlich in die frühen Morgenstunden zwischen 1 und 5 Uhr verlegt werden, wenn kaum Räder benötigt werden.",
-  "elapsed_s": 11.48,
+  "explanation": "Das Modell sagte für diese Stunde rund 296 ausgeliehene Fahrräder vorher, während tatsächlich 286 gezählt wurden. Die Abweichung beträgt lediglich etwa 10 Räder, was einer Treffergenauigkeit von über 96 % entspricht — das ist eine sehr gute Vorhersage.\n\nDie mit Abstand wichtigste Rolle spielt die Uhrzeit: 20 Uhr liegt am Ende der Abendspitze, wenn viele Menschen nach Feierabend noch unterwegs sind oder Freizeittouren unternehmen. Diese Tageszeit sorgt allein für den größten Schub in der Nachfrage. Nahezu gleichbedeutend ist der Jahreseffekt: Da es sich um das Jahr 2012 handelt, ist das Bikeshare-System bereits deutlich etablierter und beliebter als im Vorjahr — mehr registrierte Nutzer bedeuten schlicht mehr Ausleihen. Als dritter Faktor wirkt die sehr trockene Luft (nur 29 % Luftfeuchtigkeit) überraschend positiv: Trockene, frische Abendluft lädt regelrecht zum Radfahren ein, während hohe Schwüle abschrecken würde. Die angenehmen 20,5 °C und der nahezu windstille, klare Freitagabend im April verstärken diesen Effekt zusätzlich.\n\nFür den Betrieb bedeutet das: An klaren Freitagabenden im Frühjahr sollte die Stationsversorgung spätestens ab 18 Uhr auf maximale Verfügbarkeit ausgerichtet sein, da die Kombination aus Feierabendverkehr, gutem Wetter und langen Abenden die Nachfrage zuverlässig hochtreibt. Wartungsarbeiten und Umschichtungen zwischen Stationen sollten in diesem Zeitfenster vermieden und stattdessen in die Nacht- oder frühen Morgenstunden verlegt werden.",
+  "elapsed_s": 12.64,
   "usage": {
-    "input_tokens": 1837,
-    "output_tokens": 509,
-    "cache_read_input_tokens": 0
+    "input_tokens": 617,
+    "output_tokens": 519,
+    "cache_read_input_tokens": 1212
   },
-  "prediction": 653.8852,
-  "y_true": 691.0
+  "prediction": 295.9747,
+  "y_true": 286.0
 }

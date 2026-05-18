@@ -4,14 +4,14 @@
   "loss_key": "poisson_log",
   "xai_model": "xgb",
   "instance_id": 2058,
-  "explanation": "Das Modell sagt für diese Stunde 179,5 Ausleihen vorher, während tatsächlich 238 Fahrräder ausgeliehen wurden. Die Vorhersage liegt damit rund 25 % unter dem realen Wert — das ist eine mäßige bis schlechte Schätzung. Das Modell unterschätzt die Nachfrage in diesem Fall spürbar.\n\nDer mit Abstand größte bremsende Faktor ist das Jahr 2011. Da das System damals noch vergleichsweise wenig bekannt war, erwartet das Modell generell eine niedrigere Nachfrage als in 2012 — dieser Effekt zieht die Vorhersage am stärksten nach unten. Dagegen wirkt die Abendstunde 20 Uhr als kräftiger Aufwärtstreiber: Um diese Zeit sind nach Feierabend noch viele Pendler und Freizeitradler unterwegs, was die Nachfrage deutlich ankurbelt. Die Luftfeuchtigkeit von 82 % dämpft die Vorhersage spürbar, da hohe Feuchtigkeit erfahrungsgemäß viele Nutzer vom Radfahren abhält. Die übrigen Merkmale — Dienstag, November, mäßiger Wind, leichte Bewölkung, angenehme Temperatur und kein Feiertag — haben nur geringe Einzeleffekte, die sich teilweise gegenseitig ausgleichen.\n\nFür den Betrieb bedeutet das: An Dienstagabenden im November sollten trotz des Herbstwetters ausreichend Fahrräder an zentralen Stationen bereitstehen, da die Abendnachfrage höher ausfallen kann als vom Modell erwartet. Wartungsarbeiten sollten daher besser in die frühen Nachtstunden ab 22 Uhr gelegt werden, wenn die Ausleihen deutlich zurückgehen.",
+  "explanation": "Das Modell sagte für diese Stunde 194 Ausleihvorgänge vorher, während tatsächlich 243 Fahrräder ausgeliehen wurden. Das ist eine Abweichung von knapp 50 Rädern – die Vorhersage ist damit nur mäßig getroffen, das Modell unterschätzt die tatsächliche Nachfrage spürbar.\n\nDer stärkste Bremseffekt kommt vom Jahr 2011 (yr = 0): Da das Verleihsystem damals noch weniger bekannt war und die Nutzerzahlen erst wuchsen, zieht dieses Merkmal die Vorhersage kräftig nach unten. Dagegen wirkt die angenehme Temperatur von rund 25 °C als größter positiver Treiber – solche Bedingungen locken erfahrungsgemäß viele Radfahrer heraus. Fast genauso stark dämpfend wirkt die hohe Luftfeuchtigkeit von 83 %: Feuchte Luft macht das Radfahren unangenehm, weshalb das Modell die Nachfrage entsprechend reduziert. Positiv schlägt noch der Monat September zu Buche, der als warmer Herbstmonat generell beliebt ist, während der Samstag die Vorhersage leicht senkt – an Wochenenden fahren weniger Pendler, und der Freizeitverkehr um 20 Uhr fällt geringer aus als erwartet.\n\nFür den Betrieb empfiehlt es sich, an warmen Septemberabenden im Jahr 2011 großzügiger Räder bereitzustellen, da das Modell die Nachfrage systematisch unterschätzt hat. Gleichzeitig bieten sehr feuchte Abende (über 80 %) ein gutes Zeitfenster für Wartung und Umdisponierung, da dort erfahrungsgemäß weniger Räder benötigt werden.",
   "plot_file": "waterfall_xgb_poisson_log_inst2058.png",
-  "elapsed_s": 12.84,
+  "elapsed_s": 10.97,
   "usage": {
-    "input_tokens": 2309,
-    "output_tokens": 497,
+    "input_tokens": 2242,
+    "output_tokens": 504,
     "cache_read_input_tokens": 0
   },
-  "prediction": 179.473,
-  "y_true": 238.0
+  "prediction": 194.0592,
+  "y_true": 243.0
 }

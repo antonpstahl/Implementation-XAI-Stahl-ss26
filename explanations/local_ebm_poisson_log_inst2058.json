@@ -2,65 +2,65 @@
   "model": "ebm",
   "instance_id": 2058,
   "feature_values": {
-    "weathersit": 2.0,
-    "mnth": 11.0,
+    "weathersit": 1.0,
+    "mnth": 9.0,
     "hr": 20.0,
-    "weekday": 2.0,
+    "weekday": 6.0,
     "yr": 0.0,
     "holiday": 0.0,
-    "temp": 0.48,
-    "hum": 0.82,
-    "windspeed": 0.1343
+    "temp": 0.62,
+    "hum": 0.83,
+    "windspeed": 0.0
   },
-  "y_true": 238.0,
-  "prediction": 164.7105,
-  "base_value": 4.607797,
+  "y_true": 243.0,
+  "prediction": 176.8649,
+  "base_value": 4.611896,
   "contribution_space": "log",
   "contributions": [
     {
       "feature": "hr",
       "value": 20.0,
-      "contribution": 0.582409
+      "contribution": 0.555188
+    },
+    {
+      "feature": "temp",
+      "value": 0.62,
+      "contribution": 0.229537
     },
     {
       "feature": "yr",
       "value": 0.0,
-      "contribution": -0.229093
+      "contribution": -0.226264
     },
     {
       "feature": "mnth",
-      "value": 11.0,
-      "contribution": 0.104743
-    },
-    {
-      "feature": "temp",
-      "value": 0.48,
-      "contribution": 0.074529
+      "value": 9.0,
+      "contribution": 0.111812
     },
     {
       "feature": "hum",
-      "value": 0.82,
-      "contribution": -0.054982
-    },
-    {
-      "feature": "windspeed",
-      "value": 0.1343,
-      "contribution": 0.011651
-    },
-    {
-      "feature": "weekday",
-      "value": 2.0,
-      "contribution": 0.008782
+      "value": 0.83,
+      "contribution": -0.085436
     },
     {
       "feature": "weathersit",
-      "value": 2.0,
-      "contribution": -0.006104
+      "value": 1.0,
+      "contribution": 0.046734
+    },
+    {
+      "feature": "weekday",
+      "value": 6.0,
+      "contribution": 0.019952
+    },
+    {
+      "feature": "windspeed",
+      "value": 0.0,
+      "contribution": 0.013131
     },
     {
       "feature": "holiday",
       "value": 0.0,
-      "contribution": 0.004712
+      "contribution": 0.004065
     }
   ]
 }

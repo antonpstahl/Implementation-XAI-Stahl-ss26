@@ -4,14 +4,14 @@
   "loss_key": "poisson_log",
   "xai_model": "ebm",
   "instance_id": 2510,
-  "explanation": "Das Modell sagt für diese Stunde 373 Fahrräder vorher, tatsächlich wurden 337 ausgeliehen. Die Abweichung beträgt rund 11 Prozent — das ist eine mäßig gute Vorhersage, die die Größenordnung klar trifft, aber die Nachfrage etwas überschätzt.\n\nDer mit Abstand wichtigste Treiber ist die Uhrzeit: 19 Uhr liegt mitten in der Abendspitze, wenn Pendler nach Hause fahren. Dieser Effekt allein erhöht die erwartete Nachfrage enorm und ist der größte rote Balken im Diagramm. Verstärkt wird das durch die Kombination aus Uhrzeit und Wochentag — ein Dienstagabend ist ein typischer Pendlermoment, was die Vorhersage zusätzlich nach oben treibt. Auf der Gegenseite wirkt das Jahr 2011 dämpfend: Das System war damals noch weniger verbreitet als 2012, sodass das Modell die Gesamtnachfrage etwas zurückhält. Auch die Temperatur von rund 34 °C erhöht die Nachfrage spürbar, liegt jedoch knapp über dem optimalen Bereich, weshalb der Effekt zwar positiv, aber nicht maximal ist. Die niedrige Luftfeuchtigkeit von 44 % und das klare Wetter stützen die Nachfrage ebenfalls leicht.\n\nFür den Betrieb bedeutet das: An Dienstagabenden um 19 Uhr sollten ausreichend Fahrräder an stark frequentierten Pendlerstationen bereitstehen. Gleichzeitig bieten frühe Morgen- oder Mittagsstunden an Werktagen gute Wartungsfenster, da dort die Nachfrage deutlich geringer ist.",
+  "explanation": "Das Modell sagt für diese Stunde 311 Fahrradausleihen vorher, während tatsächlich 372 Räder ausgeliehen wurden. Die Vorhersage ist damit mäßig getroffen — sie liegt rund 16 % unter dem realen Wert, erfasst aber die grundsätzlich hohe Nachfrage in dieser Stunde korrekt.\n\nDer mit Abstand wichtigste Treiber ist die Uhrzeit: 18 Uhr fällt mitten in die Abendspitze, wenn Pendlerinnen und Pendler nach der Arbeit nach Hause fahren. Dieser Effekt hebt die Vorhersage massiv an und ist für sich genommen der dominante Faktor. In die entgegengesetzte Richtung wirkt das Jahr 2011: Das Bikeshare-System war damals noch vergleichsweise jung und hatte eine geringere Nutzerbasis als im Folgejahr 2012 — das Modell berücksichtigt diesen Wachstumstrend und dämpft die Vorhersage entsprechend spürbar. Eine weitere leichte Bremse ist die Kombination aus Monat und Luftfeuchtigkeit: Der Dezember bringt typischerweise weniger Ausleihbereitschaft mit sich, und obwohl die Feuchtigkeit mit 50 % moderat ist, wirkt das Zusammenspiel beider Faktoren leicht nachfragesenkend. Positiv unterstützen noch das klare Wetter sowie der Freitag, der erfahrungsgemäß etwas mehr Freizeitverkehr anzieht.\n\nFür den Betrieb empfiehlt es sich, an Freitagabenden im Dezember — trotz des Wintermonats — ausreichend Fahrräder an zentralen Pendlerstationen bereitzuhalten, da die Abendspitze die saisonalen Dämpfer deutlich überkompensiert. Wartungsarbeiten sollten in den frühen Morgenstunden desselben Tages eingeplant werden, um die hohe Abendnachfrage nicht zu beeinträchtigen.",
   "plot_file": "waterfall_ebm_poisson_log_inst2510.png",
-  "elapsed_s": 11.56,
+  "elapsed_s": 13.13,
   "usage": {
-    "input_tokens": 2070,
-    "output_tokens": 486,
+    "input_tokens": 2060,
+    "output_tokens": 546,
     "cache_read_input_tokens": 0
   },
-  "prediction": 373.4179,
-  "y_true": 337.0
+  "prediction": 311.4291,
+  "y_true": 372.0
 }

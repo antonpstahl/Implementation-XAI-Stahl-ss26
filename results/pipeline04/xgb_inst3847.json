@@ -4,13 +4,13 @@
   "loss_key": "poisson_log",
   "xai_model": "xgb",
   "instance_id": 3847,
-  "explanation": "Das Modell sagt für diese Stunde 141 Ausleihungen vorher; tatsächlich wurden 122 Fahrräder ausgeliehen. Die Abweichung beträgt knapp 16 %, was als mäßig getroffen einzustufen ist — das Modell überschätzt hier leicht, liegt aber in einem für den Betrieb noch gut handhabbaren Bereich.\n\nDer mit Abstand stärkste Bremseffekt in dieser Stunde kommt von der frühen Uhrzeit: Um 6:00 Uhr morgens ist der reguläre Pendelverkehr noch kaum angelaufen, was die Nachfrage erheblich nach unten drückt. Trotzdem ist es kein ruhiger Nachtslot — zwei Faktoren wirken deutlich gegensätzlich. Erstens läuft das Verleihjahr 2012: Gegenüber 2011 hat das System insgesamt deutlich mehr Nutzerinnen und Nutzer gewonnen, was die erwartete Ausleihmenge spürbar anhebt. Zweitens ist es ein Freitag, und Freitage zeigen im Vergleich zu anderen Wochentagen eine früh einsetzende Morgenspitze — viele Pendler starten schon vor 7 Uhr. Die angenehme Temperatur von rund 30 °C verstärkt die Bereitschaft zusätzlich, das Fahrrad zu nehmen, während Feuchtigkeit und Windstille kaum eine Rolle spielen.\n\nFür den Betrieb bedeutet das: An Freitagmorgen im Sommer sollten die Stationen bereits vor 6 Uhr vollständig bestückt sein, da die Nachfrage früher anzieht als an anderen Werktagen. Da Wind und Hitzeextreme fehlen, bietet das nächtliche Fenster von 2:00 bis 5:00 Uhr eine gute Gelegenheit für Wartungsarbeiten und Umverteilungen, bevor der Betrieb wieder hochfährt.",
-  "elapsed_s": 16.91,
+  "explanation": "Das Modell sagte für diese Stunde **586 Fahrradausleihen** vorher, während tatsächlich **531 Räder** ausgeliehen wurden — eine Abweichung von etwa 10 Prozent. Das ist insgesamt ein **mäßig gutes Ergebnis**: Die Größenordnung stimmt, aber das Modell überschätzt die Nachfrage etwas.\n\nDie stärkste Nachfrage entsteht durch die Kombination aus **Tageszeit und Wochentag**: Mittags um 12 Uhr ist der Verleih generell auf seinem Tageshoch — die Mittagspause und Freizeitausflüge sorgen für Hochbetrieb. Dazu kommt, dass es ein **Samstag** ist: An Samstagen nutzen viele Menschen die Räder für Ausflüge und Besorgungen rund um die Mittagszeit, was die Nachfrage nochmals deutlich ankurbelt. Beide Faktoren zusammen sind die mit Abstand wichtigsten Treiber dieser Vorhersage. Hinzu kommt die **angenehme Temperatur von knapp 33 °C**: Das liegt zwar am oberen Ende des Komfortbereichs, ist aber noch attraktiv genug, um viele Nutzer auf die Räder zu locken. Die sehr niedrige Luftfeuchtigkeit von nur 29 Prozent wirkt sich ebenfalls positiv aus — trockene Luft macht das Radfahren angenehmer.\n\nFür den Betrieb bedeutet das: An Samstagmittagen im Juni sollten an beliebten Stationen **besonders viele Fahrräder bereitgestellt** werden, da die Nachfrage sehr hoch ist. Wartungsarbeiten und Umschichtungen zwischen Stationen sollten idealerweise **vor 10 Uhr oder nach 15 Uhr** eingeplant werden, um das Mittagshoch nicht zu unterbrechen.",
+  "elapsed_s": 10.98,
   "usage": {
-    "input_tokens": 1836,
-    "output_tokens": 529,
-    "cache_read_input_tokens": 0
+    "input_tokens": 617,
+    "output_tokens": 504,
+    "cache_read_input_tokens": 1212
   },
-  "prediction": 141.3505,
-  "y_true": 122.0
+  "prediction": 585.7666,
+  "y_true": 531.0
 }

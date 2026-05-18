@@ -4,13 +4,13 @@
   "loss_key": "poisson_log",
   "xai_model": "xgb",
   "instance_id": 580,
-  "explanation": "Das Modell sagt für diese Stunde etwa 12 Fahrradausleihen vorher, während tatsächlich nur 5 Ausleihen stattgefunden haben. Die Vorhersage liegt damit mehr als doppelt so hoch wie der reale Wert — das ist eine mäßige bis schlechte Schätzung. Solche Abweichungen nach oben sind bei sehr geringen Nachfragewerten in der Nacht nicht ungewöhnlich, da das Modell selbst unter ungünstigen Bedingungen ein gewisses Grundniveau annimmt.\n\nDer mit Abstand stärkste Dämpfer in dieser Stunde ist die Uhrzeit: Mitternacht ist die ruhigste Phase des Tages, und das Modell berücksichtigt entsprechend, dass kaum jemand nachts ein Fahrrad ausleiht. Hinzu kommen zwei weitere bremsende Faktoren: Es ist Januar, der kälteste und fahrradschwächste Monat des Jahres, und die Temperatur liegt bei knapp 9 °C — das reicht aus, um viele potenzielle Nutzer davon abzuhalten, sich aufs Rad zu setzen. Das Wetter ist zwar klar, was grundsätzlich positiv wirkt, kann aber die Kombination aus Kälte und nächtlicher Stunde nicht aufwiegen. Da das Jahr 2011 noch das Startjahr des Verleihs war, fällt auch das allgemeine Nutzungsniveau insgesamt geringer aus als in späteren Jahren.\n\nFür den Betrieb lässt sich daraus ableiten: In Winternächten — besonders zwischen Mitternacht und 5 Uhr — reicht eine sehr geringe Fahrradverfügbarkeit aus. Diese Stunden eignen sich ideal für Wartungsarbeiten, Umverteilungen oder das Einlagern von Rädern, ohne dass relevante Nachfrage entsteht. Eine Reduzierung der aktiven Flotte in diesen Zeitfenstern spart Kosten und schont die Infrastruktur.",
-  "elapsed_s": 11.16,
+  "explanation": "Das Modell sagt für diese Stunde rund **65 Fahrradausleihen** vorher; tatsächlich wurden **63 Räder** ausgeliehen. Das ist eine sehr gute Schätzung — die Abweichung beträgt weniger als zwei Fahrräder, also praktisch ein Volltreffer.\n\nDer stärkste dämpfende Faktor ist die **späte Uhrzeit**: 22 Uhr ist bereits Nacht, der Großteil der Tagesnutzer hat längst abgeschlossen, und die Nachfrage sinkt naturgemäß stark ab. Hinzu kommt das **Jahr 2011**: Das Verleihsystem steckte damals noch in den Kinderschuhen mit deutlich weniger Stammkunden als im Folgejahr — das Modell kennt diesen Wachstumstrend und rechnet entsprechend vorsichtiger. Ebenfalls bremsend wirkt der **März**: Als Übergangsmonat liegt er noch vor der fahrradfreundlichen Frühlingssaison, und die Temperatur von knapp 15 °C ist zwar akzeptabel, aber noch kein Anreiz für spontane Ausflüge. Das klare Wetter und der Samstag wirken leicht positiv — Freizeitfahrer sind abends noch unterwegs — können die anderen Faktoren jedoch nur begrenzt ausgleichen.\n\nFür den Betrieb bedeutet das: An späten Samstagabenden im März reichen deutlich weniger Räder als tagsüber, rund 60–70 Stück sind ausreichend. Gleichzeitig eignen sich die ruhigen Nachtstunden ab 23 Uhr hervorragend für **Wartung und Umverteilung**, bevor der Sonntagbetrieb beginnt.",
+  "elapsed_s": 11.2,
   "usage": {
-    "input_tokens": 615,
-    "output_tokens": 532,
+    "input_tokens": 616,
+    "output_tokens": 463,
     "cache_read_input_tokens": 1212
   },
-  "prediction": 12.1144,
-  "y_true": 5.0
+  "prediction": 64.5773,
+  "y_true": 63.0
 }

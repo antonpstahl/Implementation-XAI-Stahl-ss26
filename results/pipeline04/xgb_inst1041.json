@@ -4,13 +4,13 @@
   "loss_key": "poisson_log",
   "xai_model": "xgb",
   "instance_id": 1041,
-  "explanation": "Das XGBoost-Modell sagt für diese Stunde **208 ausgeliehene Fahrräder** vorher, während tatsächlich 229 verliehen wurden. Die Abweichung beträgt etwa 21 Räder, was einer Untervorhersage von rund 9 % entspricht — das ist insgesamt **gut getroffen**, auch wenn das Modell die Nachfrage leicht unterschätzt.\n\nDen stärksten Einfluss in dieser Stunde übt der **Wochentag** aus: Es ist ein Dienstag, also mitten in der Arbeitswoche. An einem Werktag wie diesem konzentriert sich der Verkehr typischerweise auf die Morgenstunden und den späten Nachmittag. Um 11 Uhr, also zwischen den Pendlerspitzen, ist die Nachfrage spürbar niedriger als an einem Wochenendvormittag — daher bremst der Wochentag die Vorhersage deutlich. Positiv wirkt hingegen die **angenehme Temperatur von rund 27 °C**: Das ist nahezu ideales Radfahrwetter und hebt die erwartete Nachfrage merklich an. Ebenfalls förderlich ist das **Jahr 2012**: Das Verleihsystem war zu diesem Zeitpunkt bereits etablierter und deutlich stärker genutzt als im Vorjahr, was sich als generelles Wachstum in der Vorhersage niederschlägt.\n\nFür den Betrieb bedeutet das: An Dienstagvormittagen im Mai sollten an Hauptstandorten rund **200 Räder verfügbar** sein, um die gleichmäßige Mittagsnachfrage zu decken. Da die Auslastung zwischen den Pendlerspitzen ruhiger ist, eignet sich das Zeitfenster von 10 bis 12 Uhr gut für **schnelle Wartungs- und Umverteilungsarbeiten**, bevor die Nachmittagsspitze einsetzt.",
-  "elapsed_s": 10.74,
+  "explanation": "Das Modell sagt für diese Stunde **385 ausgeliehene Fahrräder** vorher, während tatsächlich 387 Räder verliehen wurden. Das ist eine nahezu perfekte Vorhersage — die Abweichung beträgt weniger als ein halbes Prozent, was als sehr gut getroffen gilt.\n\nDer mit Abstand stärkste Treiber ist die Uhrzeit: 8:00 Uhr morgens ist die klassische Morgenspitze des Pendelverkehrs, was die Nachfrage deutlich nach oben treibt. Dass es sich um einen Freitag handelt, verstärkt diesen Effekt zusätzlich — Werktage zeigen ausgeprägte Pendlerspitzen, und Freitag liegt noch klar im Arbeitsalltag der Nutzerinnen und Nutzer. Als bremsender Faktor fällt die hohe Luftfeuchtigkeit von 88 % ins Gewicht: Feuchte, neblige Luft macht das Radfahren unangenehmer und dämpft die Nachfrage spürbar. Etwas abmildernd wirkt zudem, dass die Daten aus dem Jahr 2011 stammen — damals war das Verleihsystem noch weniger etabliert als später, was die Gesamtnachfrage strukturell etwas nach unten zieht.\n\nFür den Betrieb bedeutet das: An Freitagmorgen zwischen 7 und 9 Uhr sollte die maximale Anzahl an Rädern an den wichtigsten Pendelstationen bereitstehen — Engpässe wären hier besonders ärgerlich. Wartungsarbeiten oder Umverteilungen von Rädern sollten keinesfalls in diese Zeitfenster fallen, sondern besser in die frühen Morgenstunden zwischen 3 und 6 Uhr gelegt werden, wenn die Nachfrage minimal ist.",
+  "elapsed_s": 10.38,
   "usage": {
     "input_tokens": 615,
-    "output_tokens": 515,
+    "output_tokens": 491,
     "cache_read_input_tokens": 1212
   },
-  "prediction": 208.226,
-  "y_true": 229.0
+  "prediction": 385.3899,
+  "y_true": 387.0
 }

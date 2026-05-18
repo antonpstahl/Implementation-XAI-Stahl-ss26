@@ -4,13 +4,13 @@
   "loss_key": "poisson_log",
   "xai_model": "ebm",
   "instance_id": 1677,
-  "explanation": "Das Modell sagt für diese Stunde 179 ausgeliehene Fahrräder vorher, während tatsächlich 145 gezählt wurden. Die Abweichung von rund 34 Rädern entspricht etwa 23 Prozent – das ist ein mäßiges Ergebnis. Das Modell überschätzt hier die Nachfrage spürbar, trifft aber die Größenordnung noch vertretbar.\n\nDie Mittagsstunde um 12 Uhr ist der mit Abstand stärkste Antrieb hinter der hohen Vorhersage: Zu dieser Tageszeit ist das System erfahrungsgemäß stark ausgelastet, da viele Menschen in der Mittagspause oder auf dem Weg zu Besorgungen ein Rad nutzen. Hinzu kommt die angenehme Temperatur von knapp 29 °C, die das Fahrradfahren besonders attraktiv macht und die Nachfrage deutlich nach oben treibt. Leicht bremsend wirkt das Jahr 2011: Das Verleihsystem war damals noch weniger bekannt und hatte eine kleinere Stammkundschaft als im Folgejahr – das Modell korrigiert die Vorhersage deshalb etwas nach unten. Klares Wetter und moderate Luftfeuchtigkeit von 48 Prozent stützen die Nachfrage zusätzlich, fallen aber kaum ins Gewicht.\n\nFür den Betrieb bedeutet das: An Mittwochmittagen im April bei sommerlichen Temperaturen sollte ausreichend Fahrradbestand an zentralen Stationen verfügbar sein – idealerweise aufgestockt durch morgendliche Umverteilungsfahrten. Da das Modell tendenziell zu optimistisch schätzt, empfiehlt es sich, die tatsächlichen Ausleihzahlen aus dem Vorjahr als zusätzlichen Richtwert hinzuzuziehen und die Disposition entsprechend konservativ zu planen.",
-  "elapsed_s": 11.26,
+  "explanation": "Es ist 20:00 Uhr an einem Donnerstagabend im August 2011, bewölkt mit rund 28,7 °C und mäßiger Luftfeuchtigkeit.\n\nDas Modell sagt 260 ausgeliehene Fahrräder vorher, während tatsächlich 286 gezählt wurden. Die Abweichung beträgt rund 26 Räder oder etwa 9 % — das ist eine solide, gut getroffene Vorhersage.\n\nDie Uhrzeit 20:00 Uhr ist der mit Abstand wichtigste Faktor: Der Abend nach Feierabend ist eine stark nachgefragte Zeit, in der viele Menschen noch unterwegs sind — sei es auf dem Heimweg oder für Freizeitaktivitäten. Das treibt die Nachfrage deutlich nach oben. Ebenfalls stark positiv wirkt die Temperatur von knapp 29 °C, die sich im optimalen Bereich für Radfahren befindet — warm genug für angenehmes Fahren, aber noch nicht unangenehm heiß. Diese beiden Faktoren gemeinsam erklären den Großteil der hohen Nachfrage. Einen spürbaren bremsenden Einfluss hat das Jahr 2011: Das Verleihsystem war damals noch weniger etabliert und bekannt als im Folgejahr, weshalb die Gesamtnachfrage systematisch etwas niedriger liegt. Die leichte Bewölkung, die Luftfeuchtigkeit von 74 % und der schwache Wind spielen an diesem Abend nur eine untergeordnete Rolle.\n\nFür den Betrieb bedeutet das: An Sommerabenden zwischen 19 und 21 Uhr sollten möglichst viele Fahrräder an zentralen Stationen verfügbar sein, da die Kombination aus warmem Wetter und Feierabendverkehr regelmäßig hohe Nachfrage erzeugt. Wartungsarbeiten sollten bevorzugt auf die frühen Morgenstunden zwischen 0 und 5 Uhr gelegt werden, wo die Nachfrage ein Minimum erreicht und Ausfälle kaum Auswirkungen haben.",
+  "elapsed_s": 14.43,
   "usage": {
-    "input_tokens": 1837,
-    "output_tokens": 508,
-    "cache_read_input_tokens": 0
+    "input_tokens": 614,
+    "output_tokens": 566,
+    "cache_read_input_tokens": 1212
   },
-  "prediction": 178.547,
-  "y_true": 145.0
+  "prediction": 260.2228,
+  "y_true": 286.0
 }

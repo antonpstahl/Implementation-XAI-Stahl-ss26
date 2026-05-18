@@ -1,4 +1,4 @@
 pipeline_label,RA,SA,VA
-JSON→Text,0.846,0.988,1.0
-Tool-Use,0.883,1.0,1.0
-Vision,0.788,0.983,1.0
+JSON→Text,0.562,0.721,0.667
+Tool-Use,0.558,0.733,0.733
+Vision,0.429,0.679,0.575

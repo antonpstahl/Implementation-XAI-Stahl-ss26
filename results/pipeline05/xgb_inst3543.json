@@ -4,14 +4,14 @@
   "loss_key": "poisson_log",
   "xai_model": "xgb",
   "instance_id": 3543,
-  "explanation": "Das Modell sagt für diese Stunde 660 ausgeliehene Fahrräder vorher, während tatsächlich 691 Räder unterwegs waren. Die Abweichung beträgt nur rund 4 %, was einer sehr guten Vorhersage entspricht — das Modell trifft die reale Nachfrage hier nahezu präzise.\n\nDen mit Abstand größten Schub nach oben liefert die Uhrzeit: 16 Uhr fällt in den frühen Abend, kurz vor der Hauptverkehrszeit, was erfahrungsgemäß viele Nutzer auf die Räder treibt. Dieser Faktor erhöht die Erwartung deutlich über den täglichen Durchschnitt hinaus. An zweiter Stelle steht die angenehme Temperatur von rund 25 °C — ideales Fahrradwetter, das die Nachfrage spürbar ankurbelt. Ebenfalls positiv wirkt das Jahr 2012: Das Verleihsystem war damals bereits etablierter und verzeichnete insgesamt mehr Nutzer als im Vorjahr. Auch der Monat September und die sehr niedrige Luftfeuchtigkeit von 33 % tragen zusätzlich positiv bei — trockene Luft macht das Radfahren angenehmer. Lediglich der Wind mit etwa 22 km/h bremst die Vorhersage minimal, bleibt aber nahezu vernachlässigbar.\n\nFür den Betrieb bedeutet das: An Sonntagnachmittagen im Spätsommer sollten die Stationen rund um 15–16 Uhr gut bestückt sein, da die Kombination aus Temperatur und Tageszeit verlässlich hohe Nachfrage erzeugt. Wartungsarbeiten an Fahrrädern sollten in diesem Zeitfenster vermieden und besser in die frühen Morgenstunden gelegt werden.",
+  "explanation": "Das Modell sagt für diese Stunde 310 Fahrradausleihen vorher, während tatsächlich 286 Fahrräder ausgeliehen wurden. Die Abweichung von rund 8 Prozent ist moderat — die Vorhersage ist insgesamt gut getroffen, liegt aber leicht über dem realen Wert.\n\nDer mit Abstand stärkste Treiber ist das Jahr 2012. Da das Bikeshare-System von Jahr zu Jahr wächst, erkennt das Modell, dass 2012 generell deutlich mehr Fahrräder unterwegs sind als im Vorjahr — das schiebt die Vorhersage spürbar nach oben. Ebenfalls stark wirkt die Uhrzeit 20:00 Uhr: Der späte Abend gehört noch zum Ausklang der Abendspitze, viele Menschen sind nach der Arbeit oder nach Freizeitaktivitäten unterwegs, was die Nachfrage merklich erhöht. Zusätzlich begünstigen die angenehmen Bedingungen die Ausleihe: Bei rund 20 °C, klarem Himmel und einer sehr niedrigen Luftfeuchtigkeit von 29 Prozent ist das Radfahren besonders attraktiv — beide Faktoren treiben die Vorhersage weiter nach oben. Der April als Monat wirkt leicht dämpfend, da der Frühling noch nicht auf dem Nachfragehöhepunkt des Sommers ist, dieser Effekt fällt aber kaum ins Gewicht.\n\nFür den Betrieb empfiehlt es sich, an Freitagabenden im Jahr 2012 genügend Fahrräder an stark frequentierten Stationen bereitzuhalten, da Jahrestrend und Abendnachfrage gemeinsam für hohes Aufkommen sorgen. Wartungsarbeiten sollten möglichst nicht in die Abendstunden zwischen 17 und 21 Uhr gelegt werden — frühe Morgenstunden oder der Spätnachmittag an Wochentagen bieten deutlich bessere Zeitfenster.",
   "plot_file": "waterfall_xgb_poisson_log_inst3543.png",
-  "elapsed_s": 12.39,
+  "elapsed_s": 12.16,
   "usage": {
-    "input_tokens": 2310,
-    "output_tokens": 495,
+    "input_tokens": 2298,
+    "output_tokens": 545,
     "cache_read_input_tokens": 0
   },
-  "prediction": 660.0004,
-  "y_true": 691.0
+  "prediction": 309.9225,
+  "y_true": 286.0
 }

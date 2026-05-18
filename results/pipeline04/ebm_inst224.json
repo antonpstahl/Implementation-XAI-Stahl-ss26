@@ -4,13 +4,13 @@
   "loss_key": "poisson_log",
   "xai_model": "ebm",
   "instance_id": 224,
-  "explanation": "Das Modell sagt für diese Stunde 290 ausgeliehene Fahrräder vorher, während tatsächlich 270 gezählt wurden — eine Abweichung von rund 7 %. Das ist eine gute, solide Schätzung, die den realen Betrieb zuverlässig widerspiegelt.\n\nDer mit Abstand stärkste Treiber ist die Uhrzeit: 20 Uhr liegt am Ende der Abendspitze, wenn viele Pendler nach Hause fahren und gleichzeitig Freizeitnutzer noch unterwegs sind. Diese Tageszeit sorgt für einen deutlich erhöhten Ausleihbedarf. Fast ebenso bedeutsam ist die Temperatur von knapp 33 °C — das fällt genau in den optimalen Bereich, in dem Radfahren angenehm ist und die Nachfrage spürbar anzieht. Leicht dämpfend wirkt hingegen, dass die Daten aus dem Jahr 2011 stammen: Das Bikeshare-System war damals noch weniger bekannt und hatte eine kleinere Stammkundschaft als ein Jahr später — die Gesamtnachfrage war systemweit noch niedriger.\n\nFür den Betrieb bedeutet das: Donnerstagabende im Juli sollten mit einer hohen Fahrzeugverfügbarkeit eingeplant werden, insbesondere an gut frequentierten Stationen entlang typischer Pendlerrouten. Wartungsarbeiten und Umverteilungen von Fahrrädern sollten daher nicht in die Abendstunden zwischen 17 und 21 Uhr gelegt werden, sondern in die ruhigen Nacht- und frühen Morgenstunden, wenn die Nachfrage gering ist.",
-  "elapsed_s": 13.42,
+  "explanation": "Das Modell sagt für diese Stunde 117 ausgeliehene Fahrräder vorher, während tatsächlich 96 Räder ausgeliehen wurden. Die Abweichung von rund 22 Prozent ist moderat — die Vorhersage wurde mäßig getroffen. Das Modell überschätzt die Nachfrage leicht, liegt aber in einer plausiblen Größenordnung.\n\nDer mit Abstand wichtigste Faktor ist die Uhrzeit: 19 Uhr ist die klassische Abendspitze, in der Pendlerinnen und Pendler vom Büro nach Hause fahren. Diese Tageszeit treibt die erwartete Nachfrage erheblich nach oben. Diesem starken Aufwärtsdruck wirkt jedoch die Temperatur deutlich entgegen: Mit rund 8 °C ist es für Februar zwar nicht ungewöhnlich kalt, aber für Radfahrerinnen und Radfahrer bereits spürbar ungemütlich — dieser Kälteeffekt dämpft die Nachfrage erheblich und ist der zweitstärkste Einfluss in dieser Stunde. Ergänzend wirken Monat und Jahr bremsend: Februar ist grundsätzlich ein nachfrageschwacher Wintermonat, und das Jahr 2011 spiegelt noch einen niedrigeren allgemeinen Nutzungsstand wider als spätere Jahre. Die angenehm niedrige Luftfeuchtigkeit von 40 % und das klare Wetter wirken leicht positiv, können die Kälte aber nicht vollständig ausgleichen.\n\nFür den Betrieb bedeutet das: Trotz der Abendspitze sollten an kalten Februartagen nicht die gleichen Kapazitäten eingeplant werden wie im Sommer — eine reduzierte Bereitstellung an gut frequentierten Stationen reicht aus. Gleichzeitig eignen sich solche Tage gut für kurze Wartungsfenster in den frühen Morgenstunden, da die Gesamtnachfrage saisonal niedrig bleibt.",
+  "elapsed_s": 12.61,
   "usage": {
-    "input_tokens": 1835,
-    "output_tokens": 446,
-    "cache_read_input_tokens": 0
+    "input_tokens": 615,
+    "output_tokens": 531,
+    "cache_read_input_tokens": 1212
   },
-  "prediction": 290.092,
-  "y_true": 270.0
+  "prediction": 117.0012,
+  "y_true": 96.0
 }

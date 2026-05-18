@@ -8,29 +8,29 @@
     "contribution_space": "native"
   },
   "training_time_seconds": {
-    "xgb": 1.9822180271148682,
-    "ebm": 13.767768859863281
+    "xgb": 1.9668219089508057,
+    "ebm": 15.707442998886108
   },
   "metrics": {
     "xgb": {
-      "rmse": 39.12852621792248,
-      "mae": 24.307415338785404,
-      "r2": 0.95153527013306,
-      "poisson_deviance": 12.032854735556183,
-      "min_prediction": -40.849910736083984,
-      "n_negative_predictions": 108
+      "rmse": 46.4342769737849,
+      "mae": 28.720874164080286,
+      "r2": 0.9324962609337942,
+      "poisson_deviance": 17.101515488925486,
+      "min_prediction": -35.79975509643555,
+      "n_negative_predictions": 133
     },
     "ebm": {
-      "rmse": 55.31316396719346,
-      "mae": 36.190844357681634,
-      "r2": 0.9031508489837787,
-      "poisson_deviance": 59.98730161608612,
-      "min_prediction": -202.55887200928922,
-      "n_negative_predictions": 358
+      "rmse": 59.643223386928376,
+      "mae": 39.688807673253145,
+      "r2": 0.8886288594090186,
+      "poisson_deviance": 79.63197933029012,
+      "min_prediction": -125.29885337578038,
+      "n_negative_predictions": 411
     }
   },
-  "n_train": 12165,
-  "n_test": 5214,
+  "n_train": 12152,
+  "n_test": 5227,
   "hyperparameters": {
     "xgb": {
       "n_estimators": 800,

@@ -4,14 +4,14 @@
   "loss_key": "poisson_log",
   "xai_model": "ebm",
   "instance_id": 2058,
-  "explanation": "Das Modell hat für diese Stunde 164,7 Fahrräder vorhergesagt, während tatsächlich 238 Räder ausgeliehen wurden. Das ist eine deutliche Unterschätzung von rund 73 Einheiten – die Vorhersage ist damit als mäßig bis schlecht einzustufen, da fast ein Drittel der tatsächlichen Nachfrage nicht erfasst wurde.\n\nDer mit Abstand stärkste Treiber ist die Uhrzeit: 20:00 Uhr gilt als Abendstunde mit noch spürbarer Nachfrage, was den Basiswert kräftig nach oben treibt. Allerdings zieht das Jahr 2011 deutlich in die Gegenrichtung – da das Verleihsystem damals noch weniger bekannt und kleiner war, erwartet das Modell generell niedrigere Zahlen als im Wachstumsjahr 2012. Dritter wesentlicher Faktor ist die Kombination aus Uhrzeit und Wochentag (Dienstag, 20 Uhr): Pendler kehren an einem Werktag abends noch aktiv zurück, was die Vorhersage zusätzlich anhebt. Dämpfend wirken dagegen die hohe Luftfeuchtigkeit von 82 % sowie die Wechselwirkung zwischen Monat und Stunde – November mit abendlicher Dunkelheit reduziert laut Modell die erwartete Nachfrage leicht.\n\nFür den Betrieb empfiehlt es sich, an Dienstagabenden im November die Stationsversorgung vorsorglich großzügiger zu planen, da das Modell die Nachfrage in dieser Kombination systematisch unterschätzt. Gleichzeitig bieten sich frühe Morgenstunden oder feuchte Novembertage für Wartungsarbeiten an, weil dort die Nachfrage erfahrungsgemäß am geringsten ausfällt.",
+  "explanation": "Das Modell hat für diese Stunde 177 Fahrräder vorhergesagt, während tatsächlich 243 ausgeliehen wurden. Die Vorhersage liegt damit rund 27 % unter dem realen Wert — das ist eine merkliche Unterschätzung und damit eher mäßig getroffen. Mögliche Ursachen könnten seltene Kombinationen aus Samstagabend und saisonalen Besonderheiten sein, die das Modell nicht vollständig abbildet.\n\nDen größten Schub nach oben liefert die Uhrzeit 20:00 Uhr: Der Abend ist eine aktive Nutzungszeit, besonders am Wochenende, und treibt die Vorhersage am stärksten an. Fast ebenso wichtig ist die angenehme Temperatur von rund 25 °C — solche Bedingungen animieren deutlich mehr Menschen zum Radfahren, weshalb auch dieser Balken kräftig ins Positive zeigt. Dagegen arbeitet das Jahr 2011 gegen die Vorhersage: Da das System damals noch deutlich weniger Nutzerinnen und Nutzer hatte als 2012, zieht dieser Faktor die erwartete Zahl spürbar nach unten. Auch die Kombination aus Stunde und Wochentag (Samstag, 20 Uhr) wirkt leicht dämpfend — möglicherweise weil die Abendstunde samstags ein anderes Muster zeigt als an Werktagen. Die hohe Luftfeuchtigkeit von 83 % bremst die Nachfrage ebenfalls leicht, was realistisch ist.\n\nFür den Betrieb empfiehlt es sich, an lauen Samstagabenden im Spätsommer — also bei warmen Temperaturen um 25 °C und klarem Wetter — großzügig Fahrräder bereitzustellen, da das Modell diese Kombination tendenziell unterschätzt. Wartungsarbeiten sollten besser in die frühen Morgenstunden verlegt werden, wenn die Nachfrage erfahrungsgemäß gering ist.",
   "plot_file": "waterfall_ebm_poisson_log_inst2058.png",
-  "elapsed_s": 11.23,
+  "elapsed_s": 12.03,
   "usage": {
-    "input_tokens": 2069,
-    "output_tokens": 504,
+    "input_tokens": 2058,
+    "output_tokens": 545,
     "cache_read_input_tokens": 0
   },
-  "prediction": 164.7105,
-  "y_true": 238.0
+  "prediction": 176.8649,
+  "y_true": 243.0
 }

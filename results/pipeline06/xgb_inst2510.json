@@ -4,19 +4,20 @@
   "loss_key": "poisson_log",
   "xai_model": "xgb",
   "instance_id": 2510,
-  "explanation": "Alle Daten sind gesammelt. Hier ist die vollständige, verständliche Erklärung:\n\n---\n\nDas Modell sagt für diese Stunde **369 Fahrräder** voraus, während tatsächlich **337 Fahrräder** ausgeliehen wurden – eine Überschätzung von knapp 10 %. Für ein Nachfragemodell, das mit stündlichen Schwankungen über ein ganzes Jahr trainiert wurde, ist diese Abweichung gering und die Vorhersage insgesamt als gut zu bewerten.\n\nDer mit Abstand stärkste Hebel für diese Vorhersage ist die **Uhrzeit 19 Uhr**: Sie ist der wichtigste Faktor im gesamten Modell und treibt die Nachfrage hier kräftig nach oben – typischerweise weil der Abend-Berufsverkehr viele Pendler auf die Räder bringt. 19 Uhr ist dabei eine völlig normale Beobachtungsstunde (gut 4 % aller Trainingsstunden), also kein Ausreißer. Den zweitgrößten Einfluss – diesmal **dämpfend** – hat das Jahr: Diese Instanz stammt aus 2011, dem ersten Betriebsjahr des Verleihs. Das Modell hat gelernt, dass die Nachfrage in 2012 deutlich höher war (das Jahr liegt genau im Mittel der Trainingsdaten, d. h. beide Jahre kommen gleich häufig vor). Wäre dieselbe Situation in 2012 aufgetreten, würde das Modell statt 369 satte **549 Fahrräder** vorhersagen – ein Plus von 180 Rädern allein wegen des Jahres. Ähnlich stark wäre der Effekt, hätte die Stunde 17 Uhr statt 19 Uhr gelautet (dann 539 Fahrräder, +170). Die **Temperatur von ~34 °C** wirkt leicht positiv, liegt aber mit einem Perzentil von 97,9 % extrem hoch – nur an sehr wenigen Tagen ist es so heiß; das Modell hebt die Nachfrage dadurch ein wenig an, ohne sie zu übertreiben.\n\nFür den Betrieb bedeutet das: **Abendstunden zwischen 17 und 19 Uhr** sind die verlässlichsten Hochlastzeiten und sollten stets mit maximaler Flotte abgedeckt sein. Gleichzeitig zeigen die Daten deutlich, dass das Geschäft zwischen 2011 und 2012 stark gewachsen ist – Kapazitätsplanungen sollten daher immer den aktuellen Wachstumstrend berücksichtigen und nicht auf Vorjahreszahlen stützen.",
+  "explanation": "Alle nötigen Daten sind vorhanden. Nun formuliere ich die vollständige Erklärung.\n\n---\n\nDas Modell sagt für die Stunde von 18:00 Uhr am Freitag, dem Dezember 2011, eine Ausleihe von **326 Fahrrädern** vorher, während in der Realität **372 Fahrräder** verliehen wurden. Das ist eine Abweichung von rund 46 Rädern (ca. 12 %), was für eine komplexe Situation wie die Abendspitze eines Wintertags eine durchaus akzeptable Schätzung darstellt. Das Modell tendiert hier leicht zur Unterschätzung, erfasst die Größenordnung aber gut.\n\nDer mit Abstand stärkste Treiber für die hohe Vorhersage ist die **Uhrzeit 18:00 Uhr**. Dieser Wert erhöht die Prognose massiv – und das wenig überraschend: Alle 24 Stunden sind im Trainingsset gleichmäßig mit je ca. 4,2 % vertreten, d. h. der Abendfeierabend ist keine Seltenheit, aber das Modell hat eindeutig gelernt, dass 18:00 Uhr die Hauptnachfragezeit schlechthin ist (global das wichtigste Merkmal mit Abstand, Wichtigkeitswert 0,83 gegenüber 0,20 beim zweitwichtigsten). Klar: Die Menschen fahren nach der Arbeit nach Hause. Das ist in dieser Stunde der dominierende Effekt. Ergänzend wirkt der **Freitag** leicht positiv, was auf erhöhte Freizeitaktivität zum Wochenschluss hindeutet.\n\nDer wichtigste **bremsende** Faktor ist das **Jahr 2011** (gegenüber 2012). Das Modell hat gelernt, dass der Verleih im zweiten Betriebsjahr (2012) deutlich stärker nachgefragt wurde – 2011 liegt auf dem 48. Perzentil, also in der unteren Jahreshälfte des Trainingszeitraums. Ein eindrucksvolles Gedankenexperiment: Hätte es sich um denselben Freitagabend im Jahr 2012 gehandelt, würde das Modell **471 Fahrräder** vorhersagen – das sind **145 Räder mehr** (+45 %). Das zeigt, wie stark das Wachstum zwischen den Jahren das Nutzungsverhalten prägte. Die Temperatur von ~16,4 °C dämpft die Nachfrage ebenfalls leicht (negativer Beitrag), was plausibel ist: Für Dezember ist das zwar mild, aber im Jahresvergleich immer noch kühl.\n\nFür den Betrieb lassen sich zwei praktische Schlüsse ziehen: **Erstens** sollten an Freitagabenden um 18:00 Uhr in jedem Fall ausreichend Fahrräder an zentralen Stationen bereitgestellt werden – dieser Zeitpunkt ist der stärkste Nachfragetreiber überhaupt und verlangt proaktive Disposition. **Zweitens** lohnt es sich, die Wachstumsdynamik zwischen den Jahren im Blick zu behalten: Wenn der Verleih weiter wächst (wie von 2011 auf 2012), sollten Kapazitätsprognosen regelmäßig nach oben angepasst werden, um Engpässe an Hauptverkehrszeiten zu vermeiden.",
+  "stop_reason": "end_turn",
   "tool_calls": [
     {
       "tool": "get_shap_values",
       "arguments": {
         "instance_id": 2510
       },
-      "result_preview": "{'instance_id': 2510, 'y_true': 337.0, 'prediction': 368.9, 'base_value': 5.25252, 'contribution_space': 'log', 'note': 'Positive Beiträge erhöhen, negative senken die Vorhersage (multiplikativ via exp).', 'contributions': [{'feature': 'hr', 'contribution': 0.55775}, {'feature': 'yr', 'contribution'…"
+      "result_preview": "{'instance_id': 2510, 'y_true': 372.0, 'prediction': 326.04, 'base_value': 5.2547, 'contribution_space': 'log', 'note': 'Positive Beiträge erhöhen, negative senken die Vorhersage (multiplikativ via exp).', 'contributions': [{'feature': 'hr', 'value': 18.0, 'value_human': '18:00 Uhr', 'contribution': 0.68554}, {'feature': 'yr', 'value': 0.0, 'value_human': '2011', 'contribution': -0.22625}, {'feature': 'temp', 'value': 0.4, 'value_human': '~16.4 °C', 'contribution': -0.08413}, {'feature': 'weekday', 'value': 5.0, 'value_human': 'Fr', 'contribution': 0.06754}, {'feature': 'hum', 'value': 0.5, 'value_human': '50 %', 'contribution': 0.04153}, {'feature': 'weathersit', 'value': 1.0, 'value_human': 'klar/wenige Wolken', 'contribution': 0.02663}, {'feature': 'holiday', 'value': 0.0, 'value_human': 'kein Feiertag', 'contribution': 0.01424}, {'feature': 'windspeed', 'value': 0.0, 'value_human': '0.0 km/h', 'contribution': 0.01166}, {'feature': 'mnth', 'value': 12.0, 'value_human': 'Dez', 'contr…"
     },
     {
       "tool": "get_feature_importance",
       "arguments": {},
-      "result_preview": "[{'rank': 1, 'feature': 'hr', 'importance': 0.84237}, {'rank': 2, 'feature': 'yr', 'importance': 0.20709}, {'rank': 3, 'feature': 'temp', 'importance': 0.18996}, {'rank': 4, 'feature': 'weekday', 'importance': 0.16116}, {'rank': 5, 'feature': 'mnth', 'importance': 0.12616}, {'rank': 6, 'feature': 'h…"
+      "result_preview": "[{'rank': 1, 'feature': 'hr', 'importance': 0.83257}, {'rank': 2, 'feature': 'yr', 'importance': 0.20042}, {'rank': 3, 'feature': 'temp', 'importance': 0.19712}, {'rank': 4, 'feature': 'weekday', 'importance': 0.17282}, {'rank': 5, 'feature': 'mnth', 'importance': 0.11826}, {'rank': 6, 'feature': 'hum', 'importance': 0.07722}, {'rank': 7, 'feature': 'weathersit', 'importance': 0.05091}, {'rank': 8, 'feature': 'windspeed', 'importance': 0.02031}, {'rank': 9, 'feature': 'holiday', 'importance': 0.012}]"
     },
     {
       "tool": "get_feature_value_context",
@@ -24,7 +25,7 @@
         "instance_id": 2510,
         "feature": "hr"
       },
-      "result_preview": "{'feature': 'hr', 'instance_value': 19, 'type': 'categorical', 'training_distribution': {0: {'count': 498, 'pct': 4.1}, 1: {'count': 516, 'pct': 4.2}, 2: {'count': 515, 'pct': 4.2}, 3: {'count': 456, 'pct': 3.7}, 4: {'count': 500, 'pct': 4.1}, 5: {'count': 510, 'pct': 4.2}, 6: {'count': 499, 'pct': …"
+      "result_preview": "{'feature': 'hr', 'instance_value': 18, 'instance_value_human': '18:00 Uhr', 'type': 'categorical', 'training_distribution': {0: {'count': 506, 'pct': 4.2}, 1: {'count': 506, 'pct': 4.2}, 2: {'count': 501, 'pct': 4.1}, 3: {'count': 487, 'pct': 4.0}, 4: {'count': 492, 'pct': 4.0}, 5: {'count': 498, 'pct': 4.1}, 6: {'count': 507, 'pct': 4.2}, 7: {'count': 508, 'pct': 4.2}, 8: {'count': 508, 'pct': 4.2}, 9: {'count': 508, 'pct': 4.2}, 10: {'count': 508, 'pct': 4.2}, 11: {'count': 508, 'pct': 4.2}, 12: {'count': 509, 'pct': 4.2}, 13: {'count': 510, 'pct': 4.2}, 14: {'count': 510, 'pct': 4.2}, 15: {'count': 510, 'pct': 4.2}, 16: {'count': 511, 'pct': 4.2}, 17: {'count': 511, 'pct': 4.2}, 18: {'count': 509, 'pct': 4.2}, 19: {'count': 509, 'pct': 4.2}, 20: {'count': 509, 'pct': 4.2}, 21: {'count': 509, 'pct': 4.2}, 22: {'count': 509, 'pct': 4.2}, 23: {'count': 509, 'pct': 4.2}}}"
     },
     {
       "tool": "get_feature_value_context",
@@ -32,15 +33,7 @@
         "instance_id": 2510,
         "feature": "yr"
       },
-      "result_preview": "{'feature': 'yr', 'instance_value': 0.0, 'type': 'numerical', 'percentile_in_train': 49.8, 'train_min': 0.0, 'train_max': 1.0, 'train_mean': 0.5018, 'train_std': 0.5}"
-    },
-    {
-      "tool": "get_feature_value_context",
-      "arguments": {
-        "instance_id": 2510,
-        "feature": "temp"
-      },
-      "result_preview": "{'feature': 'temp', 'instance_value': 0.84, 'type': 'numerical', 'percentile_in_train': 97.9, 'train_min': 0.02, 'train_max': 1.0, 'train_mean': 0.4981, 'train_std': 0.1931}"
+      "result_preview": "{'feature': 'yr', 'instance_value': 0.0, 'instance_value_human': '2011', 'type': 'numerical', 'percentile_in_train': 47.9, 'train_min': 0.0, 'train_max': 1.0, 'train_mean': 0.5213, 'train_std': 0.4996}"
     },
     {
       "tool": "get_counterfactual_prediction",
@@ -50,24 +43,14 @@
           "yr": 1
         }
       },
-      "result_preview": "{'instance_id': 2510, 'base_prediction': 368.9, 'counterfactual_prediction': 549.33, 'delta': 180.43, 'applied_changes': {'yr': 1.0}, 'unit': 'Fahrräder pro Stunde'}"
-    },
-    {
-      "tool": "get_counterfactual_prediction",
-      "arguments": {
-        "instance_id": 2510,
-        "changes": {
-          "hr": 17
-        }
-      },
-      "result_preview": "{'instance_id': 2510, 'base_prediction': 368.9, 'counterfactual_prediction': 538.71, 'delta': 169.81, 'applied_changes': {'hr': 17}, 'unit': 'Fahrräder pro Stunde'}"
+      "result_preview": "{'instance_id': 2510, 'base_prediction': 326.04, 'counterfactual_prediction': 471.41, 'delta': 145.38, 'applied_changes': {'yr': 1.0}, 'unit': 'Fahrräder pro Stunde'}"
     }
   ],
-  "n_tool_calls": 7,
-  "elapsed_s": 31.95,
+  "n_tool_calls": 5,
+  "elapsed_s": 33.75,
   "usage": {
-    "input_tokens": 4182,
-    "output_tokens": 1285
+    "input_tokens": 3094,
+    "output_tokens": 1312
   },
-  "y_true": 337.0
+  "y_true": 372.0
 }

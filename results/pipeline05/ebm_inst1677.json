@@ -4,14 +4,14 @@
   "loss_key": "poisson_log",
   "xai_model": "ebm",
   "instance_id": 1677,
-  "explanation": "Das Modell sagt für diese Stunde 178,5 Fahrradausleihen voraus, während tatsächlich 145 Fahrräder ausgeliehen wurden. Die Vorhersage liegt damit rund 23 % über dem realen Wert — das ist eine mäßige Überschätzung, aber noch in einem akzeptablen Bereich für eine grobe Betriebsplanung.\n\nDer mit Abstand stärkste Treiber ist die Tageszeit: Mittagsstunde (12 Uhr) ist eine aktive Stunde mit spürbarem Ausleihbetrieb, was die Vorhersage deutlich nach oben zieht. Fast ebenso positiv wirkt die angenehme Temperatur von knapp 29 °C — an einem solchen Frühlingstag in April lockt das Wetter viele Menschen aufs Fahrrad. Diese beiden Faktoren zusammen erklären den Großteil der hohen Vorhersage. Gegenläufig wirkt das Jahr 2011: Da das System damals noch jung und weniger bekannt war, dämpft dieser Faktor die Erwartung spürbar nach unten. Auch die Kombination aus Uhrzeit und Wochentag (Mittwoch mittags, kein Wochenende) zieht die Vorhersage leicht zurück — ein Hinweis, dass mittags werktags weniger Freizeitnutzung stattfindet als etwa am Wochenende. Luftfeuchtigkeit und Wetterlage (klar, nur 48 % Feuchte) haben einen kleinen, aber positiven Effekt.\n\nFür den Betrieb bedeutet das: An warmen, klaren Mittagen im Frühjahr lohnt es sich, ausreichend Fahrräder an zentralen Stationen bereitzuhalten. Gleichzeitig eignen sich frühe Morgenstunden oder kühle Regentage gut für Wartungsarbeiten, da dort die Nachfrage naturgemäß gering ist.",
+  "explanation": "Das EBM-Modell sagt für diese Stunde 260 Fahrräder voraus, während tatsächlich 286 Fahrräder ausgeliehen wurden. Die Abweichung beträgt rund 9 %, was als mäßig gute Schätzung einzustufen ist — die Größenordnung stimmt, aber die Nachfrage wurde leicht unterschätzt.\n\nDen mit Abstand stärksten Einfluss auf die Vorhersage hat die Uhrzeit: 20 Uhr liegt am Ende der Abendspitze und treibt die erwartete Nachfrage erheblich nach oben. An zweiter Stelle steht die angenehme Temperatur von knapp 29 °C — sommerliche Wärme lädt zum Radfahren ein und erhöht die Vorhersage deutlich. Ebenfalls positiv wirkt die Kombination aus Uhrzeit und Wochentag: Ein Donnerstagabend um 20 Uhr ist ein typischer Feierabend-Zeitpunkt, an dem viele Pendler das Rad nutzen, was die Nachfrage zusätzlich ankurbelt. Gegenläufig wirkt das Jahr 2011: Da das Bikeshare-System damals noch im Aufbau war und deutlich weniger Nutzer hatte als 2012, zieht dieses Merkmal die Vorhersage spürbar nach unten — der größte bremsende Faktor im Plot.\n\nFür den Betrieb bedeutet das: An warmen Donnerstagabenden im Sommer sollten zwischen 17 und 21 Uhr ausreichend Fahrräder an zentralen Stationen bereitstehen, da die Kombination aus Feierabendverkehr und guter Witterung verlässlich hohe Nachfrage erzeugt. Wartungsarbeiten sollten daher keinesfalls in dieses Zeitfenster fallen, sondern besser in die frühen Morgenstunden zwischen 1 und 5 Uhr gelegt werden.",
   "plot_file": "waterfall_ebm_poisson_log_inst1677.png",
-  "elapsed_s": 12.01,
+  "elapsed_s": 11.82,
   "usage": {
-    "input_tokens": 2070,
-    "output_tokens": 518,
+    "input_tokens": 2057,
+    "output_tokens": 521,
     "cache_read_input_tokens": 0
   },
-  "prediction": 178.547,
-  "y_true": 145.0
+  "prediction": 260.2228,
+  "y_true": 286.0
 }

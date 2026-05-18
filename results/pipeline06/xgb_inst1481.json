@@ -4,19 +4,20 @@
   "loss_key": "poisson_log",
   "xai_model": "xgb",
   "instance_id": 1481,
-  "explanation": "Alle Daten sind vorhanden – jetzt verfasse ich die vollständige Erklärung:\n\n---\n\n**[VORHERSAGE]**\nDas Modell sagt für diese Stunde **108 Fahrräder** voraus, der tatsächliche Wert lag bei **113 Rädern** – eine Abweichung von lediglich 5 Rädern (ca. 4 %). Das ist eine sehr präzise Vorhersage. Damit trifft das Modell die reale Nachfrage an diesem Freitagabend im April 2012 nahezu exakt.\n\n---\n\n**[TREIBER]**\nDer mit Abstand wichtigste Einflussfaktor – sowohl lokal für diese Stunde als auch global über das gesamte Modell (Wichtigkeit: 0,84, weit vor allen anderen Merkmalen) – ist die **Uhrzeit 23:00 Uhr**. Sie drückt die Vorhersage erheblich nach unten: Zu dieser späten Stunde leihen deutlich weniger Menschen Fahrräder aus als etwa am Abend. Das Modell hat alle 24 Stunden des Tages gleichmäßig im Trainingsset gesehen (~4,2 % je Stunde), die 23-Uhr-Kategorie ist also nicht selten – aber sie ist typischerweise eine Niedriglast-Stunde. Der Was-wäre-wenn-Vergleich macht das besonders deutlich: Hätte dieselbe Situation um **18:00 Uhr** stattgefunden, würde das Modell **506 Fahrräder** vorhersagen – fast **fünfmal so viele** wie jetzt. Die Abendspitze um 18 Uhr ist für den Verleih offensichtlich dramatisch ertragreicher.\n\nDer zweitstärkste Treiber ist das **Jahr 2012** (Jahrescode = 1, also das zweite Betriebsjahr). Es liegt am Maximum des Trainingsbereichs (Perzentil 100 %) und hebt die Vorhersage deutlich an. Verglichen mit 2011 (Code = 0) wurde das System 2012 offenbar viel stärker genutzt – das Modell hat diese generelle Wachstumstendenz gelernt und erhöht dadurch die Erwartung. Der **Wochentag Freitag** verstärkt diesen Effekt zusätzlich leicht positiv, da Freitage erfahrungsgemäß etwas mehr Ausleihen generieren als Werktage in der Mitte der Woche.\n\n---\n\n**[EMPFEHLUNG]**\nErstens sollte der Betrieb die **Abendstunden ab 21 Uhr** nicht mit voller Kapazität einplanen – die Nachfrage sinkt ab 23 Uhr auf ein Bruchteil der Abendspitze. Stationen könnten nach 22 Uhr personell und logistisch entlastet werden. Zweitens zeigt der Wachstumstrend von 2011 auf 2012, dass die Systemnachfrage über die Zeit stark steigt; Kapazitätsplanungen und Wartungsintervalle sollten daher **langfristig hochskaliert** werden, um auch zukünftige Nutzungsspitzen – besonders zwischen 17 und 19 Uhr – abdecken zu können.",
+  "explanation": "Hier ist die vollständige, verständliche Erklärung:\n\n---\n\nDas Modell sagt für diese Stunde **229 Fahrräder** voraus, während tatsächlich **277 Räder** ausgeliehen wurden — eine Unterschätzung von etwa 48 Einheiten (ca. 17 %). Das ist eine akzeptable, wenn auch nicht perfekte Prognose. Die Abweichung lässt sich durch das Zusammenspiel mehrerer gegenläufiger Einflüsse erklären, die das Modell in dieser ungewöhnlichen Situation vor eine Herausforderung stellen.\n\nDer mit Abstand größte Antrieb kommt von der **Uhrzeit 16:00 Uhr**: Dieser Nachmittagszeitslot ist einer der stärksten Nachfragepunkte des Tages — typisch für den Berufsverkehr, wenn viele Menschen nach Hause fahren. Das Modell hebt die Vorhersage dadurch deutlich nach oben. Als zweitgrößter Faktor wirkt das **Jahr 2011** stark bremsend: Das System war 2011 noch wenig etabliert und hatte deutlich weniger Nutzer als 2012. Hätte diese Stunde statt 2011 im Jahr 2012 stattgefunden, würde das Modell satte **380 Räder** prognostizieren — ein Plus von 151 Einheiten! Dieser Unterschied allein zeigt, wie stark das Wachstum des Verleihsystems zwischen den beiden Jahren war. Auch die **extreme Hitze von ~36,9 °C** hat einen merklichen Einfluss: Diese Temperatur liegt im 99,6. Perzentil — also außergewöhnlich heiß, unter kaum einer anderen Trainingsstunde war es wärmer. Das Modell wertet dies leicht negativ, da extreme Hitze Nutzer abschreckt. Wären es stattdessen angenehme ~24 °C, würde die Vorhersage auf rund **298 Räder** steigen (+69).\n\nFür den Betrieb ergeben sich zwei Hinweise: **Erstens** sollte an Dienstagnachmittagen im Sommer grundsätzlich eine hohe Flottenverfügbarkeit sichergestellt werden — 16 Uhr ist ein verlässlicher Nachfragegipfel. **Zweitens** lohnt es sich, bei extremen Hitzewellen über 35 °C gezielt Stationen in schattigen oder gut belüfteten Bereichen bevorzugt zu bestücken, da die Gesamtnachfrage zwar etwas geringer ist, sich aber räumlich verlagern kann.",
+  "stop_reason": "end_turn",
   "tool_calls": [
     {
       "tool": "get_shap_values",
       "arguments": {
         "instance_id": 1481
       },
-      "result_preview": "{'instance_id': 1481, 'y_true': 113.0, 'prediction': 108.33, 'base_value': 5.25252, 'contribution_space': 'log', 'note': 'Positive Beiträge erhöhen, negative senken die Vorhersage (multiplikativ via exp).', 'contributions': [{'feature': 'hr', 'contribution': -0.7517}, {'feature': 'yr', 'contribution…"
+      "result_preview": "{'instance_id': 1481, 'y_true': 277.0, 'prediction': 228.58, 'base_value': 5.2547, 'contribution_space': 'log', 'note': 'Positive Beiträge erhöhen, negative senken die Vorhersage (multiplikativ via exp).', 'contributions': [{'feature': 'hr', 'value': 16.0, 'value_human': '16:00 Uhr', 'contribution': 0.37767}, {'feature': 'yr', 'value': 0.0, 'value_human': '2011', 'contribution': -0.25988}, {'feature': 'hum', 'value': 0.42, 'value_human': '42 %', 'contribution': 0.06245}, {'feature': 'mnth', 'value': 7.0, 'value_human': 'Jul', 'contribution': 0.0616}, {'feature': 'temp', 'value': 0.9, 'value_human': '~36.9 °C', 'contribution': -0.05951}, {'feature': 'weekday', 'value': 2.0, 'value_human': 'Di', 'contribution': -0.02365}, {'feature': 'weathersit', 'value': 1.0, 'value_human': 'klar/wenige Wolken', 'contribution': 0.01871}, {'feature': 'holiday', 'value': 0.0, 'value_human': 'kein Feiertag', 'contribution': -0.00068}, {'feature': 'windspeed', 'value': 0.2985, 'value_human': '20.0 km/h', '…"
     },
     {
       "tool": "get_feature_importance",
       "arguments": {},
-      "result_preview": "[{'rank': 1, 'feature': 'hr', 'importance': 0.84237}, {'rank': 2, 'feature': 'yr', 'importance': 0.20709}, {'rank': 3, 'feature': 'temp', 'importance': 0.18996}, {'rank': 4, 'feature': 'weekday', 'importance': 0.16116}, {'rank': 5, 'feature': 'mnth', 'importance': 0.12616}, {'rank': 6, 'feature': 'h…"
+      "result_preview": "[{'rank': 1, 'feature': 'hr', 'importance': 0.83257}, {'rank': 2, 'feature': 'yr', 'importance': 0.20042}, {'rank': 3, 'feature': 'temp', 'importance': 0.19712}, {'rank': 4, 'feature': 'weekday', 'importance': 0.17282}, {'rank': 5, 'feature': 'mnth', 'importance': 0.11826}, {'rank': 6, 'feature': 'hum', 'importance': 0.07722}, {'rank': 7, 'feature': 'weathersit', 'importance': 0.05091}, {'rank': 8, 'feature': 'windspeed', 'importance': 0.02031}, {'rank': 9, 'feature': 'holiday', 'importance': 0.012}]"
     },
     {
       "tool": "get_feature_value_context",
@@ -24,7 +25,7 @@
         "instance_id": 1481,
         "feature": "hr"
       },
-      "result_preview": "{'feature': 'hr', 'instance_value': 23, 'type': 'categorical', 'training_distribution': {0: {'count': 498, 'pct': 4.1}, 1: {'count': 516, 'pct': 4.2}, 2: {'count': 515, 'pct': 4.2}, 3: {'count': 456, 'pct': 3.7}, 4: {'count': 500, 'pct': 4.1}, 5: {'count': 510, 'pct': 4.2}, 6: {'count': 499, 'pct': …"
+      "result_preview": "{'feature': 'hr', 'instance_value': 16, 'instance_value_human': '16:00 Uhr', 'type': 'categorical', 'training_distribution': {0: {'count': 506, 'pct': 4.2}, 1: {'count': 506, 'pct': 4.2}, 2: {'count': 501, 'pct': 4.1}, 3: {'count': 487, 'pct': 4.0}, 4: {'count': 492, 'pct': 4.0}, 5: {'count': 498, 'pct': 4.1}, 6: {'count': 507, 'pct': 4.2}, 7: {'count': 508, 'pct': 4.2}, 8: {'count': 508, 'pct': 4.2}, 9: {'count': 508, 'pct': 4.2}, 10: {'count': 508, 'pct': 4.2}, 11: {'count': 508, 'pct': 4.2}, 12: {'count': 509, 'pct': 4.2}, 13: {'count': 510, 'pct': 4.2}, 14: {'count': 510, 'pct': 4.2}, 15: {'count': 510, 'pct': 4.2}, 16: {'count': 511, 'pct': 4.2}, 17: {'count': 511, 'pct': 4.2}, 18: {'count': 509, 'pct': 4.2}, 19: {'count': 509, 'pct': 4.2}, 20: {'count': 509, 'pct': 4.2}, 21: {'count': 509, 'pct': 4.2}, 22: {'count': 509, 'pct': 4.2}, 23: {'count': 509, 'pct': 4.2}}}"
     },
     {
       "tool": "get_feature_value_context",
@@ -32,24 +33,42 @@
         "instance_id": 1481,
         "feature": "yr"
       },
-      "result_preview": "{'feature': 'yr', 'instance_value': 1.0, 'type': 'numerical', 'percentile_in_train': 100.0, 'train_min': 0.0, 'train_max': 1.0, 'train_mean': 0.5018, 'train_std': 0.5}"
+      "result_preview": "{'feature': 'yr', 'instance_value': 0.0, 'instance_value_human': '2011', 'type': 'numerical', 'percentile_in_train': 47.9, 'train_min': 0.0, 'train_max': 1.0, 'train_mean': 0.5213, 'train_std': 0.4996}"
+    },
+    {
+      "tool": "get_feature_value_context",
+      "arguments": {
+        "instance_id": 1481,
+        "feature": "temp"
+      },
+      "result_preview": "{'feature': 'temp', 'instance_value': 0.9, 'instance_value_human': '~36.9 °C', 'type': 'numerical', 'percentile_in_train': 99.6, 'train_min': 0.02, 'train_max': 1.0, 'train_mean': 0.5031, 'train_std': 0.1904}"
     },
     {
       "tool": "get_counterfactual_prediction",
       "arguments": {
         "instance_id": 1481,
         "changes": {
-          "hr": 18
+          "yr": 1
         }
       },
-      "result_preview": "{'instance_id': 1481, 'base_prediction': 108.33, 'counterfactual_prediction': 506.18, 'delta': 397.85, 'applied_changes': {'hr': 18}, 'unit': 'Fahrräder pro Stunde'}"
+      "result_preview": "{'instance_id': 1481, 'base_prediction': 228.58, 'counterfactual_prediction': 379.61, 'delta': 151.03, 'applied_changes': {'yr': 1.0}, 'unit': 'Fahrräder pro Stunde'}"
+    },
+    {
+      "tool": "get_counterfactual_prediction",
+      "arguments": {
+        "instance_id": 1481,
+        "changes": {
+          "temp": 0.6
+        }
+      },
+      "result_preview": "{'instance_id': 1481, 'base_prediction': 228.58, 'counterfactual_prediction': 297.65, 'delta': 69.07, 'applied_changes': {'temp': 0.6}, 'unit': 'Fahrräder pro Stunde'}"
     }
   ],
-  "n_tool_calls": 5,
-  "elapsed_s": 33.08,
+  "n_tool_calls": 7,
+  "elapsed_s": 33.25,
   "usage": {
-    "input_tokens": 2896,
-    "output_tokens": 1278
+    "input_tokens": 4421,
+    "output_tokens": 1219
   },
-  "y_true": 113.0
+  "y_true": 277.0
 }

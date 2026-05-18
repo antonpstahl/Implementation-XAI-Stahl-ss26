@@ -82,58 +82,58 @@
     }
   },
   "metrics": {
-    "rmse": 48.368917,
-    "mae": 26.998733,
-    "r2": 0.925942,
-    "poisson_deviance": 9.724249,
-    "min_prediction": 0.446458,
+    "rmse": 48.202901,
+    "mae": 28.198156,
+    "r2": 0.927256,
+    "poisson_deviance": 10.814538,
+    "min_prediction": 0.699434,
     "n_negative_predictions": 0.0
   },
-  "base_value": 4.607797,
+  "base_value": 4.611896,
   "global_importance": [
     {
       "feature": "hr",
-      "importance": 0.906757,
+      "importance": 0.888836,
       "rank": 1
     },
     {
       "feature": "temp",
-      "importance": 0.236356,
+      "importance": 0.25257,
       "rank": 2
     },
     {
       "feature": "yr",
-      "importance": 0.228284,
+      "importance": 0.216619,
       "rank": 3
     },
     {
       "feature": "mnth",
-      "importance": 0.096704,
+      "importance": 0.085721,
       "rank": 4
     },
     {
       "feature": "hum",
-      "importance": 0.0731,
+      "importance": 0.082572,
       "rank": 5
     },
     {
       "feature": "weathersit",
-      "importance": 0.061245,
+      "importance": 0.060856,
       "rank": 6
     },
     {
       "feature": "weekday",
-      "importance": 0.021681,
+      "importance": 0.023531,
       "rank": 7
     },
     {
       "feature": "windspeed",
-      "importance": 0.015951,
+      "importance": 0.014264,
       "rank": 8
     },
     {
       "feature": "holiday",
-      "importance": 0.009161,
+      "importance": 0.007907,
       "rank": 9
     }
   ]

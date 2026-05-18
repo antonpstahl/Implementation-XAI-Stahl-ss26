@@ -4,14 +4,14 @@
   "loss_key": "poisson_log",
   "xai_model": "ebm",
   "instance_id": 580,
-  "explanation": "Das Modell sagt für diese Stunde rund 10 Fahrradausleihen vorher, während tatsächlich nur 5 Fahrräder ausgeliehen wurden. Die Vorhersage ist damit deutlich zu hoch — das Modell überschätzt die Nachfrage um etwa das Doppelte, was als schlecht getroffen zu bewerten ist.\n\nTrotz dieser Überschätzung zeigt der Plot klar, warum das Modell überhaupt so niedrig landet wie es tut: Der mit Abstand stärkste Bremser ist die Uhrzeit. Mitternacht (0 Uhr) ist die ruhigste Phase des Tages, und das Modell erkennt das deutlich — der hr-Balken zieht die Vorhersage massiv nach unten. Verstärkt wird dieser Effekt durch die Kombination aus Uhrzeit und Wochentag (Montag um Mitternacht = kein Freizeitverkehr, kein Pendlerverkehr), die ebenfalls stark bremsend wirkt. Zusätzlich drückt die niedrige Temperatur von etwa 9 °C die Nachfrage spürbar: Kaltes Januarwetter hält viele potenzielle Radfahrer zuhause. Der Monat Januar sowie der frühe Wachstumsstand des Systems im Jahr 2011 verstärken diesen negativen Trend weiter. Auf der anderen Seite wirkt die vergleichsweise niedrige Luftfeuchtigkeit von 44 % leicht nachfragefördernd, kann aber die vielen dämpfenden Faktoren kaum ausgleichen.\n\nFür den Betrieb bedeutet das: In Winternächten — besonders in den ersten Stunden nach Mitternacht — ist die reale Nachfrage extrem gering. Wartungsarbeiten, Umverteilungen oder Inventarchecks lassen sich ideal in dieses Fenster legen, ohne den laufenden Verleihbetrieb zu stören. Eine Überversorgung von Stationen zu dieser Zeit ist wirtschaftlich nicht sinnvoll.",
+  "explanation": "Das Modell sagt für diese Stunde 73 Fahrradausleihen vorher, während tatsächlich 63 Räder ausgeliehen wurden. Die Abweichung von rund 16 % ist mäßig — das Modell überschätzt die Nachfrage leicht, liegt aber in einer realistischen Größenordnung für einen Samstagabend.\n\nDen stärksten Aufwärtsdruck erzeugt die Kombination aus Uhrzeit und Wochentag: Ein Samstagabend um 22 Uhr zieht erfahrungsgemäß mehr Freizeitnutzer an als ein gewöhnlicher Wochentag zur gleichen Zeit, weshalb das Modell hier deutlich nach oben korrigiert. Zusätzlich wirken die Uhrzeit für sich (+0,055) sowie das klare Wetter (+0,047) leicht nachfragefördernd — kein Regen, kein Wind begünstigt spontane Abendfahrten. Auf der anderen Seite bremsen drei Faktoren die Vorhersage merklich: Das Jahr 2011 (yr: −0,226) steht für die noch geringe Systemreife und niedrigere Gesamtnachfrage zu dieser Zeit. Die Kombination aus Monat und Jahr (−0,198) zeigt, dass der März 2011 besonders nachfrageschwach war. Schließlich drückt die eher kühle Temperatur von knapp 15 °C (−0,142) die erwartete Ausleihmenge weiter nach unten — noch zu frisch für viele Gelegenheitsnutzer.\n\nFür den Betrieb empfiehlt es sich, an Samstagabenden im März nur eine moderate Fahrradverfügbarkeit sicherzustellen: Die Freizeitnachfrage ist real, aber durch Kühle und den frühen Systemausbau begrenzt. Gleichzeitig bietet die nächtliche Nachfragepause ab etwa 23 Uhr ein gutes Zeitfenster für Wartung und Umverteilung der Flotte.",
   "plot_file": "waterfall_ebm_poisson_log_inst580.png",
-  "elapsed_s": 12.25,
+  "elapsed_s": 13.51,
   "usage": {
-    "input_tokens": 2068,
-    "output_tokens": 533,
+    "input_tokens": 2057,
+    "output_tokens": 540,
     "cache_read_input_tokens": 0
   },
-  "prediction": 9.7278,
-  "y_true": 5.0
+  "prediction": 73.0919,
+  "y_true": 63.0
 }

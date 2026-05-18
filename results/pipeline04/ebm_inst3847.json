@@ -4,13 +4,13 @@
   "loss_key": "poisson_log",
   "xai_model": "ebm",
   "instance_id": 3847,
-  "explanation": "Das EBM-Modell sagt für diese Stunde 137 ausgeliehene Fahrräder vorher, während tatsächlich 122 Räder unterwegs waren. Die Abweichung von rund 15 Rädern entspricht etwa 12 Prozent — das ist ein gutes Ergebnis, das Modell trifft die Realität hier solide.\n\nDer stärkste Bremseffekt kommt von der frühen Uhrzeit: Um 6 Uhr morgens sind die meisten Menschen noch nicht aufgebrochen, der Berufsverkehr läuft erst an — die Nachfrage liegt deutlich unter dem Tagesdurchschnitt. Gleichzeitig wirken zwei Faktoren kräftig in die andere Richtung: Die Temperatur von rund 30 °C liegt im optimalen Wohlfühlbereich für Radfahrer und kurbelt die Nachfrage merklich an. Hinzu kommt, dass die Daten aus dem Jahr 2012 stammen, als das Bikeshare-System bereits deutlich etablierter und beliebter war als im Startjahr 2011 — dieser Wachstumseffekt hebt die Grundnachfrage generell an. Der Juni als sommerlicher Hauptreisemonat sowie der Freitag als typischer Werktag mit Pendlerverkehr tragen ebenfalls leicht positiv bei, während leichter Nebel und 66 % Luftfeuchtigkeit kaum ins Gewicht fallen.\n\nFür den Betrieb empfiehlt sich an warmen Freitagmorgen im Juni, die Stationen entlang der Pendelrouten bereits ab 5:30 Uhr gut bestückt zu haben, da die Nachfrage trotz früher Stunde durch die angenehmen Temperaturen höher ausfällt als in kühleren Monaten. Wartungsarbeiten sollten hingegen auf die Nachtstunden zwischen 0 und 5 Uhr verlegt werden, wenn die Nutzungszahlen deutlich geringer sind.",
-  "elapsed_s": 12.9,
+  "explanation": "Das Modell sagt für diese Stunde 593 Fahrradausleihen vorher; tatsächlich wurden 531 gezählt. Das entspricht einer Abweichung von rund 12 Prozent — eine mäßige Schätzung, die die reale Nachfrage leicht übertrifft, aber die Größenordnung korrekt erfasst.\n\nDer stärkste Antrieb hinter dieser hohen Vorhersage ist die Uhrzeit: 12 Uhr mittags ist generell eine sehr nachfragestarke Stunde, in der viele Menschen unterwegs sind — gerade am Wochenende für Freizeitfahrten. Fast ebenso bedeutsam ist die Temperatur von knapp 33 °C: Das liegt zwar am oberen Ende des angenehmen Bereichs, wirkt aber noch deutlich nachfragesteigernd. Dazu kommt, dass die Daten aus dem Jahr 2012 stammen, als das Verleihsystem bereits deutlich mehr Nutzerinnen und Nutzer hatte als im Vorjahr — ein allgemeines Wachstum, das die Basisnachfrage spürbar nach oben zieht. Die sehr niedrige Luftfeuchtigkeit von nur 29 % verstärkt den positiven Effekt zusätzlich, da trockene Luft das Radfahren angenehmer macht.\n\nFür den Betrieb bedeutet das: An sommerlichen Samstagmittagen mit klarem Wetter und hohen Temperaturen sollte die maximale Verfügbarkeit an gut frequentierten Stationen sichergestellt sein — Wartungsarbeiten oder Umverteilungen sollten auf die Nacht- oder frühen Morgenstunden gelegt werden. Da die Temperatur nahe dem Hochpunkt liegt, lohnt es sich außerdem, bei noch heißeren Tagen (über 37 °C) die Prognosen nach unten zu korrigieren und entsprechend weniger Kapazität einzuplanen.",
+  "elapsed_s": 11.29,
   "usage": {
-    "input_tokens": 1835,
-    "output_tokens": 517,
-    "cache_read_input_tokens": 0
+    "input_tokens": 617,
+    "output_tokens": 511,
+    "cache_read_input_tokens": 1212
   },
-  "prediction": 137.0833,
-  "y_true": 122.0
+  "prediction": 593.3897,
+  "y_true": 531.0
 }
