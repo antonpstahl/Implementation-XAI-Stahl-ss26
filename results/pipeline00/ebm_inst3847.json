@@ -1,0 +1,12 @@
+{
+  "explanation": "[VORHERSAGE] Das Modell prognostiziert für Samstag, Juni 2012, 12:00 Uhr insgesamt 593 Fahrradausleihungen (tatsächlicher Wert: 531).\n\n[TREIBER] Die drei wichtigsten Einflussfaktoren sind:\n• Uhrzeit (12:00 Uhr): erhöhend (Beitrag: +0.66)\n• Temperatur (~32.8 °C): erhöhend (Beitrag: +0.27)\n• Jahr (2012): erhöhend (Beitrag: +0.21)\n\n[EMPFEHLUNG] Hohe Nachfrage im Tagesbetrieb. Stellen Sie ausreichend Fahrräder und Personal an stark frequentierten Stationen bereit.",
+  "elapsed_s": 7e-06,
+  "usage": {
+    "input_tokens": 0,
+    "output_tokens": 0,
+    "cache_read_input_tokens": 0
+  },
+  "n_tool_calls": 0,
+  "y_true": 531.0,
+  "prediction": 593.3897
+}

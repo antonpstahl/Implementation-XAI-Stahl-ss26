@@ -1,0 +1,12 @@
+{
+  "explanation": "[VORHERSAGE] Das Modell prognostiziert für Freitag, Mai 2011, 08:00 Uhr insgesamt 390 Fahrradausleihungen (tatsächlicher Wert: 387).\n\n[TREIBER] Die drei wichtigsten Einflussfaktoren sind:\n• Uhrzeit (08:00 Uhr): erhöhend (Beitrag: +1.11)\n• Jahr (2011): senkend (Beitrag: -0.23)\n• Luftfeuchtigkeit (88 %): senkend (Beitrag: -0.17)\n\n[EMPFEHLUNG] Hohe Nachfrage im Morgenberufsverkehr. Stellen Sie ausreichend Fahrräder und Personal an stark frequentierten Stationen bereit.",
+  "elapsed_s": 6e-06,
+  "usage": {
+    "input_tokens": 0,
+    "output_tokens": 0,
+    "cache_read_input_tokens": 0
+  },
+  "n_tool_calls": 0,
+  "y_true": 387.0,
+  "prediction": 389.6817
+}

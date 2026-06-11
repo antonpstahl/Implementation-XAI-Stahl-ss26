@@ -1,0 +1,12 @@
+{
+  "explanation": "[VORHERSAGE] Das Modell prognostiziert für Dienstag, Juli 2011, 16:00 Uhr insgesamt 242 Fahrradausleihungen (tatsächlicher Wert: 277).\n\n[TREIBER] Die drei wichtigsten Einflussfaktoren sind:\n• Uhrzeit (16:00 Uhr): erhöhend (Beitrag: +0.82)\n• Jahr (2011): senkend (Beitrag: -0.23)\n• Luftfeuchtigkeit (42 %): erhöhend (Beitrag: +0.10)\n\n[EMPFEHLUNG] Moderate Nachfrage im Tagesbetrieb. Halten Sie die reguläre Betriebsbereitschaft aufrecht.",
+  "elapsed_s": 5e-06,
+  "usage": {
+    "input_tokens": 0,
+    "output_tokens": 0,
+    "cache_read_input_tokens": 0
+  },
+  "n_tool_calls": 0,
+  "y_true": 277.0,
+  "prediction": 241.7738
+}

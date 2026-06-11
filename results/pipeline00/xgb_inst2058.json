@@ -1,0 +1,12 @@
+{
+  "explanation": "[VORHERSAGE] Das Modell prognostiziert für Samstag, September 2011, 20:00 Uhr insgesamt 194 Fahrradausleihungen (tatsächlicher Wert: 243).\n\n[TREIBER] Die drei wichtigsten Einflussfaktoren sind:\n• Jahr (2011): senkend (Beitrag: -0.19)\n• Temperatur (~25.4 °C): erhöhend (Beitrag: +0.16)\n• Luftfeuchtigkeit (83 %): senkend (Beitrag: -0.13)\n\n[EMPFEHLUNG] Moderate Nachfrage im Schwachlastzeit. Halten Sie die reguläre Betriebsbereitschaft aufrecht.",
+  "elapsed_s": 1.3e-05,
+  "usage": {
+    "input_tokens": 0,
+    "output_tokens": 0,
+    "cache_read_input_tokens": 0
+  },
+  "n_tool_calls": 0,
+  "y_true": 243.0,
+  "prediction": 194.0592
+}

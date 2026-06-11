@@ -1,0 +1,12 @@
+{
+  "explanation": "[VORHERSAGE] Das Modell prognostiziert für Freitag, Dezember 2011, 18:00 Uhr insgesamt 326 Fahrradausleihungen (tatsächlicher Wert: 372).\n\n[TREIBER] Die drei wichtigsten Einflussfaktoren sind:\n• Uhrzeit (18:00 Uhr): erhöhend (Beitrag: +0.69)\n• Jahr (2011): senkend (Beitrag: -0.23)\n• Temperatur (~16.4 °C): senkend (Beitrag: -0.08)\n\n[EMPFEHLUNG] Moderate Nachfrage im Abendberufsverkehr. Halten Sie die reguläre Betriebsbereitschaft aufrecht.",
+  "elapsed_s": 1e-05,
+  "usage": {
+    "input_tokens": 0,
+    "output_tokens": 0,
+    "cache_read_input_tokens": 0
+  },
+  "n_tool_calls": 0,
+  "y_true": 372.0,
+  "prediction": 326.0351
+}
