@@ -26,8 +26,39 @@ try:
 except ImportError:
     pass
 
-DEFAULT_MODEL = "claude-sonnet-4-6"
-DEFAULT_MAX_TOKENS = 2048
+# -----------------------------------------------------------------------------
+# LLM-Konfiguration – zentrale Dokumentation aller Decoding-Parameter
+#
+# API:         Anthropic Messages API
+# Abrufdatum:  2026-06-11
+# Temperature: nicht gesetzt → Anthropic-Default = 1.0 (bei allen Calls)
+#
+# Modell-IDs nach Rolle:
+#   Erklärungsgenerierung  (NB 04 / 05 / 06)  → claude-sonnet-4-6
+#   Faithfulness-Check     (NB 07)             → claude-sonnet-4-6
+#   Judge v1 unkalibriert  (NB 07)             → claude-sonnet-4-6
+#   Judge v2 kalibriert    (NB 07)             → claude-sonnet-4-6
+#   Judge v3 unabhängig    (NB 07)             → claude-opus-4-8
+#   Ichmoukhamedov-Metriken(NB 08)             → claude-sonnet-4-6
+#
+# max_tokens nach Kontext:
+#   MAX_TOKENS_GENERATION      = 2048  (Pipelines 04 / 05 / 06)
+#   MAX_TOKENS_FAITHFULNESS    = 300   (Faithfulness-Check NB 07)
+#   MAX_TOKENS_JUDGE           = 600   (Judge-Calls NB 07, alle Versionen)
+#   MAX_TOKENS_ICHMOUKHAMEDOV  = 700   (LLM-Calls NB 08)
+#
+# Hinweis für das Paper: Modell-IDs und Parameterdefaults der Anthropic-API
+# können sich nach dem Abrufdatum ändern. Für Reproduzierbarkeit sind exakte
+# Versionspins und das Abrufdatum anzugeben.
+# -----------------------------------------------------------------------------
+
+DEFAULT_MODEL      = "claude-sonnet-4-6"
+DEFAULT_MAX_TOKENS = 2048   # Erklärungsgenerierung (Pipelines 04 / 05 / 06)
+
+MAX_TOKENS_GENERATION     = 2048
+MAX_TOKENS_FAITHFULNESS   = 300
+MAX_TOKENS_JUDGE          = 600
+MAX_TOKENS_ICHMOUKHAMEDOV = 700
 
 try:
     from anthropic import RateLimitError, APIConnectionError, InternalServerError

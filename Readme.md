@@ -70,15 +70,30 @@ Quantitative cost/latency, keyword-based faithfulness, LLM-as-judge across three
 ## Setup
 
 ```bash
-# dependencies
-pip install anthropic xgboost interpret shap scikit-learn \
-            pandas numpy matplotlib seaborn joblib python-dotenv
+# dependencies (Python 3.13.1)
+pip install -r requirements.txt
 
 # API key (do NOT commit your .env)
 echo "ANTHROPIC_API_KEY=sk-ant-..." > .env
 ```
 
 Run the notebooks in order (`01` → `08`). Paths are relative to the project root; reproducibility is fixed via `RANDOM_STATE = 42`.
+
+## LLM configuration
+
+All LLM calls use the **Anthropic Messages API** (accessed **2026-06-11**).
+Parameters are centralised in `utils/llm.py`.
+
+| Use case | Model | `max_tokens` | `temperature` |
+|---|---|---|---|
+| Explanation generation (NB 04 / 05 / 06) | `claude-sonnet-4-6` | 2048 | default (1.0) |
+| Faithfulness check (NB 07) | `claude-sonnet-4-6` | 300 | default (1.0) |
+| Judge v1 uncalibrated (NB 07) | `claude-sonnet-4-6` | 600 | default (1.0) |
+| Judge v2 calibrated (NB 07) | `claude-sonnet-4-6` | 600 | default (1.0) |
+| Judge v3 independent (NB 07) | `claude-opus-4-8` | 600 | default (1.0) |
+| Ichmoukhamedov metrics (NB 08) | `claude-sonnet-4-6` | 700 | default (1.0) |
+
+**Reproducibility note (→ Paper limitation):** Anthropic model IDs are versioned snapshots, but API behaviour (sampling, default parameters, tokenisation) can change silently between SDK releases. Results are tied to `anthropic==0.98.1` and the access date above. Future runs against the same model ID are not guaranteed to produce identical outputs.
 
 ## Notes
 
