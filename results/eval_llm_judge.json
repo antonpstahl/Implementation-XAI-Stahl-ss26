@@ -31,13 +31,13 @@
     "pipeline_label": "JSON→Text",
     "xai_model": "XGB",
     "instance_id": 1041,
-    "faithfulness": null,
-    "clarity": null,
-    "completeness": null,
+    "faithfulness": 3,
+    "clarity": 4,
+    "completeness": 5,
     "reasoning": {
-      "faithfulness": "",
-      "clarity": "",
-      "completeness": ""
+      "faithfulness": "Die Uhrzeit (hr) und das Jahr (yr) sind korrekt als Treiber identifiziert mit richtiger Wirkungsrichtung, jedoch wird Luftfeuchtigkeit statt Wochentag (weekday) als dritter Treiber genannt – eine Halluzination, die einen Abzug ergibt, und der korrekte dritte Treiber (Freitag/weekday) wird zwar erwähnt, aber in der falschen Rolle als zweitem statt drittem Treiber.",
+      "clarity": "Die Erklärung verwendet durchgehend Alltagssprache und übersetzt technische Werte (z.B. '08:00 Uhr', 'Freitag', '88 % Luftfeuchtigkeit') verständlich, ohne Fachjargon wie SHAP oder Log-Raum.",
+      "completeness": "Alle drei Pflichtabschnitte sind vollständig und substanziell vorhanden: die Vorhersage mit Vergleich zum tatsächlichen Wert (385 vs. 387), die wichtigsten Treiber mit Erklärung und eine konkrete, praxisnahe Betriebsempfehlung."
     },
     "raw_response": "```json\n{\n  \"FAITHFULNESS\": 3,\n  \"CLARITY\": 4,\n  \"COMPLETENESS\": 5,\n  \"FAITHFULNESS_REASONING\": \"Die Uhrzeit (hr) und das Jahr (yr) sind korrekt als Treiber identifiziert mit richtiger Wirkungsrichtung, jedoch wird Luftfeuchtigkeit statt Wochentag (weekday) als dritter Treiber genannt – eine Halluzination, die einen Abzug ergibt, und der korrekte dritte Treiber (Freitag/weekday) wird zwar erwähnt, aber in der falschen Rolle als zweitem statt drittem Treiber.\",\n  \"CLARITY_REASONING\": \"Die Erklärung verwendet durchgehend Alltagssprache und übersetzt technische Werte (z.B. '08:00 Uhr', 'Freitag', '88 % Luftfeuchtigkeit') verständlich, ohne Fachjargon wie SHAP oder Log-Raum.\",\n  \"COMPLETENESS_REASONING\": \"Alle drei Pflichtabschnitte sind vollständig und substanziell vorhanden: die Vorhersage mit Vergleich zum tatsächlichen Wert (385 vs. 387), die wichtigsten Treiber mit Erklärung und eine konkrete, praxisnahe Betriebsempfehlung.\"\n}\n```"
   },
@@ -185,13 +185,13 @@
     "pipeline_label": "JSON→Text",
     "xai_model": "EBM",
     "instance_id": 1481,
-    "faithfulness": null,
-    "clarity": null,
-    "completeness": null,
+    "faithfulness": 3,
+    "clarity": 4,
+    "completeness": 5,
     "reasoning": {
-      "faithfulness": "",
-      "clarity": "",
-      "completeness": ""
+      "faithfulness": "Die Uhrzeit (hr) und das Jahr (yr) werden korrekt als Top-Treiber mit richtiger Wirkungsrichtung genannt, aber als dritter Treiber wird fälschlicherweise die Temperatur angeführt, während tatsächlich die Luftfeuchtigkeit (hum) der dritte Top-Treiber ist — das ist eine Halluzination (-1).",
+      "clarity": "Die Erklärung ist weitgehend in verständlicher Alltagssprache verfasst und übersetzt normalisierte Werte gut (z. B. '42 % Luftfeuchtigkeit', '37 °C'), jedoch wird die Temperatur als Treiber inhaltlich falsch dargestellt, was für Laien irreführend sein kann.",
+      "completeness": "Alle drei Pflichtabschnitte sind substanziell vorhanden: Die Vorhersage wird mit Vergleich zum tatsächlichen Wert genannt, die wichtigsten Treiber werden erklärt, und es folgt eine konkrete, praxisnahe Betriebsempfehlung."
     },
     "raw_response": "```json\n{\n  \"FAITHFULNESS\": 3,\n  \"CLARITY\": 4,\n  \"COMPLETENESS\": 5,\n  \"FAITHFULNESS_REASONING\": \"Die Uhrzeit (hr) und das Jahr (yr) werden korrekt als Top-Treiber mit richtiger Wirkungsrichtung genannt, aber als dritter Treiber wird fälschlicherweise die Temperatur angeführt, während tatsächlich die Luftfeuchtigkeit (hum) der dritte Top-Treiber ist — das ist eine Halluzination (-1).\",\n  \"CLARITY_REASONING\": \"Die Erklärung ist weitgehend in verständlicher Alltagssprache verfasst und übersetzt normalisierte Werte gut (z. B. '42 % Luftfeuchtigkeit', '37 °C'), jedoch wird die Temperatur als Treiber inhaltlich falsch dargestellt, was für Laien irreführend sein kann.\",\n  \"COMPLETENESS_REASONING\": \"Alle drei Pflichtabschnitte sind substanziell vorhanden: Die Vorhersage wird mit Vergleich zum tatsächlichen Wert genannt, die wichtigsten Treiber werden erklärt, und es folgt eine konkrete, praxisnahe Betriebsempfehlung.\"\n}\n```"
   },
@@ -199,13 +199,13 @@
     "pipeline_label": "JSON→Text",
     "xai_model": "EBM",
     "instance_id": 1677,
-    "faithfulness": null,
-    "clarity": null,
-    "completeness": null,
+    "faithfulness": 5,
+    "clarity": 5,
+    "completeness": 5,
     "reasoning": {
-      "faithfulness": "",
-      "clarity": "",
-      "completeness": ""
+      "faithfulness": "Alle drei Top-Treiber (Uhrzeit 20:00, Temperatur ~28,7°C, Jahr 2011) sind korrekt benannt mit richtigen Wirkungsrichtungen (positiv/positiv/negativ), und der Vorhersagewert 260 wird explizit genannt.",
+      "clarity": "Die Erklärung verwendet durchgängig Alltagssprache, übersetzt normalisierte Werte (z.B. 'knapp 29°C'), verzichtet vollständig auf Fachbegriffe wie SHAP und ist logisch strukturiert.",
+      "completeness": "Alle drei Pflichtabschnitte sind substanziell vorhanden: Vorhersage mit Vergleich zum tatsächlichen Wert (260 vs. 286), Erläuterung der Treiber und eine konkrete, praxisnahe Betriebsempfehlung."
     },
     "raw_response": "```json\n{\n  \"FAITHFULNESS\": 5,\n  \"CLARITY\": 5,\n  \"COMPLETENESS\": 5,\n  \"FAITHFULNESS_REASONING\": \"Alle drei Top-Treiber (Uhrzeit 20:00, Temperatur ~28,7°C, Jahr 2011) sind korrekt benannt mit richtigen Wirkungsrichtungen (positiv/positiv/negativ), und der Vorhersagewert 260 wird explizit genannt.\",\n  \"CLARITY_REASONING\": \"Die Erklärung verwendet durchgängig Alltagssprache, übersetzt normalisierte Werte (z.B. 'knapp 29°C'), verzichtet vollständig auf Fachbegriffe wie SHAP und ist logisch strukturiert.\",\n  \"COMPLETENESS_REASONING\": \"Alle drei Pflichtabschnitte sind substanziell vorhanden: Vorhersage mit Vergleich zum tatsächlichen Wert (260 vs. 286), Erläuterung der Treiber und eine konkrete, praxisnahe Betriebsempfehlung.\"\n}\n```"
   },
@@ -311,13 +311,13 @@
     "pipeline_label": "Vision",
     "xai_model": "XGB",
     "instance_id": 1041,
-    "faithfulness": null,
-    "clarity": null,
-    "completeness": null,
+    "faithfulness": 3,
+    "clarity": 4,
+    "completeness": 4,
     "reasoning": {
-      "faithfulness": "",
-      "clarity": "",
-      "completeness": ""
+      "faithfulness": "Die Top-3-Treiber hr (Uhrzeit) und yr (Jahr) sowie weekday (Freitag) sind korrekt genannt und ihre Richtungen stimmen, jedoch wird Luftfeuchtigkeit als bremsender Faktor aufgeführt, obwohl dieser nicht unter den Top-3-Treibern ist (Halluzination, -1), was den Score auf 3 drückt.",
+      "clarity": "Die Erklärung ist weitgehend in verständlicher Alltagssprache verfasst, normalisierte Werte werden sinnvoll übersetzt (z.B. '88 % Luftfeuchtigkeit', '8 Uhr morgens'), und es werden keine Fachbegriffe wie SHAP verwendet, jedoch bleibt die Erwähnung der 'Jahreskennzahl 0' leicht technisch.",
+      "completeness": "Alle drei Pflichtabschnitte (Vorhersage mit Vergleich zum tatsächlichen Wert, Treiber, praktische Betriebsempfehlung) sind vorhanden und substanziell ausgeführt, jedoch ist die Betriebsempfehlung in Bezug auf Luftfeuchtigkeit durch den halluzinierten Treiber leicht geschwächt."
     },
     "raw_response": "```json\n{\n  \"FAITHFULNESS\": 3,\n  \"CLARITY\": 4,\n  \"COMPLETENESS\": 4,\n  \"FAITHFULNESS_REASONING\": \"Die Top-3-Treiber hr (Uhrzeit) und yr (Jahr) sowie weekday (Freitag) sind korrekt genannt und ihre Richtungen stimmen, jedoch wird Luftfeuchtigkeit als bremsender Faktor aufgeführt, obwohl dieser nicht unter den Top-3-Treibern ist (Halluzination, -1), was den Score auf 3 drückt.\",\n  \"CLARITY_REASONING\": \"Die Erklärung ist weitgehend in verständlicher Alltagssprache verfasst, normalisierte Werte werden sinnvoll übersetzt (z.B. '88 % Luftfeuchtigkeit', '8 Uhr morgens'), und es werden keine Fachbegriffe wie SHAP verwendet, jedoch bleibt die Erwähnung der 'Jahreskennzahl 0' leicht technisch.\",\n  \"COMPLETENESS_REASONING\": \"Alle drei Pflichtabschnitte (Vorhersage mit Vergleich zum tatsächlichen Wert, Treiber, praktische Betriebsempfehlung) sind vorhanden und substanziell ausgeführt, jedoch ist die Betriebsempfehlung in Bezug auf Luftfeuchtigkeit durch den halluzinierten Treiber leicht geschwächt.\"\n}\n```"
   },
@@ -395,13 +395,13 @@
     "pipeline_label": "Vision",
     "xai_model": "XGB",
     "instance_id": 3847,
-    "faithfulness": null,
-    "clarity": null,
-    "completeness": null,
+    "faithfulness": 5,
+    "clarity": 5,
+    "completeness": 5,
     "reasoning": {
-      "faithfulness": "",
-      "clarity": "",
-      "completeness": ""
+      "faithfulness": "Alle drei Top-Treiber (Uhrzeit 12 Uhr, Samstag, Jahr 2012) werden korrekt mit richtiger Wirkungsrichtung (jeweils positiv) genannt, und der Vorhersagewert 585,8 ist explizit angegeben.",
+      "clarity": "Die Erklärung verzichtet vollständig auf Fachjargon, übersetzt normalisierte Werte in Alltagsgrößen (z. B. '~33 °C', '29 % Luftfeuchtigkeit') und ist logisch nachvollziehbar strukturiert.",
+      "completeness": "Alle drei Pflichtabschnitte sind substanziell vorhanden: Vorhersage mit Vergleich zum tatsächlichen Wert (531 vs. 585,8), Erläuterung der Treiber mit Wirkungsrichtung und eine konkrete, praxisnahe Betriebsempfehlung."
     },
     "raw_response": "```json\n{\n  \"FAITHFULNESS\": 5,\n  \"CLARITY\": 5,\n  \"COMPLETENESS\": 5,\n  \"FAITHFULNESS_REASONING\": \"Alle drei Top-Treiber (Uhrzeit 12 Uhr, Samstag, Jahr 2012) werden korrekt mit richtiger Wirkungsrichtung (jeweils positiv) genannt, und der Vorhersagewert 585,8 ist explizit angegeben.\",\n  \"CLARITY_REASONING\": \"Die Erklärung verzichtet vollständig auf Fachjargon, übersetzt normalisierte Werte in Alltagsgrößen (z. B. '~33 °C', '29 % Luftfeuchtigkeit') und ist logisch nachvollziehbar strukturiert.\",\n  \"COMPLETENESS_REASONING\": \"Alle drei Pflichtabschnitte sind substanziell vorhanden: Vorhersage mit Vergleich zum tatsächlichen Wert (531 vs. 585,8), Erläuterung der Treiber mit Wirkungsrichtung und eine konkrete, praxisnahe Betriebsempfehlung.\"\n}\n```"
   },
@@ -409,13 +409,13 @@
     "pipeline_label": "Vision",
     "xai_model": "XGB",
     "instance_id": 4454,
-    "faithfulness": null,
-    "clarity": null,
-    "completeness": null,
+    "faithfulness": 4,
+    "clarity": 5,
+    "completeness": 5,
     "reasoning": {
-      "faithfulness": "",
-      "clarity": "",
-      "completeness": ""
+      "faithfulness": "Alle drei Top-Treiber (hr=19:00, temp≈26°C, yr=2012) sind korrekt genannt mit richtiger Wirkungsrichtung und der Vorhersagewert 297 ist angegeben; kleiner Abzug, da Wochentag (Samstag) und Luftfeuchtigkeit als Treiber erwähnt werden, obwohl sie nicht unter den Top-3 liegen (Halluzination, -1).",
+      "clarity": "Die Erklärung verwendet durchgehend Alltagssprache, übersetzt normalisierte Werte in verständliche Einheiten (z.B. '26 °C', '19 Uhr', '78 %') und verzichtet vollständig auf technischen Fachjargon.",
+      "completeness": "Alle drei Pflichtabschnitte sind substanziell vorhanden: die Vorhersage (297) wird explizit mit dem tatsächlichen Wert (354) verglichen, die wichtigsten Treiber werden erklärt, und eine konkrete Betriebsempfehlung für Stationsbesetzung und Wartungsplanung wird gegeben."
     },
     "raw_response": "```json\n{\n  \"FAITHFULNESS\": 4,\n  \"CLARITY\": 5,\n  \"COMPLETENESS\": 5,\n  \"FAITHFULNESS_REASONING\": \"Alle drei Top-Treiber (hr=19:00, temp≈26°C, yr=2012) sind korrekt genannt mit richtiger Wirkungsrichtung und der Vorhersagewert 297 ist angegeben; kleiner Abzug, da Wochentag (Samstag) und Luftfeuchtigkeit als Treiber erwähnt werden, obwohl sie nicht unter den Top-3 liegen (Halluzination, -1).\",\n  \"CLARITY_REASONING\": \"Die Erklärung verwendet durchgehend Alltagssprache, übersetzt normalisierte Werte in verständliche Einheiten (z.B. '26 °C', '19 Uhr', '78 %') und verzichtet vollständig auf technischen Fachjargon.\",\n  \"COMPLETENESS_REASONING\": \"Alle drei Pflichtabschnitte sind substanziell vorhanden: die Vorhersage (297) wird explizit mit dem tatsächlichen Wert (354) verglichen, die wichtigsten Treiber werden erklärt, und eine konkrete Betriebsempfehlung für Stationsbesetzung und Wartungsplanung wird gegeben.\"\n}\n```"
   },
@@ -451,13 +451,13 @@
     "pipeline_label": "Vision",
     "xai_model": "EBM",
     "instance_id": 1041,
-    "faithfulness": null,
-    "clarity": null,
-    "completeness": null,
+    "faithfulness": 4,
+    "clarity": 5,
+    "completeness": 5,
     "reasoning": {
-      "faithfulness": "",
-      "clarity": "",
-      "completeness": ""
+      "faithfulness": "Alle drei Top-Treiber (Uhrzeit/hr, Jahr/yr, Luftfeuchtigkeit/hum) werden korrekt genannt mit richtiger Wirkungsrichtung und korrektem Vorhersagewert (389,7), jedoch wird 'Wochentag Freitag' als zusätzlicher Treiber erwähnt, der nicht unter den Top-3 ist (-1 für Halluzination).",
+      "clarity": "Die Erklärung ist vollständig in klarer Alltagssprache verfasst, kein Fachjargon, normalisierte Werte werden in verständliche Größen übersetzt (88 % Luftfeuchtigkeit, 8:00 Uhr, 2011), und der logische Aufbau ist für Laien gut nachvollziehbar.",
+      "completeness": "Alle drei Pflichtabschnitte sind substanziell vorhanden: Vorhersage mit Vergleich zum tatsächlichen Wert (389,7 vs. 387), Treiber mit Erklärung, und eine konkrete, praxisnahe Betriebsempfehlung zu Fahrradverfügbarkeit und Wartungsplanung."
     },
     "raw_response": "```json\n{\n  \"FAITHFULNESS\": 4,\n  \"CLARITY\": 5,\n  \"COMPLETENESS\": 5,\n  \"FAITHFULNESS_REASONING\": \"Alle drei Top-Treiber (Uhrzeit/hr, Jahr/yr, Luftfeuchtigkeit/hum) werden korrekt genannt mit richtiger Wirkungsrichtung und korrektem Vorhersagewert (389,7), jedoch wird 'Wochentag Freitag' als zusätzlicher Treiber erwähnt, der nicht unter den Top-3 ist (-1 für Halluzination).\",\n  \"CLARITY_REASONING\": \"Die Erklärung ist vollständig in klarer Alltagssprache verfasst, kein Fachjargon, normalisierte Werte werden in verständliche Größen übersetzt (88 % Luftfeuchtigkeit, 8:00 Uhr, 2011), und der logische Aufbau ist für Laien gut nachvollziehbar.\",\n  \"COMPLETENESS_REASONING\": \"Alle drei Pflichtabschnitte sind substanziell vorhanden: Vorhersage mit Vergleich zum tatsächlichen Wert (389,7 vs. 387), Treiber mit Erklärung, und eine konkrete, praxisnahe Betriebsempfehlung zu Fahrradverfügbarkeit und Wartungsplanung.\"\n}\n```"
   },
@@ -563,13 +563,13 @@
     "pipeline_label": "Tool-Use",
     "xai_model": "XGB",
     "instance_id": 224,
-    "faithfulness": null,
-    "clarity": null,
-    "completeness": null,
+    "faithfulness": 5,
+    "clarity": 4,
+    "completeness": 5,
     "reasoning": {
-      "faithfulness": "",
-      "clarity": "",
-      "completeness": ""
+      "faithfulness": "Alle drei Top-Treiber (temp negativ, hr positiv, mnth negativ) sind korrekt genannt mit richtiger Wirkungsrichtung, der Vorhersagewert 112 stimmt, und das Counterfactual-Beispiel ist korrekt belegt.",
+      "clarity": "Die Erklärung ist größtenteils in Alltagssprache verfasst und übersetzt normalisierte Werte korrekt (z.B. '~8,2 °C'), jedoch fällt der Begriff 'Perzentil' als leichter Fachjargon für Laien auf.",
+      "completeness": "Alle drei Pflichtabschnitte sind vollständig und substanziell vorhanden: Vorhersage mit Vergleich zum tatsächlichen Wert (112 vs. 96), Treiber mit kontextueller Einordnung und ein konkreter, handlungsrelevanter Betriebshinweis."
     },
     "raw_response": "```json\n{\n  \"FAITHFULNESS\": 5,\n  \"CLARITY\": 4,\n  \"COMPLETENESS\": 5,\n  \"FAITHFULNESS_REASONING\": \"Alle drei Top-Treiber (temp negativ, hr positiv, mnth negativ) sind korrekt genannt mit richtiger Wirkungsrichtung, der Vorhersagewert 112 stimmt, und das Counterfactual-Beispiel ist korrekt belegt.\",\n  \"CLARITY_REASONING\": \"Die Erklärung ist größtenteils in Alltagssprache verfasst und übersetzt normalisierte Werte korrekt (z.B. '~8,2 °C'), jedoch fällt der Begriff 'Perzentil' als leichter Fachjargon für Laien auf.\",\n  \"COMPLETENESS_REASONING\": \"Alle drei Pflichtabschnitte sind vollständig und substanziell vorhanden: Vorhersage mit Vergleich zum tatsächlichen Wert (112 vs. 96), Treiber mit kontextueller Einordnung und ein konkreter, handlungsrelevanter Betriebshinweis.\"\n}\n```"
   },
@@ -577,13 +577,13 @@
     "pipeline_label": "Tool-Use",
     "xai_model": "XGB",
     "instance_id": 580,
-    "faithfulness": null,
-    "clarity": null,
-    "completeness": null,
+    "faithfulness": 4,
+    "clarity": 4,
+    "completeness": 5,
     "reasoning": {
-      "faithfulness": "",
-      "clarity": "",
-      "completeness": ""
+      "faithfulness": "Alle drei Top-Treiber (hr, yr, mnth) werden korrekt mit negativer Wirkungsrichtung genannt, der Vorhersagewert (64,6) stimmt, jedoch wird Temperatur ('temp') als vierter Treiber prominent hervorgehoben, was den Fokus von mnth ablenkt und einen leichten Halluzinations-Abzug rechtfertigt (-1).",
+      "clarity": "Die Erklärung ist weitgehend in Alltagssprache verfasst und übersetzt normalisierte Werte (z.B. 14,8 °C, 22:00 Uhr) vorbildlich, jedoch wird der Begriff 'Perzentil' ohne Alltagsübersetzung verwendet (-1).",
+      "completeness": "Alle drei Pflichtabschnitte – Vorhersage mit Vergleich zum tatsächlichen Wert, Treiber-Erläuterung und konkrete Betriebsempfehlung – sind substanziell vorhanden und gut ausgearbeitet."
     },
     "raw_response": "```json\n{\n  \"FAITHFULNESS\": 4,\n  \"CLARITY\": 4,\n  \"COMPLETENESS\": 5,\n  \"FAITHFULNESS_REASONING\": \"Alle drei Top-Treiber (hr, yr, mnth) werden korrekt mit negativer Wirkungsrichtung genannt, der Vorhersagewert (64,6) stimmt, jedoch wird Temperatur ('temp') als vierter Treiber prominent hervorgehoben, was den Fokus von mnth ablenkt und einen leichten Halluzinations-Abzug rechtfertigt (-1).\",\n  \"CLARITY_REASONING\": \"Die Erklärung ist weitgehend in Alltagssprache verfasst und übersetzt normalisierte Werte (z.B. 14,8 °C, 22:00 Uhr) vorbildlich, jedoch wird der Begriff 'Perzentil' ohne Alltagsübersetzung verwendet (-1).\",\n  \"COMPLETENESS_REASONING\": \"Alle drei Pflichtabschnitte – Vorhersage mit Vergleich zum tatsächlichen Wert, Treiber-Erläuterung und konkrete Betriebsempfehlung – sind substanziell vorhanden und gut ausgearbeitet.\"\n}\n```"
   },
@@ -591,13 +591,13 @@
     "pipeline_label": "Tool-Use",
     "xai_model": "XGB",
     "instance_id": 1041,
-    "faithfulness": null,
-    "clarity": null,
-    "completeness": null,
+    "faithfulness": 3,
+    "clarity": 3,
+    "completeness": 4,
     "reasoning": {
-      "faithfulness": "",
-      "clarity": "",
-      "completeness": ""
+      "faithfulness": "Die Uhrzeit (hr) als Top-1-Treiber ist korrekt benannt mit richtiger Richtung, und der Vorhersagewert (385) ist angegeben; jedoch wird Luftfeuchtigkeit (hum, Rang 4) als zweitstärkster Treiber hervorgehoben statt yr (Rang 2) und weekday (Rang 3), was eine Halluzination darstellt (-1), zudem ist die Wirkungsrichtung von yr (bremsend, korrekt) richtig, aber weekday wird nur am Rand erwähnt statt als eigenständiger Top-3-Treiber (-1 für fehlenden/untergewichteten Top-3-Treiber).",
+      "clarity": "Die Erklärung ist weitgehend in Alltagssprache verfasst und übersetzt Werte wie '88 % Luftfeuchtigkeit' verständlich, jedoch wird der Begriff 'Perzentil' (91,8. Perzentil) ohne Erläuterung verwendet (-1), was für Laien unklar sein dürfte.",
+      "completeness": "Alle drei Pflichtabschnitte (Vorhersage mit Vergleich zum tatsächlichen Wert, Treiber, Betriebsempfehlung) sind vorhanden und substanziell ausgeführt, jedoch ist die Bet"
     },
     "raw_response": "```json\n{\n  \"FAITHFULNESS\": 3,\n  \"CLARITY\": 3,\n  \"COMPLETENESS\": 4,\n  \"FAITHFULNESS_REASONING\": \"Die Uhrzeit (hr) als Top-1-Treiber ist korrekt benannt mit richtiger Richtung, und der Vorhersagewert (385) ist angegeben; jedoch wird Luftfeuchtigkeit (hum, Rang 4) als zweitstärkster Treiber hervorgehoben statt yr (Rang 2) und weekday (Rang 3), was eine Halluzination darstellt (-1), zudem ist die Wirkungsrichtung von yr (bremsend, korrekt) richtig, aber weekday wird nur am Rand erwähnt statt als eigenständiger Top-3-Treiber (-1 für fehlenden/untergewichteten Top-3-Treiber).\",\n  \"CLARITY_REASONING\": \"Die Erklärung ist weitgehend in Alltagssprache verfasst und übersetzt Werte wie '88 % Luftfeuchtigkeit' verständlich, jedoch wird der Begriff 'Perzentil' (91,8. Perzentil) ohne Erläuterung verwendet (-1), was für Laien unklar sein dürfte.\",\n  \"COMPLETENESS_REASONING\": \"Alle drei Pflichtabschnitte (Vorhersage mit Vergleich zum tatsächlichen Wert, Treiber, Betriebsempfehlung) sind vorhanden und substanziell ausgeführt, jedoch ist die Bet"
   },
@@ -633,13 +633,13 @@
     "pipeline_label": "Tool-Use",
     "xai_model": "XGB",
     "instance_id": 2058,
-    "faithfulness": null,
-    "clarity": null,
-    "completeness": null,
+    "faithfulness": 5,
+    "clarity": 4,
+    "completeness": 5,
     "reasoning": {
-      "faithfulness": "",
-      "clarity": "",
-      "completeness": ""
+      "faithfulness": "Alle drei Top-Treiber (yr, temp, hum) korrekt genannt mit richtiger Wirkungsrichtung, Vorhersagewert 194 korrekt angegeben, und der Counterfactual-Wert von 248 Rädern bei yr=1 präzise eingesetzt.",
+      "clarity": "Die Erklärung ist weitgehend in Alltagssprache verfasst und übersetzt Rohwerte in verständliche Größen (25,4 °C, 83 %), jedoch enthält der Begriff 'Perzentil' Fachsprache, die für Laien nicht selbstverständlich ist.",
+      "completeness": "Alle drei Pflichtabschnitte (Vorhersage mit Vergleich zum tatsächlichen Wert, Treiber mit Erklärung, praktische Betriebsempfehlung) sind substanziell vorhanden und gut ausgeführt."
     },
     "raw_response": "```json\n{\n  \"FAITHFULNESS\": 5,\n  \"CLARITY\": 4,\n  \"COMPLETENESS\": 5,\n  \"FAITHFULNESS_REASONING\": \"Alle drei Top-Treiber (yr, temp, hum) korrekt genannt mit richtiger Wirkungsrichtung, Vorhersagewert 194 korrekt angegeben, und der Counterfactual-Wert von 248 Rädern bei yr=1 präzise eingesetzt.\",\n  \"CLARITY_REASONING\": \"Die Erklärung ist weitgehend in Alltagssprache verfasst und übersetzt Rohwerte in verständliche Größen (25,4 °C, 83 %), jedoch enthält der Begriff 'Perzentil' Fachsprache, die für Laien nicht selbstverständlich ist.\",\n  \"COMPLETENESS_REASONING\": \"Alle drei Pflichtabschnitte (Vorhersage mit Vergleich zum tatsächlichen Wert, Treiber mit Erklärung, praktische Betriebsempfehlung) sind substanziell vorhanden und gut ausgeführt.\"\n}\n```"
   },
@@ -647,13 +647,13 @@
     "pipeline_label": "Tool-Use",
     "xai_model": "XGB",
     "instance_id": 2510,
-    "faithfulness": null,
-    "clarity": null,
-    "completeness": null,
+    "faithfulness": 4,
+    "clarity": 3,
+    "completeness": 5,
     "reasoning": {
-      "faithfulness": "",
-      "clarity": "",
-      "completeness": ""
+      "faithfulness": "Alle drei Top-Treiber (hr, yr, temp) werden korrekt genannt mit richtiger Wirkungsrichtung und korrektem Vorhersagewert (326), jedoch wird der Wichtigkeitswert '0,83' als Fachjargon aus dem Tool-Ergebnis zitiert, was leicht über das Erlaubte hinausgeht, und der Wochentag (weekday) wird als Treiber ergänzt, obwohl er nicht unter den Top-3 liegt (-1 für Halluzination), was den Score auf 4 senkt.",
+      "clarity": "Die Erklärung ist größtenteils alltagssprachlich und gut strukturiert, jedoch werden technische Zahlenwerte wie 'Wichtigkeitswert 0,83' und '48. Perzentil' ohne ausreichende Alltagsübersetzung verwendet (-1 für fehlende Übersetzung normalisierter Werte, -1 für Fachjargon wie Perzentil/Wichtigkeitswert), was Laien verwirren kann.",
+      "completeness": "Alle drei Pflichtabschnitte sind substanziell vorhanden: Die Vorhersage (326) wird explizit mit dem tatsächlichen Wert (372) verglichen, die Top-Treiber werden ausführlich erklärt, und es gibt zwei klare, praktisch u"
     },
     "raw_response": "```json\n{\n  \"FAITHFULNESS\": 4,\n  \"CLARITY\": 3,\n  \"COMPLETENESS\": 5,\n  \"FAITHFULNESS_REASONING\": \"Alle drei Top-Treiber (hr, yr, temp) werden korrekt genannt mit richtiger Wirkungsrichtung und korrektem Vorhersagewert (326), jedoch wird der Wichtigkeitswert '0,83' als Fachjargon aus dem Tool-Ergebnis zitiert, was leicht über das Erlaubte hinausgeht, und der Wochentag (weekday) wird als Treiber ergänzt, obwohl er nicht unter den Top-3 liegt (-1 für Halluzination), was den Score auf 4 senkt.\",\n  \"CLARITY_REASONING\": \"Die Erklärung ist größtenteils alltagssprachlich und gut strukturiert, jedoch werden technische Zahlenwerte wie 'Wichtigkeitswert 0,83' und '48. Perzentil' ohne ausreichende Alltagsübersetzung verwendet (-1 für fehlende Übersetzung normalisierter Werte, -1 für Fachjargon wie Perzentil/Wichtigkeitswert), was Laien verwirren kann.\",\n  \"COMPLETENESS_REASONING\": \"Alle drei Pflichtabschnitte sind substanziell vorhanden: Die Vorhersage (326) wird explizit mit dem tatsächlichen Wert (372) verglichen, die Top-Treiber werden ausführlich erklärt, und es gibt zwei klare, praktisch u"
   },
@@ -661,13 +661,13 @@
     "pipeline_label": "Tool-Use",
     "xai_model": "XGB",
     "instance_id": 3543,
-    "faithfulness": null,
-    "clarity": null,
-    "completeness": null,
+    "faithfulness": 5,
+    "clarity": 5,
+    "completeness": 5,
     "reasoning": {
-      "faithfulness": "",
-      "clarity": "",
-      "completeness": ""
+      "faithfulness": "Alle drei Top-Treiber (yr, hr, hum) werden korrekt mit richtiger Wirkungsrichtung genannt, der Vorhersagewert (310) und der tatsächliche Wert (286) sind korrekt angegeben, und das Counterfactual (182 statt 310 bei yr=0) stimmt exakt mit den Ground-Truth-Daten überein.",
+      "clarity": "Die Erklärung verwendet durchgehend Alltagssprache ohne Fachjargon wie SHAP oder Log-Raum, übersetzt normalisierte Werte (z.B. 29 % Luftfeuchtigkeit, ~20,5 °C) verständlich und ist logisch strukturiert.",
+      "completeness": "Alle drei Pflichtabschnitte – Vorhersage mit Vergleich zum tatsächlichen Wert, Treiber mit substanzieller Erläuterung und eine konkrete, praxisnahe Betriebsempfehlung – sind vollständig und ausführlich vorhanden."
     },
     "raw_response": "```json\n{\n  \"FAITHFULNESS\": 5,\n  \"CLARITY\": 5,\n  \"COMPLETENESS\": 5,\n  \"FAITHFULNESS_REASONING\": \"Alle drei Top-Treiber (yr, hr, hum) werden korrekt mit richtiger Wirkungsrichtung genannt, der Vorhersagewert (310) und der tatsächliche Wert (286) sind korrekt angegeben, und das Counterfactual (182 statt 310 bei yr=0) stimmt exakt mit den Ground-Truth-Daten überein.\",\n  \"CLARITY_REASONING\": \"Die Erklärung verwendet durchgehend Alltagssprache ohne Fachjargon wie SHAP oder Log-Raum, übersetzt normalisierte Werte (z.B. 29 % Luftfeuchtigkeit, ~20,5 °C) verständlich und ist logisch strukturiert.\",\n  \"COMPLETENESS_REASONING\": \"Alle drei Pflichtabschnitte – Vorhersage mit Vergleich zum tatsächlichen Wert, Treiber mit substanzieller Erläuterung und eine konkrete, praxisnahe Betriebsempfehlung – sind vollständig und ausführlich vorhanden.\"\n}\n```"
   },
@@ -675,13 +675,13 @@
     "pipeline_label": "Tool-Use",
     "xai_model": "XGB",
     "instance_id": 3847,
-    "faithfulness": null,
-    "clarity": null,
-    "completeness": null,
+    "faithfulness": 4,
+    "clarity": 4,
+    "completeness": 5,
     "reasoning": {
-      "faithfulness": "",
-      "clarity": "",
-      "completeness": ""
+      "faithfulness": "Alle drei Top-Treiber (hr, weekday, yr) werden korrekt mit richtiger Wirkungsrichtung erwähnt, der Vorhersagewert (586) ist korrekt angegeben; jedoch wird 'yr' (Jahr 2012) im Treiber-Abschnitt nicht explizit als zweit- oder drittgrößten Treiber benannt – stattdessen rückt Temperatur (nur Rang 4) an dessen Stelle, was einen leichten Abzug rechtfertigt.",
+      "clarity": "Die Erklärung ist überwiegend in verständlicher Alltagssprache verfasst, normalisierte Werte werden korrekt übersetzt (z.B. 32,8 °C, Percentil-Angabe), jedoch taucht der Begriff 'Perzentil' auf, der für absolute Laien eine kleine Hürde darstellt.",
+      "completeness": "Alle drei Pflichtabschnitte (Vorhersage inkl. Vergleich mit tatsächlichem Wert, Treiber mit Counterfactual-Belegen, konkrete Betriebsempfehlung) sind vollständig und substanziell vorhanden."
     },
     "raw_response": "```json\n{\n  \"FAITHFULNESS\": 4,\n  \"CLARITY\": 4,\n  \"COMPLETENESS\": 5,\n  \"FAITHFULNESS_REASONING\": \"Alle drei Top-Treiber (hr, weekday, yr) werden korrekt mit richtiger Wirkungsrichtung erwähnt, der Vorhersagewert (586) ist korrekt angegeben; jedoch wird 'yr' (Jahr 2012) im Treiber-Abschnitt nicht explizit als zweit- oder drittgrößten Treiber benannt – stattdessen rückt Temperatur (nur Rang 4) an dessen Stelle, was einen leichten Abzug rechtfertigt.\",\n  \"CLARITY_REASONING\": \"Die Erklärung ist überwiegend in verständlicher Alltagssprache verfasst, normalisierte Werte werden korrekt übersetzt (z.B. 32,8 °C, Percentil-Angabe), jedoch taucht der Begriff 'Perzentil' auf, der für absolute Laien eine kleine Hürde darstellt.\",\n  \"COMPLETENESS_REASONING\": \"Alle drei Pflichtabschnitte (Vorhersage inkl. Vergleich mit tatsächlichem Wert, Treiber mit Counterfactual-Belegen, konkrete Betriebsempfehlung) sind vollständig und substanziell vorhanden.\"\n}\n```"
   },
@@ -689,13 +689,13 @@
     "pipeline_label": "Tool-Use",
     "xai_model": "XGB",
     "instance_id": 4454,
-    "faithfulness": null,
-    "clarity": null,
-    "completeness": null,
+    "faithfulness": 4,
+    "clarity": 4,
+    "completeness": 5,
     "reasoning": {
-      "faithfulness": "",
-      "clarity": "",
-      "completeness": ""
+      "faithfulness": "Alle drei Top-3-Treiber (hr, temp, yr) sind korrekt genannt mit richtiger Wirkungsrichtung und die Vorhersage (297) sowie der tatsächliche Wert (354) sind präzise angegeben; allerdings wird 'yr' (Jahr 2012) als Treiber nicht explizit erwähnt, während Samstag und Luftfeuchtigkeit stärker betont werden, was einen kleinen Abzug rechtfertigt.",
+      "clarity": "Die Sprache ist überwiegend alltagsnah und gut verständlich; Fachwörter wie 'Perzentil' und 'Features' tauchen auf und könnten Laien kurz irritieren, die Temperaturen und Uhrzeiten sind aber korrekt in lesbare Werte übersetzt.",
+      "completeness": "Alle drei Pflichtabschnitte – Vorhersage mit Vergleich zum tatsächlichen Wert, Erläuterung der wichtigsten Treiber und eine konkrete praktische Betriebsempfehlung – sind substanziell und vollständig vorhanden."
     },
     "raw_response": "```json\n{\n  \"FAITHFULNESS\": 4,\n  \"CLARITY\": 4,\n  \"COMPLETENESS\": 5,\n  \"FAITHFULNESS_REASONING\": \"Alle drei Top-3-Treiber (hr, temp, yr) sind korrekt genannt mit richtiger Wirkungsrichtung und die Vorhersage (297) sowie der tatsächliche Wert (354) sind präzise angegeben; allerdings wird 'yr' (Jahr 2012) als Treiber nicht explizit erwähnt, während Samstag und Luftfeuchtigkeit stärker betont werden, was einen kleinen Abzug rechtfertigt.\",\n  \"CLARITY_REASONING\": \"Die Sprache ist überwiegend alltagsnah und gut verständlich; Fachwörter wie 'Perzentil' und 'Features' tauchen auf und könnten Laien kurz irritieren, die Temperaturen und Uhrzeiten sind aber korrekt in lesbare Werte übersetzt.\",\n  \"COMPLETENESS_REASONING\": \"Alle drei Pflichtabschnitte – Vorhersage mit Vergleich zum tatsächlichen Wert, Erläuterung der wichtigsten Treiber und eine konkrete praktische Betriebsempfehlung – sind substanziell und vollständig vorhanden.\"\n}\n```"
   },
@@ -703,13 +703,13 @@
     "pipeline_label": "Tool-Use",
     "xai_model": "EBM",
     "instance_id": 224,
-    "faithfulness": null,
-    "clarity": null,
-    "completeness": null,
+    "faithfulness": 5,
+    "clarity": 4,
+    "completeness": 5,
     "reasoning": {
-      "faithfulness": "",
-      "clarity": "",
-      "completeness": ""
+      "faithfulness": "Alle drei Top-Treiber (hr positiv, temp negativ, yr negativ) korrekt genannt mit richtiger Wirkungsrichtung, Vorhersagewert 117 korrekt angegeben und tatsächlicher Wert 96 erwähnt.",
+      "clarity": "Weitgehend verständlich in Alltagssprache mit sinnvollen Übersetzungen (z.B. '~8,2 °C', 'Feierabend-Rückkehrverkehr'), jedoch enthält der Begriff 'Perzentil' leichten Fachjargon ohne vollständige Alltagsübersetzung.",
+      "completeness": "Alle drei Pflichtabschnitte sind substanziell vorhanden: Vorhersage mit Vergleich zum tatsächlichen Wert (117 vs. 96), klare Treiberbeschreibung und konkrete Betriebsempfehlungen inklusive Counterfactual-Beispiel."
     },
     "raw_response": "```json\n{\n  \"FAITHFULNESS\": 5,\n  \"CLARITY\": 4,\n  \"COMPLETENESS\": 5,\n  \"FAITHFULNESS_REASONING\": \"Alle drei Top-Treiber (hr positiv, temp negativ, yr negativ) korrekt genannt mit richtiger Wirkungsrichtung, Vorhersagewert 117 korrekt angegeben und tatsächlicher Wert 96 erwähnt.\",\n  \"CLARITY_REASONING\": \"Weitgehend verständlich in Alltagssprache mit sinnvollen Übersetzungen (z.B. '~8,2 °C', 'Feierabend-Rückkehrverkehr'), jedoch enthält der Begriff 'Perzentil' leichten Fachjargon ohne vollständige Alltagsübersetzung.\",\n  \"COMPLETENESS_REASONING\": \"Alle drei Pflichtabschnitte sind substanziell vorhanden: Vorhersage mit Vergleich zum tatsächlichen Wert (117 vs. 96), klare Treiberbeschreibung und konkrete Betriebsempfehlungen inklusive Counterfactual-Beispiel.\"\n}\n```"
   },
@@ -717,13 +717,13 @@
     "pipeline_label": "Tool-Use",
     "xai_model": "EBM",
     "instance_id": 580,
-    "faithfulness": null,
-    "clarity": null,
-    "completeness": null,
+    "faithfulness": 5,
+    "clarity": 4,
+    "completeness": 5,
     "reasoning": {
-      "faithfulness": "",
-      "clarity": "",
-      "completeness": ""
+      "faithfulness": "Alle drei Top-Treiber (yr, temp, hr) korrekt genannt mit richtiger Wirkungsrichtung, der Vorhersagewert (73) und der tatsächliche Wert (63) sind explizit angegeben.",
+      "clarity": "Die Erklärung ist weitgehend in Alltagssprache verfasst und übersetzt Rohwerte in lesbare Größen (14,8 °C, 22 Uhr), jedoch enthält der Abschnitt mit Perzentilen ('48. Perzentile', '30 %') leicht technische Begriffe, die Laien kurz innehalten lassen könnten.",
+      "completeness": "Alle drei Pflichtabschnitte (Vorhersage mit Vergleich zum tatsächlichen Wert, Treiber-Erklärung, praktische Betriebsempfehlung) sind substanziell und klar strukturiert vorhanden."
     },
     "raw_response": "```json\n{\n  \"FAITHFULNESS\": 5,\n  \"CLARITY\": 4,\n  \"COMPLETENESS\": 5,\n  \"FAITHFULNESS_REASONING\": \"Alle drei Top-Treiber (yr, temp, hr) korrekt genannt mit richtiger Wirkungsrichtung, der Vorhersagewert (73) und der tatsächliche Wert (63) sind explizit angegeben.\",\n  \"CLARITY_REASONING\": \"Die Erklärung ist weitgehend in Alltagssprache verfasst und übersetzt Rohwerte in lesbare Größen (14,8 °C, 22 Uhr), jedoch enthält der Abschnitt mit Perzentilen ('48. Perzentile', '30 %') leicht technische Begriffe, die Laien kurz innehalten lassen könnten.\",\n  \"COMPLETENESS_REASONING\": \"Alle drei Pflichtabschnitte (Vorhersage mit Vergleich zum tatsächlichen Wert, Treiber-Erklärung, praktische Betriebsempfehlung) sind substanziell und klar strukturiert vorhanden.\"\n}\n```"
   },
@@ -731,13 +731,13 @@
     "pipeline_label": "Tool-Use",
     "xai_model": "EBM",
     "instance_id": 1041,
-    "faithfulness": null,
-    "clarity": null,
-    "completeness": null,
+    "faithfulness": 5,
+    "clarity": 4,
+    "completeness": 5,
     "reasoning": {
-      "faithfulness": "",
-      "clarity": "",
-      "completeness": ""
+      "faithfulness": "Alle drei Top-Treiber (hr, yr, hum) korrekt genannt mit richtiger Wirkungsrichtung, Vorhersagewert (390) und tatsächlicher Wert (387) korrekt angegeben, Counterfactual (490 Räder bei hum=0,6) stimmt mit Tool-Ergebnis überein.",
+      "clarity": "Die Erklärung ist weitgehend in Alltagssprache gehalten und vermeidet technischen Jargon; der Begriff '92. Perzentil' ist leicht fachlich und könnte für Laien eine kurze Erläuterung vertragen, bleibt aber im Kontext verständlich.",
+      "completeness": "Alle drei Pflichtabschnitte sind substanziell vorhanden: Vorhersage mit Vergleich zum tatsächlichen Wert, detaillierte Treiberbeschreibung und konkrete praktische Betriebsempfehlungen."
     },
     "raw_response": "```json\n{\n  \"FAITHFULNESS\": 5,\n  \"CLARITY\": 4,\n  \"COMPLETENESS\": 5,\n  \"FAITHFULNESS_REASONING\": \"Alle drei Top-Treiber (hr, yr, hum) korrekt genannt mit richtiger Wirkungsrichtung, Vorhersagewert (390) und tatsächlicher Wert (387) korrekt angegeben, Counterfactual (490 Räder bei hum=0,6) stimmt mit Tool-Ergebnis überein.\",\n  \"CLARITY_REASONING\": \"Die Erklärung ist weitgehend in Alltagssprache gehalten und vermeidet technischen Jargon; der Begriff '92. Perzentil' ist leicht fachlich und könnte für Laien eine kurze Erläuterung vertragen, bleibt aber im Kontext verständlich.\",\n  \"COMPLETENESS_REASONING\": \"Alle drei Pflichtabschnitte sind substanziell vorhanden: Vorhersage mit Vergleich zum tatsächlichen Wert, detaillierte Treiberbeschreibung und konkrete praktische Betriebsempfehlungen.\"\n}\n```"
   },
@@ -745,13 +745,13 @@
     "pipeline_label": "Tool-Use",
     "xai_model": "EBM",
     "instance_id": 1481,
-    "faithfulness": null,
-    "clarity": null,
-    "completeness": null,
+    "faithfulness": 4,
+    "clarity": 4,
+    "completeness": 5,
     "reasoning": {
-      "faithfulness": "",
-      "clarity": "",
-      "completeness": ""
+      "faithfulness": "Alle drei Top-Treiber (hr, yr, hum) korrekt genannt mit richtiger Wirkungsrichtung und korrektem Vorhersagewert (242), jedoch fehlt ein kleiner Abzug, weil die Erklärung die 'Was-wäre-wenn-Analyse' explizit aus dem Tool-Trace ableitet und korrekt darstellt – lediglich die Beschreibung des yr-Percentiles ist leicht missverständlich formuliert ('genau auf der Grenze beider Jahre').",
+      "clarity": "Die Erklärung ist größtenteils in verständlicher Alltagssprache verfasst und übersetzt normalisierte Werte (42 % Luftfeuchtigkeit, 16:00 Uhr) korrekt, jedoch wird einmal implizit auf ein 'Percentile' verwiesen, was für Laien erklärungsbedürftig ist.",
+      "completeness": "Alle drei Pflichtabschnitte sind substanziell vorhanden: die Vorhersage (242) wird dem tatsächlichen Wert (277) gegenübergestellt, die Top-3-Treiber werden ausführlich erklärt, und konkrete Betriebsempfehlungen (mehr Räder bereitstellen, Wachstumstrend einkalkulieren) werden gegeben."
     },
     "raw_response": "```json\n{\n  \"FAITHFULNESS\": 4,\n  \"CLARITY\": 4,\n  \"COMPLETENESS\": 5,\n  \"FAITHFULNESS_REASONING\": \"Alle drei Top-Treiber (hr, yr, hum) korrekt genannt mit richtiger Wirkungsrichtung und korrektem Vorhersagewert (242), jedoch fehlt ein kleiner Abzug, weil die Erklärung die 'Was-wäre-wenn-Analyse' explizit aus dem Tool-Trace ableitet und korrekt darstellt – lediglich die Beschreibung des yr-Percentiles ist leicht missverständlich formuliert ('genau auf der Grenze beider Jahre').\",\n  \"CLARITY_REASONING\": \"Die Erklärung ist größtenteils in verständlicher Alltagssprache verfasst und übersetzt normalisierte Werte (42 % Luftfeuchtigkeit, 16:00 Uhr) korrekt, jedoch wird einmal implizit auf ein 'Percentile' verwiesen, was für Laien erklärungsbedürftig ist.\",\n  \"COMPLETENESS_REASONING\": \"Alle drei Pflichtabschnitte sind substanziell vorhanden: die Vorhersage (242) wird dem tatsächlichen Wert (277) gegenübergestellt, die Top-3-Treiber werden ausführlich erklärt, und konkrete Betriebsempfehlungen (mehr Räder bereitstellen, Wachstumstrend einkalkulieren) werden gegeben.\"\n}\n```"
   },
@@ -759,13 +759,13 @@
     "pipeline_label": "Tool-Use",
     "xai_model": "EBM",
     "instance_id": 1677,
-    "faithfulness": null,
-    "clarity": null,
-    "completeness": null,
+    "faithfulness": 5,
+    "clarity": 4,
+    "completeness": 5,
     "reasoning": {
-      "faithfulness": "",
-      "clarity": "",
-      "completeness": ""
+      "faithfulness": "Alle drei Top-Treiber (hr, temp, yr) korrekt genannt mit richtiger Wirkungsrichtung, Vorhersagewert (260) korrekt angegeben, und das Counterfactual (164 Räder bei 12:00 Uhr) belegt die Treue zur Modellausgabe.",
+      "clarity": "Die Erklärung ist weitgehend in Alltagssprache verfasst und übersetzt normalisierte Werte korrekt (z.B. ~28,7 °C), jedoch werden technische Begriffe wie 'Wichtigkeit 0,89' und 'Perzentil 84,4 %' ohne vollständige Erläuterung für Laien verwendet, was einen leichten Abzug rechtfertigt.",
+      "completeness": "Alle drei Pflichtabschnitte sind substanziell vorhanden: Vorhersage mit Vergleich zum tatsächlichen Wert (260 vs. 286), drei erklärte Treiber mit Wirkungsrichtung, und eine konkrete, praxisnahe Betriebsempfehlung zu Kapazitätsplanung und Modellaktualisierung."
     },
     "raw_response": "```json\n{\n  \"FAITHFULNESS\": 5,\n  \"CLARITY\": 4,\n  \"COMPLETENESS\": 5,\n  \"FAITHFULNESS_REASONING\": \"Alle drei Top-Treiber (hr, temp, yr) korrekt genannt mit richtiger Wirkungsrichtung, Vorhersagewert (260) korrekt angegeben, und das Counterfactual (164 Räder bei 12:00 Uhr) belegt die Treue zur Modellausgabe.\",\n  \"CLARITY_REASONING\": \"Die Erklärung ist weitgehend in Alltagssprache verfasst und übersetzt normalisierte Werte korrekt (z.B. ~28,7 °C), jedoch werden technische Begriffe wie 'Wichtigkeit 0,89' und 'Perzentil 84,4 %' ohne vollständige Erläuterung für Laien verwendet, was einen leichten Abzug rechtfertigt.\",\n  \"COMPLETENESS_REASONING\": \"Alle drei Pflichtabschnitte sind substanziell vorhanden: Vorhersage mit Vergleich zum tatsächlichen Wert (260 vs. 286), drei erklärte Treiber mit Wirkungsrichtung, und eine konkrete, praxisnahe Betriebsempfehlung zu Kapazitätsplanung und Modellaktualisierung.\"\n}\n```"
   },
@@ -773,13 +773,13 @@
     "pipeline_label": "Tool-Use",
     "xai_model": "EBM",
     "instance_id": 2058,
-    "faithfulness": null,
-    "clarity": null,
-    "completeness": null,
+    "faithfulness": 5,
+    "clarity": 4,
+    "completeness": 5,
     "reasoning": {
-      "faithfulness": "",
-      "clarity": "",
-      "completeness": ""
+      "faithfulness": "Alle drei Top-Treiber (hr, temp, yr) korrekt genannt mit richtiger Wirkungsrichtung, Vorhersagewert (177) und tatsächlicher Wert (243) explizit angegeben, Counterfactuals stimmig belegt.",
+      "clarity": "Weitgehend alltagssprachlich und gut strukturiert, aber 'Perzentil' und 'Wichtigkeit: 0.889' sind leicht technische Begriffe, die Laien kurz stolpern lassen könnten.",
+      "completeness": "Alle drei Pflichtabschnitte (Vorhersage inkl. Vergleich mit Ist-Wert, Treiber mit Erklärung, konkrete Betriebsempfehlung mit Pufferhinweis) sind substanziell ausgeführt."
     },
     "raw_response": "```json\n{\n  \"FAITHFULNESS\": 5,\n  \"CLARITY\": 4,\n  \"COMPLETENESS\": 5,\n  \"FAITHFULNESS_REASONING\": \"Alle drei Top-Treiber (hr, temp, yr) korrekt genannt mit richtiger Wirkungsrichtung, Vorhersagewert (177) und tatsächlicher Wert (243) explizit angegeben, Counterfactuals stimmig belegt.\",\n  \"CLARITY_REASONING\": \"Weitgehend alltagssprachlich und gut strukturiert, aber 'Perzentil' und 'Wichtigkeit: 0.889' sind leicht technische Begriffe, die Laien kurz stolpern lassen könnten.\",\n  \"COMPLETENESS_REASONING\": \"Alle drei Pflichtabschnitte (Vorhersage inkl. Vergleich mit Ist-Wert, Treiber mit Erklärung, konkrete Betriebsempfehlung mit Pufferhinweis) sind substanziell ausgeführt.\"\n}\n```"
   },
@@ -787,13 +787,13 @@
     "pipeline_label": "Tool-Use",
     "xai_model": "EBM",
     "instance_id": 2510,
-    "faithfulness": null,
-    "clarity": null,
-    "completeness": null,
+    "faithfulness": 4,
+    "clarity": 4,
+    "completeness": 5,
     "reasoning": {
-      "faithfulness": "",
-      "clarity": "",
-      "completeness": ""
+      "faithfulness": "Alle drei Top-Treiber (hr, yr, temp) werden korrekt genannt mit richtiger Wirkungsrichtung und korrektem Vorhersagewert (311); ein kleiner Abzug, weil temp als dritter Treiber kaum erwähnt wird und stattdessen hum, weathersit und weekday (nicht Top-3) prominent hervorgehoben werden.",
+      "clarity": "Die Erklärung ist überwiegend in Alltagssprache verfasst, Werte werden sinnvoll übersetzt (18:00 Uhr, 2011, 50 % Luftfeuchtigkeit), jedoch taucht der Begriff 'Percentile' auf und der Beitragswert '+1,15' ohne Alltagsübersetzung bleibt für Laien schwer einzuordnen.",
+      "completeness": "Alle drei Pflichtabschnitte sind vollständig und substanziell vorhanden: Vorhersage mit Vergleich zum tatsächlichen Wert (311 vs. 372), Treiber mit Wirkungsrichtung und Counterfactual-Beleg, sowie konkrete operative Betriebsempfehlungen für Kapazitätsplanung und Modellpflege."
     },
     "raw_response": "```json\n{\n  \"FAITHFULNESS\": 4,\n  \"CLARITY\": 4,\n  \"COMPLETENESS\": 5,\n  \"FAITHFULNESS_REASONING\": \"Alle drei Top-Treiber (hr, yr, temp) werden korrekt genannt mit richtiger Wirkungsrichtung und korrektem Vorhersagewert (311); ein kleiner Abzug, weil temp als dritter Treiber kaum erwähnt wird und stattdessen hum, weathersit und weekday (nicht Top-3) prominent hervorgehoben werden.\",\n  \"CLARITY_REASONING\": \"Die Erklärung ist überwiegend in Alltagssprache verfasst, Werte werden sinnvoll übersetzt (18:00 Uhr, 2011, 50 % Luftfeuchtigkeit), jedoch taucht der Begriff 'Percentile' auf und der Beitragswert '+1,15' ohne Alltagsübersetzung bleibt für Laien schwer einzuordnen.\",\n  \"COMPLETENESS_REASONING\": \"Alle drei Pflichtabschnitte sind vollständig und substanziell vorhanden: Vorhersage mit Vergleich zum tatsächlichen Wert (311 vs. 372), Treiber mit Wirkungsrichtung und Counterfactual-Beleg, sowie konkrete operative Betriebsempfehlungen für Kapazitätsplanung und Modellpflege.\"\n}\n```"
   },
@@ -801,13 +801,13 @@
     "pipeline_label": "Tool-Use",
     "xai_model": "EBM",
     "instance_id": 3543,
-    "faithfulness": null,
-    "clarity": null,
-    "completeness": null,
+    "faithfulness": 4,
+    "clarity": 3,
+    "completeness": 5,
     "reasoning": {
-      "faithfulness": "",
-      "clarity": "",
-      "completeness": ""
+      "faithfulness": "Alle drei Top-3-Treiber (hr, yr, hum) werden korrekt mit richtiger Wirkungsrichtung genannt, und der Vorhersagewert (296) sowie der tatsächliche Wert (286) sind angegeben; ein leichter Abzug, da 'temp' als zusätzlicher Treiber prominent hervorgehoben wird, obwohl es nicht unter den Top-3 nach Contribution liegt.",
+      "clarity": "Die Erklärung ist überwiegend alltagssprachlich, enthält aber Fachbegriffe wie 'Wichtigkeit: 0,89', 'Perzentil' und '100. Perzentil' ohne ausreichende Alltagsübersetzung, und normalisierte Werte (z.B. 'hum=0.29') werden zwar teilweise übersetzt, aber die Erklärung bleibt stellenweise zu technisch für Laien.",
+      "completeness": "Alle drei Pflichtabschnitte – Vorhersage mit Vergleich zum tatsächlichen Wert, Erklärung der wichtigsten Treiber und konkrete praktische Betriebsempfehlungen – sind substanziell vorhanden und gut ausgearbeitet."
     },
     "raw_response": "```json\n{\n  \"FAITHFULNESS\": 4,\n  \"CLARITY\": 3,\n  \"COMPLETENESS\": 5,\n  \"FAITHFULNESS_REASONING\": \"Alle drei Top-3-Treiber (hr, yr, hum) werden korrekt mit richtiger Wirkungsrichtung genannt, und der Vorhersagewert (296) sowie der tatsächliche Wert (286) sind angegeben; ein leichter Abzug, da 'temp' als zusätzlicher Treiber prominent hervorgehoben wird, obwohl es nicht unter den Top-3 nach Contribution liegt.\",\n  \"CLARITY_REASONING\": \"Die Erklärung ist überwiegend alltagssprachlich, enthält aber Fachbegriffe wie 'Wichtigkeit: 0,89', 'Perzentil' und '100. Perzentil' ohne ausreichende Alltagsübersetzung, und normalisierte Werte (z.B. 'hum=0.29') werden zwar teilweise übersetzt, aber die Erklärung bleibt stellenweise zu technisch für Laien.\",\n  \"COMPLETENESS_REASONING\": \"Alle drei Pflichtabschnitte – Vorhersage mit Vergleich zum tatsächlichen Wert, Erklärung der wichtigsten Treiber und konkrete praktische Betriebsempfehlungen – sind substanziell vorhanden und gut ausgearbeitet.\"\n}\n```"
   },
@@ -815,13 +815,13 @@
     "pipeline_label": "Tool-Use",
     "xai_model": "EBM",
     "instance_id": 3847,
-    "faithfulness": null,
-    "clarity": null,
-    "completeness": null,
+    "faithfulness": 5,
+    "clarity": 4,
+    "completeness": 5,
     "reasoning": {
-      "faithfulness": "",
-      "clarity": "",
-      "completeness": ""
+      "faithfulness": "Alle drei Top-Treiber (hr, temp, yr) korrekt genannt mit richtiger Wirkungsrichtung, Vorhersagewert 593 angegeben, und das Counterfactual (8 Uhr → 156 Räder) korrekt eingesetzt.",
+      "clarity": "Weitgehend in Alltagssprache gehalten und normalisierte Werte übersetzt (z.B. '~32,8 °C', 'Perzentilrang 96,1 %'), jedoch ist 'Perzentilrang' ein leicht technischer Begriff, der für Laien eine kurze Erklärung verdient hätte.",
+      "completeness": "Alle drei Pflichtabschnitte (Vorhersage inkl. Vergleich mit tatsächlichem Wert, Treiber mit Erläuterung, praktische Betriebsempfehlungen) sind substanziell vorhanden."
     },
     "raw_response": "```json\n{\n  \"FAITHFULNESS\": 5,\n  \"CLARITY\": 4,\n  \"COMPLETENESS\": 5,\n  \"FAITHFULNESS_REASONING\": \"Alle drei Top-Treiber (hr, temp, yr) korrekt genannt mit richtiger Wirkungsrichtung, Vorhersagewert 593 angegeben, und das Counterfactual (8 Uhr → 156 Räder) korrekt eingesetzt.\",\n  \"CLARITY_REASONING\": \"Weitgehend in Alltagssprache gehalten und normalisierte Werte übersetzt (z.B. '~32,8 °C', 'Perzentilrang 96,1 %'), jedoch ist 'Perzentilrang' ein leicht technischer Begriff, der für Laien eine kurze Erklärung verdient hätte.\",\n  \"COMPLETENESS_REASONING\": \"Alle drei Pflichtabschnitte (Vorhersage inkl. Vergleich mit tatsächlichem Wert, Treiber mit Erläuterung, praktische Betriebsempfehlungen) sind substanziell vorhanden.\"\n}\n```"
   },
