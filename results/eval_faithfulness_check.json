@@ -1,0 +1,1682 @@
+[
+  {
+    "pipeline_label": "JSON→Text",
+    "xai_model": "XGB",
+    "instance_id": 224,
+    "top3_features": [
+      "temp",
+      "hr",
+      "mnth"
+    ],
+    "faithfulness": 1.0,
+    "llm_assessments": [
+      {
+        "feature": "temp",
+        "mentioned": true,
+        "direction_correct": true
+      },
+      {
+        "feature": "hr",
+        "mentioned": true,
+        "direction_correct": true
+      },
+      {
+        "feature": "mnth",
+        "mentioned": true,
+        "direction_correct": true
+      }
+    ]
+  },
+  {
+    "pipeline_label": "JSON→Text",
+    "xai_model": "XGB",
+    "instance_id": 580,
+    "top3_features": [
+      "hr",
+      "yr",
+      "mnth"
+    ],
+    "faithfulness": 1.0,
+    "llm_assessments": [
+      {
+        "feature": "hr",
+        "mentioned": true,
+        "direction_correct": true
+      },
+      {
+        "feature": "yr",
+        "mentioned": true,
+        "direction_correct": true
+      },
+      {
+        "feature": "mnth",
+        "mentioned": true,
+        "direction_correct": true
+      }
+    ]
+  },
+  {
+    "pipeline_label": "JSON→Text",
+    "xai_model": "XGB",
+    "instance_id": 1041,
+    "top3_features": [
+      "hr",
+      "yr",
+      "weekday"
+    ],
+    "faithfulness": 1.0,
+    "llm_assessments": [
+      {
+        "feature": "hr",
+        "mentioned": true,
+        "direction_correct": true
+      },
+      {
+        "feature": "yr",
+        "mentioned": true,
+        "direction_correct": true
+      },
+      {
+        "feature": "weekday",
+        "mentioned": true,
+        "direction_correct": true
+      }
+    ]
+  },
+  {
+    "pipeline_label": "JSON→Text",
+    "xai_model": "XGB",
+    "instance_id": 1481,
+    "top3_features": [
+      "hr",
+      "yr",
+      "hum"
+    ],
+    "faithfulness": 0.667,
+    "llm_assessments": [
+      {
+        "feature": "hr",
+        "mentioned": true,
+        "direction_correct": true
+      },
+      {
+        "feature": "yr",
+        "mentioned": true,
+        "direction_correct": true
+      },
+      {
+        "feature": "hum",
+        "mentioned": false,
+        "direction_correct": null
+      }
+    ]
+  },
+  {
+    "pipeline_label": "JSON→Text",
+    "xai_model": "XGB",
+    "instance_id": 1677,
+    "top3_features": [
+      "hr",
+      "yr",
+      "temp"
+    ],
+    "faithfulness": 1.0,
+    "llm_assessments": [
+      {
+        "feature": "hr",
+        "mentioned": true,
+        "direction_correct": true
+      },
+      {
+        "feature": "yr",
+        "mentioned": true,
+        "direction_correct": true
+      },
+      {
+        "feature": "temp",
+        "mentioned": true,
+        "direction_correct": true
+      }
+    ]
+  },
+  {
+    "pipeline_label": "JSON→Text",
+    "xai_model": "XGB",
+    "instance_id": 2058,
+    "top3_features": [
+      "yr",
+      "temp",
+      "hum"
+    ],
+    "faithfulness": 1.0,
+    "llm_assessments": [
+      {
+        "feature": "yr",
+        "mentioned": true,
+        "direction_correct": true
+      },
+      {
+        "feature": "temp",
+        "mentioned": true,
+        "direction_correct": true
+      },
+      {
+        "feature": "hum",
+        "mentioned": true,
+        "direction_correct": true
+      }
+    ]
+  },
+  {
+    "pipeline_label": "JSON→Text",
+    "xai_model": "XGB",
+    "instance_id": 2510,
+    "top3_features": [
+      "hr",
+      "yr",
+      "temp"
+    ],
+    "faithfulness": 1.0,
+    "llm_assessments": [
+      {
+        "feature": "hr",
+        "mentioned": true,
+        "direction_correct": true
+      },
+      {
+        "feature": "yr",
+        "mentioned": true,
+        "direction_correct": true
+      },
+      {
+        "feature": "temp",
+        "mentioned": true,
+        "direction_correct": true
+      }
+    ]
+  },
+  {
+    "pipeline_label": "JSON→Text",
+    "xai_model": "XGB",
+    "instance_id": 3543,
+    "top3_features": [
+      "yr",
+      "hr",
+      "hum"
+    ],
+    "faithfulness": 1.0,
+    "llm_assessments": [
+      {
+        "feature": "yr",
+        "mentioned": true,
+        "direction_correct": true
+      },
+      {
+        "feature": "hr",
+        "mentioned": true,
+        "direction_correct": true
+      },
+      {
+        "feature": "hum",
+        "mentioned": true,
+        "direction_correct": true
+      }
+    ]
+  },
+  {
+    "pipeline_label": "JSON→Text",
+    "xai_model": "XGB",
+    "instance_id": 3847,
+    "top3_features": [
+      "hr",
+      "weekday",
+      "yr"
+    ],
+    "faithfulness": 0.667,
+    "llm_assessments": [
+      {
+        "feature": "hr",
+        "mentioned": true,
+        "direction_correct": true
+      },
+      {
+        "feature": "weekday",
+        "mentioned": true,
+        "direction_correct": true
+      },
+      {
+        "feature": "yr",
+        "mentioned": false,
+        "direction_correct": null
+      }
+    ]
+  },
+  {
+    "pipeline_label": "JSON→Text",
+    "xai_model": "XGB",
+    "instance_id": 4454,
+    "top3_features": [
+      "hr",
+      "temp",
+      "yr"
+    ],
+    "faithfulness": 1.0,
+    "llm_assessments": [
+      {
+        "feature": "hr",
+        "mentioned": true,
+        "direction_correct": true
+      },
+      {
+        "feature": "temp",
+        "mentioned": true,
+        "direction_correct": true
+      },
+      {
+        "feature": "yr",
+        "mentioned": true,
+        "direction_correct": true
+      }
+    ]
+  },
+  {
+    "pipeline_label": "JSON→Text",
+    "xai_model": "EBM",
+    "instance_id": 224,
+    "top3_features": [
+      "hr",
+      "temp",
+      "yr"
+    ],
+    "faithfulness": 1.0,
+    "llm_assessments": [
+      {
+        "feature": "hr",
+        "mentioned": true,
+        "direction_correct": true
+      },
+      {
+        "feature": "temp",
+        "mentioned": true,
+        "direction_correct": true
+      },
+      {
+        "feature": "yr",
+        "mentioned": true,
+        "direction_correct": true
+      }
+    ]
+  },
+  {
+    "pipeline_label": "JSON→Text",
+    "xai_model": "EBM",
+    "instance_id": 580,
+    "top3_features": [
+      "yr",
+      "temp",
+      "hr"
+    ],
+    "faithfulness": 1.0,
+    "llm_assessments": [
+      {
+        "feature": "yr",
+        "mentioned": true,
+        "direction_correct": true
+      },
+      {
+        "feature": "temp",
+        "mentioned": true,
+        "direction_correct": true
+      },
+      {
+        "feature": "hr",
+        "mentioned": true,
+        "direction_correct": true
+      }
+    ]
+  },
+  {
+    "pipeline_label": "JSON→Text",
+    "xai_model": "EBM",
+    "instance_id": 1041,
+    "top3_features": [
+      "hr",
+      "yr",
+      "hum"
+    ],
+    "faithfulness": 1.0,
+    "llm_assessments": [
+      {
+        "feature": "hr",
+        "mentioned": true,
+        "direction_correct": true
+      },
+      {
+        "feature": "yr",
+        "mentioned": true,
+        "direction_correct": true
+      },
+      {
+        "feature": "hum",
+        "mentioned": true,
+        "direction_correct": true
+      }
+    ]
+  },
+  {
+    "pipeline_label": "JSON→Text",
+    "xai_model": "EBM",
+    "instance_id": 1481,
+    "top3_features": [
+      "hr",
+      "yr",
+      "hum"
+    ],
+    "faithfulness": 0.667,
+    "llm_assessments": [
+      {
+        "feature": "hr",
+        "mentioned": true,
+        "direction_correct": true
+      },
+      {
+        "feature": "yr",
+        "mentioned": true,
+        "direction_correct": true
+      },
+      {
+        "feature": "hum",
+        "mentioned": false,
+        "direction_correct": null
+      }
+    ]
+  },
+  {
+    "pipeline_label": "JSON→Text",
+    "xai_model": "EBM",
+    "instance_id": 1677,
+    "top3_features": [
+      "hr",
+      "temp",
+      "yr"
+    ],
+    "faithfulness": 1.0,
+    "llm_assessments": [
+      {
+        "feature": "hr",
+        "mentioned": true,
+        "direction_correct": true
+      },
+      {
+        "feature": "temp",
+        "mentioned": true,
+        "direction_correct": true
+      },
+      {
+        "feature": "yr",
+        "mentioned": true,
+        "direction_correct": true
+      }
+    ]
+  },
+  {
+    "pipeline_label": "JSON→Text",
+    "xai_model": "EBM",
+    "instance_id": 2058,
+    "top3_features": [
+      "hr",
+      "temp",
+      "yr"
+    ],
+    "faithfulness": 1.0,
+    "llm_assessments": [
+      {
+        "feature": "hr",
+        "mentioned": true,
+        "direction_correct": true
+      },
+      {
+        "feature": "temp",
+        "mentioned": true,
+        "direction_correct": true
+      },
+      {
+        "feature": "yr",
+        "mentioned": true,
+        "direction_correct": true
+      }
+    ]
+  },
+  {
+    "pipeline_label": "JSON→Text",
+    "xai_model": "EBM",
+    "instance_id": 2510,
+    "top3_features": [
+      "hr",
+      "yr",
+      "temp"
+    ],
+    "faithfulness": 1.0,
+    "llm_assessments": [
+      {
+        "feature": "hr",
+        "mentioned": true,
+        "direction_correct": true
+      },
+      {
+        "feature": "yr",
+        "mentioned": true,
+        "direction_correct": true
+      },
+      {
+        "feature": "temp",
+        "mentioned": true,
+        "direction_correct": true
+      }
+    ]
+  },
+  {
+    "pipeline_label": "JSON→Text",
+    "xai_model": "EBM",
+    "instance_id": 3543,
+    "top3_features": [
+      "hr",
+      "yr",
+      "hum"
+    ],
+    "faithfulness": 1.0,
+    "llm_assessments": [
+      {
+        "feature": "hr",
+        "mentioned": true,
+        "direction_correct": true
+      },
+      {
+        "feature": "yr",
+        "mentioned": true,
+        "direction_correct": true
+      },
+      {
+        "feature": "hum",
+        "mentioned": true,
+        "direction_correct": true
+      }
+    ]
+  },
+  {
+    "pipeline_label": "JSON→Text",
+    "xai_model": "EBM",
+    "instance_id": 3847,
+    "top3_features": [
+      "hr",
+      "temp",
+      "yr"
+    ],
+    "faithfulness": 1.0,
+    "llm_assessments": [
+      {
+        "feature": "hr",
+        "mentioned": true,
+        "direction_correct": true
+      },
+      {
+        "feature": "temp",
+        "mentioned": true,
+        "direction_correct": true
+      },
+      {
+        "feature": "yr",
+        "mentioned": true,
+        "direction_correct": true
+      }
+    ]
+  },
+  {
+    "pipeline_label": "JSON→Text",
+    "xai_model": "EBM",
+    "instance_id": 4454,
+    "top3_features": [
+      "hr",
+      "temp",
+      "yr"
+    ],
+    "faithfulness": 1.0,
+    "llm_assessments": [
+      {
+        "feature": "hr",
+        "mentioned": true,
+        "direction_correct": true
+      },
+      {
+        "feature": "temp",
+        "mentioned": true,
+        "direction_correct": true
+      },
+      {
+        "feature": "yr",
+        "mentioned": true,
+        "direction_correct": true
+      }
+    ]
+  },
+  {
+    "pipeline_label": "Vision",
+    "xai_model": "XGB",
+    "instance_id": 224,
+    "top3_features": [
+      "temp",
+      "hr",
+      "mnth"
+    ],
+    "faithfulness": 1.0,
+    "llm_assessments": [
+      {
+        "feature": "temp",
+        "mentioned": true,
+        "direction_correct": true
+      },
+      {
+        "feature": "hr",
+        "mentioned": true,
+        "direction_correct": true
+      },
+      {
+        "feature": "mnth",
+        "mentioned": true,
+        "direction_correct": true
+      }
+    ]
+  },
+  {
+    "pipeline_label": "Vision",
+    "xai_model": "XGB",
+    "instance_id": 580,
+    "top3_features": [
+      "hr",
+      "yr",
+      "mnth"
+    ],
+    "faithfulness": 1.0,
+    "llm_assessments": [
+      {
+        "feature": "hr",
+        "mentioned": true,
+        "direction_correct": true
+      },
+      {
+        "feature": "yr",
+        "mentioned": true,
+        "direction_correct": true
+      },
+      {
+        "feature": "mnth",
+        "mentioned": true,
+        "direction_correct": true
+      }
+    ]
+  },
+  {
+    "pipeline_label": "Vision",
+    "xai_model": "XGB",
+    "instance_id": 1041,
+    "top3_features": [
+      "hr",
+      "yr",
+      "weekday"
+    ],
+    "faithfulness": 1.0,
+    "llm_assessments": [
+      {
+        "feature": "hr",
+        "mentioned": true,
+        "direction_correct": true
+      },
+      {
+        "feature": "yr",
+        "mentioned": true,
+        "direction_correct": true
+      },
+      {
+        "feature": "weekday",
+        "mentioned": true,
+        "direction_correct": true
+      }
+    ]
+  },
+  {
+    "pipeline_label": "Vision",
+    "xai_model": "XGB",
+    "instance_id": 1481,
+    "top3_features": [
+      "hr",
+      "yr",
+      "hum"
+    ],
+    "faithfulness": 0.833,
+    "llm_assessments": [
+      {
+        "feature": "hr",
+        "mentioned": true,
+        "direction_correct": true
+      },
+      {
+        "feature": "yr",
+        "mentioned": true,
+        "direction_correct": true
+      },
+      {
+        "feature": "hum",
+        "mentioned": true,
+        "direction_correct": false
+      }
+    ]
+  },
+  {
+    "pipeline_label": "Vision",
+    "xai_model": "XGB",
+    "instance_id": 1677,
+    "top3_features": [
+      "hr",
+      "yr",
+      "temp"
+    ],
+    "faithfulness": 1.0,
+    "llm_assessments": [
+      {
+        "feature": "hr",
+        "mentioned": true,
+        "direction_correct": true
+      },
+      {
+        "feature": "yr",
+        "mentioned": true,
+        "direction_correct": true
+      },
+      {
+        "feature": "temp",
+        "mentioned": true,
+        "direction_correct": true
+      }
+    ]
+  },
+  {
+    "pipeline_label": "Vision",
+    "xai_model": "XGB",
+    "instance_id": 2058,
+    "top3_features": [
+      "yr",
+      "temp",
+      "hum"
+    ],
+    "faithfulness": 1.0,
+    "llm_assessments": [
+      {
+        "feature": "yr",
+        "mentioned": true,
+        "direction_correct": true
+      },
+      {
+        "feature": "temp",
+        "mentioned": true,
+        "direction_correct": true
+      },
+      {
+        "feature": "hum",
+        "mentioned": true,
+        "direction_correct": true
+      }
+    ]
+  },
+  {
+    "pipeline_label": "Vision",
+    "xai_model": "XGB",
+    "instance_id": 2510,
+    "top3_features": [
+      "hr",
+      "yr",
+      "temp"
+    ],
+    "faithfulness": 1.0,
+    "llm_assessments": [
+      {
+        "feature": "hr",
+        "mentioned": true,
+        "direction_correct": true
+      },
+      {
+        "feature": "yr",
+        "mentioned": true,
+        "direction_correct": true
+      },
+      {
+        "feature": "temp",
+        "mentioned": true,
+        "direction_correct": true
+      }
+    ]
+  },
+  {
+    "pipeline_label": "Vision",
+    "xai_model": "XGB",
+    "instance_id": 3543,
+    "top3_features": [
+      "yr",
+      "hr",
+      "hum"
+    ],
+    "faithfulness": 0.833,
+    "llm_assessments": [
+      {
+        "feature": "yr",
+        "mentioned": true,
+        "direction_correct": true
+      },
+      {
+        "feature": "hr",
+        "mentioned": true,
+        "direction_correct": true
+      },
+      {
+        "feature": "hum",
+        "mentioned": true,
+        "direction_correct": false
+      }
+    ]
+  },
+  {
+    "pipeline_label": "Vision",
+    "xai_model": "XGB",
+    "instance_id": 3847,
+    "top3_features": [
+      "hr",
+      "weekday",
+      "yr"
+    ],
+    "faithfulness": 1.0,
+    "llm_assessments": [
+      {
+        "feature": "hr",
+        "mentioned": true,
+        "direction_correct": true
+      },
+      {
+        "feature": "weekday",
+        "mentioned": true,
+        "direction_correct": true
+      },
+      {
+        "feature": "yr",
+        "mentioned": true,
+        "direction_correct": true
+      }
+    ]
+  },
+  {
+    "pipeline_label": "Vision",
+    "xai_model": "XGB",
+    "instance_id": 4454,
+    "top3_features": [
+      "hr",
+      "temp",
+      "yr"
+    ],
+    "faithfulness": 1.0,
+    "llm_assessments": [
+      {
+        "feature": "hr",
+        "mentioned": true,
+        "direction_correct": true
+      },
+      {
+        "feature": "temp",
+        "mentioned": true,
+        "direction_correct": true
+      },
+      {
+        "feature": "yr",
+        "mentioned": true,
+        "direction_correct": true
+      }
+    ]
+  },
+  {
+    "pipeline_label": "Vision",
+    "xai_model": "EBM",
+    "instance_id": 224,
+    "top3_features": [
+      "hr",
+      "temp",
+      "yr"
+    ],
+    "faithfulness": 1.0,
+    "llm_assessments": [
+      {
+        "feature": "hr",
+        "mentioned": true,
+        "direction_correct": true
+      },
+      {
+        "feature": "temp",
+        "mentioned": true,
+        "direction_correct": true
+      },
+      {
+        "feature": "yr",
+        "mentioned": true,
+        "direction_correct": true
+      }
+    ]
+  },
+  {
+    "pipeline_label": "Vision",
+    "xai_model": "EBM",
+    "instance_id": 580,
+    "top3_features": [
+      "yr",
+      "temp",
+      "hr"
+    ],
+    "faithfulness": 1.0,
+    "llm_assessments": [
+      {
+        "feature": "yr",
+        "mentioned": true,
+        "direction_correct": true
+      },
+      {
+        "feature": "temp",
+        "mentioned": true,
+        "direction_correct": true
+      },
+      {
+        "feature": "hr",
+        "mentioned": true,
+        "direction_correct": true
+      }
+    ]
+  },
+  {
+    "pipeline_label": "Vision",
+    "xai_model": "EBM",
+    "instance_id": 1041,
+    "top3_features": [
+      "hr",
+      "yr",
+      "hum"
+    ],
+    "faithfulness": 1.0,
+    "llm_assessments": [
+      {
+        "feature": "hr",
+        "mentioned": true,
+        "direction_correct": true
+      },
+      {
+        "feature": "yr",
+        "mentioned": true,
+        "direction_correct": true
+      },
+      {
+        "feature": "hum",
+        "mentioned": true,
+        "direction_correct": true
+      }
+    ]
+  },
+  {
+    "pipeline_label": "Vision",
+    "xai_model": "EBM",
+    "instance_id": 1481,
+    "top3_features": [
+      "hr",
+      "yr",
+      "hum"
+    ],
+    "faithfulness": 1.0,
+    "llm_assessments": [
+      {
+        "feature": "hr",
+        "mentioned": true,
+        "direction_correct": true
+      },
+      {
+        "feature": "yr",
+        "mentioned": true,
+        "direction_correct": true
+      },
+      {
+        "feature": "hum",
+        "mentioned": true,
+        "direction_correct": true
+      }
+    ]
+  },
+  {
+    "pipeline_label": "Vision",
+    "xai_model": "EBM",
+    "instance_id": 1677,
+    "top3_features": [
+      "hr",
+      "temp",
+      "yr"
+    ],
+    "faithfulness": 1.0,
+    "llm_assessments": [
+      {
+        "feature": "hr",
+        "mentioned": true,
+        "direction_correct": true
+      },
+      {
+        "feature": "temp",
+        "mentioned": true,
+        "direction_correct": true
+      },
+      {
+        "feature": "yr",
+        "mentioned": true,
+        "direction_correct": true
+      }
+    ]
+  },
+  {
+    "pipeline_label": "Vision",
+    "xai_model": "EBM",
+    "instance_id": 2058,
+    "top3_features": [
+      "hr",
+      "temp",
+      "yr"
+    ],
+    "faithfulness": 1.0,
+    "llm_assessments": [
+      {
+        "feature": "hr",
+        "mentioned": true,
+        "direction_correct": true
+      },
+      {
+        "feature": "temp",
+        "mentioned": true,
+        "direction_correct": true
+      },
+      {
+        "feature": "yr",
+        "mentioned": true,
+        "direction_correct": true
+      }
+    ]
+  },
+  {
+    "pipeline_label": "Vision",
+    "xai_model": "EBM",
+    "instance_id": 2510,
+    "top3_features": [
+      "hr",
+      "yr",
+      "temp"
+    ],
+    "faithfulness": 0.667,
+    "llm_assessments": [
+      {
+        "feature": "hr",
+        "mentioned": true,
+        "direction_correct": true
+      },
+      {
+        "feature": "yr",
+        "mentioned": true,
+        "direction_correct": true
+      },
+      {
+        "feature": "temp",
+        "mentioned": false,
+        "direction_correct": null
+      }
+    ]
+  },
+  {
+    "pipeline_label": "Vision",
+    "xai_model": "EBM",
+    "instance_id": 3543,
+    "top3_features": [
+      "hr",
+      "yr",
+      "hum"
+    ],
+    "faithfulness": 0.833,
+    "llm_assessments": [
+      {
+        "feature": "hr",
+        "mentioned": true,
+        "direction_correct": true
+      },
+      {
+        "feature": "yr",
+        "mentioned": true,
+        "direction_correct": true
+      },
+      {
+        "feature": "hum",
+        "mentioned": true,
+        "direction_correct": false
+      }
+    ]
+  },
+  {
+    "pipeline_label": "Vision",
+    "xai_model": "EBM",
+    "instance_id": 3847,
+    "top3_features": [
+      "hr",
+      "temp",
+      "yr"
+    ],
+    "faithfulness": 1.0,
+    "llm_assessments": [
+      {
+        "feature": "hr",
+        "mentioned": true,
+        "direction_correct": true
+      },
+      {
+        "feature": "temp",
+        "mentioned": true,
+        "direction_correct": true
+      },
+      {
+        "feature": "yr",
+        "mentioned": true,
+        "direction_correct": true
+      }
+    ]
+  },
+  {
+    "pipeline_label": "Vision",
+    "xai_model": "EBM",
+    "instance_id": 4454,
+    "top3_features": [
+      "hr",
+      "temp",
+      "yr"
+    ],
+    "faithfulness": 1.0,
+    "llm_assessments": [
+      {
+        "feature": "hr",
+        "mentioned": true,
+        "direction_correct": true
+      },
+      {
+        "feature": "temp",
+        "mentioned": true,
+        "direction_correct": true
+      },
+      {
+        "feature": "yr",
+        "mentioned": true,
+        "direction_correct": true
+      }
+    ]
+  },
+  {
+    "pipeline_label": "Tool-Use",
+    "xai_model": "XGB",
+    "instance_id": 224,
+    "top3_features": [
+      "temp",
+      "hr",
+      "mnth"
+    ],
+    "faithfulness": 1.0,
+    "llm_assessments": [
+      {
+        "feature": "temp",
+        "mentioned": true,
+        "direction_correct": true
+      },
+      {
+        "feature": "hr",
+        "mentioned": true,
+        "direction_correct": true
+      },
+      {
+        "feature": "mnth",
+        "mentioned": true,
+        "direction_correct": true
+      }
+    ]
+  },
+  {
+    "pipeline_label": "Tool-Use",
+    "xai_model": "XGB",
+    "instance_id": 580,
+    "top3_features": [
+      "hr",
+      "yr",
+      "mnth"
+    ],
+    "faithfulness": 1.0,
+    "llm_assessments": [
+      {
+        "feature": "hr",
+        "mentioned": true,
+        "direction_correct": true
+      },
+      {
+        "feature": "yr",
+        "mentioned": true,
+        "direction_correct": true
+      },
+      {
+        "feature": "mnth",
+        "mentioned": true,
+        "direction_correct": true
+      }
+    ]
+  },
+  {
+    "pipeline_label": "Tool-Use",
+    "xai_model": "XGB",
+    "instance_id": 1041,
+    "top3_features": [
+      "hr",
+      "yr",
+      "weekday"
+    ],
+    "faithfulness": 0.833,
+    "llm_assessments": [
+      {
+        "feature": "hr",
+        "mentioned": true,
+        "direction_correct": true
+      },
+      {
+        "feature": "yr",
+        "mentioned": true,
+        "direction_correct": false
+      },
+      {
+        "feature": "weekday",
+        "mentioned": true,
+        "direction_correct": true
+      }
+    ]
+  },
+  {
+    "pipeline_label": "Tool-Use",
+    "xai_model": "XGB",
+    "instance_id": 1481,
+    "top3_features": [
+      "hr",
+      "yr",
+      "hum"
+    ],
+    "faithfulness": 0.667,
+    "llm_assessments": [
+      {
+        "feature": "hr",
+        "mentioned": true,
+        "direction_correct": true
+      },
+      {
+        "feature": "yr",
+        "mentioned": true,
+        "direction_correct": true
+      },
+      {
+        "feature": "hum",
+        "mentioned": false,
+        "direction_correct": null
+      }
+    ]
+  },
+  {
+    "pipeline_label": "Tool-Use",
+    "xai_model": "XGB",
+    "instance_id": 1677,
+    "top3_features": [
+      "hr",
+      "yr",
+      "temp"
+    ],
+    "faithfulness": 1.0,
+    "llm_assessments": [
+      {
+        "feature": "hr",
+        "mentioned": true,
+        "direction_correct": true
+      },
+      {
+        "feature": "yr",
+        "mentioned": true,
+        "direction_correct": true
+      },
+      {
+        "feature": "temp",
+        "mentioned": true,
+        "direction_correct": true
+      }
+    ]
+  },
+  {
+    "pipeline_label": "Tool-Use",
+    "xai_model": "XGB",
+    "instance_id": 2058,
+    "top3_features": [
+      "yr",
+      "temp",
+      "hum"
+    ],
+    "faithfulness": 1.0,
+    "llm_assessments": [
+      {
+        "feature": "yr",
+        "mentioned": true,
+        "direction_correct": true
+      },
+      {
+        "feature": "temp",
+        "mentioned": true,
+        "direction_correct": true
+      },
+      {
+        "feature": "hum",
+        "mentioned": true,
+        "direction_correct": true
+      }
+    ]
+  },
+  {
+    "pipeline_label": "Tool-Use",
+    "xai_model": "XGB",
+    "instance_id": 2510,
+    "top3_features": [
+      "hr",
+      "yr",
+      "temp"
+    ],
+    "faithfulness": 1.0,
+    "llm_assessments": [
+      {
+        "feature": "hr",
+        "mentioned": true,
+        "direction_correct": true
+      },
+      {
+        "feature": "yr",
+        "mentioned": true,
+        "direction_correct": true
+      },
+      {
+        "feature": "temp",
+        "mentioned": true,
+        "direction_correct": true
+      }
+    ]
+  },
+  {
+    "pipeline_label": "Tool-Use",
+    "xai_model": "XGB",
+    "instance_id": 3543,
+    "top3_features": [
+      "yr",
+      "hr",
+      "hum"
+    ],
+    "faithfulness": 0.833,
+    "llm_assessments": [
+      {
+        "feature": "yr",
+        "mentioned": true,
+        "direction_correct": true
+      },
+      {
+        "feature": "hr",
+        "mentioned": true,
+        "direction_correct": true
+      },
+      {
+        "feature": "hum",
+        "mentioned": true,
+        "direction_correct": false
+      }
+    ]
+  },
+  {
+    "pipeline_label": "Tool-Use",
+    "xai_model": "XGB",
+    "instance_id": 3847,
+    "top3_features": [
+      "hr",
+      "weekday",
+      "yr"
+    ],
+    "faithfulness": 0.667,
+    "llm_assessments": [
+      {
+        "feature": "hr",
+        "mentioned": true,
+        "direction_correct": true
+      },
+      {
+        "feature": "weekday",
+        "mentioned": true,
+        "direction_correct": true
+      },
+      {
+        "feature": "yr",
+        "mentioned": false,
+        "direction_correct": null
+      }
+    ]
+  },
+  {
+    "pipeline_label": "Tool-Use",
+    "xai_model": "XGB",
+    "instance_id": 4454,
+    "top3_features": [
+      "hr",
+      "temp",
+      "yr"
+    ],
+    "faithfulness": 0.667,
+    "llm_assessments": [
+      {
+        "feature": "hr",
+        "mentioned": true,
+        "direction_correct": true
+      },
+      {
+        "feature": "temp",
+        "mentioned": true,
+        "direction_correct": true
+      },
+      {
+        "feature": "yr",
+        "mentioned": false,
+        "direction_correct": null
+      }
+    ]
+  },
+  {
+    "pipeline_label": "Tool-Use",
+    "xai_model": "EBM",
+    "instance_id": 224,
+    "top3_features": [
+      "hr",
+      "temp",
+      "yr"
+    ],
+    "faithfulness": 1.0,
+    "llm_assessments": [
+      {
+        "feature": "hr",
+        "mentioned": true,
+        "direction_correct": true
+      },
+      {
+        "feature": "temp",
+        "mentioned": true,
+        "direction_correct": true
+      },
+      {
+        "feature": "yr",
+        "mentioned": true,
+        "direction_correct": true
+      }
+    ]
+  },
+  {
+    "pipeline_label": "Tool-Use",
+    "xai_model": "EBM",
+    "instance_id": 580,
+    "top3_features": [
+      "yr",
+      "temp",
+      "hr"
+    ],
+    "faithfulness": 1.0,
+    "llm_assessments": [
+      {
+        "feature": "yr",
+        "mentioned": true,
+        "direction_correct": true
+      },
+      {
+        "feature": "temp",
+        "mentioned": true,
+        "direction_correct": true
+      },
+      {
+        "feature": "hr",
+        "mentioned": true,
+        "direction_correct": true
+      }
+    ]
+  },
+  {
+    "pipeline_label": "Tool-Use",
+    "xai_model": "EBM",
+    "instance_id": 1041,
+    "top3_features": [
+      "hr",
+      "yr",
+      "hum"
+    ],
+    "faithfulness": 1.0,
+    "llm_assessments": [
+      {
+        "feature": "hr",
+        "mentioned": true,
+        "direction_correct": true
+      },
+      {
+        "feature": "yr",
+        "mentioned": true,
+        "direction_correct": true
+      },
+      {
+        "feature": "hum",
+        "mentioned": true,
+        "direction_correct": true
+      }
+    ]
+  },
+  {
+    "pipeline_label": "Tool-Use",
+    "xai_model": "EBM",
+    "instance_id": 1481,
+    "top3_features": [
+      "hr",
+      "yr",
+      "hum"
+    ],
+    "faithfulness": 1.0,
+    "llm_assessments": [
+      {
+        "feature": "hr",
+        "mentioned": true,
+        "direction_correct": true
+      },
+      {
+        "feature": "yr",
+        "mentioned": true,
+        "direction_correct": true
+      },
+      {
+        "feature": "hum",
+        "mentioned": true,
+        "direction_correct": true
+      }
+    ]
+  },
+  {
+    "pipeline_label": "Tool-Use",
+    "xai_model": "EBM",
+    "instance_id": 1677,
+    "top3_features": [
+      "hr",
+      "temp",
+      "yr"
+    ],
+    "faithfulness": 1.0,
+    "llm_assessments": [
+      {
+        "feature": "hr",
+        "mentioned": true,
+        "direction_correct": true
+      },
+      {
+        "feature": "temp",
+        "mentioned": true,
+        "direction_correct": true
+      },
+      {
+        "feature": "yr",
+        "mentioned": true,
+        "direction_correct": true
+      }
+    ]
+  },
+  {
+    "pipeline_label": "Tool-Use",
+    "xai_model": "EBM",
+    "instance_id": 2058,
+    "top3_features": [
+      "hr",
+      "temp",
+      "yr"
+    ],
+    "faithfulness": 1.0,
+    "llm_assessments": [
+      {
+        "feature": "hr",
+        "mentioned": true,
+        "direction_correct": true
+      },
+      {
+        "feature": "temp",
+        "mentioned": true,
+        "direction_correct": true
+      },
+      {
+        "feature": "yr",
+        "mentioned": true,
+        "direction_correct": true
+      }
+    ]
+  },
+  {
+    "pipeline_label": "Tool-Use",
+    "xai_model": "EBM",
+    "instance_id": 2510,
+    "top3_features": [
+      "hr",
+      "yr",
+      "temp"
+    ],
+    "faithfulness": 0.667,
+    "llm_assessments": [
+      {
+        "feature": "hr",
+        "mentioned": true,
+        "direction_correct": true
+      },
+      {
+        "feature": "yr",
+        "mentioned": true,
+        "direction_correct": true
+      },
+      {
+        "feature": "temp",
+        "mentioned": false,
+        "direction_correct": null
+      }
+    ]
+  },
+  {
+    "pipeline_label": "Tool-Use",
+    "xai_model": "EBM",
+    "instance_id": 3543,
+    "top3_features": [
+      "hr",
+      "yr",
+      "hum"
+    ],
+    "faithfulness": 1.0,
+    "llm_assessments": [
+      {
+        "feature": "hr",
+        "mentioned": true,
+        "direction_correct": true
+      },
+      {
+        "feature": "yr",
+        "mentioned": true,
+        "direction_correct": true
+      },
+      {
+        "feature": "hum",
+        "mentioned": true,
+        "direction_correct": true
+      }
+    ]
+  },
+  {
+    "pipeline_label": "Tool-Use",
+    "xai_model": "EBM",
+    "instance_id": 3847,
+    "top3_features": [
+      "hr",
+      "temp",
+      "yr"
+    ],
+    "faithfulness": 1.0,
+    "llm_assessments": [
+      {
+        "feature": "hr",
+        "mentioned": true,
+        "direction_correct": true
+      },
+      {
+        "feature": "temp",
+        "mentioned": true,
+        "direction_correct": true
+      },
+      {
+        "feature": "yr",
+        "mentioned": true,
+        "direction_correct": true
+      }
+    ]
+  },
+  {
+    "pipeline_label": "Tool-Use",
+    "xai_model": "EBM",
+    "instance_id": 4454,
+    "top3_features": [
+      "hr",
+      "temp",
+      "yr"
+    ],
+    "faithfulness": 1.0,
+    "llm_assessments": [
+      {
+        "feature": "hr",
+        "mentioned": true,
+        "direction_correct": true
+      },
+      {
+        "feature": "temp",
+        "mentioned": true,
+        "direction_correct": true
+      },
+      {
+        "feature": "yr",
+        "mentioned": true,
+        "direction_correct": true
+      }
+    ]
+  }
+]
