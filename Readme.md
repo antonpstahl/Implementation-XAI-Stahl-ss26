@@ -50,7 +50,7 @@ All pipelines use `claude-sonnet-4-6` and produce three-part explanations (`[PRE
 - **`06` Tool-Use** — the LLM retrieves data itself through 8 defined tools (feature schema, importance, prediction, SHAP values, partial dependence, value context, similar instances, counterfactuals) in an agentic loop — averaging **5.85 tool calls** per explanation.
 
 **5 — Evaluation** (`07_Evaluation.ipynb`, `08_Evaluation_Ichmoukhamedov.ipynb`)
-Quantitative cost/latency, keyword-based faithfulness, LLM-as-judge across three judge versions (uncalibrated Sonnet, calibrated-rubric Sonnet, independent Opus), and formal faithfulness metrics after Ichmoukhamedov et al. (Rank / Sign / Value Agreement).
+Quantitative cost/latency, LLM-as-judge across three judge versions (uncalibrated Sonnet, calibrated-rubric Sonnet, independent Opus), and formal faithfulness metrics after Ichmoukhamedov et al. (Rank / Sign / Value Agreement).
 
 | Pipeline   | Avg words | Input tok. | Output tok. | Cost (20 calls) | Avg latency |
 | ---------- | --------- | ---------- | ----------- | --------------- | ----------- |
