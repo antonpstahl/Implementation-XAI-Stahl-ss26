@@ -210,7 +210,7 @@ nicht belegbar → strukturell niedrigere Scores trotz korrekter Inhalte.
 
 ### Ichmoukhamedov-Faithfulness (`08_Evaluation_Ichmoukhamedov.ipynb`)
 
-Formale Faithfulness-Metriken nach Ichmoukhamedov et al. (2021):
+Formale Faithfulness-Metriken nach Ichmoukhamedov et al. (2024):
 - **RA** (Rank Agreement): Übereinstimmung der Feature-Rangfolge zwischen Modell und Erklärung
 - **SA** (Sign Agreement): Korrekte Wirkungsrichtung (positiv/negativ)
 - **VA** (Value Agreement): Numerische Nähe der genannten Beitragswerte
