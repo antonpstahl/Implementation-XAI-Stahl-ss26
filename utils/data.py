@@ -13,9 +13,10 @@ from __future__ import annotations
 from pathlib import Path
 from typing import Tuple
 
+import numpy as np
 import pandas as pd
 
-from . import DATA_DIR
+from . import DATA_DIR, RANDOM_STATE
 
 # -----------------------------------------------------------------------------
 # Spalten-Schema
@@ -140,6 +141,70 @@ def load_train_test(
     y_test = test[TARGET_COL].copy()
 
     return X_train, y_train, X_test, y_test
+
+
+def sample_stratified(
+    X: pd.DataFrame,
+    y: pd.Series,
+    n: int,
+    seed: int = RANDOM_STATE,
+) -> list[int]:
+    """
+    Returns n unique positional row-indices sampled from (X, y) with
+    proportional stratification over cnt-quintile, time-of-day block
+    (hr // 6), and weathersit.
+
+    Each non-empty stratum receives at least 1 draw; the total is
+    adjusted to hit exactly n.  Deterministic given the same seed.
+
+    Parameters
+    ----------
+    X    : feature DataFrame (must contain 'hr' and 'weathersit')
+    y    : target Series (cnt, used to compute quintile bins)
+    n    : number of indices to draw (must be ≤ len(X))
+    seed : RNG seed for reproducibility
+
+    Returns
+    -------
+    Sorted list of n unique integer row-indices (positional, 0-based,
+    matching X.index).
+    """
+    if n > len(X):
+        raise ValueError(f"n={n} exceeds dataset size {len(X)}")
+
+    work = pd.DataFrame({
+        "cnt_q":   pd.qcut(y, q=5, labels=False, duplicates="drop"),
+        "time_b":  (X["hr"].astype(int) // 6).astype(int),
+        "weather": X["weathersit"].astype(int),
+    }, index=X.index)
+    work["stratum"] = (
+        work["cnt_q"].astype(str) + "_"
+        + work["time_b"].astype(str) + "_"
+        + work["weather"].astype(str)
+    )
+
+    strata_sizes = work.groupby("stratum").size()
+    raw = strata_sizes / len(work) * n
+
+    # When n is large enough for at least 1 per stratum, enforce it.
+    if n >= len(strata_sizes):
+        raw = raw.clip(lower=1.0)
+
+    # Hamilton largest-remainder method — guarantees total == n, all values >= 0
+    alloc = np.floor(raw).astype(int)
+    remainder = n - int(alloc.sum())
+    for s in (raw - alloc).sort_values(ascending=False).index[:remainder]:
+        alloc[s] += 1
+
+    rng = np.random.default_rng(seed)
+    result: list[int] = []
+    for stratum, k in alloc.items():
+        pool = work.index[work["stratum"] == stratum].tolist()
+        k = min(k, len(pool))
+        chosen = rng.choice(pool, size=k, replace=False).tolist()
+        result.extend(chosen)
+
+    return sorted(result)
 
 
 def get_feature_lists() -> dict[str, list[str]]:

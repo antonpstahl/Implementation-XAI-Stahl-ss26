@@ -25,6 +25,9 @@ INSTANCE_IDS = [224, 580, 1041, 1481, 1677, 2058, 2510, 3543, 3847, 4454]
 # Reproduzierbarkeit
 RANDOM_STATE = 42
 
+# Submodule-Exports (nach den Konstanten, um zirkuläre Importe zu vermeiden)
+from .data import sample_stratified  # noqa: F401  (re-export for convenience)
+
 __all__ = [
     "PROJECT_ROOT",
     "DATA_DIR",
@@ -34,4 +37,5 @@ __all__ = [
     "PROMPTS_DIR",
     "INSTANCE_IDS",
     "RANDOM_STATE",
+    "sample_stratified",
 ]
