@@ -21,7 +21,7 @@ Implementation_1205/
 ├── models/             # Trainierte Modelle (6 .pkl-Dateien)
 ├── explanations/       # SHAP-/EBM-Erklärungen als JSON + Waterfall-Plots (PNG)
 ├── results/            # Pipeline-Ausgaben, Evaluierungsplots, CSV-Zusammenfassungen
-├── notebooks/          # 8 Jupyter Notebooks (01–08)
+├── notebooks/          # 10 Jupyter Notebooks (00 Baseline, 01–08)
 └── utils/              # Python-Hilfmodule (data.py, models.py, explanations.py, llm.py, tools.py)
 ```
 
@@ -81,10 +81,12 @@ Zwei Modellklassen wurden jeweils mit drei Verlustfunktionen trainiert:
 
 | Option | Modell | RMSE | MAE | R² | Poisson-Dev. | Neg. Vorhersagen |
 |---|---|---|---|---|---|---|
-| Squared Error | XGB | 39,13 | 24,31 | 0,952 | 12,03 | 108 |
-| Squared Error | EBM | 55,31 | 36,19 | 0,903 | 59,99 | 358 |
-| **Poisson-Log** | **XGB** | **39,01** | **23,68** | **0,952** | **7,06** | **0** |
-| **Poisson-Log** | **EBM** | **48,37** | **27,00** | **0,926** | **9,72** | **0** |
+| Squared Error | XGB | 46,43 | 28,72 | 0,932 | 17,10 | 133 |
+| Squared Error | EBM | 59,64 | 39,69 | 0,889 | 79,63 | 411 |
+| **Poisson-Log** | **XGB** | **45,44** | **27,00** | **0,935** | **9,38** | **0** |
+| **Poisson-Log** | **EBM** | **48,20** | **28,20** | **0,927** | **10,81** | **0** |
+
+(Testset n = 5 227; Werte aus `results/model_comparison_summary.csv`.)
 
 **Gewählte Option für alle weiteren Schritte:** Poisson-Log (Option 2) — beste Poisson-Deviance,
 keine negativen Vorhersagen, physikalisch korrekte Modellierung von Zähldaten.
@@ -122,10 +124,16 @@ Für beide Modelle (XGB, EBM) wurden globale und lokale Erklärungen erstellt:
 
 ---
 
-## Schritt 4 — Drei LLM-Pipelines
+## Schritt 4 — Drei LLM-Pipelines + deterministische Baseline
 
-Alle Pipelines verwenden `claude-sonnet-4-6` und erzeugen deutsche, dreistufige Erklärungen
+Alle LLM-Pipelines verwenden `claude-sonnet-4-6` und erzeugen deutsche, dreistufige Erklärungen
 (Abschnitte `[VORHERSAGE]`, `[TREIBER]`, `[EMPFEHLUNG]`) für Mitarbeitende ohne technischen Hintergrund.
+
+### Pipeline 00 — Template-Baseline (`00_Template_Pipeline_Baseline.ipynb`)
+
+Deterministischer Textbaustein-Generator, der dieselbe Dreiteilung aus denselben SHAP-/EBM-JSONs
+ohne LLM-Aufruf befüllt. Beantwortet die Standard-Reviewer-Frage: *Was leistet das LLM über
+einen Textbaustein hinaus?*
 
 ### Pipeline 04 — JSON → Text (`04_LLM_JSON_Pipeline.ipynb`)
 
@@ -163,7 +171,7 @@ Das LLM ruft Daten selbst über definierte Tools ab (agentic loop).
 | `get_similar_instances` | K nächste Nachbarn (euklidisch, Min-Max-normiert) |
 | `get_counterfactual_prediction` | Was-wäre-wenn-Vorhersage bei geänderten Features |
 
-- **Ablauf:** Agentic loop bis `stop_reason == "end_turn"`; durchschnittlich **5,85 Tool-Calls**
+- **Ablauf:** Agentic loop bis `stop_reason == "end_turn"`; durchschnittlich **5,65 Tool-Calls**
   pro Erklärung
 
 ---
@@ -172,48 +180,57 @@ Das LLM ruft Daten selbst über definierte Tools ab (agentic loop).
 
 ### Quantitativer Vergleich
 
-| Pipeline | Ø Wörter | Ø Input-Tokens | Ø Output-Tokens | Gesamtkosten (20 Calls) | Ø Latenz |
+Mittelwerte über 20 Erklärungen pro Pipeline (2 XAI-Modelle × 10 Instanzen):
+
+| Pipeline | Ø Wörter | Ø Input-Tokens¹ | Ø Output-Tokens | Gesamtkosten (20 Calls) | Ø Latenz |
 |---|---|---|---|---|---|
-| JSON→Text | 211 | 1 837 | 511 | 0,26 USD | 12,2 s |
-| Vision | 207 | 2 187 | 512 | 0,28 USD | 12,3 s |
-| Tool-Use | 306 | 3 427 | 1 263 | 0,58 USD | 29,8 s |
+| Template | 54 | 0 | 0 | 0,00 USD | 0,0 s |
+| JSON→Text | 208 | 616 | 510 | 0,16 USD | 11,7 s |
+| Vision | 212 | 2 167 | 528 | 0,29 USD | 12,3 s |
+| Tool-Use | 305 | 3 489 | 1 225 | 0,58 USD | 28,8 s |
 
-### Faithfulness (Keyword-basiert)
+¹ *Input-Tokens sind die abgerechneten, nicht gecachten Tokens. JSON→Text cacht den System-Prompt
+(Cache-Read-Tokens, ~10 % Preis, hier nicht gezählt) — daher liegt der Wert weit unter den frisch
+übertragenen Bild-Tokens von Vision.* Werte aus `results/eval_summary.csv`.
 
-Anteil der Top-3-Features, die in der Erklärung erwähnt werden:
-
-| Pipeline | Ø Faithfulness |
-|---|---|
-| JSON→Text | **1,000** |
-| Vision | **1,000** |
-| Tool-Use | 0,984 |
+> **Hinweis zur Keyword-Faithfulness:** Die ursprüngliche keyword-basierte Faithfulness-Metrik
+> wurde entfernt — sie lag am Ceiling (0,94–1,0) und differenzierte nicht zwischen Pipelines.
+> Die Faithfulness-Bewertung stützt sich nun auf LLM-as-Judge und die formalen RA/SA/VA-Metriken.
 
 ### LLM-as-Judge (drei Judge-Versionen)
 
-**Scores 1–5 pro Kriterium:**
+**v1-Scores (Sonnet, unkalibriert) 1–5 pro Kriterium, aus `results/eval_summary.csv`:**
 
-| Pipeline | Faithfulness (v1) | Faithfulness (v2) | Faithfulness (Opus) | Clarity (v2) | Completeness (v2) |
-|---|---|---|---|---|---|
-| JSON→Text | 4,55 | 3,80 | 3,50 | 4,70 | **5,00** |
-| Tool-Use | 4,62 | **4,60** | 3,70 | 4,90 | **5,00** |
-| Vision | 4,24 | 4,40 | **4,40** | 4,70 | 4,90 |
+| Pipeline | Faithfulness | Clarity | Completeness |
+|---|---|---|---|
+| Template | **5,00** | 4,70 | 4,00 |
+| JSON→Text | 4,35 | 4,90 | **4,95** |
+| Vision | 3,80 | 4,55 | 4,75 |
+| Tool-Use | 4,40 | 3,95 | 4,90 |
 
 **Judge-Versionen:**
-- **v1** (Sonnet, unkalibriert): Ceiling-Effekt 91 % der Scores = 5; zu mildes Urteil
-- **v2** (Sonnet, kalibrierte Rubrik): 73 % Scores = 5; strukturiertere Differenzierung
-- **v3** (Opus 4.7, unabhängiges Modell): 50 % Scores = 5; strengstes Urteil;
-  Self-Preference-Bias aus v1/v2 ausgeschlossen
+- **v1** (Sonnet, unkalibriert): Ceiling-Effekt ~91 % der Scores = 5; zu mildes Urteil
+- **v2** (Sonnet, kalibrierte Rubrik): ~73 % Scores = 5; strukturiertere Differenzierung.
+  Hinweis: v2 wurde auf einem anderen (Convenience-)Sample [42, 100, 250, 500, 1337] und **ohne
+  Template** erhoben, daher nicht 1:1 mit v1/v3 vergleichbar.
+- **v3** (Opus 4.8, unabhängiges Modell): strengstes Urteil. Ein systematischer Offset Opus < Sonnet
+  ist *konsistent mit* einem Self-Preference-Bias, aber **nicht** dessen Beweis — beide Judges sind
+  Anthropic-Modelle; ein echter Cross-Vendor-Judge steht noch aus (Implementierungsplan, Phase 2).
 
-**Methodische Einschränkung Opus für Tool-Use:** Der Judge sieht keine Tool-Call-Outputs
-(PD-Kurven, Kontrafaktika); Zahlen, die das LLM korrekt per Tool abgerufen hat, gelten als
-nicht belegbar → strukturell niedrigere Scores trotz korrekter Inhalte.
+**Tool-Use-Kontext für den Judge:** v3 (Opus) erhält das vollständige Tool-Call-Transkript
+(Aufrufe + Ergebnisse) als Teil von `ground_truth`, sodass per Tool abgerufene Zahlen
+(PD-Kurven, Kontrafaktika, Perzentile) verifizierbar sind (Fix aus Plan-Phase 0).
 
 ### Ichmoukhamedov-Faithfulness (`08_Evaluation_Ichmoukhamedov.ipynb`)
 
-Formale Faithfulness-Metriken nach Ichmoukhamedov et al. (2024):
-- **RA** (Rank Agreement): Übereinstimmung der Feature-Rangfolge zwischen Modell und Erklärung
-- **SA** (Sign Agreement): Korrekte Wirkungsrichtung (positiv/negativ)
-- **VA** (Value Agreement): Numerische Nähe der genannten Beitragswerte
+Formale Faithfulness-Metriken nach Ichmoukhamedov et al. (2024), n = 10 Instanzen
+(Präzisions-artige Metriken — Selection-Bias siehe NB 08 §4.1):
+
+| Pipeline | RA (Rank) | SA (Sign) | VA (Value) |
+|---|---|---|---|
+| JSON→Text | 0,562 | 0,721 | 0,667 |
+| Tool-Use | 0,558 | 0,733 | 0,733 |
+| Vision | 0,429 | 0,679 | 0,575 |
 
 ---
 
@@ -257,21 +274,32 @@ Reproduzierbarkeit durch `RANDOM_STATE = 42`.
 
 ## Kernbefunde
 
-1. **Completeness** ist robust: Alle drei Pipelines erzielen ≥ 4,9/5 — der dreistufige
-   Aufbau (Vorhersage / Treiber / Empfehlung) wird zuverlässig eingehalten.
+> **Status dieser Befunde:** deskriptiv/explorativ. Bei n = 10–20 Erklärungen pro Pipeline,
+> ohne Repeated Sampling und ohne Inferenzstatistik sind die folgenden Unterschiede **nicht**
+> statistisch abgesichert (siehe Limitationen-Tabelle in `07_Evaluation.ipynb` §7). Richtungsweisend,
+> nicht beweisend.
 
-2. **Faithfulness** differenziert je nach Judge-Strenge: Vision ist konsistent bei ≈ 4,4,
-   während JSON→Text und Tool-Use je nach Rubrik stark variieren.
+1. **Die deterministische Template-Baseline gewinnt bei Faithfulness** (5,00 vs. 3,80–4,40 der
+   LLM-Pipelines): Sie nennt konstruktionsbedingt exakt die wahren Top-Treiber. Die LLMs tauschen
+   etwas Treue gegen reichere, lesbarere Narrative ein — das ist der eigentliche Kernbefund zur
+   Frage „Was leistet das LLM über einen Textbaustein hinaus?" und ein Trade-off, kein Gratis-Gewinn.
 
-3. **JSON→Text** ist am effizientesten (≈ 0,013 USD/Erklärung) und erreicht beim
-   unkalibrieren v1-Judge den höchsten Gesamtscore (14,30/15).
+2. **Unter den LLM-Pipelines:** Faithfulness Tool-Use (4,40) ≈ JSON→Text (4,35) > Vision (3,80) —
+   konsistent mit der formalen Rank-Agreement (Vision 0,43 vs. ~0,56). Visuelles Ablesen von
+   Balkenlängen ist strukturell ungenauer als numerischer Zugriff.
 
-4. **Tool-Use** generiert längere Erklärungen (+46 % Wörter) mit quantitativen
-   Belegen aus PD-Kurven und Kontrafaktika — zu erheblich höheren Kosten (×2,2) und
-   Latenz (×2,4).
+3. **Clarity und Completeness liegen für die LLM-Pipelines am Ceiling** (≥ 4,55 / ≥ 4,75) und
+   differenzieren nicht; die Template-Baseline fällt bei Completeness ab (4,00, dünnere Empfehlung).
 
-5. **Vision** liegt bei Kosten und Latenz nah an JSON→Text, hat aber strukturell
-   niedrigere Faithfulness-Potenziale, da Balkenlängen visuell und unscharf abgelesen werden.
+4. **JSON→Text** ist am effizientesten (≈ 0,008 USD/Erklärung, niedrigste Latenz 11,7 s) —
+   System-Prompt-Caching hält die abgerechneten Input-Tokens niedrig.
 
-6. **Self-Preference-Bias** im Judge ist messbar: Opus-Scores liegen systematisch unter
-   Sonnet-Scores bei identischer Rubrik. Der Effekt ist bei Tool-Use am stärksten.
+5. **Tool-Use** generiert die längsten Erklärungen (+47 % Wörter ggü. JSON→Text) mit quantitativen
+   Belegen aus PD-Kurven und Kontrafaktika — zu ~3,6× Kosten und ~2,5× Latenz.
+
+6. **Vision** liegt bei der Latenz nah an JSON→Text, kostet aber mehr (Bild-Tokens, kein
+   Caching-Vorteil) und hat die niedrigste Faithfulness aller Pipelines.
+
+7. **Möglicher Self-Preference-Bias:** Opus-Scores (v3) liegen systematisch unter Sonnet (v1/v2)
+   bei identischer Rubrik. Konsistent mit einem Self-Preference-Effekt, aber nicht beweisend —
+   beide Judges sind Anthropic-Modelle; ein Cross-Vendor-Judge steht aus.
