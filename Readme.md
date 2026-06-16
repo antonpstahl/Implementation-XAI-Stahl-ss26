@@ -34,10 +34,12 @@ UCI Bike Sharing dataset (17,379 hourly observations, 2011–2012). Leakage and 
 **2 — Modeling** (`02a_Modeling_AllOptions.ipynb`, `02b_Comparison.ipynb`)
 XGBoost and EBM (InterpretML), each trained with three loss functions. Poisson-log was selected for all downstream steps (best Poisson deviance, no negative predictions).
 
+<!-- AUTO-TABLE:model-metrics -->
 | Loss            | Model | RMSE  | MAE   | R²    | Poisson dev. | Neg. pred. |
 | --------------- | ----- | ----- | ----- | ----- | ------------ | ---------- |
 | Poisson-log     | XGB   | 45.44 | 27.00 | 0.935 | 9.38         | 0          |
 | Poisson-log     | EBM   | 48.20 | 28.20 | 0.927 | 10.81        | 0          |
+<!-- /AUTO-TABLE:model-metrics -->
 
 (Test set n = 5,227; values from `results/model_metrics_poisson_log.json`.)
 
@@ -57,22 +59,26 @@ Quantitative cost/latency, LLM-as-judge across three judge versions (uncalibrate
 
 Quantitative + LLM-judge (v1) summary across 20 explanations per pipeline (2 XAI models × 10 instances):
 
+<!-- AUTO-TABLE:pipeline-eval -->
 | Pipeline   | Avg words | Input tok.¹ | Output tok. | Cost (20 calls) | Avg latency | Judge Faith. | Clarity | Complete. |
 | ---------- | --------- | ----------- | ----------- | --------------- | ----------- | ------------ | ------- | --------- |
 | Template   | 54        | 0           | 0           | $0.00           | 0.0 s       | 5.00         | 4.70    | 4.00      |
 | JSON→Text  | 208       | 616         | 510         | $0.16           | 11.7 s      | 4.35         | 4.90    | 4.95      |
 | Vision     | 212       | 2,167       | 528         | $0.29           | 12.3 s      | 3.80         | 4.55    | 4.75      |
 | Tool-Use   | 305       | 3,489       | 1,225       | $0.58           | 28.8 s      | 4.40         | 3.95    | 4.90      |
+<!-- /AUTO-TABLE:pipeline-eval -->
 
 ¹ *Input tokens are the billed, non-cached count. JSON→Text caches the system prompt (cache-read tokens, billed at ~10%, are not counted here), which is why its input count is far below Vision's freshly-sent image tokens.* Values from `results/eval_summary.csv`.
 
 Formal faithfulness after Ichmoukhamedov et al. (NB 08, n = 10 instances; precision-style metrics — see limitation in NB 08 §4.1):
 
+<!-- AUTO-TABLE:faithfulness -->
 | Pipeline  | Rank Agr. | Sign Agr. | Value Agr. |
 | --------- | --------- | --------- | ---------- |
 | JSON→Text | 0.562     | 0.721     | 0.667      |
 | Tool-Use  | 0.558     | 0.733     | 0.733      |
 | Vision    | 0.429     | 0.679     | 0.575      |
+<!-- /AUTO-TABLE:faithfulness -->
 
 > **Status of these findings:** descriptive/exploratory. With n = 10–20 explanations per pipeline, no repeated sampling and no inferential statistics yet, the differences below are **not** statistically confirmed (see the limitations table in `07_Evaluation.ipynb` §7). Treat them as directional.
 
