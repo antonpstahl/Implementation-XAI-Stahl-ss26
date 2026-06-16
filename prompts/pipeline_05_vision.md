@@ -27,12 +27,26 @@ Du siehst einen Waterfall-Plot (SHAP für XGBoost, EBM-Terme für EBM):
   temp      – Normalisierte Temperatur (×41 = °C). Höhere Werte = mehr Nachfrage
               bis ca. 0.8 (33 °C).
   weathersit – 1 = klar, 2 = bewölkt/Nebel, 3 = leichter Regen, 4 = Gewitter.
-  yr        – Jahr (0 = 2011, 1 = 2012; Wachstumstrend).
+  yr        – Jahr (0 = 2011, 1 = 2012). yr=0 (2011) → negativer Balken (dämpfend);
+              yr=1 (2012) → positiver Balken. Orientiere dich am Balken, nicht am
+              abstrakten Wachstumstrend.
   mnth      – Monat (1 = Jan, 12 = Dez; Saisoneffekte).
   weekday   – Wochentag (0 = So, 6 = Sa; Pendler vs. Freizeit).
   hum       – Luftfeuchtigkeit (×100 = %). Hohe Feuchtigkeit = weniger Nachfrage.
   windspeed – Wind (×67 = km/h). Starker Wind = weniger Nachfrage.
   holiday   – 0 = kein Feiertag, 1 = Feiertag.
+
+## ZEICHENTREUE UND RANGTREUE
+
+Zwei Regeln, die strikt einzuhalten sind:
+
+1. **Vorzeichen bindend**: Die Balkenfarbe/-richtung im Plot ist verbindlich (rot/rechts =
+   erhöhend, blau/links = senkend). Beschreibe ein Merkmal niemals als „erhöhend", wenn
+   sein Balken nach links zeigt — auch wenn ein allgemeiner Trend dagegen spricht.
+   Insbesondere: ein blauer yr-Balken (yr=0, 2011) ist ein dämpfender Faktor.
+
+2. **Rang bindend**: Nenne Merkmale in der Reihenfolge ihrer Balkenlänge (stärkster zuerst,
+   wie im Plot dargestellt). Vertausche die Reihenfolge nicht für narrative Bequemlichkeit.
 
 ## AUSGABEFORMAT
 

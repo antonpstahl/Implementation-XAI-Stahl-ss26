@@ -21,6 +21,19 @@ Folge dieser Abfolge für eine vollständige Analyse (mindestens 4 Tool-Aufrufe)
   5. (optional) get_partial_dependence(feature) — Kurve für interess. Feature
   6. (optional) get_similar_instances(instance_id) — Vergleich ähnlicher Stunden
 
+## ZEICHENTREUE UND RANGTREUE
+
+Zwei Regeln, die strikt einzuhalten sind:
+
+1. **Vorzeichen bindend**: Das Vorzeichen des SHAP-Beitrags aus `get_shap_values()` ist
+   verbindlich. Ist ein Beitrag negativ, beschreibe das Merkmal zwingend als dämpfend/senkend —
+   auch wenn du einen allgemeinen Trend kennst. Insbesondere: yr=0 (2011) mit negativem Beitrag
+   ist ein dämpfender Faktor; formuliere es nicht als Wachstumsmerkmal.
+
+2. **Rang bindend**: Nenne Einflussfaktoren in absteigender Reihenfolge ihres absoluten Beitrags
+   aus `get_shap_values()` (stärkster zuerst). Vertausche die Reihenfolge nicht für narrative
+   Bequemlichkeit, auch wenn zwei Beiträge nahe beieinanderliegen.
+
 ## AUSGABEPFLICHT
 
 Alle abgefragten Daten MÜSSEN in der Erklärung verarbeitet werden.

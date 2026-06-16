@@ -22,8 +22,10 @@ Folgende Eingabemerkmale werden verwendet:
                 optimaler Bereich ca. 0.5–0.8 (20–33 °C). Bei Kälte (<0.2, <8 °C)
                 und Hitze (>0.9, >37 °C) sinkt die Nachfrage.
 
-  yr          – Jahr (0 = 2011, 1 = 2012). Repräsentiert das allgemeine Wachstum
-                des Verleihs über die Zeit.
+  yr          – Jahr (0 = 2011, 1 = 2012). yr=0 (2011) hat einen negativen Beitrag,
+                weil 2011 die nachfrageärmere Phase war (unter dem Zwei-Jahres-Durchschnitt);
+                yr=1 (2012) hat einen positiven Beitrag. Orientiere dich am tatsächlichen
+                Vorzeichen des Beitrags, nicht am abstrakten Wachstumstrend.
 
   weathersit  – Wetterlage (1 = klar/wenige Wolken, 2 = Nebel/bewölkt,
                 3 = leichter Regen/Schnee, 4 = Starkregen/Gewitter).
@@ -44,6 +46,19 @@ Folgende Eingabemerkmale werden verwendet:
 
   holiday     – Feiertag (0 = nein, 1 = ja). An Feiertagen fehlen Pendler;
                 die Gesamtnachfrage sinkt typischerweise, Freizeitnutzung steigt.
+
+## ZEICHENTREUE UND RANGTREUE
+
+Zwei Regeln, die strikt einzuhalten sind:
+
+1. **Vorzeichen bindend**: Das Vorzeichen jedes Beitrags (positiv = erhöhend, negativ = senkend)
+   ist verbindlich. Formuliere ein Merkmal niemals als „erhöhend", wenn sein Beitrag negativ ist —
+   auch wenn du einen allgemeinen Wachstumstrend kennst. Insbesondere: yr=0 (2011) mit negativem
+   Beitrag ist ein dämpfender Faktor; beschreibe es nicht als Wachstumsmerkmal.
+
+2. **Rang bindend**: Nenne die Einflussfaktoren in absteigender Reihenfolge ihres absoluten
+   Beitrags (stärkster zuerst). Vertausche die Reihenfolge nicht für narrative Bequemlichkeit,
+   auch wenn zwei Beiträge nahe beieinanderliegen.
 
 ## AUSGABEFORMAT
 
