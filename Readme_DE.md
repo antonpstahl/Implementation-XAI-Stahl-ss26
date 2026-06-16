@@ -79,12 +79,14 @@ Zwei Modellklassen wurden jeweils mit drei Verlustfunktionen trainiert:
 
 **Metriken auf dem Testset:**
 
+<!-- AUTO-TABLE:model-comparison-de -->
 | Option | Modell | RMSE | MAE | R² | Poisson-Dev. | Neg. Vorhersagen |
 |---|---|---|---|---|---|---|
 | Squared Error | XGB | 46,43 | 28,72 | 0,932 | 17,10 | 133 |
 | Squared Error | EBM | 59,64 | 39,69 | 0,889 | 79,63 | 411 |
 | **Poisson-Log** | **XGB** | **45,44** | **27,00** | **0,935** | **9,38** | **0** |
 | **Poisson-Log** | **EBM** | **48,20** | **28,20** | **0,927** | **10,81** | **0** |
+<!-- /AUTO-TABLE:model-comparison-de -->
 
 (Testset n = 5 227; Werte aus `results/model_comparison_summary.csv`.)
 
@@ -182,12 +184,14 @@ Das LLM ruft Daten selbst über definierte Tools ab (agentic loop).
 
 Mittelwerte über 20 Erklärungen pro Pipeline (2 XAI-Modelle × 10 Instanzen):
 
+<!-- AUTO-TABLE:pipeline-quant-de -->
 | Pipeline | Ø Wörter | Ø Input-Tokens¹ | Ø Output-Tokens | Gesamtkosten (20 Calls) | Ø Latenz |
 |---|---|---|---|---|---|
 | Template | 54 | 0 | 0 | 0,00 USD | 0,0 s |
 | JSON→Text | 208 | 616 | 510 | 0,16 USD | 11,7 s |
 | Vision | 212 | 2 167 | 528 | 0,29 USD | 12,3 s |
 | Tool-Use | 305 | 3 489 | 1 225 | 0,58 USD | 28,8 s |
+<!-- /AUTO-TABLE:pipeline-quant-de -->
 
 ¹ *Input-Tokens sind die abgerechneten, nicht gecachten Tokens. JSON→Text cacht den System-Prompt
 (Cache-Read-Tokens, ~10 % Preis, hier nicht gezählt) — daher liegt der Wert weit unter den frisch
@@ -201,12 +205,14 @@ Mittelwerte über 20 Erklärungen pro Pipeline (2 XAI-Modelle × 10 Instanzen):
 
 **v1-Scores (Sonnet, unkalibriert) 1–5 pro Kriterium, aus `results/eval_summary.csv`:**
 
+<!-- AUTO-TABLE:judge-scores-de -->
 | Pipeline | Faithfulness | Clarity | Completeness |
 |---|---|---|---|
 | Template | **5,00** | 4,70 | 4,00 |
 | JSON→Text | 4,35 | 4,90 | **4,95** |
 | Vision | 3,80 | 4,55 | 4,75 |
 | Tool-Use | 4,40 | 3,95 | 4,90 |
+<!-- /AUTO-TABLE:judge-scores-de -->
 
 **Judge-Versionen:**
 - **v1** (Sonnet, unkalibriert): Ceiling-Effekt ~91 % der Scores = 5; zu mildes Urteil
@@ -226,11 +232,13 @@ Mittelwerte über 20 Erklärungen pro Pipeline (2 XAI-Modelle × 10 Instanzen):
 Formale Faithfulness-Metriken nach Ichmoukhamedov et al. (2024), n = 10 Instanzen
 (Präzisions-artige Metriken — Selection-Bias siehe NB 08 §4.1):
 
+<!-- AUTO-TABLE:faithfulness-de -->
 | Pipeline | RA (Rank) | SA (Sign) | VA (Value) |
 |---|---|---|---|
 | JSON→Text | 0,562 | 0,721 | 0,667 |
 | Tool-Use | 0,558 | 0,733 | 0,733 |
 | Vision | 0,429 | 0,679 | 0,575 |
+<!-- /AUTO-TABLE:faithfulness-de -->
 
 ---
 
