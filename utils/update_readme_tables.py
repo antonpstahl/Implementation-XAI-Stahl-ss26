@@ -18,6 +18,7 @@ from __future__ import annotations
 import argparse
 import csv
 import json
+import math
 import re
 import sys
 from pathlib import Path
@@ -60,12 +61,17 @@ def _de(v: float, decimals: int = 2) -> str:
     return f"{v:.{decimals}f}".replace(".", ",")
 
 
+def _round_half_up(v: float) -> int:
+    """Round-half-up (avoids banker's rounding for .5 values)."""
+    return int(v + 0.5) if v >= 0 else -int(-v + 0.5)
+
+
 def _de_int(v: float) -> str:
-    """German locale integer: narrow no-break space as thousands separator."""
-    n = round(v)
+    """German locale integer: space as thousands separator, round-half-up."""
+    n = _round_half_up(v)
     if n >= 1000:
         high, low = divmod(n, 1000)
-        return f"{high} {low:03d}"
+        return f"{high} {low:03d}"
     return str(n)
 
 
@@ -124,11 +130,11 @@ def gen_pipeline_eval_en() -> str:
     rows = []
     for pl in _PIPELINE_ORDER:
         r = data[pl]
-        tok_in = round(float(r["Tokens_in"]))
-        tok_out = round(float(r["Tokens_out"]))
+        tok_in = _round_half_up(float(r["Tokens_in"]))
+        tok_out = _round_half_up(float(r["Tokens_out"]))
         rows.append([
             pl,
-            str(round(float(r["Wörter"]))),
+            str(_round_half_up(float(r["Wörter"]))),
             f"{tok_in:,}",
             f"{tok_out:,}",
             f"${float(r['Kosten_USD']):.2f}",
@@ -202,16 +208,16 @@ def gen_pipeline_quant_de() -> str:
     rows = []
     for pl in _PIPELINE_ORDER:
         r = data[pl]
-        tok_in = round(float(r["Tokens_in"]))
-        tok_out = round(float(r["Tokens_out"]))
+        tok_in = _round_half_up(float(r["Tokens_in"]))
+        tok_out = _round_half_up(float(r["Tokens_out"]))
         cost = float(r["Kosten_USD"])
         rows.append([
             pl,
-            str(round(float(r["Wörter"]))),
+            str(_round_half_up(float(r["Wörter"]))),
             _de_int(tok_in),
             _de_int(tok_out),
             f"{_de(cost)} USD",
-            f"{float(r['Zeit_s']):.1f} s",
+            f"{_de(float(r['Zeit_s']), 1)} s",
         ])
     return _minimal_table(headers, rows)
 
