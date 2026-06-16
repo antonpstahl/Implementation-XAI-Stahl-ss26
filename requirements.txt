@@ -35,3 +35,6 @@ ipykernel==6.29.5
 
 # --- Deep Learning (Notebook 08) ---
 torch==2.8.0
+
+# --- Testing / CI ---
+pytest>=8.0
