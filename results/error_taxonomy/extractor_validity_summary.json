@@ -1,0 +1,13 @@
+{
+  "n_total": 60,
+  "n_r0_correct": 33,
+  "n_r0_wrong": 27,
+  "r0_accuracy_pct": 55.0,
+  "n_measurement_error": 24,
+  "n_explanation_error": 3,
+  "meas_share_of_r0_errors_pct": 88.9,
+  "RA_observed": 0.517,
+  "RA_corrected_ub": 0.582,
+  "SA_observed": 0.711,
+  "SA_corrected_ub": 0.795
+}
