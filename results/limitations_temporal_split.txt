@@ -1,0 +1,18 @@
+=== LIMITATIONS-ABSATZ (Temporaler Split) — für Belegarbeit / Paper ===
+
+Die Evaluation der Modelle basiert auf einem zufälligen 70/30-Split. Stundendaten
+aus dem Bikesharing-Datensatz weisen typischerweise Autokorrelation auf: benachbarte
+Stunden ähneln sich hinsichtlich Wetter, Saison und Nutzerverhalten. Ein zufälliger
+Split erlaubt daher, dass zeitlich nahe Stunden in Trainings- und Testmenge gelangen,
+was die gemessene Generalisierungsgüte potenziell überschätzt.
+
+Als Robustheitscheck wurde ein temporaler Split durchgeführt: die ersten 70 % der
+Daten chronologisch (2011-01-01 bis 2012-05-27) dienten als Trainingsmenge,
+die restlichen 30 % (2012-05-27 bis 2012-12-31) als Testmenge. Die
+Ergebnisse sind gegenüber dem Random-Split schlechter (ΔRMSE XGBoost:
++39.64, EBM: +24.38; ΔR² XGBoost: -0.0844,
+EBM: -0.0357). Die Metrik-Divergenz ist moderat, was darauf hindeutet,
+dass temporale Leakage die Random-Split-Performance merklich beeinflusst.
+Für die XAI-Demonstration dieser Arbeit ist die absolute Modellgüte nachrangig;
+alle pipelines verwenden dieselben Modelle und denselben Split, sodass
+die relative Rangordnung der Erklärungspipelines von dieser Einschränkung unberührt bleibt.
