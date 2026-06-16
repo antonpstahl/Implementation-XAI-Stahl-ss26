@@ -21,7 +21,7 @@ Two questions are examined in parallel:
 ├── models/          # Trained models (6 .pkl files)
 ├── explanations/    # SHAP / EBM explanations as JSON + waterfall plots (PNG)
 ├── results/         # Pipeline outputs, evaluation plots, CSV summaries
-├── notebooks/       # 8 Jupyter notebooks (01–08)
+├── notebooks/       # 10 Jupyter notebooks (00 baseline, 01–08)
 ├── prompts/         # Prompt templates
 └── utils/           # Python helper modules (data, models, explanations, llm, tools)
 ```
@@ -36,36 +36,53 @@ XGBoost and EBM (InterpretML), each trained with three loss functions. Poisson-l
 
 | Loss            | Model | RMSE  | MAE   | R²    | Poisson dev. | Neg. pred. |
 | --------------- | ----- | ----- | ----- | ----- | ------------ | ---------- |
-| Poisson-log     | XGB   | 39.01 | 23.68 | 0.952 | 7.06         | 0          |
-| Poisson-log     | EBM   | 48.37 | 27.00 | 0.926 | 9.72         | 0          |
+| Poisson-log     | XGB   | 45.44 | 27.00 | 0.935 | 9.38         | 0          |
+| Poisson-log     | EBM   | 48.20 | 28.20 | 0.927 | 10.81        | 0          |
+
+(Test set n = 5,227; values from `results/model_metrics_poisson_log.json`.)
 
 **3 — Explanation generation** (`03_Explanations_Generation.ipynb`)
 Global explanations (SHAP feature importance for XGB; term importances for EBM) and local explanations for 10 test instances stratified across `cnt` quintiles, stored as JSON plus waterfall-plot PNGs.
 
-**4 — Three LLM pipelines**
-All pipelines use `claude-sonnet-4-6` and produce three-part explanations (`[PREDICTION]`, `[DRIVERS]`, `[RECOMMENDATION]`) for non-technical staff.
+**4 — Three LLM pipelines + a deterministic baseline**
+All LLM pipelines use `claude-sonnet-4-6` and produce three-part explanations (`[PREDICTION]`, `[DRIVERS]`, `[RECOMMENDATION]`) for non-technical staff.
 
+- **`00` Template (baseline)** — a deterministic text-block generator that fills the same three-part structure from the identical SHAP/EBM JSON, with no LLM call. Answers the standard reviewer question: *what does the LLM add over a template?*
 - **`04` JSON → Text** — the LLM receives global importance and local SHAP/EBM contributions as structured JSON. System prompt cached via Anthropic prompt caching; raw values denormalized into plain language (e.g. `temp=0.68` → `~27.9 °C`) before the call.
 - **`05` Vision → Text** — the LLM receives the instance's waterfall plot as a base64-encoded PNG and reads bar lengths visually (no numeric access to contribution values).
-- **`06` Tool-Use** — the LLM retrieves data itself through 8 defined tools (feature schema, importance, prediction, SHAP values, partial dependence, value context, similar instances, counterfactuals) in an agentic loop — averaging **5.85 tool calls** per explanation.
+- **`06` Tool-Use** — the LLM retrieves data itself through 8 defined tools (feature schema, importance, prediction, SHAP values, partial dependence, value context, similar instances, counterfactuals) in an agentic loop — averaging **5.65 tool calls** per explanation.
 
 **5 — Evaluation** (`07_Evaluation.ipynb`, `08_Evaluation_Ichmoukhamedov.ipynb`)
 Quantitative cost/latency, LLM-as-judge across three judge versions (uncalibrated Sonnet, calibrated-rubric Sonnet, independent Opus), and formal faithfulness metrics after Ichmoukhamedov et al. (Rank / Sign / Value Agreement).
 
-| Pipeline   | Avg words | Input tok. | Output tok. | Cost (20 calls) | Avg latency |
-| ---------- | --------- | ---------- | ----------- | --------------- | ----------- |
-| JSON→Text  | 211       | 1,837      | 511         | $0.26           | 12.2 s      |
-| Vision     | 207       | 2,187      | 512         | $0.28           | 12.3 s      |
-| Tool-Use   | 306       | 3,427      | 1,263       | $0.58           | 29.8 s      |
+Quantitative + LLM-judge (v1) summary across 20 explanations per pipeline (2 XAI models × 10 instances):
 
-## Key findings
+| Pipeline   | Avg words | Input tok.¹ | Output tok. | Cost (20 calls) | Avg latency | Judge Faith. | Clarity | Complete. |
+| ---------- | --------- | ----------- | ----------- | --------------- | ----------- | ------------ | ------- | --------- |
+| Template   | 54        | 0           | 0           | $0.00           | 0.0 s       | 5.00         | 4.70    | 4.00      |
+| JSON→Text  | 208       | 616         | 510         | $0.16           | 11.7 s      | 4.35         | 4.90    | 4.95      |
+| Vision     | 212       | 2,167       | 528         | $0.29           | 12.3 s      | 3.80         | 4.55    | 4.75      |
+| Tool-Use   | 305       | 3,489       | 1,225       | $0.58           | 28.8 s      | 4.40         | 3.95    | 4.90      |
 
-1. **Completeness is robust** — all three pipelines score ≥ 4.9/5; the three-part structure is reliably maintained.
-2. **Faithfulness depends on judge strictness** — Vision is consistent (≈ 4.4); JSON→Text and Tool-Use vary more across rubrics.
-3. **JSON→Text is most efficient** (≈ $0.013 per explanation).
-4. **Tool-Use produces longer, evidence-backed explanations** (+46% words, with partial-dependence and counterfactual support) at ~2.2× cost and ~2.4× latency.
-5. **Vision** sits close to JSON→Text on cost/latency but has structurally lower faithfulness potential (bar lengths are read visually and imprecisely).
-6. **Self-preference bias is measurable** — Opus scores sit systematically below Sonnet scores under an identical rubric, strongest for Tool-Use.
+¹ *Input tokens are the billed, non-cached count. JSON→Text caches the system prompt (cache-read tokens, billed at ~10%, are not counted here), which is why its input count is far below Vision's freshly-sent image tokens.* Values from `results/eval_summary.csv`.
+
+Formal faithfulness after Ichmoukhamedov et al. (NB 08, n = 10 instances; precision-style metrics — see limitation in NB 08 §4.1):
+
+| Pipeline  | Rank Agr. | Sign Agr. | Value Agr. |
+| --------- | --------- | --------- | ---------- |
+| JSON→Text | 0.562     | 0.721     | 0.667      |
+| Tool-Use  | 0.558     | 0.733     | 0.733      |
+| Vision    | 0.429     | 0.679     | 0.575      |
+
+> **Status of these findings:** descriptive/exploratory. With n = 10–20 explanations per pipeline, no repeated sampling and no inferential statistics yet, the differences below are **not** statistically confirmed (see the limitations table in `07_Evaluation.ipynb` §7). Treat them as directional.
+
+1. **The deterministic template wins on faithfulness** — Template scores 5.00 vs. the LLM pipelines' 3.80–4.40. By construction it lists exactly the true top drivers; the LLMs trade some faithfulness for richer, more readable narratives. This is the central "what does the LLM add over a template?" result — and the trade-off, not a free lunch.
+2. **Among LLM pipelines, faithfulness ranks Tool-Use (4.40) ≈ JSON→Text (4.35) > Vision (3.80)** — consistent with the formal Rank-Agreement (Vision 0.43 vs. ~0.56 for the others): reading bar lengths from a plot is structurally less precise than numeric access.
+3. **Clarity and Completeness are at the ceiling for the LLM pipelines** (≥ 4.55 / ≥ 4.75) and do not discriminate between them; the template lags on completeness (4.00, thinner operational recommendation).
+4. **JSON→Text is most efficient** (≈ $0.008 per explanation, lowest latency 11.7 s) — system-prompt caching keeps billed input tokens low.
+5. **Tool-Use produces the longest, evidence-backed explanations** (+47% words vs. JSON→Text, with partial-dependence and counterfactual support) at ~3.6× cost and ~2.5× latency.
+6. **Vision** matches JSON→Text on latency but costs more (image tokens, no caching benefit) and has the lowest faithfulness of all pipelines.
+7. **Possible self-preference bias** — Opus (v3) scores sit systematically below Sonnet (v1/v2) under an identical rubric. This is *consistent with* a self-preference effect but not conclusive: both judges are Anthropic models, so a true cross-vendor judge is still outstanding (see implementation plan, Phase 2).
 
 ## Setup
 

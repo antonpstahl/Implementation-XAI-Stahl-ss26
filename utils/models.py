@@ -1,9 +1,10 @@
 """
 utils/models.py – Speichern und Laden der trainierten Modelle.
 
-Verwendet joblib (laut Plan empfohlen). Beide Modelle werden über
-dieselben Helper-Funktionen geladen, damit alle Notebooks konsistent
-auf identische Modell-Artefakte zugreifen.
+Verwendet joblib. Modelle werden unter dem Namensschema
+``{model_type}_{loss_key}.pkl`` abgelegt (z. B. ``xgb_poisson_log.pkl``)
+und ausschließlich über ``save_model`` / ``load_model`` adressiert, damit
+alle Notebooks konsistent auf identische Modell-Artefakte zugreifen.
 """
 
 from __future__ import annotations
@@ -17,8 +18,8 @@ import numpy as np
 
 from . import MODELS_DIR
 
-EBM_FILENAME = "ebm.pkl"
-XGB_FILENAME = "xgb.pkl"
+# Gültige Modelltypen (Präfix im Dateinamen).
+MODEL_TYPES: tuple[str, ...] = ("xgb", "ebm")
 
 
 # ---------------------------------------------------------------------------
@@ -108,71 +109,45 @@ def compute_metrics(y_true: np.ndarray, y_pred: np.ndarray) -> Dict[str, float]:
 
 
 # ---------------------------------------------------------------------------
-# Generisches Speichern / Laden
+# Speichern / Laden  (einheitliches Schema: {model_type}_{loss_key}.pkl)
 # ---------------------------------------------------------------------------
+
+def model_path(model_type: str, loss_key: str,
+               models_dir: Path | str | None = None) -> Path:
+    """Pfad eines Modell-Artefakts unter ``{model_type}_{loss_key}.pkl``."""
+    if model_type not in MODEL_TYPES:
+        raise ValueError(
+            f"Unbekannter model_type {model_type!r}. Erlaubt: {MODEL_TYPES}."
+        )
+    models_dir = Path(models_dir) if models_dir is not None else MODELS_DIR
+    return models_dir / f"{model_type}_{loss_key}.pkl"
+
 
 def save_model(model: Any, model_type: str, loss_key: str,
                models_dir: Path | str | None = None) -> Path:
     """Speichert ein Modell unter ``{model_type}_{loss_key}.pkl``."""
-    models_dir = Path(models_dir) if models_dir is not None else MODELS_DIR
-    models_dir.mkdir(parents=True, exist_ok=True)
-    path = models_dir / f"{model_type}_{loss_key}.pkl"
+    path = model_path(model_type, loss_key, models_dir)
+    path.parent.mkdir(parents=True, exist_ok=True)
     joblib.dump(model, path)
     return path
 
 
-def _ensure_dir(path: Path) -> None:
-    path.mkdir(parents=True, exist_ok=True)
-
-
-# -----------------------------------------------------------------------------
-# Speichern
-# -----------------------------------------------------------------------------
-def save_ebm(model: Any, models_dir: Path | str | None = None) -> Path:
-    """Speichert ein trainiertes EBM-Modell."""
-    models_dir = Path(models_dir) if models_dir is not None else MODELS_DIR
-    _ensure_dir(models_dir)
-    path = models_dir / EBM_FILENAME
-    joblib.dump(model, path)
-    return path
-
-
-def save_xgb(model: Any, models_dir: Path | str | None = None) -> Path:
-    """Speichert ein trainiertes XGBoost-Modell."""
-    models_dir = Path(models_dir) if models_dir is not None else MODELS_DIR
-    _ensure_dir(models_dir)
-    path = models_dir / XGB_FILENAME
-    joblib.dump(model, path)
-    return path
-
-
-# -----------------------------------------------------------------------------
-# Laden
-# -----------------------------------------------------------------------------
-def load_ebm(models_dir: Path | str | None = None) -> Any:
-    """Lädt das gespeicherte EBM-Modell."""
-    models_dir = Path(models_dir) if models_dir is not None else MODELS_DIR
-    path = models_dir / EBM_FILENAME
+def load_model(model_type: str, loss_key: str,
+               models_dir: Path | str | None = None) -> Any:
+    """Lädt ein einzelnes Modell-Artefakt (``xgb`` oder ``ebm``)."""
+    path = model_path(model_type, loss_key, models_dir)
     if not path.exists():
         raise FileNotFoundError(
-            f"EBM-Modell nicht gefunden unter {path}. "
-            "Bitte zuerst Notebook 02_Modeling.ipynb ausführen."
+            f"Modell nicht gefunden unter {path}. "
+            "Bitte zuerst Notebook 02a_Modeling_AllOptions.ipynb ausführen."
         )
     return joblib.load(path)
 
 
-def load_xgb(models_dir: Path | str | None = None) -> Any:
-    """Lädt das gespeicherte XGBoost-Modell."""
-    models_dir = Path(models_dir) if models_dir is not None else MODELS_DIR
-    path = models_dir / XGB_FILENAME
-    if not path.exists():
-        raise FileNotFoundError(
-            f"XGBoost-Modell nicht gefunden unter {path}. "
-            "Bitte zuerst Notebook 02_Modeling.ipynb ausführen."
-        )
-    return joblib.load(path)
-
-
-def load_models(models_dir: Path | str | None = None) -> Tuple[Any, Any]:
-    """Lädt beide Modelle in einem Aufruf. Returns: (ebm, xgb)."""
-    return load_ebm(models_dir), load_xgb(models_dir)
+def load_models(loss_key: str,
+                models_dir: Path | str | None = None) -> Tuple[Any, Any]:
+    """Lädt beide Modelle einer Loss-Variante. Returns: ``(xgb, ebm)``."""
+    return (
+        load_model("xgb", loss_key, models_dir),
+        load_model("ebm", loss_key, models_dir),
+    )

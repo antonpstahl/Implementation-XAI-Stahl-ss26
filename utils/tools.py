@@ -415,9 +415,9 @@ class ToolBox:
                     parts.append(df[col].cat.codes.values.astype(float))
                 else:
                     parts.append(df[col].astype(float).values)
-            X = np.column_stack(parts)
-            # Min-Max Normierung auf Trainingsset
-            return X
+            # Roh-Kodierung; die Min-Max-Normierung auf das Trainingsset
+            # erfolgt unten gemeinsam für Train- und Testpunkt.
+            return np.column_stack(parts)
 
         X_train_enc = _encode(self.X_train)
         x_test_enc = _encode(self.X_test.iloc[[instance_id]])[0]
