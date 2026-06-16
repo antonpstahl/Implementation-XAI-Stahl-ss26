@@ -175,6 +175,107 @@ def _encode_image(path: Path | str) -> dict:
     }
 
 
+# -----------------------------------------------------------------------------
+# Cross-Vendor Judge: OpenAI-kompatibler Wrapper (Phase 2)
+#
+# API:         OpenAI Chat Completions API
+# Abrufdatum:  2026-06-16
+# Empfohlenes Modell (früher Test):  gpt-4o-mini  ($0.15/$0.60 per 1M in/out)
+# Empfohlenes Modell (Finallauf):    gpt-4o       ($2.50/$10.00 per 1M in/out)
+# Free-Tier Ratelimit: 3 RPM → request_delay_s=20 nötig (Tier 0).
+#                      Ab Tier 1: request_delay_s=0 möglich.
+# -----------------------------------------------------------------------------
+OPENAI_JUDGE_MODEL_TEST  = "gpt-4o-mini"
+OPENAI_JUDGE_MODEL_FINAL = "gpt-4o"
+MAX_TOKENS_OPENAI_JUDGE  = 600
+
+
+def _with_openai_retry(fn: Any, *args: Any, max_retries: int = 2, **kwargs: Any) -> Any:
+    """Exponential backoff for OpenAI transient errors."""
+    try:
+        from openai import RateLimitError, APIConnectionError, InternalServerError
+        _oai_retryable = (RateLimitError, APIConnectionError, InternalServerError)
+    except ImportError:
+        _oai_retryable = (Exception,)
+
+    delay = 5
+    for attempt in range(max_retries + 1):
+        try:
+            return fn(*args, **kwargs)
+        except Exception as exc:
+            if attempt < max_retries and isinstance(exc, _oai_retryable):
+                print(f"[openai] {type(exc).__name__} – Retry {attempt + 1}/{max_retries} in {delay}s …")
+                _time.sleep(delay)
+                delay *= 2
+            else:
+                raise
+
+
+def ask_openai_text(
+    prompt: str,
+    *,
+    system: str | None = None,
+    model: str = OPENAI_JUDGE_MODEL_TEST,
+    max_tokens: int = MAX_TOKENS_OPENAI_JUDGE,
+    request_delay_s: float = 0.0,
+) -> dict:
+    """OpenAI Chat Completions call — gibt dasselbe Schema zurück wie ask_text().
+
+    Parameters
+    ----------
+    prompt          : User-Nachricht
+    system          : System-Prompt (wird als 'system' role übergeben)
+    model           : Modell-ID, default gpt-4o-mini (günstig, Free-Tier-tauglich)
+    max_tokens      : max. Output-Tokens
+    request_delay_s : Pause vor dem Call (20s für Free-Tier-3-RPM-Limit empfohlen)
+
+    Returns
+    -------
+    dict mit 'content'[0]['text'], 'usage' (input_tokens/output_tokens), 'model'
+    — kompatibel mit dem bestehenden _parse_judge_response()-Schema.
+    """
+    try:
+        from openai import OpenAI
+    except ImportError as e:
+        raise ImportError(
+            "Paket 'openai' nicht installiert. Bitte `pip install openai` ausführen."
+        ) from e
+
+    api_key = os.environ.get("OPENAI_API_KEY", "").strip()
+    if not api_key:
+        raise RuntimeError(
+            "OPENAI_API_KEY nicht gesetzt.\n"
+            "In .env eintragen oder exportieren:\n"
+            "  export OPENAI_API_KEY=sk-proj-..."
+        )
+
+    client = OpenAI(api_key=api_key)
+
+    messages: list[dict] = []
+    if system:
+        messages.append({"role": "system", "content": system})
+    messages.append({"role": "user", "content": prompt})
+
+    if request_delay_s > 0:
+        _time.sleep(request_delay_s)
+
+    resp = _with_openai_retry(
+        client.chat.completions.create,
+        model=model,
+        messages=messages,
+        max_tokens=max_tokens,
+    )
+
+    return {
+        "content": [{"text": resp.choices[0].message.content or ""}],
+        "usage": {
+            "input_tokens":  resp.usage.prompt_tokens,
+            "output_tokens": resp.usage.completion_tokens,
+        },
+        "model": resp.model,
+    }
+
+
 def ask_with_images(
     prompt: str,
     image_paths: Iterable[Path | str],
