@@ -1,0 +1,27 @@
+\begin{table}[t]
+\centering
+\caption{Error taxonomy for the 30 lowest-RA/SA cases (n\,=\,30 coded manually).
+  E-categories are measurement artefacts of the NB\,08 extractor;
+  B- and C-categories are genuine LLM explanation errors.
+  The corrected upper bounds for Rank Agreement and Sign Agreement
+  (assuming all E-errors resolved) are RA\,$\leq$\,0.582 and SA\,$\leq$\,0.795
+  vs.\ observed RA\,=\,0.517 and SA\,=\,0.711.}
+\label{tab:error-taxonomy}
+\small
+\begin{tabular}{@{}llp{5.6cm}lr@{}}
+\toprule
+\textbf{Code} & \textbf{Source} & \textbf{Description} & \textbf{n} & \textbf{\%} \\
+\midrule
+\multicolumn{5}{@{}l}{\textit{Eval Artefact (NB\,08 extractor)}} \\[2pt]
+\quad E1 & Eval Artefact & Extractor assigns wrong feature at rank 0 & 9 & 30\% \\
+\quad E2 & Eval Artefact & Extractor inverts contribution sign & 6 & 20\% \\
+\quad E3 & Eval Artefact & Extractor confabulates values from other instances & 4 & 13\% \\[4pt]
+\multicolumn{5}{@{}l}{\textit{Explanation Error (LLM output)}} \\[2pt]
+\quad C & Expl.\ Error & LLM overrides negative contribution with trend narrative & 5 & 17\% \\
+\quad B2 & Expl.\ Error & LLM reorders features with similar |contribution| & 4 & 13\% \\
+\quad B1 & Expl.\ Error & LLM groups by sign, losing rank information & 2 & 7\% \\
+\midrule
+\textbf{Total} & & & \textbf{30} & \textbf{100\%} \\
+\bottomrule
+\end{tabular}
+\end{table}
