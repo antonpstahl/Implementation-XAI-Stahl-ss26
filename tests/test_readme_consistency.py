@@ -13,7 +13,7 @@ import pytest
 ROOT = Path(__file__).parent.parent
 sys.path.insert(0, str(ROOT / "utils"))
 
-from update_readme_tables import (  # noqa: E402
+from update_readme_tables import ( 
     ROOT,
     _TABLES,
     extract_table,

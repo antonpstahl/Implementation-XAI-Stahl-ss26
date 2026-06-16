@@ -208,8 +208,8 @@ Mittelwerte über 20 Erklärungen pro Pipeline (2 XAI-Modelle × 10 Instanzen):
 <!-- AUTO-TABLE:judge-scores-de -->
 | Pipeline | Faithfulness | Clarity | Completeness |
 |---|---|---|---|
-| Template | **5,00** | 4,70 | 4,00 |
-| JSON→Text | 4,35 | 4,90 | **4,95** |
+| Template | 5,00 | 4,70 | 4,00 |
+| JSON→Text | 4,35 | 4,90 | 4,95 |
 | Vision | 3,80 | 4,55 | 4,75 |
 | Tool-Use | 4,40 | 3,95 | 4,90 |
 <!-- /AUTO-TABLE:judge-scores-de -->
