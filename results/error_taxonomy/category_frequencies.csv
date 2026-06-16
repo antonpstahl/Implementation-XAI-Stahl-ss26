@@ -1,0 +1,7 @@
+Kategorie,Anzahl,Beschreibung,Quelle
+E1,9,E1 — Extractor: Feature-Swap,Eval-Artefakt (NB 08)
+E2,6,E2 — Extractor: Vorzeichen-Inversion,Eval-Artefakt (NB 08)
+C,5,C  — Erklärung: Vorzeichenfehler yr/temp,Erklärungsfehler
+E3,4,E3 — Extractor: Cross-Instance-Halluzination,Eval-Artefakt (NB 08)
+B2,4,B2 — Erklärung: Nah-Beitrag-Rangswap,Erklärungsfehler
+B1,2,B1 — Erklärung: Positiv/Negativ-Gruppierung,Erklärungsfehler
