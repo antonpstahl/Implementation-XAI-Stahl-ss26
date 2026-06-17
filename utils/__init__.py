@@ -29,6 +29,14 @@ RANDOM_STATE = 42
 from .data import sample_stratified  # noqa: F401  (re-export for convenience)
 from .judge import parse_judge_response  # noqa: F401
 from .generation import run_resumable_generation, generation_filename  # noqa: F401
+from .batch import (  # noqa: F401
+    make_custom_id,
+    message_request,
+    submit_batch,
+    wait_for_batch,
+    collect_results,
+    run_batch,
+)
 
 __all__ = [
     "PROJECT_ROOT",
@@ -43,4 +51,10 @@ __all__ = [
     "parse_judge_response",
     "run_resumable_generation",
     "generation_filename",
+    "make_custom_id",
+    "message_request",
+    "submit_batch",
+    "wait_for_batch",
+    "collect_results",
+    "run_batch",
 ]
