@@ -31,7 +31,6 @@ except ImportError:
 #
 # API:         Anthropic Messages API
 # Abrufdatum:  2026-06-11
-# Temperature: nicht gesetzt → Anthropic-Default = 1.0 (bei allen Calls)
 #
 # Modell-IDs nach Rolle:
 #   Erklärungsgenerierung  (NB 04 / 05 / 06)  → claude-sonnet-4-6
@@ -44,8 +43,31 @@ except ImportError:
 # max_tokens nach Kontext:
 #   MAX_TOKENS_GENERATION      = 2048  (Pipelines 04 / 05 / 06)
 #   MAX_TOKENS_FAITHFULNESS    = 300   (Faithfulness-Check NB 07)
-#   MAX_TOKENS_JUDGE           = 600   (Judge-Calls NB 07, alle Versionen)
+#   MAX_TOKENS_JUDGE           = 900   (Judge-Calls NB 07, alle Versionen; +Reasoning)
 #   MAX_TOKENS_ICHMOUKHAMEDOV  = 700   (LLM-Calls NB 08)
+#
+# ── Decoding-Temperaturen (Phase 3·2 / A2) ────────────────────────────────
+#
+#   JUDGE_TEMPERATURE = 0.0  (deterministisch)
+#     Begründung: Der Judge ist ein Messinstrument, keine kreative Aufgabe.
+#     Gleiche Eingabe → gleicher Score: maximale Reproduzierbarkeit und kein
+#     Stochastik-Rauschen in den Messwerten. G-Eval (Liu et al. 2023) empfiehlt
+#     temperature=0 für numerische Rubriken.
+#     Wirkung auf n=20 Re-Run: Score-Std ≈ 0 (empirisch belegt, s. NB 07 Zelle v5).
+#
+#   GENERATION_TEMPERATURE = 1.0  (Anthropic-Default — bewusste Designentscheidung)
+#     Begründung: Erklärungstexte sollen natürlich und nicht repetitiv wirken.
+#     Phase 3b misst Varianz explizit (3 Generationen/Instanz), sodass die
+#     Stochastik der Messung selbst Gegenstand der Untersuchung ist.
+#     Limitation: reproduzierbare Erklärungen erfordern fixen Seed → wird im
+#     Paper als Limitation benannt.
+#
+#   JUDGE_SC_K = 3  (Self-Consistency-Samples — nur wenn SC statt temp=0 genutzt)
+#     SC kostet k× die Judge-Calls: bei n=200, 4 Pipelines, 2 XAI-Modellen
+#     ergibt k=3 ca. 4 800 statt 1 600 Judge-Calls (→ Phase-3b-Kostenschätzung).
+#     Bei JUDGE_TEMPERATURE=0 (deterministisch) ist SC wertlos — Implementierung
+#     steht bereit (judge_with_self_consistency in utils/judge.py), ist aber
+#     standardmäßig deaktiviert.
 #
 # Hinweis für das Paper: Modell-IDs und Parameterdefaults der Anthropic-API
 # können sich nach dem Abrufdatum ändern. Für Reproduzierbarkeit sind exakte
@@ -57,8 +79,13 @@ DEFAULT_MAX_TOKENS = 2048   # Erklärungsgenerierung (Pipelines 04 / 05 / 06)
 
 MAX_TOKENS_GENERATION     = 2048
 MAX_TOKENS_FAITHFULNESS   = 300
-MAX_TOKENS_JUDGE          = 600
+MAX_TOKENS_JUDGE          = 900   # +Reasoning (Reason-then-Score, Phase 3·2/A1)
 MAX_TOKENS_ICHMOUKHAMEDOV = 700
+
+# Decoding-Temperaturen (Phase 3·2 / A2)
+JUDGE_TEMPERATURE      = 0.0   # deterministisch (s. Begründung oben)
+GENERATION_TEMPERATURE = 1.0   # Anthropic-Default (bewusste Designentscheidung)
+JUDGE_SC_K             = 3     # Self-Consistency k — nur wenn SC statt temp=0
 
 try:
     from anthropic import RateLimitError, APIConnectionError, InternalServerError
@@ -112,8 +139,16 @@ def ask_text(
     model: str = DEFAULT_MODEL,
     max_tokens: int = DEFAULT_MAX_TOKENS,
     cache_system: bool = False,
+    temperature: float | None = None,
 ) -> dict:
-    
+    """Text-only Anfrage an die Anthropic Messages API.
+
+    Parameters
+    ----------
+    temperature : float | None
+        None → Anthropic-Default (1.0); 0.0 → deterministisch (für Judge-Calls);
+        0.2–0.4 → wenig stochastisch. Siehe JUDGE_TEMPERATURE / GENERATION_TEMPERATURE.
+    """
     client = _get_client()
 
     if system and cache_system:
@@ -127,13 +162,16 @@ def ask_text(
     else:
         system_block = system or ""
 
-    resp = _with_retry(
-        client.messages.create,
+    create_kwargs: dict = dict(
         model=model,
         max_tokens=max_tokens,
         system=system_block,
         messages=[{"role": "user", "content": prompt}],
     )
+    if temperature is not None:
+        create_kwargs["temperature"] = temperature
+
+    resp = _with_retry(client.messages.create, **create_kwargs)
     return resp.model_dump()
 
 
@@ -218,6 +256,7 @@ def ask_openai_text(
     model: str = OPENAI_JUDGE_MODEL_TEST,
     max_tokens: int = MAX_TOKENS_OPENAI_JUDGE,
     request_delay_s: float = 0.0,
+    temperature: float | None = None,
 ) -> dict:
     """OpenAI Chat Completions call — gibt dasselbe Schema zurück wie ask_text().
 
@@ -228,6 +267,7 @@ def ask_openai_text(
     model           : Modell-ID, default gpt-4o-mini (günstig, Free-Tier-tauglich)
     max_tokens      : max. Output-Tokens
     request_delay_s : Pause vor dem Call (20s für Free-Tier-3-RPM-Limit empfohlen)
+    temperature     : None → Modell-Default; 0.0 → deterministisch (für Judge-Calls)
 
     Returns
     -------
@@ -259,12 +299,11 @@ def ask_openai_text(
     if request_delay_s > 0:
         _time.sleep(request_delay_s)
 
-    resp = _with_openai_retry(
-        client.chat.completions.create,
-        model=model,
-        messages=messages,
-        max_tokens=max_tokens,
-    )
+    create_kwargs: dict = dict(model=model, messages=messages, max_tokens=max_tokens)
+    if temperature is not None:
+        create_kwargs["temperature"] = temperature
+
+    resp = _with_openai_retry(client.chat.completions.create, **create_kwargs)
 
     return {
         "content": [{"text": resp.choices[0].message.content or ""}],
@@ -284,10 +323,12 @@ def ask_with_images(
     model: str = DEFAULT_MODEL,
     max_tokens: int = DEFAULT_MAX_TOKENS,
     cache_system: bool = True,
+    temperature: float | None = None,
 ) -> dict:
-    """
-    Multimodale Anfrage mit einem oder mehreren Bildern (Notebook 05).
+    """Multimodale Anfrage mit einem oder mehreren Bildern (Notebook 05).
+
     Bilder werden base64-kodiert übergeben.
+    temperature : siehe ask_text.
     """
     client = _get_client()
 
@@ -305,11 +346,14 @@ def ask_with_images(
     content: list[dict] = [_encode_image(p) for p in image_paths]
     content.append({"type": "text", "text": prompt})
 
-    resp = _with_retry(
-        client.messages.create,
+    create_kwargs: dict = dict(
         model=model,
         max_tokens=max_tokens,
         system=system_block,
         messages=[{"role": "user", "content": content}],
     )
+    if temperature is not None:
+        create_kwargs["temperature"] = temperature
+
+    resp = _with_retry(client.messages.create, **create_kwargs)
     return resp.model_dump()
