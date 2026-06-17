@@ -19,6 +19,28 @@ import pandas as pd
 from . import EXPLANATIONS_DIR
 
 # -----------------------------------------------------------------------------
+# Denormalisierungs-Konstanten (einzige Quelle)
+# -----------------------------------------------------------------------------
+TEMP_FACTOR: int = 41
+HUM_FACTOR:  int = 100
+WIND_FACTOR: int = 67
+
+WEEKDAY_NAMES: list[str] = [
+    "Sonntag", "Montag", "Dienstag", "Mittwoch",
+    "Donnerstag", "Freitag", "Samstag",
+]
+MONTH_NAMES: list[str] = [
+    "", "Januar", "Februar", "März", "April", "Mai", "Juni",
+    "Juli", "August", "September", "Oktober", "November", "Dezember",
+]
+WEATHER_NAMES: dict[int, str] = {
+    1: "klar/wenige Wolken",
+    2: "Nebel/bewölkt",
+    3: "leichter Regen/Schnee",
+    4: "Starkregen/Gewitter",
+}
+
+# -----------------------------------------------------------------------------
 # Feature-Schema
 # -----------------------------------------------------------------------------
 FEATURE_SCHEMA: dict[str, dict[str, Any]] = {
@@ -26,12 +48,7 @@ FEATURE_SCHEMA: dict[str, dict[str, Any]] = {
     "weathersit": {
         "type": "categorical",
         "description": "Wetterlage",
-        "categories": {
-            1: "klar / wenige Wolken",
-            2: "Nebel / bewölkt",
-            3: "leichter Regen / Schnee",
-            4: "Starkregen / Eisregen / Gewitter",
-        },
+        "categories": WEATHER_NAMES,
     },
     "mnth": {
         "type": "categorical",
@@ -87,6 +104,51 @@ TARGET_DESCRIPTION: dict[str, Any] = {
     ),
     "type": "count",
 }
+
+
+# -----------------------------------------------------------------------------
+# Öffentliche Denormalisierungs-Helfer (einzige Quelle)
+# -----------------------------------------------------------------------------
+
+def humanize_feature(feature: str, value: Any) -> str | None:
+    """Konvertiert rohe Feature-Werte in lesbare Strings für das LLM."""
+    try:
+        if feature == "temp":       return f"~{float(value) * TEMP_FACTOR:.1f} °C"
+        if feature == "hum":        return f"{float(value) * HUM_FACTOR:.0f} %"
+        if feature == "windspeed":  return f"{float(value) * WIND_FACTOR:.1f} km/h"
+        if feature == "hr":         return f"{int(value):02d}:00 Uhr"
+        if feature == "weekday":    return WEEKDAY_NAMES[int(value)]
+        if feature == "mnth":       return MONTH_NAMES[int(value)]
+        if feature == "weathersit": return WEATHER_NAMES.get(int(value))
+        if feature == "yr":         return "2011" if int(value) == 0 else "2012"
+        if feature == "holiday":    return "Feiertag" if int(value) == 1 else "kein Feiertag"
+    except (ValueError, TypeError, IndexError):
+        pass
+    return None
+
+
+def build_context_string(fv: dict) -> str:
+    """Menschenlesbare Komma-Liste aller Feature-Werte (NB04 JSON-Payload-Feld)."""
+    parts: list[str] = []
+    if "hr" in fv:
+        parts.append(f"{int(fv['hr']):02d}:00 Uhr")
+    if "weekday" in fv:
+        parts.append(WEEKDAY_NAMES[int(fv["weekday"])])
+    if "mnth" in fv:
+        parts.append(MONTH_NAMES[int(fv["mnth"])])
+    if "yr" in fv:
+        parts.append("2011" if int(fv["yr"]) == 0 else "2012")
+    if "weathersit" in fv:
+        parts.append(WEATHER_NAMES.get(int(fv["weathersit"]), "unbekannt"))
+    if "temp" in fv:
+        parts.append(f"~{float(fv['temp']) * TEMP_FACTOR:.1f} °C")
+    if "hum" in fv:
+        parts.append(f"{float(fv['hum']) * HUM_FACTOR:.0f} % Luftfeuchtigkeit")
+    if "windspeed" in fv:
+        parts.append(f"Wind {float(fv['windspeed']) * WIND_FACTOR:.1f} km/h")
+    if "holiday" in fv and int(fv["holiday"]) == 1:
+        parts.append("Feiertag")
+    return ", ".join(parts)
 
 
 # -----------------------------------------------------------------------------

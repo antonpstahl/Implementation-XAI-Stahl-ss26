@@ -13,7 +13,7 @@ import numpy as np
 import pandas as pd
 
 from .data import CATEGORICAL_COLS, NUMERIC_COLS
-from .explanations import FEATURE_SCHEMA
+from .explanations import FEATURE_SCHEMA, humanize_feature
 
 
 # -----------------------------------------------------------------------------
@@ -311,7 +311,7 @@ class ToolBox:
                 {
                     "feature": f,
                     "value": feature_values.get(f),
-                    "value_human": _humanize(f, feature_values.get(f)),
+                    "value_human": humanize_feature(f, feature_values.get(f)),
                     "contribution": v,
                 }
                 for f, v in contribs.items()
@@ -356,7 +356,7 @@ class ToolBox:
                 "value": raw_val,
                 "avg_prediction": round(avg_pred, 3),
             }
-            human = _humanize(feature, raw_val)
+            human = humanize_feature(feature, raw_val)
             if human is not None:
                 entry["value_human"] = human
             results.append(entry)
@@ -384,7 +384,7 @@ class ToolBox:
             return {
                 "feature": feature,
                 "instance_value": int(val),
-                "instance_value_human": _humanize(feature, val),
+                "instance_value_human": humanize_feature(feature, val),
                 "type": "categorical",
                 "training_distribution": distribution,
             }
@@ -394,7 +394,7 @@ class ToolBox:
             return {
                 "feature": feature,
                 "instance_value": round(float(val), 4),
-                "instance_value_human": _humanize(feature, val),
+                "instance_value_human": humanize_feature(feature, val),
                 "type": "numerical",
                 "percentile_in_train": round(percentile, 1),
                 "train_min": round(float(train_vals.min()), 4),
@@ -436,7 +436,7 @@ class ToolBox:
         for idx in top_k_idx:
             row = self.X_train.iloc[idx]
             fv = {col: _feat_val(row[col]) for col in self.X_train.columns}
-            fv_human = {col: h for col in fv if (h := _humanize(col, fv[col])) is not None}
+            fv_human = {col: h for col in fv if (h := humanize_feature(col, fv[col])) is not None}
             pred = float(self.model.predict(self.X_train.iloc[[idx]])[0])
             results.append({
                 "train_index": int(idx),
@@ -535,20 +535,3 @@ def _feat_val(val: Any) -> Any:
     return val
 
 
-def _humanize(feature: str, value: Any) -> str | None:
-    """Konvertiert rohe Feature-Werte in lesbare Strings für das LLM."""
-    try:
-        if feature == "temp":       return f"~{float(value)*41:.1f} °C"
-        if feature == "hum":        return f"{float(value)*100:.0f} %"
-        if feature == "windspeed":  return f"{float(value)*67:.1f} km/h"
-        if feature == "hr":         return f"{int(value):02d}:00 Uhr"
-        if feature == "weekday":    return ["So","Mo","Di","Mi","Do","Fr","Sa"][int(value)]
-        if feature == "mnth":       return ["","Jan","Feb","Mär","Apr","Mai","Jun",
-                                            "Jul","Aug","Sep","Okt","Nov","Dez"][int(value)]
-        if feature == "weathersit": return {1:"klar/wenige Wolken",2:"Nebel/bewölkt",
-                                            3:"leichter Regen/Schnee",4:"Starkregen/Gewitter"}.get(int(value))
-        if feature == "yr":         return "2011" if int(value) == 0 else "2012"
-        if feature == "holiday":    return "Feiertag" if int(value) == 1 else "kein Feiertag"
-    except (ValueError, TypeError, IndexError):
-        pass
-    return None
