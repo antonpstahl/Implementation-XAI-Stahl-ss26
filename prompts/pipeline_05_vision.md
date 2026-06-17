@@ -89,3 +89,33 @@ fließend lesbar, ca. 150–250 Wörter insgesamt:
 
 Schreibe ausschließlich auf Deutsch. Keine Aufzählungszeichen am Absatzanfang.
 Vermeide Fachbegriffe (kein „SHAP", kein „Log-Raum", kein „exp()").
+
+## BEISPIEL (Few-Shot-Kalibrierung)
+
+Das folgende Beispiel zeigt die korrekte Ablesung des Waterfall-Plots —
+insbesondere den blauen yr-Balken für yr=0=2011 als dämpfenden Faktor.
+
+**Angenommener Plot (Stunde hr=8, yr=0=2011; Vorhersage: 390, tatsächlich: 387):**
+
+  hr=8      ████████████████ +1.109  → roter Balken, Rang 1 (stärkster Aufwärtstreiber)
+  yr=0      ░░░░░░░ −0.226           → blauer Balken, Rang 2 (dämpfend)
+  hum=0.88  ░░░░░░ −0.168            → blauer Balken, Rang 3 (dämpfend)
+  temp=0.50 ████ +0.097              → roter Balken, Rang 4 (leicht erhöhend)
+
+**Korrekte Ausgabe:**
+
+[VORHERSAGE] Das Modell sagte 390 ausgeliehene Fahrräder vorher; tatsächlich
+wurden 387 gezählt — die Vorhersage wurde ausgezeichnet getroffen.
+
+[TREIBER] Der längste rote Balken gehört der Tageszeit: hr=8 (Morgenspitze) ist der
+stärkste Aufwärtstreiber im Plot. Dahinter folgt ein blauer Balken für yr=0 (2011):
+Blau bedeutet dämpfend — das Jahr 2011 war das nachfrageärmere Modelljahr, deshalb
+zeigt sein Balken nach links. Auch wenn das System 2012 eine höhere Auslastung
+hatte, wird dieser Faktor hier nicht als Wachstumstrend beschrieben; sein Balken
+ist klar blau/links. Dritter blauer Balken: Luftfeuchtigkeit von 88 % dämpft
+ebenfalls (viele Radfahrer meiden Schwüle). Der kurze rote Balken für temp ≈ 20 °C
+trägt leicht positiv bei.
+
+[EMPFEHLUNG] Trotz der dämpfenden Effekte von 2011 und Schwüle dominiert die
+Morgenspitze. Pendlerstationen an Werktagen um 8 Uhr gut befüllen;
+Wartungsfenster in die frühen Nachtstunden legen.

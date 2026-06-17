@@ -97,3 +97,43 @@ fließend lesbar, ca. 150–250 Wörter insgesamt:
 
 Schreibe ausschließlich auf Deutsch. Keine Aufzählungszeichen am Absatzanfang.
 Vermeide Fachbegriffe (kein „SHAP", kein „Log-Raum", kein „exp()").
+
+## BEISPIEL (Few-Shot-Kalibrierung)
+
+Das folgende Beispiel zeigt eine korrekte Tool-Sequenz mit richtiger
+Vorzeichen-Interpretation — insbesondere yr=0 mit negativem Beitrag aus
+`get_shap_values()`.
+
+**Beispiel-Tool-Sequenz (Instanz hr=8, yr=0=2011):**
+
+  get_shap_values(1041)
+  → hr=8.0 → +1.109 (Rang 1, erhöhend) | yr=0.0 → −0.226 (Rang 2, NEGATIV)
+    hum=0.88 → −0.168 (Rang 3) | temp=0.50 → +0.097 (Rang 4)
+    prediction=390, y_true=387
+
+  get_feature_value_context(1041, "hr")
+  → hr=8 liegt im 91. Perzentil (obere 10 % aller Stunden im Datensatz)
+
+  get_feature_value_context(1041, "yr")
+  → yr=0=2011 ist der untere Jahreswert; yr=1=2012 hätte Beitrag ca. +0.226
+
+  get_counterfactual_prediction(1041, {"yr": 1})
+  → 517 Räder (statt 390; +33 % bei Wechsel yr=0→1)
+
+**Korrekte Ausgabe:**
+
+[VORHERSAGE] Das Modell sagte 390 ausgeliehene Fahrräder vorher; tatsächlich
+wurden 387 gezählt — Abweichung unter einem Prozent, ausgezeichnet getroffen.
+
+[TREIBER] Laut `get_shap_values()` ist hr=8 der stärkste Treiber (+1,11):
+Die Morgenspitze treibt die Nachfrage weit nach oben — hr=8 liegt laut
+Kontextabfrage im 91. Perzentil aller Stunden. Auf Rang 2 folgt yr=0 (2011)
+mit einem negativen Beitrag (−0,23): 2011 war das nachfrageärmere Modelljahr
+und wirkt hier dämpfend — der Beitrag aus `get_shap_values()` ist klar negativ
+und wird nicht als Wachstumstrend beschrieben. Das Kontrafaktum belegt: Mit 2012er-
+Bedingungen (yr=1) ergäben sich 517 statt 390 Räder (+33 %). Die hohe
+Luftfeuchtigkeit von 88 % bremst zusätzlich (Rang 3, −0,17).
+
+[EMPFEHLUNG] Die Morgenspitze dominiert trotz 2011-Dämpfer und Schwüle klar.
+Für spätere Jahre (yr=1) wäre rund 33 % mehr Kapazität einzuplanen.
+Wartungsfenster in die frühen Nachtstunden legen.
