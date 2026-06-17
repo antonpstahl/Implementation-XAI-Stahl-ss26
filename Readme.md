@@ -118,6 +118,24 @@ Parameters are centralised in `utils/llm.py`.
 
 **Reproducibility note (→ Paper limitation):** Anthropic model IDs are versioned snapshots, but API behaviour (sampling, default parameters, tokenisation) can change silently between SDK releases. Results are tied to `anthropic==0.98.1` and the access date above. Future runs against the same model ID are not guaranteed to produce identical outputs.
 
+## Test suite
+
+```bash
+pytest tests/        # run all tests
+pytest tests/test_prompt_golden.py -v   # prompt regression only
+```
+
+The suite covers sampling determinism, judge-parsing robustness, statistical functions, README consistency, and **prompt-fix regression**.
+The prompt regression test (`test_prompt_golden.py`) freezes the SHA-256 hashes and key constraint phrases of all three pipeline prompts as corrected in Phase 3 (sign- and rank-fidelity rules for `yr=0`).
+It is a hard gate: Phase 3b (full-scale run) must not start until all tests are green.
+
+**If a prompt is intentionally improved:**
+1. Edit the prompt file.
+2. Recompute the hash: `shasum -a 256 prompts/<file>.md`
+3. Update `GOLDEN_HASHES` in `tests/test_prompt_golden.py`.
+4. If the constraint phrase changed, update `REQUIRED_PHRASES` in the same file.
+5. Confirm `pytest tests/test_prompt_golden.py` passes.
+
 ## Notes
 
 - The `.env` file and any API keys are excluded from version control and must be supplied locally.
