@@ -42,6 +42,9 @@ except ImportError:
 #
 # max_tokens nach Kontext:
 #   MAX_TOKENS_GENERATION      = 2048  (Pipelines 04 / 05 / 06)
+#     Hinweis B6: Scratchpad (<analyse>…</analyse>) kommt vor der Prosa
+#     (~50–100 Tokens) und wird vor dem Speichern via strip_scratchpad()
+#     entfernt.  Notebooks 04/05 wurden von 600 auf diesen Wert angehoben.
 #   MAX_TOKENS_FAITHFULNESS    = 300   (Faithfulness-Check NB 07)
 #   MAX_TOKENS_JUDGE           = 900   (Judge-Calls NB 07, alle Versionen; +Reasoning)
 #   MAX_TOKENS_ICHMOUKHAMEDOV  = 700   (LLM-Calls NB 08)
@@ -86,6 +89,19 @@ MAX_TOKENS_ICHMOUKHAMEDOV = 700
 JUDGE_TEMPERATURE      = 0.0   # deterministisch (s. Begründung oben)
 GENERATION_TEMPERATURE = 1.0   # Anthropic-Default (bewusste Designentscheidung)
 JUDGE_SC_K             = 3     # Self-Consistency k — nur wenn SC statt temp=0
+
+import re as _re
+
+
+def strip_scratchpad(text: str) -> str:
+    """Removes the <analyse>…</analyse> scratchpad block from generated text.
+
+    The block is written by the model before the prose (B6 — Think-before-write)
+    and must be discarded before persisting the explanation.  Handles optional
+    leading/trailing whitespace and CRLF line endings.
+    """
+    return _re.sub(r"<analyse>.*?</analyse>\s*", "", text, flags=_re.DOTALL).strip()
+
 
 try:
     from anthropic import RateLimitError, APIConnectionError, InternalServerError

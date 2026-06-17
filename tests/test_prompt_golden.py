@@ -31,13 +31,12 @@ ROOT        = Path(__file__).resolve().parent.parent
 PROMPTS_DIR = ROOT / "prompts"
 
 GOLDEN_HASHES: dict[str, str] = {
-    # Phase 3·2/B5: Few-shot-Kalibrierung ergänzt (je 1 BEISPIEL-Sektion in 04/05/06;
-    # 3 Ankerbeispiele hoch/mittel/niedrig in judge_system.md).
-    # Davor (Phase 3·2/A3): Prompts harmonisiert (gleiches Wortbudget 150-250,
-    # identische Stil-/Schema-/Rollen-Bausteine; nur der modalspezifische Teil abweichend).
-    "pipeline_04_json.md":   "d4ab8961740d7c01882086f17e99b11962aca3e6c567a7aeae8bf4b123232e6d",
-    "pipeline_05_vision.md": "9bc1615b3dbe31891d3a9b75311eb13c7c372f59981010bc60d6c9c051804da8",
-    "pipeline_06_tooluse.md": "c328eb0c67ee3fd0fcf27ac5dfb38425c1ab601509c713f8d420fa02afc3f7e7",
+    # Phase 3·2/B6: „Think-before-write"-Scratchpad ergänzt: ANALYSE-SCHRITT-Sektion
+    # + <analyse>-Block im BEISPIEL in allen drei Generierungs-Prompts.
+    # Davor (Phase 3·2/B5): Few-shot-Kalibrierung; (A3): Harmonisierung.
+    "pipeline_04_json.md":   "d5ebfa0070684e0fe524f67a76b06e547e626737cecc57c7979c554c45e3116d",
+    "pipeline_05_vision.md": "c2a18f6b16266c71a7d8beee027626681d0bd8b75edd824f5838118d5b56e3a4",
+    "pipeline_06_tooluse.md": "4364fc743989825613183509cd43886a6c94c851d271c1512388ba6d73a65912",
     # Judge-Prompt eingefroren (Phase 3·2/A4+B5): bestimmt die Messung;
     # Änderungen müssen explizit bestätigt werden.
     "judge_system.md":       "775af71edcc5d397d22fa7d279c16c597d8a035cae4b3716912ca56414007f32",
@@ -90,3 +89,44 @@ def test_prompt_contains_phase3_phrase(filename: str, phrase: str, label: str) -
         "Ursache: yr-Vorzeichenfehler-Fix oder Rangregel wurde entfernt/verändert.\n"
         "Prompt wiederherstellen oder REQUIRED_PHRASES anpassen, falls bewusst geändert."
     )
+
+
+# ---------------------------------------------------------------------------
+# Test 3 — strip_scratchpad (Phase 3·2/B6)
+# ---------------------------------------------------------------------------
+
+import sys
+sys.path.insert(0, str(ROOT))
+from utils.llm import strip_scratchpad  # noqa: E402
+
+
+@pytest.mark.parametrize("raw,expected", [
+    # Block wird entfernt, Prosa bleibt
+    (
+        "<analyse>\nhr=8: positiv, Rang 1\nyr=0: negativ, Rang 2\n</analyse>\n\n[VORHERSAGE] Text.",
+        "[VORHERSAGE] Text.",
+    ),
+    # Kein Block — Eingabe unverändert
+    (
+        "[VORHERSAGE] Kein Scratchpad.",
+        "[VORHERSAGE] Kein Scratchpad.",
+    ),
+    # Block mit CRLF
+    (
+        "<analyse>\r\nhr=8: positiv\r\n</analyse>\r\n[VORHERSAGE] CRLF-Text.",
+        "[VORHERSAGE] CRLF-Text.",
+    ),
+    # Mehrere Blöcke (robustness)
+    (
+        "<analyse>A</analyse>\n<analyse>B</analyse>\n[VORHERSAGE] Doppelt.",
+        "[VORHERSAGE] Doppelt.",
+    ),
+    # Leerer Block
+    (
+        "<analyse></analyse>\n[VORHERSAGE] Leer.",
+        "[VORHERSAGE] Leer.",
+    ),
+])
+def test_strip_scratchpad(raw: str, expected: str) -> None:
+    """strip_scratchpad entfernt <analyse>-Blöcke und lässt die Prosa unverändert."""
+    assert strip_scratchpad(raw) == expected
