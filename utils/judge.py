@@ -7,8 +7,9 @@ import re
 
 
 def parse_judge_response(raw: str) -> dict:
-    """Extrahiert Judge-Scores robust aus Plaintext, JSON oder Markdown-Codeblock.
+    """Extrahiert Judge-Scores robust aus XML-Tags, JSON oder Key:Value-Plaintext.
 
+    Priorität: XML-Tags (B7) → JSON → Key:Value-Regex (Legacy-Fallback).
     Gibt ein dict mit den Keys faithfulness, clarity, completeness (int, 1-5)
     und optionalen *_reasoning-Keys zurück. Fehlende Scores werden nicht gesetzt
     (kein Key im dict), sodass der Aufrufer None-Scores per .get() erkennen kann.
@@ -19,32 +20,48 @@ def parse_judge_response(raw: str) -> dict:
 
     scores: dict = {}
 
-    # Vollständiges JSON versuchen
+    # Primär: XML-Tags (B7 — robustes Ausgabeformat)
+    for key in ['faithfulness', 'clarity', 'completeness']:
+        m = re.search(rf'<{key}>(\d)</{key}>', inner, re.IGNORECASE)
+        if m:
+            scores[key] = int(m.group(1))
+        rm = re.search(rf'<{key}_reasoning>(.*?)</{key}_reasoning>', inner,
+                       re.IGNORECASE | re.DOTALL)
+        if rm:
+            scores[f'{key}_reasoning'] = rm.group(1).strip()
+    if all(scores.get(k) is not None for k in ('faithfulness', 'clarity', 'completeness')):
+        return scores
+
+    # Fallback 1: vollständiges JSON
     try:
         json_match = re.search(r'\{.*\}', inner, re.DOTALL)
         if json_match:
             d = json.loads(json_match.group())
             d_up = {k.upper(): v for k, v in d.items()}
             for key in ['FAITHFULNESS', 'CLARITY', 'COMPLETENESS']:
-                if key in d_up:
+                if key in d_up and key.lower() not in scores:
                     scores[key.lower()] = int(d_up[key])
             for key in ['FAITHFULNESS_REASONING', 'CLARITY_REASONING', 'COMPLETENESS_REASONING']:
                 base = key.replace('_REASONING', '').lower()
-                if key in d_up:
-                    scores[f'{base}_reasoning'] = str(d_up[key])
-            if len(scores) >= 3:
+                rkey = f'{base}_reasoning'
+                if key in d_up and rkey not in scores:
+                    scores[rkey] = str(d_up[key])
+            if all(scores.get(k) is not None for k in ('faithfulness', 'clarity', 'completeness')):
                 return scores
     except (json.JSONDecodeError, ValueError):
         pass
 
-    # Fallback: Regex auf JSON-Keys (auch bei abgeschnittenem JSON)
+    # Fallback 2: Key:Value-Regex (Legacy — für ältere Judge-Antworten)
     for key in ['FAITHFULNESS', 'CLARITY', 'COMPLETENESS']:
-        m = re.search(rf'"?{key}"?\s*:\s*(\d)', inner, re.IGNORECASE)
-        if m:
-            scores[key.lower()] = int(m.group(1))
+        if key.lower() not in scores:
+            m = re.search(rf'"?{key}"?\s*:\s*(\d)', inner, re.IGNORECASE)
+            if m:
+                scores[key.lower()] = int(m.group(1))
     for key in ['FAITHFULNESS_REASONING', 'CLARITY_REASONING', 'COMPLETENESS_REASONING']:
         base = key.replace('_REASONING', '').lower()
         rkey = f'{base}_reasoning'
+        if rkey in scores:
+            continue
         # Quoted value (JSON or partial JSON)
         m = re.search(rf'"?{key}"?\s*:\s*"([^"]+)', inner, re.IGNORECASE)
         if m:

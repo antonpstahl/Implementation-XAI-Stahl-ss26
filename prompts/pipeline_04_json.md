@@ -57,14 +57,14 @@ nicht aus allgemeinem Domänenwissen ableiten.
 
 Zwei Regeln, die strikt einzuhalten sind:
 
-1. **Vorzeichen bindend**: Das Vorzeichen jedes Beitrags (positiv = erhöhend, negativ = senkend)
-   ist verbindlich. Formuliere ein Merkmal niemals als „erhöhend", wenn sein Beitrag negativ ist —
-   auch wenn du einen allgemeinen Wachstumstrend kennst. Insbesondere: yr=0 (2011) mit negativem
-   Beitrag ist ein dämpfender Faktor; beschreibe es nicht als Wachstumsmerkmal.
+1. **Vorzeichen bindend**: Beschreibe jeden Beitrag genau nach seinem Vorzeichen
+   (positiv → erhöhend, negativ → dämpfend/senkend) — auch wenn ein allgemeiner Trend
+   dagegen spricht. Insbesondere: yr=0 (2011) mit negativem Beitrag ist ein dämpfender
+   Faktor; beschreibe es nicht als Wachstumsmerkmal.
 
 2. **Rang bindend**: Nenne die Einflussfaktoren in absteigender Reihenfolge ihres absoluten
-   Beitrags aus dem JSON (stärkster zuerst). Vertausche die Reihenfolge nicht für narrative
-   Bequemlichkeit, auch wenn zwei Beiträge nahe beieinanderliegen.
+   Beitrags aus dem JSON (stärkster zuerst). Halte diese Reihenfolge strikt ein, auch wenn
+   zwei Beiträge nahe beieinanderliegen.
 
 ## ANALYSE-SCHRITT (Scratchpad — wird nicht angezeigt)
 
@@ -78,24 +78,33 @@ je Treiber (alle Einträge aus `top_contributions`) festhältst:
 
 Dieser Block dient ausschließlich deiner internen Planung und wird vor der
 Speicherung automatisch entfernt. Schreibe ihn vollständig aus, bevor du mit
-[VORHERSAGE] beginnst.
+<vorhersage> beginnst.
 
 ## AUSGABEFORMAT
 
-Strukturiere deine Antwort in genau drei Abschnitte — ohne Zwischenüberschriften,
-fließend lesbar, ca. 150–250 Wörter insgesamt:
+Gliedere deine Antwort in genau drei XML-Abschnitte, fließend lesbar,
+ca. 150–250 Wörter insgesamt:
 
-  [VORHERSAGE] Nenne die vorhergesagte Anzahl, vergleiche mit dem tatsächlichen
-  Wert und bewerte die Güte kurz (gut/mäßig/schlecht getroffen).
+<vorhersage>
+Nenne die vorhergesagte Anzahl, vergleiche mit dem tatsächlichen Wert
+und bewerte die Güte kurz (gut/mäßig/schlecht getroffen).
+</vorhersage>
 
-  [TREIBER] Erkläre die zwei oder drei wichtigsten Einflussfaktoren in dieser
-  Stunde — mit konkreten Werten und ihrer Wirkungsrichtung.
+<treiber>
+Erkläre die zwei oder drei wichtigsten Einflussfaktoren in dieser
+Stunde — mit konkreten Werten und ihrer Wirkungsrichtung.
+</treiber>
 
-  [EMPFEHLUNG] Leite eine oder zwei praktische Schlussfolgerungen für den Betrieb
-  ab (z.B. Fahrradverfügbarkeit, Wartungsfenster, Preisgestaltung).
+<empfehlung>
+Leite eine oder zwei praktische Schlussfolgerungen für den Betrieb
+ab (z.B. Fahrradverfügbarkeit, Wartungsfenster, Preisgestaltung).
+</empfehlung>
 
-Schreibe ausschließlich auf Deutsch. Keine Aufzählungszeichen am Absatzanfang.
-Vermeide Fachbegriffe (kein „SHAP", kein „Log-Raum", kein „exp()").
+Schreibe ausschließlich auf Deutsch. Schreibe in fließendem Text ohne
+Aufzählungszeichen am Absatzanfang. Schreibe in Alltagssprache: verwende
+„Einfluss" statt technischer Bezeichnungen; lasse „Log-Raum" und „exp()"
+weg. Wenn du dir bei einem Merkmalswert unsicher bist, schreibe „etwa X" —
+kennzeichne statt zu erfinden.
 
 ## BEISPIEL (Few-Shot-Kalibrierung)
 
@@ -127,19 +136,19 @@ hum=0.88: Beitrag −0.168 → negativ, Rang 3
 temp=0.50: Beitrag +0.097 → positiv, Rang 4
 </analyse>
 
-[VORHERSAGE] Das Modell sagte 390 ausgeliehene Fahrräder vorher; tatsächlich
+<vorhersage>Das Modell sagte 390 ausgeliehene Fahrräder vorher; tatsächlich
 wurden 387 gezählt. Die Abweichung liegt unter einem Prozent — die Vorhersage
-wurde ausgezeichnet getroffen.
+wurde ausgezeichnet getroffen.</vorhersage>
 
-[TREIBER] Der mit Abstand stärkste Treiber ist die Uhrzeit: 8 Uhr morgens liegt
+<treiber>Der mit Abstand stärkste Treiber ist die Uhrzeit: 8 Uhr morgens liegt
 mitten in der Morgenspitze und treibt die Nachfrage stark nach oben (Rang 1,
-Beitrag +1,11). Dahinter folgt das Jahr 2011 (yr=0) mit einem klar negativen
-Beitrag (−0,23, Rang 2): Da 2011 das nachfrageärmere Modelljahr war, wirkt dieser
+Einfluss +1,11). Dahinter folgt das Jahr 2011 (yr=0) mit einem klar negativen
+Einfluss (−0,23, Rang 2): Da 2011 das nachfrageärmere Modelljahr war, wirkt dieser
 Faktor dämpfend — auch wenn das System 2012 stärker ausgelastet war, wird yr=0
 hier nicht als Wachstumstrend beschrieben. Ebenfalls bremsend ist die hohe
 Luftfeuchtigkeit von 88 % (−0,17, Rang 3): Schwüle Bedingungen schrecken viele
-Radfahrer ab. Die Temperatur von ca. 20 °C trägt leicht positiv bei (Rang 4).
+Radfahrer ab. Die Temperatur von ca. 20 °C trägt leicht positiv bei (Rang 4).</treiber>
 
-[EMPFEHLUNG] Trotz des 2011-Dämpfers und der Schwüle dominiert die Morgenspitze
+<empfehlung>Trotz des 2011-Dämpfers und der Schwüle dominiert die Morgenspitze
 klar. An Werktagen um 8 Uhr sollten Pendlerstationen gut befüllt sein.
-Wartungsfenster gehören in die frühen Nachtstunden.
+Wartungsfenster gehören in die frühen Nachtstunden.</empfehlung>

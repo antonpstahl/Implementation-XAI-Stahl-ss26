@@ -130,6 +130,61 @@ COMPLETENESS: 5""",
     },
 }
 
+# ── 7. XML-Format (B7 — primärer Parsing-Pfad) ───────────────────────────────
+FIXTURE_XML_FULL = {
+    "raw": """\
+<faithfulness_reasoning>Alle drei Top-3-Treiber korrekt; yr-Vorzeichen stimmt. Ankerpunkt 5, kein Abzug.</faithfulness_reasoning>
+<faithfulness>5</faithfulness>
+<clarity_reasoning>Alltagssprache; ein Fachbegriff knapp. Ankerpunkt 4, kein Pflicht-Abzug.</clarity_reasoning>
+<clarity>4</clarity>
+<completeness_reasoning>Alle drei Abschnitte substanziell vorhanden. Ankerpunkt 5, kein Abzug.</completeness_reasoning>
+<completeness>5</completeness>""",
+    "expected": {
+        "faithfulness": 5,
+        "clarity": 4,
+        "completeness": 5,
+        "faithfulness_reasoning": "Alle drei Top-3-Treiber korrekt; yr-Vorzeichen stimmt. Ankerpunkt 5, kein Abzug.",
+        "clarity_reasoning": "Alltagssprache; ein Fachbegriff knapp. Ankerpunkt 4, kein Pflicht-Abzug.",
+        "completeness_reasoning": "Alle drei Abschnitte substanziell vorhanden. Ankerpunkt 5, kein Abzug.",
+    },
+}
+
+# ── 8. XML partial (nur Scores, kein Reasoning) ───────────────────────────────
+FIXTURE_XML_SCORES_ONLY = {
+    "raw": """\
+<faithfulness>3</faithfulness>
+<clarity>2</clarity>
+<completeness>4</completeness>""",
+    "expected": {
+        "faithfulness": 3,
+        "clarity": 2,
+        "completeness": 4,
+    },
+}
+
+# ── 9. XML mit umgebendem Text (robust gegen Preamble) ────────────────────────
+FIXTURE_XML_WITH_PREAMBLE = {
+    "raw": """\
+Hier ist meine Bewertung:
+
+<faithfulness_reasoning>Treiber korrekt. Ankerpunkt 4.</faithfulness_reasoning>
+<faithfulness>4</faithfulness>
+<clarity_reasoning>Klar und verständlich. Ankerpunkt 5.</clarity_reasoning>
+<clarity>5</clarity>
+<completeness_reasoning>Empfehlung vorhanden. Ankerpunkt 5.</completeness_reasoning>
+<completeness>5</completeness>
+
+Ende der Bewertung.""",
+    "expected": {
+        "faithfulness": 4,
+        "clarity": 5,
+        "completeness": 5,
+        "faithfulness_reasoning": "Treiber korrekt. Ankerpunkt 4.",
+        "clarity_reasoning": "Klar und verständlich. Ankerpunkt 5.",
+        "completeness_reasoning": "Empfehlung vorhanden. Ankerpunkt 5.",
+    },
+}
+
 # ── Alle Fixtures als Liste für parametrisierten Einsatz ─────────────────────
 ALL_FIXTURES = [
     ("markdown_codeblock",           FIXTURE_MARKDOWN_CODEBLOCK),
@@ -139,4 +194,7 @@ ALL_FIXTURES = [
     ("truncated_json",               FIXTURE_TRUNCATED_JSON),
     ("garbage",                      FIXTURE_GARBAGE),
     ("reason_then_score_plaintext",  FIXTURE_REASON_THEN_SCORE_PLAINTEXT),
+    ("xml_full",                     FIXTURE_XML_FULL),
+    ("xml_scores_only",              FIXTURE_XML_SCORES_ONLY),
+    ("xml_with_preamble",            FIXTURE_XML_WITH_PREAMBLE),
 ]

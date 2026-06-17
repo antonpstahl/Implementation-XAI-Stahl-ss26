@@ -31,15 +31,15 @@ ROOT        = Path(__file__).resolve().parent.parent
 PROMPTS_DIR = ROOT / "prompts"
 
 GOLDEN_HASHES: dict[str, str] = {
-    # Phase 3·2/B6: „Think-before-write"-Scratchpad ergänzt: ANALYSE-SCHRITT-Sektion
-    # + <analyse>-Block im BEISPIEL in allen drei Generierungs-Prompts.
-    # Davor (Phase 3·2/B5): Few-shot-Kalibrierung; (A3): Harmonisierung.
-    "pipeline_04_json.md":   "d5ebfa0070684e0fe524f67a76b06e547e626737cecc57c7979c554c45e3116d",
-    "pipeline_05_vision.md": "c2a18f6b16266c71a7d8beee027626681d0bd8b75edd824f5838118d5b56e3a4",
-    "pipeline_06_tooluse.md": "4364fc743989825613183509cd43886a6c94c851d271c1512388ba6d73a65912",
-    # Judge-Prompt eingefroren (Phase 3·2/A4+B5): bestimmt die Messung;
-    # Änderungen müssen explizit bestätigt werden.
-    "judge_system.md":       "775af71edcc5d397d22fa7d279c16c597d8a035cae4b3716912ca56414007f32",
+    # Phase 3·2/B7+C: XML-Abschnitts-Tags (<vorhersage>/<treiber>/<empfehlung>),
+    # positive Instruktionen (keine Verbote), Halluzinations-Notausgang in allen
+    # drei Generierungs-Prompts. Davor (B6): Scratchpad; (B5): Few-shot; (A3): Harmonisierung.
+    "pipeline_04_json.md":   "76e4efa276360c45cf6acf83c05aa260a7aab8d8dd438c95440bec4632f02155",
+    "pipeline_05_vision.md": "c1ed676bbcd7037fc2067a91c7de71131dc8d4c9ca1e92f1359d78960b6108ed",
+    "pipeline_06_tooluse.md": "0562c817c8e2b4de3ec5d6070b84580cc48606c11857091f8e4a8c5ea5fa1bd8",
+    # Judge-Prompt (Phase 3·2/B7+C): AUSGABEFORMAT-Sektion mit XML-Schema ergänzt;
+    # Ankerbeispiele auf XML-Format umgestellt; Änderungen explizit bestätigt.
+    "judge_system.md":       "c19bafcc3ac584075ec5af640dfe8fce781fa360709a7ae05e82019edfa7e60f",
 }
 
 
@@ -101,30 +101,30 @@ from utils.llm import strip_scratchpad  # noqa: E402
 
 
 @pytest.mark.parametrize("raw,expected", [
-    # Block wird entfernt, Prosa bleibt
+    # Block wird entfernt, XML-Prosa bleibt (B7: <vorhersage>-Tags)
     (
-        "<analyse>\nhr=8: positiv, Rang 1\nyr=0: negativ, Rang 2\n</analyse>\n\n[VORHERSAGE] Text.",
-        "[VORHERSAGE] Text.",
+        "<analyse>\nhr=8: positiv, Rang 1\nyr=0: negativ, Rang 2\n</analyse>\n\n<vorhersage>Text.</vorhersage>",
+        "<vorhersage>Text.</vorhersage>",
     ),
     # Kein Block — Eingabe unverändert
     (
-        "[VORHERSAGE] Kein Scratchpad.",
-        "[VORHERSAGE] Kein Scratchpad.",
+        "<vorhersage>Kein Scratchpad.</vorhersage>",
+        "<vorhersage>Kein Scratchpad.</vorhersage>",
     ),
     # Block mit CRLF
     (
-        "<analyse>\r\nhr=8: positiv\r\n</analyse>\r\n[VORHERSAGE] CRLF-Text.",
-        "[VORHERSAGE] CRLF-Text.",
+        "<analyse>\r\nhr=8: positiv\r\n</analyse>\r\n<vorhersage>CRLF-Text.</vorhersage>",
+        "<vorhersage>CRLF-Text.</vorhersage>",
     ),
     # Mehrere Blöcke (robustness)
     (
-        "<analyse>A</analyse>\n<analyse>B</analyse>\n[VORHERSAGE] Doppelt.",
-        "[VORHERSAGE] Doppelt.",
+        "<analyse>A</analyse>\n<analyse>B</analyse>\n<vorhersage>Doppelt.</vorhersage>",
+        "<vorhersage>Doppelt.</vorhersage>",
     ),
     # Leerer Block
     (
-        "<analyse></analyse>\n[VORHERSAGE] Leer.",
-        "[VORHERSAGE] Leer.",
+        "<analyse></analyse>\n<vorhersage>Leer.</vorhersage>",
+        "<vorhersage>Leer.</vorhersage>",
     ),
 ])
 def test_strip_scratchpad(raw: str, expected: str) -> None:

@@ -1,6 +1,6 @@
 Du bewertest Erklärungen von Machine-Learning-Modellen für einen Fahrradverleih.
 Bewerte jede Erklärung auf drei Kriterien anhand der unten definierten Rubrik.
-Das Ausgabeformat steht in der Benutzeranfrage.
+Das Ausgabeformat ist am Ende dieses System-Prompts definiert.
 
 ## VORGEHEN JE KRITERIUM (Reason-then-Score / G-Eval)
 
@@ -82,14 +82,14 @@ das nachfrageärmere Jahr war. Ebenfalls dämpfend: die Luftfeuchtigkeit von 88 
 (Rang 3). Empfehlung: Morgenkapazität an Pendlerstationen sichern; Wartungen in die
 Nacht verlegen."
 
-FAITHFULNESS_REASONING: Alle drei Top-Treiber korrekt (hr↑, yr↓, hum↓); yr-Vorzeichen korrekt als negativ/dämpfend; Vorhersage 390 und Vergleich mit 387 genannt. Ankerpunkt 5, kein Abzug.
-FAITHFULNESS: 5
+<faithfulness_reasoning>Alle drei Top-Treiber korrekt (hr↑, yr↓, hum↓); yr-Vorzeichen korrekt als negativ/dämpfend; Vorhersage 390 und Vergleich mit 387 genannt. Ankerpunkt 5, kein Abzug.</faithfulness_reasoning>
+<faithfulness>5</faithfulness>
 
-CLARITY_REASONING: Alltagssprache; Morgenspitze verständlich; „Beitrag ist negativ" ist knapp technisch, ohne Fachjargon. Ankerpunkt 5, kein Pflicht-Abzug → Ankerpunkt 4 da leicht erklärungsbedürftig.
-CLARITY: 4
+<clarity_reasoning>Alltagssprache; Morgenspitze verständlich; „Beitrag ist negativ" ist knapp technisch, ohne Fachjargon. Ankerpunkt 5, kein Pflicht-Abzug → Ankerpunkt 4 da leicht erklärungsbedürftig.</clarity_reasoning>
+<clarity>4</clarity>
 
-COMPLETENESS_REASONING: Alle drei Abschnitte substanziell vorhanden (Vorhersage mit Vergleich, Top-3-Treiber mit Richtungen, Empfehlung). Ankerpunkt 5, kein Abzug.
-COMPLETENESS: 5
+<completeness_reasoning>Alle drei Abschnitte substanziell vorhanden (Vorhersage mit Vergleich, Top-3-Treiber mit Richtungen, Empfehlung). Ankerpunkt 5, kein Abzug.</completeness_reasoning>
+<completeness>5</completeness>
 
 ---
 
@@ -99,14 +99,14 @@ Erklärungstext: „Die Vorhersage von 390 Rädern liegt nah am tatsächlichen W
 In dieser Stunde spielten Tageszeit und Feuchtigkeit eine Rolle für die Nachfrage.
 Genaue Aussagen über die Wirkungsrichtungen sind ohne weitere Analyse schwierig."
 
-FAITHFULNESS_REASONING: hr als Treiber nur vage angedeutet („Tageszeit"); yr fehlt komplett; hum nur allgemein („Feuchtigkeit"); Wirkungsrichtungen nicht genannt. Ankerpunkt 3 (min. 1 Treiber sichtbar, Richtung fehlt), kein Abzug.
-FAITHFULNESS: 3
+<faithfulness_reasoning>hr als Treiber nur vage angedeutet („Tageszeit"); yr fehlt komplett; hum nur allgemein („Feuchtigkeit"); Wirkungsrichtungen nicht genannt. Ankerpunkt 3 (min. 1 Treiber sichtbar, Richtung fehlt), kein Abzug.</faithfulness_reasoning>
+<faithfulness>3</faithfulness>
 
-CLARITY_REASONING: Kein Jargon; aber vage und nichtssagend — „ohne weitere Analyse schwierig" hilft Laien nicht. Ankerpunkt 3 (mehrere unklare Passagen; Laie muss raten).
-CLARITY: 3
+<clarity_reasoning>Kein Jargon; aber vage und nichtssagend — „ohne weitere Analyse schwierig" hilft Laien nicht. Ankerpunkt 3 (mehrere unklare Passagen; Laie muss raten).</clarity_reasoning>
+<clarity>3</clarity>
 
-COMPLETENESS_REASONING: Vorhersage genannt; Treiber schwach (Top-3 unvollständig, Richtungen fehlen); Empfehlung fehlt ganz. Ankerpunkt 3, −1 (keine Empfehlung) → max(1, 3−1) = 2.
-COMPLETENESS: 2
+<completeness_reasoning>Vorhersage genannt; Treiber schwach (Top-3 unvollständig, Richtungen fehlen); Empfehlung fehlt ganz. Ankerpunkt 3, −1 (keine Empfehlung) → max(1, 3−1) = 2.</completeness_reasoning>
+<completeness>2</completeness>
 
 ---
 
@@ -116,11 +116,26 @@ Erklärungstext: „Die SHAP-Werte zeigen hr=8 mit einem positiven Log-Raum-Beit
 von exp(1.11). Das Jahr 2011 (yr=0) signalisiert Wachstum bis 2012 — der Trend
 ist positiv. Die Luftfeuchtigkeit ist technisch relevant (hum=0.88)."
 
-FAITHFULNESS_REASONING: hr korrekt als erhöhend. yr als „Wachstum/positiv" beschrieben — tatsächlicher Beitrag −0.226 ist negativ/dämpfend: Richtungsfehler! hum erwähnt, aber Richtung nicht genannt. Zahlenwert 390 fehlt. Ankerpunkt 3 (min. 1 Treiber, hr korrekt), −1 (yr-Richtung falsch), −1 (Zahlenwert fehlt) → max(1, 3−2) = 1.
-FAITHFULNESS: 1
+<faithfulness_reasoning>hr korrekt als erhöhend. yr als „Wachstum/positiv" beschrieben — tatsächlicher Beitrag −0.226 ist negativ/dämpfend: Richtungsfehler! hum erwähnt, aber Richtung nicht genannt. Zahlenwert 390 fehlt. Ankerpunkt 3 (min. 1 Treiber, hr korrekt), −1 (yr-Richtung falsch), −1 (Zahlenwert fehlt) → max(1, 3−2) = 1.</faithfulness_reasoning>
+<faithfulness>1</faithfulness>
 
-CLARITY_REASONING: „SHAP-Werte", „Log-Raum", „exp(1.11)" sind Fachjargon; kein Laie versteht diese Erklärung. Ankerpunkt 2 (überwiegend technisch), −1 (SHAP/Log-Raum/exp() explizit genannt) → max(1, 2−1) = 1.
-CLARITY: 1
+<clarity_reasoning>„SHAP-Werte", „Log-Raum", „exp(1.11)" sind Fachjargon; kein Laie versteht diese Erklärung. Ankerpunkt 2 (überwiegend technisch), −1 (SHAP/Log-Raum/exp() explizit genannt) → max(1, 2−1) = 1.</clarity_reasoning>
+<clarity>1</clarity>
 
-COMPLETENESS_REASONING: Kein Abschnitt [VORHERSAGE] mit Vergleich; kein Abschnitt [EMPFEHLUNG]. Ankerpunkt 2, −1 (kein Vergleich Vorhersage vs. Tatsächlich), −1 (keine Empfehlung) → max(1, 2−2) = 1.
-COMPLETENESS: 1
+<completeness_reasoning>Kein Vorhersage-Abschnitt mit Vergleich; kein Empfehlungsabschnitt. Ankerpunkt 2, −1 (kein Vergleich Vorhersage vs. Tatsächlich), −1 (keine Empfehlung) → max(1, 2−2) = 1.</completeness_reasoning>
+<completeness>1</completeness>
+
+---
+
+## AUSGABEFORMAT
+
+Antworte ausschließlich in diesem XML-Format — kein Text außerhalb der Tags:
+
+<faithfulness_reasoning>Ankerpunkt wählen, Abzüge prüfen, Endpunktzahl berechnen (1–2 Sätze)</faithfulness_reasoning>
+<faithfulness>N</faithfulness>
+<clarity_reasoning>Ankerpunkt wählen, Abzüge prüfen, Endpunktzahl berechnen (1–2 Sätze)</clarity_reasoning>
+<clarity>N</clarity>
+<completeness_reasoning>Ankerpunkt wählen, Abzüge prüfen, Endpunktzahl berechnen (1–2 Sätze)</completeness_reasoning>
+<completeness>N</completeness>
+
+Ersetze N durch die berechnete Ganzzahl (1–5).
