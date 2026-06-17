@@ -125,9 +125,11 @@ pytest tests/        # run all tests
 pytest tests/test_prompt_golden.py -v   # prompt regression only
 ```
 
-The suite covers sampling determinism, judge-parsing robustness, statistical functions, README consistency, and **prompt-fix regression**.
+The suite covers sampling determinism, generation-loop persistence/resume, judge-parsing robustness, statistical functions, denormalization consistency, README consistency, and **prompt-fix regression**.
 The prompt regression test (`test_prompt_golden.py`) freezes the SHA-256 hashes and key constraint phrases of all three pipeline prompts as corrected in Phase 3 (sign- and rank-fidelity rules for `yr=0`).
 It is a hard gate: Phase 3b (full-scale run) must not start until all tests are green.
+
+**Green-gate status (Phase 3a):** `pytest tests/` → **139 passed** (2026-06-17, Python 3.13). All scaling-critical paths are covered, so Phase 3b is released.
 
 **If a prompt is intentionally improved:**
 1. Edit the prompt file.
