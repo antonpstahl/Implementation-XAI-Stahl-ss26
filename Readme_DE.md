@@ -264,6 +264,24 @@ API-Key wird aus `.env` geladen (`ANTHROPIC_API_KEY=sk-ant-...`).
 Alle Pfade sind relativ zur Projekt-Wurzel in `utils/__init__.py` definiert.
 Reproduzierbarkeit durch `RANDOM_STATE = 42`.
 
+### Testsuite
+
+```bash
+pytest tests/        # gesamte Testsuite
+pytest tests/test_prompt_golden.py -v   # nur Prompt-Regression
+```
+
+Die Suite umfasst Sampling-Determinismus, Judge-Parsing-Robustheit, Statistikfunktionen, README-Konsistenz und **Prompt-Fix-Regression**.
+Der Prompt-Regressionstest (`test_prompt_golden.py`) friert die SHA-256-Hashes und kritischen Constraint-Phrasen aller drei Pipeline-Prompts ein (Vorzeichen- und Rangtreue für `yr=0`, Phase-3-Fix).
+Er ist ein hartes Gate: Phase 3b (Vollauf) darf erst starten, wenn alle Tests grün sind.
+
+**Wenn ein Prompt absichtlich verbessert wird:**
+1. Prompt-Datei bearbeiten.
+2. Neuen Hash berechnen: `shasum -a 256 prompts/<datei>.md`
+3. `GOLDEN_HASHES` in `tests/test_prompt_golden.py` aktualisieren.
+4. Falls sich eine Constraint-Phrase geändert hat, auch `REQUIRED_PHRASES` anpassen.
+5. `pytest tests/test_prompt_golden.py` muss grün sein.
+
 ### Ausführungsreihenfolge
 
 ```
