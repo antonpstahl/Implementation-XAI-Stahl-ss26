@@ -111,12 +111,32 @@ FIXTURE_GARBAGE = {
     "expected": {},  # leeres dict — kein Score extrahierbar
 }
 
+# ── 6. Reason-then-Score Plain-Text (A1-Format: Begründung vor Score) ─────────
+FIXTURE_REASON_THEN_SCORE_PLAINTEXT = {
+    "raw": """\
+FAITHFULNESS_REASONING: Ankerpunkt 5: alle drei Top-3-Treiber korrekt benannt, Vorhersagezahl korrekt. Kein Abzug. Endpunktzahl = max(1, 5+0) = 5.
+FAITHFULNESS: 5
+CLARITY_REASONING: Ankerpunkt 4: ein leichter Fachbegriff vorhanden. Ein Abzug. Endpunktzahl = max(1, 4-1) = 3.
+CLARITY: 3
+COMPLETENESS_REASONING: Ankerpunkt 5: alle drei Pflichtabschnitte substanziell vorhanden. Kein Abzug. Endpunktzahl = max(1, 5+0) = 5.
+COMPLETENESS: 5""",
+    "expected": {
+        "faithfulness": 5,
+        "clarity": 3,
+        "completeness": 5,
+        "faithfulness_reasoning": "Ankerpunkt 5: alle drei Top-3-Treiber korrekt benannt, Vorhersagezahl korrekt. Kein Abzug. Endpunktzahl = max(1, 5+0) = 5.",
+        "clarity_reasoning": "Ankerpunkt 4: ein leichter Fachbegriff vorhanden. Ein Abzug. Endpunktzahl = max(1, 4-1) = 3.",
+        "completeness_reasoning": "Ankerpunkt 5: alle drei Pflichtabschnitte substanziell vorhanden. Kein Abzug. Endpunktzahl = max(1, 5+0) = 5.",
+    },
+}
+
 # ── Alle Fixtures als Liste für parametrisierten Einsatz ─────────────────────
 ALL_FIXTURES = [
-    ("markdown_codeblock",  FIXTURE_MARKDOWN_CODEBLOCK),
-    ("json_in_fliesstext",  FIXTURE_JSON_IN_FLIESSTEXT),
-    ("plain_json",          FIXTURE_PLAIN_JSON),
-    ("missing_fields",      FIXTURE_MISSING_FIELDS),
-    ("truncated_json",      FIXTURE_TRUNCATED_JSON),
-    ("garbage",             FIXTURE_GARBAGE),
+    ("markdown_codeblock",           FIXTURE_MARKDOWN_CODEBLOCK),
+    ("json_in_fliesstext",           FIXTURE_JSON_IN_FLIESSTEXT),
+    ("plain_json",                   FIXTURE_PLAIN_JSON),
+    ("missing_fields",               FIXTURE_MISSING_FIELDS),
+    ("truncated_json",               FIXTURE_TRUNCATED_JSON),
+    ("garbage",                      FIXTURE_GARBAGE),
+    ("reason_then_score_plaintext",  FIXTURE_REASON_THEN_SCORE_PLAINTEXT),
 ]
