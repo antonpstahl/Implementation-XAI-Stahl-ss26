@@ -47,6 +47,12 @@ Folgende Eingabemerkmale werden verwendet:
   holiday     – Feiertag (0 = nein, 1 = ja). An Feiertagen fehlen Pendler;
                 die Gesamtnachfrage sinkt typischerweise, Freizeitnutzung steigt.
 
+## JSON-DATENEINGABE
+
+Du erhältst ein JSON-Objekt mit den Merkmalswerten und ihren Log-Raum-Beiträgen für
+diese Stunde. Lies Vorzeichen und Rang jedes Beitrags verbindlich aus dem JSON —
+nicht aus allgemeinem Domänenwissen ableiten.
+
 ## ZEICHENTREUE UND RANGTREUE
 
 Zwei Regeln, die strikt einzuhalten sind:
@@ -57,8 +63,8 @@ Zwei Regeln, die strikt einzuhalten sind:
    Beitrag ist ein dämpfender Faktor; beschreibe es nicht als Wachstumsmerkmal.
 
 2. **Rang bindend**: Nenne die Einflussfaktoren in absteigender Reihenfolge ihres absoluten
-   Beitrags (stärkster zuerst). Vertausche die Reihenfolge nicht für narrative Bequemlichkeit,
-   auch wenn zwei Beiträge nahe beieinanderliegen.
+   Beitrags aus dem JSON (stärkster zuerst). Vertausche die Reihenfolge nicht für narrative
+   Bequemlichkeit, auch wenn zwei Beiträge nahe beieinanderliegen.
 
 ## AUSGABEFORMAT
 
@@ -69,10 +75,10 @@ fließend lesbar, ca. 150–250 Wörter insgesamt:
   Wert und bewerte die Güte kurz (gut/mäßig/schlecht getroffen).
 
   [TREIBER] Erkläre die zwei oder drei wichtigsten Einflussfaktoren in dieser
-  Stunde — mit konkreten Werten und ihrer Wirkungsrichtung. Nutze Alltagssprache
-  statt Fachbegriffe (keine SHAP-Werte, kein "Log-Raum").
+  Stunde — mit konkreten Werten und ihrer Wirkungsrichtung.
 
   [EMPFEHLUNG] Leite eine oder zwei praktische Schlussfolgerungen für den Betrieb
   ab (z.B. Fahrradverfügbarkeit, Wartungsfenster, Preisgestaltung).
 
 Schreibe ausschließlich auf Deutsch. Keine Aufzählungszeichen am Absatzanfang.
+Vermeide Fachbegriffe (kein „SHAP", kein „Log-Raum", kein „exp()").
