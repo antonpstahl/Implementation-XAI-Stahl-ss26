@@ -49,3 +49,42 @@ def parse_judge_response(raw: str) -> dict:
             scores[f'{base}_reasoning'] = m.group(1)
 
     return scores
+
+
+SCORE_KEYS = ("faithfulness", "clarity", "completeness")
+
+
+def judge_with_retry(ask_fn, prompt: str, system: str, model: str,
+                     max_tokens: int = 600, max_retries: int = 3) -> dict:
+    """Ruft ask_fn auf und wiederholt bis zu max_retries mal bei unvollständigem Parsing.
+
+    ask_fn muss dasselbe Interface wie utils.llm.ask_text haben:
+        ask_fn(prompt, system=..., model=..., max_tokens=..., cache_system=...) -> response
+
+    Rückgabe: dict mit scores (fehlende Scores als None) + raw_response + usage.
+    """
+    scores: dict = {}
+    raw = ""
+    in_tok = out_tok = 0
+
+    for _ in range(max_retries):
+        response = ask_fn(prompt, system=system, model=model,
+                          max_tokens=max_tokens, cache_system=True)
+        usage = response.get("usage", {})
+        in_tok = usage.get("input_tokens", 0)
+        out_tok = usage.get("output_tokens", 0)
+        raw = response["content"][0]["text"].strip()
+        scores = parse_judge_response(raw)
+        if all(scores.get(k) is not None for k in SCORE_KEYS):
+            break
+
+    return {
+        "faithfulness":  scores.get("faithfulness"),
+        "clarity":       scores.get("clarity"),
+        "completeness":  scores.get("completeness"),
+        "faithfulness_reasoning":  scores.get("faithfulness_reasoning", ""),
+        "clarity_reasoning":       scores.get("clarity_reasoning", ""),
+        "completeness_reasoning":  scores.get("completeness_reasoning", ""),
+        "raw_response": raw,
+        "usage": {"input_tokens": in_tok, "output_tokens": out_tok},
+    }
