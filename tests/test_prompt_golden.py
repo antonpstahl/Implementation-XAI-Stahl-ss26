@@ -31,9 +31,11 @@ ROOT        = Path(__file__).resolve().parent.parent
 PROMPTS_DIR = ROOT / "prompts"
 
 GOLDEN_HASHES: dict[str, str] = {
-    "pipeline_04_json.md":   "3eca688e5e4a952f33065ef6cec86d4320ce9de803a9f5d917a630391e3fb90a",
-    "pipeline_05_vision.md": "791d56d8f7257308c8adc9b4509473772e2e1b762b3c61d8010d35bd29fb86e7",
-    "pipeline_06_tooluse.md": "6801db6db83b02621f84e733bb4e4a8d26d94b0ec6492c5f4878b9b75a692c30",
+    # Phase 3·2/A3: Prompts harmonisiert (gleiches Wortbudget 150-250, identische
+    # Stil-/Schema-/Rollen-Bausteine; nur der modalspezifische Teil darf abweichen).
+    "pipeline_04_json.md":   "e9f2a7da34b832a050f4c4511dd47fd4a1d1dbde1d8cb5cca2808b5040b6961b",
+    "pipeline_05_vision.md": "62b4cc772ca7af60059d2fd6793e605f0dc4d134ca878777ab7f28848c2abcf2",
+    "pipeline_06_tooluse.md": "24344dae04dca3c1113eac338c0dee0734e1d09b95cbbba4c2cc1d36ba438e96",
     # Judge-Prompt eingefroren (Phase 3·2/A4): bestimmt die Messung;
     # Änderungen müssen explizit bestätigt werden.
     "judge_system.md":       "157c4c62b587b0fa6edd4ccc2193b69195b9d2fef89ba374b32beb2c56146ad7",
