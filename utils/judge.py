@@ -44,9 +44,19 @@ def parse_judge_response(raw: str) -> dict:
             scores[key.lower()] = int(m.group(1))
     for key in ['FAITHFULNESS_REASONING', 'CLARITY_REASONING', 'COMPLETENESS_REASONING']:
         base = key.replace('_REASONING', '').lower()
+        rkey = f'{base}_reasoning'
+        # Quoted value (JSON or partial JSON)
         m = re.search(rf'"?{key}"?\s*:\s*"([^"]+)', inner, re.IGNORECASE)
         if m:
-            scores[f'{base}_reasoning'] = m.group(1)
+            scores[rkey] = m.group(1)
+            continue
+        # Plain-text value (reason-then-score format; stop at next KEY: line or end)
+        m = re.search(
+            rf'^{key}\s*:\s*(.+?)(?=\n[A-Z_]{{3,}}\s*:|$)',
+            inner, re.IGNORECASE | re.MULTILINE | re.DOTALL,
+        )
+        if m:
+            scores[rkey] = m.group(1).strip()
 
     return scores
 
@@ -55,7 +65,7 @@ SCORE_KEYS = ("faithfulness", "clarity", "completeness")
 
 
 def judge_with_retry(ask_fn, prompt: str, system: str, model: str,
-                     max_tokens: int = 600, max_retries: int = 3) -> dict:
+                     max_tokens: int = 900, max_retries: int = 3) -> dict:
     """Ruft ask_fn auf und wiederholt bis zu max_retries mal bei unvollständigem Parsing.
 
     ask_fn muss dasselbe Interface wie utils.llm.ask_text haben:

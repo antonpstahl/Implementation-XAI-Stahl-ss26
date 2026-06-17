@@ -2,7 +2,7 @@
 Phase 3a — Prompt-Fix-Regression: Golden-Test.
 
 Test 1 — SHA-256-Hash-Check:
-  Friert die exakten Byte-Inhalte aller drei Prompt-Dateien ein.
+  Friert die exakten Byte-Inhalte aller Prompt-Dateien ein.
   Schlägt bei jeder Änderung fehl, bevor der teure Vollauf (Phase 3b) startet.
 
   Wenn ein Prompt absichtlich verbessert wird:
@@ -10,6 +10,10 @@ Test 1 — SHA-256-Hash-Check:
     2. Hash neu berechnen: shasum -a 256 prompts/<datei>.md
     3. GOLDEN_HASHES in dieser Datei aktualisieren
     4. pytest tests/test_prompt_golden.py grün bestätigen
+
+  judge_system.md ist in GOLDEN_HASHES aufgenommen (Phase 3·2/A4), weil
+  der Judge-Prompt die Messung bestimmt und Änderungen explizit bestätigt
+  werden sollen.
 
 Test 2 — Key-Phrase-Assertion:
   Prüft die semantisch kritischen Sätze des Phase-3-Fixes (yr-Vorzeichen +
@@ -27,9 +31,12 @@ ROOT        = Path(__file__).resolve().parent.parent
 PROMPTS_DIR = ROOT / "prompts"
 
 GOLDEN_HASHES: dict[str, str] = {
-    "pipeline_04_json.md":  "3eca688e5e4a952f33065ef6cec86d4320ce9de803a9f5d917a630391e3fb90a",
+    "pipeline_04_json.md":   "3eca688e5e4a952f33065ef6cec86d4320ce9de803a9f5d917a630391e3fb90a",
     "pipeline_05_vision.md": "791d56d8f7257308c8adc9b4509473772e2e1b762b3c61d8010d35bd29fb86e7",
     "pipeline_06_tooluse.md": "6801db6db83b02621f84e733bb4e4a8d26d94b0ec6492c5f4878b9b75a692c30",
+    # Judge-Prompt eingefroren (Phase 3·2/A4): bestimmt die Messung;
+    # Änderungen müssen explizit bestätigt werden.
+    "judge_system.md":       "157c4c62b587b0fa6edd4ccc2193b69195b9d2fef89ba374b32beb2c56146ad7",
 }
 
 
