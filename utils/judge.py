@@ -65,11 +65,17 @@ SCORE_KEYS = ("faithfulness", "clarity", "completeness")
 
 
 def judge_with_retry(ask_fn, prompt: str, system: str, model: str,
-                     max_tokens: int = 900, max_retries: int = 3) -> dict:
+                     max_tokens: int = 900, max_retries: int = 3,
+                     temperature: float | None = None) -> dict:
     """Ruft ask_fn auf und wiederholt bis zu max_retries mal bei unvollständigem Parsing.
 
     ask_fn muss dasselbe Interface wie utils.llm.ask_text haben:
-        ask_fn(prompt, system=..., model=..., max_tokens=..., cache_system=...) -> response
+        ask_fn(prompt, system=..., model=..., max_tokens=..., cache_system=...,
+               temperature=...) -> response
+
+    temperature : None → Modell-Default (1.0); 0.0 → deterministisch (JUDGE_TEMPERATURE).
+                  Für Reproduzierbarkeit und minimale Score-Varianz sollte immer
+                  JUDGE_TEMPERATURE=0.0 übergeben werden (Phase 3·2/A2).
 
     Rückgabe: dict mit scores (fehlende Scores als None) + raw_response + usage.
     """
@@ -79,7 +85,8 @@ def judge_with_retry(ask_fn, prompt: str, system: str, model: str,
 
     for _ in range(max_retries):
         response = ask_fn(prompt, system=system, model=model,
-                          max_tokens=max_tokens, cache_system=True)
+                          max_tokens=max_tokens, cache_system=True,
+                          temperature=temperature)
         usage = response.get("usage", {})
         in_tok = usage.get("input_tokens", 0)
         out_tok = usage.get("output_tokens", 0)
@@ -98,3 +105,47 @@ def judge_with_retry(ask_fn, prompt: str, system: str, model: str,
         "raw_response": raw,
         "usage": {"input_tokens": in_tok, "output_tokens": out_tok},
     }
+
+
+def judge_with_self_consistency(
+    ask_fn, prompt: str, system: str, model: str,
+    max_tokens: int = 900, k: int = 3, temperature: float = 0.7,
+) -> dict:
+    """Self-Consistency-Judge: k Samples bei gegebener temperature, Median je Score.
+
+    Kostet k× die Judge-Calls von judge_with_retry. Bei JUDGE_TEMPERATURE=0
+    (deterministisch) liefert SC keine zusätzliche Information — in diesem Fall
+    sollte judge_with_retry mit temperature=0 bevorzugt werden.
+
+    Kostenwirkung Phase 3b: k=3, n=200, 4 Pipelines, 2 XAI-Modelle
+        → 200 × 4 × 2 × k = 4 800 Judge-Calls statt 1 600 (Faktor k=3).
+        Dies ist in die Kostenschätzung (Phase 3b) einzurechnen.
+
+    Rückgabe: dict mit aggregierten Scores (Median), Roh-Antworten und
+    kumuliertem usage.
+    """
+    import statistics
+
+    per_run: list[dict] = []
+    total_in = total_out = 0
+
+    for _ in range(k):
+        result = judge_with_retry(
+            ask_fn, prompt, system, model,
+            max_tokens=max_tokens, max_retries=3, temperature=temperature,
+        )
+        per_run.append(result)
+        total_in  += result["usage"]["input_tokens"]
+        total_out += result["usage"]["output_tokens"]
+
+    aggregated: dict = {}
+    for key in SCORE_KEYS:
+        vals = [r[key] for r in per_run if r[key] is not None]
+        aggregated[key] = int(statistics.median(vals)) if vals else None
+
+    for rkey in ("faithfulness_reasoning", "clarity_reasoning", "completeness_reasoning"):
+        aggregated[rkey] = per_run[0].get(rkey, "")
+
+    aggregated["raw_responses"] = [r["raw_response"] for r in per_run]
+    aggregated["usage"] = {"input_tokens": total_in, "output_tokens": total_out}
+    return aggregated
