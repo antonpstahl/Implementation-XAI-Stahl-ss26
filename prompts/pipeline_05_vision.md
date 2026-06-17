@@ -64,14 +64,14 @@ Du siehst einen Waterfall-Plot (SHAP für XGBoost, EBM-Terme für EBM):
 
 Zwei Regeln, die strikt einzuhalten sind:
 
-1. **Vorzeichen bindend**: Die Balkenfarbe/-richtung im Plot ist verbindlich (rot/rechts =
-   erhöhend, blau/links = senkend). Beschreibe ein Merkmal niemals als „erhöhend", wenn
-   sein Balken nach links zeigt — auch wenn ein allgemeiner Trend dagegen spricht.
+1. **Vorzeichen bindend**: Beschreibe jeden Balken genau nach seiner Richtung
+   (roter Balken rechts → erhöhend, blauer Balken links → dämpfend/senkend) —
+   auch wenn ein allgemeiner Trend dagegen spricht.
    Insbesondere: ein blauer yr-Balken (yr=0, 2011) ist ein dämpfender Faktor.
 
 2. **Rang bindend**: Nenne Merkmale in der Reihenfolge ihrer Balkenlänge (stärkster zuerst,
-   wie im Plot dargestellt). Vertausche die Reihenfolge nicht für narrative Bequemlichkeit,
-   auch wenn zwei Beiträge nahe beieinanderliegen.
+   wie im Plot dargestellt). Halte diese Reihenfolge strikt ein, auch wenn zwei Beiträge
+   nahe beieinanderliegen.
 
 ## ANALYSE-SCHRITT (Scratchpad — wird nicht angezeigt)
 
@@ -85,24 +85,33 @@ je sichtbarem Balken im Plot festhältst:
 
 Dieser Block dient ausschließlich deiner internen Planung und wird vor der
 Speicherung automatisch entfernt. Schreibe ihn vollständig aus, bevor du mit
-[VORHERSAGE] beginnst.
+<vorhersage> beginnst.
 
 ## AUSGABEFORMAT
 
-Strukturiere deine Antwort in genau drei Abschnitte — ohne Zwischenüberschriften,
-fließend lesbar, ca. 150–250 Wörter insgesamt:
+Gliedere deine Antwort in genau drei XML-Abschnitte, fließend lesbar,
+ca. 150–250 Wörter insgesamt:
 
-  [VORHERSAGE] Nenne die vorhergesagte Anzahl, vergleiche mit dem tatsächlichen
-  Wert und bewerte die Güte kurz (gut/mäßig/schlecht getroffen).
+<vorhersage>
+Nenne die vorhergesagte Anzahl, vergleiche mit dem tatsächlichen Wert
+und bewerte die Güte kurz (gut/mäßig/schlecht getroffen).
+</vorhersage>
 
-  [TREIBER] Erkläre anhand des Plots die zwei oder drei wichtigsten Einflussfaktoren
-  in dieser Stunde — mit konkreten Merkmalswerten und ihrer Wirkungsrichtung.
+<treiber>
+Erkläre anhand des Plots die zwei oder drei wichtigsten Einflussfaktoren
+in dieser Stunde — mit konkreten Merkmalswerten und ihrer Wirkungsrichtung.
+</treiber>
 
-  [EMPFEHLUNG] Leite eine oder zwei praktische Schlussfolgerungen für den Betrieb
-  ab (z.B. Fahrradverfügbarkeit, Wartungsfenster, Preisgestaltung).
+<empfehlung>
+Leite eine oder zwei praktische Schlussfolgerungen für den Betrieb
+ab (z.B. Fahrradverfügbarkeit, Wartungsfenster, Preisgestaltung).
+</empfehlung>
 
-Schreibe ausschließlich auf Deutsch. Keine Aufzählungszeichen am Absatzanfang.
-Vermeide Fachbegriffe (kein „SHAP", kein „Log-Raum", kein „exp()").
+Schreibe ausschließlich auf Deutsch. Schreibe in fließendem Text ohne
+Aufzählungszeichen am Absatzanfang. Schreibe in Alltagssprache: verwende
+„Einfluss" statt technischer Bezeichnungen; lasse „Log-Raum" und „exp()"
+weg. Wenn du dir bei einem Merkmalswert unsicher bist, schreibe „etwa X" —
+kennzeichne statt zu erfinden.
 
 ## BEISPIEL (Few-Shot-Kalibrierung)
 
@@ -125,18 +134,18 @@ hum=0.88: Balken blau, Beitrag −0.168 → negativ, Rang 3
 temp=0.50: Balken rot, Beitrag +0.097 → positiv, Rang 4
 </analyse>
 
-[VORHERSAGE] Das Modell sagte 390 ausgeliehene Fahrräder vorher; tatsächlich
-wurden 387 gezählt — die Vorhersage wurde ausgezeichnet getroffen.
+<vorhersage>Das Modell sagte 390 ausgeliehene Fahrräder vorher; tatsächlich
+wurden 387 gezählt — die Vorhersage wurde ausgezeichnet getroffen.</vorhersage>
 
-[TREIBER] Der längste rote Balken gehört der Tageszeit: hr=8 (Morgenspitze) ist der
+<treiber>Der längste rote Balken gehört der Tageszeit: hr=8 (Morgenspitze) ist der
 stärkste Aufwärtstreiber im Plot. Dahinter folgt ein blauer Balken für yr=0 (2011):
 Blau bedeutet dämpfend — das Jahr 2011 war das nachfrageärmere Modelljahr, deshalb
 zeigt sein Balken nach links. Auch wenn das System 2012 eine höhere Auslastung
 hatte, wird dieser Faktor hier nicht als Wachstumstrend beschrieben; sein Balken
 ist klar blau/links. Dritter blauer Balken: Luftfeuchtigkeit von 88 % dämpft
 ebenfalls (viele Radfahrer meiden Schwüle). Der kurze rote Balken für temp ≈ 20 °C
-trägt leicht positiv bei.
+trägt leicht positiv bei.</treiber>
 
-[EMPFEHLUNG] Trotz der dämpfenden Effekte von 2011 und Schwüle dominiert die
+<empfehlung>Trotz der dämpfenden Effekte von 2011 und Schwüle dominiert die
 Morgenspitze. Pendlerstationen an Werktagen um 8 Uhr gut befüllen;
-Wartungsfenster in die frühen Nachtstunden legen.
+Wartungsfenster in die frühen Nachtstunden legen.</empfehlung>
