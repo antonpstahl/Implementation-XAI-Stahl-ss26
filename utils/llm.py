@@ -93,6 +93,22 @@ JUDGE_SC_K             = 3     # Self-Consistency k — nur wenn SC statt temp=0
 import re as _re
 
 
+def model_accepts_temperature(model: str) -> bool:
+    """True, wenn das Modell den `temperature`-Parameter akzeptiert.
+
+    Anthropic Claude Opus 4.7 / 4.8 sowie Fable lehnen `temperature` ab
+    (HTTP 400 bei der Messages API) — sie steuern das Decoding ausschließlich
+    über die Default-Stochastik. Für diese Modelle darf `temperature` nicht
+    mitgeschickt werden. Alle übrigen Modelle (Sonnet, Haiku, OpenAI) akzeptieren
+    den Parameter.
+
+    Wirkung auf Self-Consistency: Bei abgelehntem `temperature` ziehen mehrere
+    Calls ihre Diversität aus der Default-Stochastik (k Calls variieren trotzdem),
+    statt aus einem explizit erhöhten `temperature`-Wert.
+    """
+    return _re.search(r"opus-4-[78]|fable", model) is None
+
+
 def strip_scratchpad(text: str) -> str:
     """Removes the <analyse>…</analyse> scratchpad block from generated text.
 
@@ -164,6 +180,8 @@ def ask_text(
     temperature : float | None
         None → Anthropic-Default (1.0); 0.0 → deterministisch (für Judge-Calls);
         0.2–0.4 → wenig stochastisch. Siehe JUDGE_TEMPERATURE / GENERATION_TEMPERATURE.
+        Wird bei Modellen, die `temperature` ablehnen (Opus 4.7/4.8, Fable),
+        automatisch verworfen — siehe model_accepts_temperature().
     """
     client = _get_client()
 
@@ -184,7 +202,7 @@ def ask_text(
         system=system_block,
         messages=[{"role": "user", "content": prompt}],
     )
-    if temperature is not None:
+    if temperature is not None and model_accepts_temperature(model):
         create_kwargs["temperature"] = temperature
 
     resp = _with_retry(client.messages.create, **create_kwargs)
@@ -368,7 +386,7 @@ def ask_with_images(
         system=system_block,
         messages=[{"role": "user", "content": content}],
     )
-    if temperature is not None:
+    if temperature is not None and model_accepts_temperature(model):
         create_kwargs["temperature"] = temperature
 
     resp = _with_retry(client.messages.create, **create_kwargs)
