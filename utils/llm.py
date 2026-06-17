@@ -162,6 +162,62 @@ def _get_client() -> Any:
 
 
 # -----------------------------------------------------------------------------
+# Request-Shape-Builder + Real-time-Runner (Phase 3a·B)
+#
+# Der Batch- und der Real-time-Pfad müssen **dieselbe** Request-Shape erzeugen,
+# damit die On-Disk-Artefakte schema-identisch bleiben (NB 07/08 sind
+# ausführungsart-agnostisch). Deshalb bauen `build_text_params` /
+# `build_image_params` exakt die `messages.create`-Parameter; `run_params`
+# führt sie real-time aus, `utils.batch.message_request` verpackt sie für den
+# Batch. `ask_text` / `ask_with_images` bleiben die bequemen Real-time-Wrapper.
+# -----------------------------------------------------------------------------
+def _system_block(system: str | None, cache_system: bool) -> Any:
+    """Baut den `system`-Parameter — als gecachten Block oder schlichten String."""
+    if system and cache_system:
+        return [
+            {
+                "type": "text",
+                "text": system,
+                "cache_control": {"type": "ephemeral"},
+            }
+        ]
+    return system or ""
+
+
+def build_text_params(
+    prompt: str,
+    *,
+    system: str | None = None,
+    model: str = DEFAULT_MODEL,
+    max_tokens: int = DEFAULT_MAX_TOKENS,
+    cache_system: bool = False,
+    temperature: float | None = None,
+) -> dict:
+    """Baut die `messages.create`-Parameter für eine Text-only-Anfrage.
+
+    Gemeinsame Request-Shape für Real-time (`run_params`) und Batch
+    (`utils.batch.message_request`). `temperature` wird bei Modellen, die sie
+    ablehnen (Opus 4.7/4.8, Fable), weggelassen — siehe model_accepts_temperature().
+    """
+    params: dict = dict(
+        model=model,
+        max_tokens=max_tokens,
+        system=_system_block(system, cache_system),
+        messages=[{"role": "user", "content": prompt}],
+    )
+    if temperature is not None and model_accepts_temperature(model):
+        params["temperature"] = temperature
+    return params
+
+
+def run_params(params: dict) -> dict:
+    """Führt eine vorgebaute Request-Shape real-time aus (mit Retry)."""
+    client = _get_client()
+    resp = _with_retry(client.messages.create, **params)
+    return resp.model_dump()
+
+
+# -----------------------------------------------------------------------------
 # Pipeline 04: JSON → Text  (mit Prompt-Caching für den System-Prompt)
 # -----------------------------------------------------------------------------
 def ask_text(
@@ -183,30 +239,16 @@ def ask_text(
         Wird bei Modellen, die `temperature` ablehnen (Opus 4.7/4.8, Fable),
         automatisch verworfen — siehe model_accepts_temperature().
     """
-    client = _get_client()
-
-    if system and cache_system:
-        system_block = [
-            {
-                "type": "text",
-                "text": system,
-                "cache_control": {"type": "ephemeral"},
-            }
-        ]
-    else:
-        system_block = system or ""
-
-    create_kwargs: dict = dict(
-        model=model,
-        max_tokens=max_tokens,
-        system=system_block,
-        messages=[{"role": "user", "content": prompt}],
+    return run_params(
+        build_text_params(
+            prompt,
+            system=system,
+            model=model,
+            max_tokens=max_tokens,
+            cache_system=cache_system,
+            temperature=temperature,
+        )
     )
-    if temperature is not None and model_accepts_temperature(model):
-        create_kwargs["temperature"] = temperature
-
-    resp = _with_retry(client.messages.create, **create_kwargs)
-    return resp.model_dump()
 
 
 # -----------------------------------------------------------------------------
@@ -349,6 +391,36 @@ def ask_openai_text(
     }
 
 
+def build_image_params(
+    prompt: str,
+    image_paths: Iterable[Path | str],
+    *,
+    system: str | None = None,
+    model: str = DEFAULT_MODEL,
+    max_tokens: int = DEFAULT_MAX_TOKENS,
+    cache_system: bool = True,
+    temperature: float | None = None,
+) -> dict:
+    """Baut die `messages.create`-Parameter für eine multimodale Anfrage (NB 05).
+
+    Bilder werden base64-kodiert in den User-Content gelegt. Gemeinsame
+    Request-Shape für Real-time (`run_params`) und Batch
+    (`utils.batch.message_request`).
+    """
+    content: list[dict] = [_encode_image(p) for p in image_paths]
+    content.append({"type": "text", "text": prompt})
+
+    params: dict = dict(
+        model=model,
+        max_tokens=max_tokens,
+        system=_system_block(system, cache_system),
+        messages=[{"role": "user", "content": content}],
+    )
+    if temperature is not None and model_accepts_temperature(model):
+        params["temperature"] = temperature
+    return params
+
+
 def ask_with_images(
     prompt: str,
     image_paths: Iterable[Path | str],
@@ -364,30 +436,14 @@ def ask_with_images(
     Bilder werden base64-kodiert übergeben.
     temperature : siehe ask_text.
     """
-    client = _get_client()
-
-    if system and cache_system:
-        system_block = [
-            {
-                "type": "text",
-                "text": system,
-                "cache_control": {"type": "ephemeral"},
-            }
-        ]
-    else:
-        system_block = system or ""
-
-    content: list[dict] = [_encode_image(p) for p in image_paths]
-    content.append({"type": "text", "text": prompt})
-
-    create_kwargs: dict = dict(
-        model=model,
-        max_tokens=max_tokens,
-        system=system_block,
-        messages=[{"role": "user", "content": content}],
+    return run_params(
+        build_image_params(
+            prompt,
+            image_paths,
+            system=system,
+            model=model,
+            max_tokens=max_tokens,
+            cache_system=cache_system,
+            temperature=temperature,
+        )
     )
-    if temperature is not None and model_accepts_temperature(model):
-        create_kwargs["temperature"] = temperature
-
-    resp = _with_retry(client.messages.create, **create_kwargs)
-    return resp.model_dump()
