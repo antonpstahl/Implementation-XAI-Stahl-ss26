@@ -1,15 +1,19 @@
 """
 Phase 3a — Prompt-Fix-Regression: Golden-Test.
 
-Friert die SHA-256-Hashes der korrigierten Prompt-Dateien (Phase 3) ein.
-Schlägt sofort fehl, wenn eine Prompt-Datei versehentlich zurückgerollt
-oder verändert wird — bevor der teure Vollauf (Phase 3b) gestartet wird.
+Test 1 — SHA-256-Hash-Check:
+  Friert die exakten Byte-Inhalte aller drei Prompt-Dateien ein.
+  Schlägt bei jeder Änderung fehl, bevor der teure Vollauf (Phase 3b) startet.
 
-Wenn ein Prompt absichtlich verbessert wird:
-  1. Neue Datei speichern
-  2. Hash neu berechnen: shasum -a 256 prompts/<datei>.md
-  3. GOLDEN_HASHES in dieser Datei aktualisieren
-  4. pytest tests/test_prompt_golden.py grün bestätigen
+  Wenn ein Prompt absichtlich verbessert wird:
+    1. Neue Datei speichern
+    2. Hash neu berechnen: shasum -a 256 prompts/<datei>.md
+    3. GOLDEN_HASHES in dieser Datei aktualisieren
+    4. pytest tests/test_prompt_golden.py grün bestätigen
+
+Test 2 — Key-Phrase-Assertion:
+  Prüft die semantisch kritischen Sätze des Phase-3-Fixes (yr-Vorzeichen +
+  Rangregel) direkt als Textsubstring — lesbarer Fehler bei Regression.
 """
 
 from __future__ import annotations
@@ -42,4 +46,36 @@ def test_prompt_file_hash(filename: str, expected_hash: str) -> None:
         "  GOLDEN_HASHES in tests/test_prompt_golden.py aktualisieren.\n"
         "Wenn nicht:\n"
         "  git diff prompts/ prüfen und Rollback durchführen."
+    )
+
+
+# ---------------------------------------------------------------------------
+# Test 2 — Key-Phrase-Assertion (Phase-3-spezifische Constraints)
+# ---------------------------------------------------------------------------
+
+# (filename, phrase, label) — jede fehlende Phrase ist ein eigener Testfall.
+REQUIRED_PHRASES: list[tuple[str, str, str]] = [
+    # yr-Vorzeichenregel (dominante Fehlerklasse C aus Phase 3)
+    ("pipeline_04_json.md",  "yr=0 (2011) mit negativem",                         "yr-sign-fix"),
+    ("pipeline_05_vision.md", "ein blauer yr-Balken (yr=0, 2011) ist ein dämpfender Faktor", "yr-sign-fix"),
+    ("pipeline_06_tooluse.md", "yr=0 (2011) mit negativem Beitrag",                "yr-sign-fix"),
+    # Rangregel
+    ("pipeline_04_json.md",   "**Rang bindend**",  "rank-rule"),
+    ("pipeline_05_vision.md", "**Rang bindend**",  "rank-rule"),
+    ("pipeline_06_tooluse.md", "**Rang bindend**", "rank-rule"),
+]
+
+_PHRASE_IDS = [f"{fn.replace('pipeline_', 'p').replace('.md', '')}/{label}"
+               for fn, _, label in REQUIRED_PHRASES]
+
+
+@pytest.mark.parametrize("filename,phrase,label", REQUIRED_PHRASES, ids=_PHRASE_IDS)
+def test_prompt_contains_phase3_phrase(filename: str, phrase: str, label: str) -> None:
+    """Kritische Phase-3-Constraint-Sätze müssen verbatim im Prompt enthalten sein."""
+    text = (PROMPTS_DIR / filename).read_text(encoding="utf-8")
+    assert phrase in text, (
+        f"\nPhase-3-Constraint '{label}' fehlt in '{filename}'.\n"
+        f"  Erwarteter Substring:\n    {phrase!r}\n\n"
+        "Ursache: yr-Vorzeichenfehler-Fix oder Rangregel wurde entfernt/verändert.\n"
+        "Prompt wiederherstellen oder REQUIRED_PHRASES anpassen, falls bewusst geändert."
     )
