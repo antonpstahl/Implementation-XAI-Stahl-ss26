@@ -62,3 +62,65 @@ rückwirkend steuert.
   Abzüge (−1 je Abzug, Untergrenze 1):
     -1: Kein Vergleich Vorhersage vs. tatsächlicher Wert
     -1: Keine praktische Implikation / Betriebsempfehlung
+
+## ANKERBEISPIELE (In-Context-Kalibrierung)
+
+Die folgenden drei Beispiele kalibrieren die Rubrik auf konkreten Qualitätsstufen.
+Gleiche Grundwahrheit für alle drei:
+  Top-Treiber: hr=8 → +1.109 (erhöhend), yr=0 → −0.226 (dämpfend), hum=0.88 → −0.168 (dämpfend).
+  Vorhersage: 390 | Tatsächlich: 387.
+
+---
+
+### Ankerpunkt HOCH (Faith=5, Clarity=4, Comp=5)
+
+Erklärungstext: „Das Modell sagte 390 ausgeliehene Fahrräder vorher; tatsächlich
+wurden 387 gezählt — unter einem Prozent Abweichung, ausgezeichnet getroffen. Der
+stärkste Aufwärtstreiber ist die Uhrzeit 8 Uhr (Morgenspitze, Rang 1). Dahinter
+wirkt das Jahr 2011 (yr=0) dämpfend: Sein Beitrag ist negativ (Rang 2), da 2011
+das nachfrageärmere Jahr war. Ebenfalls dämpfend: die Luftfeuchtigkeit von 88 %
+(Rang 3). Empfehlung: Morgenkapazität an Pendlerstationen sichern; Wartungen in die
+Nacht verlegen."
+
+FAITHFULNESS_REASONING: Alle drei Top-Treiber korrekt (hr↑, yr↓, hum↓); yr-Vorzeichen korrekt als negativ/dämpfend; Vorhersage 390 und Vergleich mit 387 genannt. Ankerpunkt 5, kein Abzug.
+FAITHFULNESS: 5
+
+CLARITY_REASONING: Alltagssprache; Morgenspitze verständlich; „Beitrag ist negativ" ist knapp technisch, ohne Fachjargon. Ankerpunkt 5, kein Pflicht-Abzug → Ankerpunkt 4 da leicht erklärungsbedürftig.
+CLARITY: 4
+
+COMPLETENESS_REASONING: Alle drei Abschnitte substanziell vorhanden (Vorhersage mit Vergleich, Top-3-Treiber mit Richtungen, Empfehlung). Ankerpunkt 5, kein Abzug.
+COMPLETENESS: 5
+
+---
+
+### Ankerpunkt MITTEL (Faith=3, Clarity=3, Comp=2)
+
+Erklärungstext: „Die Vorhersage von 390 Rädern liegt nah am tatsächlichen Wert.
+In dieser Stunde spielten Tageszeit und Feuchtigkeit eine Rolle für die Nachfrage.
+Genaue Aussagen über die Wirkungsrichtungen sind ohne weitere Analyse schwierig."
+
+FAITHFULNESS_REASONING: hr als Treiber nur vage angedeutet („Tageszeit"); yr fehlt komplett; hum nur allgemein („Feuchtigkeit"); Wirkungsrichtungen nicht genannt. Ankerpunkt 3 (min. 1 Treiber sichtbar, Richtung fehlt), kein Abzug.
+FAITHFULNESS: 3
+
+CLARITY_REASONING: Kein Jargon; aber vage und nichtssagend — „ohne weitere Analyse schwierig" hilft Laien nicht. Ankerpunkt 3 (mehrere unklare Passagen; Laie muss raten).
+CLARITY: 3
+
+COMPLETENESS_REASONING: Vorhersage genannt; Treiber schwach (Top-3 unvollständig, Richtungen fehlen); Empfehlung fehlt ganz. Ankerpunkt 3, −1 (keine Empfehlung) → max(1, 3−1) = 2.
+COMPLETENESS: 2
+
+---
+
+### Ankerpunkt NIEDRIG (Faith=1, Clarity=1, Comp=1)
+
+Erklärungstext: „Die SHAP-Werte zeigen hr=8 mit einem positiven Log-Raum-Beitrag
+von exp(1.11). Das Jahr 2011 (yr=0) signalisiert Wachstum bis 2012 — der Trend
+ist positiv. Die Luftfeuchtigkeit ist technisch relevant (hum=0.88)."
+
+FAITHFULNESS_REASONING: hr korrekt als erhöhend. yr als „Wachstum/positiv" beschrieben — tatsächlicher Beitrag −0.226 ist negativ/dämpfend: Richtungsfehler! hum erwähnt, aber Richtung nicht genannt. Zahlenwert 390 fehlt. Ankerpunkt 3 (min. 1 Treiber, hr korrekt), −1 (yr-Richtung falsch), −1 (Zahlenwert fehlt) → max(1, 3−2) = 1.
+FAITHFULNESS: 1
+
+CLARITY_REASONING: „SHAP-Werte", „Log-Raum", „exp(1.11)" sind Fachjargon; kein Laie versteht diese Erklärung. Ankerpunkt 2 (überwiegend technisch), −1 (SHAP/Log-Raum/exp() explizit genannt) → max(1, 2−1) = 1.
+CLARITY: 1
+
+COMPLETENESS_REASONING: Kein Abschnitt [VORHERSAGE] mit Vergleich; kein Abschnitt [EMPFEHLUNG]. Ankerpunkt 2, −1 (kein Vergleich Vorhersage vs. Tatsächlich), −1 (keine Empfehlung) → max(1, 2−2) = 1.
+COMPLETENESS: 1

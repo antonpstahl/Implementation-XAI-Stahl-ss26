@@ -31,14 +31,16 @@ ROOT        = Path(__file__).resolve().parent.parent
 PROMPTS_DIR = ROOT / "prompts"
 
 GOLDEN_HASHES: dict[str, str] = {
-    # Phase 3·2/A3: Prompts harmonisiert (gleiches Wortbudget 150-250, identische
-    # Stil-/Schema-/Rollen-Bausteine; nur der modalspezifische Teil darf abweichen).
-    "pipeline_04_json.md":   "e9f2a7da34b832a050f4c4511dd47fd4a1d1dbde1d8cb5cca2808b5040b6961b",
-    "pipeline_05_vision.md": "62b4cc772ca7af60059d2fd6793e605f0dc4d134ca878777ab7f28848c2abcf2",
-    "pipeline_06_tooluse.md": "24344dae04dca3c1113eac338c0dee0734e1d09b95cbbba4c2cc1d36ba438e96",
-    # Judge-Prompt eingefroren (Phase 3·2/A4): bestimmt die Messung;
+    # Phase 3·2/B5: Few-shot-Kalibrierung ergänzt (je 1 BEISPIEL-Sektion in 04/05/06;
+    # 3 Ankerbeispiele hoch/mittel/niedrig in judge_system.md).
+    # Davor (Phase 3·2/A3): Prompts harmonisiert (gleiches Wortbudget 150-250,
+    # identische Stil-/Schema-/Rollen-Bausteine; nur der modalspezifische Teil abweichend).
+    "pipeline_04_json.md":   "d4ab8961740d7c01882086f17e99b11962aca3e6c567a7aeae8bf4b123232e6d",
+    "pipeline_05_vision.md": "9bc1615b3dbe31891d3a9b75311eb13c7c372f59981010bc60d6c9c051804da8",
+    "pipeline_06_tooluse.md": "c328eb0c67ee3fd0fcf27ac5dfb38425c1ab601509c713f8d420fa02afc3f7e7",
+    # Judge-Prompt eingefroren (Phase 3·2/A4+B5): bestimmt die Messung;
     # Änderungen müssen explizit bestätigt werden.
-    "judge_system.md":       "157c4c62b587b0fa6edd4ccc2193b69195b9d2fef89ba374b32beb2c56146ad7",
+    "judge_system.md":       "775af71edcc5d397d22fa7d279c16c597d8a035cae4b3716912ca56414007f32",
 }
 
 

@@ -82,3 +82,43 @@ fließend lesbar, ca. 150–250 Wörter insgesamt:
 
 Schreibe ausschließlich auf Deutsch. Keine Aufzählungszeichen am Absatzanfang.
 Vermeide Fachbegriffe (kein „SHAP", kein „Log-Raum", kein „exp()").
+
+## BEISPIEL (Few-Shot-Kalibrierung)
+
+Das folgende Beispiel zeigt die korrekte Vorzeichen- und Rangbehandlung.
+Entscheidend: yr=0 (2011) hat hier einen *negativen* Beitrag und ist als
+dämpfender Faktor zu beschreiben — nicht als Wachstumstrend.
+
+**Eingabe:**
+
+```json
+{
+  "feature_values": {"hr": 8, "yr": 0, "hum": 0.88, "temp": 0.50},
+  "contributions": [
+    {"feature": "hr",  "value": 8.0,  "contribution":  1.109},
+    {"feature": "yr",  "value": 0.0,  "contribution": -0.226},
+    {"feature": "hum", "value": 0.88, "contribution": -0.168},
+    {"feature": "temp","value": 0.50, "contribution":  0.097}
+  ],
+  "prediction": 390, "y_true": 387
+}
+```
+
+**Korrekte Ausgabe:**
+
+[VORHERSAGE] Das Modell sagte 390 ausgeliehene Fahrräder vorher; tatsächlich
+wurden 387 gezählt. Die Abweichung liegt unter einem Prozent — die Vorhersage
+wurde ausgezeichnet getroffen.
+
+[TREIBER] Der mit Abstand stärkste Treiber ist die Uhrzeit: 8 Uhr morgens liegt
+mitten in der Morgenspitze und treibt die Nachfrage stark nach oben (Rang 1,
+Beitrag +1,11). Dahinter folgt das Jahr 2011 (yr=0) mit einem klar negativen
+Beitrag (−0,23, Rang 2): Da 2011 das nachfrageärmere Modelljahr war, wirkt dieser
+Faktor dämpfend — auch wenn das System 2012 stärker ausgelastet war, wird yr=0
+hier nicht als Wachstumstrend beschrieben. Ebenfalls bremsend ist die hohe
+Luftfeuchtigkeit von 88 % (−0,17, Rang 3): Schwüle Bedingungen schrecken viele
+Radfahrer ab. Die Temperatur von ca. 20 °C trägt leicht positiv bei (Rang 4).
+
+[EMPFEHLUNG] Trotz des 2011-Dämpfers und der Schwüle dominiert die Morgenspitze
+klar. An Werktagen um 8 Uhr sollten Pendlerstationen gut befüllt sein.
+Wartungsfenster gehören in die frühen Nachtstunden.
