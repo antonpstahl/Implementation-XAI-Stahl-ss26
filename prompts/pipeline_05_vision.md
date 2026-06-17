@@ -73,6 +73,20 @@ Zwei Regeln, die strikt einzuhalten sind:
    wie im Plot dargestellt). Vertausche die Reihenfolge nicht für narrative Bequemlichkeit,
    auch wenn zwei Beiträge nahe beieinanderliegen.
 
+## ANALYSE-SCHRITT (Scratchpad — wird nicht angezeigt)
+
+Bevor du die Erklärung schreibst, erstelle einen `<analyse>`-Block, in dem du
+je sichtbarem Balken im Plot festhältst:
+
+  <analyse>
+  <feature>=<wert>: Balken <rot/blau>, Beitrag <+/->X.XXX → <positiv|negativ>, Rang <N>
+  …
+  </analyse>
+
+Dieser Block dient ausschließlich deiner internen Planung und wird vor der
+Speicherung automatisch entfernt. Schreibe ihn vollständig aus, bevor du mit
+[VORHERSAGE] beginnst.
+
 ## AUSGABEFORMAT
 
 Strukturiere deine Antwort in genau drei Abschnitte — ohne Zwischenüberschriften,
@@ -102,7 +116,14 @@ insbesondere den blauen yr-Balken für yr=0=2011 als dämpfenden Faktor.
   hum=0.88  ░░░░░░ −0.168            → blauer Balken, Rang 3 (dämpfend)
   temp=0.50 ████ +0.097              → roter Balken, Rang 4 (leicht erhöhend)
 
-**Korrekte Ausgabe:**
+**Korrekte Ausgabe (inkl. Scratchpad):**
+
+<analyse>
+hr=8: Balken rot, Beitrag +1.109 → positiv, Rang 1
+yr=0: Balken blau, Beitrag −0.226 → negativ, Rang 2
+hum=0.88: Balken blau, Beitrag −0.168 → negativ, Rang 3
+temp=0.50: Balken rot, Beitrag +0.097 → positiv, Rang 4
+</analyse>
 
 [VORHERSAGE] Das Modell sagte 390 ausgeliehene Fahrräder vorher; tatsächlich
 wurden 387 gezählt — die Vorhersage wurde ausgezeichnet getroffen.
