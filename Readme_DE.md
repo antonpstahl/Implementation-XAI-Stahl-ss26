@@ -271,9 +271,11 @@ pytest tests/        # gesamte Testsuite
 pytest tests/test_prompt_golden.py -v   # nur Prompt-Regression
 ```
 
-Die Suite umfasst Sampling-Determinismus, Judge-Parsing-Robustheit, Statistikfunktionen, README-Konsistenz und **Prompt-Fix-Regression**.
+Die Suite umfasst Sampling-Determinismus, Generierungs-Loop-Persistenz/Resume, Judge-Parsing-Robustheit, Statistikfunktionen, Denormalisierungs-Konsistenz, README-Konsistenz und **Prompt-Fix-Regression**.
 Der Prompt-Regressionstest (`test_prompt_golden.py`) friert die SHA-256-Hashes und kritischen Constraint-Phrasen aller drei Pipeline-Prompts ein (Vorzeichen- und Rangtreue für `yr=0`, Phase-3-Fix).
 Er ist ein hartes Gate: Phase 3b (Vollauf) darf erst starten, wenn alle Tests grün sind.
+
+**Grünes-Gate-Status (Phase 3a):** `pytest tests/` → **139 passed** (2026-06-17, Python 3.13). Alle skalierungskritischen Pfade sind abgedeckt; Phase 3b ist damit freigegeben.
 
 **Wenn ein Prompt absichtlich verbessert wird:**
 1. Prompt-Datei bearbeiten.
