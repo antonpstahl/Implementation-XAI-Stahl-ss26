@@ -91,8 +91,12 @@ def judge_with_retry(ask_fn, prompt: str, system: str, model: str,
                temperature=...) -> response
 
     temperature : None → Modell-Default (1.0); 0.0 → deterministisch (JUDGE_TEMPERATURE).
-                  Für Reproduzierbarkeit und minimale Score-Varianz sollte immer
-                  JUDGE_TEMPERATURE=0.0 übergeben werden (Phase 3·2/A2).
+                  Für Reproduzierbarkeit und minimale Score-Varianz sollte bei
+                  Modellen, die `temperature` akzeptieren (Sonnet, OpenAI),
+                  JUDGE_TEMPERATURE=0.0 übergeben werden (Phase 3·2/A2). Bei Opus
+                  4.7/4.8 wird `temperature` von der API abgelehnt und in
+                  utils.llm.ask_text automatisch verworfen — dort ist der Judge
+                  nicht deterministisch fixierbar (Default-Stochastik).
 
     Rückgabe: dict mit scores (fehlende Scores als None) + raw_response + usage.
     """
@@ -130,9 +134,17 @@ def judge_with_self_consistency(
 ) -> dict:
     """Self-Consistency-Judge: k Samples bei gegebener temperature, Median je Score.
 
-    Kostet k× die Judge-Calls von judge_with_retry. Bei JUDGE_TEMPERATURE=0
-    (deterministisch) liefert SC keine zusätzliche Information — in diesem Fall
-    sollte judge_with_retry mit temperature=0 bevorzugt werden.
+    Kostet k× die Judge-Calls von judge_with_retry.
+
+    Modellabhängigkeit von `temperature`:
+      • Sonnet/OpenAI akzeptieren `temperature`. Bei JUDGE_TEMPERATURE=0
+        (deterministisch) liefert SC keine zusätzliche Information — in diesem
+        Fall sollte judge_with_retry mit temperature=0 bevorzugt werden. SC ist
+        nur bei temperature>0 sinnvoll.
+      • Opus 4.7/4.8 (und Fable) lehnen `temperature` ab; der Parameter wird in
+        utils.llm.ask_text automatisch verworfen. Die k Calls variieren dort
+        dennoch über die Default-Stochastik, sodass SC die Diversität daraus
+        bezieht — der übergebene temperature-Wert bleibt wirkungslos.
 
     Kostenwirkung Phase 3b: k=3, n=200, 4 Pipelines, 2 XAI-Modelle
         → 200 × 4 × 2 × k = 4 800 Judge-Calls statt 1 600 (Faktor k=3).
