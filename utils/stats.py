@@ -62,9 +62,50 @@ def _delta_magnitude(d):
     return 'large'
 
 
+def adjust_pvalues(pvalues, method='holm'):
+    """Multiplizitätskorrektur für eine Familie von p-Werten (Holm oder BH).
+
+    Bei vielen paarweisen Tests (z. B. C(k,2) Pipeline-Vergleiche) inflationiert die
+    Familienfehlerrate — Holm kontrolliert die FWER, Benjamini-Hochberg die FDR.
+
+    Parameters
+    ----------
+    pvalues : array-like; NaN (degenerierte Tests, n < 3) werden durchgereicht und
+              zählen **nicht** zur Familiengröße.
+    method  : 'holm' (FWER, Default) oder 'fdr_bh' / 'bh' (Benjamini-Hochberg, FDR).
+
+    Returns
+    -------
+    np.ndarray adjustierter p-Werte in Eingabereihenfolge (NaN bleibt NaN).
+    Auf [0, 1] geklippt und monoton erzwungen — verifiziert gegen statsmodels.
+    """
+    p = np.asarray(pvalues, dtype=float)
+    out = np.full(p.shape, np.nan)
+    valid = ~np.isnan(p)
+    pv = p[valid]
+    m = len(pv)
+    if m == 0:
+        return out
+
+    order = np.argsort(pv)
+    ranked = pv[order]
+    if method == 'holm':
+        adj = np.maximum.accumulate((m - np.arange(m)) * ranked)
+    elif method in ('fdr_bh', 'bh'):
+        adj = np.minimum.accumulate(((m / (np.arange(m) + 1)) * ranked)[::-1])[::-1]
+    else:
+        raise ValueError(f"Unbekannte Methode {method!r} (erwartet 'holm' oder 'fdr_bh').")
+
+    res = np.empty(m)
+    res[order] = np.clip(adj, 0, 1)
+    out[valid] = res
+    return out
+
+
 def wilcoxon_pairwise(df, pipelines, metric,
                       group_col='pipeline_label',
-                      id_cols=('instance_id', 'xai_model')):
+                      id_cols=('instance_id', 'xai_model'),
+                      correction='holm', alpha=0.05):
     """Pairwise Wilcoxon signed-rank tests between pipelines on paired observations.
 
     Parameters
@@ -74,11 +115,16 @@ def wilcoxon_pairwise(df, pipelines, metric,
     metric    : str, name of the score column
     group_col : column that identifies the pipeline
     id_cols   : columns that identify a matched pair (instance × xai_model)
+    correction: multiplicity correction over the pairwise family in this call
+                ('holm' default, 'fdr_bh', or None to skip); see adjust_pvalues.
+    alpha     : significance level for the `reject` flag on adjusted p-values.
 
     Returns
     -------
     DataFrame[pipeline_a, pipeline_b, n_pairs, mean_a, mean_b,
               delta_mean, statistic, p_value, cliffs_d, magnitude]
+    plus, unless correction is None, [p_value_adj, reject]. Die Korrektur wird über
+    die C(k,2) paarweisen Vergleiche **dieses Aufrufs** (eine Metrik) gerechnet.
     Parametrized for arbitrary n — reusable in Phase 3b.
     """
     rows = []
@@ -112,4 +158,8 @@ def wilcoxon_pairwise(df, pipelines, metric,
                 cliffs_d=round(cd, 3),
                 magnitude=_delta_magnitude(cd),
             ))
-    return pd.DataFrame(rows)
+    out = pd.DataFrame(rows)
+    if correction and not out.empty:
+        out['p_value_adj'] = adjust_pvalues(out['p_value'].values, method=correction).round(4)
+        out['reject'] = out['p_value_adj'] < alpha
+    return out

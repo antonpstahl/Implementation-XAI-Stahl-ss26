@@ -19,6 +19,7 @@ sys.path.insert(0, str(ROOT))
 
 from utils.stats import (
     _delta_magnitude,
+    adjust_pvalues,
     bootstrap_ci,
     cliffs_delta,
     wilcoxon_pairwise,
@@ -215,3 +216,82 @@ def test_wilcoxon_pairwise_too_few_pairs():
     result = wilcoxon_pairwise(df, ["A", "B"], "score")
     assert result.loc[0, "n_pairs"] == 2
     assert np.isnan(result.loc[0, "p_value"])
+
+
+# ---------------------------------------------------------------------------
+# adjust_pvalues — Multiplizitätskorrektur (Holm / Benjamini-Hochberg)
+# ---------------------------------------------------------------------------
+
+def test_adjust_pvalues_holm_known():
+    """Hand gerechnetes Holm-Beispiel (m=3)."""
+    adj = adjust_pvalues([0.01, 0.04, 0.03], method="holm")
+    np.testing.assert_allclose(adj, [0.03, 0.06, 0.06], atol=1e-9)
+
+
+def test_adjust_pvalues_bh_known():
+    """Hand gerechnetes Benjamini-Hochberg-Beispiel (m=3)."""
+    adj = adjust_pvalues([0.01, 0.04, 0.03], method="fdr_bh")
+    np.testing.assert_allclose(adj, [0.03, 0.04, 0.04], atol=1e-9)
+
+
+def test_adjust_pvalues_nan_passthrough():
+    """NaN-Tests (n < 3) zählen nicht zur Familiengröße und bleiben NaN."""
+    adj = adjust_pvalues([np.nan, 0.01, 0.04, np.nan], method="holm")
+    assert np.isnan(adj[0]) and np.isnan(adj[3])
+    # verbleibende zwei werden als Familie der Größe 2 korrigiert
+    np.testing.assert_allclose(adj[[1, 2]], [0.02, 0.04], atol=1e-9)
+
+
+def test_adjust_pvalues_holm_at_least_bh():
+    """Holm (FWER) ist nie kleiner als BH (FDR) — elementweise."""
+    pv = [0.001, 0.01, 0.02, 0.03, 0.2]
+    holm = adjust_pvalues(pv, "holm")
+    bh = adjust_pvalues(pv, "fdr_bh")
+    assert np.all(holm + 1e-12 >= bh)
+    assert np.all(holm <= 1.0)
+
+
+def test_adjust_pvalues_invalid_method():
+    with pytest.raises(ValueError):
+        adjust_pvalues([0.1, 0.2], method="bonferroni")
+
+
+def test_adjust_pvalues_empty():
+    assert adjust_pvalues([]).shape == (0,)
+
+
+# ---------------------------------------------------------------------------
+# wilcoxon_pairwise — Korrekturspalten
+# ---------------------------------------------------------------------------
+
+@pytest.fixture
+def three_pipeline_df():
+    """Drei Pipelines × 10 gematchte Paare → C(3,2)=3 paarweise Tests."""
+    rng = np.random.default_rng(7)
+    n = 10
+    a = rng.uniform(2, 5, size=n).round(2)
+    b = (a + rng.normal(0.4, 0.4, size=n)).clip(1, 5).round(2)
+    c = (a + rng.normal(-0.4, 0.4, size=n)).clip(1, 5).round(2)
+    return pd.DataFrame({
+        "pipeline_label": ["A"] * n + ["B"] * n + ["C"] * n,
+        "instance_id":    list(range(n)) * 3,
+        "xai_model":      ["lime"] * n * 3,
+        "score":          list(a) + list(b) + list(c),
+    })
+
+
+def test_wilcoxon_pairwise_adds_correction_columns(three_pipeline_df):
+    res = wilcoxon_pairwise(three_pipeline_df, ["A", "B", "C"], "score")
+    assert {"p_value_adj", "reject"}.issubset(res.columns)
+    assert len(res) == 3  # C(3,2)
+    valid = res.dropna(subset=["p_value"])
+    # Holm-korrigiert ≥ roh; reject ist boolesch
+    assert np.all(valid["p_value_adj"] >= valid["p_value"] - 1e-9)
+    assert res["reject"].dtype == bool
+
+
+def test_wilcoxon_pairwise_correction_none(three_pipeline_df):
+    res = wilcoxon_pairwise(three_pipeline_df, ["A", "B", "C"], "score",
+                            correction=None)
+    assert "p_value_adj" not in res.columns
+    assert "reject" not in res.columns
