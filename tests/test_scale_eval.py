@@ -31,9 +31,12 @@ from utils.eval import (
 # ---------------------------------------------------------------------------
 
 def _write_generation(results_dir: Path, pipeline: str, xai: str, iid: int,
-                      gen_idx: int, n_gen: int, *, tool_calls=None):
+                      gen_idx: int, n_gen: int, *, tool_calls=None,
+                      scale_subdir: str = "scale"):
     from utils.generation import generation_filename
     d = results_dir / f"pipeline{pipeline}"
+    if scale_subdir:
+        d = d / scale_subdir
     d.mkdir(parents=True, exist_ok=True)
     rec = {
         "pipeline":    f"{pipeline}",
