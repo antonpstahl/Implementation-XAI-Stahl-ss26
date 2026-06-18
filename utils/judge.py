@@ -80,6 +80,110 @@ def parse_judge_response(raw: str) -> dict:
 
 SCORE_KEYS = ("faithfulness", "clarity", "completeness")
 
+from typing import Any
+
+
+def judge_batch_sc(
+    entries: "list[tuple[str, str]]",
+    *,
+    system: str,
+    model: str,
+    max_tokens: int = 900,
+    k: int = 3,
+    temperature: "float | None" = None,
+    client: Any = None,
+    state_path: Any = None,
+    **run_batch_kwargs: Any,
+) -> "dict[str, dict]":
+    """Batch-basierte Self-Consistency-Bewertung (A2 — Phase 3a·B).
+
+    Für jeden (base_cid, prompt)-Eintrag werden k Batch-Requests eingereicht
+    (custom_ids: {base_cid}-s0 … {base_cid}-s{k-1}). Ergebnisse werden je
+    Kriterium per Median client-seitig aggregiert.
+
+    Rückgabe-Schema identisch zu judge_with_self_consistency:
+        faithfulness, clarity, completeness  (int | None)
+        faithfulness_reasoning, clarity_reasoning, completeness_reasoning (str)
+        raw_responses  (list[str])
+        usage  ({"input_tokens": int, "output_tokens": int})
+
+    Temperature: wird bei Opus 4.7/4.8 / Fable automatisch weggelassen
+    (model_accepts_temperature). Fehlgeschlagene Samples werden aus dem Median
+    ausgeschlossen; Base-Einträge ohne Erfolg erhalten None-Scores.
+
+    Parameters
+    ----------
+    entries     : Liste aus (base_custom_id, prompt). base_cid muss ≤ 61 Zeichen
+                  haben (3 Zeichen reserviert für „-s{j}").
+    k           : Anzahl Samples je Eintrag (Diversität aus Default-Stochastik
+                  bei Opus; bei Sonnet/temperature > 0 aus Sampling).
+    client      : Anthropic-Client (Tests injizieren Fake).
+    state_path  : Pfad für batch_id-Persistenz (Poll-Resume nach Absturz).
+    **run_batch_kwargs : an utils.batch.run_batch durchgereicht
+                  (sleep, poll_interval_s, max_resubmits, …).
+
+    Returns
+    -------
+    dict[base_cid → aggregated_result]
+    """
+    import statistics as _statistics
+
+    from utils.llm import build_text_params
+    from utils.batch import message_request, run_batch
+
+    max_suffix_len = len(f"-s{k - 1}")
+    for base_cid, _ in entries:
+        if len(base_cid) + max_suffix_len > 64:
+            raise ValueError(
+                f"base_cid {base_cid!r} ist zu lang ({len(base_cid)} Z.); "
+                f"max. {64 - max_suffix_len} erlaubt (reserviert {max_suffix_len} für -s{{j}})."
+            )
+
+    requests: list[dict] = []
+    for base_cid, prompt in entries:
+        params = build_text_params(
+            prompt,
+            system=system,
+            model=model,
+            max_tokens=max_tokens,
+            cache_system=True,
+            temperature=temperature,
+        )
+        for j in range(k):
+            requests.append(message_request(f"{base_cid}-s{j}", {**params}))
+
+    outcome = run_batch(
+        requests, client=client, state_path=state_path, **run_batch_kwargs
+    )
+
+    per_base: dict[str, list[dict]] = {b: [] for b, _ in entries}
+    tok_in:  dict[str, int] = {b: 0 for b, _ in entries}
+    tok_out: dict[str, int] = {b: 0 for b, _ in entries}
+
+    for sample_cid, entry in outcome["succeeded"].items():
+        base_cid = sample_cid.rsplit("-", 1)[0]
+        if base_cid not in per_base:
+            continue
+        usage = entry.get("usage", {})
+        tok_in[base_cid]  += usage.get("input_tokens", 0)
+        tok_out[base_cid] += usage.get("output_tokens", 0)
+        parsed = parse_judge_response(entry.get("text", ""))
+        per_base[base_cid].append({**parsed, "raw_response": entry.get("text", "")})
+
+    aggregated: dict[str, dict] = {}
+    for base_cid, samples in per_base.items():
+        agg: dict = {}
+        for key in SCORE_KEYS:
+            vals = [s[key] for s in samples if s.get(key) is not None]
+            agg[key] = int(_statistics.median(vals)) if vals else None
+        for rkey in ("faithfulness_reasoning", "clarity_reasoning", "completeness_reasoning"):
+            agg[rkey] = samples[0].get(rkey, "") if samples else ""
+        agg["raw_responses"] = [s["raw_response"] for s in samples]
+        agg["usage"] = {"input_tokens": tok_in[base_cid], "output_tokens": tok_out[base_cid]}
+        aggregated[base_cid] = agg
+
+    return aggregated
+
 
 def judge_with_retry(ask_fn, prompt: str, system: str, model: str,
                      max_tokens: int = 900, max_retries: int = 3,

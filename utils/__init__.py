@@ -27,7 +27,7 @@ RANDOM_STATE = 42
 
 # Submodule-Exports (nach den Konstanten, um zirkuläre Importe zu vermeiden)
 from .data import sample_stratified  # noqa: F401  (re-export for convenience)
-from .judge import parse_judge_response  # noqa: F401
+from .judge import parse_judge_response, judge_batch_sc  # noqa: F401
 from .generation import (  # noqa: F401
     run_resumable_generation,
     run_batch_generation,
@@ -53,6 +53,7 @@ __all__ = [
     "RANDOM_STATE",
     "sample_stratified",
     "parse_judge_response",
+    "judge_batch_sc",
     "run_resumable_generation",
     "run_batch_generation",
     "generation_filename",
