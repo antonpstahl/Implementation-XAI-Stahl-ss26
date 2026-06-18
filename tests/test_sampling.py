@@ -16,6 +16,7 @@ import pytest
 ROOT = Path(__file__).resolve().parent.parent
 sys.path.insert(0, str(ROOT))
 
+from utils import INSTANCE_IDS, SCALE_N, scale_instance_ids
 from utils.data import load_train_test, sample_stratified
 
 
@@ -167,3 +168,28 @@ def test_sample_distribution_roughly_proportional(test_data):
         assert abs(pop_frac - sample_frac) < 0.15, (
             f"Quintile {q}: population {pop_frac:.2f} vs sample {sample_frac:.2f}"
         )
+
+
+# ---------------------------------------------------------------------------
+# Phase 3b — scale_instance_ids() helper
+# ---------------------------------------------------------------------------
+
+def test_scale_instance_ids_size_unique_sorted():
+    """Default scale sample must be SCALE_N unique, sorted positional indices."""
+    ids = scale_instance_ids()
+    assert len(ids) == SCALE_N
+    assert len(set(ids)) == SCALE_N
+    assert ids == sorted(ids)
+
+
+def test_scale_instance_ids_deterministic():
+    """Same seed → identical scale sample across calls (reproducible 3b run)."""
+    assert scale_instance_ids() == scale_instance_ids()
+
+
+def test_scale_instance_ids_disjoint_enough_from_validity():
+    """Scale and validity samples are drawn independently; the validity 10 are
+    NOT a guaranteed subset (they live in separate, gen-less files). Overlap is
+    incidental — assert it is small so the two experiments stay distinct."""
+    ids = set(scale_instance_ids())
+    assert len(ids & set(INSTANCE_IDS)) <= 2
