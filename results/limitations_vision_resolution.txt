@@ -1,0 +1,27 @@
+=== LIMITATIONS-ABSATZ (Vision-Pipeline: Plot-Auflösungs-Confound) — für Belegarbeit / Paper ===
+
+Die Vision-Pipeline (NB 05) übergibt SHAP-Waterfall-Plots als JPEG-/PNG-Bild
+(dpi=130) an das LLM. Die konsistent niedrigere Rang- und Vorzeichengenauigkeit
+(RA/SA) der Vision-Pipeline gegenüber JSON→Text und Tool-Use ist daher nicht
+zwingend inhärent zur visuellen Modalität, sondern könnte teilweise ein
+Plot-Auflösungs-Artefakt sein: Bei dpi=130 und typischen matplotlib-Figurgrößen
+können Balkenbeschriftungen (Feature-Beiträge, Wertangaben) für das LLM schwer
+lesbar sein, insbesondere wenn mehrere Merkmale ähnlich lange Balken aufweisen.
+
+Konkret entstehen zwei konfundierte Effekte:
+1. **Modalitätsnachteil** (inhärent): Ein Sprachmodell liest numerische Werte aus
+   Fließtext (JSON) präziser als aus einem Bild — dies ist die eigentliche
+   Forschungsfrage.
+2. **Auflösungsartefakt** (methodisch): Eine zu geringe dpi könnte das visuelle
+   Ablesen der Balkengröße und -beschriftung erschweren und RA/SA künstlich
+   absenken, unabhängig von der Modalität.
+
+Da beide Effekte in der aktuellen Experimentalanlage überlagert sind, können die
+beobachteten RA/SA-Unterschiede zwischen Vision und den anderen Pipelines nicht
+vollständig der Modalität zugeschrieben werden. Eine Gegentestung mit höherer
+Auflösung (dpi≥200 oder vektorbasiert/SVG) würde den Artefaktanteil isolieren,
+wurde aber im Rahmen dieser Arbeit nicht durchgeführt (LLM-Kosten).
+
+**Empfehlung für künftige Arbeiten:** Plot-Auflösung als unabhängige Variable
+variieren (z. B. dpi 72/130/200/300 oder rasterisiert vs. vektorbasiert), um
+den reinen Modalitätseffekt von Lese-Artefakten zu trennen.
