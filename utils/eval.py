@@ -73,14 +73,19 @@ def load_scale_records(
     *,
     results_dir: Path = RESULTS_DIR,
     loss_key: str = LOSS_KEY_DEFAULT,
+    scale_subdir: str = "scale",
     require_complete: bool = False,
 ) -> pd.DataFrame:
     """Lädt die Generierungs-Artefakte des Skalierungslaufs gen-aware in einen df.
 
-    Liest ``pipeline{p}/{xai}_inst{iid}[_gen{g}].json`` über alle Pipelines ×
-    XAI-Modelle × Instanzen × Generationen. Das Dateinamensschema folgt
+    Liest ``pipeline{p}/{scale_subdir}/{xai}_inst{iid}[_gen{g}].json`` über alle
+    Pipelines × XAI-Modelle × Instanzen × Generationen. Das Dateinamensschema folgt
     :func:`utils.generation.generation_filename`: deterministische Pipelines
     (Template) ohne ``_gen``-Suffix (1 Generation), LLM-Pipelines mit Suffix.
+
+    Der Unterordner `scale_subdir` (Default ``"scale"``) trennt den n≈200-Lauf
+    physisch von der n=20-Validität (die direkt unter ``pipeline{p}/`` liegt).
+    ``scale_subdir=""`` liest direkt aus ``pipeline{p}/`` (z. B. für Tests).
 
     Jede Zeile trägt zusätzlich zur NB-07-Spaltenmenge eine ``generation``-Spalte
     (0-basiert) und — für Tool-Use — die volle ``tool_calls``-Liste (für den
@@ -93,6 +98,8 @@ def load_scale_records(
 
     for pipeline in pipelines:
         p_dir = results_dir / f"pipeline{pipeline}"
+        if scale_subdir:
+            p_dir = p_dir / scale_subdir
         n_gen = n_generations_for(pipeline, n_generations_scale)
         for xai in xai_models:
             for iid in instance_ids:
