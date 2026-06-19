@@ -1,0 +1,17 @@
+{
+  "pipeline": "05_vision",
+  "llm_model": "claude-sonnet-4-6",
+  "loss_key": "poisson_log",
+  "xai_model": "ebm",
+  "instance_id": 3725,
+  "explanation": "<vorhersage>\nDas Modell sagte 184,5 ausgeliehene Fahrräder vorher; tatsächlich wurden 183 gezählt. Die Vorhersage wurde ausgezeichnet getroffen — die Abweichung beträgt weniger als zwei Fahrräder, was einer nahezu perfekten Schätzung entspricht.\n</vorhersage>\n\n<treiber>\nDer stärkste Aufwärtstreiber in dieser Stunde ist die Tageszeit: 10 Uhr morgens liegt im gleichmäßig ausgelasteten Tagessegment und sorgt für den längsten roten Balken im gesamten Plot. Dicht dahinter folgt die angenehme Temperatur von etwa 30 °C — sie liegt im optimalen Bereich für Radfahrende und verstärkt die Nachfrage erheblich. Auch das Jahr 2012 wirkt als klarer roter Balken positiv: Der Verleih war in diesem Jahr insgesamt stärker frequentiert als im Vorjahr, was das Modell als dauerhaft erhöhtes Nachfrageniveau einrechnet.\n\nGegenläufig wirken zwei Wechselwirkungseffekte: Die Kombination aus Uhrzeit und Wochentag (10 Uhr an einem Dienstag) dämpft die Vorhersage spürbar — an einem Werktag um 10 Uhr sind die Pendlerspitzen bereits vorbei, sodass das Modell die reine Stundenphase leicht nach unten korrigiert. Ähnliches gilt für die Kombination aus Stunde und Temperatur, die ebenfalls einen bremsenden Einfluss hat. Die übrigen Faktoren wie klares Wetter und der Monat Mai tragen noch moderat positiv bei, während Luftfeuchtigkeit und Windgeschwindigkeit die Nachfrage nur minimal beeinflussen.\n</treiber>\n\n<empfehlung>\nAn warmen Vormittagen im Mai und Juni sollten die Stationen rund um beliebte Freizeit- und Bürorouten bereits ab 9 Uhr gut befüllt sein, da Temperatur und Tageszeit gemeinsam eine hohe Nachfrage erzeugen. Wartungs- und Umverteilungsarbeiten lassen sich gut in die frühen Morgenstunden vor 7 Uhr legen, wenn die Nachfrage laut Modell noch sehr gering ist und Fahrräder ohne Engpässe für Kundinnen und Kunden umpositioniert werden können.\n</empfehlung>",
+  "plot_file": "waterfall_ebm_poisson_log_inst3725.png",
+  "elapsed_s": null,
+  "usage": {
+    "input_tokens": 1044,
+    "output_tokens": 998,
+    "cache_read_input_tokens": 0
+  },
+  "prediction": 184.4567,
+  "y_true": 183.0
+}

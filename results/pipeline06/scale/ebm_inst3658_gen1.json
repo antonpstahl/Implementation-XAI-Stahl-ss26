@@ -1,0 +1,74 @@
+{
+  "pipeline": "06_tooluse",
+  "llm_model": "claude-sonnet-4-6",
+  "loss_key": "poisson_log",
+  "xai_model": "ebm",
+  "instance_id": 3658,
+  "explanation": "Alle Daten sind beisammen – hier ist die vollständige Erklärung:\n\n---\n\n<vorhersage>\nDas Modell sagte 334 ausgeliehene Fahrräder vorher; tatsächlich wurden 324 gezählt. Das entspricht einer Abweichung von knapp 3 % — die Vorhersage ist gut getroffen. Trotz eines ungewöhnlich starken Windes an diesem Freitagnachmittag im April 2012 hat das Modell die reale Nachfrage sehr nah abgebildet.\n</vorhersage>\n\n<treiber>\nDer mit Abstand stärkste Treiber dieser Stunde ist die Uhrzeit 15:00 Uhr (Einfluss +0,61): Der frühe Nachmittag liegt im Übergang zur Abendspitze und sorgt für dauerhaft hohe Nachfrage — der stärkste einzelne Hebel für diese Vorhersage, und auch global ist die Stunde das wichtigste Merkmal im Modell überhaupt (globale Wichtigkeit: 0,89). Interessant: Hätte dieselbe Stunde statt 15 Uhr um 9 Uhr stattgefunden (Morgenspitze), wäre die Vorhersage mit 371 Rädern noch etwas höher ausgefallen (+37 Räder), was zeigt, wie eng 15 Uhr und 9 Uhr in ihrer Zugkraft beieinanderliegen.\n\nAuf Rang 2 folgt das Jahr 2012 (yr=1, Einfluss +0,21): 2012 war das nachfragestärkere Jahr, und yr=1 liegt im 100. Perzentil des Trainingsdatensatzes — es ist also der maximal mögliche Jahreswert und wirkt hier klar nachfragesteigernd.\n\nDen stärksten bremsenden Einfluss hat der starke Wind mit 33 km/h (Einfluss −0,10): Mit einem Windgeschwindigkeitswert im 98,8. Perzentil ist das ein ausgesprochen seltener und außergewöhnlicher Wert — nur etwa 1 % aller Trainingsstunden waren windiger. Hätte der Wind dem Tagesdurchschnitt entsprochen (etwa 12,7 km/h), prognostizierte das Modell 364 statt 334 Räder — also rund 30 Fahrräder mehr. Der hohe Wind kostet hier spürbar Kundschaft.\n\nDie niedrige Luftfeuchtigkeit von 29 % wirkt dagegen leicht stützend (+0,10): Trockene Luft wird von Radfahrenden bevorzugt. Das klare Wetter (+0,05) und der Freitag als Werktag (+0,04) tragen ebenfalls positiv bei, wenn auch in geringerem Maß.\n</treiber>\n\n<empfehlung>\nDer Wind ist an diesem Tag der einzige nennenswerte Dämpfer — bei durchschnittlichem Wind wären etwa 30 Räder mehr unterwegs gewesen. Das Betriebsteam sollte bei angekündigten Böen über 30 km/h die Erwartungen für die Nachmittagsstunden entsprechend nach unten korrigieren und Wartungsarbeiten oder Fahrzeug-Umverteilungen in solche windigen Nachmittagsstunden legen, statt in die besonders nachfragestarken Abendspitzen. Grundsätzlich zeigt die Analyse, dass Freitagnachmittage im April 2012 verlässlich hohe Nachfrage bringen — eine gute Basis, um in diesen Zeitfenstern maximale Verfügbarkeit sicherzustellen.\n</empfehlung>",
+  "stop_reason": "end_turn",
+  "tool_calls": [
+    {
+      "tool": "get_shap_values",
+      "arguments": {
+        "instance_id": 3658
+      },
+      "result_preview": "{'instance_id': 3658, 'y_true': 324.0, 'prediction': 334.01, 'base_value': 4.6119, 'contribution_space': 'log', 'note': 'Positive Beiträge erhöhen, negative senken die Vorhersage (multiplikativ via exp).', 'contributions': [{'feature': 'hr', 'value': 15.0, 'value_human': '15:00 Uhr', 'contribution': 0.61121}, {'feature': 'yr', 'value': 1.0, 'value_human': '2012', 'contribution': 0.20776}, {'feature': 'temp', 'value': 0.52, 'value_human': '~21.3 °C', 'contribution': 0.12675}, {'feature': 'windspeed', 'value': 0.4925, 'value_human': '33.0 km/h', 'contribution': -0.09948}, {'feature': 'hum', 'value': 0.29, 'value_human': '29 %', 'contribution': 0.09917}, {'feature': 'weathersit', 'value': 1.0, 'value_human': 'klar/wenige Wolken', 'contribution': 0.04673}, {'feature': 'weekday', 'value': 5.0, 'value_human': 'Freitag', 'contribution': 0.04092}, {'feature': 'mnth', 'value': 4.0, 'value_human': 'April', 'contribution': -0.01703}, {'feature': 'holiday', 'value': 0.0, 'value_human': 'kein Feier…"
+    },
+    {
+      "tool": "get_feature_importance",
+      "arguments": {},
+      "result_preview": "[{'rank': 1, 'feature': 'hr', 'importance': 0.88884}, {'rank': 2, 'feature': 'temp', 'importance': 0.25257}, {'rank': 3, 'feature': 'yr', 'importance': 0.21662}, {'rank': 4, 'feature': 'mnth', 'importance': 0.08572}, {'rank': 5, 'feature': 'hum', 'importance': 0.08257}, {'rank': 6, 'feature': 'weathersit', 'importance': 0.06086}, {'rank': 7, 'feature': 'weekday', 'importance': 0.02353}, {'rank': 8, 'feature': 'windspeed', 'importance': 0.01426}, {'rank': 9, 'feature': 'holiday', 'importance': 0.00791}]"
+    },
+    {
+      "tool": "get_feature_value_context",
+      "arguments": {
+        "instance_id": 3658,
+        "feature": "hr"
+      },
+      "result_preview": "{'feature': 'hr', 'instance_value': 15, 'instance_value_human': '15:00 Uhr', 'type': 'categorical', 'training_distribution': {0: {'count': 506, 'pct': 4.2}, 1: {'count': 506, 'pct': 4.2}, 2: {'count': 501, 'pct': 4.1}, 3: {'count': 487, 'pct': 4.0}, 4: {'count': 492, 'pct': 4.0}, 5: {'count': 498, 'pct': 4.1}, 6: {'count': 507, 'pct': 4.2}, 7: {'count': 508, 'pct': 4.2}, 8: {'count': 508, 'pct': 4.2}, 9: {'count': 508, 'pct': 4.2}, 10: {'count': 508, 'pct': 4.2}, 11: {'count': 508, 'pct': 4.2}, 12: {'count': 509, 'pct': 4.2}, 13: {'count': 510, 'pct': 4.2}, 14: {'count': 510, 'pct': 4.2}, 15: {'count': 510, 'pct': 4.2}, 16: {'count': 511, 'pct': 4.2}, 17: {'count': 511, 'pct': 4.2}, 18: {'count': 509, 'pct': 4.2}, 19: {'count': 509, 'pct': 4.2}, 20: {'count': 509, 'pct': 4.2}, 21: {'count': 509, 'pct': 4.2}, 22: {'count': 509, 'pct': 4.2}, 23: {'count': 509, 'pct': 4.2}}}"
+    },
+    {
+      "tool": "get_feature_value_context",
+      "arguments": {
+        "instance_id": 3658,
+        "feature": "yr"
+      },
+      "result_preview": "{'feature': 'yr', 'instance_value': 1.0, 'instance_value_human': '2012', 'type': 'numerical', 'percentile_in_train': 100.0, 'train_min': 0.0, 'train_max': 1.0, 'train_mean': 0.5213, 'train_std': 0.4996}"
+    },
+    {
+      "tool": "get_feature_value_context",
+      "arguments": {
+        "instance_id": 3658,
+        "feature": "windspeed"
+      },
+      "result_preview": "{'feature': 'windspeed', 'instance_value': 0.4925, 'instance_value_human': '33.0 km/h', 'type': 'numerical', 'percentile_in_train': 98.8, 'train_min': 0.0, 'train_max': 0.8507, 'train_mean': 0.1891, 'train_std': 0.1207}"
+    },
+    {
+      "tool": "get_counterfactual_prediction",
+      "arguments": {
+        "instance_id": 3658,
+        "changes": {
+          "hr": 9
+        }
+      },
+      "result_preview": "{'instance_id': 3658, 'base_prediction': 334.01, 'counterfactual_prediction': 370.88, 'delta': 36.88, 'applied_changes': {'hr': 9}, 'unit': 'Fahrräder pro Stunde'}"
+    },
+    {
+      "tool": "get_counterfactual_prediction",
+      "arguments": {
+        "instance_id": 3658,
+        "changes": {
+          "windspeed": 0.19
+        }
+      },
+      "result_preview": "{'instance_id': 3658, 'base_prediction': 334.01, 'counterfactual_prediction': 364.49, 'delta': 30.48, 'applied_changes': {'windspeed': 0.19}, 'unit': 'Fahrräder pro Stunde'}"
+    }
+  ],
+  "n_tool_calls": 7,
+  "elapsed_s": 38.13,
+  "usage": {
+    "input_tokens": 7702,
+    "output_tokens": 1762
+  },
+  "y_true": 324.0
+}

@@ -1,0 +1,17 @@
+{
+  "pipeline": "05_vision",
+  "llm_model": "claude-sonnet-4-6",
+  "loss_key": "poisson_log",
+  "xai_model": "ebm",
+  "instance_id": 3687,
+  "explanation": "<vorhersage>\nDas Modell sagte 315 ausgeliehene Fahrräder vorher; tatsächlich wurden 338 gezählt. Die Vorhersage liegt damit etwa 7 % unter dem realen Wert — das ist eine mäßige Treffgenauigkeit. Das Modell hat die Größenordnung richtig erfasst, unterschätzt die Nachfrage aber um gut zwei Dutzend Fahrräder.\n</vorhersage>\n\n<treiber>\nDer bei weitem stärkste Aufwärtstreiber in diesem Plot ist die Tageszeit: 20 Uhr fällt in den Bereich der Abendspitze, in der viele Menschen nach der Arbeit mit dem Fahrrad nach Hause fahren — der rote Balken für die Stunde ist mehr als doppelt so lang wie alle anderen. Direkt dahinter folgt das Jahr 2012 mit einem ebenfalls deutlich roten Balken: 2012 war das wachstumsstärkere Jahr im System, was die Grundnachfrage spürbar anhebt. Auf Rang drei wirkt die Kombination aus Uhrzeit und Wochentag zusätzlich verstärkend — ein Mittwochabend zeigt das typische Pendlermuster besonders ausgeprägt, was das Modell als eigenen positiven Faktor erkennt. Auch die angenehme Temperatur von etwa 21 °C und das klare Wetter tragen positiv bei, wenngleich deutlich schwächer. Leicht bremsend wirkt die Luftfeuchtigkeit von 77 %, die zusammen mit der Windgeschwindigkeit einen kleinen dämpfenden Effekt erzeugt.\n</treiber>\n\n<empfehlung>\nAn Mittwochabenden im Mai sollten die Stationen entlang typischer Pendlerrouten bereits ab 18 Uhr gut befüllt sein, damit um 20 Uhr ausreichend Fahrräder verfügbar sind. Da das Modell die Nachfrage in dieser Konstellation leicht unterschätzt, empfiehlt es sich, in den Sommermonaten an Werktags-Abendspitzen einen kleinen Puffer einzuplanen und Wartungsarbeiten konsequent in die frühen Morgenstunden zu verlegen.\n</empfehlung>",
+  "plot_file": "waterfall_ebm_poisson_log_inst3687.png",
+  "elapsed_s": null,
+  "usage": {
+    "input_tokens": 1044,
+    "output_tokens": 879,
+    "cache_read_input_tokens": 0
+  },
+  "prediction": 315.2522,
+  "y_true": 338.0
+}

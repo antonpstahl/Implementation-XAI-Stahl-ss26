@@ -1,0 +1,17 @@
+{
+  "pipeline": "05_vision",
+  "llm_model": "claude-sonnet-4-6",
+  "loss_key": "poisson_log",
+  "xai_model": "ebm",
+  "instance_id": 419,
+  "explanation": "<vorhersage>\nDas Modell sagte für diese Stunde 2,3 ausgeliehene Fahrräder vorher; tatsächlich wurden 4 gezählt. Die Vorhersage liegt damit spürbar unter dem tatsächlichen Wert — angesichts der ohnehin sehr geringen Nachfrage in dieser Nacht ist die Abweichung von knapp 2 Fahrrädern zwar absolut klein, prozentual aber deutlich. Die Güte der Vorhersage ist daher als mäßig zu bewerten.\n</vorhersage>\n\n<treiber>\nDer mit Abstand stärkste Einfluss in diesem Plot geht von der Uhrzeit aus: 3:00 Uhr nachts ist der größte Einzeltreiber — und er wirkt stark dämpfend. Der lange blaue Balken für hr zeigt, dass zu dieser Stunde praktisch niemand ein Fahrrad ausleihen möchte. Verstärkt wird das noch durch die Kombination aus Uhrzeit und Wochentag: Da es ein Mittwoch ist, also ein normaler Arbeitstag mitten in der Nacht, fällt auch der gemeinsame Einfluss von hr & weekday stark negativ aus — der zweitlängste blaue Balken im Plot. Hinzu kommt die Temperatur von etwa 9 °C: Das ist für Fahrradfahren recht kühl, was einen weiteren dämpfenden Einfluss erzeugt (drittlängster blauer Balken). Auch das Jahr 2011 und die Kombination aus Monat März und Jahr 2011 wirken leicht negativ, da 2011 insgesamt eine nachfrageärmere Periode darstellte. Auf der anderen Seite gibt es einige kleine rote Balken — etwa die Wechselwirkung zwischen Uhrzeit und Temperatur sowie zwischen Wochentag und Temperatur — die minimal gegensteuern, aber kaum ins Gewicht fallen. Das klare Wetter trägt ebenfalls minimal positiv bei.\n</treiber>\n\n<empfehlung>\nIn den frühen Morgenstunden zwischen etwa 1:00 und 5:00 Uhr ist die Nachfrage verschwindend gering, besonders an Werktagen im Winter. Dieses Zeitfenster eignet sich ideal für Wartungsarbeiten an Fahrrädern und Stationen, da kaum Nutzerinnen und Nutzer beeinträchtigt werden. Gleichzeitig müssen in dieser Zeit nur minimale Fahrradverfügbarkeiten sichergestellt werden — Ressourcen lassen sich gezielt in die Morgen- und Abendspitze verlagern.\n</empfehlung>",
+  "plot_file": "waterfall_ebm_poisson_log_inst419.png",
+  "elapsed_s": null,
+  "usage": {
+    "input_tokens": 1043,
+    "output_tokens": 1026,
+    "cache_read_input_tokens": 0
+  },
+  "prediction": 2.3351,
+  "y_true": 4.0
+}

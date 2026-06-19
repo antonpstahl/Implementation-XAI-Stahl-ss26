@@ -1,0 +1,17 @@
+{
+  "pipeline": "05_vision",
+  "llm_model": "claude-sonnet-4-6",
+  "loss_key": "poisson_log",
+  "xai_model": "ebm",
+  "instance_id": 3608,
+  "explanation": "<vorhersage>\nDas Modell sagte 288 ausgeliehene Fahrräder vorher; tatsächlich wurden 228 gezählt. Die Abweichung beträgt 60 Fahrräder, was einem Fehler von rund 26 % entspricht — die Vorhersage wurde damit nur mäßig getroffen. Das Modell überschätzt die Nachfrage für diese Stunde spürbar.\n</vorhersage>\n\n<treiber>\nDer mit Abstand stärkste Aufwärtstreiber ist die Tageszeit: 13 Uhr liegt mitten im Tagesgeschäft und zieht grundsätzlich viele Ausleihvorgänge nach sich — der lange rote Balken für hr spiegelt das deutlich wider. Dicht dahinter folgt das Jahr 2012 (yr=1) mit einem weiteren roten Balken: 2012 war das nachfragestärkere Jahr, was die Prognose zusätzlich nach oben treibt. Die angenehme Temperatur von etwa 23 °C verstärkt diesen Effekt noch weiter — auch dieser Balken zeigt klar nach rechts. Als wichtigster dämpfender Faktor wirkt die Kombination aus Uhrzeit und Wochentag (hr & weekday): Ein Mittwochmittag ist kein typischer Pendel-Hochpunkt, was das Modell hier mit einem blauen Balken korrigiert. Ebenfalls bemerkenswert: Die sehr niedrige Luftfeuchtigkeit von nur 26 % trägt positiv bei, da trockene Luft das Radfahren angenehmer macht.\n</treiber>\n\n<empfehlung>\nDa das Modell die Nachfrage an Mittwochmittagen systematisch überschätzt, sollte die Fahrradverfügbarkeit an solchen Werktag-Mittagsstunden nicht zu hoch angesetzt werden — eine moderate Ausstattung der Stationen reicht aus. Wartungs- und Umverteilungsarbeiten lassen sich gut in die frühen Nachmittagsstunden an Werktagen legen, da die tatsächliche Auslastung dort niedriger ausfällt als das Modell erwartet.\n</empfehlung>",
+  "plot_file": "waterfall_ebm_poisson_log_inst3608.png",
+  "elapsed_s": null,
+  "usage": {
+    "input_tokens": 1044,
+    "output_tokens": 891,
+    "cache_read_input_tokens": 0
+  },
+  "prediction": 287.9628,
+  "y_true": 228.0
+}

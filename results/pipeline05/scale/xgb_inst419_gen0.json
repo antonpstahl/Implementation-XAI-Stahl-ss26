@@ -1,0 +1,17 @@
+{
+  "pipeline": "05_vision",
+  "llm_model": "claude-sonnet-4-6",
+  "loss_key": "poisson_log",
+  "xai_model": "xgb",
+  "instance_id": 419,
+  "explanation": "<vorhersage>\nDas Modell sagte für diese Stunde etwa 2 ausgeliehene Fahrräder vorher; tatsächlich wurden 4 gezählt. Die Vorhersage liegt damit zwar in der richtigen Größenordnung — es handelt sich eindeutig um eine sehr schwache Nachfragestunde —, trifft den tatsächlichen Wert aber nur mäßig, da sie die Ausleihe um fast die Hälfte unterschätzt.\n</vorhersage>\n\n<treiber>\nDer mit Abstand stärkste Einfluss geht von der Uhrzeit aus: 3 Uhr nachts ist die tiefste Nachtphase, in der kaum jemand ein Fahrrad ausleiht. Dieser blaue Balken (−3.08) ist mehr als sechsmal so lang wie der nächstgrößte und zieht die Vorhersage massiv nach unten. An zweiter Stelle steht die Temperatur von etwa 9 °C (normalisiert 0.22): Kühle Märznächte schrecken Nutzer zusätzlich ab, weshalb auch dieser Balken blau nach links zeigt (−0.5). Knapp dahinter folgt der Wochentag Mittwoch (weekday=3) mit einem weiteren dämpfenden Einfluss (−0.42) — Pendler, die an Werktagen die Morgen- und Abendspitzen treiben, sind um 3 Uhr naturgemäß nicht unterwegs. Hinzu kommen kleinere dämpfende Beiträge aus dem Jahr 2011 (nachfrageärmeres Modelljahr, −0.24) und dem Monat März (Winterausklang, −0.23). Einzig das klare Wetter (weathersit=1) wirkt leicht positiv (+0.03), kann die vielen negativen Einflüsse aber bei Weitem nicht ausgleichen.\n</treiber>\n\n<empfehlung>\nIn den frühen Nachtstunden zwischen etwa 1 und 4 Uhr ist die Nachfrage systembedingt auf ein Minimum reduziert — diese Zeitfenster eignen sich ideal für Wartungsarbeiten, Umverteilungsfahrten und die Überprüfung der Stationen, ohne den laufenden Betrieb zu stören. Da Kälte und Jahreszeit die Nachfrage in den Wintermonaten zusätzlich drücken, sollten Personalressourcen und Fahrzeugkapazitäten in den Wintermorgen flexibel gehalten und bevorzugt in die Abend- und Morgenstoßzeiten an Werktagen verlagert werden.\n</empfehlung>",
+  "plot_file": "waterfall_xgb_poisson_log_inst419.png",
+  "elapsed_s": null,
+  "usage": {
+    "input_tokens": 1283,
+    "output_tokens": 972,
+    "cache_read_input_tokens": 0
+  },
+  "prediction": 2.1057,
+  "y_true": 4.0
+}

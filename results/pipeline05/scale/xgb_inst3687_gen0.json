@@ -1,0 +1,17 @@
+{
+  "pipeline": "05_vision",
+  "llm_model": "claude-sonnet-4-6",
+  "loss_key": "poisson_log",
+  "xai_model": "xgb",
+  "instance_id": 3687,
+  "explanation": "<vorhersage>\nDas Modell sagte 340 ausgeliehene Fahrräder vorher; tatsächlich wurden 338 gezählt. Das ist eine ausgezeichnet genaue Vorhersage — die Abweichung beträgt lediglich zwei Fahrräder bzw. weniger als ein Prozent.\n</vorhersage>\n\n<treiber>\nDer stärkste Einfluss in dieser Stunde geht von der Uhrzeit aus: Um 20 Uhr befinden sich viele Pendler auf dem Heimweg, was den längsten roten Balken im Plot erklärt. Die Abendstunde treibt die Nachfrage spürbar nach oben. Knapp dahinter folgt das Jahr 2012 (yr=1) als zweitgrößter Aufwärtstreiber — 2012 war insgesamt das nachfragereichere Jahr im System, was die Vorhersage zusätzlich anhebt. An dritter Stelle steht die angenehme Temperatur von etwa 21 °C: Wärme in diesem Bereich lädt zum Radfahren ein und erhöht die Nachfrage weiter. Auch das klare Wetter und der Mittwoch als typischer Werktag tragen noch positiv bei, allerdings in deutlich geringerem Maß. Die Luftfeuchtigkeit von 77 % und die Windgeschwindigkeit von etwa 17 km/h wirken leicht dämpfend, ihr Einfluss ist jedoch sehr klein und kaum spürbar.\n</treiber>\n\n<empfehlung>\nDa die Abendstunde um 20 Uhr an Werktagen eine klare Nachfragespitze erzeugt, sollten Verleihstationen entlang typischer Pendelrouten bis in den späten Abend gut befüllt sein. Wartungsarbeiten und Umverteilungen lassen sich sinnvoll in die Nachtstunden zwischen etwa 1 und 5 Uhr legen, wenn die Nachfrage auf ein Minimum fällt.\n</empfehlung>",
+  "plot_file": "waterfall_xgb_poisson_log_inst3687.png",
+  "elapsed_s": null,
+  "usage": {
+    "input_tokens": 1284,
+    "output_tokens": 798,
+    "cache_read_input_tokens": 0
+  },
+  "prediction": 340.3502,
+  "y_true": 338.0
+}

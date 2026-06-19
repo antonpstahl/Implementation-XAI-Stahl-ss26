@@ -1,0 +1,16 @@
+{
+  "pipeline": "04_json",
+  "llm_model": "claude-sonnet-4-6",
+  "loss_key": "poisson_log",
+  "xai_model": "xgb",
+  "instance_id": 3725,
+  "explanation": "<vorhersage>Das Modell sagte für diese Stunde 193 ausgeliehene Fahrräder vorher; tatsächlich wurden 183 gezählt. Das entspricht einer Abweichung von etwa 6 Prozent — die Vorhersage wurde mäßig gut getroffen, liegt also etwas zu hoch, ist aber in einem akzeptablen Bereich.</vorhersage>\n\n<treiber>Der stärkste Einzelfaktor in dieser Stunde ist die Uhrzeit: 10 Uhr morgens liegt zwischen der Morgenspitze und der Mittagsauslastung und wirkt hier leicht dämpfend auf die Nachfrage (Rang 1, Einfluss −0,19). Die Pendelwelle um 8 Uhr ist bereits abgeebbt, ohne dass die gleichmäßige Tagesauslastung sie vollständig ausgleicht. Nahezu gleich stark, aber in die entgegengesetzte Richtung, wirkt das Jahr 2012 (yr=1): Als das nachfragereichere Modelljahr treibt es die Ausleihen klar nach oben (Rang 2, +0,16). Auf Rang 3 folgt die angenehme Temperatur von etwa 30 °C, die ebenfalls erhöhend wirkt (+0,15) — warme, aber noch nicht drückend heiße Bedingungen animieren viele Menschen zum Radfahren. Knapp dahinter dämpft der Wochentag Dienstag (Rang 4, −0,15): An einem regulären Werktag ohne besondere Pendelspitze um 10 Uhr fällt die Freizeitnutzung geringer aus als etwa am Wochenende. Das klare Wetter und die moderate Luftfeuchtigkeit von 70 % tragen jeweils nur minimal positiv bei.</treiber>\n\n<empfehlung>Da die Nachfrage um 10 Uhr werktags spürbar unterhalb der Morgenspitze liegt, empfiehlt es sich, Wartungs- und Umverteilungsfahrten in dieses Zeitfenster zu legen — Stationen sind weniger stark ausgelastet. An Standorten mit starkem Pendleraufkommen sollte die Auffüllung hingegen bereits vor 7 Uhr abgeschlossen sein, um die Morgenspitze nicht zu verpassen.</empfehlung>",
+  "elapsed_s": null,
+  "usage": {
+    "input_tokens": 618,
+    "output_tokens": 783,
+    "cache_read_input_tokens": 0
+  },
+  "prediction": 193.4604,
+  "y_true": 183.0
+}

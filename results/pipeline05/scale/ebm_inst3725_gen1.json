@@ -1,0 +1,17 @@
+{
+  "pipeline": "05_vision",
+  "llm_model": "claude-sonnet-4-6",
+  "loss_key": "poisson_log",
+  "xai_model": "ebm",
+  "instance_id": 3725,
+  "explanation": "<vorhersage>\nDas Modell sagte 184,5 ausgeliehene Fahrräder vorher; tatsächlich wurden 183 gezählt. Die Vorhersage wurde ausgezeichnet getroffen — die Abweichung beträgt weniger als ein Fahrrad.\n</vorhersage>\n\n<treiber>\nDer stärkste Aufwärtstreiber in dieser Stunde ist die Tageszeit: 10 Uhr liegt in der gleichmäßig ausgelasteten Vormittagsphase und zieht die Vorhersage kräftig nach oben. Fast genauso stark wirkt die Temperatur von etwa 30 °C — sie liegt im optimalen Wohlfühlbereich für Radfahrende und erhöht die erwartete Nachfrage erheblich. Das Jahr 2012 trägt als dritter roter Balken ebenfalls deutlich positiv bei, da das System in diesem Jahr bereits stärker etabliert war und mehr Nutzende verzeichnete.\n\nDiesen drei Aufwärtstreibern wirkt vor allem die Kombination aus Uhrzeit und Wochentag entgegen: An einem Dienstag um 10 Uhr haben die morgendlichen Pendlerspitzen (7–9 Uhr) bereits nachgelassen, sodass dieser Wechselwirkungsterm die Vorhersage merklich dämpft. Ähnlich bremst die Kombination aus Uhrzeit und Temperatur leicht — offenbar wird der positive Temperatureffekt zu dieser Tagesstunde im Modell etwas abgemildert. Wetterlage, Monat Mai und die übrigen Faktoren spielen nur eine untergeordnete Rolle.\n</treiber>\n\n<empfehlung>\nAn klaren Vormittagen im Mai bei angenehmen Temperaturen ist mit stabiler, aber nicht mehr ganz so starker Nachfrage wie zur Morgenstunde zu rechnen. Stationen in Büro- und Innenstadtnähe sollten bis spätestens 9 Uhr gut befüllt sein, da die Nachfrage um 10 Uhr noch anhält, aber bereits leicht abflaut. Wartungs- und Umverteilungsarbeiten lassen sich gut in die frühen Abendstunden legen, wenn die Abendspitze abgeklungen ist.\n</empfehlung>",
+  "plot_file": "waterfall_ebm_poisson_log_inst3725.png",
+  "elapsed_s": null,
+  "usage": {
+    "input_tokens": 1044,
+    "output_tokens": 945,
+    "cache_read_input_tokens": 0
+  },
+  "prediction": 184.4567,
+  "y_true": 183.0
+}

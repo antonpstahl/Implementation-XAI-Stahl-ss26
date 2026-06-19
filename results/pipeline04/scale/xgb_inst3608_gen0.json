@@ -1,0 +1,16 @@
+{
+  "pipeline": "04_json",
+  "llm_model": "claude-sonnet-4-6",
+  "loss_key": "poisson_log",
+  "xai_model": "xgb",
+  "instance_id": 3608,
+  "explanation": "<vorhersage>Das Modell sagte 276 ausgeliehene Fahrräder vorher; tatsächlich wurden 228 gezählt. Das entspricht einer Abweichung von etwa 21 Prozent — die Vorhersage wurde in dieser Stunde nur mäßig getroffen, da das Modell die Nachfrage spürbar überschätzt hat.</vorhersage>\n\n<treiber>Den stärksten Einfluss hat das Jahr 2012 (yr=1): Da 2012 das nachfragereichere der beiden Modelljahre ist, treibt dieser Faktor die Vorhersage deutlich nach oben (Rang 1, Einfluss +0,20). Direkt dahinter folgt der Wochentag Mittwoch (weekday=3) mit einem klar dämpfenden Effekt (−0,17, Rang 2): An einem Mittwochmittag fehlen typische Freizeitausflügler, und der Pendelverkehr ist um 13 Uhr bereits abgeflaut. Die Tageszeit selbst (13 Uhr) wirkt leicht erhöhend (Rang 3, +0,13), da tagsüber eine gleichmäßige Grundnachfrage besteht. Unterstützend kommt die angenehme Temperatur von etwa 23 °C hinzu (Rang 4, +0,12): Solche Bedingungen laden zum Radfahren ein. Auch die sehr niedrige Luftfeuchtigkeit von nur 26 % trägt leicht positiv bei (Rang 5, +0,08), da trockene Luft das Fahrradfahren komfortabler macht.</treiber>\n\n<empfehlung>Da das Modell die Nachfrage an diesem Mittag überschätzt hat, lohnt es sich, Mittwochmittage bei der Stationsplanung gesondert zu betrachten — hier reicht eine mittlere Fahrradverfügbarkeit aus, eine volle Bestückung ist nicht nötig. Wartungs- und Umverteilungsarbeiten könnten gezielt in solche ruhigeren Mittagsstunden an Werktagen gelegt werden, um Spitzenzeiten freizuhalten.</empfehlung>",
+  "elapsed_s": null,
+  "usage": {
+    "input_tokens": 617,
+    "output_tokens": 742,
+    "cache_read_input_tokens": 0
+  },
+  "prediction": 275.559,
+  "y_true": 228.0
+}

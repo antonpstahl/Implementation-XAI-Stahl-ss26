@@ -1,0 +1,16 @@
+{
+  "pipeline": "04_json",
+  "llm_model": "claude-sonnet-4-6",
+  "loss_key": "poisson_log",
+  "xai_model": "xgb",
+  "instance_id": 419,
+  "explanation": "<vorhersage>Das Modell sagte etwa 2 ausgeliehene Fahrräder für diese Stunde vorher; tatsächlich wurden 4 gezählt. Die Abweichung beträgt rund 2 Räder — bei einer ohnehin sehr niedrigen Gesamtnachfrage ist das mäßig getroffen, wobei solche Abweichungen in Randstunden mit wenigen Ausleihen wenig praktische Bedeutung haben.</vorhersage>\n\n<treiber>Der mit großem Abstand stärkste Einflussfaktor ist die Uhrzeit: 3 Uhr nachts ist eine ausgesprochene Ruhephase, in der kaum jemand ein Fahrrad ausleiht — dieser Faktor drückt die Vorhersage extrem stark nach unten (Rang 1, Einfluss −3,08). An zweiter Stelle steht die Temperatur von etwa 9 °C, die ebenfalls deutlich dämpfend wirkt (−0,50, Rang 2): Bei solcher Kälte sind ohnehin nur sehr wenige Nutzer unterwegs. Zusätzlich bremst der Wochentag Mittwoch die Nachfrage leicht (−0,42, Rang 3) — an Werktagen fehlt in der Nacht die Freizeitnutzung fast vollständig. Auch das Jahr 2011 (yr=0) und der Monat März tragen beide kleinere negative Beiträge bei, da 2011 die nachfrageärmere Phase war und März noch zur Vorsaison gehört.</treiber>\n\n<empfehlung>Um 3 Uhr nachts im März bei Kälte ist die Nachfrage strukturell auf einem Minimum — Wartungs- und Umverteilungsarbeiten lassen sich in genau diesem Zeitfenster sehr gut durchführen, ohne den Betrieb zu beeinträchtigen. Eine volle Stationsbesetzung ist zu dieser Stunde nicht nötig; Ressourcen sollten besser auf die morgendliche Pendlerspitze vorbereitet werden.</empfehlung>",
+  "elapsed_s": null,
+  "usage": {
+    "input_tokens": 618,
+    "output_tokens": 706,
+    "cache_read_input_tokens": 0
+  },
+  "prediction": 2.1057,
+  "y_true": 4.0
+}

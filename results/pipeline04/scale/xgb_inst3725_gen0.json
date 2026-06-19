@@ -1,0 +1,16 @@
+{
+  "pipeline": "04_json",
+  "llm_model": "claude-sonnet-4-6",
+  "loss_key": "poisson_log",
+  "xai_model": "xgb",
+  "instance_id": 3725,
+  "explanation": "<vorhersage>Das Modell sagte für diese Stunde etwa 193 ausgeliehene Fahrräder vorher; tatsächlich wurden 183 gezählt. Die Abweichung beträgt rund 6 % — die Vorhersage wurde mäßig gut getroffen, liegt aber noch in einem akzeptablen Bereich.</vorhersage>\n\n<treiber>Den stärksten Einfluss hat die Uhrzeit: 10 Uhr morgens liegt zwischen der Morgenspitze und dem Mittagsverkehr, was die Nachfrage merklich dämpft (Rang 1, Einfluss −0,19). Dicht dahinter folgen zwei gegenläufige Kräfte: Das Jahr 2012 (yr=1) wirkt klar positiv — 2012 war das stärker ausgelastete Betriebsjahr und treibt die Erwartung nach oben (Rang 2, +0,16). Ähnlich stark unterstützt die angenehme Temperatur von etwa 30 °C die Nachfrage (Rang 3, +0,15), da dieser Temperaturbereich von Radfahrerinnen und Radfahrern erfahrungsgemäß gut angenommen wird. Gleichzeitig zieht der Dienstag (weekday=2) die Vorhersage wieder nach unten (Rang 4, −0,15): An einem gewöhnlichen Werktag ist um 10 Uhr die Pendlerspitze bereits vorbei. Das klare Wetter trägt nur noch leicht positiv bei.</treiber>\n\n<empfehlung>Um 10 Uhr an einem Dienstag ist die Hauptpendlerzeit vorüber — die Stationen müssen also nicht mehr auf Hochtopp laufen. Es empfiehlt sich, in dieser ruhigeren Phase Fahrräder aus stark geleerten Stationen umzuverteilen und kleinere Wartungsarbeiten anzugehen, bevor die Mittagsnachfrage einsetzt. Die warmen Temperaturen und das gute Wetter deuten zudem darauf hin, dass Freizeitnutzerinnen und Freizeitnutzer ab Mittag stärker aktiv werden — Stationen an touristisch beliebten Orten sollten entsprechend vorbereitet sein.</empfehlung>",
+  "elapsed_s": null,
+  "usage": {
+    "input_tokens": 618,
+    "output_tokens": 758,
+    "cache_read_input_tokens": 0
+  },
+  "prediction": 193.4604,
+  "y_true": 183.0
+}

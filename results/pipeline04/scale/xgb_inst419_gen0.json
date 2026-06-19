@@ -1,0 +1,16 @@
+{
+  "pipeline": "04_json",
+  "llm_model": "claude-sonnet-4-6",
+  "loss_key": "poisson_log",
+  "xai_model": "xgb",
+  "instance_id": 419,
+  "explanation": "<vorhersage>Das Modell sagte etwa 2,1 ausgeliehene Fahrräder vorher; tatsächlich wurden 4 gezählt. Die Vorhersage liegt damit rund halb so hoch wie der Realwert — bei so kleinen absoluten Zahlen in der Nacht ist die Abweichung zwar nur 2 Fahrräder, prozentual aber deutlich. Die Vorhersage wurde mäßig getroffen.</vorhersage>\n\n<treiber>Der bei weitem stärkste Einfluss ist die Uhrzeit: 3 Uhr nachts ist die ruhigste Phase des Tages, und dieser Faktor drückt die Nachfrage mit Abstand am kräftigsten nach unten (Rang 1, Einfluss −3,08). An zweiter Stelle steht die Kälte: Mit etwa 9 °C (temp=0,22) liegt die Temperatur deutlich im unkomfortablen Bereich, was zusätzlich dämpfend wirkt (Rang 2, −0,50). Ebenfalls bremsend ist der Wochentag Mittwoch — ein normaler Werktag mitten in der Nacht, an dem auch Pendlerverkehr keine Rolle spielt (Rang 3, −0,42). Das Jahr 2011 (yr=0) und der Monat März verstärken den negativen Gesamttrend jeweils noch etwas, da 2011 das nachfrageärmere Jahr war und der März außerhalb der fahrradstarken Sommersaison liegt.</treiber>\n\n<empfehlung>In den frühen Morgenstunden zwischen etwa 1 und 5 Uhr — besonders im Winter und Frühjahr — ist die Nachfrage so gering, dass eine minimale Fahrradbereitstellung völlig ausreicht. Diese Zeitfenster eignen sich ideal für Wartung, Umverteilung und Inspektion der Räder, ohne dass nennenswerte Nutzereinschränkungen entstehen.</empfehlung>",
+  "elapsed_s": null,
+  "usage": {
+    "input_tokens": 618,
+    "output_tokens": 686,
+    "cache_read_input_tokens": 0
+  },
+  "prediction": 2.1057,
+  "y_true": 4.0
+}

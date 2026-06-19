@@ -1,0 +1,17 @@
+{
+  "pipeline": "05_vision",
+  "llm_model": "claude-sonnet-4-6",
+  "loss_key": "poisson_log",
+  "xai_model": "ebm",
+  "instance_id": 419,
+  "explanation": "<vorhersage>\nDas Modell sagte 2,3 ausgeliehene Fahrräder vorher; tatsächlich wurden 4 gezählt. Die Vorhersage liegt damit in der richtigen Größenordnung — beide Werte signalisieren eine sehr geringe Nachfrage —, weicht aber prozentual deutlich ab. Angesichts der insgesamt sehr niedrigen absoluten Zahl (kaum jemand leiht um 3 Uhr nachts ein Fahrrad) ist die Abweichung von knapp zwei Rädern jedoch gut nachvollziehbar; die Gesamteinschätzung der Situation trifft das Modell dennoch nur mäßig.\n</vorhersage>\n\n<treiber>\nDer mit Abstand größte Einfluss kommt von der Uhrzeit: 3:00 Uhr früh ist tief in der Nachtphase, und der Balken für hr ist mit einem Wert von −2,183 der längste blaue Balken im gesamten Plot — die Nachtzeit drückt die Nachfrage massiv nach unten. Verstärkt wird dieser Effekt durch die Kombination aus Uhrzeit und Wochentag (hr & weekday, −0,807): An einem Mittwochmorgen um 3 Uhr gibt es weder Pendlerverkehr noch Freizeitbetrieb, was die Nachfrage weiter senkt. An dritter Stelle steht die Temperatur von etwa 9 °C (−0,564): Kühle Temperaturen im März schrecken zusätzliche Nutzer ab, sodass auch dieser Balken klar nach links zeigt. Das Jahr 2011 (yr, −0,226) und die Kombination aus Monat und Jahr (mnth & yr, −0,198) tragen ebenfalls dämpfend bei, da 2011 die nachfrageärmere Betriebsphase war und März noch zum schwachen Winterbeginn zählt. Lediglich kleine rote Balken — etwa die Wechselwirkung zwischen Uhrzeit und Temperatur sowie zwischen Wochentag und Temperatur — wirken leicht gegensteuernd, reichen aber bei weitem nicht aus, um die dominanten negativen Einflüsse auszugleichen. Das klare Wetter (weathersit, +0,047) trägt minimal positiv bei, verpufft aber nahezu wirkungslos.\n</treiber>\n\n<empfehlung>\nIn den Nachtstunden zwischen 0 und 5 Uhr — besonders an kühlen Frühlingstagen — ist die Nachfrage strukturell sehr gering. Diese Zeitfenster eignen sich ideal für Wartungsarbeiten, Umverteilungen zwischen Stationen und Fahrzeugchecks, ohne den laufenden Betrieb zu stören. Da selbst an einem klaren Mittwoch im März um 3 Uhr kaum mehr als zwei bis vier Räder bewegt werden, sollte die Stationsauffüllung erst kurz vor der Morgenspitze ab etwa 7 Uhr erfolgen, um unnötige Logistikfahrten in der Nacht zu vermeiden.\n</empfehlung>",
+  "plot_file": "waterfall_ebm_poisson_log_inst419.png",
+  "elapsed_s": null,
+  "usage": {
+    "input_tokens": 1043,
+    "output_tokens": 1152,
+    "cache_read_input_tokens": 0
+  },
+  "prediction": 2.3351,
+  "y_true": 4.0
+}

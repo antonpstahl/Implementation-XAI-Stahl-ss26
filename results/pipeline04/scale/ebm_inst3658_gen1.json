@@ -1,0 +1,16 @@
+{
+  "pipeline": "04_json",
+  "llm_model": "claude-sonnet-4-6",
+  "loss_key": "poisson_log",
+  "xai_model": "ebm",
+  "instance_id": 3658,
+  "explanation": "<vorhersage>Das Modell sagte 334 ausgeliehene Fahrräder vorher; tatsächlich wurden 324 gezählt. Die Abweichung beträgt etwa 3 Prozent — die Vorhersage wurde gut getroffen.</vorhersage>\n\n<treiber>Der bei Weitem stärkste Treiber ist die Uhrzeit: 15 Uhr fällt in die nachmittägliche Auslastungsphase und erhöht die Nachfrage deutlich (Einfluss +0,61, Rang 1). An zweiter Stelle steht das Jahr 2012 (yr=1), das als das nachfragestärkere Modelljahr einen spürbar positiven Beitrag liefert (+0,21, Rang 2). Die Temperatur von etwa 21 °C liegt im angenehmen Bereich und verstärkt den Effekt zusätzlich (+0,13, Rang 3). Einen leicht dämpfenden Einfluss hat der Wind: Mit etwa 33 km/h liegt er gerade über der Schwelle, ab der viele Radfahrer zurückhaltender werden (−0,10, Rang 4). Interessanterweise wirkt die sehr niedrige Luftfeuchtigkeit von 29 % leicht positiv (+0,10, Rang 5), was auf angenehme, trockene Bedingungen hindeutet. Das klare Wetter trägt ebenfalls minimal positiv bei.</treiber>\n\n<empfehlung>An einem Freitagnachmittag im April mit angenehmen Temperaturen und klarem Wetter ist die Nachfrage hoch — Stationen im Stadtgebiet sollten gut bestückt sein, um den Nachmittagsverkehr zu bedienen. Der erhöhte Wind könnte einzelne Nutzer abschrecken; für windexponiertere Stationen empfiehlt sich dennoch keine Reduzierung der Verfügbarkeit, da der Gesamteffekt klar positiv bleibt.</empfehlung>",
+  "elapsed_s": null,
+  "usage": {
+    "input_tokens": 619,
+    "output_tokens": 679,
+    "cache_read_input_tokens": 0
+  },
+  "prediction": 334.0092,
+  "y_true": 324.0
+}

@@ -1,0 +1,17 @@
+{
+  "pipeline": "05_vision",
+  "llm_model": "claude-sonnet-4-6",
+  "loss_key": "poisson_log",
+  "xai_model": "xgb",
+  "instance_id": 3658,
+  "explanation": "<vorhersage>\nDas Modell sagte 332 ausgeliehene Fahrräder vorher; tatsächlich wurden 324 gezählt. Die Abweichung beträgt rund 8 Fahrräder oder etwa 2,5 Prozent — das ist eine sehr gute Vorhersage, die den tatsächlichen Wert eng trifft.\n</vorhersage>\n\n<treiber>\nDer stärkste Aufwärtstreiber in dieser Stunde ist die Tageszeit: Um 15 Uhr herrscht gleichmäßig hohe Nachmittagsnachfrage, was den längsten roten Balken im Plot erklärt. Knapp dahinter folgt das Jahr 2012 (yr=1), das ebenfalls rot und fast gleich lang ist — 2012 war das nachfragereichere Jahr des Modells, und dieser Wachstumsschub hebt die Grundnachfrage spürbar an. Der einzige dämpfende Faktor ist der Wind: Mit rund 33 km/h liegt die Windgeschwindigkeit deutlich über der Schwelle von 27 km/h, ab der Nutzer das Radfahren als unangenehm empfinden. Dieser blaue Balken bremst die Vorhersage merklich. Positiv wirken außerdem die sehr niedrige Luftfeuchtigkeit von nur 29 Prozent sowie die angenehme Temperatur von etwa 21 °C — beide fördern die Lust aufs Radfahren. Das klare Wetter und der Freitag tragen noch leicht zusätzlich bei, fallen aber kaum ins Gewicht.\n</treiber>\n\n<empfehlung>\nAn Freitagnachmittagen im April sollte die Fahrradverfügbarkeit an gut besuchten Stationen zwischen 14 und 17 Uhr gesichert sein, da die Nachmittagsstunden und das Jahr 2012 gemeinsam eine deutlich erhöhte Nachfrage treiben. Gleichzeitig lohnt es sich, bei Tagen mit stärkerem Wind die Erwartungen leicht nach unten zu korrigieren und gegebenenfalls Wartungsarbeiten auf windige Nachmittage zu legen, da die Nachfrage dann etwas geringer ausfällt.\n</empfehlung>",
+  "plot_file": "waterfall_xgb_poisson_log_inst3658.png",
+  "elapsed_s": null,
+  "usage": {
+    "input_tokens": 1284,
+    "output_tokens": 864,
+    "cache_read_input_tokens": 0
+  },
+  "prediction": 332.359,
+  "y_true": 324.0
+}

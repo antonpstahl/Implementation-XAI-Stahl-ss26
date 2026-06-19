@@ -1,0 +1,16 @@
+{
+  "pipeline": "04_json",
+  "llm_model": "claude-sonnet-4-6",
+  "loss_key": "poisson_log",
+  "xai_model": "ebm",
+  "instance_id": 419,
+  "explanation": "<vorhersage>Das Modell sagte etwa 2,3 ausgeliehene Fahrräder vorher; tatsächlich wurden 4 gezählt. Die Abweichung beträgt rund 1,7 Fahrräder — bei so kleinen Absolutzahlen in der Nacht ist das verhältnismäßig groß, aber im absoluten Sinne gering. Die Vorhersage wurde mäßig getroffen: Die Größenordnung stimmt, doch das Modell unterschätzt die tatsächliche Nachfrage etwas.</vorhersage>\n\n<treiber>Der bei weitem stärkste Einflussfaktor in dieser Stunde ist die Uhrzeit: 3 Uhr nachts ist die ruhigste Phase des Tages, und dieser Faktor drückt die Nachfrage sehr stark nach unten (Einfluss −2,18, Rang 1). Kaum jemand leiht um diese Zeit ein Fahrrad aus — das Modell spiegelt das klar wider. An zweiter Stelle steht die Kälte: Mit etwa 9 °C (temp=0,22) liegt die Temperatur deutlich im unteren Bereich, was die Nachfrage zusätzlich merklich dämpft (−0,56, Rang 2). Das Jahr 2011 (yr=0) verstärkt diesen Effekt noch einmal leicht, da es das nachfrageärmere Betriebsjahr war und entsprechend bremsend wirkt (−0,23, Rang 3). Das klare Wetter (weathersit=1) steuert einen kleinen positiven Beitrag bei, reicht aber nicht aus, um die dominierenden Dämpfer auszugleichen.</treiber>\n\n<empfehlung>In Winternächten um 3 Uhr ist die Nachfrage strukturell sehr gering. Stationen müssen zu dieser Zeit nicht priorisiert befüllt werden — diese frühen Nachtstunden eignen sich hervorragend für Wartungsarbeiten und Umverteilungsfahrten. Eine reduzierte Bereitschaft des Servicepersonals in solchen Schichten spart Kosten, ohne die Kundenzufriedenheit nennenswert zu beeinträchtigen.</empfehlung>",
+  "elapsed_s": null,
+  "usage": {
+    "input_tokens": 618,
+    "output_tokens": 743,
+    "cache_read_input_tokens": 0
+  },
+  "prediction": 2.3351,
+  "y_true": 4.0
+}

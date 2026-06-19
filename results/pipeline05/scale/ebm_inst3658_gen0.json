@@ -1,0 +1,17 @@
+{
+  "pipeline": "05_vision",
+  "llm_model": "claude-sonnet-4-6",
+  "loss_key": "poisson_log",
+  "xai_model": "ebm",
+  "instance_id": 3658,
+  "explanation": "<vorhersage>\nDas Modell sagte 334 ausgeliehene Fahrräder vorher; tatsächlich wurden 324 gezählt. Die Abweichung beträgt nur 10 Fahrräder, was einer Differenz von etwa 3 % entspricht — die Vorhersage wurde gut getroffen.\n</vorhersage>\n\n<treiber>\nDer mit Abstand stärkste Aufwärtstreiber ist die Uhrzeit 15:00 Uhr: Der lange rote Balken für hr zeigt, dass der Nachmittag eine der nachfragestärksten Phasen des Tages ist, in der viele Menschen — auch Freizeitradler und frühe Pendler — das Angebot nutzen. Dahinter folgt das Jahr 2012 als zweiter roter Balken: Da das System 2012 deutlich weiter gewachsen war als 2011, erhöht dieses Merkmal die Vorhersage spürbar. Der dritte wichtige Faktor ist die Temperatur von etwa 21 °C, die sich im angenehmen Bereich bewegt und ebenfalls positiv wirkt. Als einziger dämpfender Einfluss fällt der Wind auf: Mit rund 33 km/h liegt die Windgeschwindigkeit klar im störenden Bereich und bremst die Nachfrage merklich — sein blauer Balken ist der einzige, der nach links zeigt. Interessant ist zudem die sehr niedrige Luftfeuchtigkeit von 29 %, die entgegen der üblichen Erwartung leicht positiv beiträgt, da trockene Luft das Radfahren angenehmer macht.\n</treiber>\n\n<empfehlung>\nAn klaren Freitagnachmittagen im April sollten die Stationen — vor allem in belebten Stadtteilen — gut befüllt sein, da Uhrzeit, Temperatur und Jahreseffekt gemeinsam für eine hohe Nachfrage sorgen. Zieht an solchen Tagen jedoch stärkerer Wind auf (über 27 km/h), lohnt es sich, die Fahrzeugverteilung etwas defensiver zu planen und freie Wartungskapazitäten für windexponierte Stationen einzuplanen, da die Nutzung dort spürbar zurückgeht.\n</empfehlung>",
+  "plot_file": "waterfall_ebm_poisson_log_inst3658.png",
+  "elapsed_s": null,
+  "usage": {
+    "input_tokens": 1044,
+    "output_tokens": 914,
+    "cache_read_input_tokens": 0
+  },
+  "prediction": 334.0092,
+  "y_true": 324.0
+}

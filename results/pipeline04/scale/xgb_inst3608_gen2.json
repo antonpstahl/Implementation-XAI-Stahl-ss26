@@ -1,0 +1,16 @@
+{
+  "pipeline": "04_json",
+  "llm_model": "claude-sonnet-4-6",
+  "loss_key": "poisson_log",
+  "xai_model": "xgb",
+  "instance_id": 3608,
+  "explanation": "<vorhersage>Das Modell sagte für diese Stunde 276 ausgeliehene Fahrräder vorher; tatsächlich wurden 228 gezählt. Das entspricht einer Abweichung von etwa 21 Prozent — die Vorhersage wurde mäßig getroffen und liegt spürbar über dem realen Wert.</vorhersage>\n\n<treiber>Der stärkste Einflussfaktor in dieser Stunde ist das Jahr 2012 (yr=1), das die Nachfrage klar nach oben treibt (+0,20, Rang 1): 2012 war das nachfragereichere Betriebsjahr, was sich in einem deutlich erhöhenden Effekt niederschlägt. Direkt dahinter folgt der Wochentag Mittwoch (weekday=3) mit einem merklich dämpfenden Einfluss (−0,17, Rang 2): An einem mittleren Werktag fällt die Mittagsnachfrage offenbar geringer aus als im Modell-Durchschnitt. Die Uhrzeit 13 Uhr trägt ebenfalls positiv bei (+0,13, Rang 3) — der frühe Nachmittag bringt eine gleichmäßige, wenn auch keine Spitzenstunde. Unterstützend wirkt außerdem die angenehme Temperatur von etwa 23 °C (+0,12, Rang 4). Die ungewöhnlich niedrige Luftfeuchtigkeit von 26 % wirkt ebenfalls leicht begünstigend (+0,08, Rang 5).</treiber>\n\n<empfehlung>Da das Modell die tatsächliche Nachfrage an diesem Mittwochmittag deutlich überschätzt hat, lohnt es sich, an Werktag-Mittagsstunden die Fahrradverfügbarkeit etwas konservativer zu planen — ein leichter Puffer reicht aus, übermäßiges Auffüllen ist nicht nötig. Wartungs- und Umverteilungsarbeiten lassen sich gut in die frühen Nachmittagsstunden an Wochentagen legen, da die Auslastung dann moderat und berechenbar ist.</empfehlung>",
+  "elapsed_s": null,
+  "usage": {
+    "input_tokens": 617,
+    "output_tokens": 738,
+    "cache_read_input_tokens": 0
+  },
+  "prediction": 275.559,
+  "y_true": 228.0
+}

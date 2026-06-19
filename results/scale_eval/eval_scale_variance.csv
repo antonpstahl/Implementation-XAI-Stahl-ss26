@@ -1,0 +1,13 @@
+metric,pipeline,within_gen_std
+faithfulness,Template,0.0
+faithfulness,JSON→Text,0.0471
+faithfulness,Vision,0.2357
+faithfulness,Tool-Use,0.0943
+clarity,Template,0.0
+clarity,JSON→Text,0.2357
+clarity,Vision,0.1759
+clarity,Tool-Use,0.1886
+completeness,Template,0.0
+completeness,JSON→Text,0.0
+completeness,Vision,0.0
+completeness,Tool-Use,0.0

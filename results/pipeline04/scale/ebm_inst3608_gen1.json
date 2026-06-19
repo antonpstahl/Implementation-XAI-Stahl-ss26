@@ -1,0 +1,16 @@
+{
+  "pipeline": "04_json",
+  "llm_model": "claude-sonnet-4-6",
+  "loss_key": "poisson_log",
+  "xai_model": "ebm",
+  "instance_id": 3608,
+  "explanation": "<vorhersage>Das Modell sagte für diese Stunde etwa 288 ausgeliehene Fahrräder vorher; tatsächlich wurden 228 gezählt. Das entspricht einer Abweichung von rund 60 Rädern bzw. etwa 26 Prozent — die Vorhersage wurde damit nur mäßig getroffen. Das Modell überschätzte die Nachfrage in diesem Fall spürbar.</vorhersage>\n\n<treiber>Der stärkste Treiber ist die Uhrzeit: 13 Uhr liegt in der gleichmäßig ausgelasteten Mittagsphase und hebt die Nachfrage kräftig an (Rang 1, Einfluss +0,64). An zweiter Stelle steht das Jahr 2012 (yr=1), das einen klar positiven Einfluss hat (+0,21, Rang 2): 2012 war das nachfragstärkere der beiden Modelljahre, was die Prognose nach oben treibt. Fast gleich stark wirkt die angenehme Temperatur von etwa 23 °C positiv mit (+0,18, Rang 3) — ein idealer Bereich fürs Radfahren. Bemerkenswert ist die sehr niedrige Luftfeuchtigkeit von nur 26 %, die ebenfalls leicht erhöhend wirkt (+0,10, Rang 4). Klares Wetter und der April tragen noch kleinere Beiträge bei, wobei der April minimal dämpfend eingeht (−0,02).</treiber>\n\n<empfehlung>Obwohl alle Wetterbedingungen günstig sind, blieb die tatsächliche Nachfrage deutlich hinter der Vorhersage zurück — ein Hinweis, dass an diesem Mittwochmittag möglicherweise sonstige Faktoren (z. B. lokale Ereignisse oder Ferienstimmung) die Nachfrage gedämpft haben. Für ähnliche Konstellationen empfiehlt es sich, die Stationsausstattung etwas konservativer zu planen und nicht blindlings auf das Modell zu vertrauen. Wartungsfenster können bei solch ruhigeren Mittagsstunden trotz guter Wetterlage eingeplant werden, falls die Auslastung real niedriger ausfällt als prognostiziert.</empfehlung>",
+  "elapsed_s": null,
+  "usage": {
+    "input_tokens": 617,
+    "output_tokens": 771,
+    "cache_read_input_tokens": 0
+  },
+  "prediction": 287.9628,
+  "y_true": 228.0
+}

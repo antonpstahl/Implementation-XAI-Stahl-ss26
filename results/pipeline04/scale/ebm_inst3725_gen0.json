@@ -1,0 +1,16 @@
+{
+  "pipeline": "04_json",
+  "llm_model": "claude-sonnet-4-6",
+  "loss_key": "poisson_log",
+  "xai_model": "ebm",
+  "instance_id": 3725,
+  "explanation": "<vorhersage>Das Modell sagte für diese Stunde rund 184 ausgeliehene Fahrräder vorher; tatsächlich wurden 183 gezählt. Die Abweichung beträgt weniger als ein Prozent — die Vorhersage wurde ausgezeichnet getroffen.</vorhersage>\n\n<treiber>Der stärkste Einflussfaktor ist die Uhrzeit: 10 Uhr vormittags liegt in einer Phase gleichmäßig guter Auslastung tagsüber und treibt die Nachfrage klar nach oben (Einfluss +0,34, Rang 1). Fast gleichauf folgt die angenehme Temperatur von etwa 30 °C, die sich im optimalen Bereich für Radfahrer befindet und die Nachfrage ebenfalls deutlich steigert (+0,31, Rang 2). Das Jahr 2012 (yr=1) wirkt als dritter wesentlicher Treiber positiv: 2012 war das nachfragestarke Jahr im System, was die Gesamtauslastung spürbar anhebt (+0,21, Rang 3). Das klare Wetter trägt zusätzlich leicht positiv bei, ebenso wie der Mai als nachfragestarker Frühlingsmonat und die moderate Luftfeuchtigkeit von 70 % — beide Faktoren spielen jedoch nur eine untergeordnete Rolle.</treiber>\n\n<empfehlung>An einem Dienstagvormittag im Mai bei sommerlichen Temperaturen und klarem Wetter ist die Nachfrage erfreulich stabil und gut vorhersehbar. Stationen in Freizeitlagen und Parks sollten gut bestückt sein, da um 10 Uhr Freizeitfahrer aktiv werden. Wartungs- und Umverteilungsarbeiten sollten außerhalb der Tagesstunden — also in den frühen Morgenstunden zwischen 2 und 5 Uhr — eingeplant werden, um den laufenden Betrieb nicht zu beeinträchtigen.</empfehlung>",
+  "elapsed_s": null,
+  "usage": {
+    "input_tokens": 617,
+    "output_tokens": 688,
+    "cache_read_input_tokens": 0
+  },
+  "prediction": 184.4567,
+  "y_true": 183.0
+}

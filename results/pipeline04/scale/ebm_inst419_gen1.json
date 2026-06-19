@@ -1,0 +1,16 @@
+{
+  "pipeline": "04_json",
+  "llm_model": "claude-sonnet-4-6",
+  "loss_key": "poisson_log",
+  "xai_model": "ebm",
+  "instance_id": 419,
+  "explanation": "<vorhersage>Das Modell sagte etwa 2,3 ausgeliehene Fahrräder vorher; tatsächlich wurden 4 gezählt. Bei so kleinen absoluten Zahlen ist die Abweichung zwar rechnerisch spürbar, spiegelt aber realistisch das extrem niedrige Nachfrageniveau in dieser Stunde wider — die Vorhersage wurde mäßig getroffen.</vorhersage>\n\n<treiber>Der bei weitem stärkste Faktor ist die Uhrzeit: 3 Uhr nachts liegt tief in der Ruhephase des Systems, und dieser Zeitpunkt drückt die erwartete Nachfrage massiv nach unten (Einfluss −2,18, Rang 1). Auf Rang 2 folgt die kühle Temperatur von etwa 9 °C, die ebenfalls klar dämpfend wirkt (−0,56): Bei Kälte steigen deutlich weniger Menschen aufs Leihrad. Dazu kommt das Jahr 2011 (yr=0), das als nachfrageärmeres Modelljahr einen zusätzlichen, wenn auch kleineren, bremsenden Beitrag leistet (−0,23, Rang 3). Das klare Wetter (weathersit=1) steuert einen winzigen positiven Impuls bei, kann die anderen Faktoren jedoch kaum ausgleichen.</treiber>\n\n<empfehlung>In einer solchen Nachtschicht — 3 Uhr, kalt, März 2011 — werden kaum Fahrräder benötigt. Stationen müssen in dieser Zeit nicht aufgefüllt werden; das Zeitfenster eignet sich ideal für Wartungsarbeiten, Umlagerungen oder Inspektionen, ohne den Betrieb zu stören. Sobald die Temperaturen im Frühjahr ansteigen, sollte die Flottenverfügbarkeit auch in den frühen Morgenstunden schrittweise erhöht werden.</empfehlung>",
+  "elapsed_s": null,
+  "usage": {
+    "input_tokens": 618,
+    "output_tokens": 669,
+    "cache_read_input_tokens": 0
+  },
+  "prediction": 2.3351,
+  "y_true": 4.0
+}

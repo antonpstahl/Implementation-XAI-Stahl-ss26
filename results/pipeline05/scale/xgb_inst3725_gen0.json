@@ -1,0 +1,17 @@
+{
+  "pipeline": "05_vision",
+  "llm_model": "claude-sonnet-4-6",
+  "loss_key": "poisson_log",
+  "xai_model": "xgb",
+  "instance_id": 3725,
+  "explanation": "<vorhersage>\nDas Modell sagte für diese Stunde 193,5 ausgeliehene Fahrräder vorher; tatsächlich wurden 183 gezählt. Die Abweichung beträgt etwa 10 Räder, was einem Fehler von rund 6 % entspricht — die Vorhersage wurde damit gut, aber nicht ausgezeichnet getroffen.\n</vorhersage>\n\n<treiber>\nDer stärkste Einzelfaktor in diesem Plot ist die Uhrzeit: hr=10 erzeugt den längsten Balken, und er zeigt nach links (blau). Das überrascht auf den ersten Blick, lässt sich aber erklären: 10 Uhr liegt nach der Morgenspitze und vor dem Mittagshoch — das Modell stuft diese Stunde im Vergleich zum Tagesdurchschnitt als leicht unterdurchschnittlich ein. Direkt dahinter folgt das Jahr yr=1 (2012) als roter, also erhöhender Balken: 2012 war gegenüber 2011 die nachfragereichere Phase des Systems, was die Vorhersage merklich nach oben zieht. Ähnlich stark wirkt die Temperatur von etwa 30 °C (normalisiert 0,74): Sie liegt im optimalen Bereich für Radfahren und schiebt die Erwartung ebenfalls nach oben. Fast genauso groß, aber in entgegengesetzter Richtung, ist der Einfluss des Wochentags Dienstag (weekday=2): An einem Werktag außerhalb der Stoßzeiten morgens und abends liegt die Auslastung unter dem Modellmittel, weshalb dieser Balken blau und nach links zeigt. Alle weiteren Merkmale — klares Wetter, moderate Luftfeuchtigkeit, leichter Wind, Mai und kein Feiertag — haben nur minimalen Einfluss.\n</treiber>\n\n<empfehlung>\nDa der Vormittag um 10 Uhr an Werktagen strukturell etwas ruhiger ausfällt als die Pendelspitzen, können Stationen in Bürovierteln in dieser Zeit gezielt aufgefüllt werden, damit genug Räder für die Mittagsstunden bereitstehen. Gleichzeitig bietet das angenehme Wetter im Mai bei knapp 30 °C eine gute Gelegenheit, kleinere Wartungsarbeiten auf die frühen Morgenstunden zu legen, um die Räder für die stärker genutzten Abendspitzen in einwandfreiem Zustand zu haben.\n</empfehlung>",
+  "plot_file": "waterfall_xgb_poisson_log_inst3725.png",
+  "elapsed_s": null,
+  "usage": {
+    "input_tokens": 1284,
+    "output_tokens": 959,
+    "cache_read_input_tokens": 0
+  },
+  "prediction": 193.4604,
+  "y_true": 183.0
+}

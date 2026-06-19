@@ -1,0 +1,16 @@
+{
+  "pipeline": "04_json",
+  "llm_model": "claude-sonnet-4-6",
+  "loss_key": "poisson_log",
+  "xai_model": "ebm",
+  "instance_id": 3687,
+  "explanation": "<vorhersage>\nDas Modell sagte für diese Stunde 315 ausgeliehene Fahrräder vorher; tatsächlich wurden 338 gezählt. Das entspricht einer Abweichung von etwa 23 Fahrrädern bzw. rund 7 Prozent — die Vorhersage ist als mäßig gut zu bewerten. Das Modell hat die Nachfrage leicht unterschätzt, liegt aber in einer vertretbaren Größenordnung.\n</vorhersage>\n\n<treiber>\nDer stärkste Treiber in dieser Stunde ist die Uhrzeit: 20 Uhr abends liegt am Ende der Abendspitze und sorgt noch immer für eine deutlich erhöhte Nachfrage (Rang 1, Einfluss +0,56). Viele Pendler sind auf dem Heimweg, was die Ausleihzahlen spürbar nach oben zieht.\n\nAuf Rang 2 folgt das Jahr 2012 (yr=1) mit einem klar positiven Einfluss (+0,21): Da 2012 das nachfragestärkere Modelljahr war, wirkt dieser Faktor zusätzlich steigernd auf die Vorhersage ein.\n\nEbenfalls förderlich ist die Temperatur von etwa 21 °C (+0,13, Rang 3): Diese angenehme Frühlingswärme lädt zum Radfahren ein. Das klare Wetter verstärkt diesen Effekt noch leicht (+0,05, Rang 4). Einzig die Luftfeuchtigkeit von 77 % wirkt minimal dämpfend (−0,04, Rang 5), fällt aber kaum ins Gewicht.\n</treiber>\n\n<empfehlung>\nAn Mittwochabenden im Mai sollten an stark frequentierten Rückgabestationen — etwa in Wohngebieten und an U-Bahn-Haltestellen — ausreichend freie Stellplätze gewährleistet sein, da der Heimweg-Pendelverkehr die Nachfrage um 20 Uhr hoch hält. Da das Modell die tatsächliche Nachfrage in dieser Stunde leicht unterschätzt hat, empfiehlt es sich, in den Abendstunden des Frühlings einen kleinen Sicherheitspuffer bei der Fahrradverfügbarkeit einzuplanen.\n</empfehlung>",
+  "elapsed_s": null,
+  "usage": {
+    "input_tokens": 617,
+    "output_tokens": 781,
+    "cache_read_input_tokens": 0
+  },
+  "prediction": 315.2522,
+  "y_true": 338.0
+}

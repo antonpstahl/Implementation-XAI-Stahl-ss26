@@ -1,0 +1,17 @@
+{
+  "pipeline": "05_vision",
+  "llm_model": "claude-sonnet-4-6",
+  "loss_key": "poisson_log",
+  "xai_model": "xgb",
+  "instance_id": 3725,
+  "explanation": "<vorhersage>\nDas Modell sagte für diese Stunde 193,5 ausgeliehene Fahrräder vorher; tatsächlich wurden 183 gezählt. Das entspricht einer Abweichung von etwa 10 Rädern oder rund 6 % — die Vorhersage wurde insgesamt gut getroffen, wenngleich das Modell die Nachfrage leicht überschätzt hat.\n</vorhersage>\n\n<treiber>\nDer stärkste Einfluss kommt überraschenderweise von der Tageszeit: Der blaue Balken für hr=10 (10 Uhr vormittags) zeigt den größten Ausschlag und wirkt dämpfend. Das Modell erkennt, dass 10 Uhr zwischen den Hauptspitzenzeiten liegt — die Morgenspitze der Pendler ist bereits abgeflaut, die Mittagsauslastung noch nicht voll angelaufen. Das drückt die Vorhersage gegenüber dem Durchschnitt nach unten. Gleich dahinter folgen zwei gegenläufige Einflüsse nahezu gleicher Stärke: Das Jahr 2012 (yr=1) treibt die Nachfrage mit dem zweitlängsten roten Balken spürbar nach oben, da das System 2012 deutlich stärker genutzt wurde als im Vorjahr. Fast genauso stark wirkt die angenehme Temperatur von etwa 30 °C (temp=0.74) positiv — ein typischer Sommertag lädt zum Radfahren ein. Diesen Aufwärtskräften steht ein weiterer blauer Balken gegenüber: Dienstag (weekday=2) dämpft die Nachfrage ebenfalls merklich, da an einem normalen Werktag ohne besondere Pendlerspitze um 10 Uhr weniger Bewegung herrscht. Klares Wetter, moderate Luftfeuchtigkeit und Windgeschwindigkeit spielen nur eine sehr untergeordnete Rolle.\n</treiber>\n\n<empfehlung>\nAn Werktagen wie diesem Dienstag gegen 10 Uhr ist die Nachfrage trotz schönem Wetter und warmen Temperaturen merklich geringer als während der Morgenpendlerspitze. Stationen in Bürovierteln können in diesem Zeitfenster ruhig mit etwas weniger Rädern bestückt werden; stattdessen empfiehlt sich eine Umverteilung zu Freizeitstandorten wie Parks, da Gelegenheitsnutzer um 10 Uhr aktiver sind. Gleichzeitig eignet sich dieser Zeitraum gut für kleinere Wartungsarbeiten an einzelnen Rädern, ohne die Versorgung stark zu beeinträchtigen.\n</empfehlung>",
+  "plot_file": "waterfall_xgb_poisson_log_inst3725.png",
+  "elapsed_s": null,
+  "usage": {
+    "input_tokens": 1284,
+    "output_tokens": 992,
+    "cache_read_input_tokens": 0
+  },
+  "prediction": 193.4604,
+  "y_true": 183.0
+}

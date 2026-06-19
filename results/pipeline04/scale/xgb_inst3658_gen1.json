@@ -1,0 +1,16 @@
+{
+  "pipeline": "04_json",
+  "llm_model": "claude-sonnet-4-6",
+  "loss_key": "poisson_log",
+  "xai_model": "xgb",
+  "instance_id": 3658,
+  "explanation": "<vorhersage>Das Modell sagte für diese Stunde 332 ausgeliehene Fahrräder vorher; tatsächlich wurden 324 gezählt. Die Abweichung beträgt etwa 2,5 Prozent — die Vorhersage wurde sehr gut getroffen.</vorhersage>\n\n<treiber>Der stärkste Treiber ist die Tageszeit: 15 Uhr liegt im gleichmäßig gut ausgelasteten Nachmittagsfenster und wirkt klar nachfragefördernd (+0,21, Rang 1). Knapp dahinter folgt das Jahr 2012 (yr=1), das gegenüber 2011 eine deutlich höhere Systemauslastung widerspiegelt und die Nachfrage ebenfalls spürbar nach oben treibt (+0,19, Rang 2). Entgegengesetzt wirkt der Wind: Mit etwa 33 km/h liegt er knapp über der Schwelle, ab der Windgeschwindigkeiten Nutzer erfahrungsgemäß abschrecken — das dämpft die Nachfrage merklich (−0,11, Rang 3). Positiv wirkt sich hingegen die ungewöhnlich niedrige Luftfeuchtigkeit von nur 29 % aus (+0,10, Rang 4), ebenso die angenehme Temperatur von etwa 21 °C (+0,09, Rang 5).</treiber>\n\n<empfehlung>Der Freitagnachmittag im April bei klarem Wetter ist grundsätzlich eine nachfragestarke Stunde — Stationen sollten gut befüllt sein. Der spürbare Wind könnte jedoch vereinzelte Nutzer abhalten; an exponierten Standorten lohnt es sich, die tatsächliche Ausleihquote im Blick zu behalten und bei Sturmereignissen die Verfügbarkeit vorausschauend anzupassen, anstatt übermäßig aufzustocken.</empfehlung>",
+  "elapsed_s": null,
+  "usage": {
+    "input_tokens": 619,
+    "output_tokens": 669,
+    "cache_read_input_tokens": 0
+  },
+  "prediction": 332.359,
+  "y_true": 324.0
+}

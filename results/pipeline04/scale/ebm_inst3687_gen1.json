@@ -1,0 +1,16 @@
+{
+  "pipeline": "04_json",
+  "llm_model": "claude-sonnet-4-6",
+  "loss_key": "poisson_log",
+  "xai_model": "ebm",
+  "instance_id": 3687,
+  "explanation": "<vorhersage>Das Modell sagte für diese Stunde etwa 315 ausgeliehene Fahrräder vorher; tatsächlich wurden 338 gezählt. Das entspricht einer Abweichung von rund 7 Prozent — die Vorhersage wurde mäßig getroffen, da das Modell die tatsächliche Nachfrage leicht unterschätzt hat.</vorhersage>\n\n<treiber>Der bei Weitem stärkste Treiber in dieser Stunde ist die Uhrzeit: 20 Uhr liegt in der Abendspitze und erhöht die Nachfrage kräftig (Rang 1, Einfluss +0,56). Viele Pendler kehren zu dieser Zeit nach Hause zurück, was die Ausleihzahlen deutlich in die Höhe treibt. An zweiter Stelle folgt das Jahr 2012 (yr=1), das ebenfalls spürbar positiv wirkt (+0,21, Rang 2): Das System war 2012 insgesamt stärker ausgelastet als im Vorjahr, was die Gesamtnachfrage nach oben zieht. Die angenehme Temperatur von etwa 21 °C trägt ebenfalls positiv bei (+0,13, Rang 3) und macht das Radfahren attraktiv. Das klare Wetter verstärkt diesen Effekt noch leicht. Die Luftfeuchtigkeit von 77 % wirkt minimal bremsend (−0,04), fällt aber kaum ins Gewicht.</treiber>\n\n<empfehlung>An Mittwochabenden im Mai sollten Stationen entlang wichtiger Pendelrouten bis mindestens 20 Uhr gut befüllt sein, da Abendspitze, mildes Wetter und das starke Betriebsjahr 2012 gemeinsam die Nachfrage antreiben. Da das Modell die Nachfrage in dieser Stundenkonstellation leicht unterschätzt, empfiehlt es sich, einen kleinen Puffer bei der Fahrradverfügbarkeit einzuplanen — Wartungsarbeiten sollten besser auf die späten Nachtstunden nach 1 Uhr verschoben werden.</empfehlung>",
+  "elapsed_s": null,
+  "usage": {
+    "input_tokens": 617,
+    "output_tokens": 729,
+    "cache_read_input_tokens": 0
+  },
+  "prediction": 315.2522,
+  "y_true": 338.0
+}

@@ -1,0 +1,66 @@
+{
+  "model": "xgb",
+  "instance_id": 3725,
+  "feature_values": {
+    "weathersit": 1.0,
+    "mnth": 5.0,
+    "hr": 10.0,
+    "weekday": 2.0,
+    "yr": 1.0,
+    "holiday": 0.0,
+    "temp": 0.74,
+    "hum": 0.7,
+    "windspeed": 0.2985
+  },
+  "y_true": 183.0,
+  "prediction": 193.4604,
+  "base_value": 5.2547,
+  "contribution_space": "log",
+  "contributions": [
+    {
+      "feature": "hr",
+      "value": 10.0,
+      "contribution": -0.187779
+    },
+    {
+      "feature": "yr",
+      "value": 1.0,
+      "contribution": 0.163822
+    },
+    {
+      "feature": "temp",
+      "value": 0.74,
+      "contribution": 0.154538
+    },
+    {
+      "feature": "weekday",
+      "value": 2.0,
+      "contribution": -0.151906
+    },
+    {
+      "feature": "weathersit",
+      "value": 1.0,
+      "contribution": 0.029685
+    },
+    {
+      "feature": "hum",
+      "value": 0.7,
+      "contribution": 0.008824
+    },
+    {
+      "feature": "windspeed",
+      "value": 0.2985,
+      "contribution": -0.008396
+    },
+    {
+      "feature": "mnth",
+      "value": 5.0,
+      "contribution": 0.004786
+    },
+    {
+      "feature": "holiday",
+      "value": 0.0,
+      "contribution": -0.003201
+    }
+  ]
+}

@@ -1,0 +1,17 @@
+{
+  "pipeline": "05_vision",
+  "llm_model": "claude-sonnet-4-6",
+  "loss_key": "poisson_log",
+  "xai_model": "xgb",
+  "instance_id": 3658,
+  "explanation": "<vorhersage>\nDas Modell sagte für diese Stunde 332 ausgeliehene Fahrräder vorher; tatsächlich wurden 324 gezählt. Die Abweichung beträgt damit nur etwa 8 Fahrräder oder rund 2,5 Prozent — die Vorhersage wurde sehr gut getroffen.\n</vorhersage>\n\n<treiber>\nDer stärkste Aufwärtstreiber in dieser Stunde ist die Uhrzeit: 15 Uhr liegt mitten am Nachmittag, wenn viele Menschen das Fahrrad für Besorgungen, Freizeitfahrten oder erste Heimwege nutzen — der längste rote Balken gehört diesem Merkmal. Knapp dahinter folgt das Jahr 2012 (yr=1) als zweiter roter Balken: Das Modell erkennt, dass 2012 insgesamt deutlich mehr Fahrräder ausgeliehen wurden als im Vorjahr, was die Vorhersage spürbar nach oben schiebt. Der einzige dämpfende Faktor in diesem Bild ist die Windgeschwindigkeit von etwa 33 km/h — das ist der blaue Balken. Wind in dieser Stärke schreckt viele Radfahrerinnen und Radfahrer ab und zieht die Vorhersage nach unten. Etwas positiv wirken außerdem die sehr niedrige Luftfeuchtigkeit von 29 % (angenehm trockene Luft) sowie die Temperatur von rund 21 °C, die sich im günstigen Bereich für Radfahren befindet. Klares Wetter, Freitag und April liefern noch kleinere positive Beiträge, die aber kaum ins Gewicht fallen.\n</treiber>\n\n<empfehlung>\nAn Nachmittagen mit stärkerem Wind sollte die Fahrradverfügbarkeit an windexponierten Stationen leicht reduziert und dafür an geschützten, innenstadtnahen Stationen erhöht werden, da die Nachfrage dort stabiler bleibt. Da 15 Uhr an Freitagen in 2012 generell eine verlässlich hohe Auslastung zeigt, empfiehlt es sich, Wartungs- und Umverteilungsfahrten in die windstillen Vormittagsstunden zu legen, um die Flotte zur Spitzennachfrage vollständig verfügbar zu haben.\n</empfehlung>",
+  "plot_file": "waterfall_xgb_poisson_log_inst3658.png",
+  "elapsed_s": null,
+  "usage": {
+    "input_tokens": 1284,
+    "output_tokens": 908,
+    "cache_read_input_tokens": 0
+  },
+  "prediction": 332.359,
+  "y_true": 324.0
+}

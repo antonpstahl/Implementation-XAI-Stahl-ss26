@@ -1,0 +1,16 @@
+{
+  "pipeline": "04_json",
+  "llm_model": "claude-sonnet-4-6",
+  "loss_key": "poisson_log",
+  "xai_model": "ebm",
+  "instance_id": 419,
+  "explanation": "<vorhersage>Das Modell sagte etwa 2,3 ausgeliehene Fahrräder vorher; tatsächlich wurden 4 gezählt. Bei so kleinen absoluten Zahlen ist eine Abweichung von knapp 2 Fahrrädern prozentual spürbar — die Vorhersage wurde mäßig getroffen, liegt aber im Rahmen dessen, was bei sehr geringer Nachfrage realistischerweise zu erwarten ist.</vorhersage>\n\n<treiber>Der mit Abstand stärkste Einfluss ist die Uhrzeit: Um 3 Uhr nachts liegt der Betrieb fast vollständig brach, und dieser Faktor drückt die Nachfrage massiv nach unten (Einfluss −2,18, Rang 1). Dazu kommt die Kälte von etwa 9 °C — bei einer normierten Temperatur von 0,22 liegt man klar im unteren Bereich, in dem die meisten Menschen das Rad stehen lassen; das ergibt einen weiteren deutlich dämpfenden Effekt (−0,56, Rang 2). Ergänzend wirkt das Jahr 2011 (yr=0) bremsend (−0,23, Rang 3): Da 2011 das nachfrageärmere Betriebsjahr war, zieht dieser Faktor die Vorhersage zusätzlich nach unten. Das klare Wetter (weathersit=1) wirkt zwar leicht begünstigend (+0,05), kann gegen die übrigen Einflüsse aber kaum ankommen.</treiber>\n\n<empfehlung>In einer Nacht-Winterkombination wie dieser — 3 Uhr früh, 9 °C, März 2011 — ist mit weniger als fünf Ausleihen zu rechnen. Stationen müssen zu dieser Zeit nicht aufgefüllt werden; stattdessen bieten sich frühe Morgenstunden zwischen 2 und 5 Uhr ideal für Wartungs- und Umverteilungsarbeiten an, ohne den laufenden Betrieb zu stören.</empfehlung>",
+  "elapsed_s": null,
+  "usage": {
+    "input_tokens": 618,
+    "output_tokens": 706,
+    "cache_read_input_tokens": 0
+  },
+  "prediction": 2.3351,
+  "y_true": 4.0
+}

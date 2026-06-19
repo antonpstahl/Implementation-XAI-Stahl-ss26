@@ -1,0 +1,5 @@
+pipeline_label,Opus_Score,Opus_Rang,CrossVendor_Score,CrossVendor_Rang
+Template,13.8,4,12.2,4
+JSON→Text,14.23,1,12.33,3
+Vision,13.9,3,12.37,2
+Tool-Use,14.0,2,13.27,1

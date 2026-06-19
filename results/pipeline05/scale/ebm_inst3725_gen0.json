@@ -1,0 +1,17 @@
+{
+  "pipeline": "05_vision",
+  "llm_model": "claude-sonnet-4-6",
+  "loss_key": "poisson_log",
+  "xai_model": "ebm",
+  "instance_id": 3725,
+  "explanation": "<vorhersage>\nDas EBM-Modell sagte für diese Stunde 184,5 ausgeliehene Fahrräder vorher; tatsächlich wurden 183 gezählt. Das ist eine ausgezeichnete Vorhersage — die Abweichung beträgt weniger als zwei Fahrräder, also unter einem Prozent.\n</vorhersage>\n\n<treiber>\nDie drei stärksten Aufwärtstreiber dominieren das Bild deutlich. An erster Stelle steht die Tageszeit: 10 Uhr morgens liegt in der aktiven Tagesphase, in der viele Nutzer unterwegs sind — dieser rote Balken ist der längste im gesamten Plot. Dicht dahinter folgt die Temperatur von etwa 30 °C (normalisiert 0,74), die sich im optimalen Wohlfühlbereich für Radfahrende befindet und die Nachfrage spürbar ankurbelt. Rang drei belegt das Jahr 2012 mit einem deutlich roten Balken: 2012 war das nachfragestärkere der beiden Modelljahre, was die Gesamtausleihe nach oben zieht.\n\nGegen diese Aufwärtstreiber wirken zwei Wechselwirkungseffekte dämpfend. Die Kombination aus Uhrzeit und Wochentag (10 Uhr an einem Dienstag) senkt die Vorhersage merklich — an Werktagen sind um 10 Uhr die Pendlerspitzen bereits abgeflaut, sodass das Modell hier einen Rückgang gegenüber dem reinen Stundeneffekt verrechnet. Ähnlich wirkt die Wechselwirkung zwischen Stunde und Temperatur leicht bremsend. Das klare Wetter trägt noch ein kleines Plus bei, ebenso der Monat Mai als nachfragestarker Frühlingsmonat.\n</treiber>\n\n<empfehlung>\nDa 10 Uhr an warmen Dienstagen eine solide, aber nicht extreme Nachfrage erzeugt, sollten die Stationen in dieser Zeit gut bestückt sein, ohne übermäßige Ressourcen zu binden — Wartungsarbeiten und Umverteilungsfahrten lassen sich gut in die frühen Morgenstunden zwischen 4 und 6 Uhr legen, wenn kaum Betrieb herrscht. Zudem lohnt es sich, bei ähnlichen Bedingungen — klares Wetter, Temperaturen um 30 °C, Vormittag im Frühjahr — die Verfügbarkeit an stark frequentierten Pendlerknotenpunkten proaktiv zu erhöhen, da die Kombination aus Wärme und Jahreszeit zuverlässig für eine mittlere bis hohe Grundnachfrage sorgt.\n</empfehlung>",
+  "plot_file": "waterfall_ebm_poisson_log_inst3725.png",
+  "elapsed_s": null,
+  "usage": {
+    "input_tokens": 1044,
+    "output_tokens": 1071,
+    "cache_read_input_tokens": 0
+  },
+  "prediction": 184.4567,
+  "y_true": 183.0
+}

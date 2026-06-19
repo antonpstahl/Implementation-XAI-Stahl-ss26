@@ -1,0 +1,17 @@
+{
+  "pipeline": "05_vision",
+  "llm_model": "claude-sonnet-4-6",
+  "loss_key": "poisson_log",
+  "xai_model": "xgb",
+  "instance_id": 3608,
+  "explanation": "<vorhersage>\nDas Modell sagte 275,6 ausgeliehene Fahrräder vorher; tatsächlich wurden 228 Räder gezählt. Die Abweichung beträgt damit knapp 48 Räder bzw. etwa 21 %, was als mäßige Treffsicherheit zu bewerten ist — das Modell überschätzt die Nachfrage in dieser Stunde spürbar.\n</vorhersage>\n\n<treiber>\nDer stärkste Aufwärtstreiber ist das Jahr 2012 (yr=1): Der rote Balken zeigt, dass das Modell 2012 als das nachfragestärkere Jahr einordnet und die Vorhersage dadurch deutlich anhebt. Direkt dahinter folgt als stärkster dämpfender Faktor der Wochentag Mittwoch (weekday=3): Der blaue Balken überrascht auf den ersten Blick, da Mittwoch ein normaler Werktag ist — doch um 13 Uhr fehlt die typische Pendlerspitze, und das Modell erkennt, dass ein Mittwochmittag weniger Ausleihaktivität erzeugt als erwartet. Der dritte wichtige Faktor ist die Tageszeit 13 Uhr (hr=13): Der rote Balken zeigt eine gleichmäßige Mittagsauslastung, die die Vorhersage moderat erhöht. Auch die angenehme Temperatur von etwa 23 °C sowie die sehr niedrige Luftfeuchtigkeit von 26 % tragen jeweils mit kleineren roten Balken positiv bei und signalisieren komfortable Bedingungen zum Radfahren.\n</treiber>\n\n<empfehlung>\nDa das Modell an diesem Mittwochmittag die Nachfrage deutlich überschätzt hat, lohnt es sich, für Mittwoche um die Mittagszeit die Fahrradverfügbarkeit eher konservativ zu planen und nicht alle Stationen maximal aufzufüllen. Wartungs- und Servicearbeiten könnten gezielt in diese Mittagsstunden an Werktagen gelegt werden, da die tatsächliche Nachfrage offenbar geringer ausfällt als das Modell auf Basis von Jahr und Tageszeit allein annimmt.\n</empfehlung>",
+  "plot_file": "waterfall_xgb_poisson_log_inst3608.png",
+  "elapsed_s": null,
+  "usage": {
+    "input_tokens": 1284,
+    "output_tokens": 876,
+    "cache_read_input_tokens": 0
+  },
+  "prediction": 275.559,
+  "y_true": 228.0
+}

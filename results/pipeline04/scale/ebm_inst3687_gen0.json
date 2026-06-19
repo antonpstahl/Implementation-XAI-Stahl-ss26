@@ -1,0 +1,16 @@
+{
+  "pipeline": "04_json",
+  "llm_model": "claude-sonnet-4-6",
+  "loss_key": "poisson_log",
+  "xai_model": "ebm",
+  "instance_id": 3687,
+  "explanation": "<vorhersage>Das Modell sagte für diese Stunde 315 ausgeliehene Fahrräder vorher; tatsächlich wurden 338 gezählt. Das entspricht einer Abweichung von etwa 7 % — die Vorhersage wurde mäßig getroffen, das tatsächliche Aufkommen lag etwas höher als erwartet.</vorhersage>\n\n<treiber>Der mit Abstand stärkste Treiber ist die Uhrzeit: 20 Uhr abends fällt in die auslaufende Abendspitze und hebt die Nachfrage kräftig an (Rang 1, Einfluss +0,56). Direkt dahinter folgt das Jahr 2012 (yr=1) mit einem deutlich positiven Beitrag (+0,21, Rang 2): Das System war 2012 insgesamt stärker ausgelastet als im Vorjahr, was die Nachfrage generell nach oben schiebt. Ebenfalls förderlich ist die Temperatur von etwa 21 °C (+0,13, Rang 3): Angenehme Frühlingsabendwärme lädt zum Radfahren ein. Das klare Wetter trägt zusätzlich leicht positiv bei, während die Luftfeuchtigkeit von 77 % die Nachfrage minimal bremst — dieser Effekt ist jedoch gering.</treiber>\n\n<empfehlung>An Maiabenden um 20 Uhr ist die Nachfrage spürbar hoch; Stationen in der Nähe von Freizeitzielen und Restaurants sollten bis mindestens 21 Uhr gut bestückt sein. Da das Modell die tatsächliche Nachfrage leicht unterschätzt hat, empfiehlt es sich, für warme Frühlingsabende in 2012-ähnlichen Bedingungen einen kleinen Sicherheitspuffer bei der Fahrradverfügbarkeit einzuplanen.\n</empfehlung>",
+  "elapsed_s": null,
+  "usage": {
+    "input_tokens": 617,
+    "output_tokens": 667,
+    "cache_read_input_tokens": 0
+  },
+  "prediction": 315.2522,
+  "y_true": 338.0
+}
