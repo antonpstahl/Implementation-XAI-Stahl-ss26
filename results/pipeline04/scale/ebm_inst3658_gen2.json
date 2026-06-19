@@ -1,0 +1,16 @@
+{
+  "pipeline": "04_json",
+  "llm_model": "claude-sonnet-4-6",
+  "loss_key": "poisson_log",
+  "xai_model": "ebm",
+  "instance_id": 3658,
+  "explanation": "<vorhersage>Das Modell sagte 334 ausgeliehene Fahrräder vorher; tatsächlich wurden 324 gezählt. Die Abweichung beträgt etwa 3 % — die Vorhersage wurde gut getroffen.</vorhersage>\n\n<treiber>Der stärkste Treiber ist die Uhrzeit: 15 Uhr liegt am Nachmittag in einer Phase gleichmäßig hoher Auslastung, kurz vor der beginnenden Abendspitze, und hebt die Nachfrage deutlich an (Einfluss +0,61, Rang 1). An zweiter Stelle steht das Jahr 2012 (yr=1), das als das nachfragestärkere Betriebsjahr einen klar positiven Beitrag leistet (+0,21, Rang 2). Die Temperatur von etwa 21 °C liegt im angenehmen Bereich und wirkt ebenfalls fördernd (+0,13, Rang 3). Leicht bremsend wirkt der Wind: Mit rund 33 km/h übersteigt er die Schwelle, ab der Radfahrerinnen und Radfahrer spürbar abgeschreckt werden (−0,10, Rang 4). Die niedrige Luftfeuchtigkeit von nur 29 % trägt dagegen positiv bei (+0,10, Rang 5) — trockene Luft macht das Radfahren angenehmer. Das klare Wetter verstärkt die Nachfrage zusätzlich, wenn auch nur leicht (+0,05, Rang 6).</treiber>\n\n<empfehlung>An klaren Freitagnachmittagen im April mit angenehmen Temperaturen ist die Nachfrage hoch — Stationen sollten gut befüllt sein, um die einsetzende Abendspitze ab 17 Uhr abzufangen. Bei starkem Wind wie heute (33 km/h) lohnt es sich, exponierte Stationen entlang windgeschützter Routen vorrangig aufzufüllen, da die Nachfrage dort weniger stark gedämpft wird.</empfehlung>",
+  "elapsed_s": null,
+  "usage": {
+    "input_tokens": 619,
+    "output_tokens": 703,
+    "cache_read_input_tokens": 0
+  },
+  "prediction": 334.0092,
+  "y_true": 324.0
+}

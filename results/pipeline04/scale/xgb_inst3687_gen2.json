@@ -1,0 +1,16 @@
+{
+  "pipeline": "04_json",
+  "llm_model": "claude-sonnet-4-6",
+  "loss_key": "poisson_log",
+  "xai_model": "xgb",
+  "instance_id": 3687,
+  "explanation": "<vorhersage>Das Modell sagte 340 ausgeliehene Fahrräder vorher; tatsächlich wurden 338 gezählt. Die Abweichung beträgt weniger als ein Prozent — die Vorhersage wurde ausgezeichnet getroffen.</vorhersage>\n\n<treiber>Der stärkste Treiber in dieser Stunde ist die Uhrzeit: 20 Uhr abends liegt noch im Bereich des abendlichen Rückkehrverkehrs und treibt die Nachfrage spürbar nach oben (Rang 1, Einfluss +0,24). Knapp dahinter folgt das Jahr 2012 (yr=1), das als nachfragestärkeres Jahr einen klar positiven Beitrag leistet (Rang 2, +0,16) — der Verleih hatte 2012 deutlich mehr Nutzer als im Vorjahr. Auf Rang 3 wirkt die Temperatur von etwa 21 °C angenehm und erhöht die Lust aufs Radfahren weiter (+0,09). Der Mittwoch als typischer Werktag (Rang 4, +0,07) sowie das klare Wetter (Rang 5, +0,05) stärken die Nachfrage zusätzlich. Lediglich die Luftfeuchtigkeit von 77 % bremst leicht — sie liegt aber noch unter der kritischen Schwelle von 80 % und wirkt nur minimal dämpfend (−0,02).</treiber>\n\n<empfehlung>An warmen Maiabenden im Jahr 2012 mit klarem Wetter ist die Nachfrage um 20 Uhr noch hoch. Für Mittwochabende empfiehlt sich daher eine gute Verfügbarkeit an belebten Pendelstationen bis mindestens 21 Uhr. Wartungs- und Umverteilungsarbeiten sollten möglichst in die Nachtstunden nach 23 Uhr gelegt werden, um den Abendverkehr nicht zu beeinträchtigen.</empfehlung>",
+  "elapsed_s": null,
+  "usage": {
+    "input_tokens": 618,
+    "output_tokens": 692,
+    "cache_read_input_tokens": 0
+  },
+  "prediction": 340.3502,
+  "y_true": 338.0
+}

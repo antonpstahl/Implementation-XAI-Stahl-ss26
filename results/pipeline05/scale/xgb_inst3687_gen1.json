@@ -1,0 +1,17 @@
+{
+  "pipeline": "05_vision",
+  "llm_model": "claude-sonnet-4-6",
+  "loss_key": "poisson_log",
+  "xai_model": "xgb",
+  "instance_id": 3687,
+  "explanation": "<vorhersage>\nDas Modell sagte für diese Mittwochabend-Stunde im Mai 2012 insgesamt 340 ausgeliehene Fahrräder vorher; tatsächlich wurden 338 gezählt. Die Vorhersage wurde damit ausgezeichnet getroffen — die Abweichung beträgt weniger als ein Prozent.\n</vorhersage>\n\n<treiber>\nDer mit Abstand stärkste Aufwärtstreiber ist die Uhrzeit: 20 Uhr fällt in den Bereich des Abendverkehrs, wenn viele Pendler nach Hause fahren und Freizeitnutzer noch unterwegs sind — dieser rote Balken ist der längste im gesamten Plot. Knapp dahinter liegt das Jahr 2012 (yr=1) als zweiter roter Balken: Im Vergleich zum Vorjahr war 2012 das nachfragestärkere Jahr, was die Vorhersage zusätzlich nach oben treibt. An dritter Stelle steht die Temperatur von etwa 21 °C — angenehm warm, ohne zu heiß zu sein, was Radfahren attraktiv macht. Auch der klare Himmel (weathersit=1) und der Mittwoch als regulärer Werktag tragen noch merklich positiv bei. Leicht bremsend wirken die Luftfeuchtigkeit von 77 % sowie eine moderate Windgeschwindigkeit von etwa 17 km/h, beide mit kleinen blauen Balken — ihr Einfluss ist jedoch gering.\n</treiber>\n\n<empfehlung>\nAn warmen Mittwochabenden im Mai sollten die Stationen entlang der Pendlerrouten bis mindestens 21 Uhr gut bestückt sein, da die Abendspitze die Nachfrage klar dominiert. Wartungs- und Umverteilungsarbeiten sollten in die frühen Morgenstunden zwischen 2 und 5 Uhr gelegt werden, wenn kaum Ausleihen stattfinden.\n</empfehlung>",
+  "plot_file": "waterfall_xgb_poisson_log_inst3687.png",
+  "elapsed_s": null,
+  "usage": {
+    "input_tokens": 1284,
+    "output_tokens": 803,
+    "cache_read_input_tokens": 0
+  },
+  "prediction": 340.3502,
+  "y_true": 338.0
+}

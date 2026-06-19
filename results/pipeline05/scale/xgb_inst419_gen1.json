@@ -1,0 +1,17 @@
+{
+  "pipeline": "05_vision",
+  "llm_model": "claude-sonnet-4-6",
+  "loss_key": "poisson_log",
+  "xai_model": "xgb",
+  "instance_id": 419,
+  "explanation": "<vorhersage>\nDas Modell sagte für diese Stunde etwa 2 ausgeliehene Fahrräder vorher; tatsächlich wurden 4 gezählt. Die Vorhersage liegt damit in der richtigen Größenordnung, unterschätzt die tatsächliche Nachfrage jedoch um die Hälfte — ein mäßiges Ergebnis, was bei sehr kleinen Absolutzahlen im Nachtbetrieb aber nicht ungewöhnlich ist.\n</vorhersage>\n\n<treiber>\nDer mit Abstand stärkste Einfluss kommt von der Uhrzeit: Es ist 3 Uhr nachts, und dieser blaue Balken ist der längste im gesamten Plot. Zu dieser Stunde schlafen fast alle — entsprechend zieht die Tageszeit die Vorhersage massiv nach unten. Dahinter folgt die Temperatur von etwa 9 °C (normalisiert 0.22): Kaltes Wetter schreckt Radfahrende spürbar ab, weshalb auch dieser Balken blau und nach links zeigt. Dritter dämpfender Faktor ist der Wochentag: Mittwoch (weekday=3) trägt ebenfalls negativ bei — vermutlich weil mitten in der Nacht eines Werktages keinerlei Pendelverkehr stattfindet und das Modell genau das erkennt. Auch das Jahr 2011 (yr=0) und der Monat März wirken zusätzlich dämpfend, da beide unterdurchschnittliche Nachfragephasen repräsentieren. Einziger kleiner Lichtblick: Das klare Wetter (weathersit=1) ist der einzige rote Balken und trägt minimal positiv bei — allerdings ist dieser Einfluss bei 3 Uhr nachts kaum relevant.\n</treiber>\n\n<empfehlung>\nIn den Nachtstunden zwischen 0 und 5 Uhr — insbesondere in kalten Wintermonaten — ist die Nachfrage so gering, dass an diesen Stationen nur wenige Fahrräder vorgehalten werden müssen. Dieses Zeitfenster eignet sich ideal für Wartungsarbeiten und Umverteilungsfahrten, da kaum Betrieb zu erwarten ist und Einschränkungen die Kundschaft kaum betreffen.\n</empfehlung>",
+  "plot_file": "waterfall_xgb_poisson_log_inst419.png",
+  "elapsed_s": null,
+  "usage": {
+    "input_tokens": 1283,
+    "output_tokens": 890,
+    "cache_read_input_tokens": 0
+  },
+  "prediction": 2.1057,
+  "y_true": 4.0
+}

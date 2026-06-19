@@ -1,0 +1,17 @@
+{
+  "pipeline": "05_vision",
+  "llm_model": "claude-sonnet-4-6",
+  "loss_key": "poisson_log",
+  "xai_model": "ebm",
+  "instance_id": 3687,
+  "explanation": "<vorhersage>Das Modell sagte 315 ausgeliehene Fahrräder vorher; tatsächlich wurden 338 gezählt. Die Abweichung beträgt etwa 23 Fahrräder oder rund 7 %, was als mäßig gut getroffen bewertet werden kann — die Größenordnung stimmt, aber das Modell unterschätzt die Nachfrage leicht.</vorhersage>\n\n<treiber>Der mit Abstand stärkste Einfluss kommt von der Tageszeit: 20 Uhr liegt in der Abendspitze, wenn viele Pendler nach Hause fahren — dieser lange rote Balken treibt die Vorhersage kräftig nach oben. Dicht dahinter folgt das Jahr 2012 als zweiter roter Balken: Das Modell erkennt, dass 2012 insgesamt eine deutlich höhere Nachfrage als 2011 herrschte, was die Vorhersage spürbar anhebt. An dritter Stelle steht die Kombination aus Uhrzeit und Wochentag: Ein Mittwochabend um 20 Uhr verstärkt den Abendspitzeneffekt zusätzlich, weil Pendler an Werktagen besonders verlässlich zu dieser Zeit zurückfahren. Auch die angenehme Temperatur von etwa 21 °C trägt positiv bei. Leicht dämpfend wirken die Luftfeuchtigkeit von 77 % sowie die Wechselwirkung aus Feuchtigkeit und Wind — diese Effekte sind jedoch klein und bremsen die insgesamt hohe Nachfrage nur geringfügig.</treiber>\n\n<empfehlung>An Mittwochabenden im Mai sollten die Stationen entlang der wichtigsten Pendelrouten bis spätestens 19:30 Uhr gut bestückt sein, da die Abendspitze um 20 Uhr zuverlässig hohe Ausleihzahlen bringt. Da das Modell die Nachfrage hier leicht unterschätzt, empfiehlt es sich, einen kleinen Puffer von 5–10 % zusätzlicher Fahrräder einzuplanen, um Engpässe in der Spitzenstunde zu vermeiden.</empfehlung>",
+  "plot_file": "waterfall_ebm_poisson_log_inst3687.png",
+  "elapsed_s": null,
+  "usage": {
+    "input_tokens": 1044,
+    "output_tokens": 907,
+    "cache_read_input_tokens": 0
+  },
+  "prediction": 315.2522,
+  "y_true": 338.0
+}

@@ -1,0 +1,17 @@
+{
+  "pipeline": "05_vision",
+  "llm_model": "claude-sonnet-4-6",
+  "loss_key": "poisson_log",
+  "xai_model": "xgb",
+  "instance_id": 419,
+  "explanation": "<vorhersage>\nDas Modell sagte für diese Stunde etwa 2 ausgeliehene Fahrräder vorher; tatsächlich wurden 4 gezählt. Die Vorhersage liegt damit in derselben Größenordnung, unterschätzt die tatsächliche Nachfrage jedoch um fast die Hälfte. Angesichts der insgesamt sehr geringen absoluten Zahlen ist die Abweichung zwar nur 2 Fahrräder, aber relativ betrachtet mäßig getroffen.\n</vorhersage>\n\n<treiber>\nMit Abstand der stärkste Einfluss in diesem Plot geht von der Uhrzeit aus: Es ist 3 Uhr nachts (hr=3), und dieser blaue Balken ist mit einem Einfluss von −3.08 deutlich der längste im gesamten Diagramm. Zu dieser Stunde schläft die Stadt; kaum jemand leiht ein Fahrrad aus, weshalb das Modell die Vorhersage massiv nach unten zieht. Auf Rang zwei folgt die Temperatur: Mit etwa 9 °C (normalisiert 0.22) ist es recht kalt — auch dieser blaue Balken (−0.5) drückt die erwartete Nachfrage spürbar. Dritter bedeutsamer Faktor ist der Wochentag Mittwoch (weekday=3), der ebenfalls dämpfend wirkt (−0.42): An einem Werktag mitten in der Nacht fehlen sowohl Pendler als auch Freizeitfahrer vollständig. Das Jahr 2011 (yr=0, −0.24) und der Monat März (mnth=3, −0.23) verstärken diesen Effekt noch leicht, da beide für eine eher nachfrageschwache Periode stehen. Einzig das klare Wetter (weathersit=1) wirkt mit einem kleinen roten Balken (+0.03) minimal begünstigend — doch dieser Effekt ist im Vergleich zu den Gegenkräften vernachlässigbar.\n</treiber>\n\n<empfehlung>\nIn den frühen Morgenstunden zwischen 0 und 5 Uhr — besonders im Winter und Frühling — ist die Nachfrage erwartungsgemäß minimal. Diese Nachtfenster eignen sich ideal für Wartungsarbeiten, Umverteilungen und Fahrradchecks, ohne den laufenden Betrieb zu beeinträchtigen. Da das Modell in diesem Niedriglastbereich die wenigen tatsächlichen Ausleihen leicht unterschätzt, sollte man für Notfallverfügbarkeit trotzdem eine Mindestreserve an Rädern an zentralen Stationen belassen.\n</empfehlung>",
+  "plot_file": "waterfall_xgb_poisson_log_inst419.png",
+  "elapsed_s": null,
+  "usage": {
+    "input_tokens": 1283,
+    "output_tokens": 996,
+    "cache_read_input_tokens": 0
+  },
+  "prediction": 2.1057,
+  "y_true": 4.0
+}

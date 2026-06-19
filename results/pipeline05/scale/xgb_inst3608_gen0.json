@@ -1,0 +1,17 @@
+{
+  "pipeline": "05_vision",
+  "llm_model": "claude-sonnet-4-6",
+  "loss_key": "poisson_log",
+  "xai_model": "xgb",
+  "instance_id": 3608,
+  "explanation": "<vorhersage>\nDas Modell sagte für diese Mittwochsstunde um 13 Uhr 275,6 ausgeliehene Fahrräder vorher; tatsächlich wurden 228 gezählt. Das ist eine Abweichung von knapp 48 Rädern, was etwa 21 % über dem tatsächlichen Wert liegt — die Vorhersage wurde damit nur mäßig getroffen. Das Modell hat die Nachfrage in dieser Stunde spürbar überschätzt.\n</vorhersage>\n\n<treiber>\nDer stärkste Aufwärtstreiber ist das Jahr 2012 (yr=1): Da 2012 das wachstumsstärkere Jahr des Verleihsystems war, schiebt dieser Faktor die Vorhersage am kräftigsten nach oben. Direkt dahinter folgt allerdings ein blauer, dämpfender Balken für den Wochentag: Mittwoch (weekday=3) senkt die erwartete Nachfrage merklich — offenbar liegt ein Mittwochmittag im Modell unterhalb des allgemeinen Wochendurchschnitts, möglicherweise weil an anderen Werktagen die Pendlerspitzen morgens und abends deutlich ausgeprägter sind. Die Uhrzeit 13 Uhr (hr=13) trägt positiv bei, da die Mittagsstunde eine gleichmäßig gute Auslastung zeigt. Auch die angenehme Temperatur von etwa 23 °C sowie die sehr geringe Luftfeuchtigkeit von 26 % wirken leicht erhöhend. Das klare Wetter steuert ebenfalls einen kleinen positiven Beitrag bei, während der April-Monat minimal dämpfend wirkt.\n</treiber>\n\n<empfehlung>\nDa das Modell die Mittagsstunde an einem Mittwoch im April systematisch überschätzt, sollten die Mitarbeitenden die Stationsbestückung um 13 Uhr an Mittwochsmittagen etwas konservativer planen und nicht die volle vorhergesagte Menge vorhalten — tatsächlich reichen erfahrungsgemäß weniger Räder aus. Wartungs- und Umverteilungsarbeiten lassen sich gut in solchen Mittagslücken einplanen, da die tatsächliche Nachfrage moderater ausfällt als das Modell vermuten lässt.\n</empfehlung>",
+  "plot_file": "waterfall_xgb_poisson_log_inst3608.png",
+  "elapsed_s": null,
+  "usage": {
+    "input_tokens": 1284,
+    "output_tokens": 909,
+    "cache_read_input_tokens": 0
+  },
+  "prediction": 275.559,
+  "y_true": 228.0
+}

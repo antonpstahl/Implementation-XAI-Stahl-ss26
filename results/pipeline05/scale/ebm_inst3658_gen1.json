@@ -1,0 +1,17 @@
+{
+  "pipeline": "05_vision",
+  "llm_model": "claude-sonnet-4-6",
+  "loss_key": "poisson_log",
+  "xai_model": "ebm",
+  "instance_id": 3658,
+  "explanation": "<vorhersage>\nDas EBM-Modell sagte für diese Freitagnachmittag-Stunde im April 2012 insgesamt 334 ausgeliehene Fahrräder vorher; tatsächlich wurden 324 gezählt. Die Abweichung beträgt lediglich 10 Fahrräder, was einer Abweichung von etwa 3 % entspricht — die Vorhersage wurde damit sehr gut getroffen.\n</vorhersage>\n\n<treiber>\nDer mit Abstand stärkste Einflussfaktor in dieser Stunde ist die Uhrzeit: 15 Uhr fällt in die nachmittägliche Hochphase, in der viele Menschen das Fahrrad für Besorgungen, Freizeitfahrten oder frühe Heimwege nutzen. Dieser Balken ist der längste im gesamten Plot und treibt die Nachfrage kräftig nach oben. Ebenfalls deutlich aufwärts wirkt das Jahr 2012: Das System war in diesem Jahr bereits stärker etabliert und hatte mehr registrierte Nutzer als 2011, was sich in einem spürbaren Nachfrageanstieg gegenüber dem Basiswert niederschlägt. An dritter Stelle steht die angenehme Temperatur von etwa 21 °C, die Radfahren attraktiv macht und die Vorhersage weiter erhöht. Der einzige dämpfende Faktor ist der Wind: Mit rund 33 km/h liegt die Windgeschwindigkeit deutlich über der Komfortschwelle, weshalb dieser Balken als einziger nach links zeigt und die Nachfrage leicht bremst. Alle übrigen Merkmale — klares Wetter, niedrige Luftfeuchtigkeit und der Freitag als Wochentag — tragen ebenfalls positiv bei, allerdings in deutlich geringerem Maße.\n</treiber>\n\n<empfehlung>\nDa der Nachmittag um 15 Uhr an einem Freitag im Frühjahr zu den nachfragestarken Stunden zählt, sollten die Stationen rund um beliebte Freizeitrouten und Büroviertel bereits ab Mittag gut befüllt sein. Der spürbare Wind könnte einzelne Gelegenheitsnutzer abschrecken — für solche Bedingungen empfiehlt es sich, Pufferkapazitäten an wettergeschützten Stationen vorzuhalten und Wartungsarbeiten auf die windarmen Nachtstunden zu verschieben.\n</empfehlung>",
+  "plot_file": "waterfall_ebm_poisson_log_inst3658.png",
+  "elapsed_s": null,
+  "usage": {
+    "input_tokens": 1044,
+    "output_tokens": 964,
+    "cache_read_input_tokens": 0
+  },
+  "prediction": 334.0092,
+  "y_true": 324.0
+}

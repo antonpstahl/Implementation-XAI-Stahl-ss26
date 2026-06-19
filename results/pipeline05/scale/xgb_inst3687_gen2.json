@@ -1,0 +1,17 @@
+{
+  "pipeline": "05_vision",
+  "llm_model": "claude-sonnet-4-6",
+  "loss_key": "poisson_log",
+  "xai_model": "xgb",
+  "instance_id": 3687,
+  "explanation": "<vorhersage>\nDas Modell sagte für diese Stunde 340,4 ausgeliehene Fahrräder voraus; tatsächlich wurden 338 gezählt. Die Vorhersage wurde damit ausgezeichnet getroffen — die Abweichung beträgt weniger als 1 %.\n</vorhersage>\n\n<treiber>\nDer stärkste Aufwärtstreiber in dieser Stunde ist die Uhrzeit: 20 Uhr fällt in den Bereich der Abendspitze, wenn viele Menschen nach einem langen Werktag noch mit dem Rad unterwegs sind — dieser rote Balken ist der längste im gesamten Plot. Direkt dahinter folgt das Jahr 2012 (yr=1) als zweiter roter Balken: 2012 war das nachfragereichere der beiden Modelljahre, was die Vorhersage spürbar nach oben treibt. Ebenfalls positiv wirkt die angenehme Temperatur von etwa 21 °C — ein Wert im Wohlfühlbereich für Radfahrer, der die Nachfrage leicht steigert. Auch der Mittwoch als normaler Werktag sowie das klare Wetter tragen noch merklich positiv bei. Leicht dämpfend wirken hingegen die Luftfeuchtigkeit von 77 % und der Wind von etwa 17 km/h, beide jedoch nur in sehr geringem Ausmaß.\n</treiber>\n\n<empfehlung>\nDa die Abendspitze um 20 Uhr an Werktagen im Mai 2012 zuverlässig hohe Nachfrage erzeugt, sollten Stationen in Wohngebieten und Pendlerkorridoren zu dieser Zeit gut befüllt sein. Wartungsarbeiten und Fahrradumverteilungen lassen sich ideal in die frühen Morgenstunden zwischen 1 und 5 Uhr legen, wenn die Nachfrage am geringsten ist.\n</empfehlung>",
+  "plot_file": "waterfall_xgb_poisson_log_inst3687.png",
+  "elapsed_s": null,
+  "usage": {
+    "input_tokens": 1284,
+    "output_tokens": 785,
+    "cache_read_input_tokens": 0
+  },
+  "prediction": 340.3502,
+  "y_true": 338.0
+}

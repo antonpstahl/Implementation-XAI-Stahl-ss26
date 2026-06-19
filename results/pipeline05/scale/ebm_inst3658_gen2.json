@@ -1,0 +1,17 @@
+{
+  "pipeline": "05_vision",
+  "llm_model": "claude-sonnet-4-6",
+  "loss_key": "poisson_log",
+  "xai_model": "ebm",
+  "instance_id": 3658,
+  "explanation": "<vorhersage>\nDas Modell sagte für diese Freitagnachmittag-Stunde 334 ausgeliehene Fahrräder vorher; tatsächlich wurden 324 gezählt. Die Abweichung beträgt nur etwa 10 Räder — das ist eine sehr gute, kaum merkliche Abweichung von rund 3 %, die Vorhersage wurde also ausgezeichnet getroffen.\n</vorhersage>\n\n<treiber>\nDer mit Abstand stärkste Einfluss geht von der Tageszeit aus: 15 Uhr (also der frühe Nachmittag) treibt die Nachfrage kräftig nach oben — dieser lange rote Balken dominiert das gesamte Bild. Dahinter folgt das Jahr 2012 als zweiter wichtiger Aufwärtstreiber: 2012 war das nachfragereichere Modelljahr, was sich hier deutlich mit einem roten Balken zeigt und die Vorhersage spürbar anhebt. Dritter relevanter Faktor ist die Temperatur von etwa 21 °C, die sich im angenehmen Bereich befindet und die Nachfrage ebenfalls positiv beeinflusst. Einzig der Wind bremst: Mit rund 33 km/h weht er spürbar stark, was sich als einziger blauer Balken im Plot niederschlägt und die Vorhersage etwas nach unten korrigiert. Interessanterweise ist die sehr niedrige Luftfeuchtigkeit von nur 29 % ein leichter Pluspunkt — trockene Luft scheint das Radfahren angenehmer zu machen.\n</treiber>\n\n<empfehlung>\nDa der Freitagnachmittag um 15 Uhr — kombiniert mit angenehmem Aprilwetter und dem nachfragereichen Jahr 2012 — eine hohe Auslastung erzeugt, sollten an zentralen Stationen rechtzeitig ausreichend Räder bereitgestellt werden, bevor die beginnende Feierabendwelle einsetzt. Der auffrischende Wind könnte einzelne Nutzer abschrecken; an exponierten Stationen könnte die Verfügbarkeit leicht reduziert werden, um Leerstandsrisiken zu minimieren und Wartungskapazitäten gezielt einzusetzen.\n</empfehlung>",
+  "plot_file": "waterfall_ebm_poisson_log_inst3658.png",
+  "elapsed_s": null,
+  "usage": {
+    "input_tokens": 1044,
+    "output_tokens": 926,
+    "cache_read_input_tokens": 0
+  },
+  "prediction": 334.0092,
+  "y_true": 324.0
+}

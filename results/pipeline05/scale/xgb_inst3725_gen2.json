@@ -1,0 +1,17 @@
+{
+  "pipeline": "05_vision",
+  "llm_model": "claude-sonnet-4-6",
+  "loss_key": "poisson_log",
+  "xai_model": "xgb",
+  "instance_id": 3725,
+  "explanation": "<vorhersage>\nDas Modell sagte für diese Stunde 193,5 ausgeliehene Fahrräder vorher; tatsächlich wurden 183 gezählt. Die Abweichung beträgt gut zehn Räder, was einer Überschätzung von etwa 6 Prozent entspricht — die Vorhersage wurde insgesamt mäßig gut getroffen, ist aber für die Praxis durchaus brauchbar.\n</vorhersage>\n\n<treiber>\nDer stärkste Einfluss in dieser Stunde geht überraschenderweise von der Tageszeit aus — allerdings dämpfend: hr=10 (10 Uhr vormittags) zeigt den längsten blauen Balken. Das Modell wertet diesen Zeitpunkt als unterdurchschnittlich, weil die Morgenspitze der Pendler um 8 Uhr bereits vorbei ist und die Mittagsauslastung noch nicht begonnen hat. Eng dahinter folgen zwei gegenläufige Einflüsse, die sich fast ausgleichen: Das Jahr 2012 (yr=1) wirkt deutlich erhöhend — 2012 war das nachfragereichere Jahr im System, was den roten Balken erklärt. Gleichzeitig dämpft der Wochentag Dienstag (weekday=2) die Nachfrage in ähnlichem Ausmaß; an einem Werktag außerhalb der klassischen Pendlerstunden werden Fahrräder seltener spontan genutzt als etwa am Wochenende. Die angenehme Temperatur von etwa 30 °C (temp=0.74) wirkt ebenfalls erhöhend und liegt im optimalen Bereich für Radfahrten. Klares Wetter (weathersit=1), moderate Luftfeuchtigkeit und Wind haben nur noch minimalen Einfluss.\n</treiber>\n\n<empfehlung>\nDa die 10-Uhr-Stunde an Werktagen strukturell eine Nachfragedelle zwischen Morgen- und Mittagsbetrieb darstellt, eignet sich dieses Zeitfenster gut für kurze Wartungs- und Umverteilungsfahrten — Stationen können neu befüllt werden, ohne den laufenden Betrieb zu stören. Angesichts der angenehmen Temperaturen im Mai sollte die Verfügbarkeit ab etwa 11 Uhr wieder sichergestellt sein, da die Freizeitnutzung über den Mittag erfahrungsgemäß anzieht.\n</empfehlung>",
+  "plot_file": "waterfall_xgb_poisson_log_inst3725.png",
+  "elapsed_s": null,
+  "usage": {
+    "input_tokens": 1284,
+    "output_tokens": 926,
+    "cache_read_input_tokens": 0
+  },
+  "prediction": 193.4604,
+  "y_true": 183.0
+}

@@ -1,0 +1,12 @@
+{
+  "explanation": "[VORHERSAGE] Das Modell prognostiziert für Mittwoch, März 2011, 03:00 Uhr insgesamt 2 Fahrradausleihungen (tatsächlicher Wert: 4).\n\n[TREIBER] Die drei wichtigsten Einflussfaktoren sind:\n• Uhrzeit (03:00 Uhr): senkend (Beitrag: -3.08)\n• Temperatur (~9.0 °C): senkend (Beitrag: -0.50)\n• Wochentag (Mittwoch): senkend (Beitrag: -0.42)\n\n[EMPFEHLUNG] Geringe Nachfrage im Schwachlastzeit. Ressourcen können gezielt reduziert eingesetzt werden.",
+  "elapsed_s": 1.5e-05,
+  "usage": {
+    "input_tokens": 0,
+    "output_tokens": 0,
+    "cache_read_input_tokens": 0
+  },
+  "n_tool_calls": 0,
+  "y_true": 4.0,
+  "prediction": 2.1057
+}

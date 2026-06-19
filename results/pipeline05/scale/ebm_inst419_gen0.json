@@ -1,0 +1,17 @@
+{
+  "pipeline": "05_vision",
+  "llm_model": "claude-sonnet-4-6",
+  "loss_key": "poisson_log",
+  "xai_model": "ebm",
+  "instance_id": 419,
+  "explanation": "<vorhersage>\nDas EBM-Modell sagte für diese Stunde etwa 2,3 ausgeliehene Fahrräder vorher; tatsächlich wurden 4 gezählt. Das Modell hat die Nachfrage damit merklich unterschätzt — die Vorhersage ist mäßig getroffen. Bei so geringen absoluten Zahlen in einer Nachtstunde ist die Abweichung von knapp 2 Fahrrädern zwar in Prozent spürbar, im Betrieb aber kaum relevant.\n</vorhersage>\n\n<treiber>\nDer mit Abstand stärkste Einfluss kommt von der Uhrzeit: 3:00 Uhr nachts ist die klassische Nacht-Talsohle des Fahrradverleihs, und der entsprechende blaue Balken (hr, Beitrag −2,183) ist der längste im gesamten Plot — er drückt die Vorhersage weit nach unten. Verstärkt wird dieser Effekt durch die Kombination aus Uhrzeit und Wochentag (hr & weekday, −0,807): Ein Mittwoch um 3 Uhr ist ein reiner Werktag ohne Nacht-Freizeitverkehr, weshalb das Modell hier zusätzlich dämpft. An dritter Stelle steht die Temperatur von etwa 9 °C (temp, −0,564): Diese Kälte liegt knapp über dem Bereich, in dem die Nachfrage spürbar einbricht, und senkt die Vorhersage weiter. Das Jahr 2011 (yr, −0,226) und der März 2011 kombiniert mit dem Monat (mnth & yr, −0,198) verstärken den dämpfenden Gesamtbild, weil 2011 das nachfrageärmere Betriebsjahr war. Gegen diesen Abwärtstrend arbeiten nur kleine rote Balken: Die Wechselwirkungen zwischen Stunde & Temperatur sowie Wochentag & Temperatur liefern zusammen etwa +0,33 Einheiten Aufwärtskraft — und das klare Wetter trägt ebenfalls minimal positiv bei.\n</treiber>\n\n<empfehlung>\nIn Nächten wie dieser (Werktag, März, unter 10 °C) ist die Nachfrage strukturell minimal — Stationen müssen nicht vollständig befüllt sein. Das Wartungsteam kann solche Stunden zwischen 1 und 4 Uhr gezielt für Inspektionen und Umverteilungsfahrten nutzen, ohne nennenswert in den laufenden Betrieb einzugreifen. Sollte der Betrieb an kälteren Märznächten dennoch Kapazität bereitstellen wollen, genügt eine Mindestbesetzung von zwei bis drei Rädern pro Station, da selbst bei leichter Modellunterschätzung kaum mehr als eine Handvoll Ausleihen anfallen.\n</empfehlung>",
+  "plot_file": "waterfall_ebm_poisson_log_inst419.png",
+  "elapsed_s": null,
+  "usage": {
+    "input_tokens": 1043,
+    "output_tokens": 1109,
+    "cache_read_input_tokens": 0
+  },
+  "prediction": 2.3351,
+  "y_true": 4.0
+}

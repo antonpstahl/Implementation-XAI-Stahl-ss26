@@ -1,0 +1,17 @@
+{
+  "pipeline": "05_vision",
+  "llm_model": "claude-sonnet-4-6",
+  "loss_key": "poisson_log",
+  "xai_model": "ebm",
+  "instance_id": 3608,
+  "explanation": "<vorhersage>\nDas EBM-Modell sagte für diese Mittwochsmittagsstunde im April 2012 insgesamt 288 ausgeliehene Fahrräder vorher; tatsächlich wurden jedoch nur 228 gezählt. Das entspricht einer Abweichung von etwa 26 %, was als mäßige Übersch ätzung zu bewerten ist — das Modell hat die Nachfrage in diesem Fall spürbar zu hoch angesetzt.\n</vorhersage>\n\n<treiber>\nDer mit Abstand stärkste Aufwärtstreiber ist die Tageszeit: 13 Uhr liegt mitten im Tageshoch, wenn viele Menschen das Fahrrad für Mittagsausflüge oder kurze Wege nutzen — dieser Faktor schiebt die Vorhersage am kräftigsten nach oben. Dicht dahinter folgt das Jahr 2012 mit einem ebenfalls deutlich positiven Einfluss: Das System war 2012 bereits deutlich weiter gewachsen als im Vorjahr, was die Grundnachfrage anhebt. Auch die Temperatur von etwa 23 °C trägt nennenswert positiv bei — angenehme Frühlingswärme lädt zum Radfahren ein. Gegen diese Aufwärtskräfte wirkt vor allem der gemeinsame Effekt aus Uhrzeit und Wochentag (Mittwoch, 13 Uhr): Dieser Wechselwirkungsbalken zeigt nach links und bremst die Vorhersage merklich — offenbar leihen Berufstätige mitten in der Arbeitswoche zur Mittagszeit weniger Räder aus als das Modell allein aus der Uhrzeit schließen würde. Die sehr niedrige Luftfeuchtigkeit von 26 % und das klare Wetter tragen dagegen noch leicht positiv bei.\n</treiber>\n\n<empfehlung>\nDa das Modell die Mittagsnachfrage an Werktagen systematisch überschätzt, sollten Stationen entlang typischer Bürorouten zur Mittagszeit nicht maximalbefüllt werden — eine moderate Bereitstellung reicht aus und vermeidet unnötige Umverteilungsfahrten. Gleichzeitig bietet die Kombination aus gutem Wetter und angenehmen Temperaturen im April ein gutes Fenster, um anfällige Fahrräder tagsüber kurz aus dem Verkehr zu nehmen und zu warten, da die tatsächliche Nachfrage erfahrungsgemäß etwas unter den Modellwerten liegt.\n</empfehlung>",
+  "plot_file": "waterfall_ebm_poisson_log_inst3608.png",
+  "elapsed_s": null,
+  "usage": {
+    "input_tokens": 1044,
+    "output_tokens": 976,
+    "cache_read_input_tokens": 0
+  },
+  "prediction": 287.9628,
+  "y_true": 228.0
+}

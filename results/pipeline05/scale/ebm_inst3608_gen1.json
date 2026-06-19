@@ -1,0 +1,17 @@
+{
+  "pipeline": "05_vision",
+  "llm_model": "claude-sonnet-4-6",
+  "loss_key": "poisson_log",
+  "xai_model": "ebm",
+  "instance_id": 3608,
+  "explanation": "<vorhersage>\nDas EBM-Modell sagte für diese Stunde 288 ausgeliehene Fahrräder vorher; tatsächlich wurden jedoch nur 228 gezählt. Das entspricht einer Überschätzung von etwa 60 Fahrrädern — die Vorhersage wurde damit mäßig getroffen. Das Modell hat die grundsätzliche Größenordnung richtig erkannt, lag aber spürbar daneben.\n</vorhersage>\n\n<treiber>\nDer mit Abstand stärkste Einfluss geht von der Tageszeit aus: 13 Uhr (Mittagszeit) treibt die Vorhersage kräftig nach oben — das ist der längste rote Balken im Plot. Direkt dahinter folgen zwei weitere aufwärtstreibende Faktoren: Das Jahr 2012 wirkt positiv, weil das System in diesem Jahr bereits deutlich mehr Nutzer hatte als im Vorjahr. Auch die angenehme Temperatur von etwa 23 °C unterstützt die Nachfrage spürbar. Gegenläufig wirkt die Kombination aus Uhrzeit und Wochentag: Der blaue Balken für „hr & weekday\" zeigt, dass ein Mittwochmittag für einen Werktag unterdurchschnittlich viele Pendler anzieht — die klassischen Pendlerspitzen liegen morgens und abends, nicht mittags. Die sehr niedrige Luftfeuchtigkeit von 26 % trägt leicht positiv bei, da trockene Luft das Radfahren angenehmer macht. Das klare Wetter erhöht die Vorhersage ebenfalls, allerdings in geringerem Maß.\n</treiber>\n\n<empfehlung>\nAn Werktagen zur Mittagszeit ist die tatsächliche Nachfrage trotz guter Witterungsbedingungen geringer als das Modell erwartet — Stationen müssen daher mittags nicht so stark aufgefüllt werden wie in den Morgen- und Abendspitzen. Da das Modell an solchen Mittwochsmittagen tendenziell überschätzt, empfiehlt es sich, die Fahrradverfügbarkeit eher konservativ zu planen und Wartungs- oder Umverteilungsfahrten in die ruhigere Mittagszeit zu legen.\n</empfehlung>",
+  "plot_file": "waterfall_ebm_poisson_log_inst3608.png",
+  "elapsed_s": null,
+  "usage": {
+    "input_tokens": 1044,
+    "output_tokens": 923,
+    "cache_read_input_tokens": 0
+  },
+  "prediction": 287.9628,
+  "y_true": 228.0
+}

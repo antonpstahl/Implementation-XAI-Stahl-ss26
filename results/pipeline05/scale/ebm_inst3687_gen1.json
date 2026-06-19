@@ -1,0 +1,17 @@
+{
+  "pipeline": "05_vision",
+  "llm_model": "claude-sonnet-4-6",
+  "loss_key": "poisson_log",
+  "xai_model": "ebm",
+  "instance_id": 3687,
+  "explanation": "<vorhersage>\nDas Modell sagte für diese Stunde 315 ausgeliehene Fahrräder vorher; tatsächlich wurden 338 gezählt. Die Vorhersage liegt damit etwa 7 % unter dem realen Wert — das ist ein mäßiges Ergebnis, denn das Modell erfasst die Größenordnung gut, unterschätzt die Nachfrage in diesem Fall jedoch leicht.\n</vorhersage>\n\n<treiber>\nDen mit Abstand stärksten Einfluss hat die Tageszeit: 20 Uhr fällt in die Abendspitze, in der viele Menschen nach der Arbeit nach Hause fahren oder den Feierabend aktiv gestalten — dieser rote Balken ist fast dreimal so lang wie der nächste. Dicht dahinter folgt das Jahr 2012 als zweiter großer Aufwärtstreiber: Gegenüber 2011 hat das Verleihsystem in 2012 deutlich mehr Nutzerinnen und Nutzer gewonnen, was der Modell positiv bewertet. Ebenfalls klar erhöhend wirkt die Kombination aus Abendstunde und Wochentag: Mittwochabend um 20 Uhr ist ein typischer Feierabend-Moment für Berufspendler, was die Nachfrage zusätzlich ankurbelt. Auch die angenehme Temperatur von etwa 21 °C trägt spürbar positiv bei. Auf der anderen Seite dämpfen die Luftfeuchtigkeit von 77 % sowie die Wechselwirkung aus Feuchtigkeit und Wind die Vorhersage leicht — beide Balken zeigen nach links, bleiben aber vergleichsweise kurz.\n</treiber>\n\n<empfehlung>\nAn Mittwochabenden im Frühsommer sollten die Stationen entlang typischer Pendlerrouten bereits ab 18 Uhr gut aufgefüllt sein, damit zur Hauptnachfragezeit um 20 Uhr ausreichend Räder bereitstehen. Da das Modell die Nachfrage in solchen Situationen leicht unterschätzt, empfiehlt es sich, einen kleinen Puffer einzuplanen und die Auslastung in Echtzeit zu beobachten, um Engpässe frühzeitig zu erkennen.\n</empfehlung>",
+  "plot_file": "waterfall_ebm_poisson_log_inst3687.png",
+  "elapsed_s": null,
+  "usage": {
+    "input_tokens": 1044,
+    "output_tokens": 933,
+    "cache_read_input_tokens": 0
+  },
+  "prediction": 315.2522,
+  "y_true": 338.0
+}

@@ -1,0 +1,16 @@
+{
+  "pipeline": "04_json",
+  "llm_model": "claude-sonnet-4-6",
+  "loss_key": "poisson_log",
+  "xai_model": "ebm",
+  "instance_id": 3608,
+  "explanation": "<vorhersage>Das Modell sagte für diesen Mittwochmittag im April 2012 rund 288 ausgeliehene Fahrräder vorher; tatsächlich wurden 228 gezählt. Das entspricht einer Abweichung von etwa 26 % — die Vorhersage liegt damit deutlich über dem tatsächlichen Wert und ist als mäßig bis schlecht einzustufen.</vorhersage>\n\n<treiber>Den stärksten Einfluss hat die Uhrzeit: 13 Uhr gehört zur gut ausgelasteten Mittagszeit, was die Nachfrage kräftig nach oben treibt (Rang 1, Einfluss +0,64). Auf Rang 2 folgt das Jahr 2012 (yr=1), das als nachfragestärkeres Jahr einen deutlich erhöhenden Effekt hat (+0,21). Ebenfalls positiv wirkt die Temperatur von etwa 23 °C (+0,18, Rang 3): Diese angenehme Wärme lädt zum Radfahren ein. Bemerkenswert ist auch die sehr niedrige Luftfeuchtigkeit von nur 26 %, die sich leicht positiv auswirkt (+0,10, Rang 4) — trockene Luft macht das Fahren angenehmer. Das klare Wetter trägt ebenfalls leicht positiv bei. Der April-Monatsfaktor wirkt minimal dämpfend (−0,02, Rang 6), was kaum ins Gewicht fällt.</treiber>\n\n<empfehlung>Obwohl das Modell an diesem Mittag die Nachfrage überschätzt hat, deuten alle wesentlichen Faktoren — Uhrzeit, Jahrestrend und Wetter — auf eine solide Mittagsnachfrage hin. Stationen in der Stadtmitte sollten um die Mittagszeit gut bestückt sein. Die unerwartet niedrige tatsächliche Ausleihe könnte auf lokale Sonderereignisse hinweisen, die das Modell nicht erfasst — ein Blick in die Betriebsprotokolle wäre sinnvoll.</empfehlung>",
+  "elapsed_s": null,
+  "usage": {
+    "input_tokens": 617,
+    "output_tokens": 728,
+    "cache_read_input_tokens": 0
+  },
+  "prediction": 287.9628,
+  "y_true": 228.0
+}

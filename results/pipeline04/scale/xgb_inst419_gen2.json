@@ -1,0 +1,16 @@
+{
+  "pipeline": "04_json",
+  "llm_model": "claude-sonnet-4-6",
+  "loss_key": "poisson_log",
+  "xai_model": "xgb",
+  "instance_id": 419,
+  "explanation": "<vorhersage>Das Modell sagte etwa 2,1 ausgeliehene Fahrräder vorher; tatsächlich wurden 4 gezählt. Die Vorhersage liegt damit rund 48 % unter dem tatsächlichen Wert. Bei so kleinen absoluten Zahlen — mitten in der Nacht — ist die Abweichung zwar nur 2 Fahrräder, aber relativ betrachtet wurde die Stunde mäßig getroffen.</vorhersage>\n\n<treiber>Der mit Abstand stärkste Einfluss ist die Uhrzeit: 3 Uhr nachts ist die nachfrageschwächste Zeit des Tages, kaum jemand leiht ein Fahrrad aus — dieser Faktor drückt die Vorhersage mit einem Einfluss von −3,08 (Rang 1) massiv nach unten. Ebenfalls deutlich dämpfend wirkt die Kälte: Mit etwa 9 °C (temp=0,22) liegt die Temperatur klar im ungemütlichen Bereich, was viele Nutzer abschreckt (−0,50, Rang 2). Hinzu kommt der Wochentag Mittwoch: An einem normalen Werktag fehlt mitten in der Nacht jeglicher Freizeitverkehr, was die Nachfrage weiter senkt (−0,42, Rang 3). Alle weiteren Faktoren — das Jahr 2011, der Monat März und eine mäßige Windgeschwindigkeit von etwa 19 km/h — verstärken diesen Trend zusätzlich, fallen aber vergleichsweise wenig ins Gewicht.</treiber>\n\n<empfehlung>Zwischen 2 und 4 Uhr nachts im März ist die Nachfrage praktisch vernachlässigbar. Dieses Zeitfenster eignet sich ideal für Wartungsarbeiten, Umverteilung von Fahrrädern zwischen Stationen oder Systemüberprüfungen — ohne den Betrieb zu beeinträchtigen. Eine Minimalbesetzung der Stationen reicht in diesen Stunden vollkommen aus.</empfehlung>",
+  "elapsed_s": null,
+  "usage": {
+    "input_tokens": 618,
+    "output_tokens": 714,
+    "cache_read_input_tokens": 0
+  },
+  "prediction": 2.1057,
+  "y_true": 4.0
+}

@@ -1,0 +1,16 @@
+{
+  "pipeline": "04_json",
+  "llm_model": "claude-sonnet-4-6",
+  "loss_key": "poisson_log",
+  "xai_model": "xgb",
+  "instance_id": 3725,
+  "explanation": "<vorhersage>Das Modell sagte für diese Stunde rund 193 ausgeliehene Fahrräder vorher; tatsächlich wurden 183 gezählt. Das entspricht einer Abweichung von etwa 5,7 Prozent — die Vorhersage wurde mäßig gut getroffen, liegt aber im vertretbaren Bereich für eine einzelne Stunde.</vorhersage>\n\n<treiber>Der stärkste Einflussfaktor ist die Uhrzeit 10 Uhr (Rang 1, Einfluss −0,19): Dieser Zeitpunkt fällt in die ruhigere Phase zwischen Morgen- und Mittagsverkehr, was die Nachfrage gegenüber dem Modell-Durchschnitt leicht dämpft. Knapp dahinter wirkt das Jahr 2012 (yr=1) klar positiv (Rang 2, +0,16): Da 2012 das nachfragereichere Jahr war, hebt dieser Faktor die Vorhersage spürbar an. Fast gleichauf liegt die angenehme Temperatur von etwa 30 °C (Rang 3, +0,15), die Radfahren attraktiv macht und ebenfalls die Nachfrage stützt. Der vierte Faktor ist der Wochentag Dienstag (Rang 4, −0,15): An einem regulären Werktag außerhalb der Pendlerspitzen sind um 10 Uhr weniger Gelegenheitsnutzer unterwegs, was bremsend wirkt. Das klare Wetter trägt nur leicht positiv bei.</treiber>\n\n<empfehlung>Da um 10 Uhr an Werktagen die Nachfrage zwischen den Pendlerspitzen abflaut, kann die Station-Befüllung in diesem Zeitfenster moderat gehalten werden — größere Aufstockungen lohnen sich erst wieder ab dem Nachmittag. Die angenehmen Temperaturen im Mai sprechen dafür, Wartungsarbeiten auf die frühen Morgenstunden (vor 7 Uhr) zu legen, um das Hauptnutzungsfenster nicht einzuschränken.</empfehlung>",
+  "elapsed_s": null,
+  "usage": {
+    "input_tokens": 618,
+    "output_tokens": 717,
+    "cache_read_input_tokens": 0
+  },
+  "prediction": 193.4604,
+  "y_true": 183.0
+}

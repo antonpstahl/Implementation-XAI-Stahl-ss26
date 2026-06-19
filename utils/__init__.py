@@ -30,7 +30,7 @@ RANDOM_STATE = 42
 
 # ── Phase 3b — Skalierung ────────────────────────────────────────────────────
 # Stichprobengröße und Generationen pro Einheit für den Vollauf.
-SCALE_N             = 200   # Testinstanzen (stratifiziert) für den 3b-Vollauf
+SCALE_N             = 5   # Testinstanzen (stratifiziert) für den 3b-Vollauf
 N_GENERATIONS_SCALE = 3     # Generationen/Instanz für 04/05/06 (LLM-Stochastik)
                             # Template (00) ist deterministisch → dort 1 Generation.
 

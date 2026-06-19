@@ -1,0 +1,12 @@
+{
+  "explanation": "[VORHERSAGE] Das Modell prognostiziert für Mittwoch, Mai 2012, 20:00 Uhr insgesamt 340 Fahrradausleihungen (tatsächlicher Wert: 338).\n\n[TREIBER] Die drei wichtigsten Einflussfaktoren sind:\n• Uhrzeit (20:00 Uhr): erhöhend (Beitrag: +0.24)\n• Jahr (2012): erhöhend (Beitrag: +0.16)\n• Temperatur (~21.3 °C): erhöhend (Beitrag: +0.09)\n\n[EMPFEHLUNG] Moderate Nachfrage im Schwachlastzeit. Halten Sie die reguläre Betriebsbereitschaft aufrecht.",
+  "elapsed_s": 6e-06,
+  "usage": {
+    "input_tokens": 0,
+    "output_tokens": 0,
+    "cache_read_input_tokens": 0
+  },
+  "n_tool_calls": 0,
+  "y_true": 338.0,
+  "prediction": 340.3502
+}

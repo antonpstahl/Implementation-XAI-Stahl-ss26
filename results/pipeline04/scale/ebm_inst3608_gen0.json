@@ -1,0 +1,16 @@
+{
+  "pipeline": "04_json",
+  "llm_model": "claude-sonnet-4-6",
+  "loss_key": "poisson_log",
+  "xai_model": "ebm",
+  "instance_id": 3608,
+  "explanation": "<vorhersage>Das Modell sagte knapp 288 ausgeliehene Fahrräder vorher; tatsächlich wurden 228 gezählt. Das entspricht einer Abweichung von etwa 60 Rädern oder rund 26 Prozent — die Vorhersage wurde damit nur mäßig getroffen. Das Modell überschätzte die Nachfrage für diese Stunde merklich.</vorhersage>\n\n<treiber>Der bei weitem stärkste Treiber ist die Uhrzeit: 13 Uhr liegt mitten im Tagesgeschäft und zieht die Nachfrage kräftig nach oben (Rang 1, Einfluss +0,64). An zweiter Stelle steht das Jahr 2012 (yr=1), das die Nachfrage spürbar begünstigt, da 2012 das nachfragestärkere Modelljahr war (+0,21, Rang 2). Die angenehme Temperatur von etwa 23 °C trägt ebenfalls positiv bei (+0,18, Rang 3). Bemerkenswert ist der vierte Faktor: Die sehr niedrige Luftfeuchtigkeit von nur 26 % wirkt hier überraschend fördernd auf die Nachfrage (+0,10, Rang 4). Das klare Wetter verstärkt den Effekt zusätzlich leicht. Der April selbst hat einen minimal dämpfenden Einfluss (−0,02, Rang 6), was aber kaum ins Gewicht fällt.</treiber>\n\n<empfehlung>Trotz der Überschätzung zeigt die Analyse, dass Mittwochmittag im April bei gutem Wetter grundsätzlich eine nachfragestarke Zeit ist — Stationen in der Innenstadt sollten gut befüllt sein. Da das Modell in dieser Stundenkonstellation zur Überschätzung neigt, lohnt es sich, die tatsächlichen Ausleihzahlen an vergleichbaren Tagen genauer zu beobachten, bevor Kapazitäten deutlich aufgestockt werden.</empfehlung>",
+  "elapsed_s": null,
+  "usage": {
+    "input_tokens": 617,
+    "output_tokens": 703,
+    "cache_read_input_tokens": 0
+  },
+  "prediction": 287.9628,
+  "y_true": 228.0
+}

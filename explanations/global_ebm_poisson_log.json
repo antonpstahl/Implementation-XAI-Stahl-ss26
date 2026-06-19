@@ -10,10 +10,10 @@
       "type": "categorical",
       "description": "Wetterlage",
       "categories": {
-        "1": "klar / wenige Wolken",
-        "2": "Nebel / bewölkt",
-        "3": "leichter Regen / Schnee",
-        "4": "Starkregen / Eisregen / Gewitter"
+        "1": "klar/wenige Wolken",
+        "2": "Nebel/bewölkt",
+        "3": "leichter Regen/Schnee",
+        "4": "Starkregen/Gewitter"
       }
     },
     "mnth": {
