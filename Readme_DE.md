@@ -16,12 +16,12 @@ Erklärungsinformationen erhält: als strukturiertes JSON, als Bild (Waterfall-P
 ## Projektstruktur
 
 ```
-Implementation_1205/
+Implementation-XAI-Stahl-ss26/
 ├── data/               # Rohdaten und aufbereitete Train/Test-Splits
 ├── models/             # Trainierte Modelle (6 .pkl-Dateien)
 ├── explanations/       # SHAP-/EBM-Erklärungen als JSON + Waterfall-Plots (PNG)
 ├── results/            # Pipeline-Ausgaben, Evaluierungsplots, CSV-Zusammenfassungen
-├── notebooks/          # 10 Jupyter Notebooks (00 Baseline, 01–08)
+├── notebooks/          # 12 Jupyter Notebooks (00 Baseline, 01–10)
 └── utils/              # Python-Hilfmodule (data.py, models.py, explanations.py, llm.py, tools.py)
 ```
 
@@ -242,6 +242,16 @@ Formale Faithfulness-Metriken nach Ichmoukhamedov et al. (2024), n = 10 Instanze
 
 ---
 
+## Schritt 6 — Fehlertaxonomie und Prompt-Fix (`09_Error_Taxonomy.ipynb`, `10_Prompt_Fix_Eval.ipynb`)
+
+Die 30 Erklärungen mit der niedrigsten Faithfulness werden manuell einer Fehlertaxonomie
+zugeordnet (NB 09), die echte Erklärungsfehler (z.B. `yr`-Vorzeichenfehler, Rangtausch bei
+nahen Beiträgen) von Extraktor-Artefakten trennt. Die beiden dominanten Erklärungs-Fehlerklassen
+werden anschließend per Prompt-Fix adressiert und auf demselben n=20-Sample mit Bootstrap-CIs
+vorher/nachher neu gemessen (NB 10).
+
+---
+
 ## Technische Details
 
 ### Abhängigkeiten
@@ -273,9 +283,9 @@ pytest tests/test_prompt_golden.py -v   # nur Prompt-Regression
 
 Die Suite umfasst Sampling-Determinismus, Generierungs-Loop-Persistenz/Resume, Judge-Parsing-Robustheit, Statistikfunktionen, Denormalisierungs-Konsistenz, README-Konsistenz und **Prompt-Fix-Regression**.
 Der Prompt-Regressionstest (`test_prompt_golden.py`) friert die SHA-256-Hashes und kritischen Constraint-Phrasen aller drei Pipeline-Prompts ein (Vorzeichen- und Rangtreue für `yr=0`, Phase-3-Fix).
-Er ist ein hartes Gate: Phase 3b (Vollauf) darf erst starten, wenn alle Tests grün sind.
+Er ist ein hartes Gate: ein frischer Generierungslauf darf erst starten, wenn alle Tests grün sind.
 
-**Grünes-Gate-Status (Phase 3a):** `pytest tests/` → **139 passed** (2026-06-17, Python 3.13). Alle skalierungskritischen Pfade sind abgedeckt; Phase 3b ist damit freigegeben.
+**Test-Status:** `pytest tests/` → **251 passed** (2026-06-29, Python 3.13).
 
 **Wenn ein Prompt absichtlich verbessert wird:**
 1. Prompt-Datei bearbeiten.
@@ -287,16 +297,22 @@ Er ist ein hartes Gate: Phase 3b (Vollauf) darf erst starten, wenn alle Tests gr
 ### Ausführungsreihenfolge
 
 ```
-01_Data_Preprocessing      → data/train.csv, data/test.csv
-02a_Modeling_AllOptions    → models/*.pkl
-02b_Comparison             → results/model_comparison_summary.csv
-03_Explanations_Generation → explanations/*.json, explanations/plots/*.png
-04_LLM_JSON_Pipeline       → results/pipeline04/*.json
-05_LLM_Vision_Pipeline     → results/pipeline05/*.json
-06_LLM_ToolUse_Pipeline    → results/pipeline06/*.json
-07_Evaluation              → results/eval_*.{csv,png,json}
+01_Data_Preprocessing        → data/train.csv, data/test.csv
+02a_Modeling_AllOptions      → models/*.pkl
+02b_Comparison               → results/model_comparison_summary.csv
+03_Explanations_Generation   → explanations/*.json, explanations/plots/*.png
+00_Template_Pipeline_Baseline → results/pipeline00/*.json
+04_LLM_JSON_Pipeline         → results/pipeline04/*.json
+05_LLM_Vision_Pipeline       → results/pipeline05/*.json
+06_LLM_ToolUse_Pipeline      → results/pipeline06/*.json
+07_Evaluation                → results/eval_*.{csv,png,json}
 08_Evaluation_Ichmoukhamedov → results/eval08_ichmoukhamedov/
+09_Error_Taxonomy            → results/error_taxonomy/
+10_Prompt_Fix_Eval           → results/eval08_ichmoukhamedov_v2/, results/eval10_*.png
 ```
+
+Alle Schritte laufen auf dem n=20-Validitäts-Sample (10 Instanzen × 2 XAI-Modelle);
+einen separaten Skalierungslauf gibt es nicht.
 
 ---
 

@@ -21,7 +21,7 @@ Two questions are examined in parallel:
 ├── models/          # Trained models (6 .pkl files)
 ├── explanations/    # SHAP / EBM explanations as JSON + waterfall plots (PNG)
 ├── results/         # Pipeline outputs, evaluation plots, CSV summaries
-├── notebooks/       # 10 Jupyter notebooks (00 baseline, 01–08)
+├── notebooks/       # 12 Jupyter notebooks (00 baseline, 01–10)
 ├── prompts/         # Prompt templates
 └── utils/           # Python helper modules (data, models, explanations, llm, tools)
 ```
@@ -80,6 +80,9 @@ Formal faithfulness after Ichmoukhamedov et al. (NB 08, n = 10 instances; precis
 | Vision    | 0.429     | 0.679     | 0.575      |
 <!-- /AUTO-TABLE:faithfulness -->
 
+**6 — Error analysis & prompt fix** (`09_Error_Taxonomy.ipynb`, `10_Prompt_Fix_Eval.ipynb`)
+The 30 lowest-faithfulness explanations are hand-coded into an error taxonomy (NB 09), separating genuine explanation errors (e.g. `yr` sign errors, near-tie rank swaps) from extractor artefacts. The two dominant explanation-error classes are then addressed by a prompt fix and re-measured before/after on the same n = 20 sample with bootstrap CIs (NB 10).
+
 > **Status of these findings:** descriptive/exploratory. With n = 10–20 explanations per pipeline, no repeated sampling and no inferential statistics yet, the differences below are **not** statistically confirmed (see the limitations table in `07_Evaluation.ipynb` §7). Treat them as directional.
 
 1. **The deterministic template wins on faithfulness** — Template scores 5.00 vs. the LLM pipelines' 3.80–4.40. By construction it lists exactly the true top drivers; the LLMs trade some faithfulness for richer, more readable narratives. This is the central "what does the LLM add over a template?" result — and the trade-off, not a free lunch.
@@ -100,7 +103,7 @@ pip install -r requirements.txt
 echo "ANTHROPIC_API_KEY=sk-ant-..." > .env
 ```
 
-Run the notebooks in order (`01` → `08`). Paths are relative to the project root; reproducibility is fixed via `RANDOM_STATE = 42`.
+Run the notebooks in order (`01` → `10`). Paths are relative to the project root; reproducibility is fixed via `RANDOM_STATE = 42`. The pipeline runs on the n = 20 validity sample (10 instances × 2 XAI models); there is no separate large-scale run.
 
 ## LLM configuration
 
@@ -127,9 +130,9 @@ pytest tests/test_prompt_golden.py -v   # prompt regression only
 
 The suite covers sampling determinism, generation-loop persistence/resume, judge-parsing robustness, statistical functions, denormalization consistency, README consistency, and **prompt-fix regression**.
 The prompt regression test (`test_prompt_golden.py`) freezes the SHA-256 hashes and key constraint phrases of all three pipeline prompts as corrected in Phase 3 (sign- and rank-fidelity rules for `yr=0`).
-It is a hard gate: Phase 3b (full-scale run) must not start until all tests are green.
+It is a hard gate: a fresh generation run must not start until all tests are green.
 
-**Green-gate status (Phase 3a):** `pytest tests/` → **139 passed** (2026-06-17, Python 3.13). All scaling-critical paths are covered, so Phase 3b is released.
+**Test status:** `pytest tests/` → **251 passed** (2026-06-29, Python 3.13).
 
 **If a prompt is intentionally improved:**
 1. Edit the prompt file.
