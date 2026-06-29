@@ -19,7 +19,13 @@ import pytest
 ROOT = Path(__file__).resolve().parent.parent
 sys.path.insert(0, str(ROOT))
 
-from utils.generation import run_resumable_generation, generation_filename
+from utils.generation import (
+    run_resumable_generation,
+    generation_filename,
+    load_local_explanation,
+    load_global_explanation,
+    build_generation_record,
+)
 
 
 # ---------------------------------------------------------------------------
@@ -256,3 +262,120 @@ def test_out_dir_created_if_missing(tmp_path):
         generate=make_generate([]),
     )
     assert (nested / "xgb_inst101.json").exists()
+
+
+# ---------------------------------------------------------------------------
+# build_generation_record — Golden-Schemata der drei Pipelines (NB 04/05/06)
+#
+# Friert die zuvor inline gebauten Records ein: gleiche Keys, gleiche
+# Reihenfolge, gleiche Werte. Bricht, falls der zentrale Builder vom
+# Notebook-Schema abweicht (stille Divergenz = der teure Fehler).
+# ---------------------------------------------------------------------------
+
+USAGE_FULL = {"input_tokens": 600, "output_tokens": 510, "cache_read_input_tokens": 1024}
+USAGE_TOOL = {"input_tokens": 3489, "output_tokens": 1225}
+
+
+def test_record_schema_pipeline04_json():
+    expected = {
+        "pipeline":    "04_json",
+        "llm_model":   "claude-sonnet-4-6",
+        "loss_key":    "poisson_log",
+        "xai_model":   "xgb",
+        "instance_id": 224,
+        "explanation": "Erklärungstext",
+        "elapsed_s":   11.7,
+        "usage":       {"input_tokens": 600, "output_tokens": 510,
+                        "cache_read_input_tokens": 1024},
+        "prediction":  270.4,
+        "y_true":      270,
+    }
+    rec = build_generation_record(
+        pipeline="04_json", model_name="xgb", instance_id=224,
+        explanation="Erklärungstext", usage=USAGE_FULL,
+        llm_model="claude-sonnet-4-6", loss_key="poisson_log",
+        prediction=270.4, y_true=270, elapsed_s=11.7,
+    )
+    assert rec == expected
+    assert list(rec) == list(expected)  # Key-Reihenfolge identisch
+
+
+def test_record_schema_pipeline05_vision():
+    expected = {
+        "pipeline":    "05_vision",
+        "llm_model":   "claude-sonnet-4-6",
+        "loss_key":    "poisson_log",
+        "xai_model":   "ebm",
+        "instance_id": 580,
+        "explanation": "Bilderklärung",
+        "plot_file":   "waterfall_ebm_poisson_log_inst580.png",
+        "elapsed_s":   12.3,
+        "usage":       {"input_tokens": 600, "output_tokens": 510,
+                        "cache_read_input_tokens": 1024},
+        "prediction":  5.1,
+        "y_true":      5,
+    }
+    rec = build_generation_record(
+        pipeline="05_vision", model_name="ebm", instance_id=580,
+        explanation="Bilderklärung", usage=USAGE_FULL,
+        llm_model="claude-sonnet-4-6", loss_key="poisson_log",
+        prediction=5.1, y_true=5, elapsed_s=12.3,
+        extra={"plot_file": "waterfall_ebm_poisson_log_inst580.png"},
+    )
+    assert rec == expected
+    assert list(rec) == list(expected)
+
+
+def test_record_schema_pipeline06_tooluse():
+    call_log = [{"tool": "get_shap_values", "arguments": {"instance_id": 224}}]
+    expected = {
+        "pipeline":     "06_tooluse",
+        "llm_model":    "claude-sonnet-4-6",
+        "loss_key":     "poisson_log",
+        "xai_model":    "xgb",
+        "instance_id":  224,
+        "explanation":  "Tool-Erklärung",
+        "stop_reason":  "end_turn",
+        "tool_calls":   call_log,
+        "n_tool_calls": 1,
+        "elapsed_s":    28.8,
+        "usage":        {"input_tokens": 3489, "output_tokens": 1225},
+        "y_true":       270.0,
+    }
+    rec = build_generation_record(
+        pipeline="06_tooluse", model_name="xgb", instance_id=224,
+        explanation="Tool-Erklärung", usage=USAGE_TOOL,
+        llm_model="claude-sonnet-4-6", loss_key="poisson_log",
+        y_true=270.0, elapsed_s=28.8, include_cache=False,
+        extra={"stop_reason": "end_turn", "tool_calls": call_log,
+               "n_tool_calls": 1},
+    )
+    assert rec == expected
+    assert list(rec) == list(expected)        # Reihenfolge: extra vor elapsed_s
+    assert "prediction" not in rec            # Tool-Use führt keine Vorhersage
+    assert "cache_read_input_tokens" not in rec["usage"]
+
+
+# ---------------------------------------------------------------------------
+# load_local_explanation / load_global_explanation
+# ---------------------------------------------------------------------------
+
+def test_load_local_and_global_explanation(tmp_path):
+    (tmp_path / "local_xgb_poisson_log_inst224.json").write_text(
+        json.dumps({"prediction": 270.4, "y_true": 270}), encoding="utf-8")
+    (tmp_path / "global_xgb_poisson_log.json").write_text(
+        json.dumps({"global_importance": [{"rank": 0, "feature": "hr"}]}),
+        encoding="utf-8")
+
+    loc = load_local_explanation("xgb", 224, explanations_dir=tmp_path)
+    glo = load_global_explanation("xgb", explanations_dir=tmp_path)
+    assert loc["prediction"] == 270.4 and loc["y_true"] == 270
+    assert glo["global_importance"][0]["feature"] == "hr"
+
+
+def test_load_local_explanation_custom_loss_key(tmp_path):
+    (tmp_path / "local_ebm_squared_error_inst5.json").write_text(
+        json.dumps({"prediction": 1.0, "y_true": 2}), encoding="utf-8")
+    loc = load_local_explanation("ebm", 5, loss_key="squared_error",
+                                 explanations_dir=tmp_path)
+    assert loc["y_true"] == 2

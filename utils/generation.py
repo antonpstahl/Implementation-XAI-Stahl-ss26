@@ -39,6 +39,88 @@ BuildRequestFn = Callable[[str, int, int], Optional[dict]]
 BuildRecordFn = Callable[[str, int, int, str, dict], dict]
 
 
+def load_local_explanation(
+    model_name: str,
+    instance_id: int,
+    *,
+    loss_key: str = "poisson_log",
+    explanations_dir: Path | str,
+) -> dict:
+    """Lokale SHAP-/EBM-Erklärung einer Test-Instanz (`local_{model}_{loss}_inst{id}.json`).
+
+    Bisher in NB 04/05 dreifach inline geladen; zentralisiert, damit Pfadschema und
+    Loss-Schlüssel an einer Stelle leben.
+    """
+    p = Path(explanations_dir) / f"local_{model_name}_{loss_key}_inst{instance_id}.json"
+    return json.loads(p.read_text())
+
+
+def load_global_explanation(
+    model_name: str,
+    *,
+    loss_key: str = "poisson_log",
+    explanations_dir: Path | str,
+) -> dict:
+    """Globale Feature-Importance eines Modells (`global_{model}_{loss}.json`)."""
+    p = Path(explanations_dir) / f"global_{model_name}_{loss_key}.json"
+    return json.loads(p.read_text())
+
+
+_UNSET = object()
+
+
+def build_generation_record(
+    *,
+    pipeline: str,
+    model_name: str,
+    instance_id: int,
+    explanation: str,
+    usage: dict,
+    llm_model: str,
+    loss_key: str,
+    y_true: float,
+    prediction: Any = _UNSET,
+    elapsed_s: Optional[float] = None,
+    include_cache: bool = True,
+    extra: Optional[dict] = None,
+) -> dict:
+    """Baut den persistierten Erklärungs-Record — ein Schema für alle drei Pipelines.
+
+    Reproduziert die zuvor in NB 04/05/06 dreifach inline gebauten Records **exakt**
+    (inkl. Key-Reihenfolge), parametrisiert über die wenigen echten Unterschiede:
+
+    * ``extra``         — modalitätsspezifische Felder, direkt nach ``explanation``
+                          eingefügt (NB 05: ``plot_file``; NB 06: ``stop_reason`` /
+                          ``tool_calls`` / ``n_tool_calls``).
+    * ``prediction``    — weggelassen, wenn nicht übergeben (NB 06 führt keine
+                          Vorhersage im Record).
+    * ``include_cache`` — ``cache_read_input_tokens`` in ``usage`` (NB 04/05: ja;
+                          NB 06 Tool-Use: nein).
+    """
+    in_tok  = usage.get("input_tokens", 0)
+    out_tok = usage.get("output_tokens", 0)
+    usage_d = {"input_tokens": in_tok, "output_tokens": out_tok}
+    if include_cache:
+        usage_d["cache_read_input_tokens"] = usage.get("cache_read_input_tokens", 0)
+
+    record = {
+        "pipeline":    pipeline,
+        "llm_model":   llm_model,
+        "loss_key":    loss_key,
+        "xai_model":   model_name,
+        "instance_id": instance_id,
+        "explanation": explanation,
+    }
+    if extra:
+        record.update(extra)
+    record["elapsed_s"] = elapsed_s
+    record["usage"]     = usage_d
+    if prediction is not _UNSET:
+        record["prediction"] = prediction
+    record["y_true"] = y_true
+    return record
+
+
 def generation_filename(
     model_name: str,
     instance_id: int,

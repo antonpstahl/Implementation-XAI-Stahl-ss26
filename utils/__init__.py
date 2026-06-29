@@ -59,6 +59,9 @@ from .generation import (  # noqa: F401
     run_resumable_generation,
     run_batch_generation,
     generation_filename,
+    load_local_explanation,
+    load_global_explanation,
+    build_generation_record,
 )
 from .batch import (  # noqa: F401
     make_custom_id,
@@ -87,6 +90,9 @@ __all__ = [
     "run_resumable_generation",
     "run_batch_generation",
     "generation_filename",
+    "load_local_explanation",
+    "load_global_explanation",
+    "build_generation_record",
     "make_custom_id",
     "message_request",
     "submit_batch",
