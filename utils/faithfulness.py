@@ -29,7 +29,7 @@ from pathlib import Path
 
 import pandas as pd
 
-from utils import EXPLANATIONS_DIR
+from utils import EXPLANATIONS_DIR, RESULTS_DIR
 from utils.batch import make_custom_id
 from utils.explanations import FEATURE_SCHEMA, HUM_FACTOR, TEMP_FACTOR, WIND_FACTOR
 
@@ -307,3 +307,75 @@ def extraction_validity_summary(faith_df: pd.DataFrame) -> pd.DataFrame:
     out["out_of_topk_rate"] = (out["out_of_topk_total"] / denom).where(denom > 0)
     out["r0_match_rate"] = g["r0_match"].apply(lambda s: s.dropna().mean())
     return out.round(4)
+
+
+# ── Fehleranalyse / Extraktionsvalidität (NB 09 §6) ───────────────────────────
+
+def rank0_correctness(extraction: dict, gt_contributions: list) -> dict:
+    """Rang-0-Treue des Extraktors inkl. **Vorzeichen** (Erweiterung von ``extraction_coverage``).
+
+    ``extraction_coverage`` prüft nur die Feature-Identität (``r0_match``). Für die
+    Extraktionsvalidität (NB 09 §6) zählt zusätzlich das Vorzeichen: ein Rang-0 gilt nur
+    dann als korrekt, wenn Feature **und** Vorzeichen mit dem SHAP-Rang-0 übereinstimmen.
+
+    ``gt_contributions`` sind die (Top-K-)Beiträge, absteigend nach |Beitrag| sortiert.
+    Rückgabe: gt/ext Rang-0-Feature & -Vorzeichen, ``feat_match``, ``sign_match`` und
+    ``r0_correct`` (= beides zugleich).
+    """
+    gt_r0 = gt_contributions[0] if gt_contributions else None
+    gt_r0_feat = gt_r0["feature"].lower() if gt_r0 else None
+    gt_r0_sign = (1 if gt_r0["contribution"] > 0 else -1) if gt_r0 else None
+
+    ext_r0_feat = None
+    ext_r0_sign = None
+    for k, info in extraction.items():
+        if not isinstance(info, dict):
+            continue
+        try:
+            if int(float(info.get("rank"))) == 0:
+                ext_r0_feat = str(k).lower()
+                raw_sign = info.get("sign")
+                ext_r0_sign = int(raw_sign) if raw_sign is not None else None
+                break
+        except (ValueError, TypeError):
+            pass
+
+    feat_match = gt_r0_feat is not None and gt_r0_feat == ext_r0_feat
+    sign_match = ext_r0_feat is not None and gt_r0_sign == ext_r0_sign
+    return {
+        "gt_r0_feat":  gt_r0_feat,  "gt_r0_sign":  gt_r0_sign,
+        "ext_r0_feat": ext_r0_feat, "ext_r0_sign": ext_r0_sign,
+        "feat_match":  feat_match,  "sign_match":  sign_match,
+        "r0_correct":  bool(feat_match and sign_match),
+    }
+
+
+def correct_metric(obs_val: float, n_extracted: int) -> float:
+    """Obergrenze einer RA/SA-Metrik, falls der Rang-0-Fehler ein Mess-Artefakt war.
+
+    NB 09 §6.4: Hat der Extraktor das Rang-0-Feature nachweislich falsch erfasst
+    (Mess- statt Erklärungsfehler), wäre bei korrekter Extraktion ein Rang-0-Treffer
+    hinzugekommen. Die korrigierte Metrik ersetzt einen Treffer von ``n``:
+    ``(obs·n + 1)/n``, gedeckelt bei 1.0. Bei ``n_extracted == 0`` bleibt der Wert unverändert.
+    """
+    if n_extracted <= 0:
+        return obs_val
+    return min((obs_val * n_extracted + 1) / n_extracted, 1.0)
+
+
+def load_explanation_text(
+    pipeline_prefix: str,
+    xai_model: str,
+    instance_id: int,
+    *,
+    results_dir: Path = RESULTS_DIR,
+) -> str:
+    """Erklärungstext aus ``results/pipeline{prefix}/{xai}_inst{iid}.json`` (n=20-Lauf).
+
+    Kanonischer Loader für die Fehleranalyse (NB 09) — ersetzt drei dort dupliziert
+    Inline-Loader. Gibt ``''`` zurück, wenn die Datei fehlt (z. B. vor dem Generierungslauf).
+    """
+    p = results_dir / f"pipeline{pipeline_prefix}" / f"{xai_model.lower()}_inst{instance_id}.json"
+    if not p.exists():
+        return ""
+    return json.loads(p.read_text()).get("explanation", "")

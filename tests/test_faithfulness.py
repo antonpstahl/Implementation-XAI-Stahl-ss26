@@ -24,11 +24,14 @@ import pandas as pd
 from utils.faithfulness import (
     build_faithfulness_df,
     compute_faithfulness,
+    correct_metric,
     extraction_base_cid,
     extraction_coverage,
     extraction_validity_summary,
     is_value_match,
+    load_explanation_text,
     parse_extraction,
+    rank0_correctness,
 )
 
 # Top-4 Ground-Truth (Beiträge im Log-Raum): hr(+), yr(−), hum(+), temp(+).
@@ -222,3 +225,73 @@ def test_validity_summary_aggregates_per_pipeline(tmp_path):
     assert abs(row["out_of_topk_rate"] - 0.5) < 1e-6
     # nur das eine erfolgreiche Narrativ hat r0_match=1
     assert row["r0_match_rate"] == 1.0
+
+
+# ---------------------------------------------------------------------------
+# rank0_correctness (NB 09 §6 — Rang-0 inkl. Vorzeichen)
+# ---------------------------------------------------------------------------
+
+def test_rank0_correct_feature_and_sign():
+    ext = {"hr": {"rank": 0, "sign": 1, "value": 8}}
+    out = rank0_correctness(ext, GT)
+    assert out["gt_r0_feat"] == "hr" and out["gt_r0_sign"] == 1
+    assert out["feat_match"] and out["sign_match"] and out["r0_correct"]
+
+
+def test_rank0_feature_swap_is_wrong():
+    # Extraktor setzt temp(+) auf Rang 0 statt hr → Feature-Fehler.
+    ext = {"temp": {"rank": 0, "sign": 1, "value": None}}
+    out = rank0_correctness(ext, GT)
+    assert out["ext_r0_feat"] == "temp"
+    assert not out["feat_match"] and not out["r0_correct"]
+
+
+def test_rank0_sign_inversion_is_wrong():
+    # hr korrekt auf Rang 0, aber Vorzeichen invertiert.
+    ext = {"hr": {"rank": 0, "sign": -1, "value": 8}}
+    out = rank0_correctness(ext, GT)
+    assert out["feat_match"] and not out["sign_match"] and not out["r0_correct"]
+
+
+def test_rank0_empty_extraction():
+    out = rank0_correctness({}, GT)
+    assert out["ext_r0_feat"] is None and out["ext_r0_sign"] is None
+    assert not out["feat_match"] and not out["sign_match"] and not out["r0_correct"]
+
+
+def test_rank0_empty_gt():
+    out = rank0_correctness({"hr": {"rank": 0, "sign": 1}}, [])
+    assert out["gt_r0_feat"] is None and not out["r0_correct"]
+
+
+# ---------------------------------------------------------------------------
+# correct_metric (NB 09 §6.4 — Mess-Korrektur-Obergrenze)
+# ---------------------------------------------------------------------------
+
+def test_correct_metric_adds_one_hit():
+    # obs=0.5 über n=4 extrahierte Features → (0.5·4 + 1)/4 = 0.75.
+    assert correct_metric(0.5, 4) == 0.75
+
+
+def test_correct_metric_clamped_at_one():
+    assert correct_metric(1.0, 4) == 1.0
+
+
+def test_correct_metric_zero_n_is_noop():
+    assert correct_metric(0.42, 0) == 0.42
+
+
+# ---------------------------------------------------------------------------
+# load_explanation_text (NB 09 — kanonischer Loader)
+# ---------------------------------------------------------------------------
+
+def test_load_explanation_text_reads_record(tmp_path):
+    d = tmp_path / "pipeline04"
+    d.mkdir()
+    (d / "xgb_inst101.json").write_text(
+        json.dumps({"explanation": "Hallo Welt", "y_true": 1}), encoding="utf-8")
+    assert load_explanation_text("04", "XGB", 101, results_dir=tmp_path) == "Hallo Welt"
+
+
+def test_load_explanation_text_missing_returns_empty(tmp_path):
+    assert load_explanation_text("06", "ebm", 999, results_dir=tmp_path) == ""
