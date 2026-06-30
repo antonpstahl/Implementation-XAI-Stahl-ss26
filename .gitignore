@@ -7,5 +7,5 @@ __pycache__/
 
 *.pdf
 *.xlsx
-IMPLEMENTATION_PLAN.md
+planning/
 .pytest_cache
