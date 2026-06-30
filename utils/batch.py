@@ -387,5 +387,6 @@ def _load_batch_id(state_path: Optional[Path | str]) -> Optional[str]:
         return None
     try:
         return json.loads(path.read_text()).get("batch_id")
-    except (json.JSONDecodeError, OSError):
+    except (json.JSONDecodeError, OSError) as exc:
+        logger.warning("Could not read batch_id from %s (%s); a new batch will be submitted.", path, exc)
         return None

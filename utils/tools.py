@@ -256,6 +256,8 @@ class ToolBox:
             zip(names, scores), key=lambda x: -float(x[1])
         )
         if top_k is not None:
+            if top_k <= 0:
+                return {"error": f"top_k must be a positive integer, got {top_k}"}
             ranked = ranked[:top_k]
 
         return [
@@ -334,6 +336,8 @@ class ToolBox:
     ) -> dict:
         if feature not in self.X_test.columns:
             return {"error": f"Feature '{feature}' unknown. Available: {list(self.X_test.columns)}"}
+        if n_grid_points <= 1:
+            return {"error": f"n_grid_points must be >= 2, got {n_grid_points}"}
 
         X_copy = self.X_test.copy()
 

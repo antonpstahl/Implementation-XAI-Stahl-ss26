@@ -342,7 +342,8 @@ def rank0_correctness(extraction: dict, gt_contributions: list) -> dict:
             pass
 
     feat_match = gt_r0_feat is not None and gt_r0_feat == ext_r0_feat
-    sign_match = ext_r0_feat is not None and gt_r0_sign == ext_r0_sign
+    sign_match = (ext_r0_feat is not None and gt_r0_sign is not None
+                  and ext_r0_sign is not None and gt_r0_sign == ext_r0_sign)
     return {
         "gt_r0_feat":  gt_r0_feat,  "gt_r0_sign":  gt_r0_sign,
         "ext_r0_feat": ext_r0_feat, "ext_r0_sign": ext_r0_sign,

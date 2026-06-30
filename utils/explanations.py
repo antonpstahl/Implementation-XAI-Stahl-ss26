@@ -8,6 +8,7 @@ identical feature descriptions.
 
 from __future__ import annotations
 
+import logging
 import weakref
 from pathlib import Path
 from typing import Any
@@ -16,6 +17,8 @@ import numpy as np
 import pandas as pd
 
 from . import EXPLANATIONS_DIR
+
+logger = logging.getLogger(__name__)
 
 # -----------------------------------------------------------------------------
 # Denormalisierungs-Konstanten (einzige Quelle)
@@ -121,8 +124,8 @@ def humanize_feature(feature: str, value: Any) -> str | None:
         if feature == "weathersit": return WEATHER_NAMES.get(int(value))
         if feature == "yr":         return "2011" if int(value) == 0 else "2012"
         if feature == "holiday":    return "holiday" if int(value) == 1 else "no holiday"
-    except (ValueError, TypeError, IndexError):
-        pass
+    except (ValueError, TypeError, IndexError) as exc:
+        logger.debug("humanize_feature failed for %s=%r: %s", feature, value, exc)
     return None
 
 
