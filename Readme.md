@@ -21,7 +21,7 @@ Two questions are examined in parallel:
 ├── models/          # Trained models (6 .pkl files)
 ├── explanations/    # SHAP / EBM explanations as JSON + waterfall plots (PNG)
 ├── results/         # Pipeline outputs, evaluation plots, CSV summaries
-├── notebooks/       # 12 Jupyter notebooks (00 baseline, 01–10)
+├── notebooks/       # 12 Jupyter notebooks (01–08; incl. 02a/b and 04a–d)
 ├── prompts/         # Prompt templates
 └── utils/           # Python helper modules (data, models, explanations, llm, tools)
 ```
@@ -49,12 +49,12 @@ Global explanations (SHAP feature importance for XGB; term importances for EBM) 
 **4 — Three LLM pipelines + a deterministic baseline**
 All LLM pipelines use `claude-sonnet-4-6` and produce three-part explanations (`[PREDICTION]`, `[DRIVERS]`, `[RECOMMENDATION]`) for non-technical staff.
 
-- **`00` Template (baseline)** — a deterministic text-block generator that fills the same three-part structure from the identical SHAP/EBM JSON, with no LLM call. Answers the standard reviewer question: *what does the LLM add over a template?*
-- **`04` JSON → Text** — the LLM receives global importance and local SHAP/EBM contributions as structured JSON. System prompt cached via Anthropic prompt caching; raw values denormalized into plain language (e.g. `temp=0.68` → `~27.9 °C`) before the call.
-- **`05` Vision → Text** — the LLM receives the instance's waterfall plot as a base64-encoded PNG and reads bar lengths visually (no numeric access to contribution values).
-- **`06` Tool-Use** — the LLM retrieves data itself through 8 defined tools (feature schema, importance, prediction, SHAP values, partial dependence, value context, similar instances, counterfactuals) in an agentic loop — averaging **5.65 tool calls** per explanation.
+- **`04a` Template (baseline)** — a deterministic text-block generator that fills the same three-part structure from the identical SHAP/EBM JSON, with no LLM call. Answers the standard reviewer question: *what does the LLM add over a template?*
+- **`04b` JSON → Text** — the LLM receives global importance and local SHAP/EBM contributions as structured JSON. System prompt cached via Anthropic prompt caching; raw values denormalized into plain language (e.g. `temp=0.68` → `~27.9 °C`) before the call.
+- **`04c` Vision → Text** — the LLM receives the instance's waterfall plot as a base64-encoded PNG and reads bar lengths visually (no numeric access to contribution values).
+- **`04d` Tool-Use** — the LLM retrieves data itself through 8 defined tools (feature schema, importance, prediction, SHAP values, partial dependence, value context, similar instances, counterfactuals) in an agentic loop — averaging **5.65 tool calls** per explanation.
 
-**5 — Evaluation** (`07_Evaluation.ipynb`, `08_Evaluation_Ichmoukhamedov.ipynb`)
+**5 — Evaluation** (`05_Evaluation.ipynb`, `06_Evaluation_Ichmoukhamedov.ipynb`)
 Quantitative cost/latency, LLM-as-judge across three judge versions (uncalibrated Sonnet, calibrated-rubric Sonnet, independent Opus), and formal faithfulness metrics after Ichmoukhamedov et al. (Rank / Sign / Value Agreement).
 
 Quantitative + LLM-judge (v1) summary across 20 explanations per pipeline (2 XAI models × 10 instances):
@@ -70,7 +70,7 @@ Quantitative + LLM-judge (v1) summary across 20 explanations per pipeline (2 XAI
 
 ¹ *Input tokens are the billed, non-cached count. JSON→Text caches the system prompt (cache-read tokens, billed at ~10%, are not counted here), which is why its input count is far below Vision's freshly-sent image tokens.* Values from `results/eval_summary.csv`.
 
-Formal faithfulness after Ichmoukhamedov et al. (NB 08, n = 10 instances; precision-style metrics — see limitation in NB 08 §4.1):
+Formal faithfulness after Ichmoukhamedov et al. (NB 06, n = 10 instances; precision-style metrics — see limitation in NB 06 §4.1):
 
 <!-- AUTO-TABLE:faithfulness -->
 | Pipeline  | Rank Agr. | Sign Agr. | Value Agr. |
@@ -80,10 +80,10 @@ Formal faithfulness after Ichmoukhamedov et al. (NB 08, n = 10 instances; precis
 | Vision    | 0.429     | 0.679     | 0.575      |
 <!-- /AUTO-TABLE:faithfulness -->
 
-**6 — Error analysis & prompt fix** (`09_Error_Taxonomy.ipynb`, `10_Prompt_Fix_Eval.ipynb`)
-The 30 lowest-faithfulness explanations are hand-coded into an error taxonomy (NB 09), separating genuine explanation errors (e.g. `yr` sign errors, near-tie rank swaps) from extractor artefacts. The two dominant explanation-error classes are then addressed by a prompt fix and re-measured before/after on the same n = 20 sample with bootstrap CIs (NB 10).
+**6 — Error analysis & prompt fix** (`07_Error_Taxonomy.ipynb`, `08_Prompt_Fix_Eval.ipynb`)
+The 30 lowest-faithfulness explanations are hand-coded into an error taxonomy (NB 07), separating genuine explanation errors (e.g. `yr` sign errors, near-tie rank swaps) from extractor artefacts. The two dominant explanation-error classes are then addressed by a prompt fix and re-measured before/after on the same n = 20 sample with bootstrap CIs (NB 08).
 
-> **Status of these findings:** descriptive/exploratory. With n = 10–20 explanations per pipeline, no repeated sampling and no inferential statistics yet, the differences below are **not** statistically confirmed (see the limitations table in `07_Evaluation.ipynb` §7). Treat them as directional.
+> **Status of these findings:** descriptive/exploratory. With n = 10–20 explanations per pipeline, no repeated sampling and no inferential statistics yet, the differences below are **not** statistically confirmed (see the limitations table in `05_Evaluation.ipynb` §7). Treat them as directional.
 
 1. **The deterministic template wins on faithfulness** — Template scores 5.00 vs. the LLM pipelines' 3.80–4.40. By construction it lists exactly the true top drivers; the LLMs trade some faithfulness for richer, more readable narratives. This is the central "what does the LLM add over a template?" result — and the trade-off, not a free lunch.
 2. **Among LLM pipelines, faithfulness ranks Tool-Use (4.40) ≈ JSON→Text (4.35) > Vision (3.80)** — consistent with the formal Rank-Agreement (Vision 0.43 vs. ~0.56 for the others): reading bar lengths from a plot is structurally less precise than numeric access.
@@ -103,7 +103,7 @@ pip install -r requirements.txt
 echo "ANTHROPIC_API_KEY=sk-ant-..." > .env
 ```
 
-Run the notebooks in order (`01` → `10`). Paths are relative to the project root; reproducibility is fixed via `RANDOM_STATE = 42`. The pipeline runs on the n = 20 validity sample (10 instances × 2 XAI models); there is no separate large-scale run.
+Run the notebooks in order (`01` → `08`). Paths are relative to the project root; reproducibility is fixed via `RANDOM_STATE = 42`. The pipeline runs on the n = 20 validity sample (10 instances × 2 XAI models); there is no separate large-scale run.
 
 ## LLM configuration
 
@@ -112,12 +112,12 @@ Parameters are centralised in `utils/llm.py`.
 
 | Use case | Model | `max_tokens` | `temperature` |
 |---|---|---|---|
-| Explanation generation (NB 04 / 05 / 06) | `claude-sonnet-4-6` | 2048 | default (1.0) |
-| Faithfulness check (NB 07) | `claude-sonnet-4-6` | 300 | default (1.0) |
-| Judge v1 uncalibrated (NB 07) | `claude-sonnet-4-6` | 600 | default (1.0) |
-| Judge v2 calibrated (NB 07) | `claude-sonnet-4-6` | 600 | default (1.0) |
-| Judge v3 independent (NB 07) | `claude-opus-4-8` | 600 | default (1.0) |
-| Ichmoukhamedov metrics (NB 08) | `claude-sonnet-4-6` | 700 | default (1.0) |
+| Explanation generation (NB 04b / 04c / 04d) | `claude-sonnet-4-6` | 2048 | default (1.0) |
+| Faithfulness check (NB 05) | `claude-sonnet-4-6` | 300 | default (1.0) |
+| Judge v1 uncalibrated (NB 05) | `claude-sonnet-4-6` | 600 | default (1.0) |
+| Judge v2 calibrated (NB 05) | `claude-sonnet-4-6` | 600 | default (1.0) |
+| Judge v3 independent (NB 05) | `claude-opus-4-8` | 600 | default (1.0) |
+| Ichmoukhamedov metrics (NB 06) | `claude-sonnet-4-6` | 700 | default (1.0) |
 
 **Reproducibility note (→ Paper limitation):** Anthropic model IDs are versioned snapshots, but API behaviour (sampling, default parameters, tokenisation) can change silently between SDK releases. Results are tied to `anthropic==0.98.1` and the access date above. Future runs against the same model ID are not guaranteed to produce identical outputs.
 

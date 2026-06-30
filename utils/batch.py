@@ -9,7 +9,7 @@ kapselt **submit → wait → collect** über
 
 und ist bewusst so geschnitten, dass der Batch- und der Real-time-Pfad
 **schema-identische** Ergebnisse liefern (gleicher Text/Usage je Einheit),
-damit die Eval (NB 07/08) ausführungsart-agnostisch bleibt.
+damit die Eval (NB 05/06) ausführungsart-agnostisch bleibt.
 
 Kerneigenschaften (DoD Phase 3a·B):
   * **Eindeutige `custom_id`s** – `make_custom_id()` setzt sie aus Teilen

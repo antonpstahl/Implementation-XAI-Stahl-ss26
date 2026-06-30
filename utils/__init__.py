@@ -18,8 +18,8 @@ RESULTS_DIR = PROJECT_ROOT / "results"
 PROMPTS_DIR = PROJECT_ROOT / "prompts"
 
 # Feste Test-Instanzen für lokale Erklärungen (Validitäts-Sample, n = 20).
-# 10 Instanzen × 2 XAI-Modelle (xgb/ebm). Werden in allen Pipelines (00/04/05/06)
-# verwendet und tragen die n=20-Validitätsanalyse in NB 07 (v1/v2/v3/v4/v5,
+# 10 Instanzen × 2 XAI-Modelle (xgb/ebm). Werden in allen Pipelines (04a/04b/04c/04d)
+# verwendet und tragen die n=20-Validitätsanalyse in NB 05 (v1/v2/v3/v4/v5,
 # Inter-Judge-Agreement, Judge-Sensitivität). Bewusst **eingefroren** — der
 # Skalierungslauf (Phase 3b) nutzt INSTANCE_IDS_SCALE, damit die teuren
 # Validitäts-Judges nie versehentlich auf n≈200 mitlaufen.

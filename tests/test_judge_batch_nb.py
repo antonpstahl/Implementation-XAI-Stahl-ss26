@@ -1,12 +1,12 @@
 """
-Phase 3a·B — NB07 Batch-Judge Roundtrip-Tests.
+Phase 3a·B — NB05 Batch-Judge Roundtrip-Tests.
 
 Prüft den custom_id-Roundtrip und die Schema-Gleichheit zwischen dem Batch-
-und dem Real-time-Pfad des Judge-Laufs in NB07 (Zellen 10/18/21/34 — v1–v4).
+und dem Real-time-Pfad des Judge-Laufs in NB05 (Zellen 10/18/21/34 — v1–v4).
 
 Abgedeckte Szenarien:
   * custom_id-Format: make_custom_id("jdg", version, pipeline_label, xai, iid)
-    ist gültig und eindeutig für alle NB07-Pipeline-Labels (inkl. Sonderzeichen
+    ist gültig und eindeutig für alle NB05-Pipeline-Labels (inkl. Sonderzeichen
     wie "→" in "JSON→Text" und "-" in "Tool-Use").
   * Ergebnis-Mapping: zip(entries, df_rows) ordnet base_cid korrekt der Zeile
     zu — Reihenfolge bleibt erhalten.
@@ -15,7 +15,7 @@ Abgedeckte Szenarien:
   * Judge_n < n wenn eine Basis-CID keine erfolgreichen Samples hat (None-Scores
     werden von pandas .count() ausgeschlossen).
   * Partial-Failure: verbleibende Einträge bleiben korrekt im DataFrame.
-  * Opus-Modell: temperature wird weggelassen (Gating wie in den NB07-Zellen).
+  * Opus-Modell: temperature wird weggelassen (Gating wie in den NB05-Zellen).
   * k×len(entries) Requests in einem Batch (k=JUDGE_SC_K).
 """
 from __future__ import annotations
@@ -34,7 +34,7 @@ from utils.judge import judge_batch_sc, SCORE_KEYS
 from tests.test_batch import FakeBatches, make_client, NOSLEEP
 from tests.test_judge_batch import _xml, _mk_succeeded, _mk_errored
 
-# ── NB07-Konstanten (Spiegel der Notebook-Konfiguration) ─────────────────────
+# ── NB05-Konstanten (Spiegel der Notebook-Konfiguration) ─────────────────────
 
 PIPELINE_LABELS = {
     '00': 'Template',
@@ -50,10 +50,10 @@ SONNET = 'claude-sonnet-4-6'
 OPUS   = 'claude-opus-4-8'
 
 
-# ── Hilfsfunktionen (NB07-Zellen-Logik) ─────────────────────────────────────
+# ── Hilfsfunktionen (NB05-Zellen-Logik) ─────────────────────────────────────
 
 def _build_rows(pipelines=PIPELINES, xai_models=XAI_MODELS, instance_ids=INSTANCE_IDS):
-    """Simuliert df.iterrows() aus NB07 (ohne echten DataFrame)."""
+    """Simuliert df.iterrows() aus NB05 (ohne echten DataFrame)."""
     return [
         {
             'pipeline_label': PIPELINE_LABELS[p],
@@ -67,7 +67,7 @@ def _build_rows(pipelines=PIPELINES, xai_models=XAI_MODELS, instance_ids=INSTANC
 
 
 def _entries(rows, version='v1'):
-    """Baut die entries-Liste wie in NB07-Zellen 10/18/21/34."""
+    """Baut die entries-Liste wie in NB05-Zellen 10/18/21/34."""
     return [
         (
             make_custom_id("jdg", version,
@@ -79,7 +79,7 @@ def _entries(rows, version='v1'):
 
 
 def _judge_rows_from_sc(sc: dict, entries, rows) -> list[dict]:
-    """Rekonstruiert die _rows-Liste wie in NB07-Zellen 10/18/21/34."""
+    """Rekonstruiert die _rows-Liste wie in NB05-Zellen 10/18/21/34."""
     result = []
     for (base_cid, _), row in zip(entries, rows):
         r = sc.get(base_cid, {})
@@ -171,7 +171,7 @@ def test_nb07_result_mapping_order_preserved():
 # ── 3. Schema-Gleichheit batch vs. real-time ─────────────────────────────────
 
 def test_nb07_batch_rows_have_realtime_schema():
-    """Jede Batch-Zeile hat dieselben Keys wie der Real-time-Loop in NB07."""
+    """Jede Batch-Zeile hat dieselben Keys wie der Real-time-Loop in NB05."""
     rows = _build_rows()
     ents = _entries(rows, 'v1')
     results = [_mk_succeeded(f"{cid}-s{j}", 4, 3, 5)
@@ -271,7 +271,7 @@ def test_nb07_partial_failure_other_entries_intact():
     }
 
 
-# ── 7. Opus: temperature wird weggelassen (NB07-Gating-Logik) ────────────────
+# ── 7. Opus: temperature wird weggelassen (NB05-Gating-Logik) ────────────────
 
 def test_nb07_opus_temperature_gating():
     """temperature=JUDGE_TEMPERATURE if model != 'claude-opus-4-8' else None → kein 400."""
@@ -295,7 +295,7 @@ def test_nb07_opus_temperature_gating():
     rows = _build_rows(pipelines=['04'], xai_models=['xgb'], instance_ids=[42])
     ents = _entries(rows, 'v3')
 
-    # NB07-Gating: Opus → temperature=None
+    # NB05-Gating: Opus → temperature=None
     judge_batch_sc(
         ents,
         system='sys',

@@ -5,7 +5,7 @@ Bündelt Konfiguration (Modell-ID, max_tokens) und bietet einfache Helfer
 für Text-only- und multimodale (Vision) Anfragen. Wird von Notebooks
 04, 05 und 06 verwendet.
 
-Die konkrete Tool-Use-Schleife für Notebook 06 wird dort implementiert,
+Die konkrete Tool-Use-Schleife für Notebook 04d wird dort implementiert,
 da sie modellspezifisch (Tool-Definitionen, Stop-Reason-Handling) ist.
 """
 
@@ -33,21 +33,21 @@ except ImportError:
 # Abrufdatum:  2026-06-11
 #
 # Modell-IDs nach Rolle:
-#   Erklärungsgenerierung  (NB 04 / 05 / 06)  → claude-sonnet-4-6
-#   Faithfulness-Check     (NB 07)             → claude-sonnet-4-6
-#   Judge v1 unkalibriert  (NB 07)             → claude-sonnet-4-6
-#   Judge v2 kalibriert    (NB 07)             → claude-sonnet-4-6
-#   Judge v3 unabhängig    (NB 07)             → claude-opus-4-8
-#   Ichmoukhamedov-Metriken(NB 08)             → claude-sonnet-4-6
+#   Erklärungsgenerierung  (NB 04b / 05 / 06)  → claude-sonnet-4-6
+#   Faithfulness-Check     (NB 05)             → claude-sonnet-4-6
+#   Judge v1 unkalibriert  (NB 05)             → claude-sonnet-4-6
+#   Judge v2 kalibriert    (NB 05)             → claude-sonnet-4-6
+#   Judge v3 unabhängig    (NB 05)             → claude-opus-4-8
+#   Ichmoukhamedov-Metriken(NB 06)             → claude-sonnet-4-6
 #
 # max_tokens nach Kontext:
 #   MAX_TOKENS_GENERATION      = 2048  (Pipelines 04 / 05 / 06)
 #     Hinweis B6: Scratchpad (<analyse>…</analyse>) kommt vor der Prosa
 #     (~50–100 Tokens) und wird vor dem Speichern via strip_scratchpad()
 #     entfernt.  Notebooks 04/05 wurden von 600 auf diesen Wert angehoben.
-#   MAX_TOKENS_FAITHFULNESS    = 300   (Faithfulness-Check NB 07)
-#   MAX_TOKENS_JUDGE           = 900   (Judge-Calls NB 07, alle Versionen; +Reasoning)
-#   MAX_TOKENS_ICHMOUKHAMEDOV  = 700   (LLM-Calls NB 08)
+#   MAX_TOKENS_FAITHFULNESS    = 300   (Faithfulness-Check NB 05)
+#   MAX_TOKENS_JUDGE           = 900   (Judge-Calls NB 05, alle Versionen; +Reasoning)
+#   MAX_TOKENS_ICHMOUKHAMEDOV  = 700   (LLM-Calls NB 06)
 #
 # ── Decoding-Temperaturen (Phase 3·2 / A2) ────────────────────────────────
 #
@@ -56,7 +56,7 @@ except ImportError:
 #     Gleiche Eingabe → gleicher Score: maximale Reproduzierbarkeit und kein
 #     Stochastik-Rauschen in den Messwerten. G-Eval (Liu et al. 2023) empfiehlt
 #     temperature=0 für numerische Rubriken.
-#     Wirkung auf n=20 Re-Run: Score-Std ≈ 0 (empirisch belegt, s. NB 07 Zelle v5).
+#     Wirkung auf n=20 Re-Run: Score-Std ≈ 0 (empirisch belegt, s. NB 05 Zelle v5).
 #
 #   GENERATION_TEMPERATURE = 1.0  (Anthropic-Default — bewusste Designentscheidung)
 #     Begründung: Erklärungstexte sollen natürlich und nicht repetitiv wirken.
@@ -165,7 +165,7 @@ def _get_client() -> Any:
 # Request-Shape-Builder + Real-time-Runner (Phase 3a·B)
 #
 # Der Batch- und der Real-time-Pfad müssen **dieselbe** Request-Shape erzeugen,
-# damit die On-Disk-Artefakte schema-identisch bleiben (NB 07/08 sind
+# damit die On-Disk-Artefakte schema-identisch bleiben (NB 05/06 sind
 # ausführungsart-agnostisch). Deshalb bauen `build_text_params` /
 # `build_image_params` exakt die `messages.create`-Parameter; `run_params`
 # führt sie real-time aus, `utils.batch.message_request` verpackt sie für den
@@ -401,7 +401,7 @@ def build_image_params(
     cache_system: bool = True,
     temperature: float | None = None,
 ) -> dict:
-    """Baut die `messages.create`-Parameter für eine multimodale Anfrage (NB 05).
+    """Baut die `messages.create`-Parameter für eine multimodale Anfrage (NB 04c).
 
     Bilder werden base64-kodiert in den User-Content gelegt. Gemeinsame
     Request-Shape für Real-time (`run_params`) und Batch
@@ -431,7 +431,7 @@ def ask_with_images(
     cache_system: bool = True,
     temperature: float | None = None,
 ) -> dict:
-    """Multimodale Anfrage mit einem oder mehreren Bildern (Notebook 05).
+    """Multimodale Anfrage mit einem oder mehreren Bildern (Notebook 04c).
 
     Bilder werden base64-kodiert übergeben.
     temperature : siehe ask_text.

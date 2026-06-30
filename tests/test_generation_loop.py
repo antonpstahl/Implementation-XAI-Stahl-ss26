@@ -5,7 +5,7 @@ DoD: Test mit gemocktem LLM belegt, dass Generationen/Instanz korrekt
 persistiert, nach Abbruch resume-fähig und idempotent sind (kein Doppelzählen).
 
 Getestet wird `utils.run_resumable_generation`, in den die zuvor dreifach
-inline (NB 04/05/06) vorliegende skip-if-exists-Schleife extrahiert wurde.
+inline (NB 04b/04c/06) vorliegende skip-if-exists-Schleife extrahiert wurde.
 Der LLM-Aufruf wird durch ein zählendes `generate`-Callback ersetzt.
 """
 from __future__ import annotations
@@ -169,7 +169,7 @@ def test_resumed_records_come_from_disk(tmp_path):
 
 
 # ---------------------------------------------------------------------------
-# Error skip (NB 06 tool-use loop may fail on an instance)
+# Error skip (NB 04d tool-use loop may fail on an instance)
 # ---------------------------------------------------------------------------
 
 def test_none_record_is_not_persisted_and_retried_next_run(tmp_path):
@@ -265,7 +265,7 @@ def test_out_dir_created_if_missing(tmp_path):
 
 
 # ---------------------------------------------------------------------------
-# build_generation_record — Golden-Schemata der drei Pipelines (NB 04/05/06)
+# build_generation_record — Golden-Schemata der drei Pipelines (NB 04b/04c/06)
 #
 # Friert die zuvor inline gebauten Records ein: gleiche Keys, gleiche
 # Reihenfolge, gleiche Werte. Bricht, falls der zentrale Builder vom

@@ -21,7 +21,7 @@ Implementation-XAI-Stahl-ss26/
 ├── models/             # Trainierte Modelle (6 .pkl-Dateien)
 ├── explanations/       # SHAP-/EBM-Erklärungen als JSON + Waterfall-Plots (PNG)
 ├── results/            # Pipeline-Ausgaben, Evaluierungsplots, CSV-Zusammenfassungen
-├── notebooks/          # 12 Jupyter Notebooks (00 Baseline, 01–10)
+├── notebooks/          # 12 Jupyter Notebooks (01–08; inkl. 02a/b und 04a–d)
 └── utils/              # Python-Hilfmodule (data.py, models.py, explanations.py, llm.py, tools.py)
 ```
 
@@ -131,13 +131,13 @@ Für beide Modelle (XGB, EBM) wurden globale und lokale Erklärungen erstellt:
 Alle LLM-Pipelines verwenden `claude-sonnet-4-6` und erzeugen deutsche, dreistufige Erklärungen
 (Abschnitte `[VORHERSAGE]`, `[TREIBER]`, `[EMPFEHLUNG]`) für Mitarbeitende ohne technischen Hintergrund.
 
-### Pipeline 00 — Template-Baseline (`00_Template_Pipeline_Baseline.ipynb`)
+### Pipeline 04a — Template-Baseline (`04a_Template_Pipeline_Baseline.ipynb`)
 
 Deterministischer Textbaustein-Generator, der dieselbe Dreiteilung aus denselben SHAP-/EBM-JSONs
 ohne LLM-Aufruf befüllt. Beantwortet die Standard-Reviewer-Frage: *Was leistet das LLM über
 einen Textbaustein hinaus?*
 
-### Pipeline 04 — JSON → Text (`04_LLM_JSON_Pipeline.ipynb`)
+### Pipeline 04b — JSON → Text (`04b_LLM_JSON_Pipeline.ipynb`)
 
 Das LLM erhält globale Feature Importance und lokale SHAP-/EBM-Beiträge als strukturiertes JSON.
 
@@ -147,7 +147,7 @@ Das LLM erhält globale Feature Importance und lokale SHAP-/EBM-Beiträge als st
 - **Besonderheit:** `build_context_string()` denormalisiert Rohwerte in Alltagssprache
   (z.B. `temp=0.68` → `~27,9 °C`) vor dem API-Aufruf
 
-### Pipeline 05 — Vision → Text (`05_LLM_Vision_Pipeline.ipynb`)
+### Pipeline 04c — Vision → Text (`04c_LLM_Vision_Pipeline.ipynb`)
 
 Das LLM erhält den Waterfall-Plot der Instanz als base64-kodiertes PNG.
 
@@ -156,7 +156,7 @@ Das LLM erhält den Waterfall-Plot der Instanz als base64-kodiertes PNG.
 - **Besonderheit:** Kein numerischer Zugriff auf Beitragswerte — das Modell liest Balkenlängen
   visuell ab (potenzielle Unschärfe bei kleinen Beiträgen)
 
-### Pipeline 06 — Tool-Use (`06_LLM_ToolUse_Pipeline.ipynb`)
+### Pipeline 04d — Tool-Use (`04d_LLM_ToolUse_Pipeline.ipynb`)
 
 Das LLM ruft Daten selbst über definierte Tools ab (agentic loop).
 
@@ -178,7 +178,7 @@ Das LLM ruft Daten selbst über definierte Tools ab (agentic loop).
 
 ---
 
-## Schritt 5 — Evaluation (`07_Evaluation.ipynb`, `08_Evaluation_Ichmoukhamedov.ipynb`)
+## Schritt 5 — Evaluation (`05_Evaluation.ipynb`, `06_Evaluation_Ichmoukhamedov.ipynb`)
 
 ### Quantitativer Vergleich
 
@@ -227,10 +227,10 @@ Mittelwerte über 20 Erklärungen pro Pipeline (2 XAI-Modelle × 10 Instanzen):
 (Aufrufe + Ergebnisse) als Teil von `ground_truth`, sodass per Tool abgerufene Zahlen
 (PD-Kurven, Kontrafaktika, Perzentile) verifizierbar sind (Fix aus Plan-Phase 0).
 
-### Ichmoukhamedov-Faithfulness (`08_Evaluation_Ichmoukhamedov.ipynb`)
+### Ichmoukhamedov-Faithfulness (`06_Evaluation_Ichmoukhamedov.ipynb`)
 
 Formale Faithfulness-Metriken nach Ichmoukhamedov et al. (2024), n = 10 Instanzen
-(Präzisions-artige Metriken — Selection-Bias siehe NB 08 §4.1):
+(Präzisions-artige Metriken — Selection-Bias siehe NB 06 §4.1):
 
 <!-- AUTO-TABLE:faithfulness-de -->
 | Pipeline | RA (Rank) | SA (Sign) | VA (Value) |
@@ -242,13 +242,13 @@ Formale Faithfulness-Metriken nach Ichmoukhamedov et al. (2024), n = 10 Instanze
 
 ---
 
-## Schritt 6 — Fehlertaxonomie und Prompt-Fix (`09_Error_Taxonomy.ipynb`, `10_Prompt_Fix_Eval.ipynb`)
+## Schritt 6 — Fehlertaxonomie und Prompt-Fix (`07_Error_Taxonomy.ipynb`, `08_Prompt_Fix_Eval.ipynb`)
 
 Die 30 Erklärungen mit der niedrigsten Faithfulness werden manuell einer Fehlertaxonomie
-zugeordnet (NB 09), die echte Erklärungsfehler (z.B. `yr`-Vorzeichenfehler, Rangtausch bei
+zugeordnet (NB 07), die echte Erklärungsfehler (z.B. `yr`-Vorzeichenfehler, Rangtausch bei
 nahen Beiträgen) von Extraktor-Artefakten trennt. Die beiden dominanten Erklärungs-Fehlerklassen
 werden anschließend per Prompt-Fix adressiert und auf demselben n=20-Sample mit Bootstrap-CIs
-vorher/nachher neu gemessen (NB 10).
+vorher/nachher neu gemessen (NB 08).
 
 ---
 
@@ -300,15 +300,15 @@ Er ist ein hartes Gate: ein frischer Generierungslauf darf erst starten, wenn al
 01_Data_Preprocessing        → data/train.csv, data/test.csv
 02a_Modeling_AllOptions      → models/*.pkl
 02b_Comparison               → results/model_comparison_summary.csv
-03_Explanations_Generation   → explanations/*.json, explanations/plots/*.png
-00_Template_Pipeline_Baseline → results/pipeline00/*.json
-04_LLM_JSON_Pipeline         → results/pipeline04/*.json
-05_LLM_Vision_Pipeline       → results/pipeline05/*.json
-06_LLM_ToolUse_Pipeline      → results/pipeline06/*.json
-07_Evaluation                → results/eval_*.{csv,png,json}
-08_Evaluation_Ichmoukhamedov → results/eval08_ichmoukhamedov/
-09_Error_Taxonomy            → results/error_taxonomy/
-10_Prompt_Fix_Eval           → results/eval08_ichmoukhamedov_v2/, results/eval10_*.png
+03_Explanations_Generation    → explanations/*.json, explanations/plots/*.png
+04a_Template_Pipeline_Baseline → results/pipeline00/*.json
+04b_LLM_JSON_Pipeline         → results/pipeline04/*.json
+04c_LLM_Vision_Pipeline       → results/pipeline05/*.json
+04d_LLM_ToolUse_Pipeline      → results/pipeline06/*.json
+05_Evaluation                → results/eval_*.{csv,png,json}
+06_Evaluation_Ichmoukhamedov → results/eval08_ichmoukhamedov/
+07_Error_Taxonomy            → results/error_taxonomy/
+08_Prompt_Fix_Eval           → results/eval08_ichmoukhamedov_v2/, results/eval10_*.png
 ```
 
 Alle Schritte laufen auf dem n=20-Validitäts-Sample (10 Instanzen × 2 XAI-Modelle);
@@ -320,7 +320,7 @@ einen separaten Skalierungslauf gibt es nicht.
 
 > **Status dieser Befunde:** deskriptiv/explorativ. Bei n = 10–20 Erklärungen pro Pipeline,
 > ohne Repeated Sampling und ohne Inferenzstatistik sind die folgenden Unterschiede **nicht**
-> statistisch abgesichert (siehe Limitationen-Tabelle in `07_Evaluation.ipynb` §7). Richtungsweisend,
+> statistisch abgesichert (siehe Limitationen-Tabelle in `05_Evaluation.ipynb` §7). Richtungsweisend,
 > nicht beweisend.
 
 1. **Die deterministische Template-Baseline gewinnt bei Faithfulness** (5,00 vs. 3,80–4,40 der

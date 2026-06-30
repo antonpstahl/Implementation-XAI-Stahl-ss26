@@ -1,11 +1,11 @@
 """Phase 3b — utils.faithfulness (gen-aware RA/SA/VA + Extraktionsvalidität).
 
 Sichert den Skalierungs-Faithfulness-Pfad ab:
-  * `compute_faithfulness` ist ein **treuer Port** aus NB 08 (ϕ-Ausschluss,
+  * `compute_faithfulness` ist ein **treuer Port** aus NB 06 (ϕ-Ausschluss,
     Out-of-Top-K-Skip, Vorzeichen, Wert-Match mit Denormalisierung, None bei n=0).
   * `parse_extraction` ist robust gegen Fließtext-Umrandung und kaputtes JSON.
   * `extraction_coverage` liefert die Validitäts-Proxys (parse_empty, Top-K-Recall,
-    Out-of-Top-K, Rang-0-Treffer) — der Extraktor ist fehleranfällig (NB 09).
+    Out-of-Top-K, Rang-0-Treffer) — der Extraktor ist fehleranfällig (NB 07).
   * `build_faithfulness_df` ist gen-aware (custom_id-Lookup) und behandelt fehlende
     Extraktionen als parse_empty.
   * `extraction_validity_summary` aggregiert je Pipeline korrekt.
@@ -228,7 +228,7 @@ def test_validity_summary_aggregates_per_pipeline(tmp_path):
 
 
 # ---------------------------------------------------------------------------
-# rank0_correctness (NB 09 §6 — Rang-0 inkl. Vorzeichen)
+# rank0_correctness (NB 07 §6 — Rang-0 inkl. Vorzeichen)
 # ---------------------------------------------------------------------------
 
 def test_rank0_correct_feature_and_sign():
@@ -265,7 +265,7 @@ def test_rank0_empty_gt():
 
 
 # ---------------------------------------------------------------------------
-# correct_metric (NB 09 §6.4 — Mess-Korrektur-Obergrenze)
+# correct_metric (NB 07 §6.4 — Mess-Korrektur-Obergrenze)
 # ---------------------------------------------------------------------------
 
 def test_correct_metric_adds_one_hit():
@@ -282,7 +282,7 @@ def test_correct_metric_zero_n_is_noop():
 
 
 # ---------------------------------------------------------------------------
-# load_explanation_text (NB 09 — kanonischer Loader)
+# load_explanation_text (NB 07 — kanonischer Loader)
 # ---------------------------------------------------------------------------
 
 def test_load_explanation_text_reads_record(tmp_path):

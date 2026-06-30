@@ -1,7 +1,7 @@
 """utils/faithfulness.py – Skalierungs-Faithfulness nach Ichmoukhamedov et al. (2024).
 
 Ground-truth-verankerte Faithfulness-Metriken (RA/SA/VA, Gl. 1 im Paper) für den
-n≈200-Vollauf (Phase 3b). **Treuer Port** der in `08_Evaluation_Ichmoukhamedov`
+n≈200-Vollauf (Phase 3b). **Treuer Port** der in `06_Evaluation_Ichmoukhamedov`
 auf n=20 entwickelten Logik — identischer Extraktions-Prompt, identischer Parser
 und eine **byte-für-byte identische** `compute_faithfulness` (die n=20-Zahlen
 reproduzieren), erweitert um:
@@ -11,12 +11,12 @@ reproduzieren), erweitert um:
     batchbar, −50 % Kosten, wie der Judge), und
   * **Extraktionsvalidität** (`extraction_coverage` / `extraction_validity_summary`):
     automatisch berechenbare Proxys dafür, wie verlässlich das *Messinstrument*
-    (der Extraktor) ist — denn die Fehlertaxonomie (NB 09) zeigte 19/30
+    (der Extraktor) ist — denn die Fehlertaxonomie (NB 07) zeigte 19/30
     Extraktor-Artefakte und eine Rang-0-Extraktor-Genauigkeit von nur 55 %.
-    RA/SA/VA messen **Präzision, nicht Recall** (NB 08 §4.1); die Validitäts-
+    RA/SA/VA messen **Präzision, nicht Recall** (NB 06 §4.1); die Validitäts-
     Kennzahlen machen genau diese Einschränkung quantitativ.
 
-Bewusst getrennt vom n=20-Notebook (NB 08 bleibt unangetastet); `08b_Scaling_
+Bewusst getrennt vom n=20-Notebook (NB 06 bleibt unangetastet); `08b_Scaling_
 Faithfulness` nutzt diese Helfer auf den Skalierungs-Artefakten unter
 ``results/pipeline0X/scale/``.
 """
@@ -36,7 +36,7 @@ from utils.explanations import FEATURE_SCHEMA, HUM_FACTOR, TEMP_FACTOR, WIND_FAC
 LOSS_KEY_DEFAULT = "poisson_log"
 TOP_K_DEFAULT = 4  # Paper: top-4 Features nach |Beitrag|
 
-# Extraktions-Prompt + System (treuer Port aus NB 08 Zelle 5).
+# Extraktions-Prompt + System (treuer Port aus NB 06 Zelle 5).
 EXTRACTION_SYSTEM = (
     "Du bist ein Extraktionsmodell für XAI-Narrative eines Fahrradverleih-Modells.\n"
     "Extrahiere die angeforderten Informationen ausschließlich aus dem Narrativ.\n"
@@ -54,7 +54,7 @@ _DENORM = {
 
 
 def build_extraction_prompt(explanation: str, xai_model: str) -> str:
-    """Baut den Extraktions-User-Prompt (JSON) — treuer Port aus NB 08."""
+    """Baut den Extraktions-User-Prompt (JSON) — treuer Port aus NB 06."""
     feat_descs = {f: FEATURE_SCHEMA[f]["description"] for f in FEATURE_SCHEMA}
     payload = {
         "aufgabe": (
@@ -83,7 +83,7 @@ def build_extraction_prompt(explanation: str, xai_model: str) -> str:
 
 
 def parse_extraction(raw: str) -> dict:
-    """Extrahiert das JSON-Objekt aus der Extraktor-Antwort (treuer Port, NB 08)."""
+    """Extrahiert das JSON-Objekt aus der Extraktor-Antwort (treuer Port, NB 06)."""
     m = re.search(r"\{.*\}", raw, re.DOTALL)
     if not m:
         return {}
@@ -105,10 +105,10 @@ def is_value_match(feat: str, extracted: float, gt: float, tol: float = 1.0) -> 
 
 
 def compute_faithfulness(extraction: dict, gt_contributions: list) -> dict:
-    """RA, SA, VA nach Gl. 1 aus Ichmoukhamedov et al. (2024) — treuer Port aus NB 08.
+    """RA, SA, VA nach Gl. 1 aus Ichmoukhamedov et al. (2024) — treuer Port aus NB 06.
 
     ϕ = null/nicht extrahiert → wird aus dem Nenner herausgerechnet. Iteriert über
-    die **extrahierten** Features (Präzision, nicht Recall — siehe NB 08 §4.1;
+    die **extrahierten** Features (Präzision, nicht Recall — siehe NB 06 §4.1;
     Recall/Coverage liefert :func:`extraction_coverage`).
     """
     gt_rank  = {c["feature"]: i for i, c in enumerate(gt_contributions)}
@@ -170,7 +170,7 @@ def extraction_coverage(extraction: dict, gt_contributions: list) -> dict:
 
     RA/SA/VA werten nur die *erwähnten* Features (Präzision). Diese Kennzahlen machen
     den Recall- und Rausch-Anteil sichtbar — wichtig, weil der Extraktor selbst
-    fehleranfällig ist (NB 09: 19/30 Extraktor-Artefakte, Rang-0-Genauigkeit 55 %):
+    fehleranfällig ist (NB 07: 19/30 Extraktor-Artefakte, Rang-0-Genauigkeit 55 %):
 
       * ``parse_empty``    — der Extraktor lieferte kein gültiges JSON (Messausfall).
       * ``topk_recall``    — Anteil der Top-K-Ground-Truth-Features, die der Extraktor
@@ -179,7 +179,7 @@ def extraction_coverage(extraction: dict, gt_contributions: list) -> dict:
                              (werden in `compute_faithfulness` still übersprungen → Rausch-Proxy).
       * ``r0_match``       — stimmt das vom Extraktor als Rang 0 markierte Feature mit
                              dem SHAP-Rang-0 überein? (1/0/None) — direkter Bezug zur
-                             NB-09-Kennzahl (55 % Rang-0-Genauigkeit).
+                             NB-07-Kennzahl (55 % Rang-0-Genauigkeit).
     """
     gt_features = [c["feature"].lower() for c in gt_contributions]
     gt_set = set(gt_features)
@@ -291,8 +291,8 @@ def extraction_validity_summary(faith_df: pd.DataFrame) -> pd.DataFrame:
 
     Spalten: Narrativ-Anzahl, Parse-Ausfallrate, Ø extrahierte Features, Ø Top-K-Recall,
     Out-of-Top-K-Rate (Rausch-Anteil der Extraktion) und Rang-0-Trefferquote des
-    Extraktors (Bezug zur NB-09-Kennzahl 55 %). RA/SA/VA sind nur im Licht dieser
-    Coverage interpretierbar (Präzision, nicht Recall — NB 08 §4.1).
+    Extraktors (Bezug zur NB-07-Kennzahl 55 %). RA/SA/VA sind nur im Licht dieser
+    Coverage interpretierbar (Präzision, nicht Recall — NB 06 §4.1).
     """
     g = faith_df.groupby("pipeline_label")
     out = g.agg(
@@ -309,13 +309,13 @@ def extraction_validity_summary(faith_df: pd.DataFrame) -> pd.DataFrame:
     return out.round(4)
 
 
-# ── Fehleranalyse / Extraktionsvalidität (NB 09 §6) ───────────────────────────
+# ── Fehleranalyse / Extraktionsvalidität (NB 07 §6) ───────────────────────────
 
 def rank0_correctness(extraction: dict, gt_contributions: list) -> dict:
     """Rang-0-Treue des Extraktors inkl. **Vorzeichen** (Erweiterung von ``extraction_coverage``).
 
     ``extraction_coverage`` prüft nur die Feature-Identität (``r0_match``). Für die
-    Extraktionsvalidität (NB 09 §6) zählt zusätzlich das Vorzeichen: ein Rang-0 gilt nur
+    Extraktionsvalidität (NB 07 §6) zählt zusätzlich das Vorzeichen: ein Rang-0 gilt nur
     dann als korrekt, wenn Feature **und** Vorzeichen mit dem SHAP-Rang-0 übereinstimmen.
 
     ``gt_contributions`` sind die (Top-K-)Beiträge, absteigend nach |Beitrag| sortiert.
@@ -353,7 +353,7 @@ def rank0_correctness(extraction: dict, gt_contributions: list) -> dict:
 def correct_metric(obs_val: float, n_extracted: int) -> float:
     """Obergrenze einer RA/SA-Metrik, falls der Rang-0-Fehler ein Mess-Artefakt war.
 
-    NB 09 §6.4: Hat der Extraktor das Rang-0-Feature nachweislich falsch erfasst
+    NB 07 §6.4: Hat der Extraktor das Rang-0-Feature nachweislich falsch erfasst
     (Mess- statt Erklärungsfehler), wäre bei korrekter Extraktion ein Rang-0-Treffer
     hinzugekommen. Die korrigierte Metrik ersetzt einen Treffer von ``n``:
     ``(obs·n + 1)/n``, gedeckelt bei 1.0. Bei ``n_extracted == 0`` bleibt der Wert unverändert.
@@ -372,7 +372,7 @@ def load_explanation_text(
 ) -> str:
     """Erklärungstext aus ``results/pipeline{prefix}/{xai}_inst{iid}.json`` (n=20-Lauf).
 
-    Kanonischer Loader für die Fehleranalyse (NB 09) — ersetzt drei dort dupliziert
+    Kanonischer Loader für die Fehleranalyse (NB 07) — ersetzt drei dort dupliziert
     Inline-Loader. Gibt ``''`` zurück, wenn die Datei fehlt (z. B. vor dem Generierungslauf).
     """
     p = results_dir / f"pipeline{pipeline_prefix}" / f"{xai_model.lower()}_inst{instance_id}.json"

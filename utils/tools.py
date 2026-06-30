@@ -1,5 +1,5 @@
 """
-utils/tools.py – Tool-Definitionen und ToolBox für die Tool-Use-Pipeline (Notebook 06).
+utils/tools.py – Tool-Definitionen und ToolBox für die Tool-Use-Pipeline (Notebook 04d).
 
 TOOL_DEFINITIONS: Schemas im Anthropic-Format, die dem Modell übergeben werden.
 ToolBox:          Kapselt Modell + Test-Daten; führt Tool-Aufrufe aus.
@@ -189,7 +189,7 @@ TOOL_DEFINITIONS: list[dict[str, Any]] = [
 class ToolBox:
     """
     Kapselt Modell + Test-Daten und führt Tool-Aufrufe aus.
-    Wird in Notebook 06 mit dem geladenen Modell instanziiert.
+    Wird in Notebook 04d mit dem geladenen Modell instanziiert.
     """
 
     def __init__(

@@ -128,7 +128,7 @@ def humanize_feature(feature: str, value: Any) -> str | None:
 
 
 def build_context_string(fv: dict) -> str:
-    """Menschenlesbare Komma-Liste aller Feature-Werte (NB04 JSON-Payload-Feld)."""
+    """Menschenlesbare Komma-Liste aller Feature-Werte (NB04b JSON-Payload-Feld)."""
     parts: list[str] = []
     if "hr" in fv:
         parts.append(f"{int(fv['hr']):02d}:00 Uhr")

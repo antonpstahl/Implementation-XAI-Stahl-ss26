@@ -27,9 +27,9 @@ SRC     = ROOT / "results" / "error_taxonomy"
 OUT_DIR = ROOT / "results" / "figures"
 OUT_DIR.mkdir(parents=True, exist_ok=True)
 
-# ── taxonomy data (from NB 09, category_frequencies.csv) ─────────────────────
+# ── taxonomy data (from NB 07, category_frequencies.csv) ─────────────────────
 #  Source: primary coding of 30 worst-RA/SA cases
-#  E-categories = Eval Artefact (measurement error in NB 08 extractor)
+#  E-categories = Eval Artefact (measurement error in NB 06 extractor)
 #  B/C-categories = Explanation Error (LLM output error)
 
 CATEGORIES = [

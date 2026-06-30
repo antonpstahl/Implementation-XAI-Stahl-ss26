@@ -131,7 +131,7 @@ def test_humanize_bad_value():
 
 
 # ---------------------------------------------------------------------------
-# build_context_string — Golden-Test (NB04 JSON-Payload-Feld)
+# build_context_string — Golden-Test (NB04b JSON-Payload-Feld)
 # ---------------------------------------------------------------------------
 
 _GOLDEN_FV = {

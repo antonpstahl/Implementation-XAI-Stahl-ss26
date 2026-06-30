@@ -5,7 +5,7 @@ Sichert den Skalierungs-Eval-Pfad ab:
     die LLM-Pipelines mit N Generationen (_gen{idx}-Suffix).
   * load_scale_records baut die erwarteten Spalten inkl. generation/tool_calls und
     meldet bzw. erzwingt Vollständigkeit.
-  * build_judge_prompt erzeugt gültiges JSON mit dem NB-07-Schema und bettet das
+  * build_judge_prompt erzeugt gültiges JSON mit dem NB-05-Schema und bettet das
     Tool-Transkript nur für Pipeline 06 (und nur bei vorhandenem trace) ein.
 """
 from __future__ import annotations
@@ -117,7 +117,7 @@ def test_load_scale_records_gen_aware(tmp_path):
     # generation column present and correct range
     assert set(df[df.pipeline == "00"]["generation"]) == {0}
     assert set(df[df.pipeline == "04"]["generation"]) == {0, 1, 2}
-    # xai_model is upper-cased like NB 07
+    # xai_model is upper-cased like NB 05
     assert set(df["xai_model"]) == {"XGB", "EBM"}
 
 

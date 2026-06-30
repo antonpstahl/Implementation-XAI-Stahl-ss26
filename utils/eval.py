@@ -1,14 +1,14 @@
 """utils/eval.py – Skalierungs-Evaluation (Phase 3b).
 
 Gen-aware Loading der Generierungs-Artefakte und Aufbau des Judge-Prompts für
-den n≈200-Vollauf. Bewusst getrennt vom n=20-**Validitäts**-Notebook (NB 07):
+den n≈200-Vollauf. Bewusst getrennt vom n=20-**Validitäts**-Notebook (NB 05):
 
-  * NB 07 bleibt unangetastet (alle v1/v2/v3/v4/v5-Caches + Inter-Judge-
+  * NB 05 bleibt unangetastet (alle v1/v2/v3/v4/v5-Caches + Inter-Judge-
     Agreement gelten weiter, n = 20).
   * `07b_Scaling_Evaluation` nutzt diese Helfer und fährt **nur** den finalen
     Opus-Judge + Cross-Vendor auf den 200 Instanzen × N Generationen.
 
-`build_judge_prompt` ist ein **treuer Port** des Judge-Prompt-Aufbaus aus NB 07
+`build_judge_prompt` ist ein **treuer Port** des Judge-Prompt-Aufbaus aus NB 05
 (Zelle 9) — identisches Format (XML-Reason-then-Score, dieselben
 menschenlesbaren Feature-Werte), damit der Skalierungs-Judge exakt nach der in
 Phase 3·2 validierten Rubrik bewertet. Der einzige Unterschied: das Tool-Use-
@@ -30,7 +30,7 @@ from utils.generation import generation_filename
 
 LOSS_KEY_DEFAULT = "poisson_log"
 
-# Pipeline-Kürzel → Anzeigename (identisch zu NB 07).
+# Pipeline-Kürzel → Anzeigename (identisch zu NB 05).
 PIPELINE_LABELS = {
     "00": "Template",
     "04": "JSON→Text",
@@ -45,12 +45,12 @@ DETERMINISTIC_PIPELINES = frozenset({"00"})
 # Tool-Use-Pipeline (client-seitiger Tool-Loop; Trace wird dem Judge beigelegt).
 TOOLUSE_PIPELINES = frozenset({"06"})
 
-# Kosten pro 1M Token (claude-sonnet-4-6) — nur fürs Reporting, identisch zu NB 07.
+# Kosten pro 1M Token (claude-sonnet-4-6) — nur fürs Reporting, identisch zu NB 05.
 COST_INPUT_PER_M      = 3.00
 COST_CACHE_READ_PER_M = 0.30
 COST_OUTPUT_PER_M     = 15.00
 
-# Menschenlesbare Feature-Werte für den Judge (treuer Port aus NB 07 Zelle 9).
+# Menschenlesbare Feature-Werte für den Judge (treuer Port aus NB 05 Zelle 9).
 WEEKDAYS_JUDGE = {0: "Sonntag", 1: "Montag", 2: "Dienstag", 3: "Mittwoch",
                   4: "Donnerstag", 5: "Freitag", 6: "Samstag"}
 MONTHS_JUDGE   = {1: "Januar", 2: "Februar", 3: "März", 4: "April", 5: "Mai",
@@ -87,7 +87,7 @@ def load_scale_records(
     physisch von der n=20-Validität (die direkt unter ``pipeline{p}/`` liegt).
     ``scale_subdir=""`` liest direkt aus ``pipeline{p}/`` (z. B. für Tests).
 
-    Jede Zeile trägt zusätzlich zur NB-07-Spaltenmenge eine ``generation``-Spalte
+    Jede Zeile trägt zusätzlich zur NB-05-Spaltenmenge eine ``generation``-Spalte
     (0-basiert) und — für Tool-Use — die volle ``tool_calls``-Liste (für den
     Judge-Trace). Fehlende Dateien werden gemeldet; mit ``require_complete=True``
     lösen sie einen ``FileNotFoundError`` aus (Schutz vor stillen Lücken vor der
@@ -150,7 +150,7 @@ def load_scale_records(
 
 
 def _tool_trace_block(tool_calls: list[dict]) -> list[dict]:
-    """Baut das Judge-Trace-Format aus einer ``tool_calls``-Liste (NB-07-Schema)."""
+    """Baut das Judge-Trace-Format aus einer ``tool_calls``-Liste (NB-05-Schema)."""
     return [
         {
             "round":     i + 1,
@@ -171,7 +171,7 @@ def build_judge_prompt(
     explanations_dir: Path = EXPLANATIONS_DIR,
     tool_trace: Optional[list[dict]] = None,
 ) -> str:
-    """Baut den Judge-User-Prompt (JSON) für eine Erklärung — Port aus NB 07.
+    """Baut den Judge-User-Prompt (JSON) für eine Erklärung — Port aus NB 05.
 
     Identisch zum Validitäts-Notebook: menschenlesbare Feature-Werte, Top-3-
     Treiber, Reason-then-Score-XML-Ausgabeanweisung. Für Tool-Use wird das

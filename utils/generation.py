@@ -24,7 +24,7 @@ from typing import Any, Callable, Iterable, Optional
 
 # generate(model_name, instance_id, generation_idx) -> record dict | None
 #   Gibt None zurück, um diese Generation zu überspringen (z. B. nach einem
-#   Fehler in der Tool-Use-Schleife, NB 06) — dann wird nichts persistiert.
+#   Fehler in der Tool-Use-Schleife, NB 04d) — dann wird nichts persistiert.
 GenerateFn = Callable[[str, int, int], Optional[dict]]
 HookFn = Callable[[dict, str, int, int], None]
 
@@ -38,7 +38,7 @@ def load_local_explanation(
 ) -> dict:
     """Lokale SHAP-/EBM-Erklärung einer Test-Instanz (`local_{model}_{loss}_inst{id}.json`).
 
-    Bisher in NB 04/05 dreifach inline geladen; zentralisiert, damit Pfadschema und
+    Bisher in NB 04b/04c dreifach inline geladen; zentralisiert, damit Pfadschema und
     Loss-Schlüssel an einer Stelle leben.
     """
     p = Path(explanations_dir) / f"local_{model_name}_{loss_key}_inst{instance_id}.json"
@@ -76,16 +76,16 @@ def build_generation_record(
 ) -> dict:
     """Baut den persistierten Erklärungs-Record — ein Schema für alle drei Pipelines.
 
-    Reproduziert die zuvor in NB 04/05/06 dreifach inline gebauten Records **exakt**
+    Reproduziert die zuvor in NB 04b/04c/06 dreifach inline gebauten Records **exakt**
     (inkl. Key-Reihenfolge), parametrisiert über die wenigen echten Unterschiede:
 
     * ``extra``         — modalitätsspezifische Felder, direkt nach ``explanation``
-                          eingefügt (NB 05: ``plot_file``; NB 06: ``stop_reason`` /
+                          eingefügt (NB 04c: ``plot_file``; NB 04d: ``stop_reason`` /
                           ``tool_calls`` / ``n_tool_calls``).
-    * ``prediction``    — weggelassen, wenn nicht übergeben (NB 06 führt keine
+    * ``prediction``    — weggelassen, wenn nicht übergeben (NB 04d führt keine
                           Vorhersage im Record).
-    * ``include_cache`` — ``cache_read_input_tokens`` in ``usage`` (NB 04/05: ja;
-                          NB 06 Tool-Use: nein).
+    * ``include_cache`` — ``cache_read_input_tokens`` in ``usage`` (NB 04b/04c: ja;
+                          NB 04d Tool-Use: nein).
     """
     in_tok  = usage.get("input_tokens", 0)
     out_tok = usage.get("output_tokens", 0)
