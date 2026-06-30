@@ -1,36 +1,36 @@
 """
-utils/batch.py – Anthropic-Message-Batches-Helfer (Phase 3a·B).
+utils/batch.py - Anthropic Message Batches helper.
 
-Reiner Kostenhebel für den teuren 3b-Lauf: die Batches API verarbeitet
-Messages-API-Anfragen asynchron zu −50 % der Standardpreise. Dieser Helfer
-kapselt **submit → wait → collect** über
+A pure cost lever for a larger run: the Batches API processes Messages API
+requests asynchronously at about 50 percent of the standard price. This helper
+wraps submit -> wait -> collect over
 
     client.messages.batches.create | retrieve | results
 
-und ist bewusst so geschnitten, dass der Batch- und der Real-time-Pfad
-**schema-identische** Ergebnisse liefern (gleicher Text/Usage je Einheit),
-damit die Eval (NB 05/06) ausführungsart-agnostisch bleibt.
+and is deliberately cut so that the batch and the real time path produce schema
+identical results (same text/usage per unit), so the eval (NB 05/06) stays
+execution mode agnostic.
 
-Kerneigenschaften (DoD Phase 3a·B):
-  * **Eindeutige `custom_id`s** – `make_custom_id()` setzt sie aus Teilen
-    zusammen und prüft Anthropic-Constraints (≤ 64 Zeichen, `[A-Za-z0-9_-]`).
-  * **`batch_id`-Persistenz** – `submit_batch(..., state_path=…)` schreibt die
-    `batch_id` auf Platte, sodass ein abgestürzter Poll wieder aufgenommen
-    werden kann (Poll-Resume), statt denselben Batch erneut einzureichen.
-  * **Ergebnis-Mapping** – `collect_results()` ordnet je `custom_id` Text +
-    Usage zu; ein optionaler `parse`-Callback (z. B. `parse_judge_response`)
-    wandelt den Text direkt in Scores um.
-  * **Fehlerklassen** – `errored`(server) / `expired` → Resubmit-Batch;
-    `errored`(invalid_request) → geloggt, nicht still verworfen; `canceled`
-    → als Fehler vermerkt.
-  * **`max_tokens=0` ist in Batches unzulässig** – `message_request()` lehnt es
-    ab, bevor der Batch eingereicht wird.
+Key properties:
+  * Unique `custom_id`s - `make_custom_id()` assembles them from parts and checks
+    the Anthropic constraints (<= 64 chars, `[A-Za-z0-9_-]`).
+  * `batch_id` persistence - `submit_batch(..., state_path=...)` writes the
+    `batch_id` to disk so a crashed poll can be resumed (poll resume) instead of
+    resubmitting the same batch.
+  * Result mapping - `collect_results()` maps text + usage per `custom_id`; an
+    optional `parse` callback (for example `parse_judge_response`) turns the text
+    directly into scores.
+  * Error classes - `errored`(server) / `expired` -> resubmit batch;
+    `errored`(invalid_request) -> logged, not silently dropped; `canceled` ->
+    recorded as a failure.
+  * `max_tokens=0` is not allowed in batches - `message_request()` rejects it
+    before the batch is submitted.
 
-Die SDK-Typen (`Request`, `MessageCreateParamsNonStreaming`) sind TypedDicts;
-zur Laufzeit sind es schlichte Dicts. Der Helfer baut daher die Request-Shape
-`{"custom_id": …, "params": …}` direkt und importiert das `anthropic`-Paket
-erst beim tatsächlichen API-Aufruf (`_get_client`), damit der Modulimport ohne
-installiertes SDK gelingt (Tests injizieren einen Fake-Client).
+The SDK types (`Request`, `MessageCreateParamsNonStreaming`) are TypedDicts; at
+runtime they are plain dicts. The helper therefore builds the request shape
+`{"custom_id": ..., "params": ...}` directly and imports the `anthropic` package
+only at the actual API call (`_get_client`), so the module import works without
+the SDK installed (tests inject a fake client).
 """
 
 from __future__ import annotations
@@ -44,82 +44,82 @@ from typing import Any, Callable, Iterable, Iterator, Optional
 
 logger = logging.getLogger(__name__)
 
-# ── Status-Konstanten ────────────────────────────────────────────────────────
-# Ergebnis-Typen der Batches API (result.result.type).
+# --- Status constants ---
+# Result types of the Batches API (result.result.type).
 STATUS_SUCCEEDED       = "succeeded"
 STATUS_INVALID_REQUEST = "invalid_request"   # errored, error.type == "invalid_request"
-STATUS_SERVER_ERROR    = "server_error"      # errored, sonstiger error.type → resubmit
-STATUS_EXPIRED         = "expired"           # 24 h überschritten → resubmit
+STATUS_SERVER_ERROR    = "server_error"      # errored, other error.type -> resubmit
+STATUS_EXPIRED         = "expired"           # 24 h exceeded -> resubmit
 STATUS_CANCELED        = "canceled"
 
-# Fehlerklassen, die einen Resubmit rechtfertigen (transient).
+# Error classes that justify a resubmit (transient).
 _RESUBMITTABLE = frozenset({STATUS_SERVER_ERROR, STATUS_EXPIRED})
 
 _CUSTOM_ID_RE  = re.compile(r"^[A-Za-z0-9_-]{1,64}$")
-_MAX_BATCH_WAIT_S = 24 * 60 * 60  # Anthropic: Batch endet spätestens nach 24 h.
+_MAX_BATCH_WAIT_S = 24 * 60 * 60  # Anthropic: a batch ends after 24 h at the latest.
 
 
-# ── custom_id ──────────────────────────────────────────────────────────────
+# --- custom_id ---
 def make_custom_id(*parts: Any) -> str:
-    """Baut eine eindeutige, API-konforme `custom_id` aus den Teilen.
+    """Build a unique, API conformant `custom_id` from the parts.
 
-    Teile werden mit ``-`` verbunden, andere Zeichen als ``[A-Za-z0-9_-]`` durch
-    ``_`` ersetzt. Beispiele (Phase 3a·B):
+    Parts are joined with ``-``; characters other than ``[A-Za-z0-9_-]`` are
+    replaced by ``_``. Examples:
         make_custom_id("gen", pipeline, xai, iid, f"g{gen}")
         make_custom_id("jdg", ver, pipeline, xai, iid, f"s{k}")
 
     Raises
     ------
     ValueError
-        Wenn das Ergebnis leer oder länger als 64 Zeichen ist (Anthropic-Limit).
+        If the result is empty or longer than 64 chars (Anthropic limit).
     """
     raw = "-".join(str(p) for p in parts)
     cid = re.sub(r"[^A-Za-z0-9_-]", "_", raw)
     if not _CUSTOM_ID_RE.match(cid):
         raise ValueError(
-            f"Ungültige custom_id {cid!r} (1–64 Zeichen aus [A-Za-z0-9_-] nötig)."
+            f"Invalid custom_id {cid!r} (1 to 64 chars from [A-Za-z0-9_-] required)."
         )
     return cid
 
 
 def message_request(custom_id: str, params: dict) -> dict:
-    """Baut eine einzelne Batch-Request-Shape ``{"custom_id", "params"}``.
+    """Build a single batch request shape ``{"custom_id", "params"}``.
 
-    `params` muss den Messages-API-Parametern entsprechen (model, max_tokens,
-    messages, optional system/temperature/…) – kompatibel zu
+    `params` must match the Messages API parameters (model, max_tokens, messages,
+    optional system/temperature/...), compatible with
     ``MessageCreateParamsNonStreaming``.
 
     Raises
     ------
     ValueError
-        Bei ungültiger `custom_id` oder ``max_tokens == 0`` (in Batches unzulässig).
+        On an invalid `custom_id` or ``max_tokens == 0`` (not allowed in batches).
     """
     if not _CUSTOM_ID_RE.match(custom_id):
-        raise ValueError(f"Ungültige custom_id {custom_id!r}.")
+        raise ValueError(f"Invalid custom_id {custom_id!r}.")
     if params.get("max_tokens", None) == 0:
         raise ValueError(
-            "max_tokens=0 ist in der Batches API unzulässig. "
-            "Für Pre-Warming/Leeranfragen nicht über Batches gehen."
+            "max_tokens=0 is not allowed in the Batches API. "
+            "Do not use batches for pre warming / empty requests."
         )
     return {"custom_id": custom_id, "params": params}
 
 
-# ── Client / Zugriffshelfer ──────────────────────────────────────────────────
+# --- Client / access helpers ---
 def _get_client() -> Any:
-    """Lazy: importiert den Anthropic-Client erst beim API-Aufruf."""
-    from utils.llm import _get_client as _llm_client  # nutzt dieselbe Key-Logik
+    """Lazy: imports the Anthropic client only at the API call."""
+    from utils.llm import _get_client as _llm_client  # uses the same key logic
     return _llm_client()
 
 
 def _attr(obj: Any, key: str, default: Any = None) -> Any:
-    """Liest `key` aus Objekt-Attribut **oder** Dict (SDK-Objekt ↔ Test-Dict)."""
+    """Read `key` from an object attribute or a dict (SDK object vs test dict)."""
     if isinstance(obj, dict):
         return obj.get(key, default)
     return getattr(obj, key, default)
 
 
 def message_text(message: Any) -> str:
-    """Extrahiert den ersten Text-Block einer (Batch-)Message – SDK-Obj oder Dict."""
+    """Extract the first text block of a (batch) message, SDK object or dict."""
     content = _attr(message, "content", []) or []
     for block in content:
         if _attr(block, "type") == "text" or _attr(block, "text") is not None:
@@ -128,7 +128,7 @@ def message_text(message: Any) -> str:
 
 
 def message_usage(message: Any) -> dict:
-    """Extrahiert input_tokens/output_tokens – schema-gleich zum Real-time-Pfad."""
+    """Extract input_tokens/output_tokens, same schema as the real time path."""
     usage = _attr(message, "usage", {}) or {}
     return {
         "input_tokens":  _attr(usage, "input_tokens", 0) or 0,
@@ -136,25 +136,25 @@ def message_usage(message: Any) -> dict:
     }
 
 
-# ── submit / wait / collect ──────────────────────────────────────────────────
+# --- submit / wait / collect ---
 def submit_batch(
     requests: list[dict],
     *,
     client: Any = None,
     state_path: Optional[Path | str] = None,
 ) -> str:
-    """Reicht `requests` als einen Batch ein und gibt die `batch_id` zurück.
+    """Submit `requests` as one batch and return the `batch_id`.
 
-    `requests` ist eine Liste aus :func:`message_request`-Shapes. Bei gesetztem
-    `state_path` wird die `batch_id` persistiert (Poll-Resume nach Absturz).
+    `requests` is a list of :func:`message_request` shapes. If `state_path` is set
+    the `batch_id` is persisted (poll resume after a crash).
     """
     if not requests:
-        raise ValueError("Leere Request-Liste – nichts einzureichen.")
+        raise ValueError("Empty request list, nothing to submit.")
     client = client or _get_client()
 
     batch = client.messages.batches.create(requests=requests)
     batch_id = _attr(batch, "id")
-    logger.info("Batch eingereicht: %s (%d Requests)", batch_id, len(requests))
+    logger.info("Batch submitted: %s (%d requests)", batch_id, len(requests))
 
     if state_path is not None:
         _persist_batch_id(state_path, batch_id, len(requests))
@@ -170,14 +170,14 @@ def wait_for_batch(
     sleep: Callable[[float], None] = _time.sleep,
     on_poll: Optional[Callable[[Any], None]] = None,
 ) -> Any:
-    """Pollt `retrieve`, bis ``processing_status == "ended"``; gibt den Batch zurück.
+    """Poll `retrieve` until ``processing_status == "ended"`` and return the batch.
 
-    `sleep`/`on_poll` sind injizierbar (Tests, Fortschrittsanzeige).
+    `sleep`/`on_poll` are injectable (tests, progress display).
 
     Raises
     ------
     TimeoutError
-        Wenn der Batch nach `timeout_s` nicht beendet ist.
+        If the batch is not finished after `timeout_s`.
     """
     client = client or _get_client()
     deadline = _time.monotonic() + timeout_s
@@ -190,20 +190,20 @@ def wait_for_batch(
             return batch
         if _time.monotonic() >= deadline:
             raise TimeoutError(
-                f"Batch {batch_id} nach {timeout_s:.0f}s nicht beendet (Status: {status})."
+                f"Batch {batch_id} not finished after {timeout_s:.0f}s (status: {status})."
             )
         sleep(poll_interval_s)
 
 
 def classify_result(result: Any) -> dict:
-    """Klassifiziert einen einzelnen Batch-Result-Eintrag (reine Funktion).
+    """Classify a single batch result entry (pure function).
 
-    Rückgabe-Dict je `custom_id`:
-        status == STATUS_SUCCEEDED        → + "text", "usage", "message"
-        status == STATUS_INVALID_REQUEST  → + "error"  (loggen, nicht resubmitten)
-        status == STATUS_SERVER_ERROR     → + "error"  (resubmit)
-        status == STATUS_EXPIRED          → (resubmit)
-        status == STATUS_CANCELED         → (Fehler)
+    Return dict per `custom_id`:
+        status == STATUS_SUCCEEDED        -> + "text", "usage", "message"
+        status == STATUS_INVALID_REQUEST  -> + "error"  (log, do not resubmit)
+        status == STATUS_SERVER_ERROR     -> + "error"  (resubmit)
+        status == STATUS_EXPIRED          -> (resubmit)
+        status == STATUS_CANCELED         -> (failure)
     """
     custom_id = _attr(result, "custom_id")
     inner = _attr(result, "result")
@@ -228,12 +228,12 @@ def classify_result(result: Any) -> dict:
     if rtype == "canceled":
         return {"custom_id": custom_id, "status": STATUS_CANCELED}
 
-    # Unbekannter Typ → defensiv als Server-Fehler behandeln (resubmit).
+    # Unknown type -> defensively treat as a server error (resubmit).
     return {"custom_id": custom_id, "status": STATUS_SERVER_ERROR, "error": rtype}
 
 
 def iter_results(batch_id: str, *, client: Any = None) -> Iterator[dict]:
-    """Iteriert die Ergebnisse eines beendeten Batches als klassifizierte Dicts."""
+    """Iterate the results of a finished batch as classified dicts."""
     client = client or _get_client()
     for result in client.messages.batches.results(batch_id):
         yield classify_result(result)
@@ -245,20 +245,20 @@ def collect_results(
     client: Any = None,
     parse: Optional[Callable[[str], Any]] = None,
 ) -> dict:
-    """Sammelt die Ergebnisse eines beendeten Batches in vier Eimer.
+    """Collect the results of a finished batch into four buckets.
 
-    `parse` (optional) wird auf den Text erfolgreicher Antworten angewandt –
-    z. B. ``utils.judge.parse_judge_response`` für Judge-Batches. Ohne `parse`
-    enthält ``succeeded[cid]`` das Roh-Dict aus :func:`classify_result`
-    (Text/Usage/Message), sodass der Generierungs-Pfad denselben Record wie der
-    Real-time-Loop bauen kann.
+    `parse` (optional) is applied to the text of successful answers, for example
+    ``utils.judge.parse_judge_response`` for judge batches. Without `parse`,
+    ``succeeded[cid]`` holds the raw dict from :func:`classify_result`
+    (text/usage/message), so the generation path can build the same record as the
+    real time loop.
 
-    Rückgabe::
+    Returns::
 
         {
             "succeeded":  {custom_id: parse(text) | classify-dict},
             "resubmit":   {custom_id: classify-dict},  # server_error / expired
-            "invalid":    {custom_id: classify-dict},  # invalid_request (geloggt)
+            "invalid":    {custom_id: classify-dict},  # invalid_request (logged)
             "canceled":   {custom_id: classify-dict},
         }
     """
@@ -273,14 +273,14 @@ def collect_results(
             succeeded[cid] = parse(entry["text"]) if parse is not None else entry
         elif status in _RESUBMITTABLE:
             resubmit[cid] = entry
-            logger.warning("Resubmit-Kandidat %s (%s).", cid, status)
+            logger.warning("Resubmit candidate %s (%s).", cid, status)
         elif status == STATUS_INVALID_REQUEST:
             invalid[cid] = entry
-            logger.error("invalid_request für %s – wird nicht resubmittet: %s",
+            logger.error("invalid_request for %s, not resubmitted: %s",
                          cid, entry.get("error"))
         else:  # canceled
             canceled[cid] = entry
-            logger.error("Batch-Request %s canceled.", cid)
+            logger.error("Batch request %s canceled.", cid)
 
     return {
         "succeeded": succeeded,
@@ -290,7 +290,7 @@ def collect_results(
     }
 
 
-# ── Orchestrierung: submit → wait → collect → resubmit ───────────────────────
+# --- Orchestration: submit -> wait -> collect -> resubmit ---
 def run_batch(
     requests: list[dict],
     *,
@@ -302,20 +302,20 @@ def run_batch(
     timeout_s: float = _MAX_BATCH_WAIT_S,
     sleep: Callable[[float], None] = _time.sleep,
 ) -> dict:
-    """Führt einen Batch end-to-end aus und resubmittet transiente Fehler.
+    """Run a batch end to end and resubmit transient errors.
 
-    Ablauf je Runde: einreichen (oder persistierten Batch wieder aufnehmen) →
-    warten → einsammeln. `errored`(server)/`expired` werden bis zu
-    `max_resubmits`-mal als neuer Batch erneut eingereicht; `invalid_request`
-    und `canceled` werden geloggt und als endgültig fehlgeschlagen vermerkt.
+    Flow per round: submit (or resume a persisted batch) -> wait -> collect.
+    `errored`(server)/`expired` are resubmitted as a new batch up to
+    `max_resubmits` times; `invalid_request` and `canceled` are logged and marked
+    as finally failed.
 
-    Poll-Resume: existiert unter `state_path` bereits eine `batch_id`, wird
-    dieser Batch in der ersten Runde gepollt statt neu eingereicht (die
-    Request-Liste muss dem persistierten Batch entsprechen).
+    Poll resume: if a `batch_id` already exists under `state_path`, that batch is
+    polled in the first round instead of submitting a new one (the request list
+    must match the persisted batch).
 
-    Rückgabe::
+    Returns::
 
-        {"succeeded": {cid: …}, "failed": {cid: classify-dict}, "batch_id": …}
+        {"succeeded": {cid: ...}, "failed": {cid: classify-dict}, "batch_id": ...}
     """
     client = client or _get_client()
     by_id = {r["custom_id"]: r for r in requests}
@@ -324,12 +324,12 @@ def run_batch(
     failed: dict[str, dict] = {}
     pending = list(requests)
 
-    # Poll-Resume: persistierte batch_id der ersten Runde wieder aufnehmen.
+    # Poll resume: resume the persisted batch_id in the first round.
     batch_id: Optional[str] = (
         _load_batch_id(state_path) if state_path is not None else None
     )
     if batch_id is not None:
-        logger.info("Setze persistierten Batch fort: %s", batch_id)
+        logger.info("Resuming persisted batch: %s", batch_id)
 
     attempt = 0
     while pending:
@@ -348,13 +348,13 @@ def run_batch(
             failed[cid] = entry
 
         resubmit_ids = list(collected["resubmit"])
-        batch_id = None  # nächste Runde reicht einen frischen Batch ein
+        batch_id = None  # the next round submits a fresh batch
         if not resubmit_ids:
             break
 
         attempt += 1
         if attempt > max_resubmits:
-            logger.error("max_resubmits (%d) erschöpft; %d Requests bleiben offen.",
+            logger.error("max_resubmits (%d) exhausted; %d requests remain open.",
                          max_resubmits, len(resubmit_ids))
             for cid in resubmit_ids:
                 entry = dict(collected["resubmit"][cid])
@@ -362,13 +362,13 @@ def run_batch(
                 failed[cid] = entry
             break
 
-        logger.info("Resubmit-Runde %d: %d Requests.", attempt, len(resubmit_ids))
+        logger.info("Resubmit round %d: %d requests.", attempt, len(resubmit_ids))
         pending = [by_id[cid] for cid in resubmit_ids]
 
     return {"succeeded": succeeded, "failed": failed, "batch_id": batch_id}
 
 
-# ── batch_id-Persistenz ──────────────────────────────────────────────────────
+# --- batch_id persistence ---
 def _persist_batch_id(state_path: Path | str, batch_id: str, n_requests: int) -> None:
     path = Path(state_path)
     path.parent.mkdir(parents=True, exist_ok=True)

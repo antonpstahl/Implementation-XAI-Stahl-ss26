@@ -1,20 +1,19 @@
-"""utils/eval.py – Skalierungs-Evaluation (Phase 3b).
+"""utils/eval.py - scaling evaluation.
 
-Gen-aware Loading der Generierungs-Artefakte und Aufbau des Judge-Prompts für
-den n≈200-Vollauf. Bewusst getrennt vom n=20-**Validitäts**-Notebook (NB 05):
+Generation aware loading of the generation artefacts and building of the judge
+prompt for a larger run. Deliberately separate from the n=20 validity notebook
+(NB 05):
 
-  * NB 05 bleibt unangetastet (alle v1/v2/v3/v4/v5-Caches + Inter-Judge-
-    Agreement gelten weiter, n = 20).
-  * `07b_Scaling_Evaluation` nutzt diese Helfer und fährt **nur** den finalen
-    Opus-Judge + Cross-Vendor auf den 200 Instanzen × N Generationen.
+  * NB 05 stays untouched (its judge caches and inter judge agreement hold, n = 20).
+  * `07b_Scaling_Evaluation` uses these helpers and runs only the final Opus judge
+    plus cross vendor on the 200 instances x N generations.
 
-`build_judge_prompt` ist ein **treuer Port** des Judge-Prompt-Aufbaus aus NB 05
-(Zelle 9) — identisches Format (XML-Reason-then-Score, dieselben
-menschenlesbaren Feature-Werte), damit der Skalierungs-Judge exakt nach der in
-Phase 3·2 validierten Rubrik bewertet. Der einzige Unterschied: das Tool-Use-
-Transkript (Pipeline 06) wird **explizit** übergeben (`tool_trace`), statt aus
-einem festen Pfad gelesen zu werden — denn bei N Generationen ist die
-Trace-Datei generationsspezifisch (`…_gen{g}.json`).
+`build_judge_prompt` is a faithful port of the judge prompt build from NB 05
+(cell 9), identical format (XML reason then score, the same human readable feature
+values), so the scaling judge scores exactly by the validated rubric. The only
+difference: the Tool Use transcript (pipeline 06) is passed explicitly
+(`tool_trace`) instead of read from a fixed path, because at N generations the
+trace file is generation specific (`..._gen{g}.json`).
 """
 
 from __future__ import annotations
@@ -30,38 +29,38 @@ from utils.generation import generation_filename
 
 LOSS_KEY_DEFAULT = "poisson_log"
 
-# Pipeline-Kürzel → Anzeigename (identisch zu NB 05).
+# Pipeline code to display name (identical to NB 05).
 PIPELINE_LABELS = {
     "00": "Template",
-    "04": "JSON→Text",
+    "04": "JSON to Text",
     "05": "Vision",
-    "06": "Tool-Use",
+    "06": "Tool Use",
 }
 
-# Deterministische Pipelines: erzeugen pro Instanz identischen Text → 1 Generation
-# genügt (keine Stochastik zu messen). Template (00) ist der Textbaustein-Generator.
+# Deterministic pipelines: produce identical text per instance, so 1 generation is
+# enough (no stochasticity to measure). Template (00) is the template generator.
 DETERMINISTIC_PIPELINES = frozenset({"00"})
 
-# Tool-Use-Pipeline (client-seitiger Tool-Loop; Trace wird dem Judge beigelegt).
+# Tool Use pipeline (client side tool loop; the trace is attached for the judge).
 TOOLUSE_PIPELINES = frozenset({"06"})
 
-# Kosten pro 1M Token (claude-sonnet-4-6) — nur fürs Reporting, identisch zu NB 05.
+# Cost per 1M tokens (claude-sonnet-4-6), reporting only, identical to NB 05.
 COST_INPUT_PER_M      = 3.00
 COST_CACHE_READ_PER_M = 0.30
 COST_OUTPUT_PER_M     = 15.00
 
-# Menschenlesbare Feature-Werte für den Judge (treuer Port aus NB 05 Zelle 9).
-WEEKDAYS_JUDGE = {0: "Sonntag", 1: "Montag", 2: "Dienstag", 3: "Mittwoch",
-                  4: "Donnerstag", 5: "Freitag", 6: "Samstag"}
-MONTHS_JUDGE   = {1: "Januar", 2: "Februar", 3: "März", 4: "April", 5: "Mai",
-                  6: "Juni", 7: "Juli", 8: "August", 9: "September",
-                  10: "Oktober", 11: "November", 12: "Dezember"}
-WEATHER_JUDGE  = {1: "klar/wenige Wolken", 2: "Nebel/bewölkt",
-                  3: "leichter Regen/Schnee", 4: "Starkregen/Gewitter"}
+# Human readable feature values for the judge (faithful port from NB 05 cell 9).
+WEEKDAYS_JUDGE = {0: "Sunday", 1: "Monday", 2: "Tuesday", 3: "Wednesday",
+                  4: "Thursday", 5: "Friday", 6: "Saturday"}
+MONTHS_JUDGE   = {1: "January", 2: "February", 3: "March", 4: "April", 5: "May",
+                  6: "June", 7: "July", 8: "August", 9: "September",
+                  10: "October", 11: "November", 12: "December"}
+WEATHER_JUDGE  = {1: "clear/few clouds", 2: "mist/cloudy",
+                  3: "light rain/snow", 4: "heavy rain/thunderstorm"}
 
 
 def n_generations_for(pipeline: str, n_generations_scale: int) -> int:
-    """Generationen pro Einheit je Pipeline: deterministische → 1, sonst Scale."""
+    """Generations per unit per pipeline: deterministic -> 1, otherwise scale."""
     return 1 if pipeline in DETERMINISTIC_PIPELINES else n_generations_scale
 
 
@@ -76,22 +75,22 @@ def load_scale_records(
     scale_subdir: str = "scale",
     require_complete: bool = False,
 ) -> pd.DataFrame:
-    """Lädt die Generierungs-Artefakte des Skalierungslaufs gen-aware in einen df.
+    """Load the scaling run generation artefacts generation aware into a df.
 
-    Liest ``pipeline{p}/{scale_subdir}/{xai}_inst{iid}[_gen{g}].json`` über alle
-    Pipelines × XAI-Modelle × Instanzen × Generationen. Das Dateinamensschema folgt
-    :func:`utils.generation.generation_filename`: deterministische Pipelines
-    (Template) ohne ``_gen``-Suffix (1 Generation), LLM-Pipelines mit Suffix.
+    Reads ``pipeline{p}/{scale_subdir}/{xai}_inst{iid}[_gen{g}].json`` over all
+    pipelines x XAI models x instances x generations. The file name scheme follows
+    :func:`utils.generation.generation_filename`: deterministic pipelines (Template)
+    without a ``_gen`` suffix (1 generation), LLM pipelines with a suffix.
 
-    Der Unterordner `scale_subdir` (Default ``"scale"``) trennt den n≈200-Lauf
-    physisch von der n=20-Validität (die direkt unter ``pipeline{p}/`` liegt).
-    ``scale_subdir=""`` liest direkt aus ``pipeline{p}/`` (z. B. für Tests).
+    The subfolder `scale_subdir` (default ``"scale"``) separates the larger run
+    physically from the n=20 validity run (which sits directly under
+    ``pipeline{p}/``). ``scale_subdir=""`` reads directly from ``pipeline{p}/``
+    (for example for tests).
 
-    Jede Zeile trägt zusätzlich zur NB-05-Spaltenmenge eine ``generation``-Spalte
-    (0-basiert) und — für Tool-Use — die volle ``tool_calls``-Liste (für den
-    Judge-Trace). Fehlende Dateien werden gemeldet; mit ``require_complete=True``
-    lösen sie einen ``FileNotFoundError`` aus (Schutz vor stillen Lücken vor der
-    Auswertung).
+    Beyond the NB 05 column set each row carries a ``generation`` column (0 based)
+    and, for Tool Use, the full ``tool_calls`` list (for the judge trace). Missing
+    files are reported; with ``require_complete=True`` they raise a
+    ``FileNotFoundError`` (guard against silent gaps before evaluation).
     """
     records: list[dict] = []
     missing: list[str] = []
@@ -141,16 +140,16 @@ def load_scale_records(
                     })
 
     if missing:
-        msg = f"{len(missing)} fehlende Generierungs-Datei(en) (erste 5): {missing[:5]}"
+        msg = f"{len(missing)} missing generation file(s) (first 5): {missing[:5]}"
         if require_complete:
             raise FileNotFoundError(msg)
-        print(f"⚠️  {msg}")
+        print(f"WARNING: {msg}")
 
     return pd.DataFrame(records)
 
 
 def _tool_trace_block(tool_calls: list[dict]) -> list[dict]:
-    """Baut das Judge-Trace-Format aus einer ``tool_calls``-Liste (NB-05-Schema)."""
+    """Build the judge trace format from a ``tool_calls`` list (NB 05 schema)."""
     return [
         {
             "round":     i + 1,
@@ -171,12 +170,12 @@ def build_judge_prompt(
     explanations_dir: Path = EXPLANATIONS_DIR,
     tool_trace: Optional[list[dict]] = None,
 ) -> str:
-    """Baut den Judge-User-Prompt (JSON) für eine Erklärung — Port aus NB 05.
+    """Build the judge user prompt (JSON) for one explanation, port from NB 05.
 
-    Identisch zum Validitäts-Notebook: menschenlesbare Feature-Werte, Top-3-
-    Treiber, Reason-then-Score-XML-Ausgabeanweisung. Für Tool-Use wird das
-    Transkript über `tool_trace` (Liste von ``tool_calls``-Dicts) beigelegt, statt
-    es aus einem festen Pfad zu lesen (generationsspezifisch bei N > 1).
+    Identical to the validity notebook: human readable feature values, top 3
+    drivers, reason then score XML output instruction. For Tool Use the transcript
+    is attached via `tool_trace` (a list of ``tool_calls`` dicts) instead of read
+    from a fixed path (generation specific at N > 1).
     """
     local_path = explanations_dir / f"local_{xai_model.lower()}_{loss_key}_inst{instance_id}.json"
     l = json.loads(local_path.read_text())
@@ -187,15 +186,15 @@ def build_judge_prompt(
             for c in l["contributions"][:3]]
 
     fv_readable = {
-        "uhrzeit":             f"{int(fv['hr']):02d}:00 Uhr",
-        "wochentag":           WEEKDAYS_JUDGE.get(int(fv["weekday"]), str(fv["weekday"])),
-        "monat":               MONTHS_JUDGE.get(int(fv["mnth"]), str(fv["mnth"])),
-        "jahr":                "2011" if int(fv["yr"]) == 0 else "2012",
-        "wetter":              WEATHER_JUDGE.get(int(fv["weathersit"]), str(fv["weathersit"])),
-        "temperatur_celsius":  f"~{float(fv['temp']) * 41:.1f} °C",
-        "luftfeuchtigkeit":    f"{float(fv['hum']) * 100:.0f} %",
-        "windgeschwindigkeit": f"{float(fv['windspeed']) * 67:.1f} km/h",
-        "feiertag":            "ja" if int(fv["holiday"]) == 1 else "nein",
+        "time":                f"{int(fv['hr']):02d}:00",
+        "weekday":             WEEKDAYS_JUDGE.get(int(fv["weekday"]), str(fv["weekday"])),
+        "month":               MONTHS_JUDGE.get(int(fv["mnth"]), str(fv["mnth"])),
+        "year":                "2011" if int(fv["yr"]) == 0 else "2012",
+        "weather":             WEATHER_JUDGE.get(int(fv["weathersit"]), str(fv["weathersit"])),
+        "temperature_celsius": f"~{float(fv['temp']) * 41:.1f} C",
+        "humidity":            f"{float(fv['hum']) * 100:.0f} %",
+        "wind_speed":          f"{float(fv['windspeed']) * 67:.1f} km/h",
+        "holiday":             "yes" if int(fv["holiday"]) == 1 else "no",
     }
 
     ground_truth = {
@@ -210,25 +209,25 @@ def build_judge_prompt(
     if (pipeline in TOOLUSE_PIPELINES or pipeline == "06_tooluse") and tool_trace:
         ground_truth["tool_call_trace"] = _tool_trace_block(tool_trace)
         ground_truth["tool_trace_note"] = (
-            "Die abgerufenen Werte (Beiträge, Percentile, Counterfactuals) "
-            "sind korrekt und dürfen als Belege für Faithfulness gewertet werden."
+            "The retrieved values (contributions, percentiles, counterfactuals) "
+            "are correct and may be counted as evidence for faithfulness."
         )
 
     output_instruction = (
-        "Antworte ausschließlich im XML-Format aus dem System-Prompt (B7).\n"
-        "Je Kriterium: erst Begründung (1–2 Sätze), dann Score als XML-Tag.\n"
+        "Answer only in the XML format from the system prompt.\n"
+        "Per criterion: first the reasoning (1 to 2 sentences), then the score as an XML tag.\n"
         "\n"
-        "<faithfulness_reasoning>Ankerpunkt wählen, Abzüge prüfen, Endpunktzahl berechnen</faithfulness_reasoning>\n"
+        "<faithfulness_reasoning>Choose anchor point, check deductions, compute final score</faithfulness_reasoning>\n"
         "<faithfulness>N</faithfulness>\n"
-        "<clarity_reasoning>Ankerpunkt wählen, Abzüge prüfen, Endpunktzahl berechnen</clarity_reasoning>\n"
+        "<clarity_reasoning>Choose anchor point, check deductions, compute final score</clarity_reasoning>\n"
         "<clarity>N</clarity>\n"
-        "<completeness_reasoning>Ankerpunkt wählen, Abzüge prüfen, Endpunktzahl berechnen</completeness_reasoning>\n"
+        "<completeness_reasoning>Choose anchor point, check deductions, compute final score</completeness_reasoning>\n"
         "<completeness>N</completeness>"
     )
     return json.dumps({
         "task": (
-            "Bewerte die folgende Erklärung nach der definierten Rubrik. "
-            "Vergib für jedes Kriterium einen Score (1–5) und begründe kurz."
+            "Score the following explanation using the defined rubric. "
+            "Give a score (1 to 5) for each criterion and justify briefly."
         ),
         "ground_truth": ground_truth,
         "explanation": row["explanation"],

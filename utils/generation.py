@@ -1,19 +1,19 @@
 """
-utils/generation.py – Gemeinsame Generierungs-Bausteine der Pipelines 04/05/06.
+utils/generation.py - shared generation building blocks for pipelines 04/05/06.
 
-Die drei LLM-Pipelines teilten bisher denselben Persistenz-/Resume-Loop, das
-Laden der Erklärungen und den Record-Aufbau dreifach inline. Diese Triplikation
-ist die teuerste Stelle für stille Divergenz; hier zentralisiert:
+The three LLM pipelines previously inlined the same persistence/resume loop, the
+explanation loading and the record building three times. That triplication is the
+most expensive place for silent divergence, so it is centralised here:
 
-  * `run_resumable_generation` – skip-if-exists-Loop, der den n=20-Lauf nach einem
-    API-Abbruch wiederaufnehmbar, verlustfrei und idempotent (kein Doppelzählen
-    beim Re-Run) macht. Die modalitätsspezifische Arbeit (Prompt bauen, LLM rufen)
-    bleibt im `generate`-Callback der jeweiligen Pipeline.
-  * `load_local_explanation` / `load_global_explanation` – zentrale Erklärungs-IO.
-  * `build_generation_record` – ein Record-Schema für alle drei Pipelines.
+  * `run_resumable_generation` - skip if exists loop that makes the n=20 run
+    resumable after an API abort, lossless and idempotent (no double counting on
+    re-run). The modality specific work (build prompt, call LLM) stays in the
+    `generate` callback of each pipeline.
+  * `load_local_explanation` / `load_global_explanation` - central explanation IO.
+  * `build_generation_record` - one record schema for all three pipelines.
 
-`n_generations == 1` hält das Dateinamensschema (`{model}_inst{iid}.json`); höhere
-Werte hängen `_gen{idx}` an (für etwaige Repeated-Sampling-Läufe vorbereitet).
+`n_generations == 1` keeps the file name scheme (`{model}_inst{iid}.json`); higher
+values append `_gen{idx}` (prepared for possible repeated sampling runs).
 """
 
 from __future__ import annotations
@@ -23,8 +23,8 @@ from pathlib import Path
 from typing import Any, Callable, Iterable, Optional
 
 # generate(model_name, instance_id, generation_idx) -> record dict | None
-#   Gibt None zurück, um diese Generation zu überspringen (z. B. nach einem
-#   Fehler in der Tool-Use-Schleife, NB 04d) — dann wird nichts persistiert.
+#   Returns None to skip this generation (for example after an error in the
+#   Tool Use loop, NB 04d), then nothing is persisted.
 GenerateFn = Callable[[str, int, int], Optional[dict]]
 HookFn = Callable[[dict, str, int, int], None]
 
@@ -36,10 +36,10 @@ def load_local_explanation(
     loss_key: str = "poisson_log",
     explanations_dir: Path | str,
 ) -> dict:
-    """Lokale SHAP-/EBM-Erklärung einer Test-Instanz (`local_{model}_{loss}_inst{id}.json`).
+    """Local SHAP/EBM explanation of a test instance (`local_{model}_{loss}_inst{id}.json`).
 
-    Bisher in NB 04b/04c dreifach inline geladen; zentralisiert, damit Pfadschema und
-    Loss-Schlüssel an einer Stelle leben.
+    Previously inlined three times in NB 04b/04c; centralised so the path scheme and
+    loss key live in one place.
     """
     p = Path(explanations_dir) / f"local_{model_name}_{loss_key}_inst{instance_id}.json"
     return json.loads(p.read_text())
@@ -51,7 +51,7 @@ def load_global_explanation(
     loss_key: str = "poisson_log",
     explanations_dir: Path | str,
 ) -> dict:
-    """Globale Feature-Importance eines Modells (`global_{model}_{loss}.json`)."""
+    """Global feature importance of a model (`global_{model}_{loss}.json`)."""
     p = Path(explanations_dir) / f"global_{model_name}_{loss_key}.json"
     return json.loads(p.read_text())
 
@@ -74,18 +74,18 @@ def build_generation_record(
     include_cache: bool = True,
     extra: Optional[dict] = None,
 ) -> dict:
-    """Baut den persistierten Erklärungs-Record — ein Schema für alle drei Pipelines.
+    """Build the persisted explanation record - one schema for all three pipelines.
 
-    Reproduziert die zuvor in NB 04b/04c/06 dreifach inline gebauten Records **exakt**
-    (inkl. Key-Reihenfolge), parametrisiert über die wenigen echten Unterschiede:
+    Reproduces the records previously inlined three times in NB 04b/04c/06 exactly
+    (including key order), parametrised over the few real differences:
 
-    * ``extra``         — modalitätsspezifische Felder, direkt nach ``explanation``
-                          eingefügt (NB 04c: ``plot_file``; NB 04d: ``stop_reason`` /
-                          ``tool_calls`` / ``n_tool_calls``).
-    * ``prediction``    — weggelassen, wenn nicht übergeben (NB 04d führt keine
-                          Vorhersage im Record).
-    * ``include_cache`` — ``cache_read_input_tokens`` in ``usage`` (NB 04b/04c: ja;
-                          NB 04d Tool-Use: nein).
+    * ``extra``         - modality specific fields, inserted directly after
+                          ``explanation`` (NB 04c: ``plot_file``; NB 04d:
+                          ``stop_reason`` / ``tool_calls`` / ``n_tool_calls``).
+    * ``prediction``    - omitted when not passed (NB 04d carries no prediction in
+                          the record).
+    * ``include_cache`` - ``cache_read_input_tokens`` in ``usage`` (NB 04b/04c: yes;
+                          NB 04d Tool Use: no).
     """
     in_tok  = usage.get("input_tokens", 0)
     out_tok = usage.get("output_tokens", 0)
@@ -117,10 +117,10 @@ def generation_filename(
     generation_idx: int = 0,
     n_generations: int = 1,
 ) -> str:
-    """Dateiname einer einzelnen Generation.
+    """File name of a single generation.
 
-    Bei `n_generations == 1` ohne Generations-Suffix (rückwärtskompatibel zu den
-    bereits committeten Artefakten); ab 2 mit `_gen{idx}`.
+    For `n_generations == 1` without a generation suffix (backward compatible with
+    the already committed artefacts); from 2 on with `_gen{idx}`.
     """
     if n_generations == 1:
         return f"{model_name}_inst{instance_id}.json"
@@ -137,33 +137,32 @@ def run_resumable_generation(
     on_skip: Optional[HookFn] = None,
     on_result: Optional[HookFn] = None,
 ) -> list[dict]:
-    """Führt die Generierung über alle (Modell × Instanz × Generation) aus und persistiert.
+    """Run generation over all (model x instance x generation) and persist.
 
-    Kontrakt:
-      * **Resume:** Existiert die Zieldatei bereits, wird sie geladen und der Record
-        an das Ergebnis angehängt — kein erneuter `generate`-Aufruf.
-      * **Idempotenz:** Ein zweiter vollständiger Lauf ruft `generate` kein weiteres
-        Mal auf und erzeugt keine Duplikate (gleiche Länge, gleiche Records).
-      * **Verlustfrei:** Jeder erzeugte Record wird sofort als JSON geschrieben,
-        bevor zur nächsten Einheit gegangen wird.
-      * **Fehler-Skip:** Gibt `generate` None zurück, wird nichts geschrieben und
-        nichts angehängt (die Einheit bleibt offen und wird beim nächsten Lauf
-        erneut versucht).
+    Contract:
+      * **Resume:** if the target file already exists it is loaded and the record
+        appended to the result, no further `generate` call.
+      * **Idempotency:** a second full run does not call `generate` again and
+        produces no duplicates (same length, same records).
+      * **Lossless:** each produced record is written as JSON immediately before
+        moving to the next unit.
+      * **Error skip:** if `generate` returns None, nothing is written and nothing
+        appended (the unit stays open and is retried on the next run).
 
     Parameters
     ----------
-    model_names    : XAI-Modell-Schlüssel, z. B. ["xgb", "ebm"].
-    instance_ids   : Test-Instanz-IDs (utils.INSTANCE_IDS).
-    out_dir        : Zielverzeichnis; wird bei Bedarf angelegt.
-    generate       : Callback, das den Record für (model, iid, gen_idx) liefert
-                     oder None zum Überspringen.
-    n_generations  : Generationen pro Instanz (Phase 3b: 3). Default 1.
-    on_skip        : optionaler Hook (record, model, iid, gen_idx) bei Resume-Skip.
-    on_result      : optionaler Hook (record, model, iid, gen_idx) nach Persistenz.
+    model_names    : XAI model keys, for example ["xgb", "ebm"].
+    instance_ids   : test instance IDs (utils.INSTANCE_IDS).
+    out_dir        : target directory; created if needed.
+    generate       : callback that returns the record for (model, iid, gen_idx)
+                     or None to skip.
+    n_generations  : generations per instance. Default 1.
+    on_skip        : optional hook (record, model, iid, gen_idx) on a resume skip.
+    on_result      : optional hook (record, model, iid, gen_idx) after persistence.
 
     Returns
     -------
-    list[dict] : alle Records in Iterationsreihenfolge (geladen + neu erzeugt).
+    list[dict] : all records in iteration order (loaded + newly produced).
     """
     out_dir = Path(out_dir)
     out_dir.mkdir(parents=True, exist_ok=True)

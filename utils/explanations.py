@@ -1,10 +1,9 @@
 """
-utils/explanations.py – Zentrales Feature-Schema und Erklärungs-Builder.
+utils/explanations.py - central feature schema and explanation builders.
 
-Das FEATURE_SCHEMA wird in der JSON-Schnittstelle an das LLM übergeben
-(siehe Implementierungsplan, Abschnitt 5). Es ist hier *einmal* definiert,
-damit alle Notebooks (03, 04, 05, 06) und die Tool-Use-Pipeline (06)
-identische Feature-Beschreibungen verwenden.
+The FEATURE_SCHEMA is passed to the LLM in the JSON interface. It is defined here
+once so that all notebooks (03, 04, 05, 06) and the Tool Use pipeline (06) use
+identical feature descriptions.
 """
 
 from __future__ import annotations
@@ -26,112 +25,112 @@ HUM_FACTOR:  int = 100
 WIND_FACTOR: int = 67
 
 WEEKDAY_NAMES: list[str] = [
-    "Sonntag", "Montag", "Dienstag", "Mittwoch",
-    "Donnerstag", "Freitag", "Samstag",
+    "Sunday", "Monday", "Tuesday", "Wednesday",
+    "Thursday", "Friday", "Saturday",
 ]
 MONTH_NAMES: list[str] = [
-    "", "Januar", "Februar", "März", "April", "Mai", "Juni",
-    "Juli", "August", "September", "Oktober", "November", "Dezember",
+    "", "January", "February", "March", "April", "May", "June",
+    "July", "August", "September", "October", "November", "December",
 ]
 WEATHER_NAMES: dict[int, str] = {
-    1: "klar/wenige Wolken",
-    2: "Nebel/bewölkt",
-    3: "leichter Regen/Schnee",
-    4: "Starkregen/Gewitter",
+    1: "clear/few clouds",
+    2: "mist/cloudy",
+    3: "light rain/snow",
+    4: "heavy rain/thunderstorm",
 }
 
 # -----------------------------------------------------------------------------
 # Feature-Schema
 # -----------------------------------------------------------------------------
 FEATURE_SCHEMA: dict[str, dict[str, Any]] = {
-    # --- Kategoriale Features (category-dtype) ---
+    # --- Categorical features (category dtype) ---
     "weathersit": {
         "type": "categorical",
-        "description": "Wetterlage",
+        "description": "Weather situation",
         "categories": WEATHER_NAMES,
     },
     "mnth": {
         "type": "categorical",
-        "description": "Monat (1=Januar, 12=Dezember)",
+        "description": "Month (1=January, 12=December)",
         "range": [1, 12],
     },
     "hr": {
         "type": "categorical",
-        "description": "Stunde des Tages (0-23)",
+        "description": "Hour of the day (0 to 23)",
         "range": [0, 23],
     },
     "weekday": {
         "type": "categorical",
-        "description": "Wochentag (0=Sonntag, 6=Samstag)",
+        "description": "Weekday (0=Sunday, 6=Saturday)",
         "range": [0, 6],
     },
-    # --- Numerische Features (float64) ---
+    # --- Numerical features (float64) ---
     "yr": {
         "type": "binary",
-        "description": "Jahr (0=2011, 1=2012)",
+        "description": "Year (0=2011, 1=2012)",
         "categories": {0: "2011", 1: "2012"},
     },
     "holiday": {
         "type": "binary",
-        "description": "Feiertag (0=kein Feiertag, 1=Feiertag)",
-        "categories": {0: "kein Feiertag", 1: "Feiertag"},
+        "description": "Holiday (0=no, 1=yes)",
+        "categories": {0: "no holiday", 1: "holiday"},
     },
     "temp": {
         "type": "numerical",
-        "description": "Normalisierte Temperatur in Celsius (geteilt durch 41)",
+        "description": "Normalised temperature in Celsius (divided by 41)",
         "range": [0.0, 1.0],
     },
     "hum": {
         "type": "numerical",
-        "description": "Normalisierte Luftfeuchtigkeit (geteilt durch 100)",
+        "description": "Normalised humidity (divided by 100)",
         "range": [0.0, 1.0],
     },
     "windspeed": {
         "type": "numerical",
-        "description": "Normalisierte Windgeschwindigkeit (geteilt durch 67)",
+        "description": "Normalised wind speed (divided by 67)",
         "range": [0.0, 1.0],
     },
-    # Entfernte Features (redundant, nicht im Modell):
-    #   season     → aus mnth ableitbar
-    #   workingday → aus weekday + holiday ableitbar
+    # Removed features (redundant, not in the model):
+    #   season     derivable from mnth
+    #   workingday derivable from weekday + holiday
 }
 
 TARGET_DESCRIPTION: dict[str, Any] = {
     "name": "cnt",
     "description": (
-        "Anzahl der ausgeliehenen Fahrräder pro Stunde "
-        "(Summe aus Casual- und Registered-Nutzern)"
+        "Number of rented bikes per hour "
+        "(sum of casual and registered users)"
     ),
     "type": "count",
 }
 
 
 # -----------------------------------------------------------------------------
-# Öffentliche Denormalisierungs-Helfer (einzige Quelle)
+# Public denormalisation helpers (single source)
 # -----------------------------------------------------------------------------
 
 def humanize_feature(feature: str, value: Any) -> str | None:
-    """Konvertiert rohe Feature-Werte in lesbare Strings für das LLM."""
+    """Convert raw feature values into readable strings for the LLM."""
     try:
-        if feature == "temp":       return f"~{float(value) * TEMP_FACTOR:.1f} °C"
+        if feature == "temp":       return f"~{float(value) * TEMP_FACTOR:.1f} C"
         if feature == "hum":        return f"{float(value) * HUM_FACTOR:.0f} %"
         if feature == "windspeed":  return f"{float(value) * WIND_FACTOR:.1f} km/h"
-        if feature == "hr":         return f"{int(value):02d}:00 Uhr"
+        if feature == "hr":         return f"{int(value):02d}:00"
         if feature == "weekday":    return WEEKDAY_NAMES[int(value)]
         if feature == "mnth":       return MONTH_NAMES[int(value)]
         if feature == "weathersit": return WEATHER_NAMES.get(int(value))
         if feature == "yr":         return "2011" if int(value) == 0 else "2012"
-        if feature == "holiday":    return "Feiertag" if int(value) == 1 else "kein Feiertag"
+        if feature == "holiday":    return "holiday" if int(value) == 1 else "no holiday"
     except (ValueError, TypeError, IndexError):
         pass
     return None
 
 
 def build_context_string(fv: dict) -> str:
-    """Menschenlesbare Komma-Liste aller Feature-Werte (NB04b JSON-Payload-Feld)."""
+    """Human readable comma list of all feature values (NB04b JSON payload field)."""
     parts: list[str] = []
     if "hr" in fv:
-        parts.append(f"{int(fv['hr']):02d}:00 Uhr")
+        parts.append(f"{int(fv['hr']):02d}:00")
     if "weekday" in fv:
         parts.append(WEEKDAY_NAMES[int(fv["weekday"])])
     if "mnth" in fv:
@@ -139,23 +138,23 @@ def build_context_string(fv: dict) -> str:
     if "yr" in fv:
         parts.append("2011" if int(fv["yr"]) == 0 else "2012")
     if "weathersit" in fv:
-        parts.append(WEATHER_NAMES.get(int(fv["weathersit"]), "unbekannt"))
+        parts.append(WEATHER_NAMES.get(int(fv["weathersit"]), "unknown"))
     if "temp" in fv:
-        parts.append(f"~{float(fv['temp']) * TEMP_FACTOR:.1f} °C")
+        parts.append(f"~{float(fv['temp']) * TEMP_FACTOR:.1f} C")
     if "hum" in fv:
-        parts.append(f"{float(fv['hum']) * HUM_FACTOR:.0f} % Luftfeuchtigkeit")
+        parts.append(f"{float(fv['hum']) * HUM_FACTOR:.0f} % humidity")
     if "windspeed" in fv:
-        parts.append(f"Wind {float(fv['windspeed']) * WIND_FACTOR:.1f} km/h")
+        parts.append(f"wind {float(fv['windspeed']) * WIND_FACTOR:.1f} km/h")
     if "holiday" in fv and int(fv["holiday"]) == 1:
-        parts.append("Feiertag")
+        parts.append("holiday")
     return ", ".join(parts)
 
 
 # -----------------------------------------------------------------------------
-# Interne Hilfsfunktionen
+# Internal helper functions
 # -----------------------------------------------------------------------------
 
-# Module-level cache: model object → shap.TreeExplainer (avoid re-creating per call)
+# Module level cache: model object to shap.TreeExplainer (avoid re-creating per call)
 _shap_cache: weakref.WeakKeyDictionary = weakref.WeakKeyDictionary()
 
 
@@ -167,7 +166,7 @@ def _get_shap_explainer(model: Any) -> Any:
 
 
 def _feat_value(val: Any) -> Any:
-    """Konvertiert numpy-Skalare in Python-native Typen für JSON."""
+    """Convert numpy scalars to Python native types for JSON."""
     if isinstance(val, (np.integer,)):
         return int(val)
     if isinstance(val, (np.floating,)):
@@ -176,7 +175,7 @@ def _feat_value(val: Any) -> Any:
 
 
 def _global_xgb(model: Any, X_train: pd.DataFrame) -> tuple[list[str], list[float], float]:
-    """SHAP mean |value| über Trainingsset als globale Importance für XGBoost."""
+    """SHAP mean |value| over the training set as global importance for XGBoost."""
     explainer = _get_shap_explainer(model)
     shap_vals = explainer.shap_values(X_train)
     importance = np.abs(shap_vals).mean(axis=0).tolist()
@@ -185,25 +184,25 @@ def _global_xgb(model: Any, X_train: pd.DataFrame) -> tuple[list[str], list[floa
 
 
 def _global_ebm(model: Any) -> tuple[list[str], list[float], float]:
-    """EBM term importances (nur Haupteffekte, ohne Interaktionen)."""
+    """EBM term importances (main effects only, no interactions)."""
     gexp = model.explain_global()
     gd = gexp.data()
     names = gd["names"]
     scores = [float(s) for s in gd["scores"]]
-    # Intercept steckt in explain_local; für global nutzen wir predict-Mittelwert
-    # als Näherung des Basiswerts (wird in build_global übergeben).
+    # The intercept lives in explain_local; for global we use the mean prediction
+    # as an approximation of the base value (passed in build_global).
     main_names, main_scores = [], []
     for n, s in zip(names, scores):
-        if " & " not in n:  # Interaktionsterme ausschließen
+        if " & " not in n:  # exclude interaction terms
             main_names.append(n)
             main_scores.append(s)
-    return main_names, main_scores, 0.0  # base_value über Trainingsset separat
+    return main_names, main_scores, 0.0  # base_value over the training set separately
 
 
 def _local_xgb(
     model: Any, X_train: pd.DataFrame, instance: pd.DataFrame
 ) -> tuple[dict[str, float], float, float]:
-    """SHAP-Werte (log-Raum) + Basiswert + Vorhersage für eine Instanz."""
+    """SHAP values (log space) + base value + prediction for one instance."""
     explainer = _get_shap_explainer(model)
     shap_vals = explainer.shap_values(instance)[0]
     contribs = {col: float(v) for col, v in zip(instance.columns, shap_vals)}
@@ -215,17 +214,17 @@ def _local_xgb(
 def _local_ebm(
     model: Any, instance: pd.DataFrame
 ) -> tuple[dict[str, float], float, float]:
-    """EBM-Beiträge (log-Raum) + Intercept + Vorhersage für eine Instanz."""
+    """EBM contributions (log space) + intercept + prediction for one instance."""
     lexp = model.explain_local(instance)
     d = lexp.data(0)
     contribs = {n: float(s) for n, s in zip(d["names"], d["scores"])}
-    base_value = float(d["extra"]["scores"][0])  # Intercept
+    base_value = float(d["extra"]["scores"][0])  # intercept
     prediction = float(d["perf"]["predicted"])
     return contribs, base_value, prediction
 
 
 # -----------------------------------------------------------------------------
-# Öffentliche Builder
+# Public builders
 # -----------------------------------------------------------------------------
 
 def build_global(
@@ -235,15 +234,15 @@ def build_global(
     metrics: dict[str, float],
 ) -> dict:
     """
-    Erstellt eine globale Erklärungsstruktur (JSON-serialisierbar).
+    Build a global explanation structure (JSON serialisable).
 
-    Rückgabe:
+    Returns:
         {
           "model": str,
           "task": TARGET_DESCRIPTION,
           "feature_schema": FEATURE_SCHEMA,
           "metrics": {...},
-          "base_value": float,          # log-Raum (Poisson) oder cnt-Raum (RMSE)
+          "base_value": float,          # log space (Poisson) or cnt space (RMSE)
           "global_importance": [
               {"feature": str, "importance": float, "rank": int}, ...
           ]
@@ -253,11 +252,11 @@ def build_global(
         names, scores, base_value = _global_xgb(model, X_train)
     elif model_name == "ebm":
         names, scores, _ = _global_ebm(model)
-        # EBM-Basiswert: Mittelwert der Trainingsvorhersagen (log-Raum)
+        # EBM base value: mean of the training predictions (log space)
         import numpy as np
         base_value = float(np.log(model.predict(X_train)).mean())
     else:
-        raise ValueError(f"Unbekannter model_name: {model_name!r}")
+        raise ValueError(f"Unknown model_name: {model_name!r}")
 
     ranked = sorted(
         zip(names, scores), key=lambda x: -x[1]
@@ -283,18 +282,18 @@ def build_local(
     instance_id: int,
 ) -> dict:
     """
-    Erstellt eine lokale Erklärungsstruktur für eine einzelne Test-Instanz.
+    Build a local explanation structure for a single test instance.
 
-    instance_id ist der Positions-Index im X_test DataFrame (iloc).
+    instance_id is the position index in the X_test DataFrame (iloc).
 
-    Rückgabe:
+    Returns:
         {
           "model": str,
           "instance_id": int,
           "feature_values": {feature: value, ...},
           "y_true": float,
-          "prediction": float,          # original Skala (cnt)
-          "base_value": float,          # log-Raum
+          "prediction": float,          # original scale (cnt)
+          "base_value": float,          # log space
           "contribution_space": "log",
           "contributions": [
               {"feature": str, "value": ..., "contribution": float}, ...
@@ -309,7 +308,7 @@ def build_local(
     elif model_name == "ebm":
         contribs, base_value, prediction = _local_ebm(model, instance)
     else:
-        raise ValueError(f"Unbekannter model_name: {model_name!r}")
+        raise ValueError(f"Unknown model_name: {model_name!r}")
 
     feature_values = {
         col: _feat_value(instance.iloc[0][col])
@@ -324,7 +323,7 @@ def build_local(
                 "contribution": round(float(c), 6),
             }
             for f, c in contribs.items()
-            if f in feature_values  # Interaktionsterme beim EBM überspringen
+            if f in feature_values  # skip EBM interaction terms
         ],
         key=lambda x: -abs(x["contribution"]),
     )
@@ -342,7 +341,7 @@ def build_local(
 
 
 def save_explanation(data: dict, filename: str, out_dir: Path | None = None) -> Path:
-    """Speichert ein Erklärungsdict als JSON."""
+    """Save an explanation dict as JSON."""
     import json
     out_dir = Path(out_dir) if out_dir is not None else EXPLANATIONS_DIR
     out_dir.mkdir(parents=True, exist_ok=True)

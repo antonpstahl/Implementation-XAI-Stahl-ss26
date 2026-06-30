@@ -1,23 +1,23 @@
-"""utils/faithfulness.py – Skalierungs-Faithfulness nach Ichmoukhamedov et al. (2024).
+"""utils/faithfulness.py - scaling faithfulness following Ichmoukhamedov et al. (2024).
 
-Ground-truth-verankerte Faithfulness-Metriken (RA/SA/VA, Gl. 1 im Paper) für den
-n≈200-Vollauf (Phase 3b). **Treuer Port** der in `06_Evaluation_Ichmoukhamedov`
-auf n=20 entwickelten Logik — identischer Extraktions-Prompt, identischer Parser
-und eine **byte-für-byte identische** `compute_faithfulness` (die n=20-Zahlen
-reproduzieren), erweitert um:
+Ground truth anchored faithfulness metrics (RA/SA/VA, Eq. 1 in the paper) for a
+larger run. Faithful port of the logic developed on n=20 in
+`06_Evaluation_Ichmoukhamedov`: identical extraction prompt, identical parser and a
+byte for byte identical `compute_faithfulness` (reproducing the n=20 numbers),
+extended with:
 
-  * **gen-aware** Verarbeitung (N Generationen pro Instanz, eigene `custom_id`s),
-  * einen **Batch-Extraktionspfad** (Extraktion ist ein Einzelschritt-Call → voll
-    batchbar, −50 % Kosten, wie der Judge), und
-  * **Extraktionsvalidität** (`extraction_coverage` / `extraction_validity_summary`):
-    automatisch berechenbare Proxys dafür, wie verlässlich das *Messinstrument*
-    (der Extraktor) ist — denn die Fehlertaxonomie (NB 07) zeigte 19/30
-    Extraktor-Artefakte und eine Rang-0-Extraktor-Genauigkeit von nur 55 %.
-    RA/SA/VA messen **Präzision, nicht Recall** (NB 06 §4.1); die Validitäts-
-    Kennzahlen machen genau diese Einschränkung quantitativ.
+  * generation aware processing (N generations per instance, own `custom_id`s),
+  * a batch extraction path (extraction is a single step call, so fully batchable,
+    about 50 percent cheaper, like the judge), and
+  * extraction validity (`extraction_coverage` / `extraction_validity_summary`):
+    automatically computable proxies for how reliable the measurement instrument
+    (the extractor) is, because the error taxonomy (NB 07) showed 19/30 extractor
+    artefacts and a rank 0 extractor accuracy of only 55 percent. RA/SA/VA measure
+    precision, not recall (NB 06 section 4.1); the validity figures quantify exactly
+    that limitation.
 
-Bewusst getrennt vom n=20-Notebook (NB 06 bleibt unangetastet); `08b_Scaling_
-Faithfulness` nutzt diese Helfer auf den Skalierungs-Artefakten unter
+Deliberately separate from the n=20 notebook (NB 06 stays untouched); `08b_Scaling_
+Faithfulness` uses these helpers on the scaling artefacts under
 ``results/pipeline0X/scale/``.
 """
 
@@ -34,18 +34,18 @@ from utils.batch import make_custom_id
 from utils.explanations import FEATURE_SCHEMA, HUM_FACTOR, TEMP_FACTOR, WIND_FACTOR
 
 LOSS_KEY_DEFAULT = "poisson_log"
-TOP_K_DEFAULT = 4  # Paper: top-4 Features nach |Beitrag|
+TOP_K_DEFAULT = 4  # paper: top 4 features by absolute contribution
 
-# Extraktions-Prompt + System (treuer Port aus NB 06 Zelle 5).
+# Extraction prompt + system (faithful port from NB 06 cell 5).
 EXTRACTION_SYSTEM = (
-    "Du bist ein Extraktionsmodell für XAI-Narrative eines Fahrradverleih-Modells.\n"
-    "Extrahiere die angeforderten Informationen ausschließlich aus dem Narrativ.\n"
-    "Antworte ausschließlich mit einem validen JSON-Objekt — kein Text, keine Markdown-Blöcke."
+    "You are an extraction model for XAI narratives of a bike rental model.\n"
+    "Extract the requested information only from the narrative.\n"
+    "Answer only with a valid JSON object, no text, no markdown blocks."
 )
 
-# Denormalisierung: normalisierte Featurewerte → menschlich lesbare Einheiten.
-# Quelle der Faktoren: utils.explanations (DRY-konsolidiert, Phase 3·2), damit
-# °C/%/km-h-Umrechnung nicht gegen Generierungs-/Judge-Prompt divergiert.
+# Denormalisation: normalised feature values to human readable units.
+# Factors come from utils.explanations (single source), so the C/%/km-h
+# conversion does not diverge from the generation or judge prompt.
 _DENORM = {
     "temp":      lambda v: v * TEMP_FACTOR,
     "hum":       lambda v: v * HUM_FACTOR,
@@ -54,36 +54,36 @@ _DENORM = {
 
 
 def build_extraction_prompt(explanation: str, xai_model: str) -> str:
-    """Baut den Extraktions-User-Prompt (JSON) — treuer Port aus NB 06."""
+    """Build the extraction user prompt (JSON), faithful port from NB 06."""
     feat_descs = {f: FEATURE_SCHEMA[f]["description"] for f in FEATURE_SCHEMA}
     payload = {
-        "aufgabe": (
-            f"Extrahiere strukturierte Informationen aus dem folgenden deutschen Narrativ "
-            f"zu einem {xai_model}-Regressionsmodell für einen Fahrradverleih. "
-            f"Das Modell sagt stündliche Fahrrad-Ausleihen voraus. "
-            f"Positive Beiträge erhöhen die Vorhersage, negative senken sie."
+        "task": (
+            f"Extract structured information from the following English narrative "
+            f"about a {xai_model} regression model for a bike rental company. "
+            f"The model predicts hourly bike rentals. "
+            f"Positive contributions raise the prediction, negative ones lower it."
         ),
-        "narrativ": explanation,
-        "alle_features": list(FEATURE_SCHEMA.keys()),
-        "feature_beschreibungen": feat_descs,
-        "extraktionsanweisung": (
-            "Gib für jedes Feature, das im Narrativ als wichtig erwähnt wird, ein Objekt zurück:\n"
-            "  rank: 0-basierter Wichtigkeitsrang laut Narrativ (0 = wichtigstes Feature)\n"
-            "  sign: +1 wenn das Feature die Vorhersage erhöht, -1 wenn es sie senkt\n"
-            "  value: numerischer Featurewert, falls explizit im Narrativ genannt, sonst null\n"
-            "  assumption: einziger Satz mit Hintergrundwissen warum das Feature diesen Einfluss hat; "
-            '"None" falls kein Hintergrundwissen hinzugefügt wurde'
+        "narrative": explanation,
+        "all_features": list(FEATURE_SCHEMA.keys()),
+        "feature_descriptions": feat_descs,
+        "extraction_instruction": (
+            "For each feature mentioned as important in the narrative, return an object:\n"
+            "  rank: 0 based importance rank according to the narrative (0 = most important feature)\n"
+            "  sign: +1 if the feature raises the prediction, -1 if it lowers it\n"
+            "  value: numeric feature value if explicitly named in the narrative, else null\n"
+            "  assumption: a single sentence of background knowledge why the feature has this effect; "
+            '"None" if no background knowledge was added'
         ),
-        "ausgabeformat_beispiel": {
-            "hr":   {"rank": 0, "sign":  1, "value": 13,   "assumption": "Mittagszeit ist typischerweise nachfragereich."},
-            "temp": {"rank": 1, "sign": -1, "value": None, "assumption": "Kälte schreckt Radfahrer ab."},
+        "output_format_example": {
+            "hr":   {"rank": 0, "sign":  1, "value": 13,   "assumption": "Midday is typically high demand."},
+            "temp": {"rank": 1, "sign": -1, "value": None, "assumption": "Cold deters cyclists."},
         },
     }
     return json.dumps(payload, ensure_ascii=False, indent=2)
 
 
 def parse_extraction(raw: str) -> dict:
-    """Extrahiert das JSON-Objekt aus der Extraktor-Antwort (treuer Port, NB 06)."""
+    """Extract the JSON object from the extractor answer (faithful port, NB 06)."""
     m = re.search(r"\{.*\}", raw, re.DOTALL)
     if not m:
         return {}
@@ -94,7 +94,7 @@ def parse_extraction(raw: str) -> dict:
 
 
 def is_value_match(feat: str, extracted: float, gt: float, tol: float = 1.0) -> bool:
-    """Wertvergleich mit Toleranz; prüft auch denormalisierte Einheiten (treuer Port)."""
+    """Value comparison with tolerance; also checks denormalised units (faithful port)."""
     if abs(extracted - gt) <= tol:
         return True
     if feat in _DENORM:
@@ -105,11 +105,11 @@ def is_value_match(feat: str, extracted: float, gt: float, tol: float = 1.0) -> 
 
 
 def compute_faithfulness(extraction: dict, gt_contributions: list) -> dict:
-    """RA, SA, VA nach Gl. 1 aus Ichmoukhamedov et al. (2024) — treuer Port aus NB 06.
+    """RA, SA, VA following Eq. 1 from Ichmoukhamedov et al. (2024), faithful port from NB 06.
 
-    ϕ = null/nicht extrahiert → wird aus dem Nenner herausgerechnet. Iteriert über
-    die **extrahierten** Features (Präzision, nicht Recall — siehe NB 06 §4.1;
-    Recall/Coverage liefert :func:`extraction_coverage`).
+    phi = null/not extracted is removed from the denominator. Iterates over the
+    extracted features (precision, not recall, see NB 06 section 4.1; recall and
+    coverage are provided by :func:`extraction_coverage`).
     """
     gt_rank  = {c["feature"]: i for i, c in enumerate(gt_contributions)}
     gt_sign  = {c["feature"]: (1 if c["contribution"] >= 0 else -1)
@@ -123,7 +123,7 @@ def compute_faithfulness(extraction: dict, gt_contributions: list) -> dict:
     for feat, info in extraction.items():
         feat_key = feat.lower()
         if feat_key not in gt_rank:
-            continue  # Feature nicht unter Top-K → überspringen (wie im Paper)
+            continue  # feature not in the top K, skip (as in the paper)
 
         r = info.get("rank")
         if r is not None:
@@ -166,20 +166,20 @@ def compute_faithfulness(extraction: dict, gt_contributions: list) -> dict:
 
 
 def extraction_coverage(extraction: dict, gt_contributions: list) -> dict:
-    """Extraktionsvalidität je Narrativ — Proxys für die Verlässlichkeit des Extraktors.
+    """Extraction validity per narrative, proxies for the reliability of the extractor.
 
-    RA/SA/VA werten nur die *erwähnten* Features (Präzision). Diese Kennzahlen machen
-    den Recall- und Rausch-Anteil sichtbar — wichtig, weil der Extraktor selbst
-    fehleranfällig ist (NB 07: 19/30 Extraktor-Artefakte, Rang-0-Genauigkeit 55 %):
+    RA/SA/VA only score the mentioned features (precision). These figures make the
+    recall and noise share visible, important because the extractor itself is error
+    prone (NB 07: 19/30 extractor artefacts, rank 0 accuracy 55 percent):
 
-      * ``parse_empty``    — der Extraktor lieferte kein gültiges JSON (Messausfall).
-      * ``topk_recall``    — Anteil der Top-K-Ground-Truth-Features, die der Extraktor
-                             überhaupt erfasst hat (Gegenstück zur Präzision von RA/SA/VA).
-      * ``n_out_of_topk``  — extrahierte Features, die **nicht** unter Top-K liegen
-                             (werden in `compute_faithfulness` still übersprungen → Rausch-Proxy).
-      * ``r0_match``       — stimmt das vom Extraktor als Rang 0 markierte Feature mit
-                             dem SHAP-Rang-0 überein? (1/0/None) — direkter Bezug zur
-                             NB-07-Kennzahl (55 % Rang-0-Genauigkeit).
+      * ``parse_empty``    - the extractor produced no valid JSON (measurement failure).
+      * ``topk_recall``    - share of the top K ground truth features the extractor
+                             captured at all (counterpart to the precision of RA/SA/VA).
+      * ``n_out_of_topk``  - extracted features that are not in the top K (silently
+                             skipped in `compute_faithfulness`, a noise proxy).
+      * ``r0_match``       - does the feature the extractor marked as rank 0 match the
+                             SHAP rank 0? (1/0/None), directly related to the NB 07
+                             figure (55 percent rank 0 accuracy).
     """
     gt_features = [c["feature"].lower() for c in gt_contributions]
     gt_set = set(gt_features)
@@ -227,7 +227,7 @@ def load_gt_contributions(
     loss_key: str = LOSS_KEY_DEFAULT,
     explanations_dir: Path = EXPLANATIONS_DIR,
 ) -> list:
-    """Top-K SHAP-Ground-Truth-Beiträge aus ``local_{xai}_{loss}_inst{iid}.json``."""
+    """Top K SHAP ground truth contributions from ``local_{xai}_{loss}_inst{iid}.json``."""
     p = explanations_dir / f"local_{xai_model.lower()}_{loss_key}_inst{instance_id}.json"
     gt = json.loads(p.read_text())
     return gt["contributions"][:top_k]
@@ -235,7 +235,7 @@ def load_gt_contributions(
 
 def extraction_base_cid(prefix: str, pipeline: str, xai_model: str,
                         instance_id: int, generation: int) -> str:
-    """Gen-aware `custom_id` für eine Extraktion (analog zu den Judge-cids in NB 07b)."""
+    """Generation aware `custom_id` for an extraction (like the judge cids in NB 07b)."""
     return make_custom_id(prefix, pipeline, xai_model, instance_id, f"g{generation}")
 
 
@@ -248,14 +248,14 @@ def build_faithfulness_df(
     loss_key: str = LOSS_KEY_DEFAULT,
     explanations_dir: Path = EXPLANATIONS_DIR,
 ) -> pd.DataFrame:
-    """Baut die per-Narrativ-Faithfulness-Tabelle (RA/SA/VA + Validität) gen-aware.
+    """Build the per narrative faithfulness table (RA/SA/VA + validity) generation aware.
 
-    `df` sind die gen-aware Generierungs-Records (aus
-    :func:`utils.eval.load_scale_records`); `extraction_by_cid` mappt die
-    Extraktions-`custom_id` (siehe :func:`extraction_base_cid`) auf das geparste
-    Extraktions-Dict (`run_batch(...)['succeeded']`). Pro Zeile werden Ground-Truth
-    (je (xai, instance) gecacht), `compute_faithfulness` und `extraction_coverage`
-    zusammengeführt. Fehlende `custom_id`s ⇒ leere Extraktion (zählt als `parse_empty`).
+    `df` are the generation aware generation records (from
+    :func:`utils.eval.load_scale_records`); `extraction_by_cid` maps the extraction
+    `custom_id` (see :func:`extraction_base_cid`) to the parsed extraction dict
+    (`run_batch(...)['succeeded']`). Per row the ground truth (cached per (xai,
+    instance)), `compute_faithfulness` and `extraction_coverage` are merged. Missing
+    `custom_id`s mean an empty extraction (counts as `parse_empty`).
     """
     gt_cache: dict = {}
     rows = []
@@ -287,12 +287,13 @@ def build_faithfulness_df(
 
 
 def extraction_validity_summary(faith_df: pd.DataFrame) -> pd.DataFrame:
-    """Aggregierte Extraktionsvalidität je Pipeline (für den Validitäts-Disclaimer).
+    """Aggregated extraction validity per pipeline (for the validity disclaimer).
 
-    Spalten: Narrativ-Anzahl, Parse-Ausfallrate, Ø extrahierte Features, Ø Top-K-Recall,
-    Out-of-Top-K-Rate (Rausch-Anteil der Extraktion) und Rang-0-Trefferquote des
-    Extraktors (Bezug zur NB-07-Kennzahl 55 %). RA/SA/VA sind nur im Licht dieser
-    Coverage interpretierbar (Präzision, nicht Recall — NB 06 §4.1).
+    Columns: number of narratives, parse failure rate, mean extracted features, mean
+    top K recall, out of top K rate (noise share of the extraction) and rank 0 hit
+    rate of the extractor (related to the NB 07 figure of 55 percent). RA/SA/VA are
+    only interpretable in the light of this coverage (precision, not recall, NB 06
+    section 4.1).
     """
     g = faith_df.groupby("pipeline_label")
     out = g.agg(
@@ -309,18 +310,18 @@ def extraction_validity_summary(faith_df: pd.DataFrame) -> pd.DataFrame:
     return out.round(4)
 
 
-# ── Fehleranalyse / Extraktionsvalidität (NB 07 §6) ───────────────────────────
+# --- Error analysis / extraction validity (NB 07 section 6) ------------------
 
 def rank0_correctness(extraction: dict, gt_contributions: list) -> dict:
-    """Rang-0-Treue des Extraktors inkl. **Vorzeichen** (Erweiterung von ``extraction_coverage``).
+    """Rank 0 fidelity of the extractor including the sign (extension of ``extraction_coverage``).
 
-    ``extraction_coverage`` prüft nur die Feature-Identität (``r0_match``). Für die
-    Extraktionsvalidität (NB 07 §6) zählt zusätzlich das Vorzeichen: ein Rang-0 gilt nur
-    dann als korrekt, wenn Feature **und** Vorzeichen mit dem SHAP-Rang-0 übereinstimmen.
+    ``extraction_coverage`` checks only the feature identity (``r0_match``). For the
+    extraction validity (NB 07 section 6) the sign also counts: a rank 0 is only
+    correct if feature and sign both match the SHAP rank 0.
 
-    ``gt_contributions`` sind die (Top-K-)Beiträge, absteigend nach |Beitrag| sortiert.
-    Rückgabe: gt/ext Rang-0-Feature & -Vorzeichen, ``feat_match``, ``sign_match`` und
-    ``r0_correct`` (= beides zugleich).
+    ``gt_contributions`` are the (top K) contributions, sorted descending by absolute
+    contribution. Returns: gt/ext rank 0 feature and sign, ``feat_match``,
+    ``sign_match`` and ``r0_correct`` (= both at once).
     """
     gt_r0 = gt_contributions[0] if gt_contributions else None
     gt_r0_feat = gt_r0["feature"].lower() if gt_r0 else None
@@ -351,12 +352,12 @@ def rank0_correctness(extraction: dict, gt_contributions: list) -> dict:
 
 
 def correct_metric(obs_val: float, n_extracted: int) -> float:
-    """Obergrenze einer RA/SA-Metrik, falls der Rang-0-Fehler ein Mess-Artefakt war.
+    """Upper bound of an RA/SA metric if the rank 0 error was a measurement artefact.
 
-    NB 07 §6.4: Hat der Extraktor das Rang-0-Feature nachweislich falsch erfasst
-    (Mess- statt Erklärungsfehler), wäre bei korrekter Extraktion ein Rang-0-Treffer
-    hinzugekommen. Die korrigierte Metrik ersetzt einen Treffer von ``n``:
-    ``(obs·n + 1)/n``, gedeckelt bei 1.0. Bei ``n_extracted == 0`` bleibt der Wert unverändert.
+    NB 07 section 6.4: if the extractor provably captured the rank 0 feature wrong
+    (measurement error, not explanation error), a correct extraction would have added
+    a rank 0 hit. The corrected metric adds one hit out of ``n``: ``(obs*n + 1)/n``,
+    capped at 1.0. For ``n_extracted == 0`` the value stays unchanged.
     """
     if n_extracted <= 0:
         return obs_val
@@ -370,10 +371,11 @@ def load_explanation_text(
     *,
     results_dir: Path = RESULTS_DIR,
 ) -> str:
-    """Erklärungstext aus ``results/pipeline{prefix}/{xai}_inst{iid}.json`` (n=20-Lauf).
+    """Explanation text from ``results/pipeline{prefix}/{xai}_inst{iid}.json`` (n=20 run).
 
-    Kanonischer Loader für die Fehleranalyse (NB 07) — ersetzt drei dort dupliziert
-    Inline-Loader. Gibt ``''`` zurück, wenn die Datei fehlt (z. B. vor dem Generierungslauf).
+    Canonical loader for the error analysis (NB 07), replaces three inline loaders
+    duplicated there. Returns ``''`` if the file is missing (for example before the
+    generation run).
     """
     p = results_dir / f"pipeline{pipeline_prefix}" / f"{xai_model.lower()}_inst{instance_id}.json"
     if not p.exists():

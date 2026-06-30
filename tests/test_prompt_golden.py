@@ -1,23 +1,22 @@
 """
-Phase 3a — Prompt-Fix-Regression: Golden-Test.
+Prompt regression golden test.
 
-Test 1 — SHA-256-Hash-Check:
-  Friert die exakten Byte-Inhalte aller Prompt-Dateien ein.
-  Schlägt bei jeder Änderung fehl, bevor der teure Vollauf (Phase 3b) startet.
+Test 1 - SHA-256 hash check:
+  Freezes the exact byte contents of all prompt files.
+  Fails on any change before the expensive full run starts.
 
-  Wenn ein Prompt absichtlich verbessert wird:
-    1. Neue Datei speichern
-    2. Hash neu berechnen: shasum -a 256 prompts/<datei>.md
-    3. GOLDEN_HASHES in dieser Datei aktualisieren
-    4. pytest tests/test_prompt_golden.py grün bestätigen
+  When a prompt is intentionally improved:
+    1. Save the new file
+    2. Recompute the hash: shasum -a 256 prompts/<file>.md
+    3. Update GOLDEN_HASHES in this file
+    4. Confirm pytest tests/test_prompt_golden.py is green
 
-  judge_system.md ist in GOLDEN_HASHES aufgenommen (Phase 3·2/A4), weil
-  der Judge-Prompt die Messung bestimmt und Änderungen explizit bestätigt
-  werden sollen.
+  judge_system.md is included in GOLDEN_HASHES because the judge prompt
+  determines the measurement and changes should be confirmed explicitly.
 
-Test 2 — Key-Phrase-Assertion:
-  Prüft die semantisch kritischen Sätze des Phase-3-Fixes (yr-Vorzeichen +
-  Rangregel) direkt als Textsubstring — lesbarer Fehler bei Regression.
+Test 2 - key phrase assertion:
+  Checks the semantically critical sentences of the prompt fix (yr sign rule +
+  rank rule) directly as a text substring for a readable failure on regression.
 """
 
 from __future__ import annotations
@@ -31,48 +30,45 @@ ROOT        = Path(__file__).resolve().parent.parent
 PROMPTS_DIR = ROOT / "prompts"
 
 GOLDEN_HASHES: dict[str, str] = {
-    # Phase 3·2/B7+C: XML-Abschnitts-Tags (<vorhersage>/<treiber>/<empfehlung>),
-    # positive Instruktionen (keine Verbote), Halluzinations-Notausgang in allen
-    # drei Generierungs-Prompts. Davor (B6): Scratchpad; (B5): Few-shot; (A3): Harmonisierung.
-    "pipeline_04_json.md":   "76e4efa276360c45cf6acf83c05aa260a7aab8d8dd438c95440bec4632f02155",
-    "pipeline_05_vision.md": "c1ed676bbcd7037fc2067a91c7de71131dc8d4c9ca1e92f1359d78960b6108ed",
-    "pipeline_06_tooluse.md": "0562c817c8e2b4de3ec5d6070b84580cc48606c11857091f8e4a8c5ea5fa1bd8",
-    # Judge-Prompt (Phase 3·2/B7+C): AUSGABEFORMAT-Sektion mit XML-Schema ergänzt;
-    # Ankerbeispiele auf XML-Format umgestellt; Änderungen explizit bestätigt.
-    "judge_system.md":       "c19bafcc3ac584075ec5af640dfe8fce781fa360709a7ae05e82019edfa7e60f",
+    # English prompts with XML section tags (<analysis>/<prediction>/<drivers>/
+    # <recommendation>), sign and rank rules, and the yr few shot calibration.
+    "pipeline_04_json.md":   "89912121324f621f7a60fdf4fd58a0a42c7a363e3c5f05a9e4c36d26a934fe3c",
+    "pipeline_05_vision.md": "c5c7a832dbf502088583cd02d7099de30031b328a8385e951f32e81e8011ce24",
+    "pipeline_06_tooluse.md": "345503b794780b41102932ead0513a1e67f5085af8c2b37148b452c293491edf",
+    "judge_system.md":       "01097af9368ba6e01c03aa382b4a6d76d9a0ca206615b5bcfa85fb64093329cc",
 }
 
 
 @pytest.mark.parametrize("filename,expected_hash", GOLDEN_HASHES.items())
 def test_prompt_file_hash(filename: str, expected_hash: str) -> None:
-    """Prompt-Datei darf sich seit dem Phase-3-Fix nicht geändert haben."""
+    """A prompt file must not have changed since the frozen hash."""
     path = PROMPTS_DIR / filename
     actual = hashlib.sha256(path.read_bytes()).hexdigest()
     assert actual == expected_hash, (
-        f"\nPrompt '{filename}' hat sich seit dem Phase-3-Fix geändert.\n"
-        f"  erwartet: {expected_hash}\n"
-        f"  aktuell:  {actual}\n\n"
-        "Wenn die Änderung beabsichtigt ist (verbesserter Prompt):\n"
-        "  GOLDEN_HASHES in tests/test_prompt_golden.py aktualisieren.\n"
-        "Wenn nicht:\n"
-        "  git diff prompts/ prüfen und Rollback durchführen."
+        f"\nPrompt '{filename}' has changed since the frozen hash.\n"
+        f"  expected: {expected_hash}\n"
+        f"  actual:   {actual}\n\n"
+        "If the change is intentional (improved prompt):\n"
+        "  update GOLDEN_HASHES in tests/test_prompt_golden.py.\n"
+        "If not:\n"
+        "  check git diff prompts/ and roll back."
     )
 
 
 # ---------------------------------------------------------------------------
-# Test 2 — Key-Phrase-Assertion (Phase-3-spezifische Constraints)
+# Test 2 - key phrase assertion (prompt fix constraints)
 # ---------------------------------------------------------------------------
 
-# (filename, phrase, label) — jede fehlende Phrase ist ein eigener Testfall.
+# (filename, phrase, label) - each missing phrase is its own test case.
 REQUIRED_PHRASES: list[tuple[str, str, str]] = [
-    # yr-Vorzeichenregel (dominante Fehlerklasse C aus Phase 3)
-    ("pipeline_04_json.md",  "yr=0 (2011) mit negativem",                         "yr-sign-fix"),
-    ("pipeline_05_vision.md", "ein blauer yr-Balken (yr=0, 2011) ist ein dämpfender Faktor", "yr-sign-fix"),
-    ("pipeline_06_tooluse.md", "yr=0 (2011) mit negativem Beitrag",                "yr-sign-fix"),
-    # Rangregel
-    ("pipeline_04_json.md",   "**Rang bindend**",  "rank-rule"),
-    ("pipeline_05_vision.md", "**Rang bindend**",  "rank-rule"),
-    ("pipeline_06_tooluse.md", "**Rang bindend**", "rank-rule"),
+    # yr sign rule (dominant error class C from the taxonomy)
+    ("pipeline_04_json.md",   "yr=0 (2011) with a negative contribution", "yr-sign-fix"),
+    ("pipeline_05_vision.md", "blue yr bar (yr=0, 2011)",                 "yr-sign-fix"),
+    ("pipeline_06_tooluse.md", "yr=0 (2011) with a negative contribution","yr-sign-fix"),
+    # rank rule
+    ("pipeline_04_json.md",   "**Rank binding**",  "rank-rule"),
+    ("pipeline_05_vision.md", "**Rank binding**",  "rank-rule"),
+    ("pipeline_06_tooluse.md", "**Rank binding**", "rank-rule"),
 ]
 
 _PHRASE_IDS = [f"{fn.replace('pipeline_', 'p').replace('.md', '')}/{label}"
@@ -80,19 +76,19 @@ _PHRASE_IDS = [f"{fn.replace('pipeline_', 'p').replace('.md', '')}/{label}"
 
 
 @pytest.mark.parametrize("filename,phrase,label", REQUIRED_PHRASES, ids=_PHRASE_IDS)
-def test_prompt_contains_phase3_phrase(filename: str, phrase: str, label: str) -> None:
-    """Kritische Phase-3-Constraint-Sätze müssen verbatim im Prompt enthalten sein."""
+def test_prompt_contains_fix_phrase(filename: str, phrase: str, label: str) -> None:
+    """Critical constraint sentences must appear verbatim in the prompt."""
     text = (PROMPTS_DIR / filename).read_text(encoding="utf-8")
     assert phrase in text, (
-        f"\nPhase-3-Constraint '{label}' fehlt in '{filename}'.\n"
-        f"  Erwarteter Substring:\n    {phrase!r}\n\n"
-        "Ursache: yr-Vorzeichenfehler-Fix oder Rangregel wurde entfernt/verändert.\n"
-        "Prompt wiederherstellen oder REQUIRED_PHRASES anpassen, falls bewusst geändert."
+        f"\nConstraint '{label}' missing in '{filename}'.\n"
+        f"  expected substring:\n    {phrase!r}\n\n"
+        "Cause: the yr sign fix or the rank rule was removed or changed.\n"
+        "Restore the prompt or adjust REQUIRED_PHRASES if changed on purpose."
     )
 
 
 # ---------------------------------------------------------------------------
-# Test 3 — strip_scratchpad (Phase 3·2/B6)
+# Test 3 - strip_scratchpad
 # ---------------------------------------------------------------------------
 
 import sys
@@ -101,32 +97,32 @@ from utils.llm import strip_scratchpad  # noqa: E402
 
 
 @pytest.mark.parametrize("raw,expected", [
-    # Block wird entfernt, XML-Prosa bleibt (B7: <vorhersage>-Tags)
+    # Block is removed, the XML prose stays (<prediction> tags)
     (
-        "<analyse>\nhr=8: positiv, Rang 1\nyr=0: negativ, Rang 2\n</analyse>\n\n<vorhersage>Text.</vorhersage>",
-        "<vorhersage>Text.</vorhersage>",
+        "<analysis>\nhr=8: positive, rank 1\nyr=0: negative, rank 2\n</analysis>\n\n<prediction>Text.</prediction>",
+        "<prediction>Text.</prediction>",
     ),
-    # Kein Block — Eingabe unverändert
+    # No block, input unchanged
     (
-        "<vorhersage>Kein Scratchpad.</vorhersage>",
-        "<vorhersage>Kein Scratchpad.</vorhersage>",
+        "<prediction>No scratchpad.</prediction>",
+        "<prediction>No scratchpad.</prediction>",
     ),
-    # Block mit CRLF
+    # Block with CRLF
     (
-        "<analyse>\r\nhr=8: positiv\r\n</analyse>\r\n<vorhersage>CRLF-Text.</vorhersage>",
-        "<vorhersage>CRLF-Text.</vorhersage>",
+        "<analysis>\r\nhr=8: positive\r\n</analysis>\r\n<prediction>CRLF text.</prediction>",
+        "<prediction>CRLF text.</prediction>",
     ),
-    # Mehrere Blöcke (robustness)
+    # Several blocks (robustness)
     (
-        "<analyse>A</analyse>\n<analyse>B</analyse>\n<vorhersage>Doppelt.</vorhersage>",
-        "<vorhersage>Doppelt.</vorhersage>",
+        "<analysis>A</analysis>\n<analysis>B</analysis>\n<prediction>Double.</prediction>",
+        "<prediction>Double.</prediction>",
     ),
-    # Leerer Block
+    # Empty block
     (
-        "<analyse></analyse>\n<vorhersage>Leer.</vorhersage>",
-        "<vorhersage>Leer.</vorhersage>",
+        "<analysis></analysis>\n<prediction>Empty.</prediction>",
+        "<prediction>Empty.</prediction>",
     ),
 ])
 def test_strip_scratchpad(raw: str, expected: str) -> None:
-    """strip_scratchpad entfernt <analyse>-Blöcke und lässt die Prosa unverändert."""
+    """strip_scratchpad removes <analysis> blocks and leaves the prose unchanged."""
     assert strip_scratchpad(raw) == expected

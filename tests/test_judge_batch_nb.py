@@ -7,7 +7,7 @@ und dem Real-time-Pfad des Judge-Laufs in NB05 (Zellen 10/18/21/34 — v1–v4).
 Abgedeckte Szenarien:
   * custom_id-Format: make_custom_id("jdg", version, pipeline_label, xai, iid)
     ist gültig und eindeutig für alle NB05-Pipeline-Labels (inkl. Sonderzeichen
-    wie "→" in "JSON→Text" und "-" in "Tool-Use").
+    wie Leerzeichen in "JSON to Text" und "Tool Use").
   * Ergebnis-Mapping: zip(entries, df_rows) ordnet base_cid korrekt der Zeile
     zu — Reihenfolge bleibt erhalten.
   * Schema-Gleichheit: Batch-Zeilen haben dieselben Keys wie der Real-time-Loop.
@@ -38,9 +38,9 @@ from tests.test_judge_batch import _xml, _mk_succeeded, _mk_errored
 
 PIPELINE_LABELS = {
     '00': 'Template',
-    '04': 'JSON→Text',
+    '04': 'JSON to Text',
     '05': 'Vision',
-    '06': 'Tool-Use',
+    '06': 'Tool Use',
 }
 PIPELINES   = ['00', '04', '05', '06']
 XAI_MODELS  = ['xgb', 'ebm']
@@ -133,14 +133,14 @@ def test_nb07_custom_ids_valid_and_unique_all_versions():
 
 
 def test_nb07_special_pipeline_labels_in_custom_id():
-    """Sonderzeichen in Pipeline-Labels ('→', '-') werden korrekt ersetzt/beibehalten."""
-    cid_json   = make_custom_id("jdg", "v1", "JSON→Text", "xgb", 42)
-    cid_tool   = make_custom_id("jdg", "v1", "Tool-Use",  "xgb", 42)
+    """Sonderzeichen in Pipeline-Labels (Leerzeichen) werden zu "_" ersetzt."""
+    cid_json   = make_custom_id("jdg", "v1", "JSON to Text", "xgb", 42)
+    cid_tool   = make_custom_id("jdg", "v1", "Tool Use",  "xgb", 42)
     cid_tmpl   = make_custom_id("jdg", "v1", "Template",  "xgb", 42)
     cid_vision = make_custom_id("jdg", "v1", "Vision",    "xgb", 42)
 
-    assert "JSON_Text" in cid_json   # '→' → '_'
-    assert "Tool-Use"  in cid_tool   # '-' bleibt
+    assert "JSON_to_Text" in cid_json   # spaces become _
+    assert "Tool_Use"  in cid_tool   # spaces become _
     assert "Template"  in cid_tmpl
     assert "Vision"    in cid_vision
 
@@ -237,7 +237,7 @@ def test_nb07_judge_n_excludes_none_scores():
     judge_n = df.groupby('pipeline_label')[['faithfulness']].count()
 
     # Nur 1 von 2 Einträgen hat gültige Scores.
-    assert judge_n.loc['JSON→Text', 'faithfulness'] == 1
+    assert judge_n.loc['JSON to Text', 'faithfulness'] == 1
 
 
 # ── 6. Partial failure: restliche Einträge korrekt im DataFrame ──────────────

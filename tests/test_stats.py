@@ -1,8 +1,8 @@
 """
-Phase 3a — Statistik-Funktionen testen.
+Statistics function tests.
 
-DoD: Unit-Tests gegen Referenzfälle (CI-Abdeckung bei bekanntem Generator,
-Wilcoxon gegen scipy, Cliff's-delta-Grenzfälle −1/0/+1) grün.
+Unit tests against reference cases (CI coverage with a known generator, Wilcoxon
+against scipy, Cliff's delta edge cases -1/0/+1).
 """
 from __future__ import annotations
 
@@ -31,7 +31,7 @@ from utils.stats import (
 # ---------------------------------------------------------------------------
 
 def test_bootstrap_ci_determinism():
-    """Gleicher seed → identische Tripel (ci_lo, ci_hi, observed)."""
+    """Same seed -> identical triples (ci_lo, ci_hi, observed)."""
     data = list(range(1, 21))
     first  = bootstrap_ci(data, seed=7)
     second = bootstrap_ci(data, seed=7)
@@ -39,18 +39,18 @@ def test_bootstrap_ci_determinism():
 
 
 def test_bootstrap_ci_monotone():
-    """ci_lower ≤ observed ≤ ci_upper für zufällige Eingaben."""
+    """ci_lower <= observed <= ci_upper for random inputs."""
     rng = np.random.default_rng(0)
     for seed in range(20):
         data = rng.normal(0, 1, size=50)
         lo, hi, obs = bootstrap_ci(data, seed=seed)
-        assert lo <= obs <= hi, f"seed={seed}: {lo} ≤ {obs} ≤ {hi} verletzt"
+        assert lo <= obs <= hi, f"seed={seed}: {lo} <= {obs} <= {hi} violated"
 
 
 def test_bootstrap_ci_coverage():
-    """95%-CI muss den wahren Mittelwert in ≈95 % der Wiederholungen einschließen.
+    """The 95 percent CI must contain the true mean in about 95 percent of repeats.
 
-    Erzeuge 500 Stichproben à n=40 aus N(0,1); Coverage soll 90–100 % liegen.
+    Draw 500 samples of n=40 from N(0,1); coverage should be 90 to 100 percent.
     """
     rng = np.random.default_rng(42)
     n_trials  = 500
@@ -62,17 +62,17 @@ def test_bootstrap_ci_coverage():
         if lo <= true_mean <= hi:
             covered += 1
     coverage = covered / n_trials
-    assert 0.90 <= coverage <= 1.00, f"Coverage {coverage:.3f} außerhalb [0.90, 1.00]"
+    assert 0.90 <= coverage <= 1.00, f"Coverage {coverage:.3f} outside [0.90, 1.00]"
 
 
 def test_bootstrap_ci_empty_returns_nan():
-    """Leere Eingabe → (nan, nan, nan)."""
+    """Empty input -> (nan, nan, nan)."""
     lo, hi, obs = bootstrap_ci([])
     assert all(np.isnan(v) for v in (lo, hi, obs))
 
 
 def test_bootstrap_ci_nan_values_dropped():
-    """NaN-Werte werden ignoriert; valide Einträge bleiben maßgeblich."""
+    """NaN values are ignored; valid entries remain decisive."""
     clean = [1.0, 2.0, 3.0, 4.0, 5.0]
     dirty = [1.0, np.nan, 2.0, np.nan, 3.0, 4.0, 5.0]
     lo_c, hi_c, obs_c = bootstrap_ci(clean, seed=0)
@@ -83,33 +83,33 @@ def test_bootstrap_ci_nan_values_dropped():
 
 
 # ---------------------------------------------------------------------------
-# cliffs_delta — Grenzfälle
+# cliffs_delta - edge cases
 # ---------------------------------------------------------------------------
 
 def test_cliffs_delta_plus_one():
-    """Alle x > alle y → d = +1.0."""
+    """All x > all y -> d = +1.0."""
     assert cliffs_delta([10, 11, 12], [1, 2, 3]) == pytest.approx(1.0)
 
 
 def test_cliffs_delta_minus_one():
-    """Alle x < alle y → d = −1.0."""
+    """All x < all y -> d = -1.0."""
     assert cliffs_delta([1, 2, 3], [10, 11, 12]) == pytest.approx(-1.0)
 
 
 def test_cliffs_delta_zero():
-    """x == y (identische Werte) → d = 0.0."""
+    """x == y (identical values) -> d = 0.0."""
     assert cliffs_delta([1, 2, 3], [1, 2, 3]) == pytest.approx(0.0)
 
 
 def test_cliffs_delta_antisymmetric():
-    """cliffs_delta(x, y) == −cliffs_delta(y, x)."""
+    """cliffs_delta(x, y) == -cliffs_delta(y, x)."""
     x = [1, 3, 5, 7]
     y = [2, 4, 6, 8]
     assert cliffs_delta(x, y) == pytest.approx(-cliffs_delta(y, x))
 
 
 def test_cliffs_delta_range():
-    """Ergebnis liegt stets in [−1, +1]."""
+    """Result is always in [-1, +1]."""
     rng = np.random.default_rng(99)
     for _ in range(50):
         x = rng.normal(0, 1, size=10)
@@ -118,7 +118,7 @@ def test_cliffs_delta_range():
         assert -1.0 <= d <= 1.0
 
 def test_cliffs_delta_empty_returns_nan():
-    """Leere Eingabe → nan."""
+    """Empty input -> nan."""
     assert np.isnan(cliffs_delta([], [1, 2, 3]))
     assert np.isnan(cliffs_delta([1, 2, 3], []))
 
@@ -136,7 +136,7 @@ def test_cliffs_delta_empty_returns_nan():
     (0.473, "medium"),
     (0.474, "large"),
     (1.00,  "large"),
-    # Symmetrie: negatives d gleiche Magnitude
+    # Symmetry: negative d, same magnitude
     (-0.50, "large"),
     (-0.20, "small"),
 ])
@@ -149,12 +149,12 @@ def test_delta_magnitude_nan():
 
 
 # ---------------------------------------------------------------------------
-# wilcoxon_pairwise — Vergleich gegen scipy
+# wilcoxon_pairwise - comparison against scipy
 # ---------------------------------------------------------------------------
 
 @pytest.fixture
 def paired_df():
-    """Konstruiertes DataFrame mit 10 gematchten Paaren für zwei Pipelines."""
+    """Constructed DataFrame with 10 matched pairs for two pipelines."""
     rng = np.random.default_rng(123)
     n = 10
     scores_a = rng.uniform(2, 5, size=n).round(2)
@@ -168,7 +168,7 @@ def paired_df():
 
 
 def test_wilcoxon_pairwise_schema(paired_df):
-    """Rückgabe enthält alle erwarteten Spalten."""
+    """Return contains all expected columns."""
     result = wilcoxon_pairwise(paired_df, ["A", "B"], "score")
     expected_cols = {
         "pipeline_a", "pipeline_b", "n_pairs",
@@ -179,13 +179,13 @@ def test_wilcoxon_pairwise_schema(paired_df):
 
 
 def test_wilcoxon_pairwise_n_pairs(paired_df):
-    """n_pairs muss der Anzahl gematchter Paare entsprechen."""
+    """n_pairs must equal the number of matched pairs."""
     result = wilcoxon_pairwise(paired_df, ["A", "B"], "score")
     assert result.loc[0, "n_pairs"] == 10
 
 
 def test_wilcoxon_pairwise_vs_scipy(paired_df):
-    """p_value und Statistik müssen mit scipy.stats.wilcoxon übereinstimmen."""
+    """p_value and statistic must match scipy.stats.wilcoxon."""
     result = wilcoxon_pairwise(paired_df, ["A", "B"], "score")
 
     xa = paired_df[paired_df["pipeline_label"] == "A"].set_index("instance_id")["score"].values
@@ -197,7 +197,7 @@ def test_wilcoxon_pairwise_vs_scipy(paired_df):
 
 
 def test_wilcoxon_pairwise_cliffs_d_consistent(paired_df):
-    """cliffs_d in der Tabelle muss mit direktem cliffs_delta()-Aufruf übereinstimmen."""
+    """cliffs_d in the table must match a direct cliffs_delta() call."""
     result = wilcoxon_pairwise(paired_df, ["A", "B"], "score")
     xa = paired_df[paired_df["pipeline_label"] == "A"].set_index("instance_id")["score"].values
     xb = paired_df[paired_df["pipeline_label"] == "B"].set_index("instance_id")["score"].values
@@ -206,7 +206,7 @@ def test_wilcoxon_pairwise_cliffs_d_consistent(paired_df):
 
 
 def test_wilcoxon_pairwise_too_few_pairs():
-    """Weniger als 3 Paare → Zeile mit nan statt Fehler."""
+    """Fewer than 3 pairs -> row with nan instead of an error."""
     df = pd.DataFrame({
         "pipeline_label": ["A", "A", "B", "B"],
         "instance_id":    [0, 1, 0, 1],
@@ -219,31 +219,31 @@ def test_wilcoxon_pairwise_too_few_pairs():
 
 
 # ---------------------------------------------------------------------------
-# adjust_pvalues — Multiplizitätskorrektur (Holm / Benjamini-Hochberg)
+# adjust_pvalues - multiplicity correction (Holm / Benjamini-Hochberg)
 # ---------------------------------------------------------------------------
 
 def test_adjust_pvalues_holm_known():
-    """Hand gerechnetes Holm-Beispiel (m=3)."""
+    """Hand computed Holm example (m=3)."""
     adj = adjust_pvalues([0.01, 0.04, 0.03], method="holm")
     np.testing.assert_allclose(adj, [0.03, 0.06, 0.06], atol=1e-9)
 
 
 def test_adjust_pvalues_bh_known():
-    """Hand gerechnetes Benjamini-Hochberg-Beispiel (m=3)."""
+    """Hand computed Benjamini-Hochberg example (m=3)."""
     adj = adjust_pvalues([0.01, 0.04, 0.03], method="fdr_bh")
     np.testing.assert_allclose(adj, [0.03, 0.04, 0.04], atol=1e-9)
 
 
 def test_adjust_pvalues_nan_passthrough():
-    """NaN-Tests (n < 3) zählen nicht zur Familiengröße und bleiben NaN."""
+    """NaN tests (n < 3) do not count towards the family size and stay NaN."""
     adj = adjust_pvalues([np.nan, 0.01, 0.04, np.nan], method="holm")
     assert np.isnan(adj[0]) and np.isnan(adj[3])
-    # verbleibende zwei werden als Familie der Größe 2 korrigiert
+    # the remaining two are corrected as a family of size 2
     np.testing.assert_allclose(adj[[1, 2]], [0.02, 0.04], atol=1e-9)
 
 
 def test_adjust_pvalues_holm_at_least_bh():
-    """Holm (FWER) ist nie kleiner als BH (FDR) — elementweise."""
+    """Holm (FWER) is never smaller than BH (FDR), element wise."""
     pv = [0.001, 0.01, 0.02, 0.03, 0.2]
     holm = adjust_pvalues(pv, "holm")
     bh = adjust_pvalues(pv, "fdr_bh")
@@ -261,12 +261,12 @@ def test_adjust_pvalues_empty():
 
 
 # ---------------------------------------------------------------------------
-# wilcoxon_pairwise — Korrekturspalten
+# wilcoxon_pairwise - correction columns
 # ---------------------------------------------------------------------------
 
 @pytest.fixture
 def three_pipeline_df():
-    """Drei Pipelines × 10 gematchte Paare → C(3,2)=3 paarweise Tests."""
+    """Three pipelines x 10 matched pairs -> C(3,2)=3 pairwise tests."""
     rng = np.random.default_rng(7)
     n = 10
     a = rng.uniform(2, 5, size=n).round(2)
@@ -285,7 +285,7 @@ def test_wilcoxon_pairwise_adds_correction_columns(three_pipeline_df):
     assert {"p_value_adj", "reject"}.issubset(res.columns)
     assert len(res) == 3  # C(3,2)
     valid = res.dropna(subset=["p_value"])
-    # Holm-korrigiert ≥ roh; reject ist boolesch
+    # Holm corrected >= raw; reject is boolean
     assert np.all(valid["p_value_adj"] >= valid["p_value"] - 1e-9)
     assert res["reject"].dtype == bool
 

@@ -176,7 +176,7 @@ def _scale_df():
     rows = []
     for xai in ["XGB", "EBM"]:
         for gen in range(3):
-            rows.append({"pipeline": "04", "pipeline_label": "JSON→Text",
+            rows.append({"pipeline": "04", "pipeline_label": "JSON to Text",
                          "xai_model": xai, "instance_id": 101, "generation": gen,
                          "explanation": "x"})
     return pd.DataFrame(rows)
@@ -216,8 +216,8 @@ def test_validity_summary_aggregates_per_pipeline(tmp_path):
     faith = build_faithfulness_df(df, by_cid, explanations_dir=tmp_path)
     summ = extraction_validity_summary(faith)
 
-    assert "JSON→Text" in summ.index
-    row = summ.loc["JSON→Text"]
+    assert "JSON to Text" in summ.index
+    row = summ.loc["JSON to Text"]
     assert row["n_narratives"] == 6
     # 5 von 6 Narrativen leer → Parse-Ausfallrate 5/6 (auf 4 Stellen gerundet)
     assert abs(row["parse_empty_rate"] - 5 / 6) < 1e-3

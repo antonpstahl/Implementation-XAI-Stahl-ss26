@@ -1,14 +1,14 @@
 """
-Phase 3a·B — Tests für den Anthropic-Batches-Helfer (utils/batch.py).
+Tests for the Anthropic batches helper (utils/batch.py).
 
-Deckt ab: custom_id-Roundtrip/Validierung, max_tokens=0-Verbot,
-Ergebnis-Klassifikation (succeeded/errored-invalid/errored-server/expired/
-canceled), Ergebnis-Mapping mit/ohne parse-Callback, Resubmit transienter
-Fehler (server/expired), Logging-statt-Verwerfen bei invalid_request,
-max_resubmits-Erschöpfung sowie batch_id-Persistenz + Poll-Resume.
+Covers: custom_id roundtrip/validation, the max_tokens=0 ban, result
+classification (succeeded/errored-invalid/errored-server/expired/canceled),
+result mapping with and without a parse callback, resubmit of transient errors
+(server/expired), logging instead of dropping on invalid_request, max_resubmits
+exhaustion and batch_id persistence + poll resume.
 
-Der Anthropic-Client wird durch einen Fake ersetzt; `sleep` ist injiziert,
-sodass kein echter Netz-/Wartecall stattfindet.
+The Anthropic client is replaced by a fake; `sleep` is injected so no real
+network or wait call happens.
 """
 from __future__ import annotations
 
@@ -42,7 +42,7 @@ from utils.batch import (
 from utils.judge import parse_judge_response
 
 
-# ── Fake-Client ──────────────────────────────────────────────────────────────
+# --- Fake-Client ---
 
 def _succeeded(cid: str, text: str = "ok", in_tok: int = 3, out_tok: int = 5) -> dict:
     return {
@@ -70,11 +70,11 @@ def _canceled(cid: str) -> dict:
 
 
 class FakeBatches:
-    """Minimaler Stand-in für client.messages.batches."""
+    """Minimal stand in for client.messages.batches."""
 
     def __init__(self):
-        self.rounds: list[list[dict]] = []      # je create()-Aufruf eine Ergebnisliste
-        self._store: dict[str, list[dict]] = {}  # batch_id -> Ergebnisliste
+        self.rounds: list[list[dict]] = []      # one result list per create() call
+        self._store: dict[str, list[dict]] = {}  # batch_id -> result list
         self.created: list[tuple[str, list[str]]] = []
         self.retrieve_calls: list[str] = []
         self._n = 0
@@ -86,7 +86,7 @@ class FakeBatches:
     def preset_batch(self, batch_id: str, results: list[dict]) -> None:
         self._store[batch_id] = results
 
-    # --- SDK-Schnittstelle ---
+    # --- SDK interface ---
     def create(self, requests):
         batch_id = f"batch_{self._n}"
         self._n += 1
@@ -110,7 +110,7 @@ def make_client(batches: FakeBatches):
 NOSLEEP = lambda _s: None  # noqa: E731
 
 
-# ── 1. custom_id ─────────────────────────────────────────────────────────────
+# --- 1. custom_id ---
 
 def test_make_custom_id_joins_parts():
     assert make_custom_id("gen", "json", "xgb", 1041, "g0") == "gen-json-xgb-1041-g0"
@@ -125,7 +125,7 @@ def test_make_custom_id_rejects_too_long():
         make_custom_id("x" * 65)
 
 
-# ── 2. message_request / max_tokens=0 ────────────────────────────────────────
+# --- 2. message_request / max_tokens=0 ---
 
 def test_message_request_shape():
     params = {"model": "claude-sonnet-4-6", "max_tokens": 900, "messages": []}
@@ -143,7 +143,7 @@ def test_message_request_rejects_bad_custom_id():
         message_request("bad id!", {"max_tokens": 10})
 
 
-# ── 3. classify_result (reine Funktion) ──────────────────────────────────────
+# --- 3. classify_result (reine Funktion) ---
 
 def test_classify_succeeded_extracts_text_and_usage():
     c = classify_result(_succeeded("a", text="hallo", in_tok=7, out_tok=11))
@@ -167,7 +167,7 @@ def test_classify_expired_and_canceled():
     assert classify_result(_canceled("a"))["status"] == STATUS_CANCELED
 
 
-# ── 4. Schema-Gleichheit batch ↔ real-time (Text/Usage) ──────────────────────
+# --- 4. Schema-Gleichheit batch  vs  real-time (Text/Usage) ---
 
 def test_message_text_and_usage_match_realtime_schema():
     msg = {"content": [{"type": "text", "text": " text "}],
@@ -176,7 +176,7 @@ def test_message_text_and_usage_match_realtime_schema():
     assert message_usage(msg) == {"input_tokens": 2, "output_tokens": 4}
 
 
-# ── 5. collect_results: Eimer + parse-Callback ───────────────────────────────
+# --- 5. collect_results: Eimer + parse-Callback ---
 
 def test_collect_results_buckets():
     batches = FakeBatches()
@@ -208,7 +208,7 @@ def test_collect_results_applies_parse_to_judge_text():
     assert out["succeeded"]["jdg-1"]["completeness"] == 3
 
 
-# ── 6. submit / wait ─────────────────────────────────────────────────────────
+# --- 6. submit / wait ---
 
 def test_submit_batch_returns_id_and_persists(tmp_path):
     batches = FakeBatches().queue([_succeeded("a")])
@@ -241,7 +241,7 @@ def test_wait_for_batch_times_out():
                        poll_interval_s=0, timeout_s=-1, sleep=NOSLEEP)
 
 
-# ── 7. run_batch: Happy Path ─────────────────────────────────────────────────
+# --- 7. run_batch: Happy Path ---
 
 def _req(cid: str) -> dict:
     return message_request(cid, {"model": "m", "max_tokens": 10, "messages": []})
@@ -255,7 +255,7 @@ def test_run_batch_all_succeed():
     assert len(batches.created) == 1
 
 
-# ── 8. run_batch: Resubmit transienter Fehler ────────────────────────────────
+# --- 8. run_batch: Resubmit transienter Fehler ---
 
 def test_run_batch_resubmits_server_error_then_succeeds():
     batches = FakeBatches()
@@ -264,7 +264,7 @@ def test_run_batch_resubmits_server_error_then_succeeds():
     out = run_batch([_req("a"), _req("b")], client=make_client(batches), sleep=NOSLEEP)
     assert set(out["succeeded"]) == {"a", "b"}
     assert out["failed"] == {}
-    # Zweiter Batch enthält nur den fehlgeschlagenen Request.
+    # The second batch contains only the failed request.
     assert len(batches.created) == 2
     assert batches.created[1][1] == ["b"]
 
@@ -277,7 +277,7 @@ def test_run_batch_resubmits_expired():
     assert set(out["succeeded"]) == {"a"}
 
 
-# ── 9. run_batch: invalid_request wird geloggt, nicht resubmittet ────────────
+# --- 9. run_batch: invalid_request wird geloggt, nicht resubmittet ---
 
 def test_run_batch_invalid_request_is_failed_not_resubmitted():
     batches = FakeBatches().queue([_succeeded("a"), _errored("b", "invalid_request")])
@@ -294,25 +294,25 @@ def test_run_batch_canceled_is_failed():
     assert set(out["failed"]) == {"a"}
 
 
-# ── 10. run_batch: max_resubmits-Erschöpfung ─────────────────────────────────
+# --- 10. run_batch: max_resubmits exhaustion ---
 
 def test_run_batch_exhausts_max_resubmits():
     batches = FakeBatches()
-    # Bei jedem Versuch erneut server_error → resubmit, bis Limit erreicht.
+    # server_error on every attempt -> resubmit until the limit is reached.
     for _ in range(5):
         batches.queue([_errored("a", "overloaded")])
     out = run_batch([_req("a")], client=make_client(batches),
                     max_resubmits=2, sleep=NOSLEEP)
     assert "a" in out["failed"]
     assert out["failed"]["a"]["status"] == "max_resubmits_exceeded"
-    # 1 Erst-Submit + 2 Resubmits = 3 Batches.
+    # 1 initial submit + 2 resubmits = 3 batches.
     assert len(batches.created) == 3
 
 
-# ── 11. batch_id-Persistenz + Poll-Resume ────────────────────────────────────
+# --- 11. batch_id-Persistenz + Poll-Resume ---
 
 def test_run_batch_resumes_persisted_batch(tmp_path):
-    """Bei vorhandener state-Datei wird der persistierte Batch gepollt, nicht neu eingereicht."""
+    """With an existing state file the persisted batch is polled, not resubmitted."""
     state = tmp_path / "state.json"
     state.write_text(json.dumps({"batch_id": "resumed_batch", "n_requests": 1}))
 
@@ -332,5 +332,5 @@ def test_run_batch_persists_then_processes(tmp_path):
     batches = FakeBatches().queue([_succeeded("a")])
     run_batch([_req("a")], client=make_client(batches),
               state_path=state, sleep=NOSLEEP)
-    # Nach dem Erst-Submit wurde die batch_id persistiert.
+    # After the initial submit the batch_id was persisted.
     assert json.loads(state.read_text())["batch_id"] == "batch_0"

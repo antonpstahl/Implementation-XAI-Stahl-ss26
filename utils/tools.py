@@ -1,8 +1,8 @@
 """
-utils/tools.py – Tool-Definitionen und ToolBox für die Tool-Use-Pipeline (Notebook 04d).
+utils/tools.py - tool definitions and ToolBox for the Tool Use pipeline (notebook 04d).
 
-TOOL_DEFINITIONS: Schemas im Anthropic-Format, die dem Modell übergeben werden.
-ToolBox:          Kapselt Modell + Test-Daten; führt Tool-Aufrufe aus.
+TOOL_DEFINITIONS: schemas in Anthropic format, passed to the model.
+ToolBox:          wraps model + test data; runs tool calls.
 """
 
 from __future__ import annotations
@@ -17,31 +17,31 @@ from .explanations import FEATURE_SCHEMA, humanize_feature
 
 
 # -----------------------------------------------------------------------------
-# Tool-Schemas
+# Tool schemas
 # -----------------------------------------------------------------------------
 TOOL_DEFINITIONS: list[dict[str, Any]] = [
     {
         "name": "get_feature_schema",
         "description": (
-            "Gibt Metadaten zu allen Features zurück (Typ, Beschreibung, "
-            "Wertebereich, Kategorien-Mapping). Nützlich als erster Schritt, "
-            "um zu verstehen, was die Eingabevariablen bedeuten."
+            "Returns metadata for all features (type, description, "
+            "value range, category mapping). Useful as a first step to "
+            "understand what the input variables mean."
         ),
         "input_schema": {"type": "object", "properties": {}, "required": []},
     },
     {
         "name": "get_feature_importance",
         "description": (
-            "Gibt die globale Feature-Importance des Modells zurück, sortiert "
-            "absteigend nach Wichtigkeit. Für XGBoost: SHAP-basierte Importance "
-            "(mean |SHAP|). Für EBM: Term-Importance aus den gelernten Funktionen."
+            "Returns the global feature importance of the model, sorted "
+            "descending by importance. For XGBoost: SHAP based importance "
+            "(mean |SHAP|). For EBM: term importance from the learned functions."
         ),
         "input_schema": {
             "type": "object",
             "properties": {
                 "top_k": {
                     "type": "integer",
-                    "description": "Anzahl der zurückzugebenden Top-Features (Default: alle).",
+                    "description": "Number of top features to return (default: all).",
                 }
             },
             "required": [],
@@ -50,8 +50,8 @@ TOOL_DEFINITIONS: list[dict[str, Any]] = [
     {
         "name": "get_prediction",
         "description": (
-            "Gibt die Modellvorhersage (Anzahl Fahrräder) für eine konkrete "
-            "Feature-Kombination zurück. Nützlich für Was-wäre-wenn-Szenarien."
+            "Returns the model prediction (number of bikes) for a concrete "
+            "feature combination. Useful for what if scenarios."
         ),
         "input_schema": {
             "type": "object",
@@ -59,10 +59,10 @@ TOOL_DEFINITIONS: list[dict[str, Any]] = [
                 "features": {
                     "type": "object",
                     "description": (
-                        "Mapping von Feature-Name zu Wert. Kategoriale Features "
-                        "(mnth, hr, weekday, weathersit) als Integer, "
-                        "binäre Features (yr, holiday) als Integer (0 oder 1), "
-                        "numerische Features (temp, hum, windspeed) als Float."
+                        "Mapping from feature name to value. Categorical features "
+                        "(mnth, hr, weekday, weathersit) as integers, "
+                        "binary features (yr, holiday) as integers (0 or 1), "
+                        "numerical features (temp, hum, windspeed) as floats."
                     ),
                 }
             },
@@ -72,16 +72,16 @@ TOOL_DEFINITIONS: list[dict[str, Any]] = [
     {
         "name": "get_shap_values",
         "description": (
-            "Gibt die lokalen Beiträge (SHAP für XGBoost, EBM-Terme) einer "
-            "Testinstanz zurück — sortiert nach absolutem Betrag. "
-            "Zeigt, welche Features die Vorhersage erhöhen oder senken."
+            "Returns the local contributions (SHAP for XGBoost, EBM terms) of a "
+            "test instance, sorted by absolute magnitude. "
+            "Shows which features raise or lower the prediction."
         ),
         "input_schema": {
             "type": "object",
             "properties": {
                 "instance_id": {
                     "type": "integer",
-                    "description": "Positions-Index der Testinstanz im Test-Set (0-basiert).",
+                    "description": "Position index of the test instance in the test set (0 based).",
                 }
             },
             "required": ["instance_id"],
@@ -90,20 +90,20 @@ TOOL_DEFINITIONS: list[dict[str, Any]] = [
     {
         "name": "get_partial_dependence",
         "description": (
-            "Berechnet die Partial-Dependence-Kurve für ein einzelnes Feature: "
-            "zeigt, wie sich die durchschnittliche Vorhersage ändert, wenn "
-            "dieses Feature variiert wird (alle anderen Merkmale unverändert)."
+            "Computes the partial dependence curve for a single feature: "
+            "shows how the average prediction changes when this feature is "
+            "varied (all other features unchanged)."
         ),
         "input_schema": {
             "type": "object",
             "properties": {
                 "feature": {
                     "type": "string",
-                    "description": "Name des Features (z.B. 'hr', 'temp', 'weathersit').",
+                    "description": "Name of the feature (for example 'hr', 'temp', 'weathersit').",
                 },
                 "n_grid_points": {
                     "type": "integer",
-                    "description": "Stützstellen für numerische Features (Default: 20).",
+                    "description": "Grid points for numerical features (default: 20).",
                 },
             },
             "required": ["feature"],
@@ -112,20 +112,20 @@ TOOL_DEFINITIONS: list[dict[str, Any]] = [
     {
         "name": "get_feature_value_context",
         "description": (
-            "Gibt Kontext zum Wert eines Features bei einer Testinstanz: "
-            "Percentile im Trainingsset, Minimum, Maximum, Mittelwert. "
-            "Hilft einzuordnen, ob der Wert typisch oder außergewöhnlich ist."
+            "Returns context for the value of a feature at a test instance: "
+            "percentile in the training set, minimum, maximum, mean. "
+            "Helps to judge whether the value is typical or unusual."
         ),
         "input_schema": {
             "type": "object",
             "properties": {
                 "instance_id": {
                     "type": "integer",
-                    "description": "Positions-Index der Testinstanz im Test-Set (0-basiert).",
+                    "description": "Position index of the test instance in the test set (0 based).",
                 },
                 "feature": {
                     "type": "string",
-                    "description": "Name des Features (z.B. 'temp', 'hr', 'windspeed').",
+                    "description": "Name of the feature (for example 'temp', 'hr', 'windspeed').",
                 },
             },
             "required": ["instance_id", "feature"],
@@ -134,21 +134,21 @@ TOOL_DEFINITIONS: list[dict[str, Any]] = [
     {
         "name": "get_similar_instances",
         "description": (
-            "Sucht die k ähnlichsten Trainingsinstanzen zu einer Testinstanz "
-            "(euklidische Distanz auf normierten Features). "
-            "Zeigt, wie das Modell bei vergleichbaren Situationen vorhersagt — "
-            "nützlich für Plausibilitätsprüfung und Kontextualisierung."
+            "Finds the k most similar training instances to a test instance "
+            "(Euclidean distance on normalised features). "
+            "Shows how the model predicts in comparable situations, "
+            "useful for plausibility checks and contextualisation."
         ),
         "input_schema": {
             "type": "object",
             "properties": {
                 "instance_id": {
                     "type": "integer",
-                    "description": "Positions-Index der Testinstanz im Test-Set (0-basiert).",
+                    "description": "Position index of the test instance in the test set (0 based).",
                 },
                 "k": {
                     "type": "integer",
-                    "description": "Anzahl ähnlicher Instanzen (Default: 5).",
+                    "description": "Number of similar instances (default: 5).",
                 },
             },
             "required": ["instance_id"],
@@ -157,23 +157,23 @@ TOOL_DEFINITIONS: list[dict[str, Any]] = [
     {
         "name": "get_counterfactual_prediction",
         "description": (
-            "Berechnet eine kontrafaktische Vorhersage: Wie verändert sich die "
-            "Vorhersage, wenn ein oder mehrere Features einen anderen Wert hätten? "
-            "Nützlich für Was-wäre-wenn-Analysen (z.B. 'Was wäre bei 10°C mehr?')."
+            "Computes a counterfactual prediction: how does the prediction change "
+            "if one or more features had a different value? "
+            "Useful for what if analyses (for example 'what if it were 10 C warmer?')."
         ),
         "input_schema": {
             "type": "object",
             "properties": {
                 "instance_id": {
                     "type": "integer",
-                    "description": "Positions-Index der Basis-Testinstanz im Test-Set (0-basiert).",
+                    "description": "Position index of the base test instance in the test set (0 based).",
                 },
                 "changes": {
                     "type": "object",
                     "description": (
-                        "Mapping von Feature-Name zu neuem Wert. "
-                        "Nur die geänderten Features müssen angegeben werden. "
-                        "Kategoriale Features als Integer, numerische als Float."
+                        "Mapping from feature name to new value. "
+                        "Only the changed features need to be given. "
+                        "Categorical features as integers, numerical as floats."
                     ),
                 },
             },
@@ -188,7 +188,7 @@ TOOL_DEFINITIONS: list[dict[str, Any]] = [
 # -----------------------------------------------------------------------------
 class ToolBox:
     """
-    Kapselt Modell + Test-Daten und führt Tool-Aufrufe aus.
+    Wraps model + test data and runs tool calls.
     Wird in Notebook 04d mit dem geladenen Modell instanziiert.
     """
 
@@ -212,7 +212,7 @@ class ToolBox:
     # Public API
     # ------------------------------------------------------------------
     def dispatch(self, name: str, arguments: dict[str, Any]) -> Any:
-        """Führt einen Tool-Aufruf aus, loggt ihn und gibt das Ergebnis zurück."""
+        """Run a tool call, log it and return the result."""
         handler = getattr(self, f"_tool_{name}", None)
         if handler is None:
             result = {"error": f"Unbekanntes Tool: '{name}'"}
@@ -237,7 +237,7 @@ class ToolBox:
 
     def _tool_get_feature_importance(self, top_k: int | None = None) -> list[dict]:
         if self.model_name == "xgb":
-            # SHAP-basierte Importance (mean |SHAP|) über Trainingsset
+            # SHAP based importance (mean |SHAP|) over the training set
             explainer = self._get_shap_explainer()
             shap_vals = explainer.shap_values(self.X_train)
             scores = np.abs(shap_vals).mean(axis=0)
@@ -269,7 +269,7 @@ class ToolBox:
         filled_by_mode = [c for c in self.X_test.columns if c not in features]
         result = {
             "prediction": round(pred, 2),
-            "unit": "Fahrräder pro Stunde",
+            "unit": "bikes per hour",
             "features_used": features,
         }
         if filled_by_mode:
@@ -278,7 +278,7 @@ class ToolBox:
 
     def _tool_get_shap_values(self, instance_id: int) -> dict:
         if instance_id < 0 or instance_id >= len(self.X_test):
-            return {"error": f"instance_id {instance_id} außerhalb des Test-Sets (0–{len(self.X_test)-1})."}
+            return {"error": f"instance_id {instance_id} outside the test set (0 to {len(self.X_test)-1})."}
 
         instance = self.X_test.iloc[[instance_id]]
         y_true = float(self.y_test.iloc[instance_id])
@@ -325,7 +325,7 @@ class ToolBox:
             "prediction": round(pred, 2),
             "base_value": round(base_value, 5),
             "contribution_space": "log",
-            "note": "Positive Beiträge erhöhen, negative senken die Vorhersage (multiplikativ via exp).",
+            "note": "Positive contributions raise, negative ones lower the prediction (multiplicatively via exp).",
             "contributions": sorted_contribs,
         }
 
@@ -333,7 +333,7 @@ class ToolBox:
         self, feature: str, n_grid_points: int = 20
     ) -> dict:
         if feature not in self.X_test.columns:
-            return {"error": f"Feature '{feature}' nicht bekannt. Verfügbar: {list(self.X_test.columns)}"}
+            return {"error": f"Feature '{feature}' unknown. Available: {list(self.X_test.columns)}"}
 
         X_copy = self.X_test.copy()
 
@@ -369,9 +369,9 @@ class ToolBox:
 
     def _tool_get_feature_value_context(self, instance_id: int, feature: str) -> dict:
         if instance_id < 0 or instance_id >= len(self.X_test):
-            return {"error": f"instance_id {instance_id} außerhalb des Test-Sets (0–{len(self.X_test)-1})."}
+            return {"error": f"instance_id {instance_id} outside the test set (0 to {len(self.X_test)-1})."}
         if feature not in self.X_train.columns:
-            return {"error": f"Feature '{feature}' nicht bekannt. Verfügbar: {list(self.X_train.columns)}"}
+            return {"error": f"Feature '{feature}' unknown. Available: {list(self.X_train.columns)}"}
 
         val = self.X_test.iloc[instance_id][feature]
         train_col = self.X_train[feature]
@@ -405,9 +405,9 @@ class ToolBox:
 
     def _tool_get_similar_instances(self, instance_id: int, k: int = 5) -> dict:
         if instance_id < 0 or instance_id >= len(self.X_test):
-            return {"error": f"instance_id {instance_id} außerhalb des Test-Sets (0–{len(self.X_test)-1})."}
+            return {"error": f"instance_id {instance_id} outside the test set (0 to {len(self.X_test)-1})."}
 
-        # Numerische Kodierung für Distanzberechnung
+        # Numerical encoding for distance computation
         def _encode(df: pd.DataFrame) -> np.ndarray:
             parts = []
             for col in df.columns:
@@ -416,7 +416,7 @@ class ToolBox:
                 else:
                     parts.append(df[col].astype(float).values)
             # Roh-Kodierung; die Min-Max-Normierung auf das Trainingsset
-            # erfolgt unten gemeinsam für Train- und Testpunkt.
+            # done below jointly for the train and test point.
             return np.column_stack(parts)
 
         X_train_enc = _encode(self.X_train)
@@ -456,7 +456,7 @@ class ToolBox:
         self, instance_id: int, changes: dict[str, Any]
     ) -> dict:
         if instance_id < 0 or instance_id >= len(self.X_test):
-            return {"error": f"instance_id {instance_id} außerhalb des Test-Sets (0–{len(self.X_test)-1})."}
+            return {"error": f"instance_id {instance_id} outside the test set (0 to {len(self.X_test)-1})."}
 
         base_instance = self.X_test.iloc[[instance_id]].copy()
         base_pred = float(self.model.predict(base_instance)[0])
@@ -485,7 +485,7 @@ class ToolBox:
             "counterfactual_prediction": round(cf_pred, 2),
             "delta": round(delta, 2),
             "applied_changes": applied_changes,
-            "unit": "Fahrräder pro Stunde",
+            "unit": "bikes per hour",
         }
 
     # ------------------------------------------------------------------
@@ -521,7 +521,7 @@ class ToolBox:
 def _preview(obj: Any, max_len: int = 1000) -> Any:
     if isinstance(obj, (dict, list)):
         s = repr(obj)
-        return s if len(s) <= max_len else s[:max_len] + "…"
+        return s if len(s) <= max_len else s[:max_len] + "..."
     if isinstance(obj, np.ndarray):
         return f"ndarray(shape={obj.shape})"
     return obj

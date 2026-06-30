@@ -55,9 +55,9 @@ All LLM pipelines use `claude-sonnet-4-6` and produce three-part explanations (`
 - **`04d` Tool-Use** — the LLM retrieves data itself through 8 defined tools (feature schema, importance, prediction, SHAP values, partial dependence, value context, similar instances, counterfactuals) in an agentic loop — averaging **5.65 tool calls** per explanation.
 
 **5 — Evaluation** (`05_Evaluation.ipynb`, `06_Evaluation_Ichmoukhamedov.ipynb`)
-Quantitative cost/latency, LLM-as-judge across three judge versions (uncalibrated Sonnet, calibrated-rubric Sonnet, independent Opus), and formal faithfulness metrics after Ichmoukhamedov et al. (Rank / Sign / Value Agreement).
+Quantitative cost/latency, LLM as judge with two independent judges (Opus as the primary judge plus OpenAI gpt-4o-mini as a cross vendor robustness check, identical rubric), and formal faithfulness metrics after Ichmoukhamedov et al. (Rank / Sign / Value Agreement).
 
-Quantitative + LLM-judge (v1) summary across 20 explanations per pipeline (2 XAI models × 10 instances):
+Quantitative + LLM judge (Opus) summary across 20 explanations per pipeline (2 XAI models x 10 instances):
 
 <!-- AUTO-TABLE:pipeline-eval -->
 | Pipeline  | Avg words | Input tok.¹ | Output tok. | Cost (20 calls) | Avg latency | Judge Faith. | Clarity | Complete. |
@@ -80,8 +80,8 @@ Formal faithfulness after Ichmoukhamedov et al. (NB 06, n = 10 instances; precis
 | Vision    | 0.429     | 0.679     | 0.575      |
 <!-- /AUTO-TABLE:faithfulness -->
 
-**6 — Error analysis & prompt fix** (`07_Error_Taxonomy.ipynb`, `08_Prompt_Fix_Eval.ipynb`)
-The 30 lowest-faithfulness explanations are hand-coded into an error taxonomy (NB 07), separating genuine explanation errors (e.g. `yr` sign errors, near-tie rank swaps) from extractor artefacts. The two dominant explanation-error classes are then addressed by a prompt fix and re-measured before/after on the same n = 20 sample with bootstrap CIs (NB 08).
+**6 — Error analysis** (`07_Error_Taxonomy.ipynb`)
+The 30 lowest faithfulness explanations are hand coded into an error taxonomy (NB 07), separating genuine explanation errors (for example `yr` sign errors, near tie rank swaps) from extractor artefacts. The two dominant explanation error classes (yr sign and rank order) are fixed directly in the main generation prompts, so the main run already uses the corrected prompts.
 
 > **Status of these findings:** descriptive/exploratory. With n = 10–20 explanations per pipeline, no repeated sampling and no inferential statistics yet, the differences below are **not** statistically confirmed (see the limitations table in `05_Evaluation.ipynb` §7). Treat them as directional.
 
@@ -91,7 +91,7 @@ The 30 lowest-faithfulness explanations are hand-coded into an error taxonomy (N
 4. **JSON→Text is most efficient** (≈ $0.008 per explanation, lowest latency 11.7 s) — system-prompt caching keeps billed input tokens low.
 5. **Tool-Use produces the longest, evidence-backed explanations** (+47% words vs. JSON→Text, with partial-dependence and counterfactual support) at ~3.6× cost and ~2.5× latency.
 6. **Vision** matches JSON→Text on latency but costs more (image tokens, no caching benefit) and has the lowest faithfulness of all pipelines.
-7. **Possible self-preference bias** — Opus (v3) scores sit systematically below Sonnet (v1/v2) under an identical rubric. This is *consistent with* a self-preference effect but not conclusive: both judges are Anthropic models, so a true cross-vendor judge is still outstanding (see implementation plan, Phase 2).
+7. **Judge robustness** — the judge runs on two independent models (Opus as primary, OpenAI gpt-4o-mini as a cross vendor check) under an identical rubric. Since neither judge is the generation model (Sonnet), self preference bias is avoided by design; agreement between the two judges indicates how stable the ranking is.
 
 ## Setup
 
@@ -113,10 +113,8 @@ Parameters are centralised in `utils/llm.py`.
 | Use case | Model | `max_tokens` | `temperature` |
 |---|---|---|---|
 | Explanation generation (NB 04b / 04c / 04d) | `claude-sonnet-4-6` | 2048 | default (1.0) |
-| Faithfulness check (NB 05) | `claude-sonnet-4-6` | 300 | default (1.0) |
-| Judge v1 uncalibrated (NB 05) | `claude-sonnet-4-6` | 600 | default (1.0) |
-| Judge v2 calibrated (NB 05) | `claude-sonnet-4-6` | 600 | default (1.0) |
-| Judge v3 independent (NB 05) | `claude-opus-4-8` | 600 | default (1.0) |
+| Judge, primary (NB 05) | `claude-opus-4-8` | 900 | 0.0 |
+| Judge, cross vendor (NB 05) | `gpt-4o-mini` (OpenAI) | 900 | default |
 | Ichmoukhamedov metrics (NB 06) | `claude-sonnet-4-6` | 700 | default (1.0) |
 
 **Reproducibility note (→ Paper limitation):** Anthropic model IDs are versioned snapshots, but API behaviour (sampling, default parameters, tokenisation) can change silently between SDK releases. Results are tied to `anthropic==0.98.1` and the access date above. Future runs against the same model ID are not guaranteed to produce identical outputs.

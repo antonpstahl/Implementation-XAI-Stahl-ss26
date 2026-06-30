@@ -1,26 +1,26 @@
-"""utils/batch_openai.py – OpenAI-Batch-Helfer für den Cross-Vendor-Judge (Phase 3b).
+"""utils/batch_openai.py - OpenAI batch helper for the cross vendor judge.
 
-Analog zu :mod:`utils.batch` (Anthropic), aber für die **OpenAI Batch API**
-(`/v1/chat/completions`, −50 %, asynchron < 24 h, kein RPM-Limit). Damit ist der
-Cross-Vendor-Judge (gpt-4o-mini) auch bei n≈200 bezahlbar **und** ohne den
-20-s-Free-Tier-Delay durchführbar.
+Like :mod:`utils.batch` (Anthropic), but for the OpenAI Batch API
+(`/v1/chat/completions`, about 50 percent cheaper, asynchronous < 24 h, no RPM
+limit). This makes the cross vendor judge (gpt-4o-mini) affordable even at a
+larger n and runnable without the 20 s free tier delay.
 
-Der OpenAI-Flow ist datei-basiert (≠ Anthropics Inline-Requests):
+The OpenAI flow is file based (unlike Anthropics inline requests):
 
-    1. JSONL bauen   – je Zeile {"custom_id", "method":"POST",
+    1. Build JSONL   - per line {"custom_id", "method":"POST",
                        "url":"/v1/chat/completions", "body": {...}}
-    2. Upload        – client.files.create(purpose="batch")            → file_id
-    3. Batch starten – client.batches.create(endpoint=…, window="24h") → batch_id
-    4. Pollen        – client.batches.retrieve(batch_id)               → status
-    5. Einsammeln    – client.files.content(output_file_id | error_file_id)
+    2. Upload        - client.files.create(purpose="batch")            -> file_id
+    3. Start batch   - client.batches.create(endpoint=..., window="24h") -> batch_id
+    4. Poll          - client.batches.retrieve(batch_id)               -> status
+    5. Collect       - client.files.content(output_file_id | error_file_id)
 
-Schema-Gleichheit zum Real-time-Pfad (`utils.llm.ask_openai_text`):
-`message_text`/`message_usage` liefern denselben Text bzw.
-`input_tokens`/`output_tokens`, sodass `parse_judge_response` unverändert greift.
+Schema equality with the real time path (`utils.llm.ask_openai_text`):
+`message_text`/`message_usage` return the same text and
+`input_tokens`/`output_tokens`, so `parse_judge_response` works unchanged.
 
-Fehlerklassen (wie utils.batch): 200 → succeeded; 429/5xx/expired → resubmit;
-sonstige 4xx/Batch-`failed` → invalid (geloggt, nicht still verworfen);
-cancelled → canceled. Der Client ist injizierbar (Tests nutzen einen Fake).
+Error classes (like utils.batch): 200 -> succeeded; 429/5xx/expired -> resubmit;
+other 4xx/batch `failed` -> invalid (logged, not silently dropped);
+cancelled -> canceled. The client is injectable (tests use a fake).
 """
 
 from __future__ import annotations
@@ -49,7 +49,7 @@ _ENDPOINT = "/v1/chat/completions"
 _TERMINAL = frozenset({"completed", "failed", "expired", "cancelled", "canceled"})
 
 
-# ── Request-Shape ────────────────────────────────────────────────────────────
+# --- Request shape ---
 def build_chat_body(
     prompt: str,
     *,
@@ -70,21 +70,21 @@ def build_chat_body(
 
 
 def chat_request(custom_id: str, body: dict) -> dict:
-    """Baut eine JSONL-Batch-Zeile ``{custom_id, method, url, body}``.
+    """Build a JSONL batch line ``{custom_id, method, url, body}``.
 
     Raises
     ------
     ValueError
-        Bei ``max_tokens == 0`` (in Batches unzulässig).
+        On ``max_tokens == 0`` (not allowed in batches).
     """
     if body.get("max_tokens", None) == 0:
-        raise ValueError("max_tokens=0 ist in der Batch-API unzulässig.")
+        raise ValueError("max_tokens=0 is not allowed in the Batch API.")
     return {"custom_id": custom_id, "method": "POST", "url": _ENDPOINT, "body": body}
 
 
-# ── Text/Usage-Extraktion (schema-gleich zu ask_openai_text) ─────────────────
+# --- Text/usage extraction (same schema as ask_openai_text) ---
 def message_text(body: Any) -> str:
-    """Erster Choice-Message-Content aus einem Chat-Completions-Body."""
+    """First choice message content from a chat completions body."""
     choices = _attr(body, "choices", []) or []
     if not choices:
         return ""
@@ -93,7 +93,7 @@ def message_text(body: Any) -> str:
 
 
 def message_usage(body: Any) -> dict:
-    """OpenAI usage → {input_tokens, output_tokens} (wie der Real-time-Pfad)."""
+    """OpenAI usage -> {input_tokens, output_tokens} (like the real time path)."""
     usage = _attr(body, "usage", {}) or {}
     return {
         "input_tokens":  _attr(usage, "prompt_tokens", 0) or 0,
@@ -102,12 +102,12 @@ def message_usage(body: Any) -> dict:
 
 
 def classify_result(line: Any) -> dict:
-    """Klassifiziert eine Ergebniszeile (reine Funktion) — Out- **oder** Error-File.
+    """Classify a result line (pure function), out file or error file.
 
-    Erfolg: ``response.status_code == 200`` → text/usage. Sonst nach Status-Code:
-    429 / ≥ 500 → server_error (resubmit); übrige 4xx → invalid_request; fehlende
-    Response mit ``error`` → invalid_request (geloggt). Mappt auf dieselben
-    Status-Konstanten wie :mod:`utils.batch`.
+    Success: ``response.status_code == 200`` -> text/usage. Otherwise by status
+    code: 429 / >= 500 -> server_error (resubmit); other 4xx -> invalid_request;
+    a missing response with ``error`` -> invalid_request (logged). Maps to the same
+    status constants as :mod:`utils.batch`.
     """
     custom_id = _attr(line, "custom_id")
     response = _attr(line, "response")
@@ -130,27 +130,27 @@ def classify_result(line: Any) -> dict:
         return {"custom_id": custom_id, "status": STATUS_INVALID_REQUEST,
                 "error": _attr(response, "body", status_code)}
 
-    # Keine Response → Fehlereintrag (Error-File). Default: invalid (nicht resubmitten).
+    # No response -> error entry (error file). Default: invalid (do not resubmit).
     return {"custom_id": custom_id, "status": STATUS_INVALID_REQUEST, "error": error}
 
 
-# ── Client-Zugriff ───────────────────────────────────────────────────────────
+# --- Client access ---
 def _get_client() -> Any:
-    """Lazy: erstellt den OpenAI-Client erst beim API-Aufruf (Tests injizieren)."""
+    """Lazy: creates the OpenAI client only at the API call (tests inject)."""
     import os
 
     try:
         from openai import OpenAI
     except ImportError as e:  # pragma: no cover
-        raise ImportError("Paket 'openai' nicht installiert (`pip install openai`).") from e
+        raise ImportError("Package 'openai' not installed (`pip install openai`).") from e
     api_key = os.environ.get("OPENAI_API_KEY", "").strip()
     if not api_key:
-        raise RuntimeError("OPENAI_API_KEY nicht gesetzt.")
+        raise RuntimeError("OPENAI_API_KEY not set.")
     return OpenAI(api_key=api_key)
 
 
 def _read_file_content(client: Any, file_id: Optional[str]) -> str:
-    """Lädt ein OpenAI-File als Text (out-/error-file); leer bei fehlendem id."""
+    """Load an OpenAI file as text (out/error file); empty if the id is missing."""
     if not file_id:
         return ""
     content = client.files.content(file_id)
@@ -169,16 +169,16 @@ def _iter_jsonl(text: str) -> Iterator[dict]:
             yield json.loads(raw)
 
 
-# ── submit / wait / collect ──────────────────────────────────────────────────
+# --- submit / wait / collect ---
 def submit_batch(
     requests: list[dict],
     *,
     client: Any = None,
     state_path: Optional[Path | str] = None,
 ) -> str:
-    """Lädt `requests` als JSONL hoch, startet einen Batch, gibt `batch_id` zurück."""
+    """Upload `requests` as JSONL, start a batch, return the `batch_id`."""
     if not requests:
-        raise ValueError("Leere Request-Liste – nichts einzureichen.")
+        raise ValueError("Empty request list, nothing to submit.")
     client = client or _get_client()
 
     jsonl = "\n".join(json.dumps(r, ensure_ascii=False) for r in requests)
@@ -207,7 +207,7 @@ def wait_for_batch(
     sleep: Callable[[float], None] = _time.sleep,
     on_poll: Optional[Callable[[Any], None]] = None,
 ) -> Any:
-    """Pollt `retrieve`, bis ein terminaler Status erreicht ist; gibt Batch zurück."""
+    """Poll `retrieve` until a terminal status is reached; return the batch."""
     client = client or _get_client()
     deadline = _time.monotonic() + timeout_s
     while True:
@@ -219,8 +219,8 @@ def wait_for_batch(
             return batch
         if _time.monotonic() >= deadline:
             raise TimeoutError(
-                f"OpenAI-Batch {batch_id} nach {timeout_s:.0f}s nicht beendet "
-                f"(Status: {status})."
+                f"OpenAI batch {batch_id} not finished after {timeout_s:.0f}s "
+                f"(status: {status})."
             )
         sleep(poll_interval_s)
 
@@ -231,11 +231,11 @@ def collect_results(
     client: Any = None,
     parse: Optional[Callable[[str], Any]] = None,
 ) -> dict:
-    """Sammelt Out-/Error-File eines beendeten Batches in vier Eimer (wie utils.batch).
+    """Collect the out/error file of a finished batch into four buckets (like utils.batch).
 
-    Batch-Status ``expired`` → alle (nicht gelieferten) als resubmit; ``failed`` /
-    ``cancelled`` werden über die Error-File-Zeilen abgebildet. `parse` (optional)
-    wird auf den Text erfolgreicher Antworten angewandt.
+    Batch status ``expired`` -> all (not delivered) as resubmit; ``failed`` /
+    ``cancelled`` are mapped via the error file lines. `parse` (optional) is applied
+    to the text of successful answers.
     """
     client = client or _get_client()
     status = _attr(batch, "status")
@@ -255,22 +255,22 @@ def collect_results(
             succeeded[cid] = parse(entry["text"]) if parse is not None else entry
         elif st in _RESUBMITTABLE:
             resubmit[cid] = entry
-            logger.warning("Resubmit-Kandidat %s (%s).", cid, st)
+            logger.warning("Resubmit candidate %s (%s).", cid, st)
         elif st == STATUS_CANCELED:
             canceled[cid] = entry
         else:
             invalid[cid] = entry
-            logger.error("invalid_request für %s – nicht resubmittet: %s",
+            logger.error("invalid_request for %s, not resubmitted: %s",
                          cid, entry.get("error"))
 
     if status == "expired":
-        logger.warning("OpenAI-Batch %s expired.", _attr(batch, "id"))
+        logger.warning("OpenAI batch %s expired.", _attr(batch, "id"))
 
     return {"succeeded": succeeded, "resubmit": resubmit,
             "invalid": invalid, "canceled": canceled}
 
 
-# ── Orchestrierung ───────────────────────────────────────────────────────────
+# --- Orchestration ---
 def run_batch(
     requests: list[dict],
     *,
@@ -282,15 +282,15 @@ def run_batch(
     timeout_s: float = _MAX_BATCH_WAIT_S,
     sleep: Callable[[float], None] = _time.sleep,
 ) -> dict:
-    """submit → wait → collect → resubmit, end-to-end (vgl. utils.batch.run_batch).
+    """submit -> wait -> collect -> resubmit, end to end (cf. utils.batch.run_batch).
 
-    Resubmittet transiente Fehler (429/5xx/expired) bis `max_resubmits`; jede
-    Resubmit-Runde umfasst auch Requests, die im Batch gar nicht zurückkamen
-    (z. B. bei `expired`). Poll-Resume über `state_path`.
+    Resubmits transient errors (429/5xx/expired) up to `max_resubmits`; each
+    resubmit round also includes requests that did not come back in the batch at
+    all (for example on `expired`). Poll resume via `state_path`.
 
-    Rückgabe::
+    Returns::
 
-        {"succeeded": {cid: …}, "failed": {cid: classify-dict}, "batch_id": …}
+        {"succeeded": {cid: ...}, "failed": {cid: classify-dict}, "batch_id": ...}
     """
     client = client or _get_client()
     by_id = {r["custom_id"]: r for r in requests}
@@ -336,7 +336,7 @@ def run_batch(
 
         attempt += 1
         if attempt > max_resubmits:
-            logger.error("max_resubmits (%d) erschöpft; %d Requests offen.",
+            logger.error("max_resubmits (%d) exhausted; %d requests open.",
                          max_resubmits, len(resubmit_ids))
             for cid in resubmit_ids:
                 entry = dict(collected["resubmit"].get(cid, {"custom_id": cid}))
@@ -344,13 +344,13 @@ def run_batch(
                 failed[cid] = entry
             break
 
-        logger.info("OpenAI-Resubmit-Runde %d: %d Requests.", attempt, len(resubmit_ids))
+        logger.info("OpenAI resubmit round %d: %d requests.", attempt, len(resubmit_ids))
         pending = [by_id[cid] for cid in dict.fromkeys(resubmit_ids)]
 
     return {"succeeded": succeeded, "failed": failed, "batch_id": batch_id}
 
 
-# ── batch_id-Persistenz ──────────────────────────────────────────────────────
+# --- batch_id persistence ---
 def _persist_batch_id(state_path: Path | str, batch_id: str, n_requests: int) -> None:
     path = Path(state_path)
     path.parent.mkdir(parents=True, exist_ok=True)

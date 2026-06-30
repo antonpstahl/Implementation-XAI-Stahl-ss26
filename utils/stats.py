@@ -1,4 +1,4 @@
-"""Phase-1 Inferenzstatistik: Bootstrap-CI, Cliff's delta, Wilcoxon pairwise."""
+"""Inference statistics: bootstrap CI, Cliff's delta, Wilcoxon pairwise."""
 from __future__ import annotations
 
 import numpy as np
@@ -14,13 +14,13 @@ def bootstrap_ci(data, stat_fn=np.mean, n_boot=2000, alpha=0.05, seed=42):
     data    : array-like (NaN values are dropped)
     stat_fn : callable, default np.mean
     n_boot  : int, number of resamples
-    alpha   : float, significance level (0.05 → 95 % CI)
+    alpha   : float, significance level (0.05 = 95 percent CI)
     seed    : int, for reproducibility
 
     Returns
     -------
     (ci_lower, ci_upper, observed_stat)
-    Parametrized for arbitrary n — reusable in Phase 3b.
+    Parametrized for arbitrary n.
     """
     rng  = np.random.default_rng(seed)
     arr  = np.asarray(data, dtype=float)
@@ -41,9 +41,9 @@ def cliffs_delta(x, y):
     """Cliff's delta effect size (dominance statistic) in [-1, +1].
 
     Thresholds (Romano et al.):
-        |d| < 0.147 → negligible, < 0.33 → small, < 0.474 → medium, else large.
+        |d| < 0.147 = negligible, < 0.33 = small, < 0.474 = medium, else large.
     Positive delta means x tends to be larger than y.
-    Parametrized for arbitrary n — reusable in Phase 3b.
+    Parametrized for arbitrary n.
     """
     x = np.asarray(x, dtype=float); x = x[~np.isnan(x)]
     y = np.asarray(y, dtype=float); y = y[~np.isnan(y)]
@@ -63,21 +63,21 @@ def _delta_magnitude(d):
 
 
 def adjust_pvalues(pvalues, method='holm'):
-    """Multiplizitätskorrektur für eine Familie von p-Werten (Holm oder BH).
+    """Multiplicity correction for a family of p values (Holm or BH).
 
-    Bei vielen paarweisen Tests (z. B. C(k,2) Pipeline-Vergleiche) inflationiert die
-    Familienfehlerrate — Holm kontrolliert die FWER, Benjamini-Hochberg die FDR.
+    With many pairwise tests (for example C(k,2) pipeline comparisons) the family
+    wise error rate inflates. Holm controls the FWER, Benjamini-Hochberg the FDR.
 
     Parameters
     ----------
-    pvalues : array-like; NaN (degenerierte Tests, n < 3) werden durchgereicht und
-              zählen **nicht** zur Familiengröße.
-    method  : 'holm' (FWER, Default) oder 'fdr_bh' / 'bh' (Benjamini-Hochberg, FDR).
+    pvalues : array-like; NaN (degenerate tests, n < 3) are passed through and do
+              not count towards the family size.
+    method  : 'holm' (FWER, default) or 'fdr_bh' / 'bh' (Benjamini-Hochberg, FDR).
 
     Returns
     -------
-    np.ndarray adjustierter p-Werte in Eingabereihenfolge (NaN bleibt NaN).
-    Auf [0, 1] geklippt und monoton erzwungen — verifiziert gegen statsmodels.
+    np.ndarray of adjusted p values in input order (NaN stays NaN).
+    Clipped to [0, 1] and forced monotone, verified against statsmodels.
     """
     p = np.asarray(pvalues, dtype=float)
     out = np.full(p.shape, np.nan)
@@ -94,7 +94,7 @@ def adjust_pvalues(pvalues, method='holm'):
     elif method in ('fdr_bh', 'bh'):
         adj = np.minimum.accumulate(((m / (np.arange(m) + 1)) * ranked)[::-1])[::-1]
     else:
-        raise ValueError(f"Unbekannte Methode {method!r} (erwartet 'holm' oder 'fdr_bh').")
+        raise ValueError(f"Unknown method {method!r} (expected 'holm' or 'fdr_bh').")
 
     res = np.empty(m)
     res[order] = np.clip(adj, 0, 1)
@@ -114,7 +114,7 @@ def wilcoxon_pairwise(df, pipelines, metric,
     pipelines : list of pipeline labels to compare
     metric    : str, name of the score column
     group_col : column that identifies the pipeline
-    id_cols   : columns that identify a matched pair (instance × xai_model)
+    id_cols   : columns that identify a matched pair (instance x xai_model)
     correction: multiplicity correction over the pairwise family in this call
                 ('holm' default, 'fdr_bh', or None to skip); see adjust_pvalues.
     alpha     : significance level for the `reject` flag on adjusted p-values.
@@ -123,9 +123,9 @@ def wilcoxon_pairwise(df, pipelines, metric,
     -------
     DataFrame[pipeline_a, pipeline_b, n_pairs, mean_a, mean_b,
               delta_mean, statistic, p_value, cliffs_d, magnitude]
-    plus, unless correction is None, [p_value_adj, reject]. Die Korrektur wird über
-    die C(k,2) paarweisen Vergleiche **dieses Aufrufs** (eine Metrik) gerechnet.
-    Parametrized for arbitrary n — reusable in Phase 3b.
+    plus, unless correction is None, [p_value_adj, reject]. The correction is
+    computed over the C(k,2) pairwise comparisons of this call (one metric).
+    Parametrized for arbitrary n.
     """
     rows = []
     for i, pa in enumerate(pipelines):

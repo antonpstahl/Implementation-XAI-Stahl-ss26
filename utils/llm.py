@@ -1,12 +1,11 @@
 """
-utils/llm.py – Wrapper um den Anthropic-Client für die drei LLM-Pipelines.
+utils/llm.py - wrapper around the Anthropic client for the three LLM pipelines.
 
-Bündelt Konfiguration (Modell-ID, max_tokens) und bietet einfache Helfer
-für Text-only- und multimodale (Vision) Anfragen. Wird von Notebooks
-04, 05 und 06 verwendet.
+Bundles configuration (model id, max_tokens) and offers simple helpers for text
+only and multimodal (vision) requests. Used by notebooks 04, 05 and 06.
 
-Die konkrete Tool-Use-Schleife für Notebook 04d wird dort implementiert,
-da sie modellspezifisch (Tool-Definitionen, Stop-Reason-Handling) ist.
+The concrete Tool Use loop for notebook 04d is implemented there, because it is
+model specific (tool definitions, stop reason handling).
 """
 
 from __future__ import annotations
@@ -17,8 +16,8 @@ import time as _time
 from pathlib import Path
 from typing import Any, Iterable
 
-# Lädt .env automatisch, falls python-dotenv installiert ist.
-# Fehlt das Paket, wird stattdessen die Shell-Umgebung verwendet.
+# Loads .env automatically if python-dotenv is installed.
+# If the package is missing, the shell environment is used instead.
 try:
     from dotenv import load_dotenv
     _env_file = Path(__file__).resolve().parent.parent / ".env"
@@ -27,96 +26,86 @@ except ImportError:
     pass
 
 # -----------------------------------------------------------------------------
-# LLM-Konfiguration – zentrale Dokumentation aller Decoding-Parameter
+# LLM configuration - central documentation of all decoding parameters
 #
-# API:         Anthropic Messages API
-# Abrufdatum:  2026-06-11
+# API:           Anthropic Messages API
+# Retrieved on:  2026-06-11
 #
-# Modell-IDs nach Rolle:
-#   Erklärungsgenerierung  (NB 04b / 05 / 06)  → claude-sonnet-4-6
-#   Faithfulness-Check     (NB 05)             → claude-sonnet-4-6
-#   Judge v1 unkalibriert  (NB 05)             → claude-sonnet-4-6
-#   Judge v2 kalibriert    (NB 05)             → claude-sonnet-4-6
-#   Judge v3 unabhängig    (NB 05)             → claude-opus-4-8
-#   Ichmoukhamedov-Metriken(NB 06)             → claude-sonnet-4-6
+# Model ids by role:
+#   Explanation generation  (NB 04b / 04c / 04d)  -> claude-sonnet-4-6
+#   Judge, primary          (NB 05)               -> claude-opus-4-8
+#   Judge, cross vendor     (NB 05)               -> gpt-4o-mini (OpenAI)
+#   Ichmoukhamedov metrics  (NB 06)               -> claude-sonnet-4-6
 #
-# max_tokens nach Kontext:
-#   MAX_TOKENS_GENERATION      = 2048  (Pipelines 04 / 05 / 06)
-#     Hinweis B6: Scratchpad (<analyse>…</analyse>) kommt vor der Prosa
-#     (~50–100 Tokens) und wird vor dem Speichern via strip_scratchpad()
-#     entfernt.  Notebooks 04/05 wurden von 600 auf diesen Wert angehoben.
-#   MAX_TOKENS_FAITHFULNESS    = 300   (Faithfulness-Check NB 05)
-#   MAX_TOKENS_JUDGE           = 900   (Judge-Calls NB 05, alle Versionen; +Reasoning)
-#   MAX_TOKENS_ICHMOUKHAMEDOV  = 700   (LLM-Calls NB 06)
+# max_tokens by context:
+#   MAX_TOKENS_GENERATION      = 2048  (pipelines 04 / 05 / 06)
+#     Note: the scratchpad (<analysis> ... </analysis>) comes before the prose
+#     (about 50 to 100 tokens) and is removed via strip_scratchpad() before saving.
+#   MAX_TOKENS_JUDGE           = 900   (judge calls NB 05; + reasoning)
+#   MAX_TOKENS_ICHMOUKHAMEDOV  = 700   (LLM calls NB 06)
 #
-# ── Decoding-Temperaturen (Phase 3·2 / A2) ────────────────────────────────
+# --- Decoding temperatures ---------------------------------------------------
 #
-#   JUDGE_TEMPERATURE = 0.0  (deterministisch)
-#     Begründung: Der Judge ist ein Messinstrument, keine kreative Aufgabe.
-#     Gleiche Eingabe → gleicher Score: maximale Reproduzierbarkeit und kein
-#     Stochastik-Rauschen in den Messwerten. G-Eval (Liu et al. 2023) empfiehlt
-#     temperature=0 für numerische Rubriken.
-#     Wirkung auf n=20 Re-Run: Score-Std ≈ 0 (empirisch belegt, s. NB 05 Zelle v5).
+#   JUDGE_TEMPERATURE = 0.0  (deterministic)
+#     Reason: the judge is a measurement instrument, not a creative task. Same
+#     input gives the same score: maximum reproducibility and no stochastic noise
+#     in the measurements. G-Eval (Liu et al. 2023) recommends temperature=0 for
+#     numeric rubrics. Note: Opus rejects temperature, so the Opus judge is not
+#     fully deterministic; the OpenAI judge can use temperature=0.
 #
-#   GENERATION_TEMPERATURE = 1.0  (Anthropic-Default — bewusste Designentscheidung)
-#     Begründung: Erklärungstexte sollen natürlich und nicht repetitiv wirken.
-#     Phase 3b misst Varianz explizit (3 Generationen/Instanz), sodass die
-#     Stochastik der Messung selbst Gegenstand der Untersuchung ist.
-#     Limitation: reproduzierbare Erklärungen erfordern fixen Seed → wird im
-#     Paper als Limitation benannt.
+#   GENERATION_TEMPERATURE = 1.0  (Anthropic default, a deliberate design choice)
+#     Reason: explanation texts should read naturally and not be repetitive.
+#     Limitation: reproducible explanations need a fixed seed, named as a
+#     limitation in the paper.
 #
-#   JUDGE_SC_K = 3  (Self-Consistency-Samples — nur wenn SC statt temp=0 genutzt)
-#     SC kostet k× die Judge-Calls: bei n=200, 4 Pipelines, 2 XAI-Modellen
-#     ergibt k=3 ca. 4 800 statt 1 600 Judge-Calls (→ Phase-3b-Kostenschätzung).
-#     Bei JUDGE_TEMPERATURE=0 (deterministisch) ist SC wertlos — Implementierung
-#     steht bereit (judge_with_self_consistency in utils/judge.py), ist aber
-#     standardmäßig deaktiviert.
+#   JUDGE_SC_K = 3  (self consistency samples, only if SC is used instead of temp=0)
+#     The self_consistency implementation in utils/judge.py is ready but disabled
+#     by default (SC is worthless at JUDGE_TEMPERATURE=0).
 #
-# Hinweis für das Paper: Modell-IDs und Parameterdefaults der Anthropic-API
-# können sich nach dem Abrufdatum ändern. Für Reproduzierbarkeit sind exakte
-# Versionspins und das Abrufdatum anzugeben.
+# Note for the paper: Anthropic API model ids and parameter defaults can change
+# after the retrieval date. For reproducibility report exact version pins and the
+# retrieval date.
 # -----------------------------------------------------------------------------
 
 DEFAULT_MODEL      = "claude-sonnet-4-6"
-DEFAULT_MAX_TOKENS = 2048   # Erklärungsgenerierung (Pipelines 04 / 05 / 06)
+DEFAULT_MAX_TOKENS = 2048   # explanation generation (pipelines 04 / 05 / 06)
 
 MAX_TOKENS_GENERATION     = 2048
 MAX_TOKENS_FAITHFULNESS   = 300
-MAX_TOKENS_JUDGE          = 900   # +Reasoning (Reason-then-Score, Phase 3·2/A1)
+MAX_TOKENS_JUDGE          = 900   # + reasoning (reason then score)
 MAX_TOKENS_ICHMOUKHAMEDOV = 700
 
-# Decoding-Temperaturen (Phase 3·2 / A2)
-JUDGE_TEMPERATURE      = 0.0   # deterministisch (s. Begründung oben)
-GENERATION_TEMPERATURE = 1.0   # Anthropic-Default (bewusste Designentscheidung)
-JUDGE_SC_K             = 3     # Self-Consistency k — nur wenn SC statt temp=0
+# Decoding temperatures
+JUDGE_TEMPERATURE      = 0.0   # deterministic (see reasoning above)
+GENERATION_TEMPERATURE = 1.0   # Anthropic default (a deliberate design choice)
+JUDGE_SC_K             = 3     # self consistency k, only if SC is used instead of temp=0
 
 import re as _re
 
 
 def model_accepts_temperature(model: str) -> bool:
-    """True, wenn das Modell den `temperature`-Parameter akzeptiert.
+    """True if the model accepts the `temperature` parameter.
 
-    Anthropic Claude Opus 4.7 / 4.8 sowie Fable lehnen `temperature` ab
-    (HTTP 400 bei der Messages API) — sie steuern das Decoding ausschließlich
-    über die Default-Stochastik. Für diese Modelle darf `temperature` nicht
-    mitgeschickt werden. Alle übrigen Modelle (Sonnet, Haiku, OpenAI) akzeptieren
-    den Parameter.
+    Anthropic Claude Opus 4.7 / 4.8 and Fable reject `temperature` (HTTP 400 on the
+    Messages API), they steer decoding only via the default stochasticity. For
+    those models `temperature` must not be sent. All other models (Sonnet, Haiku,
+    OpenAI) accept the parameter.
 
-    Wirkung auf Self-Consistency: Bei abgelehntem `temperature` ziehen mehrere
-    Calls ihre Diversität aus der Default-Stochastik (k Calls variieren trotzdem),
-    statt aus einem explizit erhöhten `temperature`-Wert.
+    Effect on self consistency: when `temperature` is rejected, several calls draw
+    their diversity from the default stochasticity (k calls still vary) instead of
+    from an explicitly raised `temperature` value.
     """
     return _re.search(r"opus-4-[78]|fable", model) is None
 
 
 def strip_scratchpad(text: str) -> str:
-    """Removes the <analyse>…</analyse> scratchpad block from generated text.
+    """Removes the <analysis> ... </analysis> scratchpad block from generated text.
 
-    The block is written by the model before the prose (B6 — Think-before-write)
-    and must be discarded before persisting the explanation.  Handles optional
-    leading/trailing whitespace and CRLF line endings.
+    The block is written by the model before the prose (think before write) and
+    must be discarded before persisting the explanation. Handles optional leading
+    or trailing whitespace and CRLF line endings.
     """
-    return _re.sub(r"<analyse>.*?</analyse>\s*", "", text, flags=_re.DOTALL).strip()
+    return _re.sub(r"<analysis>.*?</analysis>\s*", "", text, flags=_re.DOTALL).strip()
 
 
 try:
@@ -134,7 +123,7 @@ def _with_retry(fn: Any, *args: Any, max_retries: int = 2, **kwargs: Any) -> Any
             return fn(*args, **kwargs)
         except Exception as exc:
             if attempt < max_retries and isinstance(exc, _RETRYABLE_TYPES):
-                print(f"[llm] {type(exc).__name__} – Retry {attempt + 1}/{max_retries} in {delay}s …")
+                print(f"[llm] {type(exc).__name__} - retry {attempt + 1}/{max_retries} in {delay}s ...")
                 _time.sleep(delay)
                 delay *= 2
             else:
@@ -146,33 +135,33 @@ def _get_client() -> Any:
         from anthropic import Anthropic
     except ImportError as e:
         raise ImportError(
-            "Paket 'anthropic' nicht installiert. "
-            "Bitte `pip install anthropic` ausführen."
+            "Package 'anthropic' not installed. "
+            "Please run `pip install anthropic`."
         ) from e
 
     api_key = os.environ.get("ANTHROPIC_API_KEY")
     if not api_key:
         raise RuntimeError(
-            "ANTHROPIC_API_KEY nicht gesetzt.\n"
-            "Entweder in .env eintragen (cp .env.example .env) "
-            "oder als Umgebungsvariable exportieren:\n"
+            "ANTHROPIC_API_KEY not set.\n"
+            "Either add it to .env (cp .env.example .env) "
+            "or export it as an environment variable:\n"
             "  export ANTHROPIC_API_KEY=sk-ant-..."
         )
     return Anthropic(api_key=api_key)
 
 
 # -----------------------------------------------------------------------------
-# Request-Shape-Builder + Real-time-Runner (Phase 3a·B)
+# Request shape builders + real time runner
 #
-# Der Batch- und der Real-time-Pfad müssen **dieselbe** Request-Shape erzeugen,
-# damit die On-Disk-Artefakte schema-identisch bleiben (NB 05/06 sind
-# ausführungsart-agnostisch). Deshalb bauen `build_text_params` /
-# `build_image_params` exakt die `messages.create`-Parameter; `run_params`
-# führt sie real-time aus, `utils.batch.message_request` verpackt sie für den
-# Batch. `ask_text` / `ask_with_images` bleiben die bequemen Real-time-Wrapper.
+# The batch and the real time path must produce the same request shape so the on
+# disk artefacts stay schema identical (NB 05/06 are execution mode agnostic).
+# Therefore `build_text_params` / `build_image_params` build exactly the
+# `messages.create` parameters; `run_params` runs them real time,
+# `utils.batch.message_request` wraps them for the batch. `ask_text` /
+# `ask_with_images` remain the convenient real time wrappers.
 # -----------------------------------------------------------------------------
 def _system_block(system: str | None, cache_system: bool) -> Any:
-    """Baut den `system`-Parameter — als gecachten Block oder schlichten String."""
+    """Build the `system` parameter, as a cached block or a plain string."""
     if system and cache_system:
         return [
             {
@@ -193,11 +182,11 @@ def build_text_params(
     cache_system: bool = False,
     temperature: float | None = None,
 ) -> dict:
-    """Baut die `messages.create`-Parameter für eine Text-only-Anfrage.
+    """Build the `messages.create` parameters for a text only request.
 
-    Gemeinsame Request-Shape für Real-time (`run_params`) und Batch
-    (`utils.batch.message_request`). `temperature` wird bei Modellen, die sie
-    ablehnen (Opus 4.7/4.8, Fable), weggelassen — siehe model_accepts_temperature().
+    Shared request shape for real time (`run_params`) and batch
+    (`utils.batch.message_request`). `temperature` is omitted for models that
+    reject it (Opus 4.7/4.8, Fable), see model_accepts_temperature().
     """
     params: dict = dict(
         model=model,
@@ -211,14 +200,14 @@ def build_text_params(
 
 
 def run_params(params: dict) -> dict:
-    """Führt eine vorgebaute Request-Shape real-time aus (mit Retry)."""
+    """Run a prebuilt request shape real time (with retry)."""
     client = _get_client()
     resp = _with_retry(client.messages.create, **params)
     return resp.model_dump()
 
 
 # -----------------------------------------------------------------------------
-# Pipeline 04: JSON → Text  (mit Prompt-Caching für den System-Prompt)
+# Pipeline 04: JSON to Text  (with prompt caching for the system prompt)
 # -----------------------------------------------------------------------------
 def ask_text(
     prompt: str,
@@ -229,15 +218,15 @@ def ask_text(
     cache_system: bool = False,
     temperature: float | None = None,
 ) -> dict:
-    """Text-only Anfrage an die Anthropic Messages API.
+    """Text only request to the Anthropic Messages API.
 
     Parameters
     ----------
     temperature : float | None
-        None → Anthropic-Default (1.0); 0.0 → deterministisch (für Judge-Calls);
-        0.2–0.4 → wenig stochastisch. Siehe JUDGE_TEMPERATURE / GENERATION_TEMPERATURE.
-        Wird bei Modellen, die `temperature` ablehnen (Opus 4.7/4.8, Fable),
-        automatisch verworfen — siehe model_accepts_temperature().
+        None -> Anthropic default (1.0); 0.0 -> deterministic (for judge calls);
+        0.2 to 0.4 -> slightly stochastic. See JUDGE_TEMPERATURE / GENERATION_TEMPERATURE.
+        Dropped automatically for models that reject `temperature` (Opus 4.7/4.8,
+        Fable), see model_accepts_temperature().
     """
     return run_params(
         build_text_params(
@@ -252,7 +241,7 @@ def ask_text(
 
 
 # -----------------------------------------------------------------------------
-# Pipeline 05: Bilder + Text → Text
+# Pipeline 05: images + text to text
 # -----------------------------------------------------------------------------
 _MAX_IMAGE_BYTES = 5 * 1024 * 1024  # 5 MB
 
@@ -268,14 +257,14 @@ def _encode_image(path: Path | str) -> dict:
         "webp": "image/webp",
     }
     if suffix not in media_type_map:
-        raise ValueError(f"Bildformat .{suffix} nicht unterstützt.")
+        raise ValueError(f"Image format .{suffix} not supported.")
 
     size = path.stat().st_size
     if size > _MAX_IMAGE_BYTES:
         raise ValueError(
-            f"{path.name} ist {size / 1024 / 1024:.1f} MB groß "
-            f"(Limit: {_MAX_IMAGE_BYTES // 1024 // 1024} MB). "
-            "Bild vorher komprimieren oder Auflösung reduzieren."
+            f"{path.name} is {size / 1024 / 1024:.1f} MB "
+            f"(limit: {_MAX_IMAGE_BYTES // 1024 // 1024} MB). "
+            "Compress the image or reduce its resolution first."
         )
 
     data = base64.standard_b64encode(path.read_bytes()).decode("utf-8")
@@ -290,14 +279,14 @@ def _encode_image(path: Path | str) -> dict:
 
 
 # -----------------------------------------------------------------------------
-# Cross-Vendor Judge: OpenAI-kompatibler Wrapper (Phase 2)
+# Cross vendor judge: OpenAI compatible wrapper
 #
-# API:         OpenAI Chat Completions API
-# Abrufdatum:  2026-06-16
-# Empfohlenes Modell (früher Test):  gpt-4o-mini  ($0.15/$0.60 per 1M in/out)
-# Empfohlenes Modell (Finallauf):    gpt-4o       ($2.50/$10.00 per 1M in/out)
-# Free-Tier Ratelimit: 3 RPM → request_delay_s=20 nötig (Tier 0).
-#                      Ab Tier 1: request_delay_s=0 möglich.
+# API:           OpenAI Chat Completions API
+# Retrieved on:  2026-06-16
+# Recommended model (early test):  gpt-4o-mini  ($0.15/$0.60 per 1M in/out)
+# Recommended model (final run):   gpt-4o       ($2.50/$10.00 per 1M in/out)
+# Free tier rate limit: 3 RPM, so request_delay_s=20 is needed (tier 0).
+#                       From tier 1: request_delay_s=0 is possible.
 # -----------------------------------------------------------------------------
 OPENAI_JUDGE_MODEL_TEST  = "gpt-4o-mini"
 OPENAI_JUDGE_MODEL_FINAL = "gpt-4o"
@@ -318,7 +307,7 @@ def _with_openai_retry(fn: Any, *args: Any, max_retries: int = 2, **kwargs: Any)
             return fn(*args, **kwargs)
         except Exception as exc:
             if attempt < max_retries and isinstance(exc, _oai_retryable):
-                print(f"[openai] {type(exc).__name__} – Retry {attempt + 1}/{max_retries} in {delay}s …")
+                print(f"[openai] {type(exc).__name__} - retry {attempt + 1}/{max_retries} in {delay}s ...")
                 _time.sleep(delay)
                 delay *= 2
             else:
@@ -334,27 +323,27 @@ def ask_openai_text(
     request_delay_s: float = 0.0,
     temperature: float | None = None,
 ) -> dict:
-    """OpenAI Chat Completions call — gibt dasselbe Schema zurück wie ask_text().
+    """OpenAI Chat Completions call, returns the same schema as ask_text().
 
     Parameters
     ----------
-    prompt          : User-Nachricht
-    system          : System-Prompt (wird als 'system' role übergeben)
-    model           : Modell-ID, default gpt-4o-mini (günstig, Free-Tier-tauglich)
-    max_tokens      : max. Output-Tokens
-    request_delay_s : Pause vor dem Call (20s für Free-Tier-3-RPM-Limit empfohlen)
-    temperature     : None → Modell-Default; 0.0 → deterministisch (für Judge-Calls)
+    prompt          : user message
+    system          : system prompt (passed as the 'system' role)
+    model           : model id, default gpt-4o-mini (cheap, free tier capable)
+    max_tokens      : max output tokens
+    request_delay_s : pause before the call (20s recommended for the free tier 3 RPM limit)
+    temperature     : None -> model default; 0.0 -> deterministic (for judge calls)
 
     Returns
     -------
-    dict mit 'content'[0]['text'], 'usage' (input_tokens/output_tokens), 'model'
-    — kompatibel mit dem bestehenden _parse_judge_response()-Schema.
+    dict with 'content'[0]['text'], 'usage' (input_tokens/output_tokens), 'model',
+    compatible with the existing _parse_judge_response() schema.
     """
     try:
         from openai import OpenAI
     except ImportError as e:
         raise ImportError(
-            "Paket 'openai' nicht installiert. Bitte `pip install openai` ausführen."
+            "Package 'openai' not installed. Please run `pip install openai`."
         ) from e
 
     api_key = os.environ.get("OPENAI_API_KEY", "").strip()
@@ -401,11 +390,10 @@ def build_image_params(
     cache_system: bool = True,
     temperature: float | None = None,
 ) -> dict:
-    """Baut die `messages.create`-Parameter für eine multimodale Anfrage (NB 04c).
+    """Build the `messages.create` parameters for a multimodal request (NB 04c).
 
-    Bilder werden base64-kodiert in den User-Content gelegt. Gemeinsame
-    Request-Shape für Real-time (`run_params`) und Batch
-    (`utils.batch.message_request`).
+    Images are base64 encoded into the user content. Shared request shape for real
+    time (`run_params`) and batch (`utils.batch.message_request`).
     """
     content: list[dict] = [_encode_image(p) for p in image_paths]
     content.append({"type": "text", "text": prompt})
@@ -431,10 +419,10 @@ def ask_with_images(
     cache_system: bool = True,
     temperature: float | None = None,
 ) -> dict:
-    """Multimodale Anfrage mit einem oder mehreren Bildern (Notebook 04c).
+    """Multimodal request with one or more images (notebook 04c).
 
-    Bilder werden base64-kodiert übergeben.
-    temperature : siehe ask_text.
+    Images are passed base64 encoded.
+    temperature : see ask_text.
     """
     return run_params(
         build_image_params(

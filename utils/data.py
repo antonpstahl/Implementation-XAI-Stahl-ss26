@@ -1,11 +1,10 @@
 """
-utils/data.py – Daten-Loading mit zentral definierten Datentypen.
+utils/data.py - data loading with centrally defined dtypes.
 
-Wichtig: train.csv / test.csv enthalten nach dem CSV-Roundtrip keine
-category-Dtypes mehr. Diese Datei ist die *einzige* Stelle, an der
-die Dtypes wiederhergestellt werden – damit EBM und XGBoost
-(mit enable_categorical=True) konsistent dieselben Spalten als
-kategorisch behandeln.
+Important: after the CSV roundtrip train.csv / test.csv no longer carry category
+dtypes. This file is the only place where the dtypes are restored, so that EBM and
+XGBoost (with enable_categorical=True) consistently treat the same columns as
+categorical.
 """
 
 from __future__ import annotations
@@ -19,15 +18,15 @@ import pandas as pd
 from . import DATA_DIR, RANDOM_STATE
 
 # -----------------------------------------------------------------------------
-# Spalten-Schema
+# Column schema
 # -----------------------------------------------------------------------------
-# Nominale (ungeordnete) Kategorien
+# Nominal (unordered) categories
 NOMINAL_COLS: list[str] = [
-    "weathersit",  # 1..4 (Wetterlage)
+    "weathersit",  # 1..4 (weather situation)
 ]
 
-# Ordinale Kategorien (haben natürliche Ordnung; für EBM/XGBoost
-# als category ausreichend – Reihenfolge spiegelt sich in den Codes wider)
+# Ordinal categories (have a natural order; for EBM/XGBoost category is enough,
+# the order is reflected in the codes)
 ORDINAL_COLS: list[str] = [
     "mnth",     # 1..12
     "hr",       # 0..23
@@ -37,29 +36,29 @@ ORDINAL_COLS: list[str] = [
 CATEGORICAL_COLS: list[str] = NOMINAL_COLS + ORDINAL_COLS
 
 NUMERIC_COLS: list[str] = [
-    "yr",        # 0: 2011 / 1: 2012 — binär, als 0/1 behandelt
-    "holiday",   # 0: kein Feiertag / 1: Feiertag — binär
-    "temp",      # normalisierte Temperatur
-    "hum",       # Luftfeuchtigkeit (normalisiert)
-    "windspeed", # Windgeschwindigkeit (normalisiert)
+    "yr",        # 0: 2011 / 1: 2012, binary, treated as 0/1
+    "holiday",   # 0: no holiday / 1: holiday, binary
+    "temp",      # normalised temperature
+    "hum",       # humidity (normalised)
+    "windspeed", # wind speed (normalised)
 ]
-# Entfernte Features (redundant):
-#   season     → vollständig aus mnth ableitbar (Monate 3–5 = Frühling etc.)
-#   workingday → vollständig aus weekday + holiday ableitbar
+# Removed features (redundant):
+#   season     fully derivable from mnth (months 3 to 5 = spring etc.)
+#   workingday fully derivable from weekday + holiday
 
 TARGET_COL: str = "cnt"
 
-# Spalten, die nicht als Feature verwendet werden sollen.
-# Falls sie noch in train.csv/test.csv vorhanden sind, werden sie verworfen.
+# Columns that must not be used as a feature.
+# If they are still present in train.csv/test.csv they are dropped.
 DROP_COLS: list[str] = [
-    "instant",     # Zeilen-ID
-    "dteday",      # Datum (Leakage-frei nur als Quelle für hr/yr/mnth/weekday verwendbar)
-    "casual",      # Target-Leakage (Teil von cnt)
-    "registered",  # Target-Leakage (Teil von cnt)
-    "season",      # redundant (aus mnth ableitbar) — safety net für alte CSVs
-    "workingday",  # redundant (aus weekday+holiday ableitbar) — safety net
-    "cnt_log1p",   # abgeleitetes Target, kein Feature
-    "atemp",       # nahezu perfekt korreliert mit temp (r≈0.99)
+    "instant",     # row ID
+    "dteday",      # date (leakage free only as a source for hr/yr/mnth/weekday)
+    "casual",      # target leakage (part of cnt)
+    "registered",  # target leakage (part of cnt)
+    "season",      # redundant (derivable from mnth), safety net for old CSVs
+    "workingday",  # redundant (derivable from weekday+holiday), safety net
+    "cnt_log1p",   # derived target, not a feature
+    "atemp",       # almost perfectly correlated with temp (r approx 0.99)
 ]
 
 FEATURE_COLS: list[str] = CATEGORICAL_COLS + NUMERIC_COLS
@@ -69,7 +68,7 @@ FEATURE_COLS: list[str] = CATEGORICAL_COLS + NUMERIC_COLS
 # Dtype-Wiederherstellung
 # -----------------------------------------------------------------------------
 def _apply_dtypes(df: pd.DataFrame) -> pd.DataFrame:
-    """Stellt category-Dtypes für kategoriale Spalten wieder her."""
+    """Restore category dtypes for the categorical columns."""
     df = df.copy()
 
     for col in CATEGORICAL_COLS:
@@ -89,7 +88,7 @@ def _apply_dtypes(df: pd.DataFrame) -> pd.DataFrame:
 
 
 def _drop_unused(df: pd.DataFrame) -> pd.DataFrame:
-    """Entfernt ID-/Leakage-Spalten falls noch vorhanden."""
+    """Drop ID / leakage columns if still present."""
     cols_to_drop = [c for c in DROP_COLS if c in df.columns]
     if cols_to_drop:
         df = df.drop(columns=cols_to_drop)
@@ -103,13 +102,13 @@ def load_train_test(
     data_dir: Path | str | None = None,
 ) -> Tuple[pd.DataFrame, pd.Series, pd.DataFrame, pd.Series]:
     """
-    Lädt train.csv und test.csv mit korrekten Datentypen.
+    Load train.csv and test.csv with correct dtypes.
 
     Returns
     -------
     X_train, y_train, X_test, y_test
-        Features als DataFrame mit category-Dtypes für kategoriale Spalten,
-        Target als Series.
+        Features as a DataFrame with category dtypes for the categorical columns,
+        target as a Series.
     """
     data_dir = Path(data_dir) if data_dir is not None else DATA_DIR
 
@@ -118,13 +117,13 @@ def load_train_test(
 
     if not train_path.exists():
         raise FileNotFoundError(
-            f"train.csv nicht gefunden unter {train_path}. "
-            "Bitte zuerst Notebook 01_Preprocessing.ipynb ausführen."
+            f"train.csv not found at {train_path}. "
+            "Please run notebook 01_Data_Preprocessing.ipynb first."
         )
     if not test_path.exists():
         raise FileNotFoundError(
-            f"test.csv nicht gefunden unter {test_path}. "
-            "Bitte zuerst Notebook 01_Preprocessing.ipynb ausführen."
+            f"test.csv not found at {test_path}. "
+            "Please run notebook 01_Data_Preprocessing.ipynb first."
         )
 
     train = _apply_dtypes(_drop_unused(pd.read_csv(train_path)))
@@ -132,7 +131,7 @@ def load_train_test(
 
     if TARGET_COL not in train.columns or TARGET_COL not in test.columns:
         raise ValueError(
-            f"Target-Spalte '{TARGET_COL}' fehlt in train.csv oder test.csv."
+            f"Target column '{TARGET_COL}' missing in train.csv or test.csv."
         )
 
     X_train = train[FEATURE_COLS].copy()
@@ -161,7 +160,7 @@ def sample_stratified(
     ----------
     X    : feature DataFrame (must contain 'hr' and 'weathersit')
     y    : target Series (cnt, used to compute quintile bins)
-    n    : number of indices to draw (must be ≤ len(X))
+    n    : number of indices to draw (must be <= len(X))
     seed : RNG seed for reproducibility
 
     Returns
@@ -190,7 +189,7 @@ def sample_stratified(
     if n >= len(strata_sizes):
         raw = raw.clip(lower=1.0)
 
-    # Hamilton largest-remainder method — guarantees total == n, all values >= 0
+    # Hamilton largest remainder method, guarantees total == n, all values >= 0
     alloc = np.floor(raw).astype(int)
     remainder = n - int(alloc.sum())
     for s in (raw - alloc).sort_values(ascending=False).index[:remainder]:
@@ -208,7 +207,7 @@ def sample_stratified(
 
 
 def get_feature_lists() -> dict[str, list[str]]:
-    """Gibt die zentrale Feature-Klassifikation zurück (für Notebooks/Plots)."""
+    """Return the central feature classification (for notebooks/plots)."""
     return {
         "categorical": list(CATEGORICAL_COLS),
         "nominal": list(NOMINAL_COLS),

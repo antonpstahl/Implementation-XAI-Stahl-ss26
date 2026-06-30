@@ -1,12 +1,12 @@
 """
-Phase 3a — Generierungs-Loop & Persistenz testen.
+Generation loop and persistence tests.
 
-DoD: Test mit gemocktem LLM belegt, dass Generationen/Instanz korrekt
-persistiert, nach Abbruch resume-fähig und idempotent sind (kein Doppelzählen).
+A test with a mocked LLM shows that generations per instance are persisted
+correctly, resumable after an abort and idempotent (no double counting).
 
-Getestet wird `utils.run_resumable_generation`, in den die zuvor dreifach
-inline (NB 04b/04c/06) vorliegende skip-if-exists-Schleife extrahiert wurde.
-Der LLM-Aufruf wird durch ein zählendes `generate`-Callback ersetzt.
+Tests `utils.run_resumable_generation`, into which the skip if exists loop
+previously inlined three times (NB 04b/04c/06) was extracted. The LLM call is
+replaced by a counting `generate` callback.
 """
 from __future__ import annotations
 
@@ -265,11 +265,11 @@ def test_out_dir_created_if_missing(tmp_path):
 
 
 # ---------------------------------------------------------------------------
-# build_generation_record — Golden-Schemata der drei Pipelines (NB 04b/04c/06)
+# build_generation_record - golden schemas of the three pipelines (NB 04b/04c/06)
 #
-# Friert die zuvor inline gebauten Records ein: gleiche Keys, gleiche
-# Reihenfolge, gleiche Werte. Bricht, falls der zentrale Builder vom
-# Notebook-Schema abweicht (stille Divergenz = der teure Fehler).
+# Freezes the records previously built inline: same keys, same order, same values.
+# Breaks if the central builder diverges from the notebook schema (silent
+# divergence = the expensive bug).
 # ---------------------------------------------------------------------------
 
 USAGE_FULL = {"input_tokens": 600, "output_tokens": 510, "cache_read_input_tokens": 1024}
@@ -283,7 +283,7 @@ def test_record_schema_pipeline04_json():
         "loss_key":    "poisson_log",
         "xai_model":   "xgb",
         "instance_id": 224,
-        "explanation": "Erklärungstext",
+        "explanation": "Explanation text",
         "elapsed_s":   11.7,
         "usage":       {"input_tokens": 600, "output_tokens": 510,
                         "cache_read_input_tokens": 1024},
@@ -292,12 +292,12 @@ def test_record_schema_pipeline04_json():
     }
     rec = build_generation_record(
         pipeline="04_json", model_name="xgb", instance_id=224,
-        explanation="Erklärungstext", usage=USAGE_FULL,
+        explanation="Explanation text", usage=USAGE_FULL,
         llm_model="claude-sonnet-4-6", loss_key="poisson_log",
         prediction=270.4, y_true=270, elapsed_s=11.7,
     )
     assert rec == expected
-    assert list(rec) == list(expected)  # Key-Reihenfolge identisch
+    assert list(rec) == list(expected)  # identical key order
 
 
 def test_record_schema_pipeline05_vision():
@@ -307,7 +307,7 @@ def test_record_schema_pipeline05_vision():
         "loss_key":    "poisson_log",
         "xai_model":   "ebm",
         "instance_id": 580,
-        "explanation": "Bilderklärung",
+        "explanation": "Image explanation",
         "plot_file":   "waterfall_ebm_poisson_log_inst580.png",
         "elapsed_s":   12.3,
         "usage":       {"input_tokens": 600, "output_tokens": 510,
@@ -317,7 +317,7 @@ def test_record_schema_pipeline05_vision():
     }
     rec = build_generation_record(
         pipeline="05_vision", model_name="ebm", instance_id=580,
-        explanation="Bilderklärung", usage=USAGE_FULL,
+        explanation="Image explanation", usage=USAGE_FULL,
         llm_model="claude-sonnet-4-6", loss_key="poisson_log",
         prediction=5.1, y_true=5, elapsed_s=12.3,
         extra={"plot_file": "waterfall_ebm_poisson_log_inst580.png"},
@@ -334,7 +334,7 @@ def test_record_schema_pipeline06_tooluse():
         "loss_key":     "poisson_log",
         "xai_model":    "xgb",
         "instance_id":  224,
-        "explanation":  "Tool-Erklärung",
+        "explanation":  "Tool explanation",
         "stop_reason":  "end_turn",
         "tool_calls":   call_log,
         "n_tool_calls": 1,
@@ -344,15 +344,15 @@ def test_record_schema_pipeline06_tooluse():
     }
     rec = build_generation_record(
         pipeline="06_tooluse", model_name="xgb", instance_id=224,
-        explanation="Tool-Erklärung", usage=USAGE_TOOL,
+        explanation="Tool explanation", usage=USAGE_TOOL,
         llm_model="claude-sonnet-4-6", loss_key="poisson_log",
         y_true=270.0, elapsed_s=28.8, include_cache=False,
         extra={"stop_reason": "end_turn", "tool_calls": call_log,
                "n_tool_calls": 1},
     )
     assert rec == expected
-    assert list(rec) == list(expected)        # Reihenfolge: extra vor elapsed_s
-    assert "prediction" not in rec            # Tool-Use führt keine Vorhersage
+    assert list(rec) == list(expected)        # order: extra before elapsed_s
+    assert "prediction" not in rec            # Tool Use carries no prediction
     assert "cache_read_input_tokens" not in rec["usage"]
 
 

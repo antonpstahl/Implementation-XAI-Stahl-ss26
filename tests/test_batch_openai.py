@@ -1,8 +1,8 @@
-"""Phase 3b — utils.batch_openai (OpenAI Batch API für den Cross-Vendor-Judge).
+"""Tests for utils.batch_openai (OpenAI Batch API for the cross vendor judge).
 
-Spiegelt tests/test_batch.py: custom_id-Roundtrip, Ergebnis-Klassifikation,
-Schema-Gleichheit zum Real-time-Pfad, Resubmit bei server_error, invalid_request-
-Logging und Poll-Resume-Persistenz. Der OpenAI-Client wird gefaket (datei-basiert:
+Mirrors tests/test_batch.py: custom_id roundtrip, result classification, schema
+equality with the real time path, resubmit on server_error, invalid_request
+logging and poll resume persistence. The OpenAI client is faked (file based:
 files.create/content, batches.create/retrieve).
 """
 from __future__ import annotations
@@ -52,7 +52,7 @@ def _error_line(cid, status_code):
 
 
 # ---------------------------------------------------------------------------
-# Fake OpenAI client — scripted rounds of {cid: line}
+# Fake OpenAI client  -  scripted rounds of {cid: line}
 # ---------------------------------------------------------------------------
 
 class _FakeContent:
@@ -65,7 +65,7 @@ class _FakeBatch(dict):
 
 class FakeOpenAI:
     def __init__(self, rounds: list[dict], batch_status="completed"):
-        """rounds: list per submit — {cid: success_line | error_line}."""
+        """rounds: list per submit  -  {cid: success_line | error_line}."""
         self._rounds = rounds
         self._batch_status = batch_status
         self._files: dict[str, str] = {}
@@ -166,7 +166,7 @@ def test_classify_error_only_line_is_invalid():
 
 
 # ---------------------------------------------------------------------------
-# Roundtrip: submit → wait → collect
+# Roundtrip: submit  to  wait  to  collect
 # ---------------------------------------------------------------------------
 
 def test_run_batch_all_success_with_parse():

@@ -212,7 +212,7 @@ def test_all_base_cids_in_result():
 
 def test_long_base_cid_raises():
     too_long = [("x" * 62, "prompt")]   # 62 + len("-s2") = 65 > 64
-    with pytest.raises(ValueError, match="zu lang"):
+    with pytest.raises(ValueError, match="too long"):
         judge_batch_sc(too_long, system="s", model=MODEL, max_tokens=10, k=3,
                        client=make_client(FakeBatches()), sleep=NOSLEEP)
 

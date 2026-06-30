@@ -1,13 +1,13 @@
 """
-Fixtures für Judge-Parsing-Tests.
+Fixtures for judge parsing tests.
 
-Jede Fixture ist ein dict mit:
-  - raw:      die rohe LLM-Antwort (str)
-  - expected: erwartetes Ergebnis von parse_judge_response (dict)
-              Felder die nicht gesetzt sein sollen → Key fehlt im expected-dict
+Each fixture is a dict with:
+  - raw:      the raw LLM answer (str)
+  - expected: expected result of parse_judge_response (dict)
+              fields that should not be set -> the key is missing in expected
 """
 
-# ── 1. Normalfall: reiner Markdown-Codeblock (wie echte Modell-Antworten) ────
+# --- 1. Normal case: plain markdown code block (like real model answers) ---
 FIXTURE_MARKDOWN_CODEBLOCK = {
     "raw": """\
 ```json
@@ -15,66 +15,66 @@ FIXTURE_MARKDOWN_CODEBLOCK = {
   "FAITHFULNESS": 5,
   "CLARITY": 4,
   "COMPLETENESS": 4,
-  "FAITHFULNESS_REASONING": "Alle drei Top-3-Treiber korrekt benannt.",
-  "CLARITY_REASONING": "Alltagssprache, kein Fachjargon.",
-  "COMPLETENESS_REASONING": "Alle drei Pflichtabschnitte vorhanden."
+  "FAITHFULNESS_REASONING": "All three top 3 drivers named correctly.",
+  "CLARITY_REASONING": "Everyday language, no jargon.",
+  "COMPLETENESS_REASONING": "All three required sections present."
 }
 ```""",
     "expected": {
         "faithfulness": 5,
         "clarity": 4,
         "completeness": 4,
-        "faithfulness_reasoning": "Alle drei Top-3-Treiber korrekt benannt.",
-        "clarity_reasoning": "Alltagssprache, kein Fachjargon.",
-        "completeness_reasoning": "Alle drei Pflichtabschnitte vorhanden.",
+        "faithfulness_reasoning": "All three top 3 drivers named correctly.",
+        "clarity_reasoning": "Everyday language, no jargon.",
+        "completeness_reasoning": "All three required sections present.",
     },
 }
 
-# ── 2. JSON eingebettet in Fließtext ─────────────────────────────────────────
+# --- 2. JSON embedded in prose ---
 FIXTURE_JSON_IN_FLIESSTEXT = {
     "raw": """\
-Hier ist meine Bewertung der Erklärung:
+Here is my evaluation of the explanation:
 
-Die Erklärung ist insgesamt solide. Meine Scores:
+The explanation is solid overall. My scores:
 
 {"FAITHFULNESS": 3, "CLARITY": 5, "COMPLETENESS": 2,
- "FAITHFULNESS_REASONING": "Treiber teilweise falsch.",
- "CLARITY_REASONING": "Sehr verständlich.",
- "COMPLETENESS_REASONING": "Empfehlung fehlt."}
+ "FAITHFULNESS_REASONING": "Drivers partly wrong.",
+ "CLARITY_REASONING": "Very understandable.",
+ "COMPLETENESS_REASONING": "Recommendation missing."}
 
-Ich hoffe das hilft.""",
+I hope this helps.""",
     "expected": {
         "faithfulness": 3,
         "clarity": 5,
         "completeness": 2,
-        "faithfulness_reasoning": "Treiber teilweise falsch.",
-        "clarity_reasoning": "Sehr verständlich.",
-        "completeness_reasoning": "Empfehlung fehlt.",
+        "faithfulness_reasoning": "Drivers partly wrong.",
+        "clarity_reasoning": "Very understandable.",
+        "completeness_reasoning": "Recommendation missing.",
     },
 }
 
-# ── 3. Klares JSON-Objekt ohne Codeblock, kein Fließtext ─────────────────────
+# --- 3. Clear JSON object without code block, no prose ---
 FIXTURE_PLAIN_JSON = {
     "raw": """\
 {
   "faithfulness": 4,
   "clarity": 3,
   "completeness": 5,
-  "faithfulness_reasoning": "Wichtige Features erwähnt.",
-  "clarity_reasoning": "Etwas technisch.",
-  "completeness_reasoning": "Vollständig."
+  "faithfulness_reasoning": "Important features mentioned.",
+  "clarity_reasoning": "A bit technical.",
+  "completeness_reasoning": "Complete."
 }""",
     "expected": {
         "faithfulness": 4,
         "clarity": 3,
         "completeness": 5,
-        "faithfulness_reasoning": "Wichtige Features erwähnt.",
-        "clarity_reasoning": "Etwas technisch.",
-        "completeness_reasoning": "Vollständig.",
+        "faithfulness_reasoning": "Important features mentioned.",
+        "clarity_reasoning": "A bit technical.",
+        "completeness_reasoning": "Complete.",
     },
 }
 
-# ── 4a. Fehlende Felder: nur zwei von drei Scores vorhanden ──────────────────
+# --- 4a. Missing fields: only two of three scores present ---
 FIXTURE_MISSING_FIELDS = {
     "raw": """\
 ```json
@@ -86,18 +86,18 @@ FIXTURE_MISSING_FIELDS = {
     "expected": {
         "faithfulness": 2,
         "clarity": 4,
-        # completeness fehlt absichtlich
+        # completeness missing on purpose
     },
 }
 
-# ── 4b. Abgeschnittenes JSON (Regex-Fallback nötig) ───────────────────────────
+# --- 4b. Truncated JSON (regex fallback needed) ---
 FIXTURE_TRUNCATED_JSON = {
     "raw": """\
 {
   "FAITHFULNESS": 1,
   "CLARITY": 2,
   "COMPLETENESS": 3,
-  "FAITHFULNESS_REASONING": "Falsch.""",  # kein schließendes }
+  "FAITHFULNESS_REASONING": "Wrong.""",  # no closing }
     "expected": {
         "faithfulness": 1,
         "clarity": 2,
@@ -105,51 +105,51 @@ FIXTURE_TRUNCATED_JSON = {
     },
 }
 
-# ── 5. Vollständiger Garbage: kein JSON, keine Scores extrahierbar ────────────
+# --- 5. Full garbage: no JSON, no scores extractable ---
 FIXTURE_GARBAGE = {
-    "raw": "Ich kann diese Anfrage leider nicht beantworten. Bitte versuchen Sie es erneut.",
-    "expected": {},  # leeres dict — kein Score extrahierbar
+    "raw": "Sorry, I cannot answer this request. Please try again.",
+    "expected": {},  # empty dict, no score extractable
 }
 
-# ── 6. Reason-then-Score Plain-Text (A1-Format: Begründung vor Score) ─────────
+# --- 6. Reason then score plain text (reasoning before score) ---
 FIXTURE_REASON_THEN_SCORE_PLAINTEXT = {
     "raw": """\
-FAITHFULNESS_REASONING: Ankerpunkt 5: alle drei Top-3-Treiber korrekt benannt, Vorhersagezahl korrekt. Kein Abzug. Endpunktzahl = max(1, 5+0) = 5.
+FAITHFULNESS_REASONING: Anchor point 5: all three top 3 drivers named correctly, prediction number correct. No deduction. Final score = max(1, 5+0) = 5.
 FAITHFULNESS: 5
-CLARITY_REASONING: Ankerpunkt 4: ein leichter Fachbegriff vorhanden. Ein Abzug. Endpunktzahl = max(1, 4-1) = 3.
+CLARITY_REASONING: Anchor point 4: one mild technical term present. One deduction. Final score = max(1, 4-1) = 3.
 CLARITY: 3
-COMPLETENESS_REASONING: Ankerpunkt 5: alle drei Pflichtabschnitte substanziell vorhanden. Kein Abzug. Endpunktzahl = max(1, 5+0) = 5.
+COMPLETENESS_REASONING: Anchor point 5: all three required sections substantially present. No deduction. Final score = max(1, 5+0) = 5.
 COMPLETENESS: 5""",
     "expected": {
         "faithfulness": 5,
         "clarity": 3,
         "completeness": 5,
-        "faithfulness_reasoning": "Ankerpunkt 5: alle drei Top-3-Treiber korrekt benannt, Vorhersagezahl korrekt. Kein Abzug. Endpunktzahl = max(1, 5+0) = 5.",
-        "clarity_reasoning": "Ankerpunkt 4: ein leichter Fachbegriff vorhanden. Ein Abzug. Endpunktzahl = max(1, 4-1) = 3.",
-        "completeness_reasoning": "Ankerpunkt 5: alle drei Pflichtabschnitte substanziell vorhanden. Kein Abzug. Endpunktzahl = max(1, 5+0) = 5.",
+        "faithfulness_reasoning": "Anchor point 5: all three top 3 drivers named correctly, prediction number correct. No deduction. Final score = max(1, 5+0) = 5.",
+        "clarity_reasoning": "Anchor point 4: one mild technical term present. One deduction. Final score = max(1, 4-1) = 3.",
+        "completeness_reasoning": "Anchor point 5: all three required sections substantially present. No deduction. Final score = max(1, 5+0) = 5.",
     },
 }
 
-# ── 7. XML-Format (B7 — primärer Parsing-Pfad) ───────────────────────────────
+# --- 7. XML format (primary parsing path) ---
 FIXTURE_XML_FULL = {
     "raw": """\
-<faithfulness_reasoning>Alle drei Top-3-Treiber korrekt; yr-Vorzeichen stimmt. Ankerpunkt 5, kein Abzug.</faithfulness_reasoning>
+<faithfulness_reasoning>All three top 3 drivers correct; yr sign right. Anchor point 5, no deduction.</faithfulness_reasoning>
 <faithfulness>5</faithfulness>
-<clarity_reasoning>Alltagssprache; ein Fachbegriff knapp. Ankerpunkt 4, kein Pflicht-Abzug.</clarity_reasoning>
+<clarity_reasoning>Everyday language; one technical term, barely. Anchor point 4, no required deduction.</clarity_reasoning>
 <clarity>4</clarity>
-<completeness_reasoning>Alle drei Abschnitte substanziell vorhanden. Ankerpunkt 5, kein Abzug.</completeness_reasoning>
+<completeness_reasoning>All three sections substantially present. Anchor point 5, no deduction.</completeness_reasoning>
 <completeness>5</completeness>""",
     "expected": {
         "faithfulness": 5,
         "clarity": 4,
         "completeness": 5,
-        "faithfulness_reasoning": "Alle drei Top-3-Treiber korrekt; yr-Vorzeichen stimmt. Ankerpunkt 5, kein Abzug.",
-        "clarity_reasoning": "Alltagssprache; ein Fachbegriff knapp. Ankerpunkt 4, kein Pflicht-Abzug.",
-        "completeness_reasoning": "Alle drei Abschnitte substanziell vorhanden. Ankerpunkt 5, kein Abzug.",
+        "faithfulness_reasoning": "All three top 3 drivers correct; yr sign right. Anchor point 5, no deduction.",
+        "clarity_reasoning": "Everyday language; one technical term, barely. Anchor point 4, no required deduction.",
+        "completeness_reasoning": "All three sections substantially present. Anchor point 5, no deduction.",
     },
 }
 
-# ── 8. XML partial (nur Scores, kein Reasoning) ───────────────────────────────
+# --- 8. XML partial (scores only, no reasoning) ---
 FIXTURE_XML_SCORES_ONLY = {
     "raw": """\
 <faithfulness>3</faithfulness>
@@ -162,30 +162,30 @@ FIXTURE_XML_SCORES_ONLY = {
     },
 }
 
-# ── 9. XML mit umgebendem Text (robust gegen Preamble) ────────────────────────
+# --- 9. XML with surrounding text (robust against a preamble) ---
 FIXTURE_XML_WITH_PREAMBLE = {
     "raw": """\
-Hier ist meine Bewertung:
+Here is my evaluation:
 
-<faithfulness_reasoning>Treiber korrekt. Ankerpunkt 4.</faithfulness_reasoning>
+<faithfulness_reasoning>Drivers correct. Anchor point 4.</faithfulness_reasoning>
 <faithfulness>4</faithfulness>
-<clarity_reasoning>Klar und verständlich. Ankerpunkt 5.</clarity_reasoning>
+<clarity_reasoning>Clear and understandable. Anchor point 5.</clarity_reasoning>
 <clarity>5</clarity>
-<completeness_reasoning>Empfehlung vorhanden. Ankerpunkt 5.</completeness_reasoning>
+<completeness_reasoning>Recommendation present. Anchor point 5.</completeness_reasoning>
 <completeness>5</completeness>
 
-Ende der Bewertung.""",
+End of evaluation.""",
     "expected": {
         "faithfulness": 4,
         "clarity": 5,
         "completeness": 5,
-        "faithfulness_reasoning": "Treiber korrekt. Ankerpunkt 4.",
-        "clarity_reasoning": "Klar und verständlich. Ankerpunkt 5.",
-        "completeness_reasoning": "Empfehlung vorhanden. Ankerpunkt 5.",
+        "faithfulness_reasoning": "Drivers correct. Anchor point 4.",
+        "clarity_reasoning": "Clear and understandable. Anchor point 5.",
+        "completeness_reasoning": "Recommendation present. Anchor point 5.",
     },
 }
 
-# ── Alle Fixtures als Liste für parametrisierten Einsatz ─────────────────────
+# --- All fixtures as a list for parametrized use ---
 ALL_FIXTURES = [
     ("markdown_codeblock",           FIXTURE_MARKDOWN_CODEBLOCK),
     ("json_in_fliesstext",           FIXTURE_JSON_IN_FLIESSTEXT),

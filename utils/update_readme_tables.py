@@ -26,11 +26,11 @@ from pathlib import Path
 ROOT = Path(__file__).parent.parent
 RESULTS = ROOT / "results"
 
-_PIPELINE_ORDER = ["Template", "JSON→Text", "Vision", "Tool-Use"]
-_FAITH_ORDER = ["JSON→Text", "Tool-Use", "Vision"]
+_PIPELINE_ORDER = ["Template", "JSON to Text", "Vision", "Tool Use"]
+_FAITH_ORDER = ["JSON to Text", "Tool Use", "Vision"]
 
 
-# ── markdown helpers ──────────────────────────────────────────────────────────
+# --- markdown helpers ---
 
 def _padded_table(headers: list[str], rows: list[list[str]]) -> str:
     """Build a padded Markdown table (English style)."""
@@ -54,7 +54,7 @@ def _minimal_table(headers: list[str], rows: list[list[str]]) -> str:
     return "\n".join([header_row, sep] + data_rows)
 
 
-# ── number formatters ─────────────────────────────────────────────────────────
+# --- number formatters ---
 
 def _de(v: float, decimals: int = 2) -> str:
     """German locale float: comma decimal separator."""
@@ -75,7 +75,7 @@ def _de_int(v: float) -> str:
     return str(n)
 
 
-# ── data loaders ──────────────────────────────────────────────────────────────
+# --- data loaders ---
 
 def _load_metrics(loss_key: str) -> dict:
     with open(RESULTS / f"model_metrics_{loss_key}.json", encoding="utf-8") as f:
@@ -92,14 +92,14 @@ def _load_eval_summary() -> dict[str, dict]:
 
 def _load_faithfulness() -> dict[str, dict]:
     rows: dict[str, dict] = {}
-    p = RESULTS / "eval08_ichmoukhamedov" / "faithfulness_summary.csv"
+    p = RESULTS / "eval06_ichmoukhamedov" / "faithfulness_summary.csv"
     with open(p, newline="", encoding="utf-8") as f:
         for row in csv.DictReader(f):
             rows[row["pipeline_label"]] = row
     return rows
 
 
-# ── English table generators ──────────────────────────────────────────────────
+# --- English table generators ---
 
 def gen_model_metrics_en() -> str:
     """Poisson-log model metrics (2 rows: XGB + EBM)."""
@@ -130,15 +130,15 @@ def gen_pipeline_eval_en() -> str:
     rows = []
     for pl in _PIPELINE_ORDER:
         r = data[pl]
-        tok_in = _round_half_up(float(r["Tokens_in"]))
-        tok_out = _round_half_up(float(r["Tokens_out"]))
+        tok_in = _round_half_up(float(r["tokens_in"]))
+        tok_out = _round_half_up(float(r["tokens_out"]))
         rows.append([
             pl,
-            str(_round_half_up(float(r["Wörter"]))),
+            str(_round_half_up(float(r["words"]))),
             f"{tok_in:,}",
             f"{tok_out:,}",
-            f"${float(r['Kosten_USD']):.2f}",
-            f"{float(r['Zeit_s']):.1f} s",
+            f"${float(r['cost_usd']):.2f}",
+            f"{float(r['time_s']):.1f} s",
             f"{float(r['Judge_Faith']):.2f}",
             f"{float(r['Judge_Clarity']):.2f}",
             f"{float(r['Judge_Complete']):.2f}",
@@ -147,7 +147,7 @@ def gen_pipeline_eval_en() -> str:
 
 
 def gen_faithfulness_en() -> str:
-    """Ichmoukhamedov faithfulness metrics (3 rows: JSON→Text, Tool-Use, Vision)."""
+    """Ichmoukhamedov faithfulness metrics (3 rows: JSON to Text, Tool Use, Vision)."""
     data = _load_faithfulness()
     headers = ["Pipeline", "Rank Agr.", "Sign Agr.", "Value Agr."]
     rows = []
@@ -162,7 +162,7 @@ def gen_faithfulness_en() -> str:
     return _padded_table(headers, rows)
 
 
-# ── German table generators ───────────────────────────────────────────────────
+# --- German table generators (for Readme_DE.md) ---
 
 def gen_model_comparison_de() -> str:
     """Full model comparison in German locale (4 rows: Squared Error + Poisson-Log)."""
@@ -208,22 +208,22 @@ def gen_pipeline_quant_de() -> str:
     rows = []
     for pl in _PIPELINE_ORDER:
         r = data[pl]
-        tok_in = _round_half_up(float(r["Tokens_in"]))
-        tok_out = _round_half_up(float(r["Tokens_out"]))
-        cost = float(r["Kosten_USD"])
+        tok_in = _round_half_up(float(r["tokens_in"]))
+        tok_out = _round_half_up(float(r["tokens_out"]))
+        cost = float(r["cost_usd"])
         rows.append([
             pl,
-            str(_round_half_up(float(r["Wörter"]))),
+            str(_round_half_up(float(r["words"]))),
             _de_int(tok_in),
             _de_int(tok_out),
             f"{_de(cost)} USD",
-            f"{_de(float(r['Zeit_s']), 1)} s",
+            f"{_de(float(r['time_s']), 1)} s",
         ])
     return _minimal_table(headers, rows)
 
 
 def gen_judge_scores_de() -> str:
-    """LLM-judge v1 scores in German locale (4 rows)."""
+    """LLM judge scores in German locale (4 rows)."""
     data = _load_eval_summary()
     headers = ["Pipeline", "Faithfulness", "Clarity", "Completeness"]
     rows = []
@@ -254,7 +254,7 @@ def gen_faithfulness_de() -> str:
     return _minimal_table(headers, rows)
 
 
-# ── README updater ────────────────────────────────────────────────────────────
+# --- README updater ---
 
 _SENTINEL_RE = re.compile(
     r"<!-- AUTO-TABLE:([^/\s>]+) -->\n(.*?)\n<!-- /AUTO-TABLE:\1 -->",

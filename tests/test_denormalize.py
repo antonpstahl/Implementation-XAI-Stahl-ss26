@@ -1,9 +1,9 @@
 """
-Phase 3·2 De-Risking — DRY-Denormalisierung (Smoke- und Golden-Test).
+Denormalisation smoke and golden test.
 
-Prüft die einzige Denormalisierungsquelle in utils/explanations.py gegen
-bekannte Eingaben. Schlägt fehl, wenn Faktoren, Maps oder Funktionssignaturen
-divergieren — schützt den teuren 3b-Lauf vor still verfälschten Payloads.
+Checks the single denormalisation source in utils/explanations.py against known
+inputs. Fails if factors, maps or function signatures diverge, which protects the
+expensive run from silently corrupted payloads.
 """
 
 from __future__ import annotations
@@ -23,7 +23,7 @@ from utils.explanations import (
 
 
 # ---------------------------------------------------------------------------
-# Konstanten
+# Constants
 # ---------------------------------------------------------------------------
 
 def test_factors():
@@ -34,15 +34,15 @@ def test_factors():
 
 def test_weekday_names_length():
     assert len(WEEKDAY_NAMES) == 7
-    assert WEEKDAY_NAMES[0] == "Sonntag"
-    assert WEEKDAY_NAMES[6] == "Samstag"
+    assert WEEKDAY_NAMES[0] == "Sunday"
+    assert WEEKDAY_NAMES[6] == "Saturday"
 
 
 def test_month_names_length():
-    assert len(MONTH_NAMES) == 13        # Index 0 ist leer
+    assert len(MONTH_NAMES) == 13        # index 0 is empty
     assert MONTH_NAMES[0] == ""
-    assert MONTH_NAMES[1] == "Januar"
-    assert MONTH_NAMES[12] == "Dezember"
+    assert MONTH_NAMES[1] == "January"
+    assert MONTH_NAMES[12] == "December"
 
 
 def test_weather_names_keys():
@@ -50,13 +50,13 @@ def test_weather_names_keys():
 
 
 # ---------------------------------------------------------------------------
-# humanize_feature — Einzelwert-Denormalisierung
+# humanize_feature - single value denormalisation
 # ---------------------------------------------------------------------------
 
 @pytest.mark.parametrize("val,expected", [
-    (0.0,  f"~{0.0 * 41:.1f} °C"),
-    (0.5,  f"~{0.5 * 41:.1f} °C"),
-    (1.0,  f"~{1.0 * 41:.1f} °C"),
+    (0.0,  f"~{0.0 * 41:.1f} C"),
+    (0.5,  f"~{0.5 * 41:.1f} C"),
+    (1.0,  f"~{1.0 * 41:.1f} C"),
 ])
 def test_humanize_temp(val, expected):
     assert humanize_feature("temp", val) == expected
@@ -80,33 +80,33 @@ def test_humanize_windspeed(val, expected):
 
 
 @pytest.mark.parametrize("val,expected", [
-    (0,  "00:00 Uhr"),
-    (8,  "08:00 Uhr"),
-    (23, "23:00 Uhr"),
+    (0,  "00:00"),
+    (8,  "08:00"),
+    (23, "23:00"),
 ])
 def test_humanize_hr(val, expected):
     assert humanize_feature("hr", val) == expected
 
 
 @pytest.mark.parametrize("val,expected", [
-    (0, "Sonntag"), (1, "Montag"), (5, "Freitag"), (6, "Samstag"),
+    (0, "Sunday"), (1, "Monday"), (5, "Friday"), (6, "Saturday"),
 ])
 def test_humanize_weekday(val, expected):
     assert humanize_feature("weekday", val) == expected
 
 
 @pytest.mark.parametrize("val,expected", [
-    (1, "Januar"), (6, "Juni"), (12, "Dezember"),
+    (1, "January"), (6, "June"), (12, "December"),
 ])
 def test_humanize_mnth(val, expected):
     assert humanize_feature("mnth", val) == expected
 
 
 @pytest.mark.parametrize("val,expected", [
-    (1, "klar/wenige Wolken"),
-    (2, "Nebel/bewölkt"),
-    (3, "leichter Regen/Schnee"),
-    (4, "Starkregen/Gewitter"),
+    (1, "clear/few clouds"),
+    (2, "mist/cloudy"),
+    (3, "light rain/snow"),
+    (4, "heavy rain/thunderstorm"),
 ])
 def test_humanize_weathersit(val, expected):
     assert humanize_feature("weathersit", val) == expected
@@ -118,8 +118,8 @@ def test_humanize_yr():
 
 
 def test_humanize_holiday():
-    assert humanize_feature("holiday", 0) == "kein Feiertag"
-    assert humanize_feature("holiday", 1) == "Feiertag"
+    assert humanize_feature("holiday", 0) == "no holiday"
+    assert humanize_feature("holiday", 1) == "holiday"
 
 
 def test_humanize_unknown_feature():
@@ -131,7 +131,7 @@ def test_humanize_bad_value():
 
 
 # ---------------------------------------------------------------------------
-# build_context_string — Golden-Test (NB04b JSON-Payload-Feld)
+# build_context_string - golden test (NB04b JSON payload field)
 # ---------------------------------------------------------------------------
 
 _GOLDEN_FV = {
@@ -141,9 +141,9 @@ _GOLDEN_FV = {
 }
 
 _GOLDEN_EXPECTED = (
-    "08:00 Uhr, Mittwoch, Juni, 2011, klar/wenige Wolken, "
-    f"~{0.68 * 41:.1f} °C, {0.79 * 100:.0f} % Luftfeuchtigkeit, "
-    f"Wind {0.22 * 67:.1f} km/h"
+    "08:00, Wednesday, June, 2011, clear/few clouds, "
+    f"~{0.68 * 41:.1f} C, {0.79 * 100:.0f} % humidity, "
+    f"wind {0.22 * 67:.1f} km/h"
 )
 
 
@@ -151,20 +151,20 @@ def test_build_context_string_golden():
     assert build_context_string(_GOLDEN_FV) == _GOLDEN_EXPECTED
 
 
-def test_build_context_string_feiertag_included():
+def test_build_context_string_holiday_included():
     fv = {**_GOLDEN_FV, "holiday": 1}
     result = build_context_string(fv)
-    assert result.endswith(", Feiertag")
+    assert result.endswith(", holiday")
 
 
-def test_build_context_string_kein_feiertag_omitted():
+def test_build_context_string_no_holiday_omitted():
     result = build_context_string({**_GOLDEN_FV, "holiday": 0})
-    assert "Feiertag" not in result
+    assert "holiday" not in result
 
 
 def test_build_context_string_partial_fv():
     result = build_context_string({"temp": 0.5})
-    assert result == f"~{0.5 * 41:.1f} °C"
+    assert result == f"~{0.5 * 41:.1f} C"
 
 
 def test_build_context_string_empty():

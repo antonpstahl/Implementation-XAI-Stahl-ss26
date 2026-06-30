@@ -1,6 +1,6 @@
-"""Tests für Judge-Parsing-Robustheit (Phase-3a-Gate).
+"""Tests for judge parsing robustness.
 
-Sichert den Phase-0-Fix (robustes JSON-Parsing + Retry) dauerhaft gegen Regression ab.
+Guards the robust JSON parsing + retry against regression.
 """
 
 from __future__ import annotations
@@ -16,7 +16,7 @@ from utils.judge import parse_judge_response, judge_with_retry
 from tests.fixtures_judge import ALL_FIXTURES, FIXTURE_MARKDOWN_CODEBLOCK
 
 
-# ── Hilfsfunktion: baut eine ask_fn-Mock-Response ────────────────────────────
+# --- Helper: build an ask_fn mock response ---
 
 def _make_response(text: str) -> dict:
     return {
@@ -26,10 +26,10 @@ def _make_response(text: str) -> dict:
 
 
 VALID_RAW = FIXTURE_MARKDOWN_CODEBLOCK["raw"]
-GARBAGE_RAW = "Ich kann diese Anfrage leider nicht beantworten."
+GARBAGE_RAW = "Sorry, I cannot answer this request."
 
 
-# ── 1. Unit-Tests: parse_judge_response gegen alle Fixtures ──────────────────
+# --- 1. Unit tests: parse_judge_response against all fixtures ---
 
 @pytest.mark.parametrize("name,fixture", ALL_FIXTURES)
 def test_parse_judge_response_expected_keys(name, fixture):
@@ -42,13 +42,13 @@ def test_parse_judge_response_expected_keys(name, fixture):
 
 @pytest.mark.parametrize("name,fixture", ALL_FIXTURES)
 def test_parse_judge_response_no_extra_score_keys(name, fixture):
-    """Scores die nicht in expected sind, sollen nicht auftauchen (Garbage-Schutz)."""
+    """Scores not in expected must not appear (garbage protection)."""
     result = parse_judge_response(fixture["raw"])
     score_keys = {"faithfulness", "clarity", "completeness"}
     expected_scores = score_keys & set(fixture["expected"])
     result_scores = score_keys & set(result)
     assert result_scores == expected_scores, (
-        f"[{name}] Unerwartete Score-Keys: {result_scores - expected_scores}"
+        f"[{name}] Unexpected score keys: {result_scores - expected_scores}"
     )
 
 
@@ -60,28 +60,28 @@ def test_parse_judge_response_garbage_returns_empty():
 def test_parse_judge_response_scores_are_int():
     result = parse_judge_response(VALID_RAW)
     for key in ("faithfulness", "clarity", "completeness"):
-        assert isinstance(result[key], int), f"{key} sollte int sein, ist {type(result[key])}"
+        assert isinstance(result[key], int), f"{key} should be int, is {type(result[key])}"
 
 
-# ── 2. Mock-Test Retry-Logik: Garbage × 2, valides JSON beim 3. Call ─────────
+# --- 2. Mock test retry logic: garbage x 2, valid JSON on the 3rd call ---
 
 def test_judge_with_retry_succeeds_on_third_attempt():
     ask_fn = MagicMock(side_effect=[
-        _make_response(GARBAGE_RAW),   # Versuch 1 → kein Score
-        _make_response(GARBAGE_RAW),   # Versuch 2 → kein Score
-        _make_response(VALID_RAW),     # Versuch 3 → valide Scores
+        _make_response(GARBAGE_RAW),   # attempt 1 -> no score
+        _make_response(GARBAGE_RAW),   # attempt 2 -> no score
+        _make_response(VALID_RAW),     # attempt 3 -> valid scores
     ])
 
     result = judge_with_retry(ask_fn, "prompt", "system", "model", max_retries=3)
 
-    assert ask_fn.call_count == 3, "ask_fn soll genau 3× aufgerufen werden"
+    assert ask_fn.call_count == 3, "ask_fn should be called exactly 3 times"
     assert result["faithfulness"] == 5
     assert result["clarity"] == 4
     assert result["completeness"] == 4
 
 
 def test_judge_with_retry_stops_early_on_success():
-    """Wenn der erste Call schon valide ist, kein zweiter Call."""
+    """If the first call is already valid, no second call."""
     ask_fn = MagicMock(return_value=_make_response(VALID_RAW))
 
     result = judge_with_retry(ask_fn, "prompt", "system", "model", max_retries=3)
@@ -90,10 +90,10 @@ def test_judge_with_retry_stops_early_on_success():
     assert result["faithfulness"] is not None
 
 
-# ── 3. Erschöpfte Retries → None-Scores, kein Doppelzählen ──────────────────
+# --- 3. Exhausted retries -> None scores, no double counting ---
 
 def test_judge_with_retry_exhausted_returns_none_scores():
-    """Alle Retries scheitern → Scores sind None, kein ValueError."""
+    """All retries fail -> scores are None, no ValueError."""
     ask_fn = MagicMock(return_value=_make_response(GARBAGE_RAW))
 
     result = judge_with_retry(ask_fn, "prompt", "system", "model", max_retries=3)
@@ -105,12 +105,12 @@ def test_judge_with_retry_exhausted_returns_none_scores():
 
 
 def test_judge_n_equals_n_with_partial_failures():
-    """Simuliert n=5 Instanzen, 1 davon schlägt dauerhaft fehl.
+    """Simulates n=5 instances, 1 of which fails permanently.
 
-    Judge_n (Einträge im Ergebnis) == n — kein Eintrag wird ausgelassen.
-    None-Scores zählen als Eintrag, werden aber nicht als valider Score gezählt.
+    Judge_n (entries in the result) == n, no entry is dropped. None scores count as
+    an entry but are not counted as a valid score.
     """
-    # Instanzen 1-4 gelingen beim 1. Versuch; Instanz 5 scheitert bei allen 3 Retries.
+    # Instances 1 to 4 succeed on the first attempt; instance 5 fails all 3 retries.
     responses = (
         [_make_response(VALID_RAW)] * 4
         + [_make_response(GARBAGE_RAW)] * 3
@@ -122,14 +122,14 @@ def test_judge_n_equals_n_with_partial_failures():
     for _ in range(n):
         rows.append(judge_with_retry(ask_fn, "prompt", "system", "model", max_retries=3))
 
-    # Judge_n == n: alle Instanzen haben einen Eintrag
+    # Judge_n == n: every instance has an entry
     assert len(rows) == n
 
-    # Valide Scores nur für die 4 erfolgreichen Instanzen
+    # Valid scores only for the 4 successful instances
     valid = [r for r in rows if r["faithfulness"] is not None]
     failed = [r for r in rows if r["faithfulness"] is None]
     assert len(valid) == 4
     assert len(failed) == 1
 
-    # Kein Doppelzählen: failed-Einträge erscheinen genau einmal
+    # No double counting: failed entries appear exactly once
     assert len(rows) == len(valid) + len(failed)

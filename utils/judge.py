@@ -1,4 +1,4 @@
-"""Judge-Parsing: extrahiert strukturierte Scores aus LLM-as-Judge-Antworten."""
+"""Judge parsing: extract structured scores from LLM as judge answers."""
 
 from __future__ import annotations
 
@@ -7,20 +7,20 @@ import re
 
 
 def parse_judge_response(raw: str) -> dict:
-    """Extrahiert Judge-Scores robust aus XML-Tags, JSON oder Key:Value-Plaintext.
+    """Extract judge scores robustly from XML tags, JSON or key:value plain text.
 
-    Priorität: XML-Tags (B7) → JSON → Key:Value-Regex (Legacy-Fallback).
-    Gibt ein dict mit den Keys faithfulness, clarity, completeness (int, 1-5)
-    und optionalen *_reasoning-Keys zurück. Fehlende Scores werden nicht gesetzt
-    (kein Key im dict), sodass der Aufrufer None-Scores per .get() erkennen kann.
+    Priority: XML tags -> JSON -> key:value regex (legacy fallback).
+    Returns a dict with the keys faithfulness, clarity, completeness (int, 1 to 5)
+    and optional *_reasoning keys. Missing scores are not set (no key in the dict),
+    so the caller can detect None scores via .get().
     """
-    # Markdown-Codeblock entfernen
+    # Remove markdown code block
     code_block = re.search(r'```(?:json)?\s*(.*?)(?:```|$)', raw, re.DOTALL)
     inner = code_block.group(1).strip() if code_block else raw
 
     scores: dict = {}
 
-    # Primär: XML-Tags (B7 — robustes Ausgabeformat)
+    # Primary: XML tags (robust output format)
     for key in ['faithfulness', 'clarity', 'completeness']:
         m = re.search(rf'<{key}>(\d)</{key}>', inner, re.IGNORECASE)
         if m:
@@ -32,7 +32,7 @@ def parse_judge_response(raw: str) -> dict:
     if all(scores.get(k) is not None for k in ('faithfulness', 'clarity', 'completeness')):
         return scores
 
-    # Fallback 1: vollständiges JSON
+    # Fallback 1: full JSON
     try:
         json_match = re.search(r'\{.*\}', inner, re.DOTALL)
         if json_match:
@@ -51,7 +51,7 @@ def parse_judge_response(raw: str) -> dict:
     except (json.JSONDecodeError, ValueError):
         pass
 
-    # Fallback 2: Key:Value-Regex (Legacy — für ältere Judge-Antworten)
+    # Fallback 2: key:value regex (legacy, for older judge answers)
     for key in ['FAITHFULNESS', 'CLARITY', 'COMPLETENESS']:
         if key.lower() not in scores:
             m = re.search(rf'"?{key}"?\s*:\s*(\d)', inner, re.IGNORECASE)
@@ -95,36 +95,36 @@ def judge_batch_sc(
     state_path: Any = None,
     **run_batch_kwargs: Any,
 ) -> "dict[str, dict]":
-    """Batch-basierte Self-Consistency-Bewertung (A2 — Phase 3a·B).
+    """Batch based self consistency scoring.
 
-    Für jeden (base_cid, prompt)-Eintrag werden k Batch-Requests eingereicht
-    (custom_ids: {base_cid}-s0 … {base_cid}-s{k-1}). Ergebnisse werden je
-    Kriterium per Median client-seitig aggregiert.
+    For each (base_cid, prompt) entry k batch requests are submitted
+    (custom_ids: {base_cid}-s0 ... {base_cid}-s{k-1}). Results are aggregated per
+    criterion by median on the client side.
 
-    Rückgabe-Schema identisch zu judge_with_self_consistency:
+    Return schema identical to judge_with_self_consistency:
         faithfulness, clarity, completeness  (int | None)
         faithfulness_reasoning, clarity_reasoning, completeness_reasoning (str)
         raw_responses  (list[str])
         usage  ({"input_tokens": int, "output_tokens": int})
 
-    Temperature: wird bei Opus 4.7/4.8 / Fable automatisch weggelassen
-    (model_accepts_temperature). Fehlgeschlagene Samples werden aus dem Median
-    ausgeschlossen; Base-Einträge ohne Erfolg erhalten None-Scores.
+    Temperature: dropped automatically for Opus 4.7/4.8 / Fable
+    (model_accepts_temperature). Failed samples are excluded from the median;
+    base entries with no success get None scores.
 
     Parameters
     ----------
-    entries     : Liste aus (base_custom_id, prompt). base_cid muss ≤ 61 Zeichen
-                  haben (3 Zeichen reserviert für „-s{j}").
-    k           : Anzahl Samples je Eintrag (Diversität aus Default-Stochastik
-                  bei Opus; bei Sonnet/temperature > 0 aus Sampling).
-    client      : Anthropic-Client (Tests injizieren Fake).
-    state_path  : Pfad für batch_id-Persistenz (Poll-Resume nach Absturz).
-    **run_batch_kwargs : an utils.batch.run_batch durchgereicht
-                  (sleep, poll_interval_s, max_resubmits, …).
+    entries     : list of (base_custom_id, prompt). base_cid must be <= 61 chars
+                  (3 chars reserved for "-s{j}").
+    k           : number of samples per entry (diversity from default stochasticity
+                  for Opus; for Sonnet/temperature > 0 from sampling).
+    client      : Anthropic client (tests inject a fake).
+    state_path  : path for batch_id persistence (poll resume after a crash).
+    **run_batch_kwargs : passed through to utils.batch.run_batch
+                  (sleep, poll_interval_s, max_resubmits, ...).
 
     Returns
     -------
-    dict[base_cid → aggregated_result]
+    dict[base_cid -> aggregated_result]
     """
     import statistics as _statistics
 
@@ -135,8 +135,8 @@ def judge_batch_sc(
     for base_cid, _ in entries:
         if len(base_cid) + max_suffix_len > 64:
             raise ValueError(
-                f"base_cid {base_cid!r} ist zu lang ({len(base_cid)} Z.); "
-                f"max. {64 - max_suffix_len} erlaubt (reserviert {max_suffix_len} für -s{{j}})."
+                f"base_cid {base_cid!r} is too long ({len(base_cid)} chars); "
+                f"max {64 - max_suffix_len} allowed (reserved {max_suffix_len} for -s{{j}})."
             )
 
     requests: list[dict] = []
@@ -188,21 +188,20 @@ def judge_batch_sc(
 def judge_with_retry(ask_fn, prompt: str, system: str, model: str,
                      max_tokens: int = 900, max_retries: int = 3,
                      temperature: float | None = None) -> dict:
-    """Ruft ask_fn auf und wiederholt bis zu max_retries mal bei unvollständigem Parsing.
+    """Call ask_fn and retry up to max_retries times on incomplete parsing.
 
-    ask_fn muss dasselbe Interface wie utils.llm.ask_text haben:
+    ask_fn must have the same interface as utils.llm.ask_text:
         ask_fn(prompt, system=..., model=..., max_tokens=..., cache_system=...,
                temperature=...) -> response
 
-    temperature : None → Modell-Default (1.0); 0.0 → deterministisch (JUDGE_TEMPERATURE).
-                  Für Reproduzierbarkeit und minimale Score-Varianz sollte bei
-                  Modellen, die `temperature` akzeptieren (Sonnet, OpenAI),
-                  JUDGE_TEMPERATURE=0.0 übergeben werden (Phase 3·2/A2). Bei Opus
-                  4.7/4.8 wird `temperature` von der API abgelehnt und in
-                  utils.llm.ask_text automatisch verworfen — dort ist der Judge
-                  nicht deterministisch fixierbar (Default-Stochastik).
+    temperature : None -> model default (1.0); 0.0 -> deterministic (JUDGE_TEMPERATURE).
+                  For reproducibility and minimal score variance, models that accept
+                  `temperature` (Sonnet, OpenAI) should get JUDGE_TEMPERATURE=0.0.
+                  For Opus 4.7/4.8 `temperature` is rejected by the API and dropped
+                  automatically in utils.llm.ask_text, so the judge cannot be fixed
+                  deterministically there (default stochasticity).
 
-    Rückgabe: dict mit scores (fehlende Scores als None) + raw_response + usage.
+    Returns: dict with scores (missing scores as None) + raw_response + usage.
     """
     scores: dict = {}
     raw = ""
@@ -236,26 +235,24 @@ def judge_with_self_consistency(
     ask_fn, prompt: str, system: str, model: str,
     max_tokens: int = 900, k: int = 3, temperature: float = 0.7,
 ) -> dict:
-    """Self-Consistency-Judge: k Samples bei gegebener temperature, Median je Score.
+    """Self consistency judge: k samples at a given temperature, median per score.
 
-    Kostet k× die Judge-Calls von judge_with_retry.
+    Costs k times the judge calls of judge_with_retry.
 
-    Modellabhängigkeit von `temperature`:
-      • Sonnet/OpenAI akzeptieren `temperature`. Bei JUDGE_TEMPERATURE=0
-        (deterministisch) liefert SC keine zusätzliche Information — in diesem
-        Fall sollte judge_with_retry mit temperature=0 bevorzugt werden. SC ist
-        nur bei temperature>0 sinnvoll.
-      • Opus 4.7/4.8 (und Fable) lehnen `temperature` ab; der Parameter wird in
-        utils.llm.ask_text automatisch verworfen. Die k Calls variieren dort
-        dennoch über die Default-Stochastik, sodass SC die Diversität daraus
-        bezieht — der übergebene temperature-Wert bleibt wirkungslos.
+    Model dependence of `temperature`:
+      * Sonnet/OpenAI accept `temperature`. At JUDGE_TEMPERATURE=0 (deterministic)
+        SC adds no extra information, so judge_with_retry with temperature=0 should
+        be preferred. SC is only useful at temperature > 0.
+      * Opus 4.7/4.8 (and Fable) reject `temperature`; the parameter is dropped
+        automatically in utils.llm.ask_text. The k calls still vary via the default
+        stochasticity, so SC draws its diversity from that, the passed temperature
+        value has no effect.
 
-    Kostenwirkung Phase 3b: k=3, n=200, 4 Pipelines, 2 XAI-Modelle
-        → 200 × 4 × 2 × k = 4 800 Judge-Calls statt 1 600 (Faktor k=3).
-        Dies ist in die Kostenschätzung (Phase 3b) einzurechnen.
+    Cost effect at scale: k=3, n=200, 4 pipelines, 2 XAI models
+        -> 200 x 4 x 2 x k = 4800 judge calls instead of 1600 (factor k=3).
+        This must be included in the cost estimate.
 
-    Rückgabe: dict mit aggregierten Scores (Median), Roh-Antworten und
-    kumuliertem usage.
+    Returns: dict with aggregated scores (median), raw answers and cumulative usage.
     """
     import statistics
 

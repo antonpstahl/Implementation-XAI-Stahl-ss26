@@ -1,10 +1,10 @@
 """
-utils/models.py – Speichern und Laden der trainierten Modelle.
+utils/models.py - save and load the trained models.
 
-Verwendet joblib. Modelle werden unter dem Namensschema
-``{model_type}_{loss_key}.pkl`` abgelegt (z. B. ``xgb_poisson_log.pkl``)
-und ausschließlich über ``save_model`` / ``load_model`` adressiert, damit
-alle Notebooks konsistent auf identische Modell-Artefakte zugreifen.
+Uses joblib. Models are stored under the naming scheme
+``{model_type}_{loss_key}.pkl`` (for example ``xgb_poisson_log.pkl``) and
+addressed only via ``save_model`` / ``load_model`` so that all notebooks access
+identical model artefacts consistently.
 """
 
 from __future__ import annotations
@@ -18,7 +18,7 @@ import numpy as np
 
 from . import MODELS_DIR
 
-# Gültige Modelltypen (Präfix im Dateinamen).
+# Valid model types (prefix in the file name).
 MODEL_TYPES: tuple[str, ...] = ("xgb", "ebm")
 
 
@@ -41,9 +41,8 @@ LOSS_OPTIONS: Dict[str, LossOption] = {
         key="squared_error",
         label="Option 1: Squared Error",
         description=(
-            "Klassische quadratische Verlustfunktion. Einfach zu interpretieren, "
-            "aber nicht ideal für rechtsschiefe Count-Daten — kann negative "
-            "Vorhersagen liefern."
+            "Classic squared loss. Easy to interpret, but not ideal for right "
+            "skewed count data, can produce negative predictions."
         ),
         ebm_objective="rmse",
         xgb_objective="reg:squarederror",
@@ -51,10 +50,10 @@ LOSS_OPTIONS: Dict[str, LossOption] = {
     ),
     "poisson_log": LossOption(
         key="poisson_log",
-        label="Option 2: Poisson-Deviance (Beitraege auf Log-Skala)",
+        label="Option 2: Poisson Deviance (contributions in log space)",
         description=(
-            "Poisson-Deviance-Verlust. Vorhersagen strikt positiv via exp(). "
-            "Beiträge werden auf der Log-Skala extrahiert und interpretiert."
+            "Poisson deviance loss. Predictions strictly positive via exp(). "
+            "Contributions are extracted and interpreted on the log scale."
         ),
         ebm_objective="poisson_deviance",
         xgb_objective="count:poisson",
@@ -62,10 +61,10 @@ LOSS_OPTIONS: Dict[str, LossOption] = {
     ),
     "poisson_native": LossOption(
         key="poisson_native",
-        label="Option 3: Poisson-Deviance (Beitraege approximativ auf Ausleihe-Skala)",
+        label="Option 3: Poisson Deviance (contributions approximately in rentals)",
         description=(
-            "Identisches Modell wie Option 2. Beiträge werden approximativ auf "
-            "der Ausleihe-Skala extrahiert (XGBoost output_margin=False, EBM analog)."
+            "Identical model to option 2. Contributions are extracted approximately "
+            "on the rental scale (XGBoost output_margin=False, EBM analogous)."
         ),
         ebm_objective="poisson_deviance",
         xgb_objective="count:poisson",
@@ -79,7 +78,7 @@ LOSS_OPTIONS: Dict[str, LossOption] = {
 # ---------------------------------------------------------------------------
 
 def compute_metrics(y_true: np.ndarray, y_pred: np.ndarray) -> Dict[str, float]:
-    """Berechnet Regressionsmetriken auf der Original-Skala."""
+    """Compute regression metrics on the original scale."""
     y_true = np.asarray(y_true, dtype=float)
     y_pred = np.asarray(y_pred, dtype=float)
 
@@ -91,7 +90,7 @@ def compute_metrics(y_true: np.ndarray, y_pred: np.ndarray) -> Dict[str, float]:
     mae = float(np.mean(np.abs(residuals)))
     r2 = 1.0 - ss_res / ss_tot if ss_tot > 0 else float("nan")
 
-    # Mean Poisson deviance (nur für y_pred > 0 sinnvoll)
+    # Mean Poisson deviance (only meaningful for y_pred > 0)
     eps = 1e-8
     pred_pos = np.clip(y_pred, eps, None)
     poisson_deviance = float(
@@ -109,15 +108,15 @@ def compute_metrics(y_true: np.ndarray, y_pred: np.ndarray) -> Dict[str, float]:
 
 
 # ---------------------------------------------------------------------------
-# Speichern / Laden  (einheitliches Schema: {model_type}_{loss_key}.pkl)
+# Save / load  (uniform scheme: {model_type}_{loss_key}.pkl)
 # ---------------------------------------------------------------------------
 
 def model_path(model_type: str, loss_key: str,
                models_dir: Path | str | None = None) -> Path:
-    """Pfad eines Modell-Artefakts unter ``{model_type}_{loss_key}.pkl``."""
+    """Path of a model artefact under ``{model_type}_{loss_key}.pkl``."""
     if model_type not in MODEL_TYPES:
         raise ValueError(
-            f"Unbekannter model_type {model_type!r}. Erlaubt: {MODEL_TYPES}."
+            f"Unknown model_type {model_type!r}. Allowed: {MODEL_TYPES}."
         )
     models_dir = Path(models_dir) if models_dir is not None else MODELS_DIR
     return models_dir / f"{model_type}_{loss_key}.pkl"
@@ -125,7 +124,7 @@ def model_path(model_type: str, loss_key: str,
 
 def save_model(model: Any, model_type: str, loss_key: str,
                models_dir: Path | str | None = None) -> Path:
-    """Speichert ein Modell unter ``{model_type}_{loss_key}.pkl``."""
+    """Save a model under ``{model_type}_{loss_key}.pkl``."""
     path = model_path(model_type, loss_key, models_dir)
     path.parent.mkdir(parents=True, exist_ok=True)
     joblib.dump(model, path)
@@ -134,19 +133,19 @@ def save_model(model: Any, model_type: str, loss_key: str,
 
 def load_model(model_type: str, loss_key: str,
                models_dir: Path | str | None = None) -> Any:
-    """Lädt ein einzelnes Modell-Artefakt (``xgb`` oder ``ebm``)."""
+    """Load a single model artefact (``xgb`` or ``ebm``)."""
     path = model_path(model_type, loss_key, models_dir)
     if not path.exists():
         raise FileNotFoundError(
-            f"Modell nicht gefunden unter {path}. "
-            "Bitte zuerst Notebook 02a_Modeling_AllOptions.ipynb ausführen."
+            f"Model not found at {path}. "
+            "Please run notebook 02a_Modeling_AllOptions.ipynb first."
         )
     return joblib.load(path)
 
 
 def load_models(loss_key: str,
                 models_dir: Path | str | None = None) -> Tuple[Any, Any]:
-    """Lädt beide Modelle einer Loss-Variante. Returns: ``(xgb, ebm)``."""
+    """Load both models of a loss variant. Returns: ``(xgb, ebm)``."""
     return (
         load_model("xgb", loss_key, models_dir),
         load_model("ebm", loss_key, models_dir),

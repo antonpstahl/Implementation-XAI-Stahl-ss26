@@ -1,14 +1,14 @@
 """
-utils/ – Gemeinsame Module für die Belegarbeit XAI.
+utils/ - shared modules for the XAI thesis.
 
-Stellt Daten-, Modell- und Erklärungs-Loading-Logik zentral bereit,
-sodass alle Notebooks (02-07) auf konsistenter Grundlage arbeiten.
+Provides data, model and explanation loading logic centrally so that all
+notebooks (02 to 07) work on a consistent basis.
 """
 
 from pathlib import Path
 
-# Wurzel-Verzeichnis des Projekts (Implementation/), unabhängig vom CWD.
-# utils liegt unter Implementation/utils/, also ist parent.parent die Wurzel.
+# Project root (Implementation/), independent of the CWD.
+# utils lives under Implementation/utils/, so parent.parent is the root.
 PROJECT_ROOT = Path(__file__).resolve().parent.parent
 
 DATA_DIR = PROJECT_ROOT / "data"
@@ -17,42 +17,40 @@ EXPLANATIONS_DIR = PROJECT_ROOT / "explanations"
 RESULTS_DIR = PROJECT_ROOT / "results"
 PROMPTS_DIR = PROJECT_ROOT / "prompts"
 
-# Feste Test-Instanzen für lokale Erklärungen (Validitäts-Sample, n = 20).
-# 10 Instanzen × 2 XAI-Modelle (xgb/ebm). Werden in allen Pipelines (04a/04b/04c/04d)
-# verwendet und tragen die n=20-Validitätsanalyse in NB 05 (v1/v2/v3/v4/v5,
-# Inter-Judge-Agreement, Judge-Sensitivität). Bewusst **eingefroren** — der
-# Skalierungslauf (Phase 3b) nutzt INSTANCE_IDS_SCALE, damit die teuren
-# Validitäts-Judges nie versehentlich auf n≈200 mitlaufen.
+# Fixed test instances for local explanations (validity sample, n = 20).
+# 10 instances x 2 XAI models (xgb/ebm). Used in all pipelines (04a/04b/04c/04d)
+# and carry the n=20 validity analysis in NB 05 (judge + inter judge agreement,
+# judge sensitivity). Deliberately frozen: a larger scaling run uses
+# scale_instance_ids so the expensive validity judges never run on it by accident.
 INSTANCE_IDS = [224, 580, 1041, 1481, 1677, 2058, 2510, 3543, 3847, 4454]
 
-# Reproduzierbarkeit
+# Reproducibility
 RANDOM_STATE = 42
 
-# ── Phase 3b — Skalierung ────────────────────────────────────────────────────
-# Stichprobengröße und Generationen pro Einheit für den Vollauf.
-SCALE_N             = 5   # Testinstanzen (stratifiziert) für den 3b-Vollauf
-N_GENERATIONS_SCALE = 3     # Generationen/Instanz für 04/05/06 (LLM-Stochastik)
-                            # Template (00) ist deterministisch → dort 1 Generation.
+# --- Scaling -----------------------------------------------------------------
+# Sample size and generations per unit for a larger run.
+SCALE_N             = 5   # stratified test instances for the larger run
+N_GENERATIONS_SCALE = 3     # generations per instance for 04/05/06 (LLM stochasticity)
+                            # Template (00) is deterministic, so 1 generation there.
 
 
 def scale_instance_ids(n: int = SCALE_N, seed: int = RANDOM_STATE) -> list[int]:
-    """Seeded, stratifizierte Test-Instanz-IDs für den Phase-3b-Vollauf.
+    """Seeded, stratified test instance IDs for a larger run.
 
-    Zieht `n` Instanzen aus dem Test-Set, stratifiziert über cnt-Quintil,
-    Tageszeit-Block (hr // 6) und Wetterlage (siehe `utils.data.sample_stratified`).
-    Deterministisch bei festem `seed`. Lazy implementiert (lädt die Daten erst
-    beim Aufruf), damit der Modulimport ohne Datendateien gelingt.
+    Draws `n` instances from the test set, stratified over the cnt quintile,
+    the time of day block (hr // 6) and the weather situation (see
+    `utils.data.sample_stratified`). Deterministic for a fixed `seed`. Lazy
+    (loads the data only on call) so the module import works without data files.
 
-    Reproduzierbarkeit: Der Aufruf `scale_instance_ids()` ersetzt das fest
-    verdrahtete `INSTANCE_IDS` für die Skalierung (Phase-3b-DoR) — statt 200
-    Magic-Numbers im Code zu pinnen, wird die seeded Funktion bei jedem Lauf
-    identisch ausgewertet.
+    Reproducibility: `scale_instance_ids()` replaces the hard wired `INSTANCE_IDS`
+    for scaling. Instead of pinning many magic numbers in the code, the seeded
+    function is evaluated identically on every run.
     """
     from .data import load_train_test, sample_stratified
     _, _, X_test, y_test = load_train_test()
     return sample_stratified(X_test, y_test, n=n, seed=seed)
 
-# Submodule-Exports (nach den Konstanten, um zirkuläre Importe zu vermeiden)
+# Submodule exports (after the constants, to avoid circular imports)
 from .data import sample_stratified  # noqa: F401  (re-export for convenience)
 from .judge import parse_judge_response, judge_batch_sc  # noqa: F401
 from .generation import (  # noqa: F401

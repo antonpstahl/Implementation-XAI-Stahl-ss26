@@ -1,9 +1,8 @@
 """
-Phase 3a — Sampling/Stratifizierung testen.
+Sampling / stratification tests.
 
-DoD: Test prüft Determinismus bei festem Seed, korrekte Stratifizierung
-über cnt-Quintile/Tageszeit/Wetter, Abwesenheit von Duplikaten und die
-Zielgröße n.
+Checks determinism at a fixed seed, correct stratification over
+cnt quintile / time of day / weather, absence of duplicates and the target size n.
 """
 from __future__ import annotations
 
@@ -107,7 +106,7 @@ def test_all_cnt_quintiles_covered(test_data):
     result = sample_stratified(X, y, n=150, seed=42)
     strata = _compute_strata(X, y, result)
     present_quintiles = set(strata["cnt_q"].dropna().astype(int).unique())
-    # qcut with duplicates='drop' may merge bins → at least 4 distinct bins
+    # qcut with duplicates='drop' may merge bins  to  at least 4 distinct bins
     assert len(present_quintiles) >= 4, (
         f"Only {len(present_quintiles)} cnt-quintile bins covered: {present_quintiles}"
     )
@@ -119,7 +118,7 @@ def test_all_time_blocks_covered(test_data):
     result = sample_stratified(X, y, n=50, seed=42)
     strata = _compute_strata(X, y, result)
     present_blocks = set(strata["time_b"].unique())
-    # hr 0-5 → 0, 6-11 → 1, 12-17 → 2, 18-23 → 3
+    # hr 0-5  to  0, 6-11  to  1, 12-17  to  2, 18-23  to  3
     assert present_blocks == {0, 1, 2, 3}, (
         f"Not all time blocks covered: {present_blocks}"
     )
@@ -142,7 +141,7 @@ def test_rare_weather_covered_in_large_sample(test_data):
     result = sample_stratified(X, y, n=150, seed=42)
     strata = _compute_strata(X, y, result)
     assert 3 in strata["weather"].values, (
-        "weathersit=3 absent from sample of 150 — stratification may be broken"
+        "weathersit=3 absent from sample of 150  -  stratification may be broken"
     )
 
 
@@ -152,7 +151,7 @@ def test_rare_weather_covered_in_large_sample(test_data):
 
 def test_sample_distribution_roughly_proportional(test_data):
     """
-    For each cnt-quintile, the sample fraction should be within ±15 pp
+    For each cnt-quintile, the sample fraction should be within +/-15 pp
     of the population fraction (proportional allocation, not uniform).
     """
     X, y = test_data
@@ -171,7 +170,7 @@ def test_sample_distribution_roughly_proportional(test_data):
 
 
 # ---------------------------------------------------------------------------
-# Phase 3b — scale_instance_ids() helper
+# Phase 3b  -  scale_instance_ids() helper
 # ---------------------------------------------------------------------------
 
 def test_scale_instance_ids_size_unique_sorted():
@@ -183,13 +182,13 @@ def test_scale_instance_ids_size_unique_sorted():
 
 
 def test_scale_instance_ids_deterministic():
-    """Same seed → identical scale sample across calls (reproducible 3b run)."""
+    """Same seed  to  identical scale sample across calls (reproducible 3b run)."""
     assert scale_instance_ids() == scale_instance_ids()
 
 
 def test_scale_instance_ids_disjoint_enough_from_validity():
     """Scale and validity samples are drawn independently; the validity 10 are
     NOT a guaranteed subset (they live in separate, gen-less files). Overlap is
-    incidental — assert it is small so the two experiments stay distinct."""
+    incidental  -  assert it is small so the two experiments stay distinct."""
     ids = set(scale_instance_ids())
     assert len(ids & set(INSTANCE_IDS)) <= 2

@@ -306,9 +306,8 @@ Er ist ein hartes Gate: ein frischer Generierungslauf darf erst starten, wenn al
 04c_LLM_Vision_Pipeline       → results/pipeline05/*.json
 04d_LLM_ToolUse_Pipeline      → results/pipeline06/*.json
 05_Evaluation                → results/eval_*.{csv,png,json}
-06_Evaluation_Ichmoukhamedov → results/eval08_ichmoukhamedov/
+06_Evaluation_Ichmoukhamedov -> results/eval06_ichmoukhamedov/
 07_Error_Taxonomy            → results/error_taxonomy/
-08_Prompt_Fix_Eval           → results/eval08_ichmoukhamedov_v2/, results/eval10_*.png
 ```
 
 Alle Schritte laufen auf dem n=20-Validitäts-Sample (10 Instanzen × 2 XAI-Modelle);
