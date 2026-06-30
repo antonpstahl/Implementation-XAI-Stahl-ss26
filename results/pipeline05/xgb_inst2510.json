@@ -1,0 +1,17 @@
+{
+  "pipeline": "05_vision",
+  "llm_model": "claude-sonnet-4-6",
+  "loss_key": "poisson_log",
+  "xai_model": "xgb",
+  "instance_id": 2510,
+  "explanation": "<prediction>The XGBoost model predicted 326 rented bikes for this hour, while 372 were actually counted — a gap of about 46 bikes. The prediction is moderately matched; the model underestimates demand by roughly 12 percent.</prediction>\n\n<drivers>The dominant driver is the hour of the day: hr=18 (evening peak) produces the longest red bar by far (+0.69), reflecting the strong commuter rush as people head home on a Friday evening. Working against this is the year 2011 (yr=0), whose blue bar (-0.23) is the second-largest influence — being in 2011 damps the prediction noticeably, since the system was in its lower-demand phase that year. The third influence is temperature: at about 16 °C (normalised 0.40) the weather is on the cooler side, and its blue bar (-0.08) slightly reduces expected rentals. Smaller red bars for Friday (weekday=5), moderate humidity (50 %), clear skies, no holiday, and virtually no wind all nudge the prediction a little upward, but none of them comes close to the top two forces.</drivers>\n\n<recommendation>Friday evening peaks at 18:00 are strong demand moments even in December and even in a cooler year like 2011 — ensure full bike availability at commuter stations well before 18:00. Because the model consistently underestimates actual rentals at this hour, operations staff should keep a small buffer of additional bikes ready beyond what the model alone suggests.</recommendation>",
+  "plot_file": "waterfall_xgb_poisson_log_inst2510.png",
+  "elapsed_s": 12.14,
+  "usage": {
+    "input_tokens": 1160,
+    "output_tokens": 549,
+    "cache_read_input_tokens": 1845
+  },
+  "prediction": 326.0351,
+  "y_true": 372.0
+}

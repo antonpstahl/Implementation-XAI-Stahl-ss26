@@ -9,3 +9,4 @@ __pycache__/
 *.xlsx
 planning/
 .pytest_cache
+**/_archive/

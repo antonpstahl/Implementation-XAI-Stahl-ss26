@@ -1,0 +1,17 @@
+{
+  "pipeline": "05_vision",
+  "llm_model": "claude-sonnet-4-6",
+  "loss_key": "poisson_log",
+  "xai_model": "xgb",
+  "instance_id": 3543,
+  "explanation": "<prediction>The XGBoost model predicted approximately 310 rented bikes for this hour, while the actual count was 286. The prediction overshoots by about 24 bikes, which is a moderate discrepancy of roughly 8 percent — a reasonably good but not perfect match.</prediction>\n\n<drivers>The strongest upward influence comes from the year 2012 (yr=1), which carries the largest red bar at +0.19. The system had grown substantially by 2012, and the model reflects this higher baseline demand. Second in rank is the evening hour of 20:00 (hr=20), which sits within the evening peak window and pushes the prediction upward by +0.11 — commuters and leisure riders returning home keep demand elevated at this time. The low humidity of just 29 percent and a comfortable temperature of about 20.5 °C each add a small but equal upward nudge (+0.06 each), as dry and mild conditions encourage cycling. Clear weather (weathersit=1) reinforces this with an additional small positive influence. The only damping factor is April (mnth=4) at −0.02, a very slight seasonal pull downward, though April is generally a spring month with growing demand.</drivers>\n\n<recommendation>On clear Friday evenings in 2012-level demand conditions, the 20:00 hour consistently draws solid ridership. Ensure that popular commuter and leisure stations are well-stocked heading into the evening peak, particularly when temperatures are mild and humidity is low. Since demand at this hour is predictably high, maintenance work on docking stations should be scheduled well outside the 17:00–21:00 window.</recommendation>",
+  "plot_file": "waterfall_xgb_poisson_log_inst3543.png",
+  "elapsed_s": 13.89,
+  "usage": {
+    "input_tokens": 1216,
+    "output_tokens": 578,
+    "cache_read_input_tokens": 1845
+  },
+  "prediction": 309.9225,
+  "y_true": 286.0
+}

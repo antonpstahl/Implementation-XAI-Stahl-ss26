@@ -1,0 +1,17 @@
+{
+  "pipeline": "05_vision",
+  "llm_model": "claude-sonnet-4-6",
+  "loss_key": "poisson_log",
+  "xai_model": "ebm",
+  "instance_id": 3847,
+  "explanation": "<prediction>The EBM model predicted 593 rented bikes for this Saturday noon in June 2012, while the actual count was 531. The prediction overshoots by about 62 bikes (~12%), which is a moderate match — reasonably close but not precise.</prediction>\n\n<drivers>The dominant upward driver is the hour of day (hr, midday at 12:00), which produces the longest red bar in the plot, strongly raising the forecast above the baseline. Almost equally powerful is the interaction between hour and weekday (hr & weekday): Saturday midday shows a pronounced leisure pattern, confirming that the combination of a weekend afternoon and peak daytime hours pushes demand up considerably. Third in rank, temperature at about 33°C contributes a solid positive influence, sitting right in the optimal warm-weather range. Notably, the interaction term hr & temp pulls slightly in the opposite direction (blue bar), suggesting that at this particular combination of midday heat and temperature the model applies a small correction downward — likely reflecting that very warm midday hours can slightly deter some riders.</drivers>\n\n<recommendation>On clear Saturday middays in June, demand consistently runs high, so operators should ensure full bike availability at leisure-oriented and tourist stations well before noon. Since the model tends to overpredict slightly under these conditions, a small buffer adjustment in deployment targets is advisable. Maintenance work should be scheduled in the early morning hours when demand is minimal.</recommendation>",
+  "plot_file": "waterfall_ebm_poisson_log_inst3847.png",
+  "elapsed_s": 12.5,
+  "usage": {
+    "input_tokens": 976,
+    "output_tokens": 521,
+    "cache_read_input_tokens": 1845
+  },
+  "prediction": 593.3897,
+  "y_true": 531.0
+}

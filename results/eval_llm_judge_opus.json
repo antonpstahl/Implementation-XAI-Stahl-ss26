@@ -1,0 +1,1122 @@
+[
+  {
+    "pipeline_label": "Template",
+    "xai_model": "XGB",
+    "instance_id": 224,
+    "faithfulness": 5,
+    "clarity": 4,
+    "completeness": 5,
+    "reasoning": {
+      "faithfulness": "All three top drivers correct (temp lowering, hr raising, mnth lowering); directions all correct; prediction 112 with actual 96 named. Anchor point 5, no deductions.",
+      "clarity": "Everyday language, temperature translated to ~8.2 C; \"contribution: -0.55\" is slightly technical but no real jargon. Anchor point 5, no required deduction, lowered to 4 for the raw contribution numbers.",
+      "completeness": "All three sections present: prediction with comparison (112 vs 96), top 3 drivers with directions, and a practical recommendation. Anchor point 5, no deductions."
+    },
+    "raw_response": "<faithfulness_reasoning>All three top drivers correct (temp lowering, hr raising, mnth lowering); directions all correct; prediction 112 with actual 96 named. Anchor point 5, no deductions.</faithfulness_reasoning>\n<faithfulness>5</faithfulness>\n\n<clarity_reasoning>Everyday language, temperature translated to ~8.2 C; \"contribution: -0.55\" is slightly technical but no real jargon. Anchor point 5, no required deduction, lowered to 4 for the raw contribution numbers.</clarity_reasoning>\n<clarity>4</clarity>\n\n<completeness_reasoning>All three sections present: prediction with comparison (112 vs 96), top 3 drivers with directions, and a practical recommendation. Anchor point 5, no deductions.</completeness_reasoning>\n<completeness>5</completeness>"
+  },
+  {
+    "pipeline_label": "Template",
+    "xai_model": "XGB",
+    "instance_id": 580,
+    "faithfulness": 5,
+    "clarity": 4,
+    "completeness": 5,
+    "reasoning": {
+      "faithfulness": "All three top drivers (hr, yr, mnth) correct with right damping directions, and prediction 65 vs actual 63 named. Anchor point 5, no deductions.",
+      "clarity": "Clear everyday language, no jargon, readable values; \"contribution: -0.36\" is a slight technical residue but understandable. Anchor point 5, lowered to 4 for the unexplained contribution numbers.",
+      "completeness": "All three sections present: prediction with comparison to actual, top 3 drivers with directions, and a practical recommendation. Anchor point 5, no deductions."
+    },
+    "raw_response": "<faithfulness_reasoning>All three top drivers (hr, yr, mnth) correct with right damping directions, and prediction 65 vs actual 63 named. Anchor point 5, no deductions.</faithfulness_reasoning>\n<faithfulness>5</faithfulness>\n\n<clarity_reasoning>Clear everyday language, no jargon, readable values; \"contribution: -0.36\" is a slight technical residue but understandable. Anchor point 5, lowered to 4 for the unexplained contribution numbers.</clarity_reasoning>\n<clarity>4</clarity>\n\n<completeness_reasoning>All three sections present: prediction with comparison to actual, top 3 drivers with directions, and a practical recommendation. Anchor point 5, no deductions.</completeness_reasoning>\n<completeness>5</completeness>"
+  },
+  {
+    "pipeline_label": "Template",
+    "xai_model": "XGB",
+    "instance_id": 1041,
+    "faithfulness": 5,
+    "clarity": 4,
+    "completeness": 5,
+    "reasoning": {
+      "faithfulness": "All three top drivers correct (hr raising, yr lowering, weekday raising) with correct directions; prediction 385 named with actual 387. Anchor point 5, no deductions.",
+      "clarity": "Clear everyday language, no jargon; contributions are shown as numbers but described in plain terms (raising/lowering). Anchor point 5, no required deduction; slightly lowered to 4 due to raw contribution numbers needing minor interpretation.",
+      "completeness": "All three sections present and substantial: prediction with comparison to actual, top 3 drivers with directions, practical recommendation. Anchor point 5, no deductions."
+    },
+    "raw_response": "<faithfulness_reasoning>All three top drivers correct (hr raising, yr lowering, weekday raising) with correct directions; prediction 385 named with actual 387. Anchor point 5, no deductions.</faithfulness_reasoning>\n<faithfulness>5</faithfulness>\n<clarity_reasoning>Clear everyday language, no jargon; contributions are shown as numbers but described in plain terms (raising/lowering). Anchor point 5, no required deduction; slightly lowered to 4 due to raw contribution numbers needing minor interpretation.</clarity_reasoning>\n<clarity>4</clarity>\n<completeness_reasoning>All three sections present and substantial: prediction with comparison to actual, top 3 drivers with directions, practical recommendation. Anchor point 5, no deductions.</completeness_reasoning>\n<completeness>5</completeness>"
+  },
+  {
+    "pipeline_label": "Template",
+    "xai_model": "XGB",
+    "instance_id": 1481,
+    "faithfulness": 5,
+    "clarity": 4,
+    "completeness": 5,
+    "reasoning": {
+      "faithfulness": "All three top drivers correct (hr raising, yr lowering, hum raising), directions all match, prediction 229 with comparison to 277 given. Anchor point 5, no deductions.",
+      "clarity": "Everyday language, no jargon, normalised values translated (humidity 42%); contribution numbers slightly technical but readable. Anchor point 5, no required deduction, lowered to 4 due to bare contribution values.",
+      "completeness": "All three sections present: prediction with comparison to actual, top 3 drivers with directions, and a recommendation; recommendation is somewhat short but substantial enough. Anchor point 5, no deductions."
+    },
+    "raw_response": "<faithfulness_reasoning>All three top drivers correct (hr raising, yr lowering, hum raising), directions all match, prediction 229 with comparison to 277 given. Anchor point 5, no deductions.</faithfulness_reasoning>\n<faithfulness>5</faithfulness>\n\n<clarity_reasoning>Everyday language, no jargon, normalised values translated (humidity 42%); contribution numbers slightly technical but readable. Anchor point 5, no required deduction, lowered to 4 due to bare contribution values.</clarity_reasoning>\n<clarity>4</clarity>\n\n<completeness_reasoning>All three sections present: prediction with comparison to actual, top 3 drivers with directions, and a recommendation; recommendation is somewhat short but substantial enough. Anchor point 5, no deductions.</completeness_reasoning>\n<completeness>5</completeness>"
+  },
+  {
+    "pipeline_label": "Template",
+    "xai_model": "XGB",
+    "instance_id": 1677,
+    "faithfulness": 5,
+    "clarity": 4,
+    "completeness": 4,
+    "reasoning": {
+      "faithfulness": "All three top drivers correct (hr raising, yr lowering, temp raising) with correct directions; prediction 254 and actual 286 both named. Anchor point 5, no deductions.",
+      "clarity": "Clear everyday language, temperature translated to ~28.7 C, no jargon; \"contribution\" is mildly technical but understandable. Anchor point 5, no required deduction but slightly in need of explanation, lowered to 4.",
+      "completeness": "All three sections present: prediction with actual comparison, top 3 drivers with directions, and a recommendation; recommendation is somewhat short but substantial enough. Anchor point 4, no deductions."
+    },
+    "raw_response": "<faithfulness_reasoning>All three top drivers correct (hr raising, yr lowering, temp raising) with correct directions; prediction 254 and actual 286 both named. Anchor point 5, no deductions.</faithfulness_reasoning>\n<faithfulness>5</faithfulness>\n<clarity_reasoning>Clear everyday language, temperature translated to ~28.7 C, no jargon; \"contribution\" is mildly technical but understandable. Anchor point 5, no required deduction but slightly in need of explanation, lowered to 4.</clarity_reasoning>\n<clarity>4</clarity>\n<completeness_reasoning>All three sections present: prediction with actual comparison, top 3 drivers with directions, and a recommendation; recommendation is somewhat short but substantial enough. Anchor point 4, no deductions.</completeness_reasoning>\n<completeness>4</completeness>"
+  },
+  {
+    "pipeline_label": "Template",
+    "xai_model": "XGB",
+    "instance_id": 2058,
+    "faithfulness": 5,
+    "clarity": 4,
+    "completeness": 5,
+    "reasoning": {
+      "faithfulness": "All three top drivers correct (yr lowering, temp raising, hum lowering), directions correct, prediction 194 named with comparison to 243. Anchor point 5, no deductions.",
+      "clarity": "Everyday language, normalised values translated (~25.4 C, 83 %), no jargon; \"contribution: -0.19\" slightly technical but understandable. Anchor point 5, lowered to 4 for the raw contribution numbers needing minor explanation.",
+      "completeness": "All three sections present: prediction with comparison to actual, three drivers with directions, and an operational recommendation. Anchor point 5, no deductions."
+    },
+    "raw_response": "<faithfulness_reasoning>All three top drivers correct (yr lowering, temp raising, hum lowering), directions correct, prediction 194 named with comparison to 243. Anchor point 5, no deductions.</faithfulness_reasoning>\n<faithfulness>5</faithfulness>\n<clarity_reasoning>Everyday language, normalised values translated (~25.4 C, 83 %), no jargon; \"contribution: -0.19\" slightly technical but understandable. Anchor point 5, lowered to 4 for the raw contribution numbers needing minor explanation.</clarity_reasoning>\n<clarity>4</clarity>\n<completeness_reasoning>All three sections present: prediction with comparison to actual, three drivers with directions, and an operational recommendation. Anchor point 5, no deductions.</completeness_reasoning>\n<completeness>5</completeness>"
+  },
+  {
+    "pipeline_label": "Template",
+    "xai_model": "XGB",
+    "instance_id": 2510,
+    "faithfulness": 5,
+    "clarity": 4,
+    "completeness": 5,
+    "reasoning": {
+      "faithfulness": "All three top drivers correct (hr raising, yr lowering, temp lowering), directions all correct, prediction 326 with actual 372 named. Anchor point 5, no deductions.",
+      "clarity": "Everyday language, no jargon, temperature translated to ~16.4 C, contributions are slightly technical but understandable. Anchor point 4 (one slightly technical element with the contribution numbers), no deductions.",
+      "completeness": "All three sections present: prediction with comparison to actual, top 3 drivers with directions, and a recommendation. Anchor point 5, no deductions."
+    },
+    "raw_response": "<faithfulness_reasoning>All three top drivers correct (hr raising, yr lowering, temp lowering), directions all correct, prediction 326 with actual 372 named. Anchor point 5, no deductions.</faithfulness_reasoning>\n<faithfulness>5</faithfulness>\n<clarity_reasoning>Everyday language, no jargon, temperature translated to ~16.4 C, contributions are slightly technical but understandable. Anchor point 4 (one slightly technical element with the contribution numbers), no deductions.</clarity_reasoning>\n<clarity>4</clarity>\n<completeness_reasoning>All three sections present: prediction with comparison to actual, top 3 drivers with directions, and a recommendation. Anchor point 5, no deductions.</completeness_reasoning>\n<completeness>5</completeness>"
+  },
+  {
+    "pipeline_label": "Template",
+    "xai_model": "XGB",
+    "instance_id": 3543,
+    "faithfulness": 5,
+    "clarity": 5,
+    "completeness": 4,
+    "reasoning": {
+      "faithfulness": "All three top drivers correct (yr, hr, hum) with correct raising direction; prediction 310 named with comparison to 286. Anchor point 5, no deductions.",
+      "clarity": "Everyday language, normalised humidity translated to \"29 %\"; contribution numbers shown but harmless. No jargon, clear structure. Anchor point 5, no deductions.",
+      "completeness": "All three sections present: prediction with actual comparison, three drivers with directions, recommendation. Recommendation is brief but present. Anchor point 4 (recommendation rather shallow), no deductions."
+    },
+    "raw_response": "<faithfulness_reasoning>All three top drivers correct (yr, hr, hum) with correct raising direction; prediction 310 named with comparison to 286. Anchor point 5, no deductions.</faithfulness_reasoning>\n<faithfulness>5</faithfulness>\n\n<clarity_reasoning>Everyday language, normalised humidity translated to \"29 %\"; contribution numbers shown but harmless. No jargon, clear structure. Anchor point 5, no deductions.</clarity_reasoning>\n<clarity>5</clarity>\n\n<completeness_reasoning>All three sections present: prediction with actual comparison, three drivers with directions, recommendation. Recommendation is brief but present. Anchor point 4 (recommendation rather shallow), no deductions.</completeness_reasoning>\n<completeness>4</completeness>"
+  },
+  {
+    "pipeline_label": "Template",
+    "xai_model": "XGB",
+    "instance_id": 3847,
+    "faithfulness": 5,
+    "clarity": 5,
+    "completeness": 5,
+    "reasoning": {
+      "faithfulness": "All three top drivers (hr, weekday, yr) named correctly with correct raising direction; prediction 586 and actual 531 both stated. Anchor point 5, no deductions.",
+      "clarity": "Everyday language, readable times and days; no jargon. Contribution numbers (+0.41 etc.) appear but are minor; temperature/humidity not needed here. Anchor point 5, no required deduction; slight contribution numbers keep it near top.",
+      "completeness": "All three sections present and substantial: prediction with comparison to actual, three drivers with directions, practical recommendation. Anchor point 5, no deductions."
+    },
+    "raw_response": "<faithfulness_reasoning>All three top drivers (hr, weekday, yr) named correctly with correct raising direction; prediction 586 and actual 531 both stated. Anchor point 5, no deductions.</faithfulness_reasoning>\n<faithfulness>5</faithfulness>\n<clarity_reasoning>Everyday language, readable times and days; no jargon. Contribution numbers (+0.41 etc.) appear but are minor; temperature/humidity not needed here. Anchor point 5, no required deduction; slight contribution numbers keep it near top.</clarity_reasoning>\n<clarity>5</clarity>\n<completeness_reasoning>All three sections present and substantial: prediction with comparison to actual, three drivers with directions, practical recommendation. Anchor point 5, no deductions.</completeness_reasoning>\n<completeness>5</completeness>"
+  },
+  {
+    "pipeline_label": "Template",
+    "xai_model": "XGB",
+    "instance_id": 4454,
+    "faithfulness": 5,
+    "clarity": 4,
+    "completeness": 5,
+    "reasoning": {
+      "faithfulness": "All three top drivers correct (hr, temp, yr) with correct raising direction; prediction 297 with comparison to 354. Anchor point 5, no deductions.",
+      "clarity": "Everyday language, temperature translated to ~26.2 C, no jargon; \"contribution: +0.35\" is slightly technical but understandable. Anchor point 4, no required deductions.",
+      "completeness": "All three sections present (prediction with comparison, three drivers with directions, recommendation); recommendation is somewhat brief but substantial. Anchor point 5, no deductions."
+    },
+    "raw_response": "<faithfulness_reasoning>All three top drivers correct (hr, temp, yr) with correct raising direction; prediction 297 with comparison to 354. Anchor point 5, no deductions.</faithfulness_reasoning>\n<faithfulness>5</faithfulness>\n<clarity_reasoning>Everyday language, temperature translated to ~26.2 C, no jargon; \"contribution: +0.35\" is slightly technical but understandable. Anchor point 4, no required deductions.</clarity_reasoning>\n<clarity>4</clarity>\n<completeness_reasoning>All three sections present (prediction with comparison, three drivers with directions, recommendation); recommendation is somewhat brief but substantial. Anchor point 5, no deductions.</completeness_reasoning>\n<completeness>5</completeness>"
+  },
+  {
+    "pipeline_label": "Template",
+    "xai_model": "EBM",
+    "instance_id": 224,
+    "faithfulness": 5,
+    "clarity": 4,
+    "completeness": 5,
+    "reasoning": {
+      "faithfulness": "All three top drivers correct (hr raising, temp lowering, yr lowering) with correct directions, and prediction 117 with actual comparison 96 named. Anchor point 5, no deductions.",
+      "clarity": "Everyday language with readable values (8.2 C, 19:00); \"contribution: +0.85\" is mildly technical but no jargon. Anchor point 5, lowered to 4 for the slightly technical contribution numbers without explanation.",
+      "completeness": "All three sections present: prediction with actual comparison, top 3 drivers with directions, and a recommendation. Anchor point 5, no deductions."
+    },
+    "raw_response": "<faithfulness_reasoning>All three top drivers correct (hr raising, temp lowering, yr lowering) with correct directions, and prediction 117 with actual comparison 96 named. Anchor point 5, no deductions.</faithfulness_reasoning>\n<faithfulness>5</faithfulness>\n<clarity_reasoning>Everyday language with readable values (8.2 C, 19:00); \"contribution: +0.85\" is mildly technical but no jargon. Anchor point 5, lowered to 4 for the slightly technical contribution numbers without explanation.</clarity_reasoning>\n<clarity>4</clarity>\n<completeness_reasoning>All three sections present: prediction with actual comparison, top 3 drivers with directions, and a recommendation. Anchor point 5, no deductions.</completeness_reasoning>\n<completeness>5</completeness>"
+  },
+  {
+    "pipeline_label": "Template",
+    "xai_model": "EBM",
+    "instance_id": 580,
+    "faithfulness": 5,
+    "clarity": 4,
+    "completeness": 5,
+    "reasoning": {
+      "faithfulness": "All three top drivers correct (yr lowering, temp lowering, hr raising), all directions correct, prediction 73 with actual 63 named. Anchor point 5, no deductions.",
+      "clarity": "Everyday language, normalised values translated (~14.8 C), no jargon; \"contribution: -0.23\" is slightly technical but understandable. Anchor point 5, no required deduction, lowered to 4 for the contribution numbers.",
+      "completeness": "All three sections present and substantial: prediction with comparison (73 vs 63), top 3 drivers with directions, and a practical recommendation. Anchor point 5, no deductions."
+    },
+    "raw_response": "<faithfulness_reasoning>All three top drivers correct (yr lowering, temp lowering, hr raising), all directions correct, prediction 73 with actual 63 named. Anchor point 5, no deductions.</faithfulness_reasoning>\n<faithfulness>5</faithfulness>\n<clarity_reasoning>Everyday language, normalised values translated (~14.8 C), no jargon; \"contribution: -0.23\" is slightly technical but understandable. Anchor point 5, no required deduction, lowered to 4 for the contribution numbers.</clarity_reasoning>\n<clarity>4</clarity>\n<completeness_reasoning>All three sections present and substantial: prediction with comparison (73 vs 63), top 3 drivers with directions, and a practical recommendation. Anchor point 5, no deductions.</completeness_reasoning>\n<completeness>5</completeness>"
+  },
+  {
+    "pipeline_label": "Template",
+    "xai_model": "EBM",
+    "instance_id": 1041,
+    "faithfulness": 5,
+    "clarity": 4,
+    "completeness": 5,
+    "reasoning": {
+      "faithfulness": "All three top drivers correct (hr raising, yr lowering, hum lowering) with correct directions; prediction 390 and actual 387 named. Anchor point 5, no deductions.",
+      "clarity": "Clear everyday language, structured sections; humidity translated to \"88 %\", no jargon. Anchor point 5, contributions like \"+1.11\" are slightly technical but no listed jargon term, lowered slightly to 4.",
+      "completeness": "All three sections present and substantial: prediction with comparison to actual, top 3 drivers with directions, practical recommendation. Anchor point 5, no deductions."
+    },
+    "raw_response": "<faithfulness_reasoning>All three top drivers correct (hr raising, yr lowering, hum lowering) with correct directions; prediction 390 and actual 387 named. Anchor point 5, no deductions.</faithfulness_reasoning>\n<faithfulness>5</faithfulness>\n<clarity_reasoning>Clear everyday language, structured sections; humidity translated to \"88 %\", no jargon. Anchor point 5, contributions like \"+1.11\" are slightly technical but no listed jargon term, lowered slightly to 4.</clarity_reasoning>\n<clarity>4</clarity>\n<completeness_reasoning>All three sections present and substantial: prediction with comparison to actual, top 3 drivers with directions, practical recommendation. Anchor point 5, no deductions.</completeness_reasoning>\n<completeness>5</completeness>"
+  },
+  {
+    "pipeline_label": "Template",
+    "xai_model": "EBM",
+    "instance_id": 1481,
+    "faithfulness": 5,
+    "clarity": 4,
+    "completeness": 4,
+    "reasoning": {
+      "faithfulness": "All three top drivers correct (hr raising, yr lowering, hum raising), directions all correct, prediction 242 with actual 277 named. Anchor point 5, no deductions.",
+      "clarity": "Everyday language with readable values (16:00, 42%), no jargon; \"contribution: +0.82\" is a slightly technical number but understandable. Anchor point 5, no deductions, but lowered to 4 for the raw contribution numbers needing slight explanation.",
+      "completeness": "All three sections present: prediction with comparison (242 vs 277), top 3 drivers with directions, and a recommendation; recommendation is short but present. Anchor point 4 (recommendation shallow), no deductions."
+    },
+    "raw_response": "<faithfulness_reasoning>All three top drivers correct (hr raising, yr lowering, hum raising), directions all correct, prediction 242 with actual 277 named. Anchor point 5, no deductions.</faithfulness_reasoning>\n<faithfulness>5</faithfulness>\n\n<clarity_reasoning>Everyday language with readable values (16:00, 42%), no jargon; \"contribution: +0.82\" is a slightly technical number but understandable. Anchor point 5, no deductions, but lowered to 4 for the raw contribution numbers needing slight explanation.</clarity_reasoning>\n<clarity>4</clarity>\n\n<completeness_reasoning>All three sections present: prediction with comparison (242 vs 277), top 3 drivers with directions, and a recommendation; recommendation is short but present. Anchor point 4 (recommendation shallow), no deductions.</completeness_reasoning>\n<completeness>4</completeness>"
+  },
+  {
+    "pipeline_label": "Template",
+    "xai_model": "EBM",
+    "instance_id": 1677,
+    "faithfulness": 5,
+    "clarity": 4,
+    "completeness": 4,
+    "reasoning": {
+      "faithfulness": "All three top drivers correct (hr raising, temp raising, yr lowering) with correct directions; prediction 260 and actual 286 named. Anchor point 5, no deductions.",
+      "clarity": "Everyday language, clear structure, temperature translated to ~28.7 C; \"contribution: +0.56\" is slightly technical but no real jargon. Anchor point 5, lowered to 4 for the slightly unexplained contribution numbers.",
+      "completeness": "All three sections present: prediction with comparison to actual, top 3 drivers with directions, and an operational recommendation, though the recommendation is rather brief. Anchor point 4, no deductions."
+    },
+    "raw_response": "<faithfulness_reasoning>All three top drivers correct (hr raising, temp raising, yr lowering) with correct directions; prediction 260 and actual 286 named. Anchor point 5, no deductions.</faithfulness_reasoning>\n<faithfulness>5</faithfulness>\n<clarity_reasoning>Everyday language, clear structure, temperature translated to ~28.7 C; \"contribution: +0.56\" is slightly technical but no real jargon. Anchor point 5, lowered to 4 for the slightly unexplained contribution numbers.</clarity_reasoning>\n<clarity>4</clarity>\n<completeness_reasoning>All three sections present: prediction with comparison to actual, top 3 drivers with directions, and an operational recommendation, though the recommendation is rather brief. Anchor point 4, no deductions.</completeness_reasoning>\n<completeness>4</completeness>"
+  },
+  {
+    "pipeline_label": "Template",
+    "xai_model": "EBM",
+    "instance_id": 2058,
+    "faithfulness": 5,
+    "clarity": 4,
+    "completeness": 5,
+    "reasoning": {
+      "faithfulness": "All three top drivers correct (hr raising, temp raising, yr lowering), all directions correct, prediction 177 with comparison to 243 named. Anchor point 5, no deductions.",
+      "clarity": "Clear everyday language, temperature translated to ~25.4 C, no jargon; \"contribution: +0.56\" is slightly technical but understandable. Anchor point 4, no deductions.",
+      "completeness": "All three sections present: prediction with actual comparison, top 3 drivers with directions, and a recommendation. Anchor point 5, no deductions."
+    },
+    "raw_response": "<faithfulness_reasoning>All three top drivers correct (hr raising, temp raising, yr lowering), all directions correct, prediction 177 with comparison to 243 named. Anchor point 5, no deductions.</faithfulness_reasoning>\n<faithfulness>5</faithfulness>\n<clarity_reasoning>Clear everyday language, temperature translated to ~25.4 C, no jargon; \"contribution: +0.56\" is slightly technical but understandable. Anchor point 4, no deductions.</clarity_reasoning>\n<clarity>4</clarity>\n<completeness_reasoning>All three sections present: prediction with actual comparison, top 3 drivers with directions, and a recommendation. Anchor point 5, no deductions.</completeness_reasoning>\n<completeness>5</completeness>"
+  },
+  {
+    "pipeline_label": "Template",
+    "xai_model": "EBM",
+    "instance_id": 2510,
+    "faithfulness": 5,
+    "clarity": 4,
+    "completeness": 5,
+    "reasoning": {
+      "faithfulness": "All three top drivers correct (hr raising, yr lowering, temp lowering), directions correct, prediction 311 named with actual 372. Anchor point 5, no deductions.",
+      "clarity": "Everyday language, clear structure, temperature translated to ~16.4 C; contributions shown as plain numbers without jargon. Anchor point 5, no required deduction; slight numeric contributions lower it to 4.",
+      "completeness": "All three sections present: prediction with comparison to actual, top 3 drivers with directions, and a practical recommendation. Anchor point 5, no deductions."
+    },
+    "raw_response": "<faithfulness_reasoning>All three top drivers correct (hr raising, yr lowering, temp lowering), directions correct, prediction 311 named with actual 372. Anchor point 5, no deductions.</faithfulness_reasoning>\n<faithfulness>5</faithfulness>\n<clarity_reasoning>Everyday language, clear structure, temperature translated to ~16.4 C; contributions shown as plain numbers without jargon. Anchor point 5, no required deduction; slight numeric contributions lower it to 4.</clarity_reasoning>\n<clarity>4</clarity>\n<completeness_reasoning>All three sections present: prediction with comparison to actual, top 3 drivers with directions, and a practical recommendation. Anchor point 5, no deductions.</completeness_reasoning>\n<completeness>5</completeness>"
+  },
+  {
+    "pipeline_label": "Template",
+    "xai_model": "EBM",
+    "instance_id": 3543,
+    "faithfulness": 5,
+    "clarity": 4,
+    "completeness": 5,
+    "reasoning": {
+      "faithfulness": "All three top drivers correct (hr, yr, hum), all directions raising and correct, prediction 296 named with comparison to actual 286. Anchor point 5, no deductions.",
+      "clarity": "Everyday language, no jargon, normalised humidity translated to 29 %; contribution numbers are slightly technical but understandable. Anchor point 5, no required deduction, lowered to 4 for the raw contribution values.",
+      "completeness": "All three sections present: prediction with comparison, top 3 drivers with directions, and an operational recommendation. Anchor point 5, no deductions."
+    },
+    "raw_response": "<faithfulness_reasoning>All three top drivers correct (hr, yr, hum), all directions raising and correct, prediction 296 named with comparison to actual 286. Anchor point 5, no deductions.</faithfulness_reasoning>\n<faithfulness>5</faithfulness>\n<clarity_reasoning>Everyday language, no jargon, normalised humidity translated to 29 %; contribution numbers are slightly technical but understandable. Anchor point 5, no required deduction, lowered to 4 for the raw contribution values.</clarity_reasoning>\n<clarity>4</clarity>\n<completeness_reasoning>All three sections present: prediction with comparison, top 3 drivers with directions, and an operational recommendation. Anchor point 5, no deductions.</completeness_reasoning>\n<completeness>5</completeness>"
+  },
+  {
+    "pipeline_label": "Template",
+    "xai_model": "EBM",
+    "instance_id": 3847,
+    "faithfulness": 5,
+    "clarity": 5,
+    "completeness": 5,
+    "reasoning": {
+      "faithfulness": "All three top drivers (hr, temp, yr) named correctly with correct raising direction; prediction 593 with comparison to 531 present. Anchor point 5, no deduction.",
+      "clarity": "Everyday language, normalised values translated (~32.8 C), no jargon; clear structure. Anchor point 5, no deduction.",
+      "completeness": "All three sections present and substantial: prediction with actual comparison, top 3 drivers with directions, practical recommendation. Anchor point 5, no deduction."
+    },
+    "raw_response": "<faithfulness_reasoning>All three top drivers (hr, temp, yr) named correctly with correct raising direction; prediction 593 with comparison to 531 present. Anchor point 5, no deduction.</faithfulness_reasoning>\n<faithfulness>5</faithfulness>\n<clarity_reasoning>Everyday language, normalised values translated (~32.8 C), no jargon; clear structure. Anchor point 5, no deduction.</clarity_reasoning>\n<clarity>5</clarity>\n<completeness_reasoning>All three sections present and substantial: prediction with actual comparison, top 3 drivers with directions, practical recommendation. Anchor point 5, no deduction.</completeness_reasoning>\n<completeness>5</completeness>"
+  },
+  {
+    "pipeline_label": "Template",
+    "xai_model": "EBM",
+    "instance_id": 4454,
+    "faithfulness": 5,
+    "clarity": 4,
+    "completeness": 5,
+    "reasoning": {
+      "faithfulness": "All three top drivers (hr, temp, yr) named correctly with correct raising direction; prediction 332 and comparison with actual 354 stated. Anchor point 5, no deductions.",
+      "clarity": "Everyday language, no jargon; normalised temp translated to ~26.2 C; contribution numbers shown but understandable. Anchor point 5, no required deduction; slight numeric contributions justify lowering to 4.",
+      "completeness": "All three sections present: prediction with comparison to actual, top 3 drivers with directions, and an operational recommendation. Anchor point 5, no deductions."
+    },
+    "raw_response": "<faithfulness_reasoning>All three top drivers (hr, temp, yr) named correctly with correct raising direction; prediction 332 and comparison with actual 354 stated. Anchor point 5, no deductions.</faithfulness_reasoning>\n<faithfulness>5</faithfulness>\n<clarity_reasoning>Everyday language, no jargon; normalised temp translated to ~26.2 C; contribution numbers shown but understandable. Anchor point 5, no required deduction; slight numeric contributions justify lowering to 4.</clarity_reasoning>\n<clarity>4</clarity>\n<completeness_reasoning>All three sections present: prediction with comparison to actual, top 3 drivers with directions, and an operational recommendation. Anchor point 5, no deductions.</completeness_reasoning>\n<completeness>5</completeness>"
+  },
+  {
+    "pipeline_label": "JSON to Text",
+    "xai_model": "XGB",
+    "instance_id": 224,
+    "faithfulness": 5,
+    "clarity": 4,
+    "completeness": 5,
+    "reasoning": {
+      "faithfulness": "All three top drivers correct: temp down (rank 1), hr up (rank 2), mnth down (rank 3), all directions correct; prediction ~112 and comparison with 96 named. Anchor point 5; extra factors (yr, weekday, hum) are mentioned but framed as lower-ranked, not as top 3, so no hallucination deduction. No deduction.",
+      "clarity": "Everyday language, clear structure, temperature translated to ~8 °C; \"normalised value 0.2\" and \"yr=0\" are slightly technical but explained. Anchor point 5, lowered to 4 for minor technical residue, no required jargon deduction.",
+      "completeness": "All three sections present and substantial: prediction with comparison to actual, top 3 drivers with directions, and concrete operational recommendation. Anchor point 5, no deduction."
+    },
+    "raw_response": "<faithfulness_reasoning>All three top drivers correct: temp down (rank 1), hr up (rank 2), mnth down (rank 3), all directions correct; prediction ~112 and comparison with 96 named. Anchor point 5; extra factors (yr, weekday, hum) are mentioned but framed as lower-ranked, not as top 3, so no hallucination deduction. No deduction.</faithfulness_reasoning>\n<faithfulness>5</faithfulness>\n\n<clarity_reasoning>Everyday language, clear structure, temperature translated to ~8 °C; \"normalised value 0.2\" and \"yr=0\" are slightly technical but explained. Anchor point 5, lowered to 4 for minor technical residue, no required jargon deduction.</clarity_reasoning>\n<clarity>4</clarity>\n\n<completeness_reasoning>All three sections present and substantial: prediction with comparison to actual, top 3 drivers with directions, and concrete operational recommendation. Anchor point 5, no deduction.</completeness_reasoning>\n<completeness>5</completeness>"
+  },
+  {
+    "pipeline_label": "JSON to Text",
+    "xai_model": "XGB",
+    "instance_id": 580,
+    "faithfulness": 5,
+    "clarity": 4,
+    "completeness": 5,
+    "reasoning": {
+      "faithfulness": "All three top drivers correct (hr=22, yr=0, mnth=3), all with correct damping direction, and prediction 65 plus comparison with 63 named. Anchor point 5, no deductions.",
+      "clarity": "Clear everyday language with good explanations; the one slip is \"normalised 0.36\" alongside the readable 15 °C, but the everyday translation is present so the jargon deduction does not strictly apply. Anchor point 5, lowered to 4 for the slightly technical \"normalised\" value mention.",
+      "completeness": "All three sections present and substantial: prediction with comparison to actual, top 3 drivers with directions, and a practical operational recommendation. Anchor point 5, no deductions."
+    },
+    "raw_response": "<faithfulness_reasoning>All three top drivers correct (hr=22, yr=0, mnth=3), all with correct damping direction, and prediction 65 plus comparison with 63 named. Anchor point 5, no deductions.</faithfulness_reasoning>\n<faithfulness>5</faithfulness>\n\n<clarity_reasoning>Clear everyday language with good explanations; the one slip is \"normalised 0.36\" alongside the readable 15 °C, but the everyday translation is present so the jargon deduction does not strictly apply. Anchor point 5, lowered to 4 for the slightly technical \"normalised\" value mention.</clarity_reasoning>\n<clarity>4</clarity>\n\n<completeness_reasoning>All three sections present and substantial: prediction with comparison to actual, top 3 drivers with directions, and a practical operational recommendation. Anchor point 5, no deductions.</completeness_reasoning>\n<completeness>5</completeness>"
+  },
+  {
+    "pipeline_label": "JSON to Text",
+    "xai_model": "XGB",
+    "instance_id": 1041,
+    "faithfulness": 5,
+    "clarity": 4,
+    "completeness": 5,
+    "reasoning": {
+      "faithfulness": "All three top drivers correct: hr=8 raising, yr=0 damping, weekday=5 raising, all directions correct; prediction 385 with comparison to 387 named. The extra mention of humidity (rank 4) is outside top 3 but presented as rank 4, not falsely claimed as top 3, so no hallucination deduction. Anchor point 5, no deduction.",
+      "clarity": "Everyday language, clear structure, normalised values translated (88% humidity, ~20.5°C); \"influence +0.75\" is slightly technical but no forbidden jargon. Anchor point 5, no required deduction, lowered to 4 for the slight technical influence notation.",
+      "completeness": "All three sections present and substantial: prediction with comparison to actual, drivers with directions, and a practical operational recommendation. Anchor point 5, no deduction."
+    },
+    "raw_response": "<faithfulness_reasoning>All three top drivers correct: hr=8 raising, yr=0 damping, weekday=5 raising, all directions correct; prediction 385 with comparison to 387 named. The extra mention of humidity (rank 4) is outside top 3 but presented as rank 4, not falsely claimed as top 3, so no hallucination deduction. Anchor point 5, no deduction.</faithfulness_reasoning>\n<faithfulness>5</faithfulness>\n<clarity_reasoning>Everyday language, clear structure, normalised values translated (88% humidity, ~20.5°C); \"influence +0.75\" is slightly technical but no forbidden jargon. Anchor point 5, no required deduction, lowered to 4 for the slight technical influence notation.</clarity_reasoning>\n<clarity>4</clarity>\n<completeness_reasoning>All three sections present and substantial: prediction with comparison to actual, drivers with directions, and a practical operational recommendation. Anchor point 5, no deduction.</completeness_reasoning>\n<completeness>5</completeness>"
+  },
+  {
+    "pipeline_label": "JSON to Text",
+    "xai_model": "XGB",
+    "instance_id": 1481,
+    "faithfulness": 5,
+    "clarity": 4,
+    "completeness": 5,
+    "reasoning": {
+      "faithfulness": "All three top drivers correct: hr=16 raising (+0.38), yr=0 damping (−0.26), hum=42% positive (+0.06); directions all correct and prediction 229 vs actual 277 named. Anchor point 5, no deduction (additional rank 4/5 mentions are correct extras, not hallucinated top-3 claims).",
+      "clarity": "Everyday language with clear commuter analogy, temperature given in Celsius and humidity in percent; \"influence +0.38\" style numbers are slightly technical but no SHAP/log jargon. Anchor point 5, lowered to 4 for the mild numeric notation.",
+      "completeness": "All three sections present and substantial: prediction with explicit comparison (229 vs 277), full driver list with directions, and a concrete operational recommendation. Anchor point 5, no deduction."
+    },
+    "raw_response": "<faithfulness_reasoning>All three top drivers correct: hr=16 raising (+0.38), yr=0 damping (−0.26), hum=42% positive (+0.06); directions all correct and prediction 229 vs actual 277 named. Anchor point 5, no deduction (additional rank 4/5 mentions are correct extras, not hallucinated top-3 claims).</faithfulness_reasoning>\n<faithfulness>5</faithfulness>\n\n<clarity_reasoning>Everyday language with clear commuter analogy, temperature given in Celsius and humidity in percent; \"influence +0.38\" style numbers are slightly technical but no SHAP/log jargon. Anchor point 5, lowered to 4 for the mild numeric notation.</clarity_reasoning>\n<clarity>4</clarity>\n\n<completeness_reasoning>All three sections present and substantial: prediction with explicit comparison (229 vs 277), full driver list with directions, and a concrete operational recommendation. Anchor point 5, no deduction.</completeness_reasoning>\n<completeness>5</completeness>"
+  },
+  {
+    "pipeline_label": "JSON to Text",
+    "xai_model": "XGB",
+    "instance_id": 1677,
+    "faithfulness": 5,
+    "clarity": 4,
+    "completeness": 5,
+    "reasoning": {
+      "faithfulness": "All three top drivers correct (hr +, yr damping, temp +) with correct directions, and prediction 254 with comparison to 286 given. Anchor point 5, no deductions.",
+      "clarity": "Everyday language, evening peak explained, temperature translated to ~28.7 °C; \"influence +0.25\" is slightly technical but no jargon. Anchor point 5, lowered to 4 for the raw contribution values needing slight explanation.",
+      "completeness": "All three sections present and substantial: prediction with actual comparison, top 3 drivers with directions, and a practical operational recommendation. Anchor point 5, no deductions."
+    },
+    "raw_response": "<faithfulness_reasoning>All three top drivers correct (hr +, yr damping, temp +) with correct directions, and prediction 254 with comparison to 286 given. Anchor point 5, no deductions.</faithfulness_reasoning>\n<faithfulness>5</faithfulness>\n\n<clarity_reasoning>Everyday language, evening peak explained, temperature translated to ~28.7 °C; \"influence +0.25\" is slightly technical but no jargon. Anchor point 5, lowered to 4 for the raw contribution values needing slight explanation.</clarity_reasoning>\n<clarity>4</clarity>\n\n<completeness_reasoning>All three sections present and substantial: prediction with actual comparison, top 3 drivers with directions, and a practical operational recommendation. Anchor point 5, no deductions.</completeness_reasoning>\n<completeness>5</completeness>"
+  },
+  {
+    "pipeline_label": "JSON to Text",
+    "xai_model": "XGB",
+    "instance_id": 2058,
+    "faithfulness": 5,
+    "clarity": 4,
+    "completeness": 5,
+    "reasoning": {
+      "faithfulness": "All three top drivers correct: yr down (rank 1, -0.19), temp up (rank 2, +0.16), hum down (rank 3, -0.13), all directions correct; prediction 194 stated with comparison to 243. Anchor point 5, no deductions.",
+      "clarity": "Everyday language, no jargon, normalised values translated to ~25 °C and 83 %; \"contribution\" and feature codes like yr=0/weekday=6 are minor but explained. Anchor point 5, no required deduction, lowered to 4 for slight technical labelling.",
+      "completeness": "All three sections present and substantial: prediction with comparison to actual, top drivers with directions, and a concrete operational recommendation. Anchor point 5, no deductions."
+    },
+    "raw_response": "<faithfulness_reasoning>All three top drivers correct: yr down (rank 1, -0.19), temp up (rank 2, +0.16), hum down (rank 3, -0.13), all directions correct; prediction 194 stated with comparison to 243. Anchor point 5, no deductions.</faithfulness_reasoning>\n<faithfulness>5</faithfulness>\n\n<clarity_reasoning>Everyday language, no jargon, normalised values translated to ~25 °C and 83 %; \"contribution\" and feature codes like yr=0/weekday=6 are minor but explained. Anchor point 5, no required deduction, lowered to 4 for slight technical labelling.</clarity_reasoning>\n<clarity>4</clarity>\n\n<completeness_reasoning>All three sections present and substantial: prediction with comparison to actual, top drivers with directions, and a concrete operational recommendation. Anchor point 5, no deductions.</completeness_reasoning>\n<completeness>5</completeness>"
+  },
+  {
+    "pipeline_label": "JSON to Text",
+    "xai_model": "XGB",
+    "instance_id": 2510,
+    "faithfulness": 5,
+    "clarity": 4,
+    "completeness": 5,
+    "reasoning": {
+      "faithfulness": "All three top drivers correct (hr up rank1, yr down rank2, temp down rank3) with correct directions; prediction 326 and comparison to 372 named. Extra drivers (weekday, humidity) are mentioned as rank 4/5, not as top 3, so no hallucination into the top 3. Anchor point 5, no deduction.",
+      "clarity": "Everyday language, clear structure, temperature translated to ~16 °C; minor mild technicality (\"influence +0.69\", \"yr=0\") but understandable. Anchor point 5, lowered to 4 for slight technical notation, no required deduction applies.",
+      "completeness": "All three sections present and substantial: prediction with comparison to actual, top 3 drivers with directions, and a concrete operational recommendation. Anchor point 5, no deduction."
+    },
+    "raw_response": "<faithfulness_reasoning>All three top drivers correct (hr up rank1, yr down rank2, temp down rank3) with correct directions; prediction 326 and comparison to 372 named. Extra drivers (weekday, humidity) are mentioned as rank 4/5, not as top 3, so no hallucination into the top 3. Anchor point 5, no deduction.</faithfulness_reasoning>\n<faithfulness>5</faithfulness>\n<clarity_reasoning>Everyday language, clear structure, temperature translated to ~16 °C; minor mild technicality (\"influence +0.69\", \"yr=0\") but understandable. Anchor point 5, lowered to 4 for slight technical notation, no required deduction applies.</clarity_reasoning>\n<clarity>4</clarity>\n<completeness_reasoning>All three sections present and substantial: prediction with comparison to actual, top 3 drivers with directions, and a concrete operational recommendation. Anchor point 5, no deduction.</completeness_reasoning>\n<completeness>5</completeness>"
+  },
+  {
+    "pipeline_label": "JSON to Text",
+    "xai_model": "XGB",
+    "instance_id": 3543,
+    "faithfulness": 5,
+    "clarity": 5,
+    "completeness": 5,
+    "reasoning": {
+      "faithfulness": "All three top drivers correct (yr=2012 +, hr=20:00 +, hum=29% +), all directions correct, prediction 310 named with comparison to 286. Anchor point 5, no deductions.",
+      "clarity": "Everyday language with readable translations (8 p.m., 20.5 °C, 29 percent); no jargon like SHAP or log space. Anchor point 5, no deductions; remains 5.",
+      "completeness": "All three sections present and substantial: prediction with actual-value comparison, top 3 drivers with directions, and a concrete operational recommendation. Anchor point 5, no deductions."
+    },
+    "raw_response": "<faithfulness_reasoning>All three top drivers correct (yr=2012 +, hr=20:00 +, hum=29% +), all directions correct, prediction 310 named with comparison to 286. Anchor point 5, no deductions.</faithfulness_reasoning>\n<faithfulness>5</faithfulness>\n\n<clarity_reasoning>Everyday language with readable translations (8 p.m., 20.5 °C, 29 percent); no jargon like SHAP or log space. Anchor point 5, no deductions; remains 5.</clarity_reasoning>\n<clarity>5</clarity>\n\n<completeness_reasoning>All three sections present and substantial: prediction with actual-value comparison, top 3 drivers with directions, and a concrete operational recommendation. Anchor point 5, no deductions.</completeness_reasoning>\n<completeness>5</completeness>"
+  },
+  {
+    "pipeline_label": "JSON to Text",
+    "xai_model": "XGB",
+    "instance_id": 3847,
+    "faithfulness": 5,
+    "clarity": 4,
+    "completeness": 5,
+    "reasoning": {
+      "faithfulness": "All three top drivers (hr, weekday, yr) named correctly with correct upward directions; prediction 586 and comparison to 531 both given. Extra drivers mentioned beyond top 3 but they are correctly labelled as lower ranks, not hallucinated as top 3. Anchor point 5, no deduction.",
+      "clarity": "Clear everyday language, good structure; normalised values translated (~33 °C, 29 %); no jargon. Minor \"influence +0.41\" notation slightly technical but understandable. Anchor point 5, lowered to 4 for the raw contribution numbers needing minor explanation.",
+      "completeness": "All three sections present and substantial: prediction with actual comparison, detailed drivers, and practical operational recommendation. Anchor point 5, no deduction."
+    },
+    "raw_response": "<faithfulness_reasoning>All three top drivers (hr, weekday, yr) named correctly with correct upward directions; prediction 586 and comparison to 531 both given. Extra drivers mentioned beyond top 3 but they are correctly labelled as lower ranks, not hallucinated as top 3. Anchor point 5, no deduction.</faithfulness_reasoning>\n<faithfulness>5</faithfulness>\n\n<clarity_reasoning>Clear everyday language, good structure; normalised values translated (~33 °C, 29 %); no jargon. Minor \"influence +0.41\" notation slightly technical but understandable. Anchor point 5, lowered to 4 for the raw contribution numbers needing minor explanation.</clarity_reasoning>\n<clarity>4</clarity>\n\n<completeness_reasoning>All three sections present and substantial: prediction with actual comparison, detailed drivers, and practical operational recommendation. Anchor point 5, no deduction.</completeness_reasoning>\n<completeness>5</completeness>"
+  },
+  {
+    "pipeline_label": "JSON to Text",
+    "xai_model": "XGB",
+    "instance_id": 4454,
+    "faithfulness": 5,
+    "clarity": 4,
+    "completeness": 5,
+    "reasoning": {
+      "faithfulness": "All three top drivers correct (hr +0.35, temp +0.16, yr +0.15) with correct upward directions; prediction 297 named with comparison to 354. Anchor point 5, no deductions (extra drivers ranked 4-6 are accurate, not hallucinated as top 3).",
+      "clarity": "Everyday language, clear structure, normalised values translated (~26 °C, 19:00); \"influence +0.35\" is mildly technical but not jargon. Anchor point 5, no required deductions, lowered to 4 for the minor numeric influence values needing slight explanation.",
+      "completeness": "All three sections present and substantial: prediction with explicit comparison to actual, top 3 drivers with directions, and a practical operational recommendation. Anchor point 5, no deductions."
+    },
+    "raw_response": "<faithfulness_reasoning>All three top drivers correct (hr +0.35, temp +0.16, yr +0.15) with correct upward directions; prediction 297 named with comparison to 354. Anchor point 5, no deductions (extra drivers ranked 4-6 are accurate, not hallucinated as top 3).</faithfulness_reasoning>\n<faithfulness>5</faithfulness>\n\n<clarity_reasoning>Everyday language, clear structure, normalised values translated (~26 °C, 19:00); \"influence +0.35\" is mildly technical but not jargon. Anchor point 5, no required deductions, lowered to 4 for the minor numeric influence values needing slight explanation.</clarity_reasoning>\n<clarity>4</clarity>\n\n<completeness_reasoning>All three sections present and substantial: prediction with explicit comparison to actual, top 3 drivers with directions, and a practical operational recommendation. Anchor point 5, no deductions.</completeness_reasoning>\n<completeness>5</completeness>"
+  },
+  {
+    "pipeline_label": "JSON to Text",
+    "xai_model": "EBM",
+    "instance_id": 224,
+    "faithfulness": 5,
+    "clarity": 4,
+    "completeness": 5,
+    "reasoning": {
+      "faithfulness": "All three top drivers correct: hr=19 raising (+0.85), temp ~8°C damping (-0.60), yr=0 damping (-0.23); directions all correct; prediction 117 and comparison to 96 named. Anchor point 5; extra ranks 4-6 are mentioned but the top 3 are all accurate, no deduction applies.",
+      "clarity": "Everyday language with translations (8°C, evening commuter peak); minor technical phrasing like \"influence +0.85\" and \"yr=0\" but normalised values are translated. Anchor point 5, lowered to 4 for slight technicality (\"yr=0\", numeric contributions).",
+      "completeness": "All three sections present and substantial: prediction with comparison to actual, drivers with directions, concrete operational recommendation. Anchor point 5, no deduction."
+    },
+    "raw_response": "<faithfulness_reasoning>All three top drivers correct: hr=19 raising (+0.85), temp ~8°C damping (-0.60), yr=0 damping (-0.23); directions all correct; prediction 117 and comparison to 96 named. Anchor point 5; extra ranks 4-6 are mentioned but the top 3 are all accurate, no deduction applies.</faithfulness_reasoning>\n<faithfulness>5</faithfulness>\n\n<clarity_reasoning>Everyday language with translations (8°C, evening commuter peak); minor technical phrasing like \"influence +0.85\" and \"yr=0\" but normalised values are translated. Anchor point 5, lowered to 4 for slight technicality (\"yr=0\", numeric contributions).</clarity_reasoning>\n<clarity>4</clarity>\n\n<completeness_reasoning>All three sections present and substantial: prediction with comparison to actual, drivers with directions, concrete operational recommendation. Anchor point 5, no deduction.</completeness_reasoning>\n<completeness>5</completeness>"
+  },
+  {
+    "pipeline_label": "JSON to Text",
+    "xai_model": "EBM",
+    "instance_id": 580,
+    "faithfulness": 5,
+    "clarity": 4,
+    "completeness": 5,
+    "reasoning": {
+      "faithfulness": "All three top drivers correct (yr damping, temp damping, hr raising) with correct directions; prediction 73 named and compared to actual 63. Anchor point 5, no deduction (extra rank 4/5 drivers are accurate and not hallucinated top-3 claims).",
+      "clarity": "Everyday language, temperature translated to ~14.8 °C, logical structure; minor technical labels like \"yr=0\", \"weathersit = 1\" appear but are explained. Anchor point 5, no jargon deduction (no SHAP/log/exp), values translated; lowered to 4 for slight technical labels.",
+      "completeness": "All three sections present and substantial: prediction with comparison to actual, top drivers with directions, and a concrete operational recommendation. Anchor point 5, no deduction."
+    },
+    "raw_response": "<faithfulness_reasoning>All three top drivers correct (yr damping, temp damping, hr raising) with correct directions; prediction 73 named and compared to actual 63. Anchor point 5, no deduction (extra rank 4/5 drivers are accurate and not hallucinated top-3 claims).</faithfulness_reasoning>\n<faithfulness>5</faithfulness>\n\n<clarity_reasoning>Everyday language, temperature translated to ~14.8 °C, logical structure; minor technical labels like \"yr=0\", \"weathersit = 1\" appear but are explained. Anchor point 5, no jargon deduction (no SHAP/log/exp), values translated; lowered to 4 for slight technical labels.</clarity_reasoning>\n<clarity>4</clarity>\n\n<completeness_reasoning>All three sections present and substantial: prediction with comparison to actual, top drivers with directions, and a concrete operational recommendation. Anchor point 5, no deduction.</completeness_reasoning>\n<completeness>5</completeness>"
+  },
+  {
+    "pipeline_label": "JSON to Text",
+    "xai_model": "EBM",
+    "instance_id": 1041,
+    "faithfulness": 5,
+    "clarity": 5,
+    "completeness": 5,
+    "reasoning": {
+      "faithfulness": "All three top drivers correct (hr up +1.11, yr down −0.23, hum down −0.17) with correct directions; prediction 390 and comparison with 387 stated. Anchor point 5, no deductions.",
+      "clarity": "Everyday language throughout, morning peak and muggy conditions are accessible; normalised humidity given as readable 88%, temperature as ~20.5°C; no jargon like SHAP. Anchor point 5, no deductions.",
+      "completeness": "All three sections present and substantial: prediction with actual comparison, top 3 drivers with directions, and concrete operational recommendation. Anchor point 5, no deductions."
+    },
+    "raw_response": "<faithfulness_reasoning>All three top drivers correct (hr up +1.11, yr down −0.23, hum down −0.17) with correct directions; prediction 390 and comparison with 387 stated. Anchor point 5, no deductions.</faithfulness_reasoning>\n<faithfulness>5</faithfulness>\n\n<clarity_reasoning>Everyday language throughout, morning peak and muggy conditions are accessible; normalised humidity given as readable 88%, temperature as ~20.5°C; no jargon like SHAP. Anchor point 5, no deductions.</clarity_reasoning>\n<clarity>5</clarity>\n\n<completeness_reasoning>All three sections present and substantial: prediction with actual comparison, top 3 drivers with directions, and concrete operational recommendation. Anchor point 5, no deductions.</completeness_reasoning>\n<completeness>5</completeness>"
+  },
+  {
+    "pipeline_label": "JSON to Text",
+    "xai_model": "EBM",
+    "instance_id": 1481,
+    "faithfulness": 5,
+    "clarity": 4,
+    "completeness": 5,
+    "reasoning": {
+      "faithfulness": "All three top drivers correct: hr=16 raising (rank1), yr=0 damping (rank2), hum=42% small positive boost (rank3), directions all correct; prediction 242 and comparison with 277 named. Anchor point 5, no deduction.",
+      "clarity": "Everyday language, well structured, commuter peak understandable; no jargon (SHAP/log/exp absent); normalised values translated to readable form (16:00, 42%, 36.9 °C). The \"influence +0.82\" numbers are slightly technical but explained in plain terms. Anchor point 5, no required deduction but lowered to 4 for the raw influence numbers.",
+      "completeness": "All three sections present and substantial: prediction with comparison to actual (242 vs 277), top 3 drivers with directions, concrete operational recommendation. Anchor point 5, no deduction."
+    },
+    "raw_response": "<faithfulness_reasoning>All three top drivers correct: hr=16 raising (rank1), yr=0 damping (rank2), hum=42% small positive boost (rank3), directions all correct; prediction 242 and comparison with 277 named. Anchor point 5, no deduction.</faithfulness_reasoning>\n<faithfulness>5</faithfulness>\n\n<clarity_reasoning>Everyday language, well structured, commuter peak understandable; no jargon (SHAP/log/exp absent); normalised values translated to readable form (16:00, 42%, 36.9 °C). The \"influence +0.82\" numbers are slightly technical but explained in plain terms. Anchor point 5, no required deduction but lowered to 4 for the raw influence numbers.</clarity_reasoning>\n<clarity>4</clarity>\n\n<completeness_reasoning>All three sections present and substantial: prediction with comparison to actual (242 vs 277), top 3 drivers with directions, concrete operational recommendation. Anchor point 5, no deduction.</completeness_reasoning>\n<completeness>5</completeness>"
+  },
+  {
+    "pipeline_label": "JSON to Text",
+    "xai_model": "EBM",
+    "instance_id": 1677,
+    "faithfulness": 5,
+    "clarity": 4,
+    "completeness": 5,
+    "reasoning": {
+      "faithfulness": "All three top drivers correct (hr up, temp up, yr down) with correct directions; prediction ~260 named and compared with 286. Anchor point 5, no deductions.",
+      "clarity": "Everyday language with morning/evening peak well explained; temperature is translated to ~28.7 °C. The normalised values (temp=0.70, yr=0, weekday=4) are shown but the temperature one is translated. No jargon like SHAP/log/exp. Anchor point 4 (one slightly technical inclusion of raw normalised values), no required deduction since temp is translated.",
+      "completeness": "All three sections present and substantial: prediction with comparison to actual, top 3 drivers with directions, and a practical operational recommendation. Anchor point 5, no deductions."
+    },
+    "raw_response": "<faithfulness_reasoning>All three top drivers correct (hr up, temp up, yr down) with correct directions; prediction ~260 named and compared with 286. Anchor point 5, no deductions.</faithfulness_reasoning>\n<faithfulness>5</faithfulness>\n\n<clarity_reasoning>Everyday language with morning/evening peak well explained; temperature is translated to ~28.7 °C. The normalised values (temp=0.70, yr=0, weekday=4) are shown but the temperature one is translated. No jargon like SHAP/log/exp. Anchor point 4 (one slightly technical inclusion of raw normalised values), no required deduction since temp is translated.</clarity_reasoning>\n<clarity>4</clarity>\n\n<completeness_reasoning>All three sections present and substantial: prediction with comparison to actual, top 3 drivers with directions, and a practical operational recommendation. Anchor point 5, no deductions.</completeness_reasoning>\n<completeness>5</completeness>"
+  },
+  {
+    "pipeline_label": "JSON to Text",
+    "xai_model": "EBM",
+    "instance_id": 2058,
+    "faithfulness": 5,
+    "clarity": 4,
+    "completeness": 5,
+    "reasoning": {
+      "faithfulness": "All three top drivers correct: hr=20 raising, temp~25°C raising, yr=0 damping; directions all correct; prediction 177 named with comparison to 243. Anchor point 5, no deductions.",
+      "clarity": "Clear everyday language with good translations (~25°C, 8 pm); only minor technical notation like \"temp=0.62\" appears alongside the readable value but the normalised values are translated. Anchor point 5, but lowered slightly for the raw \"+0.56/temp=0.62\" notation; no jargon deduction (no SHAP/log/exp) and translation present, so 4.",
+      "completeness": "All three sections present and substantial: prediction with comparison vs actual, top 3 drivers with directions, and a practical operational recommendation. Anchor point 5, no deductions."
+    },
+    "raw_response": "<faithfulness_reasoning>All three top drivers correct: hr=20 raising, temp~25°C raising, yr=0 damping; directions all correct; prediction 177 named with comparison to 243. Anchor point 5, no deductions.</faithfulness_reasoning>\n<faithfulness>5</faithfulness>\n<clarity_reasoning>Clear everyday language with good translations (~25°C, 8 pm); only minor technical notation like \"temp=0.62\" appears alongside the readable value but the normalised values are translated. Anchor point 5, but lowered slightly for the raw \"+0.56/temp=0.62\" notation; no jargon deduction (no SHAP/log/exp) and translation present, so 4.</clarity_reasoning>\n<clarity>4</clarity>\n<completeness_reasoning>All three sections present and substantial: prediction with comparison vs actual, top 3 drivers with directions, and a practical operational recommendation. Anchor point 5, no deductions.</completeness_reasoning>\n<completeness>5</completeness>"
+  },
+  {
+    "pipeline_label": "JSON to Text",
+    "xai_model": "EBM",
+    "instance_id": 2510,
+    "faithfulness": 5,
+    "clarity": 4,
+    "completeness": 5,
+    "reasoning": {
+      "faithfulness": "All three top drivers correct (hr up rank1, yr down rank2, temp down rank3) with correct directions; prediction 311 named with comparison to 372. Anchor point 5, no deductions.",
+      "clarity": "Everyday language, clear structure, evening peak well explained; temperature translated to ~16°C. \"normalised 0.4\" is given but with the Celsius translation alongside, so no missing-translation deduction; no jargon like SHAP. Anchor point 4 (slight technical \"normalised\" mention), no deduction.",
+      "completeness": "All three sections present and substantial: prediction with comparison, drivers with directions, practical recommendation. Anchor point 5, no deductions."
+    },
+    "raw_response": "<faithfulness_reasoning>All three top drivers correct (hr up rank1, yr down rank2, temp down rank3) with correct directions; prediction 311 named with comparison to 372. Anchor point 5, no deductions.</faithfulness_reasoning>\n<faithfulness>5</faithfulness>\n\n<clarity_reasoning>Everyday language, clear structure, evening peak well explained; temperature translated to ~16°C. \"normalised 0.4\" is given but with the Celsius translation alongside, so no missing-translation deduction; no jargon like SHAP. Anchor point 4 (slight technical \"normalised\" mention), no deduction.</clarity_reasoning>\n<clarity>4</clarity>\n\n<completeness_reasoning>All three sections present and substantial: prediction with comparison, drivers with directions, practical recommendation. Anchor point 5, no deductions.</completeness_reasoning>\n<completeness>5</completeness>"
+  },
+  {
+    "pipeline_label": "JSON to Text",
+    "xai_model": "EBM",
+    "instance_id": 3543,
+    "faithfulness": 5,
+    "clarity": 4,
+    "completeness": 5,
+    "reasoning": {
+      "faithfulness": "All three top drivers correct (hr=20 raising, yr=2012 raising, hum=29% raising) with correct directions; prediction 296 vs actual 286 named. Anchor point 5, no deductions.",
+      "clarity": "Everyday language; humidity and temperature translated to readable values; minor technical notations like \"hr=20\", \"weathersit=1\", \"weekday=5\" appear but values are explained. No SHAP/log/exp jargon. Anchor point 5, lowered to 4 for the slightly technical feature codes.",
+      "completeness": "All three sections present and substantial: prediction with comparison to actual, top 3 drivers with directions, practical operational recommendation. Anchor point 5, no deductions."
+    },
+    "raw_response": "<faithfulness_reasoning>All three top drivers correct (hr=20 raising, yr=2012 raising, hum=29% raising) with correct directions; prediction 296 vs actual 286 named. Anchor point 5, no deductions.</faithfulness_reasoning>\n<faithfulness>5</faithfulness>\n<clarity_reasoning>Everyday language; humidity and temperature translated to readable values; minor technical notations like \"hr=20\", \"weathersit=1\", \"weekday=5\" appear but values are explained. No SHAP/log/exp jargon. Anchor point 5, lowered to 4 for the slightly technical feature codes.</clarity_reasoning>\n<clarity>4</clarity>\n<completeness_reasoning>All three sections present and substantial: prediction with comparison to actual, top 3 drivers with directions, practical operational recommendation. Anchor point 5, no deductions.</completeness_reasoning>\n<completeness>5</completeness>"
+  },
+  {
+    "pipeline_label": "JSON to Text",
+    "xai_model": "EBM",
+    "instance_id": 3847,
+    "faithfulness": 5,
+    "clarity": 4,
+    "completeness": 5,
+    "reasoning": {
+      "faithfulness": "All three top drivers correct (hr=12 +0.66, temp ~32.8°C +0.27, yr=2012 +0.21), all directions correct as raising, and prediction 593 vs actual 531 named. Anchor point 5, no deductions apply.",
+      "clarity": "Everyday language, clear structure, temperature translated to ~32.8 °C; \"influence +0.66\" and \"temp = 0.8\" are mildly technical but not jargon like SHAP/log space. Anchor point 4 (one slightly technical term), no required deduction applies.",
+      "completeness": "All three sections present and substantial: prediction with comparison to actual, top 3 drivers with directions, and a concrete operational recommendation. Anchor point 5, no deductions apply."
+    },
+    "raw_response": "<faithfulness_reasoning>All three top drivers correct (hr=12 +0.66, temp ~32.8°C +0.27, yr=2012 +0.21), all directions correct as raising, and prediction 593 vs actual 531 named. Anchor point 5, no deductions apply.</faithfulness_reasoning>\n<faithfulness>5</faithfulness>\n\n<clarity_reasoning>Everyday language, clear structure, temperature translated to ~32.8 °C; \"influence +0.66\" and \"temp = 0.8\" are mildly technical but not jargon like SHAP/log space. Anchor point 4 (one slightly technical term), no required deduction applies.</clarity_reasoning>\n<clarity>4</clarity>\n\n<completeness_reasoning>All three sections present and substantial: prediction with comparison to actual, top 3 drivers with directions, and a concrete operational recommendation. Anchor point 5, no deductions apply.</completeness_reasoning>\n<completeness>5</completeness>"
+  },
+  {
+    "pipeline_label": "JSON to Text",
+    "xai_model": "EBM",
+    "instance_id": 4454,
+    "faithfulness": 5,
+    "clarity": 4,
+    "completeness": 5,
+    "reasoning": {
+      "faithfulness": "All three top drivers correct (hr +0.85, temp +0.25, yr +0.21), all directions correct (raising), prediction 332 named and compared to actual 354. Anchor point 5, no deductions.",
+      "clarity": "Clear everyday language with peaks and temperature translated to ~26 °C; no jargon like SHAP/log/exp. Normalised value 0.64 is given alongside the Celsius translation, so no deduction. Anchor point 5, but slightly technical with contribution numbers, lowered to 4.",
+      "completeness": "All three sections present and substantial: prediction with comparison to actual, top 3 drivers with directions, and a concrete operational recommendation. Anchor point 5, no deductions."
+    },
+    "raw_response": "<faithfulness_reasoning>All three top drivers correct (hr +0.85, temp +0.25, yr +0.21), all directions correct (raising), prediction 332 named and compared to actual 354. Anchor point 5, no deductions.</faithfulness_reasoning>\n<faithfulness>5</faithfulness>\n\n<clarity_reasoning>Clear everyday language with peaks and temperature translated to ~26 °C; no jargon like SHAP/log/exp. Normalised value 0.64 is given alongside the Celsius translation, so no deduction. Anchor point 5, but slightly technical with contribution numbers, lowered to 4.</clarity_reasoning>\n<clarity>4</clarity>\n\n<completeness_reasoning>All three sections present and substantial: prediction with comparison to actual, top 3 drivers with directions, and a concrete operational recommendation. Anchor point 5, no deductions.</completeness_reasoning>\n<completeness>5</completeness>"
+  },
+  {
+    "pipeline_label": "Vision",
+    "xai_model": "XGB",
+    "instance_id": 224,
+    "faithfulness": 5,
+    "clarity": 4,
+    "completeness": 5,
+    "reasoning": {
+      "faithfulness": "All three top drivers correct: temp damping (-0.55), hr=19 raising (+0.41), mnth=2 damping (-0.32); directions all correct, and prediction 112 vs actual 96 named. Anchor point 5, no deductions (yr is mentioned extra but the top 3 are all correctly named, no hallucination replacing a top 3 driver).",
+      "clarity": "Mostly clear everyday language with temperatures translated to °C, but it repeatedly cites raw contribution numbers (0.55, 0.41) and uses \"normalised 0.20\" and \"blue bar\" which are mild technical/visualization references. Anchor point 4 (one slightly unclear element), no required jargon deduction since SHAP/log/exp not used and values are translated, final 4.",
+      "completeness": "All three sections present and substantial: prediction with comparison to actual (112 vs 96), detailed drivers with directions, and a concrete operational recommendation. Anchor point 5, no deductions."
+    },
+    "raw_response": "<faithfulness_reasoning>All three top drivers correct: temp damping (-0.55), hr=19 raising (+0.41), mnth=2 damping (-0.32); directions all correct, and prediction 112 vs actual 96 named. Anchor point 5, no deductions (yr is mentioned extra but the top 3 are all correctly named, no hallucination replacing a top 3 driver).</faithfulness_reasoning>\n<faithfulness>5</faithfulness>\n\n<clarity_reasoning>Mostly clear everyday language with temperatures translated to °C, but it repeatedly cites raw contribution numbers (0.55, 0.41) and uses \"normalised 0.20\" and \"blue bar\" which are mild technical/visualization references. Anchor point 4 (one slightly unclear element), no required jargon deduction since SHAP/log/exp not used and values are translated, final 4.</clarity_reasoning>\n<clarity>4</clarity>\n\n<completeness_reasoning>All three sections present and substantial: prediction with comparison to actual (112 vs 96), detailed drivers with directions, and a concrete operational recommendation. Anchor point 5, no deductions.</completeness_reasoning>\n<completeness>5</completeness>"
+  },
+  {
+    "pipeline_label": "Vision",
+    "xai_model": "XGB",
+    "instance_id": 580,
+    "faithfulness": 5,
+    "clarity": 5,
+    "completeness": 5,
+    "reasoning": {
+      "faithfulness": "All three top drivers correct (hr=22 damping, yr=0 damping, mnth=3 damping) with correct downward directions, and prediction 64.6 vs actual 63 named. Anchor point 5; temperature is mentioned as a fourth factor but it is not falsely placed in top 3 and no top-3 driver is wrong, so no hallucination deduction on the top 3. No deductions.",
+      "clarity": "Everyday language throughout, clear structure; \"normalised 0.36\" appears but the everyday translation (~14.8 °C) is provided alongside, so no missing-translation deduction. No jargon like SHAP/log/exp. Anchor point 5, no deduction.",
+      "completeness": "All three sections present and substantial: prediction with comparison to actual, drivers with directions, and a practical operational recommendation. Anchor point 5, no deductions."
+    },
+    "raw_response": "<faithfulness_reasoning>All three top drivers correct (hr=22 damping, yr=0 damping, mnth=3 damping) with correct downward directions, and prediction 64.6 vs actual 63 named. Anchor point 5; temperature is mentioned as a fourth factor but it is not falsely placed in top 3 and no top-3 driver is wrong, so no hallucination deduction on the top 3. No deductions.</faithfulness_reasoning>\n<faithfulness>5</faithfulness>\n<clarity_reasoning>Everyday language throughout, clear structure; \"normalised 0.36\" appears but the everyday translation (~14.8 °C) is provided alongside, so no missing-translation deduction. No jargon like SHAP/log/exp. Anchor point 5, no deduction.</clarity_reasoning>\n<clarity>5</clarity>\n<completeness_reasoning>All three sections present and substantial: prediction with comparison to actual, drivers with directions, and a practical operational recommendation. Anchor point 5, no deductions.</completeness_reasoning>\n<completeness>5</completeness>"
+  },
+  {
+    "pipeline_label": "Vision",
+    "xai_model": "XGB",
+    "instance_id": 1041,
+    "faithfulness": 5,
+    "clarity": 4,
+    "completeness": 5,
+    "reasoning": {
+      "faithfulness": "All three top drivers correct: hr=8 raising, yr=0 damping, weekday=Friday raising; directions all correct, and prediction 385.4 with actual 387 named. The mention of humidity as a \"fourth bar\" is extra but not a hallucinated top-3 driver. Anchor point 5, no deduction.",
+      "clarity": "Everyday language with morning peak and commuter explanations; no SHAP/log/exp jargon, normalised values translated (e.g. May 2011, 88 percent). Slight technicality with \"blue bar/red bar\" references. Anchor point 5, lowered to 4 for minor unexplained chart references.",
+      "completeness": "All three sections present and substantial: prediction with comparison to actual, top 3 drivers with directions, and a concrete operational recommendation. Anchor point 5, no deduction."
+    },
+    "raw_response": "<faithfulness_reasoning>All three top drivers correct: hr=8 raising, yr=0 damping, weekday=Friday raising; directions all correct, and prediction 385.4 with actual 387 named. The mention of humidity as a \"fourth bar\" is extra but not a hallucinated top-3 driver. Anchor point 5, no deduction.</faithfulness_reasoning>\n<faithfulness>5</faithfulness>\n\n<clarity_reasoning>Everyday language with morning peak and commuter explanations; no SHAP/log/exp jargon, normalised values translated (e.g. May 2011, 88 percent). Slight technicality with \"blue bar/red bar\" references. Anchor point 5, lowered to 4 for minor unexplained chart references.</clarity_reasoning>\n<clarity>4</clarity>\n\n<completeness_reasoning>All three sections present and substantial: prediction with comparison to actual, top 3 drivers with directions, and a concrete operational recommendation. Anchor point 5, no deduction.</completeness_reasoning>\n<completeness>5</completeness>"
+  },
+  {
+    "pipeline_label": "Vision",
+    "xai_model": "XGB",
+    "instance_id": 1481,
+    "faithfulness": 4,
+    "clarity": 3,
+    "completeness": 5,
+    "reasoning": {
+      "faithfulness": "All three top drivers named correctly: hr=16 raising (rank 1), yr=0 damping (rank 2, correct negative direction), hum mentioned but described as positive while true contribution is +0.06245 — actually correct as raising; however the explanation says hum=42% adds a small positive red bar, which matches the positive contribution, and the temperature is described as the third damper, which is a hallucination not in the top 3. Prediction 229 and actual 277 named. Anchor point 5, -1 (temperature presented as third driver, not in top 3 — hallucination), max(1, 5-1) = 4.",
+      "clarity": "Mostly everyday language with clear structure, but uses \"baseline\", \"normalised 0.90\", and references \"red/blue bars\" which require visual context a layperson lacks. Anchor point 4, -1 (normalised value \"0.90\" given alongside but the bar-jargon and normalisation reference reduce clarity), max(1, 4-1) = 3.",
+      "completeness": "All three sections present and substantial: prediction with explicit comparison to actual (229 vs 277), drivers with directions, and a concrete operational recommendation. Anchor point 5, no deduction."
+    },
+    "raw_response": "<faithfulness_reasoning>All three top drivers named correctly: hr=16 raising (rank 1), yr=0 damping (rank 2, correct negative direction), hum mentioned but described as positive while true contribution is +0.06245 — actually correct as raising; however the explanation says hum=42% adds a small positive red bar, which matches the positive contribution, and the temperature is described as the third damper, which is a hallucination not in the top 3. Prediction 229 and actual 277 named. Anchor point 5, -1 (temperature presented as third driver, not in top 3 — hallucination), max(1, 5-1) = 4.</faithfulness_reasoning>\n<faithfulness>4</faithfulness>\n\n<clarity_reasoning>Mostly everyday language with clear structure, but uses \"baseline\", \"normalised 0.90\", and references \"red/blue bars\" which require visual context a layperson lacks. Anchor point 4, -1 (normalised value \"0.90\" given alongside but the bar-jargon and normalisation reference reduce clarity), max(1, 4-1) = 3.</clarity_reasoning>\n<clarity>3</clarity>\n\n<completeness_reasoning>All three sections present and substantial: prediction with explicit comparison to actual (229 vs 277), drivers with directions, and a concrete operational recommendation. Anchor point 5, no deduction.</completeness_reasoning>\n<completeness>5</completeness>"
+  },
+  {
+    "pipeline_label": "Vision",
+    "xai_model": "XGB",
+    "instance_id": 1677,
+    "faithfulness": 5,
+    "clarity": 4,
+    "completeness": 5,
+    "reasoning": {
+      "faithfulness": "All three top drivers correct: hr=20 raising, yr=0 damping, temp~28.7°C raising; directions all correct; prediction 254 and actual 286 named. Anchor point 5, no deductions.",
+      "clarity": "Everyday language with good translations (~28.7°C, 8 p.m.); but mentions \"normalised 0.70\" alongside Celsius which is fine, and references to \"red bar\"/\"blue bar\"/\"plot\" are mildly technical visualization jargon though understandable. Anchor point 5, no required jargon deduction (no SHAP/log/exp), temperature is translated; lowered to 4 for the slightly plot-dependent phrasing.",
+      "completeness": "All three sections present and substantial: prediction with comparison to actual, top 3 drivers with directions, and concrete operational recommendation. Anchor point 5, no deductions."
+    },
+    "raw_response": "<faithfulness_reasoning>All three top drivers correct: hr=20 raising, yr=0 damping, temp~28.7°C raising; directions all correct; prediction 254 and actual 286 named. Anchor point 5, no deductions.</faithfulness_reasoning>\n<faithfulness>5</faithfulness>\n\n<clarity_reasoning>Everyday language with good translations (~28.7°C, 8 p.m.); but mentions \"normalised 0.70\" alongside Celsius which is fine, and references to \"red bar\"/\"blue bar\"/\"plot\" are mildly technical visualization jargon though understandable. Anchor point 5, no required jargon deduction (no SHAP/log/exp), temperature is translated; lowered to 4 for the slightly plot-dependent phrasing.</clarity_reasoning>\n<clarity>4</clarity>\n\n<completeness_reasoning>All three sections present and substantial: prediction with comparison to actual, top 3 drivers with directions, and concrete operational recommendation. Anchor point 5, no deductions.</completeness_reasoning>\n<completeness>5</completeness>"
+  },
+  {
+    "pipeline_label": "Vision",
+    "xai_model": "XGB",
+    "instance_id": 2058,
+    "faithfulness": 5,
+    "clarity": 4,
+    "completeness": 5,
+    "reasoning": {
+      "faithfulness": "All three top drivers correct (yr down -0.19, temp up +0.16, hum down -0.13) with correct directions; prediction 194 and comparison to 243 named. Anchor point 5, no deductions.",
+      "clarity": "Mostly everyday language with good translations (25°C, 83%), but references \"blue bar\"/\"red bar\" and \"normalised 0.62\" add mild technical framing; anchor point 4 (one slightly unclear element), no required deduction since values are translated. Final 4.",
+      "completeness": "All three sections present and substantial: prediction with comparison to actual, top 3 drivers with directions, and concrete operational recommendation. Anchor point 5, no deductions."
+    },
+    "raw_response": "<faithfulness_reasoning>All three top drivers correct (yr down -0.19, temp up +0.16, hum down -0.13) with correct directions; prediction 194 and comparison to 243 named. Anchor point 5, no deductions.</faithfulness_reasoning>\n<faithfulness>5</faithfulness>\n\n<clarity_reasoning>Mostly everyday language with good translations (25°C, 83%), but references \"blue bar\"/\"red bar\" and \"normalised 0.62\" add mild technical framing; anchor point 4 (one slightly unclear element), no required deduction since values are translated. Final 4.</clarity_reasoning>\n<clarity>4</clarity>\n\n<completeness_reasoning>All three sections present and substantial: prediction with comparison to actual, top 3 drivers with directions, and concrete operational recommendation. Anchor point 5, no deductions.</completeness_reasoning>\n<completeness>5</completeness>"
+  },
+  {
+    "pipeline_label": "Vision",
+    "xai_model": "XGB",
+    "instance_id": 2510,
+    "faithfulness": 5,
+    "clarity": 4,
+    "completeness": 5,
+    "reasoning": {
+      "faithfulness": "All three top drivers correct (hr=18 up, yr=0 down, temp down) with correct directions; prediction 326 and comparison with 372 named. Anchor point 5, no deductions.",
+      "clarity": "Everyday language with clear translations (~16°C, 50%); \"red/blue bar\" and \"normalised 0.40\" are slightly technical but no forbidden jargon (no SHAP/log/exp), and values are translated. Anchor point 4 (one slightly technical term), no required deduction.",
+      "completeness": "All three sections present and substantial: prediction with comparison vs actual, top 3 drivers with directions, and a concrete operational recommendation. Anchor point 5, no deductions."
+    },
+    "raw_response": "<faithfulness_reasoning>All three top drivers correct (hr=18 up, yr=0 down, temp down) with correct directions; prediction 326 and comparison with 372 named. Anchor point 5, no deductions.</faithfulness_reasoning>\n<faithfulness>5</faithfulness>\n\n<clarity_reasoning>Everyday language with clear translations (~16°C, 50%); \"red/blue bar\" and \"normalised 0.40\" are slightly technical but no forbidden jargon (no SHAP/log/exp), and values are translated. Anchor point 4 (one slightly technical term), no required deduction.</clarity_reasoning>\n<clarity>4</clarity>\n\n<completeness_reasoning>All three sections present and substantial: prediction with comparison vs actual, top 3 drivers with directions, and a concrete operational recommendation. Anchor point 5, no deductions.</completeness_reasoning>\n<completeness>5</completeness>"
+  },
+  {
+    "pipeline_label": "Vision",
+    "xai_model": "XGB",
+    "instance_id": 3543,
+    "faithfulness": 5,
+    "clarity": 4,
+    "completeness": 5,
+    "reasoning": {
+      "faithfulness": "All three top drivers correct (yr=2012 up, hr=20 up, hum=29% up) with correct directions, and prediction 310 vs actual 286 named. Extra features (temp, weather, month) are mentioned but the top 3 are accurate; no hallucinated driver replaces a top 3 one. Anchor point 5, no deduction.",
+      "clarity": "Mostly everyday language with readable translations (~20.5 °C, 29 %); contains minor technical tokens like \"yr=1\", \"hr=20\", \"weathersit=1\", \"mnth=4\" but no SHAP/log/exp jargon. Anchor point 4 (largely understandable, a few technical labels), no required deduction.",
+      "completeness": "All three sections present and substantial: prediction with comparison to actual, drivers with directions, and a concrete operational recommendation. Anchor point 5, no deduction."
+    },
+    "raw_response": "<faithfulness_reasoning>All three top drivers correct (yr=2012 up, hr=20 up, hum=29% up) with correct directions, and prediction 310 vs actual 286 named. Extra features (temp, weather, month) are mentioned but the top 3 are accurate; no hallucinated driver replaces a top 3 one. Anchor point 5, no deduction.</faithfulness_reasoning>\n<faithfulness>5</faithfulness>\n\n<clarity_reasoning>Mostly everyday language with readable translations (~20.5 °C, 29 %); contains minor technical tokens like \"yr=1\", \"hr=20\", \"weathersit=1\", \"mnth=4\" but no SHAP/log/exp jargon. Anchor point 4 (largely understandable, a few technical labels), no required deduction.</clarity_reasoning>\n<clarity>4</clarity>\n\n<completeness_reasoning>All three sections present and substantial: prediction with comparison to actual, drivers with directions, and a concrete operational recommendation. Anchor point 5, no deduction.</completeness_reasoning>\n<completeness>5</completeness>"
+  },
+  {
+    "pipeline_label": "Vision",
+    "xai_model": "XGB",
+    "instance_id": 3847,
+    "faithfulness": 5,
+    "clarity": 4,
+    "completeness": 5,
+    "reasoning": {
+      "faithfulness": "All three top drivers correct (hr +0.41, weekday +0.21, yr +0.16) with correct upward directions; prediction 586 vs actual 531 stated. Extra drivers (temp, humidity) mentioned but not claimed as top 3, so no hallucination deduction. Anchor point 5, no deductions.",
+      "clarity": "Clear everyday language, well structured, leisure-window analogy understandable. No SHAP/log/exp jargon, and temperature is translated to ~32.8 °C, though \"normalised 0.80\" is shown alongside without harm. Anchor point 5, no deduction applies, lowered slightly to 4 for the contribution numbers that need minor interpretation.",
+      "completeness": "All three sections present and substantial: prediction with comparison to actual, top 3 drivers with directions, and a concrete operational recommendation. Anchor point 5, no deductions."
+    },
+    "raw_response": "<faithfulness_reasoning>All three top drivers correct (hr +0.41, weekday +0.21, yr +0.16) with correct upward directions; prediction 586 vs actual 531 stated. Extra drivers (temp, humidity) mentioned but not claimed as top 3, so no hallucination deduction. Anchor point 5, no deductions.</faithfulness_reasoning>\n<faithfulness>5</faithfulness>\n<clarity_reasoning>Clear everyday language, well structured, leisure-window analogy understandable. No SHAP/log/exp jargon, and temperature is translated to ~32.8 °C, though \"normalised 0.80\" is shown alongside without harm. Anchor point 5, no deduction applies, lowered slightly to 4 for the contribution numbers that need minor interpretation.</clarity_reasoning>\n<clarity>4</clarity>\n<completeness_reasoning>All three sections present and substantial: prediction with comparison to actual, top 3 drivers with directions, and a concrete operational recommendation. Anchor point 5, no deductions.</completeness_reasoning>\n<completeness>5</completeness>"
+  },
+  {
+    "pipeline_label": "Vision",
+    "xai_model": "XGB",
+    "instance_id": 4454,
+    "faithfulness": 4,
+    "clarity": 4,
+    "completeness": 5,
+    "reasoning": {
+      "faithfulness": "All three top drivers (hr=19, temp~26°C, yr=2012) named correctly as upward influences, matching the ground truth directions; prediction 297 and actual 354 both stated. The added \"Saturday\" and \"humidity\" dampening factors are not in the top 3 (hallucination). Anchor point 5, -1 (named drivers not in top 3), max(1, 5-1) = 4.",
+      "clarity": "Clear everyday language, evening peak and temperature well explained; no SHAP/log jargon. The normalised value 0.64 is mentioned but is translated to ~26°C, so the everyday translation is present. Anchor point 5, slightly technical \"normalised 0.64\" lowers to 4.",
+      "completeness": "All three sections present and substantial: prediction with comparison (297 vs 354), drivers with directions, and a concrete operational recommendation. Anchor point 5, no deductions."
+    },
+    "raw_response": "<faithfulness_reasoning>All three top drivers (hr=19, temp~26°C, yr=2012) named correctly as upward influences, matching the ground truth directions; prediction 297 and actual 354 both stated. The added \"Saturday\" and \"humidity\" dampening factors are not in the top 3 (hallucination). Anchor point 5, -1 (named drivers not in top 3), max(1, 5-1) = 4.</faithfulness_reasoning>\n<faithfulness>4</faithfulness>\n\n<clarity_reasoning>Clear everyday language, evening peak and temperature well explained; no SHAP/log jargon. The normalised value 0.64 is mentioned but is translated to ~26°C, so the everyday translation is present. Anchor point 5, slightly technical \"normalised 0.64\" lowers to 4.</clarity_reasoning>\n<clarity>4</clarity>\n\n<completeness_reasoning>All three sections present and substantial: prediction with comparison (297 vs 354), drivers with directions, and a concrete operational recommendation. Anchor point 5, no deductions.</completeness_reasoning>\n<completeness>5</completeness>"
+  },
+  {
+    "pipeline_label": "Vision",
+    "xai_model": "EBM",
+    "instance_id": 224,
+    "faithfulness": 4,
+    "clarity": 4,
+    "completeness": 5,
+    "reasoning": {
+      "faithfulness": "All three top drivers correct (hr up, temp down, yr down) with correct directions, and prediction 117 vs actual 96 named. The added \"mnth & yr\" interaction is not in the top 3 (hallucination). Anchor point 5, -1 (named driver mnth not among top 3), max(1, 5 - 1) = 4.",
+      "clarity": "Largely everyday language with good translations (~8.2 °C given), but references \"normalised 0.20\", \"red bar\"/\"blue bars\" plot details that mildly need explanation. Anchor point 4, no required deduction applies (no SHAP/log jargon, normalised value is translated). Final 4.",
+      "completeness": "All three sections present and substantial: prediction with explicit comparison to actual, detailed drivers, and concrete operational recommendation. Anchor point 5, no deductions. Final 5."
+    },
+    "raw_response": "<faithfulness_reasoning>All three top drivers correct (hr up, temp down, yr down) with correct directions, and prediction 117 vs actual 96 named. The added \"mnth & yr\" interaction is not in the top 3 (hallucination). Anchor point 5, -1 (named driver mnth not among top 3), max(1, 5 - 1) = 4.</faithfulness_reasoning>\n<faithfulness>4</faithfulness>\n\n<clarity_reasoning>Largely everyday language with good translations (~8.2 °C given), but references \"normalised 0.20\", \"red bar\"/\"blue bars\" plot details that mildly need explanation. Anchor point 4, no required deduction applies (no SHAP/log jargon, normalised value is translated). Final 4.</clarity_reasoning>\n<clarity>4</clarity>\n\n<completeness_reasoning>All three sections present and substantial: prediction with explicit comparison to actual, detailed drivers, and concrete operational recommendation. Anchor point 5, no deductions. Final 5.</completeness_reasoning>\n<completeness>5</completeness>"
+  },
+  {
+    "pipeline_label": "Vision",
+    "xai_model": "EBM",
+    "instance_id": 580,
+    "faithfulness": 3,
+    "clarity": 4,
+    "completeness": 5,
+    "reasoning": {
+      "faithfulness": "Top 3 are yr (down), temp (down), hr (up). The explanation correctly names yr as strongest damper and temp as damping, but ranks an invented \"month-year interaction\" as second, which is not among the top 3 (hallucination), and treats hr as part of a positive combination correctly. So 2 of 3 top drivers correct with correct directions → anchor 4, -1 for hallucinated interaction driver, max(1, 4-1) = 3.",
+      "clarity": "Everyday language, prediction translated, temperature given in °C; \"blue bar / red bar\" is metaphorical but understandable, no SHAP/log/exp jargon. Anchor 4 (largely understandable, slight bar-color terminology), no deduction.",
+      "completeness": "All three sections present and substantial: prediction with comparison (73.1 vs 63), drivers with directions, and a concrete operational recommendation. Anchor 5, no deductions."
+    },
+    "raw_response": "<faithfulness_reasoning>Top 3 are yr (down), temp (down), hr (up). The explanation correctly names yr as strongest damper and temp as damping, but ranks an invented \"month-year interaction\" as second, which is not among the top 3 (hallucination), and treats hr as part of a positive combination correctly. So 2 of 3 top drivers correct with correct directions → anchor 4, -1 for hallucinated interaction driver, max(1, 4-1) = 3.</faithfulness_reasoning>\n<faithfulness>3</faithfulness>\n\n<clarity_reasoning>Everyday language, prediction translated, temperature given in °C; \"blue bar / red bar\" is metaphorical but understandable, no SHAP/log/exp jargon. Anchor 4 (largely understandable, slight bar-color terminology), no deduction.</clarity_reasoning>\n<clarity>4</clarity>\n\n<completeness_reasoning>All three sections present and substantial: prediction with comparison (73.1 vs 63), drivers with directions, and a concrete operational recommendation. Anchor 5, no deductions.</completeness_reasoning>\n<completeness>5</completeness>"
+  },
+  {
+    "pipeline_label": "Vision",
+    "xai_model": "EBM",
+    "instance_id": 1041,
+    "faithfulness": 4,
+    "clarity": 4,
+    "completeness": 5,
+    "reasoning": {
+      "faithfulness": "All three top drivers correct: hr=8 raising, yr=0 damping, hum=0.88 damping, all directions correct; prediction 390 and comparison with 387 named. The \"hr & weekday\" interaction is mentioned as a second driver, which is not among the actual top 3 (hallucination). Anchor point 5, -1 (named driver not in top 3), max(1, 5-1) = 4.",
+      "clarity": "Everyday language, clear structure; references to \"red bar/blue bar\" and \"base value\" are slightly technical but understandable, no SHAP/log/exp jargon; normalised values like 88% and 20.5°C are translated. Anchor point 4 (one slightly unclear technical reference), no deduction.",
+      "completeness": "All three sections present and substantial: prediction with comparison to actual, top 3 drivers with directions, concrete operational recommendation. Anchor point 5, no deduction."
+    },
+    "raw_response": "<faithfulness_reasoning>All three top drivers correct: hr=8 raising, yr=0 damping, hum=0.88 damping, all directions correct; prediction 390 and comparison with 387 named. The \"hr & weekday\" interaction is mentioned as a second driver, which is not among the actual top 3 (hallucination). Anchor point 5, -1 (named driver not in top 3), max(1, 5-1) = 4.</faithfulness_reasoning>\n<faithfulness>4</faithfulness>\n\n<clarity_reasoning>Everyday language, clear structure; references to \"red bar/blue bar\" and \"base value\" are slightly technical but understandable, no SHAP/log/exp jargon; normalised values like 88% and 20.5°C are translated. Anchor point 4 (one slightly unclear technical reference), no deduction.</clarity_reasoning>\n<clarity>4</clarity>\n\n<completeness_reasoning>All three sections present and substantial: prediction with comparison to actual, top 3 drivers with directions, concrete operational recommendation. Anchor point 5, no deduction.</completeness_reasoning>\n<completeness>5</completeness>"
+  },
+  {
+    "pipeline_label": "Vision",
+    "xai_model": "EBM",
+    "instance_id": 1481,
+    "faithfulness": 5,
+    "clarity": 4,
+    "completeness": 5,
+    "reasoning": {
+      "faithfulness": "All three top drivers correct: hr=16 raising (+0.819), yr=0 damping (-0.226), hum=42% raising (+0.096), all with correct directions; prediction 242 and comparison to 277 stated. Anchor point 5, no deductions (temperature mentioned is a real lesser feature, not a top-3 hallucination claim).",
+      "clarity": "Everyday language, normalised humidity translated to 42% and temperature to ~37 °C; however phrases like \"base value\", \"interaction term\", \"blue/red bar\" are mildly technical. Anchor point 4 (largely understandable, slight technicality), no required deduction (no SHAP/log/exp jargon, values translated).",
+      "completeness": "All three sections present and substantial: prediction with comparison to actual, top 3 drivers with directions, and a concrete operational recommendation. Anchor point 5, no deductions."
+    },
+    "raw_response": "<faithfulness_reasoning>All three top drivers correct: hr=16 raising (+0.819), yr=0 damping (-0.226), hum=42% raising (+0.096), all with correct directions; prediction 242 and comparison to 277 stated. Anchor point 5, no deductions (temperature mentioned is a real lesser feature, not a top-3 hallucination claim).</faithfulness_reasoning>\n<faithfulness>5</faithfulness>\n\n<clarity_reasoning>Everyday language, normalised humidity translated to 42% and temperature to ~37 °C; however phrases like \"base value\", \"interaction term\", \"blue/red bar\" are mildly technical. Anchor point 4 (largely understandable, slight technicality), no required deduction (no SHAP/log/exp jargon, values translated).</clarity_reasoning>\n<clarity>4</clarity>\n\n<completeness_reasoning>All three sections present and substantial: prediction with comparison to actual, top 3 drivers with directions, and a concrete operational recommendation. Anchor point 5, no deductions.</completeness_reasoning>\n<completeness>5</completeness>"
+  },
+  {
+    "pipeline_label": "Vision",
+    "xai_model": "EBM",
+    "instance_id": 1677,
+    "faithfulness": 5,
+    "clarity": 4,
+    "completeness": 5,
+    "reasoning": {
+      "faithfulness": "All three top drivers correct: hr=20 raising, temp~29°C raising, yr=0 damping; directions all correct, prediction 260 named with comparison to 286. Anchor point 5, no deductions.",
+      "clarity": "Everyday language, evening peak and temperature explained well; mentions \"red bar\"/\"blue bar\" plot references but no SHAP/log jargon, and normalised values are translated (~29 °C). Anchor point 4 (one slightly unclear plot reference), no deductions.",
+      "completeness": "All three sections present and substantial: prediction with comparison to actual, detailed drivers, and concrete operational recommendation. Anchor point 5, no deductions."
+    },
+    "raw_response": "<faithfulness_reasoning>All three top drivers correct: hr=20 raising, temp~29°C raising, yr=0 damping; directions all correct, prediction 260 named with comparison to 286. Anchor point 5, no deductions.</faithfulness_reasoning>\n<faithfulness>5</faithfulness>\n\n<clarity_reasoning>Everyday language, evening peak and temperature explained well; mentions \"red bar\"/\"blue bar\" plot references but no SHAP/log jargon, and normalised values are translated (~29 °C). Anchor point 4 (one slightly unclear plot reference), no deductions.</clarity_reasoning>\n<clarity>4</clarity>\n\n<completeness_reasoning>All three sections present and substantial: prediction with comparison to actual, detailed drivers, and concrete operational recommendation. Anchor point 5, no deductions.</completeness_reasoning>\n<completeness>5</completeness>"
+  },
+  {
+    "pipeline_label": "Vision",
+    "xai_model": "EBM",
+    "instance_id": 2058,
+    "faithfulness": 5,
+    "clarity": 4,
+    "completeness": 5,
+    "reasoning": {
+      "faithfulness": "All three top drivers named correctly (hr=20 raising, temp~25°C raising, yr=2011 damping) with correct directions, and prediction 177 stated with comparison to actual 243. Anchor point 5, no deductions apply.",
+      "clarity": "Largely everyday language with readable temperature, but references to \"red bar\"/\"blue bar pointing left\" require some guessing and \"interaction between hour and weekday\" is mildly technical. Anchor point 4, no required deduction (no SHAP/log jargon, normalised values translated).",
+      "completeness": "All three sections present and substantial: prediction with explicit comparison (177 vs 243), drivers with directions, and a concrete operational recommendation. Anchor point 5, no deductions."
+    },
+    "raw_response": "<faithfulness_reasoning>All three top drivers named correctly (hr=20 raising, temp~25°C raising, yr=2011 damping) with correct directions, and prediction 177 stated with comparison to actual 243. Anchor point 5, no deductions apply.</faithfulness_reasoning>\n<faithfulness>5</faithfulness>\n\n<clarity_reasoning>Largely everyday language with readable temperature, but references to \"red bar\"/\"blue bar pointing left\" require some guessing and \"interaction between hour and weekday\" is mildly technical. Anchor point 4, no required deduction (no SHAP/log jargon, normalised values translated).</clarity_reasoning>\n<clarity>4</clarity>\n\n<completeness_reasoning>All three sections present and substantial: prediction with explicit comparison (177 vs 243), drivers with directions, and a concrete operational recommendation. Anchor point 5, no deductions.</completeness_reasoning>\n<completeness>5</completeness>"
+  },
+  {
+    "pipeline_label": "Vision",
+    "xai_model": "EBM",
+    "instance_id": 2510,
+    "faithfulness": 4,
+    "clarity": 4,
+    "completeness": 5,
+    "reasoning": {
+      "faithfulness": "Top 3 are hr (up), yr (down), temp (down). The explanation names hr=18 as dominant upward (correct), yr=0 as damping (correct), and temp as a modest negative (correct), plus prediction 311 vs 372. A \"month and humidity interaction\" is introduced as the third factor, but the actual third driver is temp, which is named fourth — minor hallucination of a non-top-3 driver. Anchor point 5 (all three correct with directions), -1 (named driver month/humidity interaction not among top 3), max(1, 5-1) = 4.",
+      "clarity": "Mostly clear everyday language with translation of temp to ~16 °C; but references \"base value of about 4.6\" (log space artifact) and \"normalised 0.40\" without full translation, and \"EBM\" is technical. Anchor point 4, no explicit jargon deduction (no SHAP/log/exp named), but the normalised value 0.40 is given alongside the Celsius so translation present; slight unclear passages keep it at 4.",
+      "completeness": "All three sections present and substantial: prediction with comparison (311 vs 372), drivers with directions, and a practical winter Friday recommendation. Anchor point 5, no deductions."
+    },
+    "raw_response": "<faithfulness_reasoning>Top 3 are hr (up), yr (down), temp (down). The explanation names hr=18 as dominant upward (correct), yr=0 as damping (correct), and temp as a modest negative (correct), plus prediction 311 vs 372. A \"month and humidity interaction\" is introduced as the third factor, but the actual third driver is temp, which is named fourth — minor hallucination of a non-top-3 driver. Anchor point 5 (all three correct with directions), -1 (named driver month/humidity interaction not among top 3), max(1, 5-1) = 4.</faithfulness_reasoning>\n<faithfulness>4</faithfulness>\n\n<clarity_reasoning>Mostly clear everyday language with translation of temp to ~16 °C; but references \"base value of about 4.6\" (log space artifact) and \"normalised 0.40\" without full translation, and \"EBM\" is technical. Anchor point 4, no explicit jargon deduction (no SHAP/log/exp named), but the normalised value 0.40 is given alongside the Celsius so translation present; slight unclear passages keep it at 4.</clarity_reasoning>\n<clarity>4</clarity>\n\n<completeness_reasoning>All three sections present and substantial: prediction with comparison (311 vs 372), drivers with directions, and a practical winter Friday recommendation. Anchor point 5, no deductions.</completeness_reasoning>\n<completeness>5</completeness>"
+  },
+  {
+    "pipeline_label": "Vision",
+    "xai_model": "EBM",
+    "instance_id": 3543,
+    "faithfulness": 5,
+    "clarity": 4,
+    "completeness": 5,
+    "reasoning": {
+      "faithfulness": "All three top drivers correct (hr=20 raising, yr=1 raising, hum=0.29 raising), directions correct, prediction 296 and comparison with 286 named. Anchor point 5, no deductions.",
+      "clarity": "Largely everyday language with readable translations (8 PM, ~20.5 °C, 29%); references to \"red bar\"/\"blue bar\" are slightly visual-technical but understandable, no SHAP/log jargon. Anchor point 4, no required deduction.",
+      "completeness": "All three sections present and substantial: prediction with comparison to actual, detailed drivers with directions, and a concrete operational recommendation. Anchor point 5, no deductions."
+    },
+    "raw_response": "<faithfulness_reasoning>All three top drivers correct (hr=20 raising, yr=1 raising, hum=0.29 raising), directions correct, prediction 296 and comparison with 286 named. Anchor point 5, no deductions.</faithfulness_reasoning>\n<faithfulness>5</faithfulness>\n\n<clarity_reasoning>Largely everyday language with readable translations (8 PM, ~20.5 °C, 29%); references to \"red bar\"/\"blue bar\" are slightly visual-technical but understandable, no SHAP/log jargon. Anchor point 4, no required deduction.</clarity_reasoning>\n<clarity>4</clarity>\n\n<completeness_reasoning>All three sections present and substantial: prediction with comparison to actual, detailed drivers with directions, and a concrete operational recommendation. Anchor point 5, no deductions.</completeness_reasoning>\n<completeness>5</completeness>"
+  },
+  {
+    "pipeline_label": "Vision",
+    "xai_model": "EBM",
+    "instance_id": 3847,
+    "faithfulness": 3,
+    "clarity": 4,
+    "completeness": 5,
+    "reasoning": {
+      "faithfulness": "Top 3 are hr (correct, up), temp (correct, up), yr (missing entirely). Instead the explanation invents an \"hr & weekday\" interaction as the second driver, which is not among the top 3 (hallucination). Prediction 593 and actual 531 both named correctly. Anchor point 4 (2 of 3 correct), -1 for hallucinated driver, max(1, 4-1) = 3.",
+      "clarity": "Mostly everyday language, temperature given as ~33°C (readable), but \"baseline\", \"interaction term\", \"blue bar/red bar correction\" are mildly technical and need guessing. Anchor point 4 (one technical term/slightly unclear), no required deduction applies (no SHAP/log/exp, values translated). Score 4.",
+      "completeness": "All three sections present and substantial: prediction with comparison vs actual, drivers with directions, and a concrete operational recommendation. Anchor point 5, no deductions apply. Score 5."
+    },
+    "raw_response": "<faithfulness_reasoning>Top 3 are hr (correct, up), temp (correct, up), yr (missing entirely). Instead the explanation invents an \"hr & weekday\" interaction as the second driver, which is not among the top 3 (hallucination). Prediction 593 and actual 531 both named correctly. Anchor point 4 (2 of 3 correct), -1 for hallucinated driver, max(1, 4-1) = 3.</faithfulness_reasoning>\n<faithfulness>3</faithfulness>\n\n<clarity_reasoning>Mostly everyday language, temperature given as ~33°C (readable), but \"baseline\", \"interaction term\", \"blue bar/red bar correction\" are mildly technical and need guessing. Anchor point 4 (one technical term/slightly unclear), no required deduction applies (no SHAP/log/exp, values translated). Score 4.</clarity_reasoning>\n<clarity>4</clarity>\n\n<completeness_reasoning>All three sections present and substantial: prediction with comparison vs actual, drivers with directions, and a concrete operational recommendation. Anchor point 5, no deductions apply. Score 5.</completeness_reasoning>\n<completeness>5</completeness>"
+  },
+  {
+    "pipeline_label": "Vision",
+    "xai_model": "EBM",
+    "instance_id": 4454,
+    "faithfulness": 4,
+    "clarity": 4,
+    "completeness": 5,
+    "reasoning": {
+      "faithfulness": "All three top drivers correct (hr=19 up, temp~26°C up, yr=2012 up) with correct positive directions; prediction 331.8 vs actual 354 named. The mentioned \"hr & weekday\" interaction is not among the top 3 (hallucination/extra). Anchor point 5, -1 (named driver not in top 3), max(1, 5-1) = 4.",
+      "clarity": "Everyday language, evening peak and leisure riders well explained, normalised temp translated to ~26°C; \"yr=1\" and \"hr & weekday at −0.195\" are slightly technical references. Anchor point 4, no required deduction (no SHAP/log jargon, values translated). Score 4.",
+      "completeness": "All three sections present and substantial: prediction with explicit comparison to actual, top drivers with directions, and a detailed operational recommendation. Anchor point 5, no deductions."
+    },
+    "raw_response": "<faithfulness_reasoning>All three top drivers correct (hr=19 up, temp~26°C up, yr=2012 up) with correct positive directions; prediction 331.8 vs actual 354 named. The mentioned \"hr & weekday\" interaction is not among the top 3 (hallucination/extra). Anchor point 5, -1 (named driver not in top 3), max(1, 5-1) = 4.</faithfulness_reasoning>\n<faithfulness>4</faithfulness>\n\n<clarity_reasoning>Everyday language, evening peak and leisure riders well explained, normalised temp translated to ~26°C; \"yr=1\" and \"hr & weekday at −0.195\" are slightly technical references. Anchor point 4, no required deduction (no SHAP/log jargon, values translated). Score 4.</clarity_reasoning>\n<clarity>4</clarity>\n\n<completeness_reasoning>All three sections present and substantial: prediction with explicit comparison to actual, top drivers with directions, and a detailed operational recommendation. Anchor point 5, no deductions.</completeness_reasoning>\n<completeness>5</completeness>"
+  },
+  {
+    "pipeline_label": "Tool Use",
+    "xai_model": "XGB",
+    "instance_id": 224,
+    "faithfulness": 5,
+    "clarity": 4,
+    "completeness": 5,
+    "reasoning": {
+      "faithfulness": "All three top drivers named correctly: temp (rank 1, damping), hr=19 (raising), mnth=February (damping), all directions correct; prediction 112 and actual 96 named. Anchor point 5, no deductions.",
+      "clarity": "Clear everyday language with Celsius translations and intuitive explanations; \"normalised value of 0.2\" appears but is immediately translated to ~8.2 °C and percentile context, no SHAP/log/exp jargon. Anchor point 4 (one slightly technical term), no required deduction since normalised values are translated.",
+      "completeness": "All three sections present and substantial: prediction with comparison to actual (17% deviation), detailed top 3 drivers with directions, concrete operational recommendation. Anchor point 5, no deductions."
+    },
+    "raw_response": "<faithfulness_reasoning>All three top drivers named correctly: temp (rank 1, damping), hr=19 (raising), mnth=February (damping), all directions correct; prediction 112 and actual 96 named. Anchor point 5, no deductions.</faithfulness_reasoning>\n<faithfulness>5</faithfulness>\n\n<clarity_reasoning>Clear everyday language with Celsius translations and intuitive explanations; \"normalised value of 0.2\" appears but is immediately translated to ~8.2 °C and percentile context, no SHAP/log/exp jargon. Anchor point 4 (one slightly technical term), no required deduction since normalised values are translated.</clarity_reasoning>\n<clarity>4</clarity>\n\n<completeness_reasoning>All three sections present and substantial: prediction with comparison to actual (17% deviation), detailed top 3 drivers with directions, concrete operational recommendation. Anchor point 5, no deductions.</completeness_reasoning>\n<completeness>5</completeness>"
+  },
+  {
+    "pipeline_label": "Tool Use",
+    "xai_model": "XGB",
+    "instance_id": 580,
+    "faithfulness": 5,
+    "clarity": 5,
+    "completeness": 5,
+    "reasoning": {
+      "faithfulness": "All three top drivers (hr=22 down, yr=2011 down, mnth=March down) named correctly with right damping directions; prediction 64.58 vs actual 63 stated correctly. Anchor point 5, no deductions.",
+      "clarity": "Clear everyday language, normalised values translated (14.8 °C), counterfactual explained intuitively, no jargon like SHAP/log space/exp. Anchor point 5, no deductions.",
+      "completeness": "All three sections present and substantial: prediction with explicit comparison to actual, detailed top-3 drivers with directions, and concrete operational recommendation. Anchor point 5, no deductions."
+    },
+    "raw_response": "<faithfulness_reasoning>All three top drivers (hr=22 down, yr=2011 down, mnth=March down) named correctly with right damping directions; prediction 64.58 vs actual 63 stated correctly. Anchor point 5, no deductions.</faithfulness_reasoning>\n<faithfulness>5</faithfulness>\n\n<clarity_reasoning>Clear everyday language, normalised values translated (14.8 °C), counterfactual explained intuitively, no jargon like SHAP/log space/exp. Anchor point 5, no deductions.</clarity_reasoning>\n<clarity>5</clarity>\n\n<completeness_reasoning>All three sections present and substantial: prediction with explicit comparison to actual, detailed top-3 drivers with directions, and concrete operational recommendation. Anchor point 5, no deductions.</completeness_reasoning>\n<completeness>5</completeness>"
+  },
+  {
+    "pipeline_label": "Tool Use",
+    "xai_model": "XGB",
+    "instance_id": 1041,
+    "faithfulness": 5,
+    "clarity": 4,
+    "completeness": 5,
+    "reasoning": {
+      "faithfulness": "All three top drivers correct (hr +0.75 raising, yr -0.22 damping, weekday/Friday +0.19 raising) with correct directions; prediction 385 and comparison with 387 named. Anchor point 5, no deductions.",
+      "clarity": "Clear everyday language, commuter peak well explained, normalised values translated (~20.5 °C, 88 %); \"counterfactual\" and \"92nd percentile\" are mildly technical but explained. Anchor point 5, no jargon deduction (no SHAP/log space/exp), no missing translation; lowered to 4 for slightly technical terms.",
+      "completeness": "All three sections present and substantial: prediction with comparison to actual, top 3 drivers with directions plus extra context, and a concrete operational recommendation. Anchor point 5, no deductions."
+    },
+    "raw_response": "<faithfulness_reasoning>All three top drivers correct (hr +0.75 raising, yr -0.22 damping, weekday/Friday +0.19 raising) with correct directions; prediction 385 and comparison with 387 named. Anchor point 5, no deductions.</faithfulness_reasoning>\n<faithfulness>5</faithfulness>\n\n<clarity_reasoning>Clear everyday language, commuter peak well explained, normalised values translated (~20.5 °C, 88 %); \"counterfactual\" and \"92nd percentile\" are mildly technical but explained. Anchor point 5, no jargon deduction (no SHAP/log space/exp), no missing translation; lowered to 4 for slightly technical terms.</clarity_reasoning>\n<clarity>4</clarity>\n\n<completeness_reasoning>All three sections present and substantial: prediction with comparison to actual, top 3 drivers with directions plus extra context, and a concrete operational recommendation. Anchor point 5, no deductions.</completeness_reasoning>\n<completeness>5</completeness>"
+  },
+  {
+    "pipeline_label": "Tool Use",
+    "xai_model": "XGB",
+    "instance_id": 1481,
+    "faithfulness": 5,
+    "clarity": 4,
+    "completeness": 5,
+    "reasoning": {
+      "faithfulness": "All three top drivers correct: hr (+, raising), yr (-, damping), hum (+, raising), all with correct directions; prediction 229 and comparison to 277 given. The text also mentions temperature (rank 5) but as supplementary, not displacing the top 3. Anchor point 5, no deduction.",
+      "clarity": "Clear everyday language with good intuitions (commuter rush, growth phase); normalised temp values translated to °C and humidity given as %. One slightly technical phrase (\"normalised 0.75\", \"percentile\") but no jargon like SHAP/log/exp. Anchor point 5, lowered to 4 for the minor technical references.",
+      "completeness": "All three sections present and substantial: prediction with explicit comparison to actual (229 vs 277), detailed drivers with directions, and concrete operational recommendations. Anchor point 5, no deduction."
+    },
+    "raw_response": "<faithfulness_reasoning>All three top drivers correct: hr (+, raising), yr (-, damping), hum (+, raising), all with correct directions; prediction 229 and comparison to 277 given. The text also mentions temperature (rank 5) but as supplementary, not displacing the top 3. Anchor point 5, no deduction.</faithfulness_reasoning>\n<faithfulness>5</faithfulness>\n\n<clarity_reasoning>Clear everyday language with good intuitions (commuter rush, growth phase); normalised temp values translated to °C and humidity given as %. One slightly technical phrase (\"normalised 0.75\", \"percentile\") but no jargon like SHAP/log/exp. Anchor point 5, lowered to 4 for the minor technical references.</clarity_reasoning>\n<clarity>4</clarity>\n\n<completeness_reasoning>All three sections present and substantial: prediction with explicit comparison to actual (229 vs 277), detailed drivers with directions, and concrete operational recommendations. Anchor point 5, no deduction.</completeness_reasoning>\n<completeness>5</completeness>"
+  },
+  {
+    "pipeline_label": "Tool Use",
+    "xai_model": "XGB",
+    "instance_id": 1677,
+    "faithfulness": 5,
+    "clarity": 3,
+    "completeness": 5,
+    "reasoning": {
+      "faithfulness": "All three top drivers correct (hr +, yr damping/negative, temp +), directions all correct, and prediction 254 with comparison to 286 named. Anchor point 5, no deductions.",
+      "clarity": "Clear everyday language with good translations (~28.7 °C, percentages), but uses \"SHAP value\" jargon and \"normalised 0.70\". Anchor point 4, -1 (SHAP jargon), max(1, 4-1) = 3.",
+      "completeness": "All three sections present and substantial: prediction with comparison to actual, detailed drivers with directions, and a concrete operational recommendation. Anchor point 5, no deductions."
+    },
+    "raw_response": "<faithfulness_reasoning>All three top drivers correct (hr +, yr damping/negative, temp +), directions all correct, and prediction 254 with comparison to 286 named. Anchor point 5, no deductions.</faithfulness_reasoning>\n<faithfulness>5</faithfulness>\n\n<clarity_reasoning>Clear everyday language with good translations (~28.7 °C, percentages), but uses \"SHAP value\" jargon and \"normalised 0.70\". Anchor point 4, -1 (SHAP jargon), max(1, 4-1) = 3.</clarity_reasoning>\n<clarity>3</clarity>\n\n<completeness_reasoning>All three sections present and substantial: prediction with comparison to actual, detailed drivers with directions, and a concrete operational recommendation. Anchor point 5, no deductions.</completeness_reasoning>\n<completeness>5</completeness>"
+  },
+  {
+    "pipeline_label": "Tool Use",
+    "xai_model": "XGB",
+    "instance_id": 2058,
+    "faithfulness": 5,
+    "clarity": 4,
+    "completeness": 5,
+    "reasoning": {
+      "faithfulness": "All three top drivers correct (yr down rank 1, temp up rank 2, hum down rank 3), directions all correct, and prediction 194 named with comparison. Anchor point 5, no deductions apply.",
+      "clarity": "Clear everyday language with readable temperature in °C and humidity in %; uses \"normalised: 0.62\" alongside the °C translation but the everyday value is given, and \"counterfactual\" and \"percentile\" are mild technical terms. Anchor point 4 (one technical term/slightly unclear), no required deduction since values are translated.",
+      "completeness": "All three sections present and substantial: prediction with comparison to actual (194 vs 243), all top 3 drivers with directions, and concrete operational recommendation. Anchor point 5, no deductions."
+    },
+    "raw_response": "<faithfulness_reasoning>All three top drivers correct (yr down rank 1, temp up rank 2, hum down rank 3), directions all correct, and prediction 194 named with comparison. Anchor point 5, no deductions apply.</faithfulness_reasoning>\n<faithfulness>5</faithfulness>\n\n<clarity_reasoning>Clear everyday language with readable temperature in °C and humidity in %; uses \"normalised: 0.62\" alongside the °C translation but the everyday value is given, and \"counterfactual\" and \"percentile\" are mild technical terms. Anchor point 4 (one technical term/slightly unclear), no required deduction since values are translated.</clarity_reasoning>\n<clarity>4</clarity>\n\n<completeness_reasoning>All three sections present and substantial: prediction with comparison to actual (194 vs 243), all top 3 drivers with directions, and concrete operational recommendation. Anchor point 5, no deductions.</completeness_reasoning>\n<completeness>5</completeness>"
+  },
+  {
+    "pipeline_label": "Tool Use",
+    "xai_model": "XGB",
+    "instance_id": 2510,
+    "faithfulness": 5,
+    "clarity": 4,
+    "completeness": 5,
+    "reasoning": {
+      "faithfulness": "All three top drivers correct: hr (+0.69, raising), yr (−0.23, damping), temp (−0.08, damping) with correct directions; prediction 326 and actual 372 both named. Anchor point 5, no deductions.",
+      "clarity": "Clear everyday language, normalised values translated (16.4 °C, 26.7 °C), no SHAP/log/exp jargon; \"normalised value 0.4\" is a slight technical residue but is translated. Anchor point 5, no required deduction; lowered to 4 for minor technical phrasing.",
+      "completeness": "All three sections present and substantial: prediction with explicit comparison vs actual (326 vs 372), detailed drivers, and concrete operational recommendation. Anchor point 5, no deductions."
+    },
+    "raw_response": "<faithfulness_reasoning>All three top drivers correct: hr (+0.69, raising), yr (−0.23, damping), temp (−0.08, damping) with correct directions; prediction 326 and actual 372 both named. Anchor point 5, no deductions.</faithfulness_reasoning>\n<faithfulness>5</faithfulness>\n\n<clarity_reasoning>Clear everyday language, normalised values translated (16.4 °C, 26.7 °C), no SHAP/log/exp jargon; \"normalised value 0.4\" is a slight technical residue but is translated. Anchor point 5, no required deduction; lowered to 4 for minor technical phrasing.</clarity_reasoning>\n<clarity>4</clarity>\n\n<completeness_reasoning>All three sections present and substantial: prediction with explicit comparison vs actual (326 vs 372), detailed drivers, and concrete operational recommendation. Anchor point 5, no deductions.</completeness_reasoning>\n<completeness>5</completeness>"
+  },
+  {
+    "pipeline_label": "Tool Use",
+    "xai_model": "XGB",
+    "instance_id": 3543,
+    "faithfulness": 5,
+    "clarity": 5,
+    "completeness": 5,
+    "reasoning": {
+      "faithfulness": "All three top drivers named correctly (yr=2012 rank 1, hr=20:00 rank 2, hum=29% rank 3), all with correct positive/raising direction; prediction 310 named and compared to actual 286. Anchor point 5, no deductions.",
+      "clarity": "Clear everyday language, percentages and counterfactuals translated into intuitive bike counts, humidity given as \"29%\" not normalised; no jargon like SHAP/log space. Anchor point 5, no deductions.",
+      "completeness": "All three sections present and substantial: prediction with comparison to actual, drivers with directions and counterfactuals, and a concrete operational recommendation. Anchor point 5, no deductions."
+    },
+    "raw_response": "<faithfulness_reasoning>All three top drivers named correctly (yr=2012 rank 1, hr=20:00 rank 2, hum=29% rank 3), all with correct positive/raising direction; prediction 310 named and compared to actual 286. Anchor point 5, no deductions.</faithfulness_reasoning>\n<faithfulness>5</faithfulness>\n\n<clarity_reasoning>Clear everyday language, percentages and counterfactuals translated into intuitive bike counts, humidity given as \"29%\" not normalised; no jargon like SHAP/log space. Anchor point 5, no deductions.</clarity_reasoning>\n<clarity>5</clarity>\n\n<completeness_reasoning>All three sections present and substantial: prediction with comparison to actual, drivers with directions and counterfactuals, and a concrete operational recommendation. Anchor point 5, no deductions.</completeness_reasoning>\n<completeness>5</completeness>"
+  },
+  {
+    "pipeline_label": "Tool Use",
+    "xai_model": "XGB",
+    "instance_id": 3847,
+    "faithfulness": 5,
+    "clarity": 4,
+    "completeness": 5,
+    "reasoning": {
+      "faithfulness": "All three top drivers correct (hr +0.41, weekday/Saturday +0.21, yr 2012 +0.16) with correct upward directions; prediction 586 vs actual 531 stated correctly; counterfactuals match the tool trace. Anchor point 5, no deductions.",
+      "clarity": "Clear everyday language, normalised values translated (~32.8 °C, 29 %), counterfactuals well explained; \"3rd percentile\" is mildly technical but explained as \"unusually dry day\". Anchor point 5, no jargon deduction, no value-translation deduction, lowered to 4 for slight percentile technicality.",
+      "completeness": "All three sections present and substantial: prediction with comparison to actual, top drivers with directions and counterfactuals, concrete operational recommendation. Anchor point 5, no deductions."
+    },
+    "raw_response": "<faithfulness_reasoning>All three top drivers correct (hr +0.41, weekday/Saturday +0.21, yr 2012 +0.16) with correct upward directions; prediction 586 vs actual 531 stated correctly; counterfactuals match the tool trace. Anchor point 5, no deductions.</faithfulness_reasoning>\n<faithfulness>5</faithfulness>\n\n<clarity_reasoning>Clear everyday language, normalised values translated (~32.8 °C, 29 %), counterfactuals well explained; \"3rd percentile\" is mildly technical but explained as \"unusually dry day\". Anchor point 5, no jargon deduction, no value-translation deduction, lowered to 4 for slight percentile technicality.</clarity_reasoning>\n<clarity>4</clarity>\n\n<completeness_reasoning>All three sections present and substantial: prediction with comparison to actual, top drivers with directions and counterfactuals, concrete operational recommendation. Anchor point 5, no deductions.</completeness_reasoning>\n<completeness>5</completeness>"
+  },
+  {
+    "pipeline_label": "Tool Use",
+    "xai_model": "XGB",
+    "instance_id": 4454,
+    "faithfulness": 5,
+    "clarity": 4,
+    "completeness": 5,
+    "reasoning": {
+      "faithfulness": "All three top drivers correct (hr +0.35 raising, temp +0.16 raising, yr +0.15 raising) with correct directions; prediction 297 vs actual 354 named accurately. Anchor point 5, no deductions.",
+      "clarity": "Clear everyday language, normalised values translated (~26.2 °C, 74th percentile explained); \"rank 1, +0.35\" contribution numbers are mildly technical but no SHAP/log/exp jargon. Anchor point 5, lowered to 4 for slightly technical contribution notation.",
+      "completeness": "All three sections present and substantial: prediction with comparison to actual, top 3 drivers with directions, and a concrete operational recommendation. Anchor point 5, no deductions."
+    },
+    "raw_response": "<faithfulness_reasoning>All three top drivers correct (hr +0.35 raising, temp +0.16 raising, yr +0.15 raising) with correct directions; prediction 297 vs actual 354 named accurately. Anchor point 5, no deductions.</faithfulness_reasoning>\n<faithfulness>5</faithfulness>\n\n<clarity_reasoning>Clear everyday language, normalised values translated (~26.2 °C, 74th percentile explained); \"rank 1, +0.35\" contribution numbers are mildly technical but no SHAP/log/exp jargon. Anchor point 5, lowered to 4 for slightly technical contribution notation.</clarity_reasoning>\n<clarity>4</clarity>\n\n<completeness_reasoning>All three sections present and substantial: prediction with comparison to actual, top 3 drivers with directions, and a concrete operational recommendation. Anchor point 5, no deductions.</completeness_reasoning>\n<completeness>5</completeness>"
+  },
+  {
+    "pipeline_label": "Tool Use",
+    "xai_model": "EBM",
+    "instance_id": 224,
+    "faithfulness": 5,
+    "clarity": 4,
+    "completeness": 5,
+    "reasoning": {
+      "faithfulness": "All three top drivers correct (hr +0.85 raising, temp -0.60 damping, yr -0.23 damping) with correct directions, and the prediction 117 vs actual 96 is named. Anchor point 5, no deductions.",
+      "clarity": "Largely everyday language with celsius translations provided; however \"normalised value 0.20\" and \"percentile\" are slightly technical, and the SHAP contributions appear as raw numbers (+0.85) which slightly burden a layperson. Anchor point 4, no jargon term from the list (no SHAP/log/exp), readable values translated, so 4.",
+      "completeness": "All three sections present and substantial: prediction with comparison to actual (117 vs 96), detailed drivers with directions, and a concrete operational recommendation. Anchor point 5, no deductions."
+    },
+    "raw_response": "<faithfulness_reasoning>All three top drivers correct (hr +0.85 raising, temp -0.60 damping, yr -0.23 damping) with correct directions, and the prediction 117 vs actual 96 is named. Anchor point 5, no deductions.</faithfulness_reasoning>\n<faithfulness>5</faithfulness>\n\n<clarity_reasoning>Largely everyday language with celsius translations provided; however \"normalised value 0.20\" and \"percentile\" are slightly technical, and the SHAP contributions appear as raw numbers (+0.85) which slightly burden a layperson. Anchor point 4, no jargon term from the list (no SHAP/log/exp), readable values translated, so 4.</clarity_reasoning>\n<clarity>4</clarity>\n\n<completeness_reasoning>All three sections present and substantial: prediction with comparison to actual (117 vs 96), detailed drivers with directions, and a concrete operational recommendation. Anchor point 5, no deductions.</completeness_reasoning>\n<completeness>5</completeness>"
+  },
+  {
+    "pipeline_label": "Tool Use",
+    "xai_model": "EBM",
+    "instance_id": 580,
+    "faithfulness": 5,
+    "clarity": 4,
+    "completeness": 5,
+    "reasoning": {
+      "faithfulness": "All three top drivers correct (yr down, temp down, hr up) with correct directions; prediction 73 and actual 63 both named with comparison. Anchor point 5, no deductions.",
+      "clarity": "Everyday language with Celsius translations provided; \"normalised value 0.36/0.6\" is mentioned but always alongside the °C reading, so no missing everyday translation. No SHAP/log/exp jargon. Anchor point 4 (one slightly technical mention of normalised values, but overall clear), no required deduction.",
+      "completeness": "All three sections present and substantial: prediction with comparison to actual, drivers with directions and counterfactuals, and a concrete operational recommendation. Anchor point 5, no deductions."
+    },
+    "raw_response": "<faithfulness_reasoning>All three top drivers correct (yr down, temp down, hr up) with correct directions; prediction 73 and actual 63 both named with comparison. Anchor point 5, no deductions.</faithfulness_reasoning>\n<faithfulness>5</faithfulness>\n\n<clarity_reasoning>Everyday language with Celsius translations provided; \"normalised value 0.36/0.6\" is mentioned but always alongside the °C reading, so no missing everyday translation. No SHAP/log/exp jargon. Anchor point 4 (one slightly technical mention of normalised values, but overall clear), no required deduction.</clarity_reasoning>\n<clarity>4</clarity>\n\n<completeness_reasoning>All three sections present and substantial: prediction with comparison to actual, drivers with directions and counterfactuals, and a concrete operational recommendation. Anchor point 5, no deductions.</completeness_reasoning>\n<completeness>5</completeness>"
+  },
+  {
+    "pipeline_label": "Tool Use",
+    "xai_model": "EBM",
+    "instance_id": 1041,
+    "faithfulness": 5,
+    "clarity": 4,
+    "completeness": 5,
+    "reasoning": {
+      "faithfulness": "All three top drivers correct (hr +1.11 raising, yr −0.23 damping, hum −0.17 damping) with correct directions; prediction 390 vs actual 387 named correctly. Anchor point 5, no deductions.",
+      "clarity": "Clear everyday language with translations (08:00, 88%, ~20.5°C); \"contribution +1.11\" is mildly technical but no SHAP/log/exp jargon. Anchor point 5, lowered to 4 due to slight technical phrasing, no required deduction applies.",
+      "completeness": "All three sections substantial: prediction with comparison to actual, top 3 drivers with directions, and a detailed operational recommendation. Anchor point 5, no deductions."
+    },
+    "raw_response": "<faithfulness_reasoning>All three top drivers correct (hr +1.11 raising, yr −0.23 damping, hum −0.17 damping) with correct directions; prediction 390 vs actual 387 named correctly. Anchor point 5, no deductions.</faithfulness_reasoning>\n<faithfulness>5</faithfulness>\n\n<clarity_reasoning>Clear everyday language with translations (08:00, 88%, ~20.5°C); \"contribution +1.11\" is mildly technical but no SHAP/log/exp jargon. Anchor point 5, lowered to 4 due to slight technical phrasing, no required deduction applies.</clarity_reasoning>\n<clarity>4</clarity>\n\n<completeness_reasoning>All three sections substantial: prediction with comparison to actual, top 3 drivers with directions, and a detailed operational recommendation. Anchor point 5, no deductions.</completeness_reasoning>\n<completeness>5</completeness>"
+  },
+  {
+    "pipeline_label": "Tool Use",
+    "xai_model": "EBM",
+    "instance_id": 1481,
+    "faithfulness": 5,
+    "clarity": 4,
+    "completeness": 5,
+    "reasoning": {
+      "faithfulness": "All three top drivers correct: hr=16 raising (+0.82), yr=0 damping (−0.23), hum=42% raising (+0.10); directions all correct; prediction 242 named with comparison to actual 277. Anchor point 5, no deductions.",
+      "clarity": "Clear everyday language with readable values (16:00, ~36.9 °C, 42%); however uses \"partial dependence curve\", \"counterfactual\", \"percentile\", \"contribution\" — mild technical terms but no SHAP/log/exp jargon. Anchor point 4 (one or two slightly technical terms), no required deduction.",
+      "completeness": "All three sections present and substantial: prediction with comparison to actual, top 3 drivers with directions, and a concrete operational recommendation. Anchor point 5, no deductions."
+    },
+    "raw_response": "<faithfulness_reasoning>All three top drivers correct: hr=16 raising (+0.82), yr=0 damping (−0.23), hum=42% raising (+0.10); directions all correct; prediction 242 named with comparison to actual 277. Anchor point 5, no deductions.</faithfulness_reasoning>\n<faithfulness>5</faithfulness>\n\n<clarity_reasoning>Clear everyday language with readable values (16:00, ~36.9 °C, 42%); however uses \"partial dependence curve\", \"counterfactual\", \"percentile\", \"contribution\" — mild technical terms but no SHAP/log/exp jargon. Anchor point 4 (one or two slightly technical terms), no required deduction.</clarity_reasoning>\n<clarity>4</clarity>\n\n<completeness_reasoning>All three sections present and substantial: prediction with comparison to actual, top 3 drivers with directions, and a concrete operational recommendation. Anchor point 5, no deductions.</completeness_reasoning>\n<completeness>5</completeness>"
+  },
+  {
+    "pipeline_label": "Tool Use",
+    "xai_model": "EBM",
+    "instance_id": 1677,
+    "faithfulness": 5,
+    "clarity": 4,
+    "completeness": 5,
+    "reasoning": {
+      "faithfulness": "All three top drivers correct (hr +, temp +, yr -), directions correct, prediction 260 named and compared to 286. Anchor point 5, no deductions.",
+      "clarity": "Everyday language with clear narrative; normalised values translated (~28.7 °C, percentile explained). No jargon like SHAP/log space; \"normalised value 0.70\" is minor but accompanied by the Celsius translation. Anchor point 5, lowered to 4 for slight technical phrasing (\"normalised value\", \"percentile\").",
+      "completeness": "All three sections present and substantial: prediction with comparison to actual, three drivers with directions, and concrete operational recommendation. Anchor point 5, no deductions."
+    },
+    "raw_response": "<faithfulness_reasoning>All three top drivers correct (hr +, temp +, yr -), directions correct, prediction 260 named and compared to 286. Anchor point 5, no deductions.</faithfulness_reasoning>\n<faithfulness>5</faithfulness>\n\n<clarity_reasoning>Everyday language with clear narrative; normalised values translated (~28.7 °C, percentile explained). No jargon like SHAP/log space; \"normalised value 0.70\" is minor but accompanied by the Celsius translation. Anchor point 5, lowered to 4 for slight technical phrasing (\"normalised value\", \"percentile\").</clarity_reasoning>\n<clarity>4</clarity>\n\n<completeness_reasoning>All three sections present and substantial: prediction with comparison to actual, three drivers with directions, and concrete operational recommendation. Anchor point 5, no deductions.</completeness_reasoning>\n<completeness>5</completeness>"
+  },
+  {
+    "pipeline_label": "Tool Use",
+    "xai_model": "EBM",
+    "instance_id": 2058,
+    "faithfulness": 5,
+    "clarity": 4,
+    "completeness": 5,
+    "reasoning": {
+      "faithfulness": "All three top drivers correct (hr +0.56 raising, temp +0.23 raising, yr -0.23 damping) with correct directions; prediction 177 named and compared to 243. Anchor point 5, no deductions.",
+      "clarity": "Clear everyday language, percentages and Celsius translations given; mentions \"normalised value 0.62\" but does provide the ~25.4 °C translation, so no jargon deduction. Anchor point 4 due to minor technical phrasing (\"normalised value\", \"counterfactual\").",
+      "completeness": "All three sections present and substantial: prediction with comparison to actual, top 3 drivers with directions, and concrete operational recommendation. Anchor point 5, no deductions."
+    },
+    "raw_response": "<faithfulness_reasoning>All three top drivers correct (hr +0.56 raising, temp +0.23 raising, yr -0.23 damping) with correct directions; prediction 177 named and compared to 243. Anchor point 5, no deductions.</faithfulness_reasoning>\n<faithfulness>5</faithfulness>\n\n<clarity_reasoning>Clear everyday language, percentages and Celsius translations given; mentions \"normalised value 0.62\" but does provide the ~25.4 °C translation, so no jargon deduction. Anchor point 4 due to minor technical phrasing (\"normalised value\", \"counterfactual\").</clarity_reasoning>\n<clarity>4</clarity>\n\n<completeness_reasoning>All three sections present and substantial: prediction with comparison to actual, top 3 drivers with directions, and concrete operational recommendation. Anchor point 5, no deductions.</completeness_reasoning>\n<completeness>5</completeness>"
+  },
+  {
+    "pipeline_label": "Tool Use",
+    "xai_model": "EBM",
+    "instance_id": 2510,
+    "faithfulness": 5,
+    "clarity": 5,
+    "completeness": 5,
+    "reasoning": {
+      "faithfulness": "All three top drivers named correctly (hr +1.15 raising, yr -0.23 damping, temp -0.06 damping), directions all correct, prediction 311 and comparison with 372 given. Anchor point 5, no deductions.",
+      "clarity": "Clear everyday language, normalised values translated to Celsius and percentiles explained; no jargon like SHAP or log space appears. Anchor point 5, no deductions.",
+      "completeness": "All three sections present and substantial: prediction with actual-value comparison, detailed drivers with directions, and concrete operational recommendation. Anchor point 5, no deductions."
+    },
+    "raw_response": "<faithfulness_reasoning>All three top drivers named correctly (hr +1.15 raising, yr -0.23 damping, temp -0.06 damping), directions all correct, prediction 311 and comparison with 372 given. Anchor point 5, no deductions.</faithfulness_reasoning>\n<faithfulness>5</faithfulness>\n\n<clarity_reasoning>Clear everyday language, normalised values translated to Celsius and percentiles explained; no jargon like SHAP or log space appears. Anchor point 5, no deductions.</clarity_reasoning>\n<clarity>5</clarity>\n\n<completeness_reasoning>All three sections present and substantial: prediction with actual-value comparison, detailed drivers with directions, and concrete operational recommendation. Anchor point 5, no deductions.</completeness_reasoning>\n<completeness>5</completeness>"
+  },
+  {
+    "pipeline_label": "Tool Use",
+    "xai_model": "EBM",
+    "instance_id": 3543,
+    "faithfulness": 5,
+    "clarity": 4,
+    "completeness": 5,
+    "reasoning": {
+      "faithfulness": "All three top drivers correct (hr +0.56 raising, yr +0.21 raising, hum +0.10 raising), all directions correct, prediction 296 with actual 286 named. Anchor point 5, no deductions.",
+      "clarity": "Everyday language with readable values (20:00, ~20.5 °C, 29% humidity), logical structure, no jargon like SHAP/log/exp; minor \"percentile/baseline\" terms but well explained. Anchor point 5, no required deduction; slightly technical \"100th percentile\" lowers to 4.",
+      "completeness": "All three sections present and substantial: prediction with comparison to actual, top 3 drivers with directions and counterfactual, and practical operational recommendation. Anchor point 5, no deductions."
+    },
+    "raw_response": "<faithfulness_reasoning>All three top drivers correct (hr +0.56 raising, yr +0.21 raising, hum +0.10 raising), all directions correct, prediction 296 with actual 286 named. Anchor point 5, no deductions.</faithfulness_reasoning>\n<faithfulness>5</faithfulness>\n\n<clarity_reasoning>Everyday language with readable values (20:00, ~20.5 °C, 29% humidity), logical structure, no jargon like SHAP/log/exp; minor \"percentile/baseline\" terms but well explained. Anchor point 5, no required deduction; slightly technical \"100th percentile\" lowers to 4.</clarity_reasoning>\n<clarity>4</clarity>\n\n<completeness_reasoning>All three sections present and substantial: prediction with comparison to actual, top 3 drivers with directions and counterfactual, and practical operational recommendation. Anchor point 5, no deductions.</completeness_reasoning>\n<completeness>5</completeness>"
+  },
+  {
+    "pipeline_label": "Tool Use",
+    "xai_model": "EBM",
+    "instance_id": 3847,
+    "faithfulness": 5,
+    "clarity": 4,
+    "completeness": 5,
+    "reasoning": {
+      "faithfulness": "All three top drivers correct (hr +0.66, temp +0.27, yr +0.21), all directions correct as raising, and prediction 593 named with comparison to actual 531. Anchor point 5, no deductions apply.",
+      "clarity": "Clear everyday language with good translations (~32.8 °C, 8:00 morning rush); uses \"counterfactual\" once and \"96th percentile\" which are mild technical terms but values are well translated. Anchor point 4, no jargon (SHAP/log/exp) and normalised values are translated, so no deduction; stays at 4.",
+      "completeness": "All three sections present and substantial: prediction with explicit comparison (593 vs 531), detailed top 3 drivers with directions, and concrete operational recommendation. Anchor point 5, no deductions."
+    },
+    "raw_response": "<faithfulness_reasoning>All three top drivers correct (hr +0.66, temp +0.27, yr +0.21), all directions correct as raising, and prediction 593 named with comparison to actual 531. Anchor point 5, no deductions apply.</faithfulness_reasoning>\n<faithfulness>5</faithfulness>\n\n<clarity_reasoning>Clear everyday language with good translations (~32.8 °C, 8:00 morning rush); uses \"counterfactual\" once and \"96th percentile\" which are mild technical terms but values are well translated. Anchor point 4, no jargon (SHAP/log/exp) and normalised values are translated, so no deduction; stays at 4.</clarity_reasoning>\n<clarity>4</clarity>\n\n<completeness_reasoning>All three sections present and substantial: prediction with explicit comparison (593 vs 531), detailed top 3 drivers with directions, and concrete operational recommendation. Anchor point 5, no deductions.</completeness_reasoning>\n<completeness>5</completeness>"
+  },
+  {
+    "pipeline_label": "Tool Use",
+    "xai_model": "EBM",
+    "instance_id": 4454,
+    "faithfulness": 5,
+    "clarity": 4,
+    "completeness": 5,
+    "reasoning": {
+      "faithfulness": "All three top drivers correct (hr +0.85 raising, temp +0.25 raising, yr +0.21 raising); all directions correct; prediction 332 named with comparison to 354. Anchor point 5, no deductions.",
+      "clarity": "Clear everyday language with translated values (~26.2 °C, 78%, percentiles explained); the contribution numbers like +0.85 are slightly technical but no SHAP/log/exp jargon. Anchor point 5, lowered to 4 for slightly technical contribution figures, no required deductions.",
+      "completeness": "All three sections present and substantial: prediction with explicit comparison to actual, detailed drivers with directions, and concrete operational recommendations. Anchor point 5, no deductions."
+    },
+    "raw_response": "<faithfulness_reasoning>All three top drivers correct (hr +0.85 raising, temp +0.25 raising, yr +0.21 raising); all directions correct; prediction 332 named with comparison to 354. Anchor point 5, no deductions.</faithfulness_reasoning>\n<faithfulness>5</faithfulness>\n\n<clarity_reasoning>Clear everyday language with translated values (~26.2 °C, 78%, percentiles explained); the contribution numbers like +0.85 are slightly technical but no SHAP/log/exp jargon. Anchor point 5, lowered to 4 for slightly technical contribution figures, no required deductions.</clarity_reasoning>\n<clarity>4</clarity>\n\n<completeness_reasoning>All three sections present and substantial: prediction with explicit comparison to actual, detailed drivers with directions, and concrete operational recommendations. Anchor point 5, no deductions.</completeness_reasoning>\n<completeness>5</completeness>"
+  }
+]

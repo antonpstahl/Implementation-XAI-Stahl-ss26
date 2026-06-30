@@ -80,8 +80,8 @@ Formal faithfulness after Ichmoukhamedov et al. (NB 06, n = 10 instances; precis
 | Vision    | 0.429     | 0.679     | 0.575      |
 <!-- /AUTO-TABLE:faithfulness -->
 
-**6 — Error analysis** (`07_Error_Taxonomy.ipynb`)
-The 30 lowest faithfulness explanations are hand coded into an error taxonomy (NB 07), separating genuine explanation errors (for example `yr` sign errors, near tie rank swaps) from extractor artefacts. The two dominant explanation error classes (yr sign and rank order) are fixed directly in the main generation prompts, so the main run already uses the corrected prompts.
+**6 — Error analysis** (frozen diagnostic, kept locally — not included in the repository)
+The 30 lowest faithfulness explanations were hand coded into an error taxonomy, separating genuine explanation errors (for example `yr` sign errors, near tie rank swaps) from extractor artefacts. The two dominant explanation error classes (yr sign and rank order) are fixed directly in the main generation prompts, so the main run already uses the corrected prompts. This was a **frozen diagnostic** that motivated those fixes; its learnings are now baked into the prompts (`pipeline_04/05/06`, `judge_system`) and guarded by regression tests (`tests/test_prompt_golden.py`, `tests/test_faithfulness.py`), so the notebook itself is no longer part of the tracked pipeline.
 
 > **Status of these findings:** descriptive/exploratory. With n = 10–20 explanations per pipeline, no repeated sampling and no inferential statistics yet, the differences below are **not** statistically confirmed (see the limitations table in `05_Evaluation.ipynb` §7). Treat them as directional.
 

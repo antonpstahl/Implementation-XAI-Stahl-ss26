@@ -2,23 +2,23 @@
   "model": "ebm",
   "task": {
     "name": "cnt",
-    "description": "Anzahl der ausgeliehenen Fahrräder pro Stunde (Summe aus Casual- und Registered-Nutzern)",
+    "description": "Number of rented bikes per hour (sum of casual and registered users)",
     "type": "count"
   },
   "feature_schema": {
     "weathersit": {
       "type": "categorical",
-      "description": "Wetterlage",
+      "description": "Weather situation",
       "categories": {
-        "1": "klar/wenige Wolken",
-        "2": "Nebel/bewölkt",
-        "3": "leichter Regen/Schnee",
-        "4": "Starkregen/Gewitter"
+        "1": "clear/few clouds",
+        "2": "mist/cloudy",
+        "3": "light rain/snow",
+        "4": "heavy rain/thunderstorm"
       }
     },
     "mnth": {
       "type": "categorical",
-      "description": "Monat (1=Januar, 12=Dezember)",
+      "description": "Month (1=January, 12=December)",
       "range": [
         1,
         12
@@ -26,7 +26,7 @@
     },
     "hr": {
       "type": "categorical",
-      "description": "Stunde des Tages (0-23)",
+      "description": "Hour of the day (0 to 23)",
       "range": [
         0,
         23
@@ -34,7 +34,7 @@
     },
     "weekday": {
       "type": "categorical",
-      "description": "Wochentag (0=Sonntag, 6=Samstag)",
+      "description": "Weekday (0=Sunday, 6=Saturday)",
       "range": [
         0,
         6
@@ -42,7 +42,7 @@
     },
     "yr": {
       "type": "binary",
-      "description": "Jahr (0=2011, 1=2012)",
+      "description": "Year (0=2011, 1=2012)",
       "categories": {
         "0": "2011",
         "1": "2012"
@@ -50,15 +50,15 @@
     },
     "holiday": {
       "type": "binary",
-      "description": "Feiertag (0=kein Feiertag, 1=Feiertag)",
+      "description": "Holiday (0=no, 1=yes)",
       "categories": {
-        "0": "kein Feiertag",
-        "1": "Feiertag"
+        "0": "no holiday",
+        "1": "holiday"
       }
     },
     "temp": {
       "type": "numerical",
-      "description": "Normalisierte Temperatur in Celsius (geteilt durch 41)",
+      "description": "Normalised temperature in Celsius (divided by 41)",
       "range": [
         0.0,
         1.0
@@ -66,7 +66,7 @@
     },
     "hum": {
       "type": "numerical",
-      "description": "Normalisierte Luftfeuchtigkeit (geteilt durch 100)",
+      "description": "Normalised humidity (divided by 100)",
       "range": [
         0.0,
         1.0
@@ -74,7 +74,7 @@
     },
     "windspeed": {
       "type": "numerical",
-      "description": "Normalisierte Windgeschwindigkeit (geteilt durch 67)",
+      "description": "Normalised wind speed (divided by 67)",
       "range": [
         0.0,
         1.0

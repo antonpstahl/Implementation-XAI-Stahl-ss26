@@ -1,0 +1,18 @@
+=== LIMITATIONS PARAGRAPH (temporal split) for the thesis ===
+
+The model evaluation is based on a random 70/30 split. Hourly data from the bike
+sharing dataset typically shows autocorrelation: neighbouring hours are similar in
+weather, season and user behaviour. A random split therefore allows hours that are
+close in time to land in both the training and the test set, which can overstate the
+measured generalisation.
+
+As a robustness check a temporal split was run: the first 70 percent of the data in
+chronological order (2011-01-01 to 2012-05-27) served as the training set,
+the remaining 30 percent (2012-05-27 to 2012-12-31) as the test set. The
+results are worse compared to the random split (dRMSE XGBoost:
++39.64, EBM: +24.38; dR2 XGBoost: -0.0844,
+EBM: -0.0357). The metric divergence is moderate, which suggests that
+temporal leakage noticeably affects the random split performance.
+For the XAI demonstration of this work the absolute model quality is secondary; all
+pipelines use the same models and the same split, so the relative ranking of the
+explanation pipelines is unaffected by this limitation.

@@ -1,0 +1,17 @@
+{
+  "pipeline": "05_vision",
+  "llm_model": "claude-sonnet-4-6",
+  "loss_key": "poisson_log",
+  "xai_model": "ebm",
+  "instance_id": 3543,
+  "explanation": "<prediction>The EBM model predicted 296 rented bikes for this hour, while 286 were actually counted — a difference of just 10 bikes. The prediction is well matched, coming within about 3.5% of the real value.</prediction>\n\n<drivers>The single strongest influence in this hour is the time of day: hr=20 (8 PM) produces the longest red bar by far (+0.555), capturing the tail end of the evening commuter peak when many riders are still active. The second most important factor is the year: yr=1 (2012) carries a clearly red bar (+0.208), reflecting that 2012 was the higher-demand year in the system's history, raising the overall prediction noticeably. Third and fourth place are nearly tied: very low humidity at just 29% raises demand slightly (+0.099), because comfortable dry air encourages cycling, while a mild temperature of about 20.5 °C also contributes positively (+0.097). Clear weather and the fact that it is a Friday add smaller but still positive nudges. The only dampening element is the interaction between hour and humidity (hr & hum, -0.034), a modest blue bar suggesting that the combination of this evening hour with very low humidity slightly moderates the otherwise positive picture.</drivers>\n\n<recommendation>With nearly 300 rentals expected on a clear Friday evening in April, stations along commuter corridors should be well stocked heading into the 19:00–21:00 window. Because demand tapers off sharply after 21:00, that late-evening slot is a good opportunity to rebalance docks and schedule any light maintenance without disrupting peak usage.</recommendation>",
+  "plot_file": "waterfall_ebm_poisson_log_inst3543.png",
+  "elapsed_s": 13.3,
+  "usage": {
+    "input_tokens": 976,
+    "output_tokens": 609,
+    "cache_read_input_tokens": 1845
+  },
+  "prediction": 295.9747,
+  "y_true": 286.0
+}

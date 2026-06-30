@@ -242,13 +242,17 @@ Formale Faithfulness-Metriken nach Ichmoukhamedov et al. (2024), n = 10 Instanze
 
 ---
 
-## Schritt 6 — Fehlertaxonomie und Prompt-Fix (`07_Error_Taxonomy.ipynb`, `08_Prompt_Fix_Eval.ipynb`)
+## Schritt 6 — Fehlertaxonomie und Prompt-Fix (eingefrorene Diagnostik, lokal — nicht im Repository)
 
-Die 30 Erklärungen mit der niedrigsten Faithfulness werden manuell einer Fehlertaxonomie
-zugeordnet (NB 07), die echte Erklärungsfehler (z.B. `yr`-Vorzeichenfehler, Rangtausch bei
+Die 30 Erklärungen mit der niedrigsten Faithfulness wurden manuell einer Fehlertaxonomie
+zugeordnet, die echte Erklärungsfehler (z.B. `yr`-Vorzeichenfehler, Rangtausch bei
 nahen Beiträgen) von Extraktor-Artefakten trennt. Die beiden dominanten Erklärungs-Fehlerklassen
-werden anschließend per Prompt-Fix adressiert und auf demselben n=20-Sample mit Bootstrap-CIs
-vorher/nachher neu gemessen (NB 08).
+(yr-Vorzeichen, Rangordnung) wurden direkt in den Generierungs-Prompts gefixt — der Hauptlauf
+nutzt also bereits die korrigierten Prompts. Dies war eine **eingefrorene Diagnostik**,
+die diese Fixes motiviert hat; die Learnings stecken jetzt in den Prompts
+(`pipeline_04/05/06`, `judge_system`) und sind durch Regressionstests abgesichert
+(`tests/test_prompt_golden.py`, `tests/test_faithfulness.py`). Das Notebook selbst ist daher
+nicht mehr Teil der getrackten Pipeline.
 
 ---
 
@@ -307,8 +311,10 @@ Er ist ein hartes Gate: ein frischer Generierungslauf darf erst starten, wenn al
 04d_LLM_ToolUse_Pipeline      → results/pipeline06/*.json
 05_Evaluation                → results/eval_*.{csv,png,json}
 06_Evaluation_Ichmoukhamedov -> results/eval06_ichmoukhamedov/
-07_Error_Taxonomy            → results/error_taxonomy/
 ```
+
+> Die eingefrorene Fehlertaxonomie (Schritt 6) liegt lokal unter `notebooks/_archive/`
+> und ist via `**/_archive/` aus dem Repository ausgenommen.
 
 Alle Schritte laufen auf dem n=20-Validitäts-Sample (10 Instanzen × 2 XAI-Modelle);
 einen separaten Skalierungslauf gibt es nicht.

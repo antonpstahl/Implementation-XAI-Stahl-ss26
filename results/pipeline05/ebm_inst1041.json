@@ -1,0 +1,17 @@
+{
+  "pipeline": "05_vision",
+  "llm_model": "claude-sonnet-4-6",
+  "loss_key": "poisson_log",
+  "xai_model": "ebm",
+  "instance_id": 1041,
+  "explanation": "<prediction>The EBM model predicted approximately 390 rented bikes for this hour, while the actual count was 387. The prediction is an excellent match, with an error of less than 1 percent.</prediction>\n\n<drivers>The dominant driver by far is the hour of day, hr=8, which produces the longest red bar in the plot. A Friday morning rush hour strongly pulls demand upward. Reinforcing this, the interaction between hour and weekday (hr & weekday) adds a second substantial red bar: the model recognises that a weekday morning peak, particularly on a Friday, amplifies ridership well beyond what hour alone would suggest. These two factors together account for the bulk of the prediction above the base value. Working against them are two blue bars: the year 2011 (yr=0) damps the prediction, as 2011 was the lower-demand phase of the system's growth. Additionally, a humidity of 88 percent (hum=0.88) also pulls demand down noticeably — high humidity discourages many cyclists. Temperature at about 20.5 °C contributes a small positive nudge, sitting comfortably in the pleasant riding range.</drivers>\n\n<recommendation>On Friday mornings at 8 o'clock, even under misty or humid conditions, commuter demand is very high and largely predictable. Stations near offices and transit hubs should be fully stocked before 7:30 to avoid shortages during the peak. Maintenance and rebalancing work should be scheduled during overnight hours, when demand drops to near zero, to avoid disrupting the morning rush.</recommendation>",
+  "plot_file": "waterfall_ebm_poisson_log_inst1041.png",
+  "elapsed_s": 12.07,
+  "usage": {
+    "input_tokens": 977,
+    "output_tokens": 562,
+    "cache_read_input_tokens": 1845
+  },
+  "prediction": 389.6817,
+  "y_true": 387.0
+}
