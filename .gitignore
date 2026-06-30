@@ -8,3 +8,4 @@ __pycache__/
 *.pdf
 *.xlsx
 IMPLEMENTATION_PLAN.md
+.pytest_cache
