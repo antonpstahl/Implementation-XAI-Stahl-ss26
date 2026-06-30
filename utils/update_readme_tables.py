@@ -327,7 +327,7 @@ def run(check: bool = False) -> int:
                 print(f"  {s}")
             print("\nRun:  python utils/update_readme_tables.py")
             return 1
-        print("OK — all README tables match results/")
+        print("OK - all README tables match results/")
         return 0
 
     for path in changed_files:
@@ -335,7 +335,7 @@ def run(check: bool = False) -> int:
         print(f"Updated {path.name}")
 
     if not changed_files:
-        print("Nothing to update — tables already up to date.")
+        print("Nothing to update - tables already up to date.")
     return 0
 
 

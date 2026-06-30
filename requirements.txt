@@ -1,9 +1,9 @@
-# Requirements – XAI Stahl SoSe26
+# Requirements - XAI Stahl SoSe26
 # Python 3.13.1
 #
 # Install: pip install -r requirements.txt
 #
-# Optional (Notebook 08 · Ichmoukhamedov-Metriken mit LLM-Embedding):
+# Optional (Notebook 08 - Ichmoukhamedov-Metriken mit LLM-Embedding):
 #   pip install sentence-transformers transformers
 #   (nicht im Standardlauf benötigt; torch ist bereits unten enthalten)
 

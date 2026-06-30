@@ -1,11 +1,11 @@
-"""Phase 3b — utils.faithfulness (gen-aware RA/SA/VA + Extraktionsvalidität).
+"""Phase 3b - utils.faithfulness (gen-aware RA/SA/VA + Extraktionsvalidität).
 
 Sichert den Skalierungs-Faithfulness-Pfad ab:
   * `compute_faithfulness` ist ein **treuer Port** aus NB 06 (ϕ-Ausschluss,
     Out-of-Top-K-Skip, Vorzeichen, Wert-Match mit Denormalisierung, None bei n=0).
   * `parse_extraction` ist robust gegen Fließtext-Umrandung und kaputtes JSON.
   * `extraction_coverage` liefert die Validitäts-Proxys (parse_empty, Top-K-Recall,
-    Out-of-Top-K, Rang-0-Treffer) — der Extraktor ist fehleranfällig (NB 07).
+    Out-of-Top-K, Rang-0-Treffer) - der Extraktor ist fehleranfällig (NB 07).
   * `build_faithfulness_df` ist gen-aware (custom_id-Lookup) und behandelt fehlende
     Extraktionen als parse_empty.
   * `extraction_validity_summary` aggregiert je Pipeline korrekt.
@@ -34,7 +34,7 @@ from utils.faithfulness import (
     rank0_correctness,
 )
 
-# Top-4 Ground-Truth (Beiträge im Log-Raum): hr(+), yr(−), hum(+), temp(+).
+# Top-4 Ground-Truth (Beiträge im Log-Raum): hr(+), yr(-), hum(+), temp(+).
 GT = [
     {"feature": "hr",   "contribution": 1.23,  "value": 8},
     {"feature": "yr",   "contribution": -0.226, "value": 0},
@@ -72,14 +72,14 @@ def test_value_match_exact_and_tolerance():
 
 
 def test_value_match_denormalized_temperature():
-    # GT temp normalisiert 0.50 → ~20.5 °C; LLM zitiert oft die °C-Form.
+    # GT temp normalisiert 0.50 -> ~20.5 °C; LLM zitiert oft die °C-Form.
     assert is_value_match("temp", 20.5, 0.50)
     # normalisierte Form passt ebenfalls
     assert is_value_match("temp", 0.50, 0.50)
 
 
 # ---------------------------------------------------------------------------
-# compute_faithfulness — treuer Port
+# compute_faithfulness - treuer Port
 # ---------------------------------------------------------------------------
 
 def test_compute_faithfulness_all_correct():
@@ -91,13 +91,13 @@ def test_compute_faithfulness_all_correct():
     m = compute_faithfulness(ext, GT)
     assert m["RA"] == 1.0 and m["RA_n"] == 3
     assert m["SA"] == 1.0 and m["SA_n"] == 3
-    # value: hr=8 ✓, hum=0.88 ✓ (yr value None → nicht gewertet)
+    # value: hr=8 ok, hum=0.88 ok (yr value None -> nicht gewertet)
     assert m["VA"] == 1.0 and m["VA_n"] == 2
     assert m["n_extracted"] == 3
 
 
 def test_compute_faithfulness_out_of_topk_skipped():
-    # 'windspeed' ist nicht unter Top-4 → komplett übersprungen (Nenner unberührt).
+    # 'windspeed' ist nicht unter Top-4 -> komplett übersprungen (Nenner unberührt).
     ext = {
         "hr":        {"rank": 0, "sign": 1, "value": None},
         "windspeed": {"rank": 1, "sign": 1, "value": 5},
@@ -124,14 +124,14 @@ def test_compute_faithfulness_empty_extraction_gives_none():
 
 
 # ---------------------------------------------------------------------------
-# extraction_coverage — Validitäts-Proxys
+# extraction_coverage - Validitäts-Proxys
 # ---------------------------------------------------------------------------
 
 def test_coverage_recall_and_out_of_topk():
     ext = {
         "hr":        {"rank": 0, "sign": 1, "value": 8},
         "yr":        {"rank": 1, "sign": -1, "value": None},
-        "windspeed": {"rank": 2, "sign": 1, "value": None},  # nicht Top-K → Rauschen
+        "windspeed": {"rank": 2, "sign": 1, "value": None},  # nicht Top-K -> Rauschen
     }
     cov = extraction_coverage(ext, GT)
     assert cov["parse_empty"] is False
@@ -158,7 +158,7 @@ def test_coverage_empty_extraction():
 
 
 # ---------------------------------------------------------------------------
-# build_faithfulness_df — gen-aware custom_id lookup
+# build_faithfulness_df - gen-aware custom_id lookup
 # ---------------------------------------------------------------------------
 
 def _write_local_explanation(expl_dir: Path, xai: str, iid: int,
@@ -187,7 +187,7 @@ def test_build_faithfulness_df_gen_aware(tmp_path):
     _write_local_explanation(tmp_path, "ebm", 101)
     df = _scale_df()
 
-    # Extraktionen nur für XGB-gen0 vorhanden → restliche cids fehlen (parse_empty).
+    # Extraktionen nur für XGB-gen0 vorhanden -> restliche cids fehlen (parse_empty).
     cid = extraction_base_cid("ext", "04", "XGB", 101, 0)
     by_cid = {cid: {"hr": {"rank": 0, "sign": 1, "value": 8}}}
 
@@ -198,7 +198,7 @@ def test_build_faithfulness_df_gen_aware(tmp_path):
     hit = out[(out.xai_model == "XGB") & (out.generation == 0)].iloc[0]
     assert hit["RA"] == 1.0 and not hit["parse_empty"] and hit["r0_match"] == 1
 
-    # alle anderen cids fehlen → leere Extraktion
+    # alle anderen cids fehlen -> leere Extraktion
     assert out["parse_empty"].sum() == 5
 
 
@@ -219,7 +219,7 @@ def test_validity_summary_aggregates_per_pipeline(tmp_path):
     assert "JSON to Text" in summ.index
     row = summ.loc["JSON to Text"]
     assert row["n_narratives"] == 6
-    # 5 von 6 Narrativen leer → Parse-Ausfallrate 5/6 (auf 4 Stellen gerundet)
+    # 5 von 6 Narrativen leer -> Parse-Ausfallrate 5/6 (auf 4 Stellen gerundet)
     assert abs(row["parse_empty_rate"] - 5 / 6) < 1e-3
     # Out-of-Top-K-Rate: 1 von (1 in-topK + 1 out) = 0.5
     assert abs(row["out_of_topk_rate"] - 0.5) < 1e-6
@@ -228,7 +228,7 @@ def test_validity_summary_aggregates_per_pipeline(tmp_path):
 
 
 # ---------------------------------------------------------------------------
-# rank0_correctness (NB 07 §6 — Rang-0 inkl. Vorzeichen)
+# rank0_correctness (NB 07 §6 - Rang-0 inkl. Vorzeichen)
 # ---------------------------------------------------------------------------
 
 def test_rank0_correct_feature_and_sign():
@@ -239,7 +239,7 @@ def test_rank0_correct_feature_and_sign():
 
 
 def test_rank0_feature_swap_is_wrong():
-    # Extraktor setzt temp(+) auf Rang 0 statt hr → Feature-Fehler.
+    # Extraktor setzt temp(+) auf Rang 0 statt hr -> Feature-Fehler.
     ext = {"temp": {"rank": 0, "sign": 1, "value": None}}
     out = rank0_correctness(ext, GT)
     assert out["ext_r0_feat"] == "temp"
@@ -265,11 +265,11 @@ def test_rank0_empty_gt():
 
 
 # ---------------------------------------------------------------------------
-# correct_metric (NB 07 §6.4 — Mess-Korrektur-Obergrenze)
+# correct_metric (NB 07 §6.4 - Mess-Korrektur-Obergrenze)
 # ---------------------------------------------------------------------------
 
 def test_correct_metric_adds_one_hit():
-    # obs=0.5 über n=4 extrahierte Features → (0.5·4 + 1)/4 = 0.75.
+    # obs=0.5 über n=4 extrahierte Features -> (0.5*4 + 1)/4 = 0.75.
     assert correct_metric(0.5, 4) == 0.75
 
 
@@ -282,7 +282,7 @@ def test_correct_metric_zero_n_is_noop():
 
 
 # ---------------------------------------------------------------------------
-# load_explanation_text (NB 07 — kanonischer Loader)
+# load_explanation_text (NB 07 - kanonischer Loader)
 # ---------------------------------------------------------------------------
 
 def test_load_explanation_text_reads_record(tmp_path):

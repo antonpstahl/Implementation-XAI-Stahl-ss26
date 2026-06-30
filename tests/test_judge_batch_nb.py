@@ -1,22 +1,22 @@
 """
-Phase 3a·B — NB05 Batch-Judge Roundtrip-Tests.
+Phase 3a.B - NB05 Batch-Judge Roundtrip-Tests.
 
 Prüft den custom_id-Roundtrip und die Schema-Gleichheit zwischen dem Batch-
-und dem Real-time-Pfad des Judge-Laufs in NB05 (Zellen 10/18/21/34 — v1–v4).
+und dem Real-time-Pfad des Judge-Laufs in NB05 (Zellen 10/18/21/34 - v1-v4).
 
 Abgedeckte Szenarien:
   * custom_id-Format: make_custom_id("jdg", version, pipeline_label, xai, iid)
     ist gültig und eindeutig für alle NB05-Pipeline-Labels (inkl. Sonderzeichen
     wie Leerzeichen in "JSON to Text" und "Tool Use").
   * Ergebnis-Mapping: zip(entries, df_rows) ordnet base_cid korrekt der Zeile
-    zu — Reihenfolge bleibt erhalten.
+    zu - Reihenfolge bleibt erhalten.
   * Schema-Gleichheit: Batch-Zeilen haben dieselben Keys wie der Real-time-Loop.
   * Judge_n == n wenn alle SC-Samples erfolgreich sind.
   * Judge_n < n wenn eine Basis-CID keine erfolgreichen Samples hat (None-Scores
     werden von pandas .count() ausgeschlossen).
   * Partial-Failure: verbleibende Einträge bleiben korrekt im DataFrame.
   * Opus-Modell: temperature wird weggelassen (Gating wie in den NB05-Zellen).
-  * k×len(entries) Requests in einem Batch (k=JUDGE_SC_K).
+  * kxlen(entries) Requests in einem Batch (k=JUDGE_SC_K).
 """
 from __future__ import annotations
 
@@ -34,7 +34,7 @@ from utils.judge import judge_batch_sc, SCORE_KEYS
 from tests.test_batch import FakeBatches, make_client, NOSLEEP
 from tests.test_judge_batch import _xml, _mk_succeeded, _mk_errored
 
-# ── NB05-Konstanten (Spiegel der Notebook-Konfiguration) ─────────────────────
+# -- NB05-Konstanten (Spiegel der Notebook-Konfiguration) ---------------------
 
 PIPELINE_LABELS = {
     '00': 'Template',
@@ -50,7 +50,7 @@ SONNET = 'claude-sonnet-4-6'
 OPUS   = 'claude-opus-4-8'
 
 
-# ── Hilfsfunktionen (NB05-Zellen-Logik) ─────────────────────────────────────
+# -- Hilfsfunktionen (NB05-Zellen-Logik) -------------------------------------
 
 def _build_rows(pipelines=PIPELINES, xai_models=XAI_MODELS, instance_ids=INSTANCE_IDS):
     """Simuliert df.iterrows() aus NB05 (ohne echten DataFrame)."""
@@ -115,10 +115,10 @@ def _run_sc(batches, entries, model=SONNET, k=K, temperature=0.0):
     )
 
 
-# ── 1. custom_id-Format: gültig + eindeutig für alle Pipeline-Labels ─────────
+# -- 1. custom_id-Format: gültig + eindeutig für alle Pipeline-Labels ---------
 
 def test_nb07_custom_ids_valid_and_unique_all_versions():
-    """make_custom_id('jdg', version, pipeline_label, xai, iid) → kein Fehler, alle eindeutig."""
+    """make_custom_id('jdg', version, pipeline_label, xai, iid) -> kein Fehler, alle eindeutig."""
     import re
     _RE = re.compile(r'^[A-Za-z0-9_-]{1,64}$')
     rows = _build_rows()
@@ -148,7 +148,7 @@ def test_nb07_special_pipeline_labels_in_custom_id():
     assert len({cid_json, cid_tool, cid_tmpl, cid_vision}) == 4
 
 
-# ── 2. Ergebnis-Mapping: Reihenfolge bleibt erhalten ─────────────────────────
+# -- 2. Ergebnis-Mapping: Reihenfolge bleibt erhalten -------------------------
 
 def test_nb07_result_mapping_order_preserved():
     """zip(entries, rows) ordnet Ergebnis-CIDs korrekt den Original-Zeilen zu."""
@@ -168,7 +168,7 @@ def test_nb07_result_mapping_order_preserved():
         assert jr['instance_id']    == orig['instance_id']
 
 
-# ── 3. Schema-Gleichheit batch vs. real-time ─────────────────────────────────
+# -- 3. Schema-Gleichheit batch vs. real-time ---------------------------------
 
 def test_nb07_batch_rows_have_realtime_schema():
     """Jede Batch-Zeile hat dieselben Keys wie der Real-time-Loop in NB05."""
@@ -192,10 +192,10 @@ def test_nb07_batch_rows_have_realtime_schema():
         assert set(row['reasoning'].keys()) == {'faithfulness', 'clarity', 'completeness'}
 
 
-# ── 4. Judge_n == n wenn alle Samples erfolgreich ────────────────────────────
+# -- 4. Judge_n == n wenn alle Samples erfolgreich ----------------------------
 
 def test_nb07_judge_n_equals_n_all_succeed():
-    """Alle Scores nicht-None → Judge_n == n (pandas .count() zählt alle Zeilen)."""
+    """Alle Scores nicht-None -> Judge_n == n (pandas .count() zählt alle Zeilen)."""
     rows = _build_rows()
     ents = _entries(rows, 'v3')
     results = [_mk_succeeded(f"{cid}-s{j}", 4, 3, 5)
@@ -214,10 +214,10 @@ def test_nb07_judge_n_equals_n_all_succeed():
             f"Judge_n falsch für {label}: {judge_n.loc[label, 'faithfulness']}"
 
 
-# ── 5. Judge_n < n wenn ein Eintrag komplett fehlschlägt ─────────────────────
+# -- 5. Judge_n < n wenn ein Eintrag komplett fehlschlägt ---------------------
 
 def test_nb07_judge_n_excludes_none_scores():
-    """Scheitern aller SC-Samples → None-Scores → nicht in Judge_n gezählt."""
+    """Scheitern aller SC-Samples -> None-Scores -> nicht in Judge_n gezählt."""
     rows = _build_rows(pipelines=['04'], xai_models=['xgb'], instance_ids=[42, 100])
     ents = _entries(rows, 'v1')
 
@@ -240,7 +240,7 @@ def test_nb07_judge_n_excludes_none_scores():
     assert judge_n.loc['JSON to Text', 'faithfulness'] == 1
 
 
-# ── 6. Partial failure: restliche Einträge korrekt im DataFrame ──────────────
+# -- 6. Partial failure: restliche Einträge korrekt im DataFrame --------------
 
 def test_nb07_partial_failure_other_entries_intact():
     """Scheitert eine Basis-CID, bleiben alle anderen Zeilen korrekt befüllt."""
@@ -271,10 +271,10 @@ def test_nb07_partial_failure_other_entries_intact():
     }
 
 
-# ── 7. Opus: temperature wird weggelassen (NB05-Gating-Logik) ────────────────
+# -- 7. Opus: temperature wird weggelassen (NB05-Gating-Logik) ----------------
 
 def test_nb07_opus_temperature_gating():
-    """temperature=JUDGE_TEMPERATURE if model != 'claude-opus-4-8' else None → kein 400."""
+    """temperature=JUDGE_TEMPERATURE if model != 'claude-opus-4-8' else None -> kein 400."""
     captured: list[dict] = []
 
     class CapBatches(FakeBatches):
@@ -295,7 +295,7 @@ def test_nb07_opus_temperature_gating():
     rows = _build_rows(pipelines=['04'], xai_models=['xgb'], instance_ids=[42])
     ents = _entries(rows, 'v3')
 
-    # NB05-Gating: Opus → temperature=None
+    # NB05-Gating: Opus -> temperature=None
     judge_batch_sc(
         ents,
         system='sys',
@@ -312,11 +312,11 @@ def test_nb07_opus_temperature_gating():
             f"temperature darf bei Opus nicht im Payload stehen: {req['params']}"
 
 
-# ── 8. k × len(entries) Requests in einem Batch ─────────────────────────────
+# -- 8. k x len(entries) Requests in einem Batch -----------------------------
 
 def test_nb07_k_times_n_requests_submitted():
-    """judge_batch_sc reicht genau k × len(entries) Requests als einen Batch ein."""
-    rows = _build_rows()   # 4 Pipelines × 2 XAI × 2 Instanzen = 16 Zeilen
+    """judge_batch_sc reicht genau k x len(entries) Requests als einen Batch ein."""
+    rows = _build_rows()   # 4 Pipelines x 2 XAI x 2 Instanzen = 16 Zeilen
     ents = _entries(rows, 'v1')
     results = [_mk_succeeded(f"{cid}-s{j}", 4, 3, 5)
                for cid, _ in ents for j in range(K)]

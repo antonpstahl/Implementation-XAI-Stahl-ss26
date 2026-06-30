@@ -1,14 +1,14 @@
 """
-Phase 3a·B / A2 — Tests für den Batch-Judge mit Self-Consistency (utils.judge_batch_sc).
+Phase 3a.B / A2 - Tests für den Batch-Judge mit Self-Consistency (utils.judge_batch_sc).
 
 Deckt ab:
   * k Requests pro Eintrag werden als ein Batch eingereicht.
-  * custom_ids haben das Schema {base_cid}-s0 … -s{k-1}.
+  * custom_ids haben das Schema {base_cid}-s0 ... -s{k-1}.
   * Median-Aggregation client-seitig über k Samples (je Kriterium).
   * Fehlgeschlagene Samples werden aus dem Median ausgeschlossen.
-  * Basis-CID ohne jedes erfolgreiche Sample → None-Scores.
+  * Basis-CID ohne jedes erfolgreiche Sample -> None-Scores.
   * Schema-Gleichheit mit judge_with_self_consistency (same keys).
-  * base_cid-Längenvalidierung (> 61 Zeichen → ValueError).
+  * base_cid-Längenvalidierung (> 61 Zeichen -> ValueError).
   * temperature wird bei Opus-Modellen weggelassen (model_accepts_temperature).
 
 Der Anthropic-Client wird durch den Fake aus test_batch ersetzt.
@@ -28,7 +28,7 @@ from utils.judge import judge_batch_sc, SCORE_KEYS, parse_judge_response
 from tests.test_batch import FakeBatches, make_client, NOSLEEP
 
 
-# ── Hilfsfunktionen ──────────────────────────────────────────────────────────
+# -- Hilfsfunktionen ----------------------------------------------------------
 
 def _xml(f: int, cl: int, co: int) -> str:
     return (
@@ -81,7 +81,7 @@ def _run(batches: FakeBatches, entries=ENTRIES, k=K, **kwargs) -> dict:
     )
 
 
-# ── 1. k Requests pro Eintrag ────────────────────────────────────────────────
+# -- 1. k Requests pro Eintrag ------------------------------------------------
 
 def test_submits_k_requests_per_entry():
     n = len(ENTRIES)
@@ -98,10 +98,10 @@ def test_submits_k_requests_per_entry():
             assert f"{base_cid}-s{j}" in submitted_ids
 
 
-# ── 2. Median-Aggregation ────────────────────────────────────────────────────
+# -- 2. Median-Aggregation ----------------------------------------------------
 
 def test_median_of_three_scores():
-    # Sample scores: (5,4,3), (3,3,3), (4,4,4) → median: (4,4,3)
+    # Sample scores: (5,4,3), (3,3,3), (4,4,4) -> median: (4,4,3)
     entry = ENTRIES[0]
     score_sets = [(5, 4, 3), (3, 3, 3), (4, 4, 4)]
     results = [_mk_succeeded(f"{entry[0]}-s{j}", *s) for j, s in enumerate(score_sets)]
@@ -118,7 +118,7 @@ def test_median_of_three_scores():
 
 
 def test_median_two_samples_even():
-    # k=2: (4,2) → median of [4,2] = 3.0 → int 3
+    # k=2: (4,2) -> median of [4,2] = 3.0 -> int 3
     entry = ENTRIES[0]
     results = [
         _mk_succeeded(f"{entry[0]}-s0", 4, 4, 4),
@@ -132,7 +132,7 @@ def test_median_two_samples_even():
     assert out[entry[0]]["faithfulness"] == 3
 
 
-# ── 3. Fehlgeschlagene Samples ausgeschlossen ────────────────────────────────
+# -- 3. Fehlgeschlagene Samples ausgeschlossen --------------------------------
 
 def test_failed_sample_excluded_from_median():
     entry = ENTRIES[0]
@@ -161,7 +161,7 @@ def test_all_samples_failed_gives_none_scores():
     assert r["completeness"]  is None
 
 
-# ── 4. Rückgabe-Schema identisch zu judge_with_self_consistency ───────────────
+# -- 4. Rückgabe-Schema identisch zu judge_with_self_consistency ---------------
 
 def test_return_schema_matches_self_consistency():
     results = [_mk_succeeded(f"{e[0]}-s{j}", 4, 3, 5) for e in ENTRIES for j in range(K)]
@@ -183,7 +183,7 @@ def test_return_schema_matches_self_consistency():
     assert "output_tokens" in r["usage"]
 
 
-# ── 5. Usage-Akkumulation ────────────────────────────────────────────────────
+# -- 5. Usage-Akkumulation ----------------------------------------------------
 
 def test_usage_accumulated_over_k_samples():
     entry = ENTRIES[0]
@@ -192,12 +192,12 @@ def test_usage_accumulated_over_k_samples():
     batches = FakeBatches().queue(results)
 
     out = _run(batches)
-    # _mk_succeeded gibt in=5, out=10 → k=3 → 15, 30
+    # _mk_succeeded gibt in=5, out=10 -> k=3 -> 15, 30
     assert out[entry[0]]["usage"]["input_tokens"]  == 5 * K
     assert out[entry[0]]["usage"]["output_tokens"] == 10 * K
 
 
-# ── 6. Rückgabe alle Einträge im dict ────────────────────────────────────────
+# -- 6. Rückgabe alle Einträge im dict ----------------------------------------
 
 def test_all_base_cids_in_result():
     results = [_mk_succeeded(f"{e[0]}-s{j}", 4, 3, 4) for e in ENTRIES for j in range(K)]
@@ -208,7 +208,7 @@ def test_all_base_cids_in_result():
         assert base_cid in out
 
 
-# ── 7. base_cid-Längenvalidierung ───────────────────────────────────────────
+# -- 7. base_cid-Längenvalidierung -------------------------------------------
 
 def test_long_base_cid_raises():
     too_long = [("x" * 62, "prompt")]   # 62 + len("-s2") = 65 > 64
@@ -230,7 +230,7 @@ def test_base_cid_at_limit_ok():
     assert ok_cid in out
 
 
-# ── 8. temperature-Gating (Opus → keine temperature) ────────────────────────
+# -- 8. temperature-Gating (Opus -> keine temperature) ------------------------
 
 def test_opus_model_no_temperature_in_params():
     """Für Opus darf kein temperature-Feld in den batch-Requests auftauchen."""
