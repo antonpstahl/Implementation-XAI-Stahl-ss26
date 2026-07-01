@@ -316,8 +316,7 @@ Er ist ein hartes Gate: ein frischer Generierungslauf darf erst starten, wenn al
 > Die eingefrorene Fehlertaxonomie (Schritt 6) liegt lokal unter `notebooks/_archive/`
 > und ist via `**/_archive/` aus dem Repository ausgenommen.
 
-Alle Schritte laufen auf dem n=20-Validitäts-Sample (10 Instanzen × 2 XAI-Modelle);
-einen separaten Skalierungslauf gibt es nicht.
+Alle Schritte laufen auf dem n=20-Validitäts-Sample (10 Instanzen × 2 XAI-Modelle).
 
 ---
 

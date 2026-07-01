@@ -103,7 +103,7 @@ pip install -r requirements.txt
 echo "ANTHROPIC_API_KEY=sk..." > .env
 ```
 
-Run the notebooks in order (`01` → `08`). Paths are relative to the project root; reproducibility is fixed via `RANDOM_STATE = 42`. The pipeline runs on the n = 20 validity sample (10 instances × 2 XAI models); there is no separate large-scale run.
+Run the notebooks in order (`01` → `08`). Paths are relative to the project root; reproducibility is fixed via `RANDOM_STATE = 42`. The pipeline runs on the n = 20 validity sample (10 instances × 2 XAI models).
 
 ## LLM configuration
 

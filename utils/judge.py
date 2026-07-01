@@ -248,10 +248,6 @@ def judge_with_self_consistency(
         stochasticity, so SC draws its diversity from that, the passed temperature
         value has no effect.
 
-    Cost effect at scale: k=3, n=200, 4 pipelines, 2 XAI models
-        -> 200 x 4 x 2 x k = 4800 judge calls instead of 1600 (factor k=3).
-        This must be included in the cost estimate.
-
     Returns: dict with aggregated scores (median), raw answers and cumulative usage.
     """
     import statistics
