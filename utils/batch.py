@@ -1,7 +1,7 @@
 """
 utils/batch.py - Anthropic Message Batches helper.
 
-A pure cost lever for a larger run: the Batches API processes Messages API
+A pure cost lever: the Batches API processes Messages API
 requests asynchronously at about 50 percent of the standard price. This helper
 wraps submit -> wait -> collect over
 
