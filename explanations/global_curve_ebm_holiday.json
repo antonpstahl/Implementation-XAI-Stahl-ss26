@@ -1,0 +1,13 @@
+{
+  "feature": "holiday",
+  "kind": "continuous",
+  "x": [
+    0.25,
+    0.75
+  ],
+  "y": [
+    0.004065,
+    -0.144708
+  ],
+  "importance": 0.007907
+}

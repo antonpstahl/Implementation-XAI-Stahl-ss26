@@ -1,0 +1,61 @@
+{
+  "loss_option": {
+    "key": "poisson_native",
+    "label": "Option 3: Poisson Deviance (contributions approximately in rentals)",
+    "description": "Identical model to option 2. Contributions are extracted approximately on the rental scale (XGBoost output_margin=False, EBM analogous).",
+    "ebm_objective": "poisson_deviance",
+    "xgb_objective": "count:poisson",
+    "contribution_space": "native"
+  },
+  "training_time_seconds": {
+    "xgb": 1.939117670059204,
+    "ebm": 12.690465927124023
+  },
+  "metrics": {
+    "xgb": {
+      "rmse": 45.43951062043428,
+      "mae": 27.002631963473878,
+      "r2": 0.9353575594034751,
+      "poisson_deviance": 9.380072104704615,
+      "min_prediction": 1.8812179565429688,
+      "n_negative_predictions": 0
+    },
+    "ebm": {
+      "rmse": 48.20290142996842,
+      "mae": 28.1981562298493,
+      "r2": 0.9272560609239382,
+      "poisson_deviance": 10.814538455984227,
+      "min_prediction": 0.699434306752487,
+      "n_negative_predictions": 0
+    }
+  },
+  "n_train": 12152,
+  "n_test": 5227,
+  "hyperparameters": {
+    "xgb": {
+      "n_estimators": 800,
+      "max_depth": 7,
+      "learning_rate": 0.03,
+      "subsample": 0.8,
+      "colsample_bytree": 0.8,
+      "min_child_weight": 3,
+      "reg_lambda": 1.0,
+      "enable_categorical": true,
+      "tree_method": "hist",
+      "n_jobs": -1,
+      "random_state": 42,
+      "verbosity": 0,
+      "objective": "count:poisson"
+    },
+    "ebm": {
+      "interactions": 15,
+      "max_bins": 512,
+      "learning_rate": 0.02,
+      "max_rounds": 10000,
+      "early_stopping_rounds": 100,
+      "n_jobs": -1,
+      "random_state": 42,
+      "objective": "poisson_deviance"
+    }
+  }
+}
