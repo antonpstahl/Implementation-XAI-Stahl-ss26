@@ -351,3 +351,100 @@ def save_explanation(data: dict, filename: str, out_dir: Path | None = None) -> 
     path = out_dir / filename
     path.write_text(json.dumps(data, indent=2, ensure_ascii=False))
     return path
+
+
+# -----------------------------------------------------------------------------
+# Global shape / dependence curves (for global XAI plots)
+# -----------------------------------------------------------------------------
+
+def _global_curves_ebm(model: Any) -> list[dict]:
+    """Per-term shape functions from ``explain_global().data(i)`` (main effects)."""
+    gexp = model.explain_global()
+    gd = gexp.data()
+    importance = {n: float(s) for n, s in zip(gd["names"], gd["scores"])}
+    feat_names = list(model.feature_names_in_)
+    feat_types = list(model.feature_types_in_)
+
+    curves: list[dict] = []
+    for i, term in enumerate(model.term_features_):
+        if len(term) != 1:
+            continue  # skip interaction terms
+        fname = feat_names[term[0]]
+        d = gexp.data(i)
+        if feat_types[term[0]] == "continuous":
+            # names = bin edges (n+1), scores = per-bin contribution (n)
+            edges = [float(v) for v in d["names"]]
+            y = [float(s) for s in d["scores"]]
+            x = [round((edges[k] + edges[k + 1]) / 2, 6) for k in range(len(y))]
+            kind = "continuous"
+        else:
+            # nominal: names = categories, scores = per-category contribution
+            x = [str(v) for v in d["names"]]
+            y = [float(s) for s in d["scores"]]
+            kind = "categorical"
+        curves.append({
+            "feature": fname,
+            "kind": kind,
+            "x": x,
+            "y": [round(v, 6) for v in y],
+            "importance": round(importance.get(fname, 0.0), 6),
+        })
+    return curves
+
+
+def _global_curves_xgb(model: Any, X_train: pd.DataFrame) -> list[dict]:
+    """SHAP dependence cloud per feature (one point per training row, log space)."""
+    explainer = _get_shap_explainer(model)
+    sv = explainer(X_train)
+    values = np.asarray(sv.values)
+    data = np.asarray(sv.data)
+
+    curves: list[dict] = []
+    for j, feat in enumerate(X_train.columns):
+        kind = "categorical" if str(X_train[feat].dtype) == "category" else "continuous"
+        curves.append({
+            "feature": str(feat),
+            "kind": kind,
+            "x": [_feat_value(v) for v in data[:, j]],
+            "y": [round(float(v), 6) for v in values[:, j]],
+            "importance": round(float(np.abs(values[:, j]).mean()), 6),
+        })
+    return curves
+
+
+def build_global_curves(
+    model: Any,
+    model_name: str,
+    X_train: pd.DataFrame,
+) -> list[dict]:
+    """Per-feature global shape / dependence curves (JSON serialisable).
+
+    Each entry::
+
+        {"feature": str, "kind": "continuous" | "categorical",
+         "x": [...], "y": [...], "importance": float}
+
+    EBM: shape function per main-effect term. Continuous features give bin
+    midpoints (x) and the per-bin contribution in log space (y); categorical
+    features give the category label (x) and its contribution (y).
+    XGB: SHAP dependence cloud per feature, one point per training row
+    (x = feature value, y = shap value in log space); ``importance`` = mean |shap|.
+    The full per-feature (x, y) columns together form the beeswarm raw matrix.
+    """
+    if model_name == "ebm":
+        return _global_curves_ebm(model)
+    if model_name == "xgb":
+        return _global_curves_xgb(model, X_train)
+    raise ValueError(f"Unknown model_name: {model_name!r}")
+
+
+def save_global_curves(
+    curves: list[dict], model_name: str, out_dir: Path | None = None
+) -> list[Path]:
+    """Write one JSON per feature: ``global_curve_{model}_{feature}.json``."""
+    return [
+        save_explanation(
+            c, f"global_curve_{model_name}_{c['feature']}.json", out_dir=out_dir
+        )
+        for c in curves
+    ]
