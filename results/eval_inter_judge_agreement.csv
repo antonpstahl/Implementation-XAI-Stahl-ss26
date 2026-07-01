@@ -1,4 +1,0 @@
-metric,Judge A,Judge B,n,tau,p
-faithfulness,Opus (claude-opus-4-8),OpenAI (gpt-4o-mini),80,0.061,0.5669
-clarity,Opus (claude-opus-4-8),OpenAI (gpt-4o-mini),80,0.087,0.4116
-completeness,Opus (claude-opus-4-8),OpenAI (gpt-4o-mini),80,-0.071,0.528
