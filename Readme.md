@@ -60,12 +60,12 @@ Quantitative cost/latency, LLM as judge with two independent judges (Opus as the
 Quantitative + LLM judge (Opus) summary across 20 explanations per pipeline (2 XAI models x 10 instances):
 
 <!-- AUTO-TABLE:pipeline-eval -->
-| Pipeline  | Avg words | Input tok.¹ | Output tok. | Cost (20 calls) | Avg latency | Judge Faith. | Clarity | Complete. |
-| --------- | --------- | ----------- | ----------- | --------------- | ----------- | ------------ | ------- | --------- |
-| Template  | 54        | 0           | 0           | $0.00           | 0.0 s       | 5.00         | 4.70    | 4.00      |
-| JSON→Text | 208       | 616         | 510         | $0.16           | 11.7 s      | 4.35         | 4.90    | 4.95      |
-| Vision    | 212       | 2,167       | 528         | $0.29           | 12.3 s      | 3.80         | 4.55    | 4.75      |
-| Tool-Use  | 305       | 3,489       | 1,225       | $0.58           | 28.8 s      | 4.40         | 3.95    | 4.90      |
+| Pipeline     | Avg words | Input tok.¹ | Output tok. | Cost (20 calls) | Avg latency | Judge Faith. | Clarity | Complete. |
+| ------------ | --------- | ----------- | ----------- | --------------- | ----------- | ------------ | ------- | --------- |
+| Template     | 57        | 0           | 0           | $0.00           | 0.0 s       | 5.00         | 4.15    | 4.80      |
+| JSON to Text | 250       | 600         | 524         | $0.17           | 11.5 s      | 5.00         | 4.10    | 5.00      |
+| Vision       | 239       | 1,085       | 571         | $0.19           | 13.2 s      | 4.50         | 4.00    | 5.00      |
+| Tool Use     | 403       | 5,786       | 1,268       | $0.73           | 33.0 s      | 5.00         | 4.10    | 5.00      |
 <!-- /AUTO-TABLE:pipeline-eval -->
 
 ¹ *Input tokens are the billed, non-cached count. JSON→Text caches the system prompt (cache-read tokens, billed at ~10%, are not counted here), which is why its input count is far below Vision's freshly-sent image tokens.* Values from `results/eval_summary.csv`.
@@ -73,11 +73,11 @@ Quantitative + LLM judge (Opus) summary across 20 explanations per pipeline (2 X
 Formal faithfulness after Ichmoukhamedov et al. (NB 06, n = 10 instances; precision-style metrics — see limitation in NB 06 §4.1):
 
 <!-- AUTO-TABLE:faithfulness -->
-| Pipeline  | Rank Agr. | Sign Agr. | Value Agr. |
-| --------- | --------- | --------- | ---------- |
-| JSON→Text | 0.562     | 0.721     | 0.667      |
-| Tool-Use  | 0.558     | 0.733     | 0.733      |
-| Vision    | 0.429     | 0.679     | 0.575      |
+| Pipeline     | Rank Agr. | Sign Agr. | Value Agr. |
+| ------------ | --------- | --------- | ---------- |
+| JSON to Text | 1.000     | 1.000     | 1.000      |
+| Tool Use     | 0.988     | 1.000     | 1.000      |
+| Vision       | 0.846     | 1.000     | 1.000      |
 <!-- /AUTO-TABLE:faithfulness -->
 
 **6 — Error analysis** (frozen diagnostic, kept locally — not included in the repository)

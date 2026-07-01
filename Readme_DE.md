@@ -187,10 +187,10 @@ Mittelwerte über 20 Erklärungen pro Pipeline (2 XAI-Modelle × 10 Instanzen):
 <!-- AUTO-TABLE:pipeline-quant-de -->
 | Pipeline | Ø Wörter | Ø Input-Tokens¹ | Ø Output-Tokens | Gesamtkosten (20 Calls) | Ø Latenz |
 |---|---|---|---|---|---|
-| Template | 54 | 0 | 0 | 0,00 USD | 0,0 s |
-| JSON→Text | 208 | 616 | 510 | 0,16 USD | 11,7 s |
-| Vision | 212 | 2 167 | 528 | 0,29 USD | 12,3 s |
-| Tool-Use | 305 | 3 489 | 1 225 | 0,58 USD | 28,8 s |
+| Template | 57 | 0 | 0 | 0,00 USD | 0,0 s |
+| JSON to Text | 250 | 600 | 524 | 0,17 USD | 11,5 s |
+| Vision | 239 | 1 085 | 571 | 0,19 USD | 13,2 s |
+| Tool Use | 403 | 5 786 | 1 268 | 0,73 USD | 33,0 s |
 <!-- /AUTO-TABLE:pipeline-quant-de -->
 
 ¹ *Input-Tokens sind die abgerechneten, nicht gecachten Tokens. JSON→Text cacht den System-Prompt
@@ -208,10 +208,10 @@ Mittelwerte über 20 Erklärungen pro Pipeline (2 XAI-Modelle × 10 Instanzen):
 <!-- AUTO-TABLE:judge-scores-de -->
 | Pipeline | Faithfulness | Clarity | Completeness |
 |---|---|---|---|
-| Template | 5,00 | 4,70 | 4,00 |
-| JSON→Text | 4,35 | 4,90 | 4,95 |
-| Vision | 3,80 | 4,55 | 4,75 |
-| Tool-Use | 4,40 | 3,95 | 4,90 |
+| Template | 5,00 | 4,15 | 4,80 |
+| JSON to Text | 5,00 | 4,10 | 5,00 |
+| Vision | 4,50 | 4,00 | 5,00 |
+| Tool Use | 5,00 | 4,10 | 5,00 |
 <!-- /AUTO-TABLE:judge-scores-de -->
 
 **Judge-Versionen:**
@@ -235,9 +235,9 @@ Formale Faithfulness-Metriken nach Ichmoukhamedov et al. (2024), n = 10 Instanze
 <!-- AUTO-TABLE:faithfulness-de -->
 | Pipeline | RA (Rank) | SA (Sign) | VA (Value) |
 |---|---|---|---|
-| JSON→Text | 0,562 | 0,721 | 0,667 |
-| Tool-Use | 0,558 | 0,733 | 0,733 |
-| Vision | 0,429 | 0,679 | 0,575 |
+| JSON to Text | 1,000 | 1,000 | 1,000 |
+| Tool Use | 0,988 | 1,000 | 1,000 |
+| Vision | 0,846 | 1,000 | 1,000 |
 <!-- /AUTO-TABLE:faithfulness-de -->
 
 ---
