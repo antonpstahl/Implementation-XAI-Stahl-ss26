@@ -18,7 +18,7 @@ RESULTS_DIR = PROJECT_ROOT / "results"
 PROMPTS_DIR = PROJECT_ROOT / "prompts"
 
 # Fixed test instances for local explanations (validity sample, n = 20).
-# 10 instances x 2 XAI models (xgb/ebm). Used in all pipelines (04a/04b/04c/04d)
+# 10 instances x 2 XAI models (xgb/ebm). Used in all pipelines (04La/04Lb/04Lc/04Ld)
 # and carry the n=20 validity analysis in NB 05 (judge + inter judge agreement,
 # judge sensitivity). Deliberately frozen.
 INSTANCE_IDS = [224, 580, 1041, 1481, 1677, 2058, 2510, 3543, 3847, 4454]

@@ -30,20 +30,20 @@ from utils.generation import generation_filename
 
 LOSS_KEY_DEFAULT = "poisson_log"
 
-# Pipeline-Kürzel → Anzeigename (identisch zu NB 07).
+# Pipeline-Kürzel -> Anzeigename (identisch zu NB 07).
 PIPELINE_LABELS = {
-    "00": "Template",
-    "04": "JSON→Text",
-    "05": "Vision",
-    "06": "Tool-Use",
+    "04La": "Template",
+    "04Lb": "JSON→Text",
+    "04Lc": "Vision",
+    "04Ld": "Tool-Use",
 }
 
 # Deterministische Pipelines: erzeugen pro Instanz identischen Text → 1 Generation
-# genügt (keine Stochastik zu messen). Template (00) ist der Textbaustein-Generator.
-DETERMINISTIC_PIPELINES = frozenset({"00"})
+# genügt (keine Stochastik zu messen). Template (04La) ist der Textbaustein-Generator.
+DETERMINISTIC_PIPELINES = frozenset({"04La"})
 
 # Tool-Use-Pipeline (client-seitiger Tool-Loop; Trace wird dem Judge beigelegt).
-TOOLUSE_PIPELINES = frozenset({"06"})
+TOOLUSE_PIPELINES = frozenset({"04Ld"})
 
 # Kosten pro 1M Token (claude-sonnet-4-6) — nur fürs Reporting, identisch zu NB 07.
 COST_INPUT_PER_M      = 3.00
@@ -78,14 +78,14 @@ def load_scale_records(
 ) -> pd.DataFrame:
     """Lädt die Generierungs-Artefakte des Skalierungslaufs gen-aware in einen df.
 
-    Liest ``pipeline{p}/{scale_subdir}/{xai}_inst{iid}[_gen{g}].json`` über alle
+    Liest ``{pipeline}/{scale_subdir}/{xai}_inst{iid}[_gen{g}].json`` über alle
     Pipelines × XAI-Modelle × Instanzen × Generationen. Das Dateinamensschema folgt
     :func:`utils.generation.generation_filename`: deterministische Pipelines
     (Template) ohne ``_gen``-Suffix (1 Generation), LLM-Pipelines mit Suffix.
 
     Der Unterordner `scale_subdir` (Default ``"scale"``) trennt den n≈200-Lauf
-    physisch von der n=20-Validität (die direkt unter ``pipeline{p}/`` liegt).
-    ``scale_subdir=""`` liest direkt aus ``pipeline{p}/`` (z. B. für Tests).
+    physisch von der n=20-Validität (die direkt unter ``{pipeline}/`` liegt).
+    ``scale_subdir=""`` liest direkt aus ``{pipeline}/`` (z. B. für Tests).
 
     Jede Zeile trägt zusätzlich zur NB-07-Spaltenmenge eine ``generation``-Spalte
     (0-basiert) und — für Tool-Use — die volle ``tool_calls``-Liste (für den
@@ -97,7 +97,7 @@ def load_scale_records(
     missing: list[str] = []
 
     for pipeline in pipelines:
-        p_dir = results_dir / f"pipeline{pipeline}"
+        p_dir = results_dir / pipeline
         if scale_subdir:
             p_dir = p_dir / scale_subdir
         n_gen = n_generations_for(pipeline, n_generations_scale)
@@ -207,7 +207,7 @@ def build_judge_prompt(
     }
 
     pipeline = row.get("pipeline", "")
-    if (pipeline in TOOLUSE_PIPELINES or pipeline == "06_tooluse") and tool_trace:
+    if (pipeline in TOOLUSE_PIPELINES) and tool_trace:
         ground_truth["tool_call_trace"] = _tool_trace_block(tool_trace)
         ground_truth["tool_trace_note"] = (
             "Die abgerufenen Werte (Beiträge, Percentile, Counterfactuals) "

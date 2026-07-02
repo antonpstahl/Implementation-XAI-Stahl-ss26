@@ -1,5 +1,5 @@
 """
-utils/tools.py - tool definitions and ToolBox for the Tool Use pipeline (notebook 04d).
+utils/tools.py - tool definitions and ToolBox for the Tool Use pipeline (notebook 04Ld).
 
 TOOL_DEFINITIONS: schemas in Anthropic format, passed to the model.
 ToolBox:          wraps model + test data; runs tool calls.
@@ -189,7 +189,7 @@ TOOL_DEFINITIONS: list[dict[str, Any]] = [
 class ToolBox:
     """
     Wraps model + test data and runs tool calls.
-    Wird in Notebook 04d mit dem geladenen Modell instanziiert.
+    Wird in Notebook 04Ld mit dem geladenen Modell instanziiert.
     """
 
     def __init__(

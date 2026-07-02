@@ -21,7 +21,7 @@ Two questions are examined in parallel:
 ├── models/          # Trained models (6 .pkl files)
 ├── explanations/    # SHAP / EBM explanations as JSON + waterfall plots (PNG)
 ├── results/         # Pipeline outputs, evaluation plots, CSV summaries
-├── notebooks/       # 12 Jupyter notebooks (01–08; incl. 02a/b and 04a–d)
+├── notebooks/       # 12 Jupyter notebooks (01–08; incl. 02a/b and 04La–Ld)
 ├── prompts/         # Prompt templates
 └── utils/           # Python helper modules (data, models, explanations, llm, tools)
 ```
@@ -49,10 +49,10 @@ Global explanations (SHAP feature importance for XGB; term importances for EBM) 
 **4 — Three LLM pipelines + a deterministic baseline**
 All LLM pipelines use `claude-sonnet-4-6` and produce three-part explanations (`[PREDICTION]`, `[DRIVERS]`, `[RECOMMENDATION]`) for non-technical staff.
 
-- **`04a` Template (baseline)** — a deterministic text-block generator that fills the same three-part structure from the identical SHAP/EBM JSON, with no LLM call. Answers the standard reviewer question: *what does the LLM add over a template?*
-- **`04b` JSON → Text** — the LLM receives global importance and local SHAP/EBM contributions as structured JSON. System prompt cached via Anthropic prompt caching; raw values denormalized into plain language (e.g. `temp=0.68` → `~27.9 °C`) before the call.
-- **`04c` Vision → Text** — the LLM receives the instance's waterfall plot as a base64-encoded PNG and reads bar lengths visually (no numeric access to contribution values).
-- **`04d` Tool-Use** — the LLM retrieves data itself through 8 defined tools (feature schema, importance, prediction, SHAP values, partial dependence, value context, similar instances, counterfactuals) in an agentic loop — averaging **5.65 tool calls** per explanation.
+- **`04La` Template (baseline)** — a deterministic text-block generator that fills the same three-part structure from the identical SHAP/EBM JSON, with no LLM call. Answers the standard reviewer question: *what does the LLM add over a template?*
+- **`04Lb` JSON → Text** — the LLM receives global importance and local SHAP/EBM contributions as structured JSON. System prompt cached via Anthropic prompt caching; raw values denormalized into plain language (e.g. `temp=0.68` → `~27.9 °C`) before the call.
+- **`04Lc` Vision → Text** — the LLM receives the instance's waterfall plot as a base64-encoded PNG and reads bar lengths visually (no numeric access to contribution values).
+- **`04Ld` Tool-Use** — the LLM retrieves data itself through 8 defined tools (feature schema, importance, prediction, SHAP values, partial dependence, value context, similar instances, counterfactuals) in an agentic loop — averaging **5.65 tool calls** per explanation.
 
 **5 — Evaluation** (`05_Evaluation.ipynb`, `06_Evaluation_Ichmoukhamedov.ipynb`)
 Quantitative cost/latency, LLM as judge with two independent judges (Opus as the primary judge plus OpenAI gpt-4o-mini as a cross vendor robustness check, identical rubric), and formal faithfulness metrics after Ichmoukhamedov et al. (Rank / Sign / Value Agreement).
@@ -112,7 +112,7 @@ Parameters are centralised in `utils/llm.py`.
 
 | Use case | Model | `max_tokens` | `temperature` |
 |---|---|---|---|
-| Explanation generation (NB 04b / 04c / 04d) | `claude-sonnet-4-6` | 2048 | default (1.0) |
+| Explanation generation (NB 04Lb / 04Lc / 04Ld) | `claude-sonnet-4-6` | 2048 | default (1.0) |
 | Judge, primary (NB 05) | `claude-opus-4-8` | 900 | 0.0 |
 | Judge, cross vendor (NB 05) | `gpt-4o-mini` (OpenAI) | 900 | default |
 | Ichmoukhamedov metrics (NB 06) | `claude-sonnet-4-6` | 700 | default (1.0) |

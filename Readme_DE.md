@@ -21,7 +21,7 @@ Implementation-XAI-Stahl-ss26/
 ├── models/             # Trainierte Modelle (6 .pkl-Dateien)
 ├── explanations/       # SHAP-/EBM-Erklärungen als JSON + Waterfall-Plots (PNG)
 ├── results/            # Pipeline-Ausgaben, Evaluierungsplots, CSV-Zusammenfassungen
-├── notebooks/          # 12 Jupyter Notebooks (01–08; inkl. 02a/b und 04a–d)
+├── notebooks/          # 12 Jupyter Notebooks (01–08; inkl. 02a/b und 04La–Ld)
 └── utils/              # Python-Hilfmodule (data.py, models.py, explanations.py, llm.py, tools.py)
 ```
 
@@ -131,13 +131,13 @@ Für beide Modelle (XGB, EBM) wurden globale und lokale Erklärungen erstellt:
 Alle LLM-Pipelines verwenden `claude-sonnet-4-6` und erzeugen deutsche, dreistufige Erklärungen
 (Abschnitte `[VORHERSAGE]`, `[TREIBER]`, `[EMPFEHLUNG]`) für Mitarbeitende ohne technischen Hintergrund.
 
-### Pipeline 04a — Template-Baseline (`04a_Template_Pipeline_Baseline.ipynb`)
+### Pipeline 04La — Template-Baseline (`04La_Template_Pipeline_Baseline.ipynb`)
 
 Deterministischer Textbaustein-Generator, der dieselbe Dreiteilung aus denselben SHAP-/EBM-JSONs
 ohne LLM-Aufruf befüllt. Beantwortet die Standard-Reviewer-Frage: *Was leistet das LLM über
 einen Textbaustein hinaus?*
 
-### Pipeline 04b — JSON → Text (`04b_LLM_JSON_Pipeline.ipynb`)
+### Pipeline 04Lb — JSON → Text (`04Lb_LLM_JSON_Pipeline.ipynb`)
 
 Das LLM erhält globale Feature Importance und lokale SHAP-/EBM-Beiträge als strukturiertes JSON.
 
@@ -147,7 +147,7 @@ Das LLM erhält globale Feature Importance und lokale SHAP-/EBM-Beiträge als st
 - **Besonderheit:** `build_context_string()` denormalisiert Rohwerte in Alltagssprache
   (z.B. `temp=0.68` → `~27,9 °C`) vor dem API-Aufruf
 
-### Pipeline 04c — Vision → Text (`04c_LLM_Vision_Pipeline.ipynb`)
+### Pipeline 04Lc — Vision → Text (`04Lc_LLM_Vision_Pipeline.ipynb`)
 
 Das LLM erhält den Waterfall-Plot der Instanz als base64-kodiertes PNG.
 
@@ -156,7 +156,7 @@ Das LLM erhält den Waterfall-Plot der Instanz als base64-kodiertes PNG.
 - **Besonderheit:** Kein numerischer Zugriff auf Beitragswerte — das Modell liest Balkenlängen
   visuell ab (potenzielle Unschärfe bei kleinen Beiträgen)
 
-### Pipeline 04d — Tool-Use (`04d_LLM_ToolUse_Pipeline.ipynb`)
+### Pipeline 04Ld — Tool-Use (`04Ld_LLM_ToolUse_Pipeline.ipynb`)
 
 Das LLM ruft Daten selbst über definierte Tools ab (agentic loop).
 
@@ -305,10 +305,10 @@ Er ist ein hartes Gate: ein frischer Generierungslauf darf erst starten, wenn al
 02a_Modeling_AllOptions      → models/*.pkl
 02b_Comparison               → results/model_comparison_summary.csv
 03_Explanations_Generation    → explanations/*.json, explanations/plots/*.png
-04a_Template_Pipeline_Baseline → results/pipeline00/*.json
-04b_LLM_JSON_Pipeline         → results/pipeline04/*.json
-04c_LLM_Vision_Pipeline       → results/pipeline05/*.json
-04d_LLM_ToolUse_Pipeline      → results/pipeline06/*.json
+04La_Template_Pipeline_Baseline → results/04La/*.json
+04Lb_LLM_JSON_Pipeline         → results/04Lb/*.json
+04Lc_LLM_Vision_Pipeline       → results/04Lc/*.json
+04Ld_LLM_ToolUse_Pipeline      → results/04Ld/*.json
 05_Evaluation                → results/eval_*.{csv,png,json}
 06_Evaluation_Ichmoukhamedov -> results/eval06_ichmoukhamedov/
 ```

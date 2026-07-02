@@ -24,7 +24,7 @@ from typing import Any, Callable, Iterable, Optional
 
 # generate(model_name, instance_id, generation_idx) -> record dict | None
 #   Returns None to skip this generation (for example after an error in the
-#   Tool Use loop, NB 04d), then nothing is persisted.
+#   Tool Use loop, NB 04Ld), then nothing is persisted.
 GenerateFn = Callable[[str, int, int], Optional[dict]]
 HookFn = Callable[[dict, str, int, int], None]
 
@@ -38,7 +38,7 @@ def load_local_explanation(
 ) -> dict:
     """Local SHAP/EBM explanation of a test instance (`local_{model}_{loss}_inst{id}.json`).
 
-    Previously inlined three times in NB 04b/04c; centralised so the path scheme and
+    Previously inlined three times in NB 04Lb/04Lc; centralised so the path scheme and
     loss key live in one place.
     """
     p = Path(explanations_dir) / f"local_{model_name}_{loss_key}_inst{instance_id}.json"
@@ -76,16 +76,16 @@ def build_generation_record(
 ) -> dict:
     """Build the persisted explanation record - one schema for all three pipelines.
 
-    Reproduces the records previously inlined three times in NB 04b/04c/06 exactly
+    Reproduces the records previously inlined three times in NB 04Lb/04Lc/04Ld exactly
     (including key order), parametrised over the few real differences:
 
     * ``extra``         - modality specific fields, inserted directly after
-                          ``explanation`` (NB 04c: ``plot_file``; NB 04d:
+                          ``explanation`` (NB 04Lc: ``plot_file``; NB 04Ld:
                           ``stop_reason`` / ``tool_calls`` / ``n_tool_calls``).
-    * ``prediction``    - omitted when not passed (NB 04d carries no prediction in
+    * ``prediction``    - omitted when not passed (NB 04Ld carries no prediction in
                           the record).
-    * ``include_cache`` - ``cache_read_input_tokens`` in ``usage`` (NB 04b/04c: yes;
-                          NB 04d Tool Use: no).
+    * ``include_cache`` - ``cache_read_input_tokens`` in ``usage`` (NB 04Lb/04Lc: yes;
+                          NB 04Ld Tool Use: no).
     """
     in_tok  = usage.get("input_tokens", 0)
     out_tok = usage.get("output_tokens", 0)

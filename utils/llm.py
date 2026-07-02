@@ -4,7 +4,7 @@ utils/llm.py - wrapper around the Anthropic client for the three LLM pipelines.
 Bundles configuration (model id, max_tokens) and offers simple helpers for text
 only and multimodal (vision) requests. Used by notebooks 04, 05 and 06.
 
-The concrete Tool Use loop for notebook 04d is implemented there, because it is
+The concrete Tool Use loop for notebook 04Ld is implemented there, because it is
 model specific (tool definitions, stop reason handling).
 """
 
@@ -32,7 +32,7 @@ except ImportError:
 # Retrieved on:  2026-06-11
 #
 # Model ids by role:
-#   Explanation generation  (NB 04b / 04c / 04d)  -> claude-sonnet-4-6
+#   Explanation generation  (NB 04Lb / 04Lc / 04Ld)  -> claude-sonnet-4-6
 #   Judge, primary          (NB 05)               -> claude-opus-4-8
 #   Judge, cross vendor     (NB 05)               -> gpt-4o-mini (OpenAI)
 #   Ichmoukhamedov metrics  (NB 06)               -> claude-sonnet-4-6
@@ -390,7 +390,7 @@ def build_image_params(
     cache_system: bool = True,
     temperature: float | None = None,
 ) -> dict:
-    """Build the `messages.create` parameters for a multimodal request (NB 04c).
+    """Build the `messages.create` parameters for a multimodal request (NB 04Lc).
 
     Images are base64 encoded into the user content. Shared request shape for real
     time (`run_params`) and batch (`utils.batch.message_request`).
@@ -419,7 +419,7 @@ def ask_with_images(
     cache_system: bool = True,
     temperature: float | None = None,
 ) -> dict:
-    """Multimodal request with one or more images (notebook 04c).
+    """Multimodal request with one or more images (notebook 04Lc).
 
     Images are passed base64 encoded.
     temperature : see ask_text.

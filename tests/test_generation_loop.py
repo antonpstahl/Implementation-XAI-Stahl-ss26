@@ -5,7 +5,7 @@ A test with a mocked LLM shows that generations per instance are persisted
 correctly, resumable after an abort and idempotent (no double counting).
 
 Tests `utils.run_resumable_generation`, into which the skip if exists loop
-previously inlined three times (NB 04b/04c/06) was extracted. The LLM call is
+previously inlined three times (NB 04Lb/04Lc/04Ld) was extracted. The LLM call is
 replaced by a counting `generate` callback.
 """
 from __future__ import annotations
@@ -169,7 +169,7 @@ def test_resumed_records_come_from_disk(tmp_path):
 
 
 # ---------------------------------------------------------------------------
-# Error skip (NB 04d tool-use loop may fail on an instance)
+# Error skip (NB 04Ld tool-use loop may fail on an instance)
 # ---------------------------------------------------------------------------
 
 def test_none_record_is_not_persisted_and_retried_next_run(tmp_path):
@@ -265,7 +265,7 @@ def test_out_dir_created_if_missing(tmp_path):
 
 
 # ---------------------------------------------------------------------------
-# build_generation_record - golden schemas of the three pipelines (NB 04b/04c/06)
+# build_generation_record - golden schemas of the three pipelines (NB 04Lb/04Lc/04Ld)
 #
 # Freezes the records previously built inline: same keys, same order, same values.
 # Breaks if the central builder diverges from the notebook schema (silent
@@ -276,9 +276,9 @@ USAGE_FULL = {"input_tokens": 600, "output_tokens": 510, "cache_read_input_token
 USAGE_TOOL = {"input_tokens": 3489, "output_tokens": 1225}
 
 
-def test_record_schema_pipeline04_json():
+def test_record_schema_04Lb_json():
     expected = {
-        "pipeline":    "04_json",
+        "pipeline":    "04Lb",
         "llm_model":   "claude-sonnet-4-6",
         "loss_key":    "poisson_log",
         "xai_model":   "xgb",
@@ -291,7 +291,7 @@ def test_record_schema_pipeline04_json():
         "y_true":      270,
     }
     rec = build_generation_record(
-        pipeline="04_json", model_name="xgb", instance_id=224,
+        pipeline="04Lb", model_name="xgb", instance_id=224,
         explanation="Explanation text", usage=USAGE_FULL,
         llm_model="claude-sonnet-4-6", loss_key="poisson_log",
         prediction=270.4, y_true=270, elapsed_s=11.7,
@@ -300,9 +300,9 @@ def test_record_schema_pipeline04_json():
     assert list(rec) == list(expected)  # identical key order
 
 
-def test_record_schema_pipeline05_vision():
+def test_record_schema_04Lc_vision():
     expected = {
-        "pipeline":    "05_vision",
+        "pipeline":    "04Lc",
         "llm_model":   "claude-sonnet-4-6",
         "loss_key":    "poisson_log",
         "xai_model":   "ebm",
@@ -316,7 +316,7 @@ def test_record_schema_pipeline05_vision():
         "y_true":      5,
     }
     rec = build_generation_record(
-        pipeline="05_vision", model_name="ebm", instance_id=580,
+        pipeline="04Lc", model_name="ebm", instance_id=580,
         explanation="Image explanation", usage=USAGE_FULL,
         llm_model="claude-sonnet-4-6", loss_key="poisson_log",
         prediction=5.1, y_true=5, elapsed_s=12.3,
@@ -326,10 +326,10 @@ def test_record_schema_pipeline05_vision():
     assert list(rec) == list(expected)
 
 
-def test_record_schema_pipeline06_tooluse():
+def test_record_schema_04Ld_tooluse():
     call_log = [{"tool": "get_shap_values", "arguments": {"instance_id": 224}}]
     expected = {
-        "pipeline":     "06_tooluse",
+        "pipeline":     "04Ld",
         "llm_model":    "claude-sonnet-4-6",
         "loss_key":     "poisson_log",
         "xai_model":    "xgb",
@@ -343,7 +343,7 @@ def test_record_schema_pipeline06_tooluse():
         "y_true":       270.0,
     }
     rec = build_generation_record(
-        pipeline="06_tooluse", model_name="xgb", instance_id=224,
+        pipeline="04Ld", model_name="xgb", instance_id=224,
         explanation="Tool explanation", usage=USAGE_TOOL,
         llm_model="claude-sonnet-4-6", loss_key="poisson_log",
         y_true=270.0, elapsed_s=28.8, include_cache=False,
