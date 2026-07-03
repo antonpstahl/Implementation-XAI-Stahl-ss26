@@ -43,6 +43,24 @@ from .batch import (  # noqa: F401
     collect_results,
     run_batch,
 )
+from .global_feature import (  # noqa: F401
+    GLOBAL_RESULTS_SUBDIR,
+    list_global_features,
+    feature_importance_map,
+    load_global_curve,
+    shape_plot_path,
+    beeswarm_plot_path,
+    build_feature_json_payload,
+    global_generation_filename,
+    build_global_record,
+    run_resumable_global_generation,
+)
+from .global_tools import (  # noqa: F401
+    GLOBAL_TOOL_DEFINITIONS,
+    GlobalToolBox,
+    ToolImage,
+    run_global_tool_use_loop,
+)
 
 __all__ = [
     "PROJECT_ROOT",
@@ -66,4 +84,18 @@ __all__ = [
     "wait_for_batch",
     "collect_results",
     "run_batch",
+    "GLOBAL_RESULTS_SUBDIR",
+    "list_global_features",
+    "feature_importance_map",
+    "load_global_curve",
+    "shape_plot_path",
+    "beeswarm_plot_path",
+    "build_feature_json_payload",
+    "global_generation_filename",
+    "build_global_record",
+    "run_resumable_global_generation",
+    "GLOBAL_TOOL_DEFINITIONS",
+    "GlobalToolBox",
+    "ToolImage",
+    "run_global_tool_use_loop",
 ]
