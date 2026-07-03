@@ -1,0 +1,18 @@
+{
+  "model": "xgb",
+  "feature": "yr",
+  "kind": "continuous",
+  "is_binary": true,
+  "importance": 0.20042,
+  "importance_rang": 2,
+  "form": "monoton",
+  "n_grid": 2,
+  "verified": false,
+  "richtung": "steigend",
+  "monotonie": "monoton_steigend",
+  "peak": null,
+  "effect_range": 0.40363,
+  "y_at_min_x": -0.23459,
+  "y_at_max_x": 0.16904,
+  "sign_change_x": 0.5812
+}

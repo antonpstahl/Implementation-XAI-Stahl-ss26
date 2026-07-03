@@ -1,0 +1,43 @@
+{
+  "model": "xgb",
+  "feature": "hr",
+  "kind": "categorical",
+  "is_binary": false,
+  "importance": 0.83258,
+  "importance_rang": 1,
+  "form": "kategorial",
+  "n_grid": 24,
+  "verified": false,
+  "richtung": "kategorial",
+  "monotonie": "n/a",
+  "peak": null,
+  "effect_range": 4.00101,
+  "top_categories": [
+    {
+      "cat": 17.0,
+      "y": 0.79947
+    },
+    {
+      "cat": 18.0,
+      "y": 0.71562
+    },
+    {
+      "cat": 8.0,
+      "y": 0.53603
+    }
+  ],
+  "bottom_categories": [
+    {
+      "cat": 4.0,
+      "y": -3.20154
+    },
+    {
+      "cat": 3.0,
+      "y": -2.75137
+    },
+    {
+      "cat": 5.0,
+      "y": -2.26958
+    }
+  ]
+}

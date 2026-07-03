@@ -1,0 +1,22 @@
+{
+  "model": "xgb",
+  "feature": "windspeed",
+  "kind": "continuous",
+  "is_binary": false,
+  "importance": 0.02031,
+  "importance_rang": 8,
+  "form": "nicht-monoton",
+  "n_grid": 29,
+  "verified": false,
+  "richtung": "gemischt",
+  "monotonie": "nicht_monoton",
+  "peak": {
+    "type": "max",
+    "x": 0.1642,
+    "y": 0.01846
+  },
+  "effect_range": 0.71225,
+  "y_at_min_x": 0.00658,
+  "y_at_max_x": -0.19725,
+  "sign_change_x": 0.2375
+}

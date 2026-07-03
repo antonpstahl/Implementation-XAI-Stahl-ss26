@@ -1,0 +1,22 @@
+{
+  "model": "xgb",
+  "feature": "hum",
+  "kind": "continuous",
+  "is_binary": false,
+  "importance": 0.07722,
+  "importance_rang": 6,
+  "form": "nicht-monoton",
+  "n_grid": 85,
+  "verified": false,
+  "richtung": "gemischt",
+  "monotonie": "nicht_monoton",
+  "peak": {
+    "type": "max",
+    "x": 0.34,
+    "y": 0.08719
+  },
+  "effect_range": 0.52204,
+  "y_at_min_x": -0.37871,
+  "y_at_max_x": -0.30086,
+  "sign_change_x": 0.0726
+}

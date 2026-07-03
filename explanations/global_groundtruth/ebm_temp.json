@@ -1,0 +1,22 @@
+{
+  "model": "ebm",
+  "feature": "temp",
+  "kind": "continuous",
+  "is_binary": false,
+  "importance": 0.25257,
+  "importance_rang": 2,
+  "form": "nicht-monoton",
+  "n_grid": 48,
+  "verified": false,
+  "richtung": "gemischt",
+  "monotonie": "nicht_monoton",
+  "peak": {
+    "type": "max",
+    "x": 0.76,
+    "y": 0.32099
+  },
+  "effect_range": 1.84824,
+  "y_at_min_x": -1.52725,
+  "y_at_max_x": -0.09909,
+  "sign_change_x": 0.4379
+}

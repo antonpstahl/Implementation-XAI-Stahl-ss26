@@ -1,0 +1,18 @@
+{
+  "model": "xgb",
+  "feature": "holiday",
+  "kind": "continuous",
+  "is_binary": true,
+  "importance": 0.012,
+  "importance_rang": 9,
+  "form": "fast-flach",
+  "n_grid": 2,
+  "verified": false,
+  "richtung": "fallend",
+  "monotonie": "monoton_fallend",
+  "peak": null,
+  "effect_range": 0.17329,
+  "y_at_min_x": 0.00137,
+  "y_at_max_x": -0.17192,
+  "sign_change_x": 0.0079
+}

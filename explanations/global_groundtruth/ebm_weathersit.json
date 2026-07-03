@@ -1,0 +1,43 @@
+{
+  "model": "ebm",
+  "feature": "weathersit",
+  "kind": "categorical",
+  "is_binary": false,
+  "importance": 0.06086,
+  "importance_rang": 6,
+  "form": "kategorial",
+  "n_grid": 4,
+  "verified": false,
+  "richtung": "kategorial",
+  "monotonie": "n/a",
+  "peak": null,
+  "effect_range": 0.39545,
+  "top_categories": [
+    {
+      "cat": "1",
+      "y": 0.04673
+    },
+    {
+      "cat": "2",
+      "y": -0.00208
+    },
+    {
+      "cat": "4",
+      "y": -0.26383
+    }
+  ],
+  "bottom_categories": [
+    {
+      "cat": "3",
+      "y": -0.34872
+    },
+    {
+      "cat": "4",
+      "y": -0.26383
+    },
+    {
+      "cat": "2",
+      "y": -0.00208
+    }
+  ]
+}

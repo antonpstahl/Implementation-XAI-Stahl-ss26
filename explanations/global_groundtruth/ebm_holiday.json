@@ -1,0 +1,18 @@
+{
+  "model": "ebm",
+  "feature": "holiday",
+  "kind": "continuous",
+  "is_binary": true,
+  "importance": 0.00791,
+  "importance_rang": 9,
+  "form": "fast-flach",
+  "n_grid": 2,
+  "verified": false,
+  "richtung": "fallend",
+  "monotonie": "monoton_fallend",
+  "peak": null,
+  "effect_range": 0.14877,
+  "y_at_min_x": 0.00407,
+  "y_at_max_x": -0.14471,
+  "sign_change_x": 0.2637
+}

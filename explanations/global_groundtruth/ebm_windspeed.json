@@ -1,0 +1,18 @@
+{
+  "model": "ebm",
+  "feature": "windspeed",
+  "kind": "continuous",
+  "is_binary": false,
+  "importance": 0.01426,
+  "importance_rang": 8,
+  "form": "fast-flach",
+  "n_grid": 26,
+  "verified": false,
+  "richtung": "fallend",
+  "monotonie": "monoton_fallend",
+  "peak": null,
+  "effect_range": 0.36462,
+  "y_at_min_x": 0.01313,
+  "y_at_max_x": -0.34255,
+  "sign_change_x": 0.1248
+}

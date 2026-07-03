@@ -1,0 +1,18 @@
+{
+  "model": "ebm",
+  "feature": "yr",
+  "kind": "continuous",
+  "is_binary": true,
+  "importance": 0.21662,
+  "importance_rang": 3,
+  "form": "monoton",
+  "n_grid": 2,
+  "verified": false,
+  "richtung": "steigend",
+  "monotonie": "monoton_steigend",
+  "peak": null,
+  "effect_range": 0.43403,
+  "y_at_min_x": -0.22626,
+  "y_at_max_x": 0.20776,
+  "sign_change_x": 0.5107
+}
