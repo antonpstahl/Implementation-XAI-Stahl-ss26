@@ -17,10 +17,12 @@ from utils import EXPLANATIONS_DIR
 from utils.global_feature import (
     build_feature_json_payload,
     build_global_record,
+    describe_curve,
     feature_importance_map,
     global_generation_filename,
     list_global_features,
     load_global_curve,
+    readable_feature_value,
     run_resumable_global_generation,
     shape_plot_path,
     beeswarm_plot_path,
@@ -72,6 +74,47 @@ def test_plot_paths_resolve():
 def test_bad_model_name_rejected():
     with pytest.raises(ValueError):
         shape_plot_path("lgbm", "hr", plots_dir=PLOTS)
+
+
+# -----------------------------------------------------------------------------
+# Curve derivation (shared baseline + G3 ground-truth source)
+# -----------------------------------------------------------------------------
+
+def test_readable_feature_value():
+    assert readable_feature_value("hr", 7) == "07:00"
+    assert readable_feature_value("temp", 0.68).startswith("~27.9")
+    assert readable_feature_value("yr", 0) == "2011"
+    assert readable_feature_value("yr", 1) == "2012"
+    assert readable_feature_value("weekday", 3) == "Wednesday"
+    assert readable_feature_value("holiday", 1) == "holiday"
+
+
+def test_describe_curve_fields_and_domains():
+    d = describe_curve("ebm", "hr", explanations_dir=EXPLANATIONS_DIR)
+    assert set(d) == {"feature", "kind", "direction", "monotonicity", "shape",
+                      "peak_x", "peak_value", "peak_label"}
+    assert d["direction"] in {"rising", "falling", "mixed", "flat"}
+    assert d["monotonicity"] in {"monotonic", "non_monotonic", "flat"}
+    assert d["shape"] in {"monotonic", "non_monotonic", "categorical", "near_flat"}
+
+
+def test_describe_curve_categorical_and_monotonic():
+    # hr is a categorical curve
+    assert describe_curve("ebm", "hr", explanations_dir=EXPLANATIONS_DIR)["shape"] == "categorical"
+    # yr is a monotonic step for the EBM (2011 -> 2012 rising)
+    yr = describe_curve("ebm", "yr", explanations_dir=EXPLANATIONS_DIR)
+    assert yr["monotonicity"] == "monotonic" and yr["direction"] == "rising"
+    assert yr["peak_label"] == "2012"
+
+
+def test_describe_curve_matches_manual_peak():
+    # peak_label must be the readable value at the argmax of y
+    curve = load_global_curve("ebm", "temp", explanations_dir=EXPLANATIONS_DIR)
+    y = [float(v) for v in curve["y"]]
+    x = [float(v) for v in curve["x"]]
+    peak_raw = x[max(range(len(y)), key=lambda i: y[i])]
+    d = describe_curve("ebm", "temp", explanations_dir=EXPLANATIONS_DIR)
+    assert d["peak_label"] == readable_feature_value("temp", peak_raw)
 
 
 # -----------------------------------------------------------------------------

@@ -99,6 +99,112 @@ def list_global_features(
 
 
 # -----------------------------------------------------------------------------
+# Curve derivation (shared source of truth: deterministic baseline 04Ga + G3 ground truth)
+# -----------------------------------------------------------------------------
+# Discrete-coded features: readable_feature_value truncates via int(), so continuous
+# shape-curve x-grid points (bin midpoints like 0.75) are rounded to hit the right label.
+_DISCRETE_FEATURES = {"hr", "yr", "mnth", "weekday", "weathersit", "holiday"}
+_WEEKDAYS = {0: "Sunday", 1: "Monday", 2: "Tuesday", 3: "Wednesday",
+             4: "Thursday", 5: "Friday", 6: "Saturday"}
+_MONTHS = {1: "January", 2: "February", 3: "March", 4: "April", 5: "May", 6: "June",
+           7: "July", 8: "August", 9: "September", 10: "October", 11: "November",
+           12: "December"}
+_WEATHER = {1: "clear/few clouds", 2: "mist/cloudy", 3: "light rain/snow",
+            4: "heavy rain/thunderstorm"}
+
+
+def readable_feature_value(feature: str, raw: float) -> str:
+    """Denormalise a raw feature value into a readable string (e.g. hr 7 -> ``07:00``).
+
+    Single source of the denormalisation used by the global template baseline and the
+    G3 ground truth, so both verbalise feature values identically.
+    """
+    if feature == "hr":
+        return f"{int(raw):02d}:00"
+    if feature == "temp":
+        return f"~{raw * 41:.1f} C"
+    if feature == "hum":
+        return f"{raw * 100:.0f} %"
+    if feature == "windspeed":
+        return f"{raw * 67:.1f} km/h"
+    if feature == "yr":
+        return "2011" if int(raw) == 0 else "2012"
+    if feature == "mnth":
+        return _MONTHS.get(int(raw), str(int(raw)))
+    if feature == "weekday":
+        return _WEEKDAYS.get(int(raw), str(int(raw)))
+    if feature == "weathersit":
+        return _WEATHER.get(int(raw), str(int(raw)))
+    if feature == "holiday":
+        return "holiday" if int(raw) == 1 else "no holiday"
+    return str(raw)
+
+
+def describe_curve(
+    model_name: str,
+    feature: str,
+    *,
+    explanations_dir: Path | str,
+    flat_eps: float = 0.02,
+) -> dict:
+    """Derive the structural facts of a feature's global curve.
+
+    The **single source of truth** for the deterministic per-feature baseline (04Ga)
+    and the G3 ground truth — so the baseline is scored against fields derived exactly
+    the way it produced them (it should hit the structural GT fields by construction;
+    the open question is what the LLM adds on top).
+
+    Returns ``{feature, kind, direction, monotonicity, shape, peak_x, peak_value,
+    peak_label}``:
+      * ``direction``    : ``rising`` | ``falling`` | ``mixed`` | ``flat`` (sign of the
+                           net change across the range; ``mixed`` = interior extremum).
+      * ``monotonicity`` : ``monotonic`` | ``non_monotonic`` | ``flat``.
+      * ``shape``        : ``categorical`` (categorical curve) | ``near_flat``
+                           (amplitude < ``flat_eps``) | else the monotonicity label —
+                           the coarse form type for the G3 stratification.
+      * ``peak_*``       : the x (raw + readable) and y where the contribution is highest.
+
+    ``flat_eps`` is a heuristic amplitude threshold (log-space contribution range) for
+    "negligible effect"; the G3 ground truth is domain-verified on top of this.
+    """
+    curve = load_global_curve(model_name, feature, explanations_dir=explanations_dir)
+    x = [float(v) for v in curve["x"]]
+    y = [float(v) for v in curve["y"]]
+    kind = curve["kind"]
+    n = len(y)
+
+    peak_i = max(range(n), key=lambda i: y[i]) if n else 0
+    trough_i = min(range(n), key=lambda i: y[i]) if n else 0
+    amplitude = (max(y) - min(y)) if n else 0.0
+
+    if n < 2 or amplitude < flat_eps:
+        direction, monotonicity, shape = "flat", "flat", "near_flat"
+    else:
+        interior_extremum = (0 < peak_i < n - 1) or (0 < trough_i < n - 1)
+        if interior_extremum:
+            direction, monotonicity = "mixed", "non_monotonic"
+        else:
+            direction = "rising" if y[-1] >= y[0] else "falling"
+            monotonicity = "monotonic"
+        shape = "categorical" if kind == "categorical" else monotonicity
+
+    peak_raw = x[peak_i] if n else 0.0
+    if feature in _DISCRETE_FEATURES:
+        peak_raw = round(peak_raw)
+
+    return {
+        "feature": feature,
+        "kind": kind,
+        "direction": direction,
+        "monotonicity": monotonicity,
+        "shape": shape,
+        "peak_x": peak_raw,
+        "peak_value": y[peak_i] if n else None,
+        "peak_label": readable_feature_value(feature, peak_raw),
+    }
+
+
+# -----------------------------------------------------------------------------
 # JSON pipeline payload (04Gb)
 # -----------------------------------------------------------------------------
 
