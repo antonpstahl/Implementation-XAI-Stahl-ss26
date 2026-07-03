@@ -10,13 +10,19 @@ JSON-vs-Vision-vs-Tool-Use comparison measures the *modality*, not prompt wordin
 Placeholders vary along two independent axes:
   - {{MODEL}}           varies by MODEL ("EBM" | "XGBoost") — identical across the
                         three modalities, so it does not confound the modality comparison.
+  - {{ARTIFACT}}        varies by MODEL, vision only ("EBM shape plot" |
+                        "XGBoost SHAP dependence plot") — names the plot type the model
+                        actually sees. Sits inside the (already modality-specific) vision
+                        handover, so it does not touch the shared core; correctly naming
+                        the XGB scatter reduces a model-vs-method confound in vision.
   - {{HANDOVER_FORMAT}} varies by MODALITY (json | vision | tooluse).
   - {{FEATURE}} / {{HANDOVER}} / {{RANK}} / {{N_FEATURES}}  vary per feature/instance.
 
 How the notebooks (04Gb/04Gc/04Gd) use it:
   system = CORE with {{MODEL}} filled (EBM/XGBoost) and {{HANDOVER_FORMAT}} replaced by
-           the matching block from "HANDOVER FORMAT variants" (cached via prompt
-           caching, cache_system=True — one cache entry per model x modality).
+           the matching block from "HANDOVER FORMAT variants" (04Gc also fills
+           {{ARTIFACT}} in that block); cached via prompt caching, cache_system=True —
+           one cache entry per model x modality.
   user   = the "USER MESSAGE" pattern for that form (carries {{FEATURE}}/{{HANDOVER}}).
 Output convention matches the deterministic baselines (04Ga / 04La): a short
 <scratchpad> (stripped via utils.llm.strip_scratchpad) then the bracketed sections.
@@ -111,11 +117,12 @@ strictly from `rank` / `importance`.
 
 ## vision  → 04Gc
 ```
-You receive an image: this feature's global plot (an EBM shape plot or an XGBoost SHAP
-dependence plot). The x-axis is the feature value, the y-axis is the contribution to
-demand in log space (above zero raises demand, below zero lowers it). Read the
-direction, shape and peak visually from the curve. The importance rank of the feature
-is stated in the user message.
+You receive an image: this feature's global plot, a **{{ARTIFACT}}**. The x-axis is the
+feature value, the y-axis is the contribution to demand in log space (above zero raises
+demand, below zero lowers it). If the plot shows individual points (a dependence plot),
+read the overall trend of the points, not their vertical spread. Read the direction,
+shape and peak visually from the plot. The importance rank of the feature is stated in
+the user message.
 ```
 
 ## tooluse  → 04Gd
