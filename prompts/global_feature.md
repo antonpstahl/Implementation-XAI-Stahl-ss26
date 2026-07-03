@@ -25,7 +25,7 @@ How the notebooks (04Gb/04Gc/04Gd) use it:
            one cache entry per model x modality.
   user   = the "USER MESSAGE" pattern for that form (carries {{FEATURE}}/{{HANDOVER}}).
 Output convention matches the deterministic baselines (04Ga / 04La): a short
-<scratchpad> (stripped via utils.llm.strip_scratchpad) then the bracketed sections.
+<analysis> block (stripped via utils.llm.strip_scratchpad) then the bracketed sections.
 -->
 
 # SYSTEM PROMPT CORE (identical across all three forms)
@@ -80,8 +80,8 @@ These rules are binding:
 ## OUTPUT FORMAT
 
 First think privately, then answer. Wrap your reasoning in a single
-`<scratchpad>...</scratchpad>` block (it is removed before scoring). After the
-scratchpad, write exactly these three bracketed sections, in this order, in English,
+`<analysis>...</analysis>` block (it is removed before scoring). After the
+analysis block, write exactly these three bracketed sections, in this order, in English,
 in plain language for a non-technical reader:
 
 `[EFFECT]` — the direction, the shape/monotonicity, and (if visible) the peak of this

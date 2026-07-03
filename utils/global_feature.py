@@ -22,6 +22,7 @@ idempotent / lossless / error-skip), only the iterated unit is the feature.
 from __future__ import annotations
 
 import json
+import re
 from pathlib import Path
 from typing import Any, Callable, Iterable, Optional
 
@@ -239,6 +240,68 @@ def build_feature_json_payload(
         "n_features": len(g["global_importance"]),
         "curve": {"x": curve["x"], "y": curve["y"]},
     }
+
+
+# -----------------------------------------------------------------------------
+# Prompt assembly (shared by 04Gb / 04Gc / 04Gd)
+# -----------------------------------------------------------------------------
+# The single prompt template prompts/global_feature.md has a byte-identical core plus
+# per-modality handover blocks. Parse it once here so the three notebooks don't each
+# re-implement the markdown extraction (and can't drift apart).
+MODEL_LABELS = {"ebm": "EBM", "xgb": "XGBoost"}
+ARTIFACT_LABELS = {"ebm": "EBM shape plot", "xgb": "XGBoost SHAP dependence plot"}
+
+
+def _handover_block(variants_section: str, form: str) -> str:
+    m = re.search(
+        r"^##\s+" + re.escape(form) + r"\b[^\n]*\n```\n(.*?)\n```",
+        variants_section, re.DOTALL | re.MULTILINE,
+    )
+    if m is None:
+        raise ValueError(f"No handover block for form '{form}' in the prompt template.")
+    return m.group(1).strip()
+
+
+def assemble_global_system_prompt(
+    form: str,
+    model_name: str,
+    *,
+    prompts_dir: Path | str,
+    prompt_file: str = "global_feature.md",
+) -> str:
+    """Build the system prompt for one (form, model) from ``global_feature.md``.
+
+    Splices the modality's handover block into the shared core and fills {{MODEL}}
+    (and, for vision, {{ARTIFACT}}). ``form`` in {"json", "vision", "tooluse"}.
+    Raises if any ``{{placeholder}}`` is left unresolved (catches template drift).
+    The per-feature {{FEATURE}}/{{HANDOVER}} placeholders live in the USER MESSAGE, not
+    here — the notebook builds that at call time.
+    """
+    md = (Path(prompts_dir) / prompt_file).read_text()
+    try:
+        core = md.split("# SYSTEM PROMPT CORE", 1)[1].split("# HANDOVER FORMAT variants", 1)[0]
+        variants = md.split("# HANDOVER FORMAT variants", 1)[1].split("# USER MESSAGE pattern", 1)[0]
+    except IndexError as exc:  # pragma: no cover - template shape guard
+        raise ValueError("global_feature.md is missing an expected section header.") from exc
+
+    core = core[core.index("\n") + 1:]                  # drop the rest of the header line
+    core = re.sub(r"\n-{3,}\s*$", "", core.strip())     # drop trailing '---' separator
+
+    model_key = model_name.lower()
+    if model_key not in MODEL_LABELS:
+        raise ValueError(f"Unknown model_name '{model_name}' (expected 'ebm' or 'xgb').")
+
+    sys_prompt = (
+        core.replace("{{HANDOVER_FORMAT}}", _handover_block(variants, form))
+        .replace("{{MODEL}}", MODEL_LABELS[model_key])
+    )
+    if "{{ARTIFACT}}" in sys_prompt:
+        sys_prompt = sys_prompt.replace("{{ARTIFACT}}", ARTIFACT_LABELS[model_key])
+
+    leftover = re.findall(r"\{\{[^}]+\}\}", sys_prompt)
+    if leftover:
+        raise ValueError(f"Unresolved placeholders in assembled system prompt: {leftover}")
+    return sys_prompt.strip()
 
 
 # -----------------------------------------------------------------------------

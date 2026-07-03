@@ -14,7 +14,9 @@ ROOT = Path(__file__).resolve().parent.parent
 sys.path.insert(0, str(ROOT))
 
 from utils import EXPLANATIONS_DIR
+from utils import PROMPTS_DIR
 from utils.global_feature import (
+    assemble_global_system_prompt,
     build_feature_json_payload,
     build_global_record,
     describe_curve,
@@ -115,6 +117,38 @@ def test_describe_curve_matches_manual_peak():
     peak_raw = x[max(range(len(y)), key=lambda i: y[i])]
     d = describe_curve("ebm", "temp", explanations_dir=EXPLANATIONS_DIR)
     assert d["peak_label"] == readable_feature_value("temp", peak_raw)
+
+
+# -----------------------------------------------------------------------------
+# Prompt assembly
+# -----------------------------------------------------------------------------
+
+@pytest.mark.parametrize("form,model,needle", [
+    ("json", "ebm", "JSON object"),
+    ("vision", "xgb", "XGBoost SHAP dependence plot"),
+    ("tooluse", "ebm", "tools available"),
+])
+def test_assemble_resolves_and_names(form, model, needle):
+    s = assemble_global_system_prompt(form, model, prompts_dir=PROMPTS_DIR)
+    assert "{{" not in s                       # no leftover placeholder
+    assert "[EFFECT]" in s and needle in s
+    assert ("EBM" if model == "ebm" else "XGBoost") in s
+
+
+def test_assemble_core_identical_across_modalities():
+    # Everything after the handover block (from GROUNDING on) must be byte-identical
+    # across json/vision/tooluse for the same model — the modality-comparison invariant.
+    tails = {
+        f: assemble_global_system_prompt(f, "ebm", prompts_dir=PROMPTS_DIR)
+           .split("## GROUNDING", 1)[1]
+        for f in ("json", "vision", "tooluse")
+    }
+    assert tails["json"] == tails["vision"] == tails["tooluse"]
+
+
+def test_assemble_rejects_unknown_model():
+    with pytest.raises(ValueError):
+        assemble_global_system_prompt("json", "lgbm", prompts_dir=PROMPTS_DIR)
 
 
 # -----------------------------------------------------------------------------
