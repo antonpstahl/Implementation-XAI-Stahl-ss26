@@ -8,8 +8,8 @@
     "contribution_space": "native"
   },
   "training_time_seconds": {
-    "xgb": 1.939117670059204,
-    "ebm": 12.690465927124023
+    "xgb": 1.936837911605835,
+    "ebm": 12.54245924949646
   },
   "metrics": {
     "xgb": {

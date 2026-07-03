@@ -1,0 +1,15 @@
+{
+  "form": "json",
+  "scope": "global",
+  "llm_model": "claude-sonnet-4-6",
+  "loss_key": "poisson_log",
+  "xai_model": "xgb",
+  "feature": "hr",
+  "explanation": "[EFFECT]\nThe hour of day has a strong, non-monotonic (double-peaked) effect on predicted bike demand. Contributions are most negative in the very early morning hours (roughly 2–4 a.m.), reflecting near-zero ridership overnight. Demand rises sharply in the morning, reaching a first peak around 8 a.m. (morning commute), stays moderately elevated through midday, then climbs to a second, slightly higher peak around 5–6 p.m. (evening commute), before falling again through the late evening. In log-space terms, the evening rush hour boosts predicted rentals by roughly 0.85–0.95 units above the model baseline, while the deepest overnight hours suppress it by roughly 3 or more units.\n\n[IMPORTANCE]\nHour of day is the single most important feature in the model — ranked 1st out of 9 features with an importance score of 0.83 — dwarfing all other variables and driving the majority of the model's predictions about demand levels.\n\n[RECOMMENDATION]\nStaffing and bike redistribution should be tightly aligned with the two daily demand peaks (approximately 8 a.m. and 5–6 p.m.), while overnight dock rebalancing can be done during the 2–5 a.m. window when demand is at its lowest.",
+  "elapsed_s": 20.4,
+  "usage": {
+    "input_tokens": 164082,
+    "output_tokens": 773,
+    "cache_read_input_tokens": 0
+  }
+}

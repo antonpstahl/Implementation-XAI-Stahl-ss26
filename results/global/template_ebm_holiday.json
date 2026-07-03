@@ -1,0 +1,16 @@
+{
+  "form": "template",
+  "scope": "global",
+  "llm_model": "template",
+  "loss_key": "poisson_log",
+  "xai_model": "ebm",
+  "feature": "holiday",
+  "explanation": "[EFFECT] The effect of holiday status on hourly demand is decreasing — higher values lower demand. Its shape is monotonic, with the contribution highest around no holiday.\n\n[IMPORTANCE] Holiday status ranks 9 of 9 features by global importance (importance 0.008) — a minor driver of demand.\n\n[RECOMMENDATION] Account for holiday status when planning bikes and staff: demand is highest around no holiday, so allocate more there and less at the opposite end.",
+  "n_tool_calls": 0,
+  "elapsed_s": 0.000196,
+  "usage": {
+    "input_tokens": 0,
+    "output_tokens": 0,
+    "cache_read_input_tokens": 0
+  }
+}

@@ -1,0 +1,16 @@
+{
+  "form": "vision",
+  "scope": "global",
+  "llm_model": "claude-sonnet-4-6",
+  "loss_key": "poisson_log",
+  "xai_model": "ebm",
+  "feature": "hr",
+  "explanation": "[EFFECT] The hour of the day has a strong, non-monotonic effect on predicted bike demand. Demand is heavily suppressed in the early morning hours (roughly midnight to 5 a.m.), with the deepest negative contribution around 4–5 a.m. It then rises sharply through the morning, reaching a first peak around 8 a.m., dips slightly in mid-morning, holds at moderate positive levels through midday, and climbs to its highest point around 5–6 p.m. before falling off again late at night.\n\n[IMPORTANCE] This is the single most important feature in the model, ranked 1st out of 9 with an importance score of 0.889. The hour of day drives larger swings in predicted demand than any other variable, including weather or season.\n\n[RECOMMENDATION] Ensure maximum bike availability and staff coverage during the two daily peak windows — around 8 a.m. and 5–6 p.m. — while reducing resources in the early-morning hours (roughly 1–5 a.m.) when demand is at its lowest.",
+  "plot_file": "ebm_shape_hr.png",
+  "elapsed_s": 13.79,
+  "usage": {
+    "input_tokens": 1468,
+    "output_tokens": 599,
+    "cache_read_input_tokens": 0
+  }
+}

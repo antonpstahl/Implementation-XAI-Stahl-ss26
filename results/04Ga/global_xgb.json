@@ -1,0 +1,12 @@
+{
+  "explanation": "[MODEL] The model predicts number of rented bikes per hour (sum of casual and registered users). On average it expects about 191 rentals per hour (baseline). Model fit: rmse=45.440, mae=27.003, r2=0.935, poisson_deviance=9.380.\n\n[DRIVERS] The features with the largest overall influence on demand are:\n* hour (rank 1, importance 0.833): mixed effect, contribution highest around 17:00.\n* year (rank 2, importance 0.200): mixed effect, contribution highest around 2012.\n* temperature (rank 3, importance 0.197): mixed effect, contribution highest around ~21.3 C.\n\n[RECOMMENDATION] Plan capacity around the dominant driver (hour): provide the most bikes and staff at its high-demand level (around 17:00) and scale resources down otherwise.",
+  "elapsed_s": 0.009755,
+  "usage": {
+    "input_tokens": 0,
+    "output_tokens": 0,
+    "cache_read_input_tokens": 0
+  },
+  "n_tool_calls": 0,
+  "scope": "global",
+  "model": "xgb"
+}

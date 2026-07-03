@@ -1,0 +1,16 @@
+{
+  "form": "vision",
+  "scope": "global",
+  "llm_model": "claude-sonnet-4-6",
+  "loss_key": "poisson_log",
+  "xai_model": "xgb",
+  "feature": "yr",
+  "explanation": "<thinking>\nLooking at the SHAP dependence plot for the feature \"yr\":\n\n- X-axis: yr values (0 = 2011, 1 = 2012)\n- Y-axis: SHAP value (contribution to log demand)\n\nFrom the plot:\n- When yr = 0 (2011): SHAP values are clustered around -0.15 to -0.5, mostly negative (around -0.25 to -0.35 on average)\n- When yr = 1 (2012): SHAP values are clustered around +0.1 to +0.28, mostly positive\n\nThis is a clear step change - going from 2011 to 2012 shifts the contribution from negative to positive. The effect is a binary/step change since yr is essentially a binary feature (0 or 1).\n\nThe importance rank is 2 out of 9, making it the second most important feature.\n\nDirection: Higher yr value (2012 vs 2011) raises predicted demand.\nShape: Step change (binary feature).\nPeak: yr = 1 (2012) has the highest contribution.\n</thinking>\n\n[EFFECT] The year has a clear step-change effect on predicted bike demand: hours from 2011 consistently lower the model's demand forecast (contributions roughly −0.15 to −0.50 in log space), while hours from 2012 consistently raise it (contributions roughly +0.05 to +0.30). There is no gradual shift — the model treats the two years as fundamentally different demand environments, with 2012 being the higher-demand year.\n\n[IMPORTANCE] This is the second most important feature out of nine, meaning the year a given hour belongs to is one of the strongest drivers of predicted rental volume in the entire model — only one other feature has a greater influence.\n\n[RECOMMENDATION] The strong year-over-year growth captured by the model suggests that overall system demand can increase substantially from one year to the next; planners should build in capacity reviews and fleet scaling annually rather than assuming demand stays flat over time.",
+  "plot_file": "xgb_dependence_yr.png",
+  "elapsed_s": 14.62,
+  "usage": {
+    "input_tokens": 1621,
+    "output_tokens": 696,
+    "cache_read_input_tokens": 0
+  }
+}

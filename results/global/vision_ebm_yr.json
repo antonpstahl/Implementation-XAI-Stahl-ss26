@@ -1,0 +1,16 @@
+{
+  "form": "vision",
+  "scope": "global",
+  "llm_model": "claude-sonnet-4-6",
+  "loss_key": "poisson_log",
+  "xai_model": "ebm",
+  "feature": "yr",
+  "explanation": "<thinking>\nThe plot shows the EBM shape for the \"yr\" feature. Let me analyze it:\n\n- The x-axis represents the year (0 = 2011, 1 = 2012)\n- The y-axis shows contribution in log space\n\nFrom the plot:\n- For yr values below ~0.5 (i.e., 2011), the contribution is approximately -0.23 (negative, lowering demand)\n- For yr values at or above ~0.5 (i.e., 2012), the contribution jumps to approximately +0.20 (positive, raising demand)\n- This is a clear step change at the midpoint between the two years\n\nThe importance is 0.217, ranked 3rd out of 9 features.\n\nThe direction: going from 2011 to 2012, demand increases significantly.\nShape: step change (binary-like, since yr is effectively 0 or 1)\nPeak: 2012 (yr=1) has the highest contribution\n\nThis makes sense as the model captures year-over-year growth in the bike share system.\n</thinking>\n\n[EFFECT] The year feature has a sharp, step-change effect on predicted hourly demand: in 2011 it consistently reduces predicted rentals (contribution of about −0.23 in log space), while in 2012 it consistently boosts them (about +0.20 in log space). There is no gradual transition — the model sees a clear jump in the overall demand level from one year to the next, reflecting system-wide growth between the two years.\n\n[IMPORTANCE] With an importance score of 0.217 and a rank of 3rd out of 9 features, the year is one of the strongest drivers of predicted demand in this model, behind only a couple of other features. The gap between 2011 and 2012 represents a substantial shift in the overall scale of rentals.\n\n[RECOMMENDATION] When benchmarking targets or staffing levels, avoid directly comparing 2011 figures to 2012 figures without accounting for this growth — the system-wide demand was substantially higher in 2012, so plans built on 2011 data alone will likely underestimate bike and staff needs.",
+  "plot_file": "ebm_shape_yr.png",
+  "elapsed_s": 15.06,
+  "usage": {
+    "input_tokens": 1468,
+    "output_tokens": 681,
+    "cache_read_input_tokens": 0
+  }
+}

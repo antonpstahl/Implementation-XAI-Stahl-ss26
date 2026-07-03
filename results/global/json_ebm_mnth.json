@@ -1,0 +1,15 @@
+{
+  "form": "json",
+  "scope": "global",
+  "llm_model": "claude-sonnet-4-6",
+  "loss_key": "poisson_log",
+  "xai_model": "ebm",
+  "feature": "mnth",
+  "explanation": "[EFFECT]\nThe month of the year has a non-monotonic effect on predicted hourly bike demand. Winter months (January and February) noticeably reduce demand — by roughly 19–21% relative to the baseline — while spring months transition toward neutral. Early summer (May–June) gives a small positive boost, but mid-summer (July–August) dips back to nearly neutral, likely reflecting the effect of intense heat. The strongest boost to demand comes in autumn, peaking in October (about +19% above baseline), followed by November and September; December remains modestly positive before demand drops again in winter.\n\n[IMPORTANCE]\nMonth ranks 4th out of 9 features in terms of overall influence on predicted demand, with an importance score of approximately 0.086. It has a meaningful but not dominant role — hour of day, temperature, and year all have stronger influence.\n\n[RECOMMENDATION]\nPlan for higher bike availability and staffing in the autumn months (September–November), particularly October, and consider scaling back resources in January and February when demand is at its seasonal lowest. The mid-summer dip also suggests that extreme summer heat may reduce ridership, so July and August may not need the same level of resource intensity as autumn.",
+  "elapsed_s": 14.52,
+  "usage": {
+    "input_tokens": 328,
+    "output_tokens": 608,
+    "cache_read_input_tokens": 1031
+  }
+}

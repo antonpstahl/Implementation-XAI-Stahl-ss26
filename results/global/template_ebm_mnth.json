@@ -1,0 +1,16 @@
+{
+  "form": "template",
+  "scope": "global",
+  "llm_model": "template",
+  "loss_key": "poisson_log",
+  "xai_model": "ebm",
+  "feature": "mnth",
+  "explanation": "[EFFECT] The effect of month on hourly demand is non-monotonic — it rises and falls across the range. Its shape is category-dependent, with the contribution highest around October.\n\n[IMPORTANCE] Month ranks 4 of 9 features by global importance (importance 0.086) — a moderate driver of demand.\n\n[RECOMMENDATION] Account for month when planning bikes and staff: demand is highest around October, so allocate more there and less at the opposite end.",
+  "n_tool_calls": 0,
+  "elapsed_s": 0.000329,
+  "usage": {
+    "input_tokens": 0,
+    "output_tokens": 0,
+    "cache_read_input_tokens": 0
+  }
+}

@@ -1,0 +1,15 @@
+{
+  "form": "json",
+  "scope": "global",
+  "llm_model": "claude-sonnet-4-6",
+  "loss_key": "poisson_log",
+  "xai_model": "xgb",
+  "feature": "mnth",
+  "explanation": "[EFFECT] The month of year has a clear seasonal, non-monotonic effect on predicted bike demand. Contributions are most negative in January and February (roughly −0.35 to −0.55 in log space, meaning demand is substantially multiplied down), gradually improve through spring, and cross into positive territory around June through October — when the model pushes demand up relative to the annual average. November and December then swing back to clearly negative contributions. The peak positive influence falls in the summer and early autumn months (approximately June–September).\n\n[IMPORTANCE] With a rank of 5 out of 9 features and an importance score of about 0.12, month is a mid-tier driver of predicted demand — meaningfully influential but less dominant than the top features (such as hour of day and temperature). It captures the broad seasonal rhythm in ridership across the year.\n\n[RECOMMENDATION] Plan for noticeably higher bike availability and staffing from June through October and scale back resources in January and February, since the model consistently associates those winter months with substantially lower expected demand relative to the annual norm.",
+  "elapsed_s": 22.11,
+  "usage": {
+    "input_tokens": 162815,
+    "output_tokens": 919,
+    "cache_read_input_tokens": 1033
+  }
+}

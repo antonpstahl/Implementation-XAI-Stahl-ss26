@@ -1,0 +1,16 @@
+{
+  "form": "vision",
+  "scope": "global",
+  "llm_model": "claude-sonnet-4-6",
+  "loss_key": "poisson_log",
+  "xai_model": "ebm",
+  "feature": "temp",
+  "explanation": "<thinking>\nLet me analyze the EBM shape plot for the \"temp\" feature.\n\nFrom the plot:\n- X-axis: temp (normalized, 0 to ~1.0, where value × 41 = degrees Celsius)\n- Y-axis: contribution in log space\n\n**Direction and Shape:**\n- At very low temperatures (near 0, i.e., ~0°C), the contribution is very negative, around -1.5\n- As temperature increases from 0 to ~0.75 (about 30°C), the contribution rises steadily (non-monotonic overall - rises then falls)\n- The contribution crosses zero at around temp ≈ 0.45-0.50 (roughly 18-20°C)\n- The contribution peaks at around temp ≈ 0.75-0.80 (roughly 31-33°C), with a peak contribution of about +0.30\n- After the peak, it drops sharply at the very high end (temp ~0.95-1.0, ~39-41°C), going back negative to about -0.15\n\n**Shape:** Non-monotonic - rises from very negative at cold temperatures, peaks at moderate-to-warm temperatures (~75% normalized, or about 31°C), then falls at the very highest temperatures.\n\n**Peak:** Around temp = 0.75-0.80 (approximately 31-33°C)\n\n**Importance:** Rank 2 of 9, with importance score of 0.253 - this is a highly important feature.\n\nLet me convert some values to readable units:\n- Peak at ~0.75 × 41 ≈ 30-31°C\n- Zero crossing around 0.45 × 41 ≈ 18°C\n- Very cold (near 0°C) has the most negative effect (-1.5 in log space)\n- Very hot (~0.95 × 41 ≈ 39°C) also has a slightly negative effect\n</thinking>\n\n[EFFECT]\nTemperature has a strong, non-monotonic (inverted U-shaped) effect on predicted bike demand. Very cold temperatures (near 0 °C) drastically reduce demand, with contributions as low as −1.5 in log space. Demand rises steadily as it warms up, peaking around 31–33 °C (normalized temp ≈ 0.75–0.80), where the contribution reaches about +0.30. Extremely hot temperatures (above ~39 °C) also slightly suppress demand, though far less severely than cold weather.\n\n[IMPORTANCE]\nTemperature is the **second most important** feature in the model (rank 2 out of 9, importance score 0.253), meaning it is one of the strongest drivers of hourly rental demand, second only to the hour of the day.\n\n[RECOMMENDATION]\nPlan for significantly higher bike availability and staffing during mild-to-warm weather (roughly 18–33 °C), and reduce operational resources in cold or extreme-heat periods, since temperature swings create some of the largest swings in expected ridership.",
+  "plot_file": "ebm_shape_temp.png",
+  "elapsed_s": 21.75,
+  "usage": {
+    "input_tokens": 1468,
+    "output_tokens": 966,
+    "cache_read_input_tokens": 0
+  }
+}

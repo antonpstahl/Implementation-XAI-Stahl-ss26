@@ -1,0 +1,16 @@
+{
+  "form": "vision",
+  "scope": "global",
+  "llm_model": "claude-sonnet-4-6",
+  "loss_key": "poisson_log",
+  "xai_model": "ebm",
+  "feature": "hum",
+  "explanation": "[EFFECT] Humidity has a non-monotonic effect on predicted bike demand. At extremely low humidity (below about 5%), the model strongly suppresses demand. Demand is boosted slightly at low-to-moderate humidity levels (roughly 5–40% relative humidity), where the contribution peaks at around +0.1 in log space. As humidity rises above ~40%, the contribution steadily declines, becoming noticeably negative above about 70–80%, reaching roughly -0.25 to -0.30 at the highest humidity levels.\n\n[IMPORTANCE] With an importance score of 0.083 and a rank of 5th out of 9 features, humidity has a moderate influence on predicted demand — meaningful, but less impactful than the top drivers such as hour of day or temperature.\n\n[RECOMMENDATION] On high-humidity days (above ~70–80% relative humidity), plan for meaningfully reduced ridership and consider redistributing staff or bikes accordingly, while maintaining fuller availability during comfortable, low-to-moderate humidity conditions when demand is at its highest.",
+  "plot_file": "ebm_shape_hum.png",
+  "elapsed_s": 13.39,
+  "usage": {
+    "input_tokens": 1469,
+    "output_tokens": 580,
+    "cache_read_input_tokens": 0
+  }
+}

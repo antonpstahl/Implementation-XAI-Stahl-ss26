@@ -1,0 +1,15 @@
+{
+  "form": "json",
+  "scope": "global",
+  "llm_model": "claude-sonnet-4-6",
+  "loss_key": "poisson_log",
+  "xai_model": "ebm",
+  "feature": "hum",
+  "explanation": "[EFFECT]\nHumidity has a non-monotonic but broadly declining effect on predicted bike demand. At low-to-moderate humidity levels (roughly 10%–40%, i.e. about 10–40%), the contribution is slightly positive and fairly flat, with a small peak around 36% humidity. Beyond that point, the contribution falls steadily, crossing into negative territory around 70% humidity, and reaching its lowest values near 100% humidity — where predicted demand is roughly 23% lower than the model's baseline. (The very lowest humidity point, near 2%, shows an unusually negative contribution, but this likely reflects very rare conditions with few observations.)\n\n[IMPORTANCE]\nHumidity ranks 5th out of 9 features in terms of importance (importance score: 0.083), making it a mid-level driver of demand. It matters, but hour of the day, temperature, and year have a stronger influence on predictions.\n\n[RECOMMENDATION]\nWhen high humidity is forecast (above roughly 70%), expect noticeably lower ridership — consider reducing bike redistribution efforts and staff hours during those periods, as demand is unlikely to be strong regardless of other conditions.",
+  "elapsed_s": 17.55,
+  "usage": {
+    "input_tokens": 1259,
+    "output_tokens": 657,
+    "cache_read_input_tokens": 1031
+  }
+}

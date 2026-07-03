@@ -1,0 +1,15 @@
+{
+  "form": "json",
+  "scope": "global",
+  "llm_model": "claude-sonnet-4-6",
+  "loss_key": "poisson_log",
+  "xai_model": "ebm",
+  "feature": "weekday",
+  "explanation": "[EFFECT]\nThe contribution of weekday to predicted hourly bike demand rises fairly steadily from Sunday through to Friday, then dips slightly on Saturday. Sunday has the most negative contribution (reducing predicted demand), while Friday has the highest positive contribution (boosting it the most). The effect is near-monotonic across the week, peaking on Friday (day 5), with Saturday remaining positive but slightly lower than Friday.\n\n[IMPORTANCE]\nWeekday is ranked 7th out of 9 features in terms of importance, with a relatively low importance score of 0.023. It is one of the weakest drivers of predicted demand in this model — the differences between days are real but small compared to factors like hour of day or temperature.\n\n[RECOMMENDATION]\nSince Friday consistently shows the highest predicted demand and Sunday the lowest, operators could consider having marginally more bikes available and staff on standby on Fridays, while slightly scaling back resources on Sundays — though the effect is modest and should be considered alongside stronger factors like time of day and weather.",
+  "elapsed_s": 12.72,
+  "usage": {
+    "input_tokens": 265,
+    "output_tokens": 618,
+    "cache_read_input_tokens": 1031
+  }
+}

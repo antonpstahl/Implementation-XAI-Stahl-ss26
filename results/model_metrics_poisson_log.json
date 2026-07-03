@@ -8,8 +8,8 @@
     "contribution_space": "log"
   },
   "training_time_seconds": {
-    "xgb": 1.9549388885498047,
-    "ebm": 12.591652870178223
+    "xgb": 1.9350409507751465,
+    "ebm": 12.578251123428345
   },
   "metrics": {
     "xgb": {

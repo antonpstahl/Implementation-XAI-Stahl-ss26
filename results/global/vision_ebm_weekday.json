@@ -1,0 +1,16 @@
+{
+  "form": "vision",
+  "scope": "global",
+  "llm_model": "claude-sonnet-4-6",
+  "loss_key": "poisson_log",
+  "xai_model": "ebm",
+  "feature": "weekday",
+  "explanation": "[EFFECT] The day of the week has a non-monotonic effect on predicted bike demand. Sunday (day 0) shows the strongest negative contribution, noticeably reducing predicted rentals, while Monday is also slightly below average. Demand climbs through the midweek days, peaking on Friday (day 5) with the highest positive contribution, and remains moderately above average on Thursday and Saturday as well.\n\n[IMPORTANCE] With an importance score of 0.024 and a rank of 7 out of 9 features, weekday is one of the weaker drivers of demand in this model — it has a real but modest influence compared to factors like hour of day or temperature.\n\n[RECOMMENDATION] Since Sundays consistently show lower predicted demand and Fridays the highest, consider scheduling slightly fewer bikes and staff on Sundays and ensuring fuller availability on Fridays to better match these day-of-week patterns.",
+  "plot_file": "ebm_shape_weekday.png",
+  "elapsed_s": 10.04,
+  "usage": {
+    "input_tokens": 1469,
+    "output_tokens": 408,
+    "cache_read_input_tokens": 0
+  }
+}

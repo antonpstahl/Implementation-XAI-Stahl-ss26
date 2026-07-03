@@ -1,0 +1,15 @@
+{
+  "form": "json",
+  "scope": "global",
+  "llm_model": "claude-sonnet-4-6",
+  "loss_key": "poisson_log",
+  "xai_model": "xgb",
+  "feature": "holiday",
+  "explanation": "[EFFECT]\nThe holiday feature is binary (0 = regular day, 1 = holiday), so its effect appears as a step change rather than a gradual trend. On regular days (holiday = 0), the model's contribution from this feature is near zero — essentially neutral. On holidays (holiday = 1), the contributions are highly variable and often strongly negative, indicating that being a holiday frequently suppresses predicted demand, sometimes substantially. However, some holiday hours show positive contributions, meaning demand can be pushed up in certain contexts (likely leisure hours), making the overall holiday effect complex and hour-dependent.\n\n[IMPORTANCE]\nHoliday is the least important feature in the model, ranked 9th out of 9 features, with a very low importance score of 0.012. Its influence on predicted hourly demand is minimal compared to factors like hour of day, temperature, or weather conditions.\n\n[RECOMMENDATION]\nSince holidays mostly reduce demand (likely by eliminating commuter trips) but can boost it in some hours, operators should not make drastic staffing or bike-redistribution decisions based on the holiday flag alone — other features like hour of day matter far more. Treat the holiday indicator as a minor adjustment factor rather than a primary planning signal.",
+  "elapsed_s": 35.72,
+  "usage": {
+    "input_tokens": 162968,
+    "output_tokens": 1001,
+    "cache_read_input_tokens": 1033
+  }
+}

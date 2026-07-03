@@ -1,0 +1,15 @@
+{
+  "form": "json",
+  "scope": "global",
+  "llm_model": "claude-sonnet-4-6",
+  "loss_key": "poisson_log",
+  "xai_model": "xgb",
+  "feature": "temp",
+  "explanation": "[EFFECT] Temperature has a broadly positive and monotonically rising effect on hourly bike demand: cold temperatures significantly suppress rentals, while warm temperatures boost them. The contribution climbs from around −0.9 in log space at the coldest end of the range (roughly 5–10°C) to positive values of +0.2 to +0.3 at the warmest end (roughly 29–41°C). The peak effect is seen at the highest observed temperatures, with no sign of a downturn even at very warm conditions.\n\n[IMPORTANCE] Temperature is the 3rd most influential feature out of 9, with an importance score of 0.197 — making it a major driver of predicted demand, behind only a couple of other features. Its influence is substantial and spans a wide range of contribution values.\n\n[RECOMMENDATION] Plan for significantly higher bike availability and staffing during warm weather, and reduced supply during cold periods; the model indicates that temperature swings have a large and consistent impact on how many bikes customers want to rent hour by hour.",
+  "elapsed_s": 16.6,
+  "usage": {
+    "input_tokens": 163431,
+    "output_tokens": 559,
+    "cache_read_input_tokens": 1033
+  }
+}

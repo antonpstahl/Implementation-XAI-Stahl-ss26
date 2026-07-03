@@ -1,0 +1,15 @@
+{
+  "form": "json",
+  "scope": "global",
+  "llm_model": "claude-sonnet-4-6",
+  "loss_key": "poisson_log",
+  "xai_model": "ebm",
+  "feature": "yr",
+  "explanation": "[EFFECT]\nThe year feature has a clear, monotonically rising effect on predicted hourly demand: hours in 2011 receive a negative contribution (reducing predicted rentals by roughly 20%), while hours in 2012 receive a positive contribution (boosting predicted rentals by roughly 23%). Overall, the model estimates that demand in 2012 was around 50% higher than in 2011 for comparable hours. The effect acts essentially as a step change between the two years, with no complex intermediate shape.\n\n[IMPORTANCE]\nYear is the 3rd most important feature out of 9, with an importance score of 0.217 — making it a major driver of predicted demand, behind only a couple of other features. Its influence is substantial enough that ignoring year-over-year growth could significantly skew demand forecasts.\n\n[RECOMMENDATION]\nSince ridership grew strongly between 2011 and 2012, planners should build in an explicit year-over-year growth factor when projecting future bike and staff requirements, rather than assuming demand stays constant from one year to the next.",
+  "elapsed_s": 13.87,
+  "usage": {
+    "input_tokens": 202,
+    "output_tokens": 678,
+    "cache_read_input_tokens": 1031
+  }
+}

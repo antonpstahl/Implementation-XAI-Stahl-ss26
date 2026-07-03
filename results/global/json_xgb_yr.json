@@ -1,0 +1,15 @@
+{
+  "form": "json",
+  "scope": "global",
+  "llm_model": "claude-sonnet-4-6",
+  "loss_key": "poisson_log",
+  "xai_model": "xgb",
+  "feature": "yr",
+  "explanation": "[EFFECT] The year feature acts as a simple on/off switch: hours in 2011 (yr = 0) consistently pull predicted demand **down** (negative contributions around –0.30 on average), while hours in 2012 (yr = 1) push it **up** (positive contributions around +0.17 on average). This is a sharp step change with no gradual transition — the model sees 2012 as a fundamentally higher-demand environment than 2011. The peak contribution belongs entirely to 2012.\n\n[IMPORTANCE] Year is the **second most important** feature out of the nine used by the model, with an importance score of 0.20. Only one other feature influences demand more strongly, meaning the year alone accounts for a large share of the model's predictions.\n\n[RECOMMENDATION] Because 2012 showed systematically higher demand than 2011, any future year-over-year growth should be explicitly accounted for in your staffing and fleet-size planning — do not assume demand levels from an earlier year are a reliable baseline for the next.",
+  "elapsed_s": 14.73,
+  "usage": {
+    "input_tokens": 163960,
+    "output_tokens": 514,
+    "cache_read_input_tokens": 1033
+  }
+}

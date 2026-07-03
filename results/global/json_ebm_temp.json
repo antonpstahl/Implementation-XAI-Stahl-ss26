@@ -1,0 +1,15 @@
+{
+  "form": "json",
+  "scope": "global",
+  "llm_model": "claude-sonnet-4-6",
+  "loss_key": "poisson_log",
+  "xai_model": "ebm",
+  "feature": "temp",
+  "explanation": "<thinking>\nLet me analyze the temperature feature's effect on bike demand.\n\nLooking at the curve:\n- x ranges from 0.025 to 0.975 (normalized), which corresponds to about 1°C to 40°C\n- y values start very negative (-1.527 at x=0.025) and increase as temperature rises\n- The curve peaks around x=0.76-0.78 (approximately 31-32°C) where y≈0.321\n- After the peak, y decreases, going negative again at x=0.94 (about 38.5°C) with y=-0.118\n\nSo the shape is non-monotonic: rises from very negative contributions at cold temperatures, peaks around 31-32°C, then declines and eventually becomes negative again at very high temperatures.\n\nPeak: x=0.78 gives y=0.321, but let me check more carefully:\n- x=0.76: y=0.320989\n- x=0.78: y=0.270191 (drop!)\n- x=0.74: y=0.314066\n- x=0.72: y=0.306965\n\nWait, x=0.76 has y=0.320989 and x=0.78 drops to 0.270191. So peak is around x=0.76, which is 0.76 × 41 = 31.2°C.\n\nImportance: rank 2 out of 9, importance value 0.25257 - this is the second most important feature.\n\nDirection: overall positive (higher temperatures up to ~31°C increase demand), but at extremes (very cold or very hot) the effect is negative.\n\nShape: non-monotonic, rises steeply from cold temperatures, peaks around 31°C, then declines and goes negative at very high temperatures (~38°C+).\n\nThe transition from negative to positive contributions happens around x=0.44-0.42, which is 0.44×41 ≈ 18°C.\n</thinking>\n\n[EFFECT]\nTemperature has a strong, non-monotonic (inverted-U) effect on hourly bike demand. Starting from very cold temperatures (around 1°C), the contribution is sharply negative — meaning demand is well below the model's baseline — and it rises steadily as temperatures warm up, crossing into positive territory at roughly 18°C. The contribution peaks at around 31°C (normalised value ≈ 0.76), where it adds the most to predicted demand. Beyond that point the effect weakens and turns negative again above approximately 38°C, suggesting that extreme heat also discourages rentals.\n\n[IMPORTANCE]\nTemperature is the **second most important** feature in the model out of nine, with an importance score of 0.25. Only the hour of the day outranks it, making temperature a dominant driver of demand.\n\n[RECOMMENDATION]\nPlan for the highest bike availability and staffing around mild-to-warm days (roughly 18–31°C); on unusually cold days or during heatwaves, expect noticeably lower ridership and scale resources accordingly.",
+  "elapsed_s": 15.66,
+  "usage": {
+    "input_tokens": 822,
+    "output_tokens": 727,
+    "cache_read_input_tokens": 1031
+  }
+}

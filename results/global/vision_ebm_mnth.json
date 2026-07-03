@@ -1,0 +1,16 @@
+{
+  "form": "vision",
+  "scope": "global",
+  "llm_model": "claude-sonnet-4-6",
+  "loss_key": "poisson_log",
+  "xai_model": "ebm",
+  "feature": "mnth",
+  "explanation": "[EFFECT] Month has a non-monotonic effect on predicted hourly bike demand. January and February produce the strongest negative contributions (roughly −0.25 and −0.20 in log space), meaning demand is notably suppressed in the depths of winter. Contributions climb through spring and summer — hovering near or just above zero — then reach their highest point in October (around +0.35), before easing off in November and December. The pattern therefore dips in mid-winter, stays moderate across summer, and peaks sharply in autumn.\n\n[IMPORTANCE] Month is the 4th most important feature out of 9, with an importance score of 0.086. It has a meaningful but not dominant influence on demand, sitting behind the top three predictors (likely hour, temperature, and year).\n\n[RECOMMENDATION] Plan for significantly reduced bike availability and staffing needs in January and February, and prepare for the highest seasonal demand in October — ensuring maximum fleet readiness and maintenance coverage heading into autumn.",
+  "plot_file": "ebm_shape_mnth.png",
+  "elapsed_s": 12.63,
+  "usage": {
+    "input_tokens": 1469,
+    "output_tokens": 508,
+    "cache_read_input_tokens": 0
+  }
+}

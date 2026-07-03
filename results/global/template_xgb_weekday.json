@@ -1,0 +1,16 @@
+{
+  "form": "template",
+  "scope": "global",
+  "llm_model": "template",
+  "loss_key": "poisson_log",
+  "xai_model": "xgb",
+  "feature": "weekday",
+  "explanation": "[EFFECT] The effect of weekday on hourly demand is non-monotonic — it rises and falls across the range. Its shape is category-dependent, with the contribution highest around Sunday.\n\n[IMPORTANCE] Weekday ranks 4 of 9 features by global importance (importance 0.173) — a moderate driver of demand.\n\n[RECOMMENDATION] Account for weekday when planning bikes and staff: demand is highest around Sunday, so allocate more there and less at the opposite end.",
+  "n_tool_calls": 0,
+  "elapsed_s": 0.00236,
+  "usage": {
+    "input_tokens": 0,
+    "output_tokens": 0,
+    "cache_read_input_tokens": 0
+  }
+}

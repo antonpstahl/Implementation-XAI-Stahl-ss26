@@ -1,0 +1,15 @@
+{
+  "form": "json",
+  "scope": "global",
+  "llm_model": "claude-sonnet-4-6",
+  "loss_key": "poisson_log",
+  "xai_model": "xgb",
+  "feature": "weathersit",
+  "explanation": "[EFFECT]\nWeather has a clear and consistently negative effect on demand as conditions worsen. Clear weather (category 1) contributes a small positive boost to predicted rentals, misty or cloudy conditions (category 2) produce a slight negative pull, and light rain or snow (category 3) causes a substantial drop — typically cutting predicted demand by roughly 20–60%. The rare instances of heavy rain (category 4) push contributions even lower, into the most severe negative range seen in the data. The pattern is a stepped decline: each worsening weather category brings a meaningfully larger reduction in predicted rentals.\n\n[IMPORTANCE]\nWeather situation is ranked 7th out of 9 features in overall importance to the model, with an importance score of about 0.05. While it does produce large effects during bad weather, it is one of the lower-ranked predictors because clear or mist conditions — which cause only modest effects — make up the majority of hours in the data.\n\n[RECOMMENDATION]\nConsider dynamically reducing bike availability or rebalancing staff during forecast periods of light rain or snow, as these conditions are associated with a large drop in predicted rentals; conversely, ensure full fleet readiness on clear-weather days when demand is at its highest.",
+  "elapsed_s": 17.11,
+  "usage": {
+    "input_tokens": 161734,
+    "output_tokens": 655,
+    "cache_read_input_tokens": 1033
+  }
+}
