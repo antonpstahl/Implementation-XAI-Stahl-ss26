@@ -12,12 +12,12 @@ Two curve formats are handled transparently:
             monotonicity / peak logic runs.
 
 The derived fields are the GT contract for the G3 rubric and the reference-based
-judge: ``form``, ``richtung``, ``monotonie``, ``peak``, ``importance_rang`` plus
+judge: ``form``, ``direction``, ``monotonicity``, ``peak``, ``importance_rank`` plus
 supporting quantities. Output is semi-automatic and meant to be domain-verified
 afterwards (edit the JSON by hand where the curve is ambiguous).
 
 Classification defaults (documented, overridable via ``Thresholds``):
-  * flat_threshold = 0.02  -> importance below this absolute value => "fast-flach".
+  * flat_threshold = 0.025 -> importance below this absolute value => "near-flat".
   * mono_tol       = 0.15  -> a continuous curve counts as monotone when the
                              movement against the dominant direction is <= 15 %
                              of the total absolute variation.
@@ -37,7 +37,7 @@ MODELS = ("ebm", "xgb")
 
 @dataclass
 class Thresholds:
-    flat_threshold: float = 0.02   # absolute importance below => fast-flach
+    flat_threshold: float = 0.025  # absolute importance below => near-flat
     mono_tol: float = 0.15         # reversal share tolerated as still-monotone
     top_k_cats: int = 3            # best/worst categories to record
 
@@ -117,12 +117,12 @@ def _continuous_fields(xs: list[float], ys: list[float], th: Thresholds) -> dict
     is_monotone = reversal <= th.mono_tol
 
     if is_monotone:
-        richtung = "steigend" if net >= 0 else "fallend"
-        monotonie = f"monoton_{richtung}"
+        direction = "increasing" if net >= 0 else "decreasing"
+        monotonicity = f"monotonic_{direction}"
         peak = None
     else:
-        richtung = "gemischt"
-        monotonie = "nicht_monoton"
+        direction = "mixed"
+        monotonicity = "non_monotonic"
         # inverted-U (rise then fall) -> report max; U-shape -> report min
         if i_max not in (0, len(ys) - 1):
             peak = {"type": "max", "x": xs[i_max], "y": round(y_max, 5)}
@@ -141,8 +141,8 @@ def _continuous_fields(xs: list[float], ys: list[float], th: Thresholds) -> dict
             break
 
     return {
-        "richtung": richtung,
-        "monotonie": monotonie,
+        "direction": direction,
+        "monotonicity": monotonicity,
         "peak": peak,
         "effect_range": round(y_max - y_min, 5),
         "y_at_min_x": round(ys[0], 5),
@@ -157,8 +157,8 @@ def _categorical_fields(xs: list, ys: list[float], th: Thresholds) -> dict:
     top = [{"cat": xs[i], "y": round(ys[i], 5)} for i in order[:k]]
     bottom = [{"cat": xs[i], "y": round(ys[i], 5)} for i in order[-k:][::-1]]
     return {
-        "richtung": "kategorial",
-        "monotonie": "n/a",
+        "direction": "categorical",
+        "monotonicity": "n/a",
         "peak": None,
         "effect_range": round(max(ys) - min(ys), 5),
         "top_categories": top,
@@ -169,12 +169,12 @@ def _categorical_fields(xs: list, ys: list[float], th: Thresholds) -> dict:
 def _classify_form(kind: str, importance: float, cont: dict | None,
                    th: Thresholds) -> str:
     if importance < th.flat_threshold:
-        return "fast-flach"
+        return "near-flat"
     if kind == "categorical":
-        return "kategorial"
+        return "categorical"
     # continuous, non-trivial importance
     assert cont is not None
-    return "monoton" if cont["monotonie"].startswith("monoton") else "nicht-monoton"
+    return "monotonic" if cont["monotonicity"].startswith("monotonic") else "non-monotonic"
 
 
 def derive_feature(model: str, feature: str, ranks: dict[str, int],
@@ -202,7 +202,7 @@ def derive_feature(model: str, feature: str, ranks: dict[str, int],
         "kind": kind,
         "is_binary": is_binary,
         "importance": round(importance, 5),
-        "importance_rang": ranks[feature],
+        "importance_rank": ranks[feature],
         "form": form,
         "n_grid": n_unique,
         "verified": False,  # flip to true after manual domain check
@@ -232,18 +232,18 @@ def build_all(th: Thresholds | None = None) -> list[dict]:
 
 def print_table(records: list[dict]) -> None:
     hdr = f"{'model':5s} {'feature':11s} {'rank':4s} {'imp':8s} {'form':13s} " \
-          f"{'richtung':9s} {'peak/struct'}"
+          f"{'direction':10s} {'peak/struct'}"
     print(hdr)
     print("-" * len(hdr))
-    for r in sorted(records, key=lambda d: (d["model"], d["importance_rang"])):
+    for r in sorted(records, key=lambda d: (d["model"], d["importance_rank"])):
         if r["peak"]:
             struct = f"{r['peak']['type']}@x={r['peak']['x']}"
         elif "top_categories" in r:
             struct = "top=" + ",".join(str(c["cat"]) for c in r["top_categories"])
         else:
             struct = f"net {r.get('y_at_min_x')}->{r.get('y_at_max_x')}"
-        print(f"{r['model']:5s} {r['feature']:11s} {r['importance_rang']:<4d} "
-              f"{r['importance']:<8.4f} {r['form']:13s} {r['richtung']:9s} {struct}")
+        print(f"{r['model']:5s} {r['feature']:11s} {r['importance_rank']:<4d} "
+              f"{r['importance']:<8.4f} {r['form']:13s} {r['direction']:10s} {struct}")
 
 
 if __name__ == "__main__":

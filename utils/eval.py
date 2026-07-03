@@ -25,7 +25,7 @@ from typing import Optional
 
 import pandas as pd
 
-from utils import EXPLANATIONS_DIR, RESULTS_DIR
+from utils import EXPLANATIONS_DIR, RESULTS_DIR, PROMPTS_DIR
 from utils.generation import generation_filename
 
 LOSS_KEY_DEFAULT = "poisson_log"
@@ -160,6 +160,177 @@ def _tool_trace_block(tool_calls: list[dict]) -> list[dict]:
         }
         for i, c in enumerate(tool_calls or [])
     ]
+
+
+# Denormalisation to human-readable reference values (UCI Bike scaling).
+GLOBAL_UNIT_SCALE = {
+    "temp":      (41.0, "°C"),
+    "hum":       (100.0, "%"),
+    "windspeed": (67.0, "km/h"),
+}
+
+# Per-feature judge reference block (from explanations/global_groundtruth/).
+GROUNDTRUTH_DIR_NAME = "global_groundtruth"
+
+
+def _readable_peak(feature: str, peak: Optional[dict]) -> Optional[dict]:
+    """Add a human-readable unit to the peak (normalised x)."""
+    if not peak:
+        return None
+    out = dict(peak)
+    if feature in GLOBAL_UNIT_SCALE:
+        factor, unit = GLOBAL_UNIT_SCALE[feature]
+        out["x_readable"] = f"~{peak['x'] * factor:.1f} {unit}"
+    return out
+
+
+def _global_reference(gt: dict) -> dict:
+    """Build the judge-friendly reference block from the GT fields."""
+    feature = gt["feature"]
+    ref = {
+        "feature":         feature,
+        "kind":            gt["kind"],
+        "form":            gt["form"],
+        "direction":       gt["direction"],
+        "monotonicity":    gt["monotonicity"],
+        "importance_rank": f"{gt['importance_rank']} of 9",
+    }
+    if gt.get("peak"):
+        ref["peak"] = _readable_peak(feature, gt["peak"])
+    if gt.get("sign_change_x") is not None:
+        factor, unit = GLOBAL_UNIT_SCALE.get(feature, (1.0, ""))
+        ref["sign_change"] = f"x≈{gt['sign_change_x']}" + (
+            f" (~{gt['sign_change_x'] * factor:.1f} {unit})" if unit else "")
+    if "top_categories" in gt:
+        ref["top_categories"] = gt["top_categories"]
+        ref["bottom_categories"] = gt["bottom_categories"]
+    if feature in GLOBAL_UNIT_SCALE:
+        factor, unit = GLOBAL_UNIT_SCALE[feature]
+        ref["value_scale"] = f"normalised x × {factor:g} = {unit}"
+    return ref
+
+
+def build_global_judge_prompt(
+    record: dict,
+    *,
+    explanations_dir: Path = EXPLANATIONS_DIR,
+) -> str:
+    """Build the reference-based judge user prompt for one GLOBAL feature
+    explanation (Phase G3, part b).
+
+    Unlike the local ``build_judge_prompt`` (top-3 drivers per instance), this
+    attaches the structured reference derived from the G0 curves
+    (`explanations/global_groundtruth/{model}_{feature}.json`) — the judge scores
+    generated *against* reference instead of blindly. For the tool-use pipeline
+    the retrieval transcript from ``record['tool_calls']`` is attached.
+    """
+    model = record["xai_model"]
+    feature = record["feature"]
+    gt_path = explanations_dir / GROUNDTRUTH_DIR_NAME / f"{model}_{feature}.json"
+    gt = json.loads(gt_path.read_text())
+
+    reference = _global_reference(gt)
+
+    if record.get("tool_calls"):
+        reference["tool_call_trace"] = _tool_trace_block(record["tool_calls"])
+        reference["tool_trace_note"] = (
+            "The retrieved values (importances, curve points, percentiles) are "
+            "correct and may be counted as evidence for faithfulness."
+        )
+
+    output_instruction = (
+        "Answer only in the XML format from the system prompt.\n"
+        "Per criterion: reasoning first (1–2 sentences), then the score tag.\n"
+        "\n"
+        "<faithfulness_reasoning>...</faithfulness_reasoning>\n"
+        "<faithfulness>N</faithfulness>\n"
+        "<clarity_reasoning>...</clarity_reasoning>\n"
+        "<clarity>N</clarity>\n"
+        "<completeness_reasoning>...</completeness_reasoning>\n"
+        "<completeness>N</completeness>"
+    )
+    return json.dumps({
+        "task": (
+            "Evaluate the following GLOBAL feature explanation against the "
+            "structured ground-truth reference, using the rubric. Score each "
+            "criterion 1–5 with a short justification."
+        ),
+        "ground_truth": reference,
+        "explanation": record["explanation"],
+        "output_format": output_instruction,
+    }, ensure_ascii=False, indent=2)
+
+
+GLOBAL_JUDGE_SYSTEM_FILE = "judge_system_global.md"
+
+
+def run_global_judge(
+    ask_fn,
+    model: str,
+    *,
+    results_dir: Path = RESULTS_DIR,
+    explanations_dir: Path = EXPLANATIONS_DIR,
+    prompts_dir: Path = PROMPTS_DIR,
+    k: int = 1,
+    temperature: float | None = 0.0,
+    out_subdir: str = "global_judge",
+    only: Optional[list[str]] = None,
+) -> pd.DataFrame:
+    """Reference-based judge over all global explanations (Phase G3, part b).
+
+    Idempotent like the generation pipeline: one judge record per explanation is
+    written to ``results/{out_subdir}/{stem}.json``; if it already exists it is
+    loaded instead of re-scored (no API call). ``k>1`` enables self-consistency
+    (median per score). ``only`` filters on file stems (e.g. the dev-5) for cheap
+    validation runs.
+
+    Warning: running this calls the API (billed). Returns a DataFrame with one row
+    per explanation (scores + form type for the stratified evaluation).
+    """
+    from utils.judge import judge_with_retry, judge_with_self_consistency
+
+    system = (prompts_dir / GLOBAL_JUDGE_SYSTEM_FILE).read_text()
+    src_dir = results_dir / "global"
+    out_dir = results_dir / out_subdir
+    out_dir.mkdir(parents=True, exist_ok=True)
+
+    rows: list[dict] = []
+    for path in sorted(src_dir.glob("*.json")):
+        if only is not None and path.stem not in only:
+            continue
+        out_file = out_dir / path.name
+        if out_file.exists():
+            rows.append(json.loads(out_file.read_text()))
+            continue
+
+        record = json.loads(path.read_text())
+        prompt = build_global_judge_prompt(record, explanations_dir=explanations_dir)
+        if k > 1:
+            res = judge_with_self_consistency(
+                ask_fn, prompt, system, model, k=k,
+                temperature=temperature if temperature is not None else 0.7)
+        else:
+            res = judge_with_retry(
+                ask_fn, prompt, system, model, temperature=temperature)
+
+        gt = json.loads((explanations_dir / GROUNDTRUTH_DIR_NAME /
+                         f"{record['xai_model']}_{record['feature']}.json").read_text())
+        judged = {
+            "form_pipeline": record["form"],
+            "xai_model":     record["xai_model"],
+            "feature":       record["feature"],
+            "form_type":     gt["form"],
+            "judge_model":   model,
+            "faithfulness":  res.get("faithfulness"),
+            "clarity":       res.get("clarity"),
+            "completeness":  res.get("completeness"),
+            "faithfulness_reasoning": res.get("faithfulness_reasoning", ""),
+            "usage":         res.get("usage", {}),
+        }
+        out_file.write_text(json.dumps(judged, ensure_ascii=False, indent=2))
+        rows.append(judged)
+
+    return pd.DataFrame(rows)
 
 
 def build_judge_prompt(
