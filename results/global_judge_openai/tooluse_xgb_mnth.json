@@ -1,0 +1,15 @@
+{
+  "form_pipeline": "tooluse",
+  "xai_model": "xgb",
+  "feature": "mnth",
+  "form_type": "categorical",
+  "judge_model": "gpt-4o",
+  "faithfulness": 4,
+  "clarity": 3,
+  "completeness": 5,
+  "faithfulness_reasoning": "The explanation correctly identifies the top and bottom months, with January and February as the lowest and September as the highest, aligning with the reference. The importance rank is accurately stated as 5th. However, the description of an \"arch-shaped\" effect is misleading for a categorical feature. Anchor 5, -1 (misleading shape description), resulting in a score of 4.",
+  "usage": {
+    "input_tokens": 3175,
+    "output_tokens": 209
+  }
+}

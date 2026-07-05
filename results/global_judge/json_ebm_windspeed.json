@@ -1,0 +1,15 @@
+{
+  "form_pipeline": "json",
+  "xai_model": "ebm",
+  "feature": "windspeed",
+  "form_type": "near-flat",
+  "judge_model": "claude-opus-4-8",
+  "faithfulness": 4,
+  "clarity": 5,
+  "completeness": 5,
+  "faithfulness_reasoning": "Direction (decreasing) matches, rank 8 of 9 is correct, and the near-flat/negligible framing is captured (limited influence, mostly flat). The sign-change is stated as ~20 km/h vs reference ~8.4 km/h, a minor imprecision but structure is right. Anchor 5, no deduction triggers fully; slight threshold mismatch keeps it near-top but not disqualifying — anchor 4 for the imprecise threshold.",
+  "usage": {
+    "input_tokens": 752,
+    "output_tokens": 341
+  }
+}

@@ -1,0 +1,15 @@
+{
+  "form_pipeline": "vision",
+  "xai_model": "ebm",
+  "feature": "hr",
+  "form_type": "categorical",
+  "judge_model": "claude-opus-4-8",
+  "faithfulness": 5,
+  "clarity": 5,
+  "completeness": 5,
+  "faithfulness_reasoning": "Both commuter peaks (8 a.m. and 5–6 p.m., with 17 highest) and the deepest trough at 4–5 a.m. match the reference top/bottom categories; rank 1 of 9 correct. Anchor 5, no deductions.",
+  "usage": {
+    "input_tokens": 855,
+    "output_tokens": 268
+  }
+}

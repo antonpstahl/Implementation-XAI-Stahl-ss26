@@ -1,0 +1,15 @@
+{
+  "form_pipeline": "template",
+  "xai_model": "ebm",
+  "feature": "weathersit",
+  "form_type": "categorical",
+  "judge_model": "claude-opus-4-8",
+  "faithfulness": 3,
+  "clarity": 4,
+  "completeness": 5,
+  "faithfulness_reasoning": "This is a categorical feature; describing it as \"non-monotonic\" that \"rises and falls across the range\" wrongly imposes a continuous shape, though it correctly identifies clear/few clouds (cat 1) as highest and rank 6 is correct. It fails to note the lowest is category 3 (heavy weather). Anchor 4 (top level correct, rank correct, but structure mischaracterized), -1 (imposes a peak/shape the categorical reference does not have), max(1,4-1)=3.",
+  "usage": {
+    "input_tokens": 685,
+    "output_tokens": 397
+  }
+}

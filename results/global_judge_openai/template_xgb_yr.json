@@ -1,0 +1,15 @@
+{
+  "form_pipeline": "template",
+  "xai_model": "xgb",
+  "feature": "yr",
+  "form_type": "monotonic",
+  "judge_model": "gpt-4o",
+  "faithfulness": 1,
+  "clarity": 4,
+  "completeness": 5,
+  "faithfulness_reasoning": "The explanation incorrectly describes the effect as non-monotonic, while the reference states it is monotonic increasing. The importance rank is correctly identified as 2 of 9. Anchor 2, -1 (direction/monotonicity contradicts), max(1, 2-1)=1.",
+  "usage": {
+    "input_tokens": 2324,
+    "output_tokens": 177
+  }
+}

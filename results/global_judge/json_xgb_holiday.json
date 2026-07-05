@@ -1,0 +1,15 @@
+{
+  "form_pipeline": "json",
+  "xai_model": "xgb",
+  "feature": "holiday",
+  "form_type": "near-flat",
+  "judge_model": "claude-opus-4-8",
+  "faithfulness": 5,
+  "clarity": 4,
+  "completeness": 5,
+  "faithfulness_reasoning": "Direction (decreasing on holidays) matches the reference and the rank 9/9 is correct; the explanation frames the feature as minimal/near-flat while capturing the negative effect, though it slightly over-describes variability. Anchor 5, no deduction applies.",
+  "usage": {
+    "input_tokens": 790,
+    "output_tokens": 306
+  }
+}

@@ -1,0 +1,15 @@
+{
+  "form_pipeline": "tooluse",
+  "xai_model": "xgb",
+  "feature": "windspeed",
+  "form_type": "near-flat",
+  "judge_model": "claude-opus-4-8",
+  "faithfulness": 2,
+  "clarity": 3,
+  "completeness": 5,
+  "faithfulness_reasoning": "The reference is near-flat and negligible with a small early peak (~11 km/h) then slight decline; the explanation over-describes a strong monotone decrease with contributions \"below –0.5 in log scale\" and fails to frame the feature as negligible, though it does capture the low-wind positive nudge and correct rank. Anchor 3, -1 (misses negligibility / claims a sizeable structure the near-flat reference does not have), max(1,3-1)=2.",
+  "usage": {
+    "input_tokens": 1580,
+    "output_tokens": 356
+  }
+}

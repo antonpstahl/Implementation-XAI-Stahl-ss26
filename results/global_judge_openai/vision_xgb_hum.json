@@ -1,0 +1,15 @@
+{
+  "form_pipeline": "vision",
+  "xai_model": "xgb",
+  "feature": "hum",
+  "form_type": "non-monotonic",
+  "judge_model": "gpt-4o",
+  "faithfulness": 4,
+  "clarity": 3,
+  "completeness": 5,
+  "faithfulness_reasoning": "The explanation correctly identifies the non-monotonic, inverted-U shape and the peak around 30–50% humidity, which aligns with the reference peak at ~34%. The importance rank of 6 is also accurate. However, the explanation slightly overstates the range of the peak and does not mention the sign change at ~7.3%. Anchor 5, -1 (peak range slightly imprecise), resulting in a score of 4.",
+  "usage": {
+    "input_tokens": 2872,
+    "output_tokens": 250
+  }
+}

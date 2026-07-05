@@ -1,0 +1,15 @@
+{
+  "form_pipeline": "tooluse",
+  "xai_model": "xgb",
+  "feature": "hum",
+  "form_type": "non-monotonic",
+  "judge_model": "claude-opus-4-8",
+  "faithfulness": 5,
+  "clarity": 4,
+  "completeness": 5,
+  "faithfulness_reasoning": "The inverted-U shape, negative-at-extremes, positive mid-range, and rank 6 of 9 all match the reference; the peak is placed as a broad 30–60% sweet spot which includes the true ~34% peak, close enough. Anchor 5, no deductions.",
+  "usage": {
+    "input_tokens": 1547,
+    "output_tokens": 305
+  }
+}

@@ -102,6 +102,58 @@ def adjust_pvalues(pvalues, method='holm'):
     return out
 
 
+def krippendorff_alpha_interval(reliability_data) -> float:
+    """Krippendorff's alpha with interval metric (squared differences).
+
+    Parameters
+    ----------
+    reliability_data : ndarray shape (n_raters, n_units); NaN = missing value.
+
+    Returns
+    -------
+    float : alpha in [-1, 1]; 1.0 = perfect agreement, 0.0 = chance.
+
+    Notes
+    -----
+    The interval metric is the standard approximation for ordinal Likert data
+    (1 to 5). Formula: Hayes and Krippendorff (2007), Communication Methods and
+    Measures. Ported verbatim from NB 05 so the local and global judge-robustness
+    figures use the exact same estimator.
+    """
+    data = np.asarray(reliability_data, dtype=float)  # (n_raters, n_units)
+
+    # Observed disagreement: mean squared diff across all rater pairs per unit.
+    D_o = 0.0
+    n_pairs_total = 0
+    for u in range(data.shape[1]):
+        valid = data[:, u][~np.isnan(data[:, u])]
+        m_u = len(valid)
+        for i in range(m_u):
+            for j in range(i + 1, m_u):
+                D_o += (valid[i] - valid[j]) ** 2
+                n_pairs_total += 1
+    if n_pairs_total == 0:
+        return np.nan
+    D_o /= n_pairs_total
+
+    # Expected disagreement: across all values ignoring unit structure.
+    all_values = data[~np.isnan(data)]
+    n = len(all_values)
+    if n < 2:
+        return np.nan
+    D_e = 0.0
+    count = 0
+    for i in range(n):
+        for j in range(i + 1, n):
+            D_e += (all_values[i] - all_values[j]) ** 2
+            count += 1
+    D_e /= count
+
+    if D_e == 0:
+        return 1.0 if D_o == 0 else np.nan
+    return 1.0 - D_o / D_e
+
+
 def wilcoxon_pairwise(df, pipelines, metric,
                       group_col='pipeline_label',
                       id_cols=('instance_id', 'xai_model'),

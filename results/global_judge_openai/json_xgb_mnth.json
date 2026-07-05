@@ -1,0 +1,15 @@
+{
+  "form_pipeline": "json",
+  "xai_model": "xgb",
+  "feature": "mnth",
+  "form_type": "categorical",
+  "judge_model": "gpt-4o",
+  "faithfulness": 3,
+  "clarity": 3,
+  "completeness": 5,
+  "faithfulness_reasoning": "The explanation correctly identifies the top and bottom categories, with January and February as the most negative and summer months as the most positive, aligning with the reference. The importance rank of 5 is also accurate. However, the explanation inaccurately describes a \"non-monotonic\" effect and uses \"log space,\" which is not in the reference. Anchor 5, -1 (non-monotonic claim), -1 (log space), max(1, 5-2)=3.",
+  "usage": {
+    "input_tokens": 2580,
+    "output_tokens": 241
+  }
+}

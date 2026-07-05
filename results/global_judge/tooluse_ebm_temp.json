@@ -1,0 +1,15 @@
+{
+  "form_pipeline": "tooluse",
+  "xai_model": "ebm",
+  "feature": "temp",
+  "form_type": "non-monotonic",
+  "judge_model": "claude-opus-4-8",
+  "faithfulness": 5,
+  "clarity": 4,
+  "completeness": 5,
+  "faithfulness_reasoning": "Inverted-U with peak ~30–31 °C, cold negative and slight decline at extreme heat all match the reference; rank 2 correct. Anchor 5, no deductions.",
+  "usage": {
+    "input_tokens": 1545,
+    "output_tokens": 274
+  }
+}

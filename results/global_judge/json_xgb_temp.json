@@ -1,0 +1,15 @@
+{
+  "form_pipeline": "json",
+  "xai_model": "xgb",
+  "feature": "temp",
+  "form_type": "non-monotonic",
+  "judge_model": "claude-opus-4-8",
+  "faithfulness": 3,
+  "clarity": 3,
+  "completeness": 5,
+  "faithfulness_reasoning": "Direction (warmer→more) is correct and rank 3 matches, but the explanation claims a monotonic rise with \"no downturn,\" missing the inverted-U peak at ~29.5 °C. Anchor 4, -1 (claims monotone rise, misses the peak/decline the reference has), max(1, 4-1)=3.",
+  "usage": {
+    "input_tokens": 789,
+    "output_tokens": 308
+  }
+}

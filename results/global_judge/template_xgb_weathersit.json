@@ -1,0 +1,15 @@
+{
+  "form_pipeline": "template",
+  "xai_model": "xgb",
+  "feature": "weathersit",
+  "form_type": "categorical",
+  "judge_model": "claude-opus-4-8",
+  "faithfulness": 3,
+  "clarity": 4,
+  "completeness": 5,
+  "faithfulness_reasoning": "Feature is categorical, but the explanation calls it \"non-monotonic, rises and falls\" which misframes it; it does correctly name clear/few clouds (cat 1) as highest, and rank 7 of 9 is correct. It misses that the worst category is heavy weather (cat 3). Anchor 3 (top level correct, but shape framing wrong for a categorical feature); no direction-contradiction since highest level is right. Score 3.",
+  "usage": {
+    "input_tokens": 696,
+    "output_tokens": 368
+  }
+}

@@ -1,0 +1,15 @@
+{
+  "form_pipeline": "json",
+  "xai_model": "ebm",
+  "feature": "mnth",
+  "form_type": "categorical",
+  "judge_model": "claude-opus-4-8",
+  "faithfulness": 5,
+  "clarity": 4,
+  "completeness": 5,
+  "faithfulness_reasoning": "Top categories (Oct, Nov, Sep) and bottom (Jan, Feb) are correctly identified, rank 4/9 is exact, and the seasonal shape matches the reference values well. Anchor 5, no deductions.",
+  "usage": {
+    "input_tokens": 922,
+    "output_tokens": 306
+  }
+}

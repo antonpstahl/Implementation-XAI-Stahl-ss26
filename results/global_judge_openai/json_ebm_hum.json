@@ -1,0 +1,15 @@
+{
+  "form_pipeline": "json",
+  "xai_model": "ebm",
+  "feature": "hum",
+  "form_type": "non-monotonic",
+  "judge_model": "gpt-4o",
+  "faithfulness": 3,
+  "clarity": 5,
+  "completeness": 5,
+  "faithfulness_reasoning": "The explanation correctly identifies the non-monotonic nature and the peak around 36% humidity, matching the reference. However, it incorrectly describes a decline beyond 70% and misses the sign change at ~9.9%. The importance rank is accurate. Anchor 4, -1 (peak missed), max(1, 4-1)=3.",
+  "usage": {
+    "input_tokens": 2526,
+    "output_tokens": 178
+  }
+}

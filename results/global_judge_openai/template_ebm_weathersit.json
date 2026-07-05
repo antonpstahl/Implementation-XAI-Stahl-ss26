@@ -1,0 +1,15 @@
+{
+  "form_pipeline": "template",
+  "xai_model": "ebm",
+  "feature": "weathersit",
+  "form_type": "categorical",
+  "judge_model": "gpt-4o",
+  "faithfulness": 4,
+  "clarity": 5,
+  "completeness": 5,
+  "faithfulness_reasoning": "The explanation correctly identifies the categorical nature of the feature and the top category as \"clear/few clouds\" (category 1), matching the reference. The importance rank is also correctly stated as 6 of 9. However, the description of the effect as \"non-monotonic\" is misleading for a categorical feature. Anchor 5, -1 (misleading description of effect), final score 4.",
+  "usage": {
+    "input_tokens": 2450,
+    "output_tokens": 229
+  }
+}

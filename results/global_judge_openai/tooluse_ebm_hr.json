@@ -1,0 +1,15 @@
+{
+  "form_pipeline": "tooluse",
+  "xai_model": "ebm",
+  "feature": "hr",
+  "form_type": "categorical",
+  "judge_model": "gpt-4o",
+  "faithfulness": 4,
+  "clarity": 5,
+  "completeness": 5,
+  "faithfulness_reasoning": "The explanation correctly identifies the non-monotonic, double-peaked nature of the effect, but it inaccurately places the highest peak at 5 PM instead of the correct 17 (5 PM) and 18 (6 PM) hours. The importance rank is correctly identified as 1. Anchor 5, -1 (peak location imprecise), resulting in a score of 4.",
+  "usage": {
+    "input_tokens": 3029,
+    "output_tokens": 202
+  }
+}

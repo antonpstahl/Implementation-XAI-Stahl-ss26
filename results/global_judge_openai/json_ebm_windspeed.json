@@ -1,0 +1,15 @@
+{
+  "form_pipeline": "json",
+  "xai_model": "ebm",
+  "feature": "windspeed",
+  "form_type": "near-flat",
+  "judge_model": "gpt-4o",
+  "faithfulness": 4,
+  "clarity": 5,
+  "completeness": 5,
+  "faithfulness_reasoning": "The explanation correctly identifies the near-flat effect at low to moderate wind speeds and the decreasing effect at higher speeds, aligning with the reference's monotonic decreasing direction. The importance rank is accurately stated as 8th out of 9. However, the explanation overstates the effect at high wind speeds, which is not supported by the near-flat reference. Anchor 5, -1 (overstated effect), resulting in a score of 4.",
+  "usage": {
+    "input_tokens": 2454,
+    "output_tokens": 219
+  }
+}

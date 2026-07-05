@@ -1,0 +1,15 @@
+{
+  "form_pipeline": "json",
+  "xai_model": "ebm",
+  "feature": "mnth",
+  "form_type": "categorical",
+  "judge_model": "gpt-4o",
+  "faithfulness": 4,
+  "clarity": 5,
+  "completeness": 5,
+  "faithfulness_reasoning": "The explanation correctly identifies October as the peak month and January and February as the lowest, aligning with the reference. The importance rank is accurately stated as 4th. However, the explanation inaccurately describes a dip in mid-summer (July-August), which is not supported by the reference. Anchor 5, -1 (incorrect mid-summer dip), resulting in a score of 4.",
+  "usage": {
+    "input_tokens": 2604,
+    "output_tokens": 217
+  }
+}

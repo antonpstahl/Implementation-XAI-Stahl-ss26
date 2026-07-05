@@ -1,0 +1,15 @@
+{
+  "form_pipeline": "template",
+  "xai_model": "ebm",
+  "feature": "mnth",
+  "form_type": "categorical",
+  "judge_model": "claude-opus-4-8",
+  "faithfulness": 5,
+  "clarity": 4,
+  "completeness": 5,
+  "faithfulness_reasoning": "Categorical feature: top category October (10) is correctly identified, rank 4 of 9 is exact; the \"non-monotonic\" framing is slightly off for a categorical feature but the \"opposite end\" (lowest) implicitly points to winter (Jan/Feb), which is correct. Anchor 5, no deduction as the top level and rank are right and lows implied.",
+  "usage": {
+    "input_tokens": 669,
+    "output_tokens": 331
+  }
+}

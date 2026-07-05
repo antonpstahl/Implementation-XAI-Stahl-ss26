@@ -1,0 +1,15 @@
+{
+  "form_pipeline": "template",
+  "xai_model": "xgb",
+  "feature": "hum",
+  "form_type": "non-monotonic",
+  "judge_model": "claude-opus-4-8",
+  "faithfulness": 4,
+  "clarity": 4,
+  "completeness": 5,
+  "faithfulness_reasoning": "Non-monotonic form and inverted-U with peak correct; peak stated as ~43% vs reference ~34%, a modest imprecision; rank 6 of 9 correct. Anchor 4 (slightly imprecise peak), no deductions apply.",
+  "usage": {
+    "input_tokens": 610,
+    "output_tokens": 264
+  }
+}

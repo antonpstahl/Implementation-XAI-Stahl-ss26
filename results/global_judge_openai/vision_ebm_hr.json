@@ -1,0 +1,15 @@
+{
+  "form_pipeline": "vision",
+  "xai_model": "ebm",
+  "feature": "hr",
+  "form_type": "categorical",
+  "judge_model": "gpt-4o",
+  "faithfulness": 5,
+  "clarity": 5,
+  "completeness": 5,
+  "faithfulness_reasoning": "The explanation correctly identifies the categorical nature of the feature and captures the key structure with peaks at 8 a.m. and 5–6 p.m., aligning with the reference's top categories. The importance rank is accurately stated as 1st. Anchor 5, no deduction.",
+  "usage": {
+    "input_tokens": 2567,
+    "output_tokens": 175
+  }
+}

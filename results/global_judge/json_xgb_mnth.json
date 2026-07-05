@@ -1,0 +1,15 @@
+{
+  "form_pipeline": "json",
+  "xai_model": "xgb",
+  "feature": "mnth",
+  "form_type": "categorical",
+  "judge_model": "claude-opus-4-8",
+  "faithfulness": 5,
+  "clarity": 3,
+  "completeness": 5,
+  "faithfulness_reasoning": "Direction matches: winter (Jan/Feb) most negative, autumn (Sep/Oct) top positive, rank 5 of 9 correct; the top categories (9,10) fall within the June–October positive range described. Slight imprecision: the peak is really Sep/Oct not \"June–September\", but the key structure is captured. Anchor 5, no deduction applies.",
+  "usage": {
+    "input_tokens": 874,
+    "output_tokens": 344
+  }
+}

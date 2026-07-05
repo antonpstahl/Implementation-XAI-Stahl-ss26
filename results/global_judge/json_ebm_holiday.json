@@ -1,0 +1,15 @@
+{
+  "form_pipeline": "json",
+  "xai_model": "ebm",
+  "feature": "holiday",
+  "form_type": "near-flat",
+  "judge_model": "claude-opus-4-8",
+  "faithfulness": 3,
+  "clarity": 4,
+  "completeness": 5,
+  "faithfulness_reasoning": "Direction (holidays lower) matches the decreasing reference and rank 9/9 is correct; however the reference is near-flat/negligible and the explanation over-describes a \"meaningful\" 13–14% step effect rather than framing it as negligible. Anchor 4, -1 (misses negligibility framing of a near-flat feature), max(1, 4-1)=3.",
+  "usage": {
+    "input_tokens": 675,
+    "output_tokens": 328
+  }
+}

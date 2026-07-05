@@ -1,0 +1,15 @@
+{
+  "form_pipeline": "vision",
+  "xai_model": "ebm",
+  "feature": "hum",
+  "form_type": "non-monotonic",
+  "judge_model": "claude-opus-4-8",
+  "faithfulness": 5,
+  "clarity": 3,
+  "completeness": 5,
+  "faithfulness_reasoning": "Non-monotonic shape with peak ~36% and decline at high humidity matches the reference; rank 5 of 9 correct; sign change and structure captured well. Anchor 5, no deductions.",
+  "usage": {
+    "input_tokens": 808,
+    "output_tokens": 261
+  }
+}

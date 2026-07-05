@@ -1,0 +1,15 @@
+{
+  "form_pipeline": "json",
+  "xai_model": "xgb",
+  "feature": "yr",
+  "form_type": "monotonic",
+  "judge_model": "claude-opus-4-8",
+  "faithfulness": 5,
+  "clarity": 4,
+  "completeness": 5,
+  "faithfulness_reasoning": "Direction (increasing, 2012 > 2011) matches the reference, rank 2 of 9 correct, and the step change captures the monotonic-increasing binary structure. Anchor 5, no deductions.",
+  "usage": {
+    "input_tokens": 691,
+    "output_tokens": 297
+  }
+}

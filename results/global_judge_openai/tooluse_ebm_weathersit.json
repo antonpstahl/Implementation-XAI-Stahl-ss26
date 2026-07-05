@@ -1,0 +1,15 @@
+{
+  "form_pipeline": "tooluse",
+  "xai_model": "ebm",
+  "feature": "weathersit",
+  "form_type": "categorical",
+  "judge_model": "gpt-4o",
+  "faithfulness": 5,
+  "clarity": 5,
+  "completeness": 5,
+  "faithfulness_reasoning": "The explanation accurately describes the categorical nature of the feature, correctly identifies the top and bottom categories, and provides the correct importance rank of 6 out of 9. The step-like effect and the specific contributions for each category match the reference. Anchor 5, no deduction.",
+  "usage": {
+    "input_tokens": 3116,
+    "output_tokens": 199
+  }
+}

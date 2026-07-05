@@ -1,0 +1,15 @@
+{
+  "form_pipeline": "tooluse",
+  "xai_model": "ebm",
+  "feature": "mnth",
+  "form_type": "categorical",
+  "judge_model": "gpt-4o",
+  "faithfulness": 5,
+  "clarity": 4,
+  "completeness": 5,
+  "faithfulness_reasoning": "The explanation accurately describes the categorical nature of the feature, correctly identifies October as the peak month, and notes January and February as the lowest. The importance rank is correctly stated as 4th. Anchor 5, no deduction.",
+  "usage": {
+    "input_tokens": 3047,
+    "output_tokens": 188
+  }
+}

@@ -1,0 +1,15 @@
+{
+  "form_pipeline": "vision",
+  "xai_model": "xgb",
+  "feature": "hr",
+  "form_type": "categorical",
+  "judge_model": "claude-opus-4-8",
+  "faithfulness": 5,
+  "clarity": 3,
+  "completeness": 5,
+  "faithfulness_reasoning": "Peak at 17:00 matches the top category, lowest around 4–5 a.m. matches bottom categories, and rank 1 of 9 is correct; structure captured well. Anchor 5, no deductions.",
+  "usage": {
+    "input_tokens": 921,
+    "output_tokens": 278
+  }
+}

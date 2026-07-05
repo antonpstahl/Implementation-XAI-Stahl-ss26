@@ -1,0 +1,15 @@
+{
+  "form_pipeline": "vision",
+  "xai_model": "ebm",
+  "feature": "yr",
+  "form_type": "monotonic",
+  "judge_model": "gpt-4o",
+  "faithfulness": 5,
+  "clarity": 4,
+  "completeness": 5,
+  "faithfulness_reasoning": "The explanation correctly identifies the monotonic increase from 2011 to 2012, matching the reference's direction and monotonicity. The importance rank is accurately stated as 3rd. The step-change effect is consistent with the reference's monotonic increase, capturing the key structure. Anchor 5, no deduction.",
+  "usage": {
+    "input_tokens": 2681,
+    "output_tokens": 197
+  }
+}

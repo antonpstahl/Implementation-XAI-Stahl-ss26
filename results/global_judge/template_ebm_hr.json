@@ -1,0 +1,15 @@
+{
+  "form_pipeline": "template",
+  "xai_model": "ebm",
+  "feature": "hr",
+  "form_type": "categorical",
+  "judge_model": "claude-opus-4-8",
+  "faithfulness": 4,
+  "clarity": 4,
+  "completeness": 5,
+  "faithfulness_reasoning": "Top category 17:00 correctly identified and rank 1 of 9 correct; captures category-dependent shape. It misses naming the second commuter peak (8:00) and the deepest lows (early morning 3-5), but identifies \"opposite end\" as lowest which is roughly right. Anchor 5, -1 (morning commuter peak / precise lows not captured), max(1,5-1)=4.",
+  "usage": {
+    "input_tokens": 680,
+    "output_tokens": 333
+  }
+}

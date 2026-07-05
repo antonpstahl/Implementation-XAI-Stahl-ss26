@@ -1,0 +1,15 @@
+{
+  "form_pipeline": "template",
+  "xai_model": "ebm",
+  "feature": "weekday",
+  "form_type": "near-flat",
+  "judge_model": "gpt-4o",
+  "faithfulness": 2,
+  "clarity": 4,
+  "completeness": 5,
+  "faithfulness_reasoning": "The explanation correctly identifies the importance rank as 7 of 9, matching the reference. However, it incorrectly describes the effect as non-monotonic with rises and falls, which is misleading for a near-flat feature. The claim about Friday being the highest is accurate. Anchor 3, -1 (misleading non-monotonic description), max(1, 3-1)=2.",
+  "usage": {
+    "input_tokens": 2443,
+    "output_tokens": 219
+  }
+}

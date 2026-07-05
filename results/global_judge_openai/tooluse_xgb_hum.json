@@ -1,0 +1,15 @@
+{
+  "form_pipeline": "tooluse",
+  "xai_model": "xgb",
+  "feature": "hum",
+  "form_type": "non-monotonic",
+  "judge_model": "gpt-4o",
+  "faithfulness": 4,
+  "clarity": 5,
+  "completeness": 5,
+  "faithfulness_reasoning": "The explanation correctly identifies the non-monotonic, inverted-U shape of the effect, with a peak around 34% humidity. It accurately describes the negative contribution at low and high humidity levels and the positive contribution in the moderate range. The importance rank of 6 is also correctly stated. However, the explanation incorrectly suggests a sharp drop beyond 80% humidity, which is not specified in the reference. Anchor 5, -1 (sharp drop beyond 80% not in reference), final score 4.",
+  "usage": {
+    "input_tokens": 3044,
+    "output_tokens": 233
+  }
+}

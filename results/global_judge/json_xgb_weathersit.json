@@ -1,0 +1,15 @@
+{
+  "form_pipeline": "json",
+  "xai_model": "xgb",
+  "feature": "weathersit",
+  "form_type": "categorical",
+  "judge_model": "claude-opus-4-8",
+  "faithfulness": 4,
+  "clarity": 5,
+  "completeness": 5,
+  "faithfulness_reasoning": "The explanation correctly identifies cat 1 as top positive, cat 2 slight negative, cat 3 as the largest drop, and cat 4 as strongly negative; the \"stepped decline\" claim is slightly imprecise since cat 3 is actually lower than cat 4 in the reference, but the top/bottom levels are right and rank 7 of 9 is correct. Anchor 5, -1 for the minor ordering imprecision (cat 3 vs cat 4), max(1,5-1)=4.",
+  "usage": {
+    "input_tokens": 947,
+    "output_tokens": 368
+  }
+}

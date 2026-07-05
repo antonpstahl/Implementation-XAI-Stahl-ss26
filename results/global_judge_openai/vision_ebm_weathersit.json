@@ -1,0 +1,15 @@
+{
+  "form_pipeline": "vision",
+  "xai_model": "ebm",
+  "feature": "weathersit",
+  "form_type": "categorical",
+  "judge_model": "gpt-4o",
+  "faithfulness": 5,
+  "clarity": 4,
+  "completeness": 5,
+  "faithfulness_reasoning": "The explanation correctly identifies the top category (1) and the bottom category (3), and the importance rank of 6 matches the reference. The description of the categorical effects aligns with the reference, capturing the key structure. Anchor 5, no deduction.",
+  "usage": {
+    "input_tokens": 2875,
+    "output_tokens": 189
+  }
+}

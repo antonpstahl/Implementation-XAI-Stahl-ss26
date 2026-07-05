@@ -1,0 +1,15 @@
+{
+  "form_pipeline": "vision",
+  "xai_model": "xgb",
+  "feature": "temp",
+  "form_type": "non-monotonic",
+  "judge_model": "gpt-4o",
+  "faithfulness": 5,
+  "clarity": 4,
+  "completeness": 5,
+  "faithfulness_reasoning": "The explanation correctly identifies the non-monotonic, inverted-U shape with a peak around 27–31 °C, matching the reference's peak at ~29.5 °C. The importance rank is accurately stated as 3rd. The structure and direction are well captured. Anchor 5, no deduction.",
+  "usage": {
+    "input_tokens": 2957,
+    "output_tokens": 184
+  }
+}

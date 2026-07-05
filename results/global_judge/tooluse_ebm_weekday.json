@@ -1,0 +1,15 @@
+{
+  "form_pipeline": "tooluse",
+  "xai_model": "ebm",
+  "feature": "weekday",
+  "form_type": "near-flat",
+  "judge_model": "claude-opus-4-8",
+  "faithfulness": 4,
+  "clarity": 3,
+  "completeness": 5,
+  "faithfulness_reasoning": "Top category (5/Friday) and bottom (0/Sunday) match the reference exactly, and rank 7 is correct; however the reference marks this as near-flat/negligible and the explanation frames it as a meaningful non-monotonic effect rather than negligible (though it does note it's a weak driver). Anchor 4-5, -1 for not clearly framing the small magnitudes as effectively negligible, so 4.",
+  "usage": {
+    "input_tokens": 1571,
+    "output_tokens": 353
+  }
+}

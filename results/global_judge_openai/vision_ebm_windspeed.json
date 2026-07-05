@@ -1,0 +1,15 @@
+{
+  "form_pipeline": "vision",
+  "xai_model": "ebm",
+  "feature": "windspeed",
+  "form_type": "near-flat",
+  "judge_model": "gpt-4o",
+  "faithfulness": 2,
+  "clarity": 3,
+  "completeness": 5,
+  "faithfulness_reasoning": "The explanation correctly identifies the direction as decreasing and the importance rank as 8th, matching the reference. However, it overstates the effect by describing a significant impact at high wind speeds, whereas the reference indicates a near-flat effect. Anchor 3, -1 (effect overstated), max(1, 3-1)=2.",
+  "usage": {
+    "input_tokens": 2453,
+    "output_tokens": 198
+  }
+}

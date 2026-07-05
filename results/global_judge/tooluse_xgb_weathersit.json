@@ -1,0 +1,15 @@
+{
+  "form_pipeline": "tooluse",
+  "xai_model": "xgb",
+  "feature": "weathersit",
+  "form_type": "categorical",
+  "judge_model": "claude-opus-4-8",
+  "faithfulness": 5,
+  "clarity": 3,
+  "completeness": 5,
+  "faithfulness_reasoning": "Category ordering matches: cat 1 positive, cat 2 slight negative, cat 3 the strongest negative, cat 4 also negative; rank 7 correct. Anchor 5; the \"in log space\" phrasing is a clarity issue not faithfulness, so no faithfulness deduction.",
+  "usage": {
+    "input_tokens": 1669,
+    "output_tokens": 302
+  }
+}

@@ -1,0 +1,15 @@
+{
+  "form_pipeline": "vision",
+  "xai_model": "ebm",
+  "feature": "temp",
+  "form_type": "non-monotonic",
+  "judge_model": "gpt-4o",
+  "faithfulness": 5,
+  "clarity": 4,
+  "completeness": 5,
+  "faithfulness_reasoning": "The explanation accurately describes the non-monotonic, inverted U-shaped effect with a peak around 31–33 °C, matching the reference. The importance rank is correctly stated as 2. The structure, including the zero crossing and peak, is captured well. Anchor 5, no deduction.",
+  "usage": {
+    "input_tokens": 2942,
+    "output_tokens": 184
+  }
+}

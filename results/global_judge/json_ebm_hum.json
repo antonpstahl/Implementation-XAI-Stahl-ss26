@@ -1,0 +1,15 @@
+{
+  "form_pipeline": "json",
+  "xai_model": "ebm",
+  "feature": "hum",
+  "form_type": "non-monotonic",
+  "judge_model": "claude-opus-4-8",
+  "faithfulness": 5,
+  "clarity": 4,
+  "completeness": 5,
+  "faithfulness_reasoning": "Non-monotonic with peak ~36% and later decline matches the reference; direction (broadly declining after peak) correct, rank 5 of 9 correct, structure captured. Anchor 5, no deductions.",
+  "usage": {
+    "input_tokens": 845,
+    "output_tokens": 289
+  }
+}

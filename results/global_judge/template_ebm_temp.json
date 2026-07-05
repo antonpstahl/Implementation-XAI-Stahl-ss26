@@ -1,0 +1,15 @@
+{
+  "form_pipeline": "template",
+  "xai_model": "ebm",
+  "feature": "temp",
+  "form_type": "non-monotonic",
+  "judge_model": "claude-opus-4-8",
+  "faithfulness": 5,
+  "clarity": 4,
+  "completeness": 5,
+  "faithfulness_reasoning": "Non-monotonic rise-then-fall with peak ~31.2 °C matches the reference, and rank 2 of 9 is correct; the ~18 °C sign change is not mentioned but the key structure (peak, direction, rank) is captured. Anchor 5, no deductions.",
+  "usage": {
+    "input_tokens": 622,
+    "output_tokens": 323
+  }
+}

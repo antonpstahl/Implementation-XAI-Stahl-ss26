@@ -1,0 +1,15 @@
+{
+  "form_pipeline": "json",
+  "xai_model": "xgb",
+  "feature": "weathersit",
+  "form_type": "categorical",
+  "judge_model": "gpt-4o",
+  "faithfulness": 5,
+  "clarity": 5,
+  "completeness": 5,
+  "faithfulness_reasoning": "The explanation correctly identifies the categorical nature of the feature and the ranking as 7th out of 9, which matches the reference. It accurately describes the top category (1) as having a positive effect and the bottom category (3) as having the most negative effect. However, it slightly exaggerates the impact of category 3 by stating a 20-60% drop, which is not specified in the reference. Anchor 5, no deduction.",
+  "usage": {
+    "input_tokens": 2614,
+    "output_tokens": 222
+  }
+}

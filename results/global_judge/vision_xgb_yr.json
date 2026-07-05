@@ -1,0 +1,15 @@
+{
+  "form_pipeline": "vision",
+  "xai_model": "xgb",
+  "feature": "yr",
+  "form_type": "monotonic",
+  "judge_model": "claude-opus-4-8",
+  "faithfulness": 5,
+  "clarity": 3,
+  "completeness": 5,
+  "faithfulness_reasoning": "Direction (2012 raises demand) matches monotonic increasing, rank 2 correct, and the step change from negative to positive matches the sign_change structure. Anchor 5, no deductions.",
+  "usage": {
+    "input_tokens": 1026,
+    "output_tokens": 276
+  }
+}

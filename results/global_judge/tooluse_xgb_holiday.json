@@ -1,0 +1,15 @@
+{
+  "form_pipeline": "tooluse",
+  "xai_model": "xgb",
+  "feature": "holiday",
+  "form_type": "near-flat",
+  "judge_model": "claude-opus-4-8",
+  "faithfulness": 4,
+  "clarity": 3,
+  "completeness": 5,
+  "faithfulness_reasoning": "Direction (decreasing on holidays) matches, and rank 9/9 as least important is correct; the near-flat/negligible framing is acknowledged via \"least important\" and \"minimal influence,\" though the effect is described in somewhat more dramatic terms than a near-flat feature warrants. Anchor 4 (structure slightly over-described), no strict deduction since direction and rank are right.",
+  "usage": {
+    "input_tokens": 1516,
+    "output_tokens": 332
+  }
+}

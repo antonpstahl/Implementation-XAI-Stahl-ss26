@@ -1,0 +1,15 @@
+{
+  "form_pipeline": "tooluse",
+  "xai_model": "ebm",
+  "feature": "yr",
+  "form_type": "monotonic",
+  "judge_model": "claude-opus-4-8",
+  "faithfulness": 5,
+  "clarity": 3,
+  "completeness": 5,
+  "faithfulness_reasoning": "Direction (increasing, 2011 down, 2012 up) matches; rank 3 correct; step-change structure correctly captured with accurate contribution values. Anchor 5, no deductions.",
+  "usage": {
+    "input_tokens": 1185,
+    "output_tokens": 286
+  }
+}

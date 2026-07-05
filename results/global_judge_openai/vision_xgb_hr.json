@@ -1,0 +1,15 @@
+{
+  "form_pipeline": "vision",
+  "xai_model": "xgb",
+  "feature": "hr",
+  "form_type": "categorical",
+  "judge_model": "gpt-4o",
+  "faithfulness": 5,
+  "clarity": 3,
+  "completeness": 5,
+  "faithfulness_reasoning": "The explanation correctly identifies the non-monotonic nature of the effect, the peak at 17:00, and the lowest point around 4–5 a.m., aligning with the reference. The importance rank is accurately stated as 1st. However, the SHAP value at 17:00 is slightly overstated as +1.0 instead of the reference's 0.79947. Anchor 5, no deduction.",
+  "usage": {
+    "input_tokens": 2610,
+    "output_tokens": 247
+  }
+}

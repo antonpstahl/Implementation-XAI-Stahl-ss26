@@ -1,0 +1,15 @@
+{
+  "form_pipeline": "json",
+  "xai_model": "ebm",
+  "feature": "temp",
+  "form_type": "non-monotonic",
+  "judge_model": "gpt-4o",
+  "faithfulness": 5,
+  "clarity": 5,
+  "completeness": 5,
+  "faithfulness_reasoning": "The explanation accurately captures the non-monotonic inverted-U shape with a peak around 31°C and the sign change at ~18°C, matching the reference. The importance rank is correctly identified as 2. Anchor 5, no deduction.",
+  "usage": {
+    "input_tokens": 2957,
+    "output_tokens": 173
+  }
+}

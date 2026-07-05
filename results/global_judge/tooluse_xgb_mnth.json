@@ -1,0 +1,15 @@
+{
+  "form_pipeline": "tooluse",
+  "xai_model": "xgb",
+  "feature": "mnth",
+  "form_type": "categorical",
+  "judge_model": "claude-opus-4-8",
+  "faithfulness": 4,
+  "clarity": 3,
+  "completeness": 5,
+  "faithfulness_reasoning": "Top months (9, 10, 7) and bottom months (1, 2, 3) broadly match: winter negative, summer/early-autumn positive; rank 5 of 9 correct. Slight imprecision — reference peak is months 9–10 more than mid-summer, and month 12 detail is speculative — but structure is captured. Anchor 4, no deduction applies.",
+  "usage": {
+    "input_tokens": 1655,
+    "output_tokens": 343
+  }
+}

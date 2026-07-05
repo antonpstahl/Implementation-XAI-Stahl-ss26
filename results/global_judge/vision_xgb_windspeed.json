@@ -1,0 +1,15 @@
+{
+  "form_pipeline": "vision",
+  "xai_model": "xgb",
+  "feature": "windspeed",
+  "form_type": "near-flat",
+  "judge_model": "claude-opus-4-8",
+  "faithfulness": 2,
+  "clarity": 3,
+  "completeness": 5,
+  "faithfulness_reasoning": "The reference marks windspeed as near-flat (rank 8/9, negligible) with a tiny peak (~11 km/h) and small effect magnitude; the explanation overstates it as a strong monotone decline reaching -0.7, missing the \"negligible\" framing and the small early peak, though the negative-leaning direction and rank 8 are correct. Anchor 3 (structure/negligibility wrong), -1 (negligibility of near-flat feature missed and false steep decline claimed) → max(1, 3-1)=2.",
+  "usage": {
+    "input_tokens": 1340,
+    "output_tokens": 413
+  }
+}

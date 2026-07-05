@@ -1,0 +1,15 @@
+{
+  "form_pipeline": "json",
+  "xai_model": "ebm",
+  "feature": "yr",
+  "form_type": "monotonic",
+  "judge_model": "claude-opus-4-8",
+  "faithfulness": 5,
+  "clarity": 5,
+  "completeness": 5,
+  "faithfulness_reasoning": "Monotonic increase matches the reference, the sign change near x≈0.51 (mid-way between the two years) is captured as the 2011→2012 crossing, and rank 3 of 9 is correct. Anchor 5, no deductions.",
+  "usage": {
+    "input_tokens": 714,
+    "output_tokens": 297
+  }
+}

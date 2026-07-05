@@ -1,0 +1,15 @@
+{
+  "form_pipeline": "template",
+  "xai_model": "ebm",
+  "feature": "mnth",
+  "form_type": "categorical",
+  "judge_model": "gpt-4o",
+  "faithfulness": 5,
+  "clarity": 5,
+  "completeness": 5,
+  "faithfulness_reasoning": "The explanation correctly identifies the categorical nature of the feature and highlights October as the month with the highest demand, aligning with the reference. The importance rank is also accurately stated as 4 of 9. Anchor 5, no deduction.",
+  "usage": {
+    "input_tokens": 2443,
+    "output_tokens": 165
+  }
+}

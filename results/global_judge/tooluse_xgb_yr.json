@@ -1,0 +1,15 @@
+{
+  "form_pipeline": "tooluse",
+  "xai_model": "xgb",
+  "feature": "yr",
+  "form_type": "monotonic",
+  "judge_model": "claude-opus-4-8",
+  "faithfulness": 5,
+  "clarity": 3,
+  "completeness": 5,
+  "faithfulness_reasoning": "Direction (increasing, 2011 low → 2012 high) matches the reference, rank 2 correct, and the binary step-change structure is captured accurately. Anchor 5; no deductions apply.",
+  "usage": {
+    "input_tokens": 1512,
+    "output_tokens": 284
+  }
+}

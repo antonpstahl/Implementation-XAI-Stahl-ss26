@@ -1,0 +1,15 @@
+{
+  "form_pipeline": "template",
+  "xai_model": "xgb",
+  "feature": "holiday",
+  "form_type": "near-flat",
+  "judge_model": "claude-opus-4-8",
+  "faithfulness": 1,
+  "clarity": 2,
+  "completeness": 5,
+  "faithfulness_reasoning": "Reference is near-flat, monotonic decreasing; the explanation calls it non-monotonic with a rising-and-falling shape and claims a peak, contradicting the direction and inventing structure while ignoring negligibility. Rank 9 is correct. Anchor 2, -1 (direction/monotonicity contradicts), -1 (fabricated peak / negligibility missed), max(1, 2-2)=1.",
+  "usage": {
+    "input_tokens": 529,
+    "output_tokens": 367
+  }
+}

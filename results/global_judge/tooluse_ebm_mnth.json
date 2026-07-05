@@ -1,0 +1,15 @@
+{
+  "form_pipeline": "tooluse",
+  "xai_model": "ebm",
+  "feature": "mnth",
+  "form_type": "categorical",
+  "judge_model": "claude-opus-4-8",
+  "faithfulness": 5,
+  "clarity": 4,
+  "completeness": 5,
+  "faithfulness_reasoning": "Top category October (+0.17) and bottom categories January/February correctly identified, rank 4 correct, seasonal shape captured accurately. Anchor 5, no deductions.",
+  "usage": {
+    "input_tokens": 1563,
+    "output_tokens": 276
+  }
+}

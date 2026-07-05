@@ -1,0 +1,15 @@
+{
+  "form_pipeline": "tooluse",
+  "xai_model": "xgb",
+  "feature": "temp",
+  "form_type": "non-monotonic",
+  "judge_model": "gpt-4o",
+  "faithfulness": 3,
+  "clarity": 4,
+  "completeness": 5,
+  "faithfulness_reasoning": "The explanation correctly identifies the non-monotonic, inverted-U shape and the general direction of the effect. However, it inaccurately places the peak at 25–27°C instead of the reference peak at ~29.5°C, and the sign change is not clearly mentioned. The importance rank is correctly stated as 3rd. Anchor 4, -1 (peak location imprecise), resulting in a score of 3.",
+  "usage": {
+    "input_tokens": 3080,
+    "output_tokens": 241
+  }
+}

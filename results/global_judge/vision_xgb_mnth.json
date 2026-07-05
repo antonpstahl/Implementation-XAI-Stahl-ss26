@@ -1,0 +1,15 @@
+{
+  "form_pipeline": "vision",
+  "xai_model": "xgb",
+  "feature": "mnth",
+  "form_type": "categorical",
+  "judge_model": "claude-opus-4-8",
+  "faithfulness": 5,
+  "clarity": 3,
+  "completeness": 5,
+  "faithfulness_reasoning": "Categorical: top month 9 (September) correctly identified as peak, October also high, and January/February correctly the lowest — matches reference; rank 5 of 9 correct. Anchor 5, no deductions.",
+  "usage": {
+    "input_tokens": 1621,
+    "output_tokens": 286
+  }
+}

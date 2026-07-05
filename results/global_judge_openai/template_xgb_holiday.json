@@ -1,0 +1,15 @@
+{
+  "form_pipeline": "template",
+  "xai_model": "xgb",
+  "feature": "holiday",
+  "form_type": "near-flat",
+  "judge_model": "gpt-4o",
+  "faithfulness": 1,
+  "clarity": 3,
+  "completeness": 4,
+  "faithfulness_reasoning": "The explanation incorrectly describes the effect as non-monotonic, while the reference states it is monotonic decreasing. It also claims a peak around holidays, which contradicts the near-flat nature. The importance rank is correctly identified as 9 of 9. Anchor 2, -1 (direction/monotonicity contradicts), -1 (peak claimed but not present), max(1, 2-2)=1.",
+  "usage": {
+    "input_tokens": 2320,
+    "output_tokens": 216
+  }
+}

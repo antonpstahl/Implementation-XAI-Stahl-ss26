@@ -1,0 +1,15 @@
+{
+  "form_pipeline": "tooluse",
+  "xai_model": "ebm",
+  "feature": "weathersit",
+  "form_type": "categorical",
+  "judge_model": "claude-opus-4-8",
+  "faithfulness": 5,
+  "clarity": 4,
+  "completeness": 5,
+  "faithfulness_reasoning": "Categorical ordering matches: cat 1 highest positive, cat 3 lowest, cat 4 next, cat 2 near-neutral — all correct; rank 6 of 9 correct. Anchor 5, no deductions.",
+  "usage": {
+    "input_tokens": 1720,
+    "output_tokens": 296
+  }
+}

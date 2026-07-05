@@ -1,0 +1,15 @@
+{
+  "form_pipeline": "template",
+  "xai_model": "ebm",
+  "feature": "holiday",
+  "form_type": "near-flat",
+  "judge_model": "claude-opus-4-8",
+  "faithfulness": 3,
+  "clarity": 5,
+  "completeness": 5,
+  "faithfulness_reasoning": "Direction (decreasing) and rank (9 of 9) match the reference, but the feature is near-flat/negligible and the explanation over-describes a meaningful monotone effect without framing it as negligible. Anchor 4, -1 (misses the near-flat negligibility framing), max(1, 4-1)=3.",
+  "usage": {
+    "input_tokens": 525,
+    "output_tokens": 296
+  }
+}

@@ -1,0 +1,15 @@
+{
+  "form_pipeline": "vision",
+  "xai_model": "xgb",
+  "feature": "mnth",
+  "form_type": "categorical",
+  "judge_model": "gpt-4o",
+  "faithfulness": 4,
+  "clarity": 4,
+  "completeness": 5,
+  "faithfulness_reasoning": "The explanation correctly identifies the top and bottom categories, with September as the peak month, aligning with the reference. The importance rank is also accurately stated as 5th. However, the explanation inaccurately suggests a peak in November, which is not supported by the reference. Anchor 5, -1 (peak claimed not in reference), resulting in a score of 4.",
+  "usage": {
+    "input_tokens": 3108,
+    "output_tokens": 226
+  }
+}

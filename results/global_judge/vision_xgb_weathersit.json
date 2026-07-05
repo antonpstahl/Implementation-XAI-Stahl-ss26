@@ -1,0 +1,15 @@
+{
+  "form_pipeline": "vision",
+  "xai_model": "xgb",
+  "feature": "weathersit",
+  "form_type": "categorical",
+  "judge_model": "claude-opus-4-8",
+  "faithfulness": 5,
+  "clarity": 5,
+  "completeness": 5,
+  "faithfulness_reasoning": "Top category (1, clear) correctly identified as highest positive; category 3 correctly the strongest negative; rank 7 correct; category ordering matches reference. Anchor 5, no deductions.",
+  "usage": {
+    "input_tokens": 1465,
+    "output_tokens": 319
+  }
+}

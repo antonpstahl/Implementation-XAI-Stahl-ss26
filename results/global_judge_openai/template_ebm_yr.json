@@ -1,0 +1,15 @@
+{
+  "form_pipeline": "template",
+  "xai_model": "ebm",
+  "feature": "yr",
+  "form_type": "monotonic",
+  "judge_model": "gpt-4o",
+  "faithfulness": 4,
+  "clarity": 5,
+  "completeness": 5,
+  "faithfulness_reasoning": "The explanation correctly identifies the direction as increasing and the monotonicity as monotonic, matching the reference. The importance rank is also correctly stated as 3 of 9. However, it incorrectly claims a peak around 2012, which is not supported by the reference for a monotonic feature. Anchor 5, -1 (peak claimed), resulting in a score of 4.",
+  "usage": {
+    "input_tokens": 2316,
+    "output_tokens": 219
+  }
+}

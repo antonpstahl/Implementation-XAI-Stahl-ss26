@@ -1,0 +1,15 @@
+{
+  "form_pipeline": "vision",
+  "xai_model": "ebm",
+  "feature": "hum",
+  "form_type": "non-monotonic",
+  "judge_model": "gpt-4o",
+  "faithfulness": 4,
+  "clarity": 3,
+  "completeness": 5,
+  "faithfulness_reasoning": "The explanation correctly identifies the non-monotonic effect and the peak around 36% humidity, matching the reference. The importance rank of 5 is also accurate. However, the explanation inaccurately describes the peak contribution as +0.1 in log space, which is not in the reference. Anchor 5, -1 (peak value misrepresented), final score 4.",
+  "usage": {
+    "input_tokens": 2502,
+    "output_tokens": 217
+  }
+}

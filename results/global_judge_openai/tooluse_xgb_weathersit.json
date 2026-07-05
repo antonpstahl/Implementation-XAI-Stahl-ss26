@@ -1,0 +1,15 @@
+{
+  "form_pipeline": "tooluse",
+  "xai_model": "xgb",
+  "feature": "weathersit",
+  "form_type": "categorical",
+  "judge_model": "gpt-4o",
+  "faithfulness": 4,
+  "clarity": 5,
+  "completeness": 5,
+  "faithfulness_reasoning": "The explanation correctly identifies the categorical nature of the feature and the top and bottom categories, with category 1 having a positive effect and category 3 having the most negative effect. The importance rank of 7 is accurate. However, the explanation inaccurately describes the effect of category 4 as being limited by its rarity, which is not supported by the reference. Anchor 5, -1 (mischaracterization of category 4), resulting in a score of 4.",
+  "usage": {
+    "input_tokens": 3170,
+    "output_tokens": 234
+  }
+}

@@ -1,0 +1,15 @@
+{
+  "form_pipeline": "template",
+  "xai_model": "ebm",
+  "feature": "weekday",
+  "form_type": "near-flat",
+  "judge_model": "claude-opus-4-8",
+  "faithfulness": 3,
+  "clarity": 4,
+  "completeness": 5,
+  "faithfulness_reasoning": "Categorical feature: top category is 5 (Friday), which the explanation correctly identifies, and rank 7 of 9 is correct with \"minor driver\" framing appropriate for near-flat. However, \"non-monotonic — rises and falls across the range\" wrongly imposes an ordinal shape on a categorical feature and misses the near-flat/negligible framing. Anchor 4, -1 (near-flat negligibility not conveyed, shape mischaracterized), max(1,4-1)=3.",
+  "usage": {
+    "input_tokens": 679,
+    "output_tokens": 398
+  }
+}

@@ -1,0 +1,15 @@
+{
+  "form_pipeline": "tooluse",
+  "xai_model": "xgb",
+  "feature": "temp",
+  "form_type": "non-monotonic",
+  "judge_model": "claude-opus-4-8",
+  "faithfulness": 5,
+  "clarity": 3,
+  "completeness": 5,
+  "faithfulness_reasoning": "Inverted-U with the rise, peak (~25-27°C, slightly below the true ~29.5°C but close) and high-heat decline all match; rank 3 correct. Anchor 5; peak slightly imprecise but not enough to trigger the \"clear peak missed\" deduction; no deductions apply.",
+  "usage": {
+    "input_tokens": 1593,
+    "output_tokens": 314
+  }
+}

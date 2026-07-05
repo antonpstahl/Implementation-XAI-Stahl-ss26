@@ -1,0 +1,15 @@
+{
+  "form_pipeline": "template",
+  "xai_model": "ebm",
+  "feature": "windspeed",
+  "form_type": "near-flat",
+  "judge_model": "gpt-4o",
+  "faithfulness": 1,
+  "clarity": 4,
+  "completeness": 5,
+  "faithfulness_reasoning": "The explanation incorrectly describes the effect of wind speed as non-monotonic with a peak, contradicting the reference which states it is monotonic decreasing and near-flat. The importance rank is correct. Anchor 2, -1 (direction/monotonicity contradicts), -1 (peak claimed but not present), max(1, 2-2)=1.",
+  "usage": {
+    "input_tokens": 2353,
+    "output_tokens": 185
+  }
+}

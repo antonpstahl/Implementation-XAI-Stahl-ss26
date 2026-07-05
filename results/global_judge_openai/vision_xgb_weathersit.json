@@ -1,0 +1,15 @@
+{
+  "form_pipeline": "vision",
+  "xai_model": "xgb",
+  "feature": "weathersit",
+  "form_type": "categorical",
+  "judge_model": "gpt-4o",
+  "faithfulness": 4,
+  "clarity": 5,
+  "completeness": 5,
+  "faithfulness_reasoning": "The explanation correctly identifies the top category (weathersit=1) and the bottom category (weathersit=3), and the importance rank of 7 matches the reference. However, it inaccurately describes weathersit=4 as less negative than weathersit=3, which contradicts the reference. Anchor 5, -1 (incorrect category comparison), max(1, 5-1)=4.",
+  "usage": {
+    "input_tokens": 2983,
+    "output_tokens": 201
+  }
+}

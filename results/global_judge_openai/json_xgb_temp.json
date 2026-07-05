@@ -1,0 +1,15 @@
+{
+  "form_pipeline": "json",
+  "xai_model": "xgb",
+  "feature": "temp",
+  "form_type": "non-monotonic",
+  "judge_model": "gpt-4o",
+  "faithfulness": 1,
+  "clarity": 1,
+  "completeness": 5,
+  "faithfulness_reasoning": "The explanation incorrectly describes the effect as monotonically rising, contradicting the non-monotonic reference with a peak at ~29.5°C. It also claims a peak at the highest temperatures, which is not supported by the reference. The importance rank is correctly stated as 3. Anchor 2, -1 (direction/monotonicity contradicts), -1 (peak missed), max(1, 2-2)=1.",
+  "usage": {
+    "input_tokens": 2501,
+    "output_tokens": 222
+  }
+}

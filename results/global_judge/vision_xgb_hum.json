@@ -1,0 +1,15 @@
+{
+  "form_pipeline": "vision",
+  "xai_model": "xgb",
+  "feature": "hum",
+  "form_type": "non-monotonic",
+  "judge_model": "claude-opus-4-8",
+  "faithfulness": 5,
+  "clarity": 3,
+  "completeness": 5,
+  "faithfulness_reasoning": "The inverted-U shape with peak around moderate humidity (~34%, explanation says 30–50%) and decline at high humidity matches the reference; rank 6 of 9 is correct. Anchor 5, no deductions.",
+  "usage": {
+    "input_tokens": 1375,
+    "output_tokens": 287
+  }
+}

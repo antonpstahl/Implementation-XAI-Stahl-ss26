@@ -1,0 +1,15 @@
+{
+  "form_pipeline": "tooluse",
+  "xai_model": "ebm",
+  "feature": "hum",
+  "form_type": "non-monotonic",
+  "judge_model": "claude-opus-4-8",
+  "faithfulness": 5,
+  "clarity": 5,
+  "completeness": 5,
+  "faithfulness_reasoning": "The non-monotonic shape, peak ~35–36%, sign change ~10%, and rank 5 of 9 all match the reference precisely. Anchor 5, no deductions.",
+  "usage": {
+    "input_tokens": 1568,
+    "output_tokens": 247
+  }
+}

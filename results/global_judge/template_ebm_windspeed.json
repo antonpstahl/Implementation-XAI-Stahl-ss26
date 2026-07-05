@@ -1,0 +1,15 @@
+{
+  "form_pipeline": "template",
+  "xai_model": "ebm",
+  "feature": "windspeed",
+  "form_type": "near-flat",
+  "judge_model": "claude-opus-4-8",
+  "faithfulness": 1,
+  "clarity": 3,
+  "completeness": 5,
+  "faithfulness_reasoning": "Reference is near-flat, monotonic decreasing; the explanation calls it non-monotonic with a peak at 7.3 km/h and misses the negligibility framing. Anchor 2 (direction partly wrong/vague), -1 (fabricated peak the reference does not have), -1 (contradicts monotonic decreasing form), max(1, 2-2)=1. Rank 8 is correct.",
+  "usage": {
+    "input_tokens": 573,
+    "output_tokens": 367
+  }
+}

@@ -1,0 +1,15 @@
+{
+  "form_pipeline": "template",
+  "xai_model": "xgb",
+  "feature": "hr",
+  "form_type": "categorical",
+  "judge_model": "claude-opus-4-8",
+  "faithfulness": 4,
+  "clarity": 3,
+  "completeness": 5,
+  "faithfulness_reasoning": "Top category 17:00 correct and rank 1 of 9 correct; it captures the evening peak but misses the second commuter peak at 8:00 and doesn't name the lowest hours (early morning ~4:00). Anchor 4 (top level right, structure slightly incomplete), no explicit deduction triggers a drop below since direction/rank are correct.",
+  "usage": {
+    "input_tokens": 692,
+    "output_tokens": 351
+  }
+}

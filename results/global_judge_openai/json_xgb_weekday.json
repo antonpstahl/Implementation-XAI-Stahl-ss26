@@ -1,0 +1,15 @@
+{
+  "form_pipeline": "json",
+  "xai_model": "xgb",
+  "feature": "weekday",
+  "form_type": "categorical",
+  "judge_model": "gpt-4o",
+  "faithfulness": 3,
+  "clarity": 5,
+  "completeness": 5,
+  "faithfulness_reasoning": "The explanation correctly identifies the categorical nature of the effect and notes that Saturday (weekday 6) has positive contributions, aligning with the reference. However, it incorrectly states that Saturday is the most positive, while the reference indicates Friday (weekday 5) is the top category. The importance rank of 4 is accurate. Anchor 4, -1 (incorrect top category), final score 3.",
+  "usage": {
+    "input_tokens": 2620,
+    "output_tokens": 219
+  }
+}

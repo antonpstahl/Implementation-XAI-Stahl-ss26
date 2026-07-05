@@ -1,0 +1,15 @@
+{
+  "form_pipeline": "json",
+  "xai_model": "xgb",
+  "feature": "hum",
+  "form_type": "non-monotonic",
+  "judge_model": "gpt-4o",
+  "faithfulness": 4,
+  "clarity": 5,
+  "completeness": 5,
+  "faithfulness_reasoning": "The explanation correctly identifies the non-monotonic, inverted-U shape with a peak at moderate humidity levels, aligning with the reference. The importance rank is accurately stated as 6th. However, the peak is slightly misrepresented as 30-55% instead of ~34%. Anchor 5, -1 (peak slightly imprecise), resulting in a score of 4.",
+  "usage": {
+    "input_tokens": 2504,
+    "output_tokens": 201
+  }
+}

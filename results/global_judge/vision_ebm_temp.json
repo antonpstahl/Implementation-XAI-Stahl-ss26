@@ -1,0 +1,15 @@
+{
+  "form_pipeline": "vision",
+  "xai_model": "ebm",
+  "feature": "temp",
+  "form_type": "non-monotonic",
+  "judge_model": "claude-opus-4-8",
+  "faithfulness": 5,
+  "clarity": 3,
+  "completeness": 5,
+  "faithfulness_reasoning": "Inverted-U with peak ~31 °C, sign change ~18 °C, and rank 2 of 9 all match the reference; structure fully captured. Anchor 5, no deductions.",
+  "usage": {
+    "input_tokens": 1450,
+    "output_tokens": 275
+  }
+}
