@@ -7,7 +7,7 @@
   "importance_rank": 7,
   "form": "categorical",
   "n_grid": 4,
-  "verified": false,
+  "verified": true,
   "direction": "categorical",
   "monotonicity": "n/a",
   "peak": null,
@@ -39,5 +39,6 @@
       "cat": 2.0,
       "y": -0.01133
     }
-  ]
+  ],
+  "note": "Category 4 (heavy rain/thunderstorm) has very few samples, so its curve contribution is noisy and its high rank is not domain-reliable. True weather severity is monotone 1>2>3>4 (clear > mist > light rain > heavy rain)."
 }

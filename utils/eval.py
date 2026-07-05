@@ -204,6 +204,8 @@ def _global_reference(gt: dict) -> dict:
     if "top_categories" in gt:
         ref["top_categories"] = gt["top_categories"]
         ref["bottom_categories"] = gt["bottom_categories"]
+    if gt.get("note"):
+        ref["note"] = gt["note"]  # domain limitation the judge should account for
     if feature in GLOBAL_UNIT_SCALE:
         factor, unit = GLOBAL_UNIT_SCALE[feature]
         ref["value_scale"] = f"normalised x × {factor:g} = {unit}"

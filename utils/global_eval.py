@@ -128,6 +128,42 @@ def rubric_judge_correlation(df: pd.DataFrame) -> dict:
             "p_value": round(float(p), 4)}
 
 
+def modality_significance(judge_df: pd.DataFrame,
+                          metric: str = "faithfulness") -> pd.DataFrame:
+    """Pairwise Wilcoxon signed-rank tests across modalities on a judge metric.
+
+    Observations are paired on (feature, xai_model) — the same feature-curve
+    judged under two modalities — so the test respects the matched design.
+    Holm-corrected over the pairwise family; Cliff's delta as effect size.
+    """
+    from utils.stats import wilcoxon_pairwise
+    pipelines = [m for m in MODALITY_ORDER if m in set(judge_df["form_pipeline"])]
+    return wilcoxon_pairwise(judge_df, pipelines, metric,
+                             group_col="form_pipeline",
+                             id_cols=("feature", "xai_model"))
+
+
+def ceiling_flags(df: pd.DataFrame, tol: float = 0.1) -> dict[str, str]:
+    """Detect judge criteria with (near) zero variance — non-informative ceilings.
+
+    Returns {criterion: message} only for the criteria that are constant or
+    near-constant across all explanations (e.g. completeness pinned at 5).
+    """
+    flags = {}
+    for crit in JUDGE_CRITERIA:
+        if crit not in df.columns or not df[crit].notna().any():
+            continue
+        vals = df[crit].dropna()
+        if vals.nunique() == 1:
+            flags[crit] = (f"constant at {vals.iloc[0]:.0f} across all "
+                           f"{len(vals)} explanations — non-informative "
+                           f"(cross-vendor alpha undefined/chance)")
+        elif vals.std() < tol:
+            flags[crit] = (f"near-constant (mean={vals.mean():.2f}, "
+                           f"std={vals.std():.2f}) — treat as ceiling effect")
+    return flags
+
+
 # ---------------------------------------------------------------------------
 # judge robustness: cross-vendor Krippendorff alpha
 # ---------------------------------------------------------------------------
@@ -189,9 +225,19 @@ def _main() -> None:
         _print_table(name, tab, counts_table(df, value_of[name]))
 
     if judge is not None:
+        for crit, msg in ceiling_flags(df).items():
+            print(f"\n[ceiling] judge '{crit}': {msg}")
+
         corr = rubric_judge_correlation(df)
         print(f"\nRubric-vs-judge (faithfulness) Spearman: rho={corr.get('spearman_rho')} "
               f"(p={corr.get('p_value')}, n={corr.get('n')})")
+
+        print("\nModality significance (Wilcoxon on judge faithfulness, "
+              "paired on feature x model, Holm):")
+        sig = modality_significance(judge, "faithfulness")
+        print(sig[["pipeline_a", "pipeline_b", "n_pairs", "delta_mean",
+                   "p_value_adj", "reject", "cliffs_d", "magnitude"]].to_string(index=False))
+
         vendors = sorted({p.name for p in RESULTS_DIR.glob("global_judge*") if p.is_dir()})
         if len(vendors) >= 2:
             print("\nCross-vendor Krippendorff alpha (interval):")

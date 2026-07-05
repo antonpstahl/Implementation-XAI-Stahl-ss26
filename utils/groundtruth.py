@@ -34,6 +34,17 @@ EXPL_DIR = Path(__file__).resolve().parent.parent / "explanations"
 GT_DIR = EXPL_DIR / "global_groundtruth"
 MODELS = ("ebm", "xgb")
 
+# Manual domain verification, applied after the automatic derivation (and
+# preserved across regeneration). Keyed by feature. Presence marks the reference
+# as human-reviewed (verified=True) and attaches a limitation note; the derived
+# curve values are left untouched (documented, not altered).
+DOMAIN_NOTES = {
+    "weathersit": ("Category 4 (heavy rain/thunderstorm) has very few samples, so "
+                   "its curve contribution is noisy and its high rank is not "
+                   "domain-reliable. True weather severity is monotone 1>2>3>4 "
+                   "(clear > mist > light rain > heavy rain)."),
+}
+
 
 @dataclass
 class Thresholds:
@@ -205,9 +216,12 @@ def derive_feature(model: str, feature: str, ranks: dict[str, int],
         "importance_rank": ranks[feature],
         "form": form,
         "n_grid": n_unique,
-        "verified": False,  # flip to true after manual domain check
+        "verified": False,  # flipped to True by DOMAIN_NOTES after manual review
         **fields,
     }
+    if feature in DOMAIN_NOTES:
+        gt["verified"] = True
+        gt["note"] = DOMAIN_NOTES[feature]
     return gt
 
 
