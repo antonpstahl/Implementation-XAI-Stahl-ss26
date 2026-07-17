@@ -1,0 +1,15 @@
+{
+  "form_pipeline": "json_all",
+  "xai_model": "ebm",
+  "feature": "holiday",
+  "form_type": "near-flat",
+  "judge_model": "gpt-4o",
+  "faithfulness": 5,
+  "clarity": 5,
+  "completeness": 5,
+  "faithfulness_reasoning": "The explanation correctly identifies the effect as near-flat and negligible, matching the reference. It also accurately states the importance rank as last (9th). The description of the effect as a small negative contribution aligns with the reference's monotonic decreasing direction. Anchor 5, no deduction.",
+  "usage": {
+    "input_tokens": 2368,
+    "output_tokens": 182
+  }
+}

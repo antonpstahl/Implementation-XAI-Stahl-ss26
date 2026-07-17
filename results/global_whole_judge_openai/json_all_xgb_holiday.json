@@ -1,0 +1,15 @@
+{
+  "form_pipeline": "json_all",
+  "xai_model": "xgb",
+  "feature": "holiday",
+  "form_type": "near-flat",
+  "judge_model": "gpt-4o",
+  "faithfulness": 4,
+  "clarity": 5,
+  "completeness": 5,
+  "faithfulness_reasoning": "The explanation correctly identifies the feature as the least important (rank 9) and describes the effect as small, aligning with the near-flat reference. However, it describes a step-down effect, which is not consistent with the near-flat nature. Anchor 5, -1 (step-down effect claimed), max(1, 5-1)=4.",
+  "usage": {
+    "input_tokens": 2397,
+    "output_tokens": 177
+  }
+}

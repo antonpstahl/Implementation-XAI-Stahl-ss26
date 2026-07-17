@@ -1,0 +1,15 @@
+{
+  "form_pipeline": "json_all",
+  "xai_model": "ebm",
+  "feature": "windspeed",
+  "form_type": "near-flat",
+  "judge_model": "gpt-4o",
+  "faithfulness": 1,
+  "clarity": 5,
+  "completeness": 5,
+  "faithfulness_reasoning": "The explanation correctly identifies windspeed as having a low importance (rank 8), but it incorrectly describes the effect as becoming increasingly negative at high wind speeds, which contradicts the near-flat nature of the feature. The explanation also misses the monotonic decreasing direction. Anchor 3, -1 (direction contradicts), -1 (peak claimed), max(1, 3-2)=1.",
+  "usage": {
+    "input_tokens": 2418,
+    "output_tokens": 191
+  }
+}

@@ -1,0 +1,15 @@
+{
+  "form_pipeline": "tooluse_all",
+  "xai_model": "xgb",
+  "feature": "hum",
+  "form_type": "non-monotonic",
+  "judge_model": "gpt-4o",
+  "faithfulness": 5,
+  "clarity": 5,
+  "completeness": 5,
+  "faithfulness_reasoning": "The explanation correctly identifies the non-monotonic nature of the effect and the peak around 25-35% humidity, which aligns with the reference peak at ~34%. The importance rank is accurately stated as 6th. However, the explanation extends beyond the reference by describing effects at very high humidity levels, which are not specified in the reference. Anchor 5, no deduction.",
+  "usage": {
+    "input_tokens": 2506,
+    "output_tokens": 215
+  }
+}

@@ -1,0 +1,15 @@
+{
+  "form_pipeline": "json_all",
+  "xai_model": "xgb",
+  "feature": "hr",
+  "form_type": "categorical",
+  "judge_model": "gpt-4o",
+  "faithfulness": 2,
+  "clarity": 3,
+  "completeness": 5,
+  "faithfulness_reasoning": "The explanation correctly identifies the categorical nature of the feature and the importance rank as 1. However, it inaccurately describes the peak at 5 p.m. instead of 5 p.m. being 17:00, which is correct. The explanation also misses the top category at 17:00 and incorrectly states the peak at 5 p.m. Anchor 3, -1 (peak missed), max(1, 3-1)=2.",
+  "usage": {
+    "input_tokens": 2587,
+    "output_tokens": 229
+  }
+}

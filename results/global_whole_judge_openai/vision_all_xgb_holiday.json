@@ -1,0 +1,15 @@
+{
+  "form_pipeline": "vision_all",
+  "xai_model": "xgb",
+  "feature": "holiday",
+  "form_type": "near-flat",
+  "judge_model": "gpt-4o",
+  "faithfulness": 1,
+  "clarity": 1,
+  "completeness": 1,
+  "faithfulness_reasoning": "The explanation is missing entirely, so it cannot be evaluated against the reference. Anchor 1, no deductions possible.",
+  "usage": {
+    "input_tokens": 2213,
+    "output_tokens": 119
+  }
+}

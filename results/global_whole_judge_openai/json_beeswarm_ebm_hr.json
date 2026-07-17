@@ -1,0 +1,15 @@
+{
+  "form_pipeline": "json_beeswarm",
+  "xai_model": "ebm",
+  "feature": "hr",
+  "form_type": "categorical",
+  "judge_model": "gpt-4o",
+  "faithfulness": 4,
+  "clarity": 5,
+  "completeness": 5,
+  "faithfulness_reasoning": "The explanation correctly identifies the feature as categorical and acknowledges the complex, non-monotonic effect, aligning with the reference. It accurately states the feature's rank as the most important. However, it does not specify the top and bottom categories, which are crucial for categorical features. Anchor 5, -1 (top/bottom categories not specified), resulting in a score of 4.",
+  "usage": {
+    "input_tokens": 2522,
+    "output_tokens": 209
+  }
+}

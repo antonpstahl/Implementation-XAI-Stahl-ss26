@@ -1,0 +1,15 @@
+{
+  "form_pipeline": "vision_all",
+  "xai_model": "xgb",
+  "feature": "hr",
+  "form_type": "categorical",
+  "judge_model": "gpt-4o",
+  "faithfulness": 2,
+  "clarity": 3,
+  "completeness": 2,
+  "faithfulness_reasoning": "The explanation correctly identifies the hour as the most important feature and captures the low demand in pre-dawn hours. However, it inaccurately describes the peak as occurring around 5–6 p.m., whereas the reference indicates the top category is 17.0 (5 p.m.). The secondary rise around 8 a.m. is correctly noted. Anchor 3, -1 (peak misidentified), resulting in a score of 2.",
+  "usage": {
+    "input_tokens": 2492,
+    "output_tokens": 233
+  }
+}

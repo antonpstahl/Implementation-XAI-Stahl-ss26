@@ -1,0 +1,15 @@
+{
+  "form_pipeline": "vision_all",
+  "xai_model": "ebm",
+  "feature": "windspeed",
+  "form_type": "near-flat",
+  "judge_model": "gpt-4o",
+  "faithfulness": 4,
+  "clarity": 5,
+  "completeness": 3,
+  "faithfulness_reasoning": "The explanation correctly identifies the near-flat nature of the windspeed feature at low speeds and the monotonic decrease at higher speeds, aligning with the reference. The importance rank is accurately stated as 8th. However, the explanation overemphasizes the effect by describing a steep decline, which is not consistent with the near-flat reference. Anchor 5, -1 (overemphasized effect), resulting in a score of 4.",
+  "usage": {
+    "input_tokens": 2421,
+    "output_tokens": 238
+  }
+}

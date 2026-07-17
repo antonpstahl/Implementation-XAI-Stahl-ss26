@@ -1,0 +1,15 @@
+{
+  "form_pipeline": "json_beeswarm",
+  "xai_model": "ebm",
+  "feature": "temp",
+  "form_type": "non-monotonic",
+  "judge_model": "gpt-4o",
+  "faithfulness": 2,
+  "clarity": 4,
+  "completeness": 4,
+  "faithfulness_reasoning": "The explanation correctly identifies the non-monotonic nature and mixed direction of the temperature effect, and accurately states the importance rank as 2. However, it fails to mention the peak at ~31.2 °C and the sign change at ~18 °C, which are key structural elements. Anchor 3, -1 (peak missed), resulting in a score of 2.",
+  "usage": {
+    "input_tokens": 2449,
+    "output_tokens": 215
+  }
+}

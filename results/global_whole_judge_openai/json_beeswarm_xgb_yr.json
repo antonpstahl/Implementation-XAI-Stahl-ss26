@@ -1,0 +1,15 @@
+{
+  "form_pipeline": "json_beeswarm",
+  "xai_model": "xgb",
+  "feature": "yr",
+  "form_type": "monotonic",
+  "judge_model": "gpt-4o",
+  "faithfulness": 5,
+  "clarity": 5,
+  "completeness": 5,
+  "faithfulness_reasoning": "The explanation correctly identifies the direction as increasing and the importance rank as 2nd, matching the reference. The step change between 2011 and 2012 is consistent with the monotonic increase described. Anchor 5, no deduction.",
+  "usage": {
+    "input_tokens": 2388,
+    "output_tokens": 173
+  }
+}

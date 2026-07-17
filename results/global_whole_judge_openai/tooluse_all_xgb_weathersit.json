@@ -1,0 +1,15 @@
+{
+  "form_pipeline": "tooluse_all",
+  "xai_model": "xgb",
+  "feature": "weathersit",
+  "form_type": "categorical",
+  "judge_model": "gpt-4o",
+  "faithfulness": 5,
+  "clarity": 5,
+  "completeness": 4,
+  "faithfulness_reasoning": "The explanation correctly identifies the categorical nature and the order of categories, with category 1 being the highest and category 3 the lowest, matching the reference. The importance rank is also correctly stated as 7th. However, the explanation misses the note about the unreliability of category 4 due to few samples. Anchor 5, no deduction.",
+  "usage": {
+    "input_tokens": 2659,
+    "output_tokens": 207
+  }
+}

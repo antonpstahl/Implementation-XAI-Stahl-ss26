@@ -1,0 +1,15 @@
+{
+  "form_pipeline": "json_beeswarm",
+  "xai_model": "xgb",
+  "feature": "windspeed",
+  "form_type": "near-flat",
+  "judge_model": "gpt-4o",
+  "faithfulness": 4,
+  "clarity": 5,
+  "completeness": 3,
+  "faithfulness_reasoning": "The explanation correctly identifies the mixed directional effect and near-negligible importance of windspeed, aligning with the reference's near-flat form and rank 8. However, it misses the specific peak and sign change details. Anchor 5, -1 (peak missed), resulting in a score of 4.",
+  "usage": {
+    "input_tokens": 2427,
+    "output_tokens": 192
+  }
+}

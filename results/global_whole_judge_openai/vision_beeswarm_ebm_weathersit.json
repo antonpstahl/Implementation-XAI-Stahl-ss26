@@ -1,0 +1,15 @@
+{
+  "form_pipeline": "vision_beeswarm",
+  "xai_model": "ebm",
+  "feature": "weathersit",
+  "form_type": "categorical",
+  "judge_model": "gpt-4o",
+  "faithfulness": 2,
+  "clarity": 2,
+  "completeness": 3,
+  "faithfulness_reasoning": "The explanation correctly identifies the importance rank as sixth, matching the reference. However, it inaccurately describes the effect as a \"step-like decline\" and mentions \"log space,\" which is not supported by the reference. The top category (1) is not highlighted as contributing positively. Anchor 3, -1 (structure missed), max(1, 3-1)=2.",
+  "usage": {
+    "input_tokens": 2535,
+    "output_tokens": 232
+  }
+}

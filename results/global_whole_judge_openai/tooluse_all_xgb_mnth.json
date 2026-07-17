@@ -1,0 +1,15 @@
+{
+  "form_pipeline": "tooluse_all",
+  "xai_model": "xgb",
+  "feature": "mnth",
+  "form_type": "categorical",
+  "judge_model": "gpt-4o",
+  "faithfulness": 3,
+  "clarity": 4,
+  "completeness": 3,
+  "faithfulness_reasoning": "The explanation correctly identifies September and October as having the highest contributions, aligning with the reference. It also accurately ranks the feature as 5th in importance. However, it inaccurately describes a \"seasonal arc\" and a \"plateau\" in summer, which is not supported by the reference. Anchor 4, -1 (shape claimed not in reference), max(1, 4-1)=3.",
+  "usage": {
+    "input_tokens": 2561,
+    "output_tokens": 235
+  }
+}

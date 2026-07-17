@@ -1,0 +1,15 @@
+{
+  "form_pipeline": "json_all",
+  "xai_model": "xgb",
+  "feature": "weekday",
+  "form_type": "categorical",
+  "judge_model": "gpt-4o",
+  "faithfulness": 2,
+  "clarity": 5,
+  "completeness": 3,
+  "faithfulness_reasoning": "The explanation correctly identifies the categorical nature of the feature and the importance rank as 4. However, it inaccurately describes a \"broadly rising trend\" and misrepresents the top categories, as Friday is not the highest according to the reference. Anchor 3, -1 (top category misrepresented), max(1, 3-1)=2.",
+  "usage": {
+    "input_tokens": 2543,
+    "output_tokens": 214
+  }
+}

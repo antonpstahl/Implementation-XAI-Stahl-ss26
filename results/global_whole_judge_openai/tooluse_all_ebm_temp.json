@@ -1,0 +1,15 @@
+{
+  "form_pipeline": "tooluse_all",
+  "xai_model": "ebm",
+  "feature": "temp",
+  "form_type": "non-monotonic",
+  "judge_model": "gpt-4o",
+  "faithfulness": 5,
+  "clarity": 5,
+  "completeness": 5,
+  "faithfulness_reasoning": "The explanation correctly describes the non-monotonic effect with a peak around 31 °C and acknowledges the decline at high temperatures, matching the reference. The importance rank is accurately stated as 2nd. The structure is well captured. Anchor 5, no deduction.",
+  "usage": {
+    "input_tokens": 2517,
+    "output_tokens": 177
+  }
+}

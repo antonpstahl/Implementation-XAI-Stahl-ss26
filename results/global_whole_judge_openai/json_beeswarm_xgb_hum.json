@@ -1,0 +1,15 @@
+{
+  "form_pipeline": "json_beeswarm",
+  "xai_model": "xgb",
+  "feature": "hum",
+  "form_type": "non-monotonic",
+  "judge_model": "gpt-4o",
+  "faithfulness": 3,
+  "clarity": 5,
+  "completeness": 3,
+  "faithfulness_reasoning": "The explanation correctly identifies the mixed, non-monotonic effect of humidity and its rank as 6th, aligning with the reference. However, it misses the peak at ~34% and the sign change at ~7.3%. Anchor 4, -1 (peak missed), resulting in a score of 3.",
+  "usage": {
+    "input_tokens": 2419,
+    "output_tokens": 194
+  }
+}

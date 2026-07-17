@@ -1,0 +1,15 @@
+{
+  "form_pipeline": "vision_all",
+  "xai_model": "ebm",
+  "feature": "weekday",
+  "form_type": "near-flat",
+  "judge_model": "gpt-4o",
+  "faithfulness": 5,
+  "clarity": 4,
+  "completeness": 5,
+  "faithfulness_reasoning": "The explanation correctly identifies the near-flat nature of the effect and the correct top and bottom categories, with Sunday being the most negative and Friday the most positive. The importance rank is accurately stated as seventh. Anchor 5, no deduction.",
+  "usage": {
+    "input_tokens": 2533,
+    "output_tokens": 184
+  }
+}

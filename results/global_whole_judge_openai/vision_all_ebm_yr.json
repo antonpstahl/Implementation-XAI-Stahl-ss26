@@ -1,0 +1,15 @@
+{
+  "form_pipeline": "vision_all",
+  "xai_model": "ebm",
+  "feature": "yr",
+  "form_type": "monotonic",
+  "judge_model": "gpt-4o",
+  "faithfulness": 4,
+  "clarity": 4,
+  "completeness": 3,
+  "faithfulness_reasoning": "The explanation correctly identifies the monotonic increase from 2011 to 2012, matching the reference's direction and monotonicity. The importance rank is accurately stated as third. However, the explanation does not mention the sign change at x≈0.5107, which is a key structure. Anchor 5, -1 (key structure missed), resulting in a score of 4.",
+  "usage": {
+    "input_tokens": 2395,
+    "output_tokens": 234
+  }
+}

@@ -1,0 +1,15 @@
+{
+  "form_pipeline": "tooluse_all",
+  "xai_model": "xgb",
+  "feature": "temp",
+  "form_type": "non-monotonic",
+  "judge_model": "gpt-4o",
+  "faithfulness": 4,
+  "clarity": 5,
+  "completeness": 5,
+  "faithfulness_reasoning": "The explanation correctly describes the non-monotonic inverted-U shape with a peak around 29–30 °C, matching the reference peak at ~29.5 °C. The importance rank is accurately stated as 3rd. However, the explanation mentions a decline at very high temperatures above ~37 °C, which is not specified in the reference. Anchor 5, -1 (peak detail slightly imprecise), resulting in a score of 4.",
+  "usage": {
+    "input_tokens": 2521,
+    "output_tokens": 224
+  }
+}

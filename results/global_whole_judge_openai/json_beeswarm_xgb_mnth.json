@@ -1,0 +1,15 @@
+{
+  "form_pipeline": "json_beeswarm",
+  "xai_model": "xgb",
+  "feature": "mnth",
+  "form_type": "categorical",
+  "judge_model": "gpt-4o",
+  "faithfulness": 3,
+  "clarity": 5,
+  "completeness": 3,
+  "faithfulness_reasoning": "The explanation correctly identifies the categorical nature of the feature and its non-ordinal effect, aligning with the reference. The importance rank is accurately stated as 5th. However, it does not specify the top or bottom categories, which is crucial for categorical features. Anchor 4, -1 (top/bottom categories not specified), max(1, 4-1)=3.",
+  "usage": {
+    "input_tokens": 2505,
+    "output_tokens": 225
+  }
+}

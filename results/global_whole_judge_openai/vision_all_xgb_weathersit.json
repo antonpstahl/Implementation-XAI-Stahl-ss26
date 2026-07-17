@@ -1,0 +1,15 @@
+{
+  "form_pipeline": "vision_all",
+  "xai_model": "xgb",
+  "feature": "weathersit",
+  "form_type": "categorical",
+  "judge_model": "gpt-4o",
+  "faithfulness": 3,
+  "clarity": 3,
+  "completeness": 2,
+  "faithfulness_reasoning": "The explanation correctly identifies the categorical nature and the order of categories, with clear skies (1) being the most positive and light rain (3) being the most negative. However, it inaccurately describes the effect size for category 1 and overstates the negativity of category 3. The importance rank is correctly identified as around seventh. Anchor 4, -1 (effect size inaccuracies), resulting in a score of 3.",
+  "usage": {
+    "input_tokens": 2545,
+    "output_tokens": 229
+  }
+}

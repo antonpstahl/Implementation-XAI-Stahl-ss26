@@ -1,0 +1,15 @@
+{
+  "form_pipeline": "json_beeswarm",
+  "xai_model": "ebm",
+  "feature": "hum",
+  "form_type": "non-monotonic",
+  "judge_model": "gpt-4o",
+  "faithfulness": 3,
+  "clarity": 5,
+  "completeness": 3,
+  "faithfulness_reasoning": "The explanation correctly identifies the non-monotonic nature and mixed direction of the effect, and the importance rank is accurate. However, it incorrectly states that no specific peak can be identified, missing the peak at ~36%. Anchor 4, -1 (peak missed), final score 3.",
+  "usage": {
+    "input_tokens": 2443,
+    "output_tokens": 189
+  }
+}

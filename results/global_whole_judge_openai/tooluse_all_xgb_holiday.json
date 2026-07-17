@@ -1,0 +1,15 @@
+{
+  "form_pipeline": "tooluse_all",
+  "xai_model": "xgb",
+  "feature": "holiday",
+  "form_type": "near-flat",
+  "judge_model": "gpt-4o",
+  "faithfulness": 4,
+  "clarity": 5,
+  "completeness": 3,
+  "faithfulness_reasoning": "The explanation correctly identifies the feature as having a small negative effect, consistent with the near-flat and monotonic decreasing nature of the reference. It also accurately ranks the feature as the least important (9th). However, it describes a binary step effect rather than a near-flat effect, which is a slight mischaracterization. Anchor 5, -1 (key structure slightly imprecise), resulting in a score of 4.",
+  "usage": {
+    "input_tokens": 2406,
+    "output_tokens": 238
+  }
+}

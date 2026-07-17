@@ -1,0 +1,15 @@
+{
+  "form_pipeline": "json_all",
+  "xai_model": "ebm",
+  "feature": "temp",
+  "form_type": "non-monotonic",
+  "judge_model": "gpt-4o",
+  "faithfulness": 5,
+  "clarity": 5,
+  "completeness": 5,
+  "faithfulness_reasoning": "The explanation correctly identifies the non-monotonic nature with a peak around 30–31 °C and acknowledges the slight decline at extreme heat, aligning with the reference. The importance rank is accurately stated as 2. However, it suggests a consistent rise in demand with temperature, which slightly oversimplifies the mixed direction. Anchor 5, no deduction.",
+  "usage": {
+    "input_tokens": 2474,
+    "output_tokens": 204
+  }
+}

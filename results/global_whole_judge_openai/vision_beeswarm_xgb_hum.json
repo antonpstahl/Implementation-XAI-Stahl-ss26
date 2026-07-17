@@ -1,0 +1,15 @@
+{
+  "form_pipeline": "vision_beeswarm",
+  "xai_model": "xgb",
+  "feature": "hum",
+  "form_type": "non-monotonic",
+  "judge_model": "gpt-4o",
+  "faithfulness": 1,
+  "clarity": 1,
+  "completeness": 1,
+  "faithfulness_reasoning": "No explanation provided, so no direction, peak, or rank can be evaluated. Anchor 1, no deductions possible.",
+  "usage": {
+    "input_tokens": 2278,
+    "output_tokens": 119
+  }
+}

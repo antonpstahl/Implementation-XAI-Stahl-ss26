@@ -1,0 +1,15 @@
+{
+  "form_pipeline": "json_all",
+  "xai_model": "ebm",
+  "feature": "mnth",
+  "form_type": "categorical",
+  "judge_model": "gpt-4o",
+  "faithfulness": 4,
+  "clarity": 5,
+  "completeness": 4,
+  "faithfulness_reasoning": "The explanation correctly identifies October as the peak month and mentions January and February as suppressing demand, aligning with the reference. However, it inaccurately describes July and August as neutral or slightly negative, which is not specified in the reference. The importance rank is correctly stated as fourth. Anchor 5, -1 (incorrect description of July and August), resulting in a score of 4.",
+  "usage": {
+    "input_tokens": 2524,
+    "output_tokens": 246
+  }
+}

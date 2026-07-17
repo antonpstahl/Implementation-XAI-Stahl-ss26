@@ -1,0 +1,15 @@
+{
+  "form_pipeline": "tooluse_all",
+  "xai_model": "ebm",
+  "feature": "weathersit",
+  "form_type": "categorical",
+  "judge_model": "gpt-4o",
+  "faithfulness": 4,
+  "clarity": 5,
+  "completeness": 5,
+  "faithfulness_reasoning": "The explanation correctly describes the categorical nature of the feature and the order of categories, with category 1 being the most positive and category 3 the most negative, aligning with the reference. The importance rank is also correctly stated as 6th. However, the explanation does not emphasize the noisiness of category 4 due to few samples, which is a key detail. Anchor 5, -1 (missed key detail about category 4), resulting in a score of 4.",
+  "usage": {
+    "input_tokens": 2645,
+    "output_tokens": 250
+  }
+}

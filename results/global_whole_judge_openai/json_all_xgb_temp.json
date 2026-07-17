@@ -1,0 +1,15 @@
+{
+  "form_pipeline": "json_all",
+  "xai_model": "xgb",
+  "feature": "temp",
+  "form_type": "non-monotonic",
+  "judge_model": "gpt-4o",
+  "faithfulness": 4,
+  "clarity": 5,
+  "completeness": 5,
+  "faithfulness_reasoning": "The explanation correctly describes the non-monotonic, arch-shaped effect with a peak around 29–30°C, matching the reference. It also accurately states the importance rank as 3. However, it incorrectly mentions a negative contribution above 37°C, which is not specified in the reference. Anchor 5, -1 (incorrect negative contribution), resulting in a score of 4.",
+  "usage": {
+    "input_tokens": 2490,
+    "output_tokens": 220
+  }
+}

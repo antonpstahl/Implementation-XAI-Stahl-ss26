@@ -1,0 +1,15 @@
+{
+  "form_pipeline": "vision_beeswarm",
+  "xai_model": "ebm",
+  "feature": "hr",
+  "form_type": "categorical",
+  "judge_model": "gpt-4o",
+  "faithfulness": 3,
+  "clarity": 3,
+  "completeness": 5,
+  "faithfulness_reasoning": "The explanation correctly identifies the hour as the most important feature and describes the non-monotonic effect with overnight hours decreasing and daytime hours increasing demand. However, it fails to specify the exact peak hours, which are 17, 18, and 8, as per the reference. Anchor 4, -1 (peak missed), max(1, 4-1)=3.",
+  "usage": {
+    "input_tokens": 2512,
+    "output_tokens": 229
+  }
+}

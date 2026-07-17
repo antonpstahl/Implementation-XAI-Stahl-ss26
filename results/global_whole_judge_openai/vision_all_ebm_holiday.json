@@ -1,0 +1,15 @@
+{
+  "form_pipeline": "vision_all",
+  "xai_model": "ebm",
+  "feature": "holiday",
+  "form_type": "near-flat",
+  "judge_model": "gpt-4o",
+  "faithfulness": 4,
+  "clarity": 5,
+  "completeness": 4,
+  "faithfulness_reasoning": "The explanation correctly identifies the feature as having a negligible effect, aligning with the near-flat reference. It also accurately states the feature's lowest importance rank. However, it describes a binary step effect rather than a monotonic decrease, which is a slight deviation. Anchor 5, -1 (structure imprecise), resulting in a score of 4.",
+  "usage": {
+    "input_tokens": 2366,
+    "output_tokens": 201
+  }
+}

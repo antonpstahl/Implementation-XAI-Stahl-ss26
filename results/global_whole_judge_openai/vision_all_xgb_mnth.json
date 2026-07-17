@@ -1,0 +1,15 @@
+{
+  "form_pipeline": "vision_all",
+  "xai_model": "xgb",
+  "feature": "mnth",
+  "form_type": "categorical",
+  "judge_model": "gpt-4o",
+  "faithfulness": 3,
+  "clarity": 3,
+  "completeness": 2,
+  "faithfulness_reasoning": "The explanation correctly identifies January as the most negative month and mentions a peak in summer, aligning with the reference's top categories. However, it exaggerates the contributions for January and summer months, and the rank is slightly off. Anchor 4, -1 (exaggerated contributions), max(1, 4-1)=3.",
+  "usage": {
+    "input_tokens": 2466,
+    "output_tokens": 198
+  }
+}

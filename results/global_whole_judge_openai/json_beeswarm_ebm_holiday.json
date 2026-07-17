@@ -1,0 +1,15 @@
+{
+  "form_pipeline": "json_beeswarm",
+  "xai_model": "ebm",
+  "feature": "holiday",
+  "form_type": "near-flat",
+  "judge_model": "gpt-4o",
+  "faithfulness": 4,
+  "clarity": 5,
+  "completeness": 5,
+  "faithfulness_reasoning": "The explanation correctly identifies the feature as the least important (rank 9) and describes its effect as negligible, which aligns with the near-flat reference. However, it describes a step-down effect, which is not consistent with the monotonic decreasing nature of the feature. Anchor 5, -1 (step-down effect not in reference), max(1, 5-1)=4.",
+  "usage": {
+    "input_tokens": 2367,
+    "output_tokens": 204
+  }
+}

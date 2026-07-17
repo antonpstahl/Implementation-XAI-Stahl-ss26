@@ -1,0 +1,15 @@
+{
+  "form_pipeline": "json_beeswarm",
+  "xai_model": "xgb",
+  "feature": "hr",
+  "form_type": "categorical",
+  "judge_model": "gpt-4o",
+  "faithfulness": 2,
+  "clarity": 4,
+  "completeness": 4,
+  "faithfulness_reasoning": "The explanation correctly identifies the feature as categorical and the most important (rank 1), but it fails to specify the top and bottom categories, which are crucial for categorical features. The explanation also inaccurately states that no single peak hour can be identified, which contradicts the reference that lists specific top categories. Anchor 3, -1 (peak missed), max(1, 3-1)=2.",
+  "usage": {
+    "input_tokens": 2556,
+    "output_tokens": 221
+  }
+}

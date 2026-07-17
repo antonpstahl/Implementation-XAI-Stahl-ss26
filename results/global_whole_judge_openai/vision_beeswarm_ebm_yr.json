@@ -1,0 +1,15 @@
+{
+  "form_pipeline": "vision_beeswarm",
+  "xai_model": "ebm",
+  "feature": "yr",
+  "form_type": "monotonic",
+  "judge_model": "gpt-4o",
+  "faithfulness": 4,
+  "clarity": 5,
+  "completeness": 4,
+  "faithfulness_reasoning": "The explanation correctly identifies the monotonic increase from 2011 to 2012, aligning with the reference's direction and monotonicity. The importance rank is accurately stated as third. However, the explanation describes a step change rather than a continuous increase, which slightly misrepresents the form. Anchor 4, no deduction.",
+  "usage": {
+    "input_tokens": 2343,
+    "output_tokens": 215
+  }
+}

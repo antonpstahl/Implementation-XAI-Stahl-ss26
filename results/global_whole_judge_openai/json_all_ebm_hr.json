@@ -1,0 +1,15 @@
+{
+  "form_pipeline": "json_all",
+  "xai_model": "ebm",
+  "feature": "hr",
+  "form_type": "categorical",
+  "judge_model": "gpt-4o",
+  "faithfulness": 4,
+  "clarity": 5,
+  "completeness": 5,
+  "faithfulness_reasoning": "The explanation correctly identifies the hour as the most important feature (rank 1) and captures the key structure with peaks at 8 a.m. and 5 p.m., matching the reference's top categories. However, it inaccurately describes the peak at 5 p.m. as the highest, whereas the reference indicates 17:00 is the highest. Anchor 5, -1 (peak imprecision), resulting in a score of 4.",
+  "usage": {
+    "input_tokens": 2555,
+    "output_tokens": 231
+  }
+}

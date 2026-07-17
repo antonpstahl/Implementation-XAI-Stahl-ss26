@@ -1,0 +1,15 @@
+{
+  "form_pipeline": "vision_beeswarm",
+  "xai_model": "ebm",
+  "feature": "mnth",
+  "form_type": "categorical",
+  "judge_model": "gpt-4o",
+  "faithfulness": 1,
+  "clarity": 2,
+  "completeness": 3,
+  "faithfulness_reasoning": "The explanation incorrectly describes the effect as a monotonic seasonal rise, which contradicts the categorical nature of the feature. It also inaccurately describes the effect in \"log space\" and misses the specific top and bottom categories. However, the importance rank is correctly stated as fourth. Anchor 3, -1 (direction/monotonicity contradicts), -1 (peak/shape missed), max(1, 3-2)=1.",
+  "usage": {
+    "input_tokens": 2480,
+    "output_tokens": 250
+  }
+}

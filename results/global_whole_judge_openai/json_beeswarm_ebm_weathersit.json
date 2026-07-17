@@ -1,0 +1,15 @@
+{
+  "form_pipeline": "json_beeswarm",
+  "xai_model": "ebm",
+  "feature": "weathersit",
+  "form_type": "categorical",
+  "judge_model": "gpt-4o",
+  "faithfulness": 4,
+  "clarity": 5,
+  "completeness": 3,
+  "faithfulness_reasoning": "The explanation correctly identifies the categorical nature of the feature and notes the lack of a consistent directional pattern, aligning with the reference. It accurately states the importance rank as 6th. However, it does not explicitly mention the top and bottom categories, which is a key structure for categorical features. Anchor 5, -1 (key structure missing), resulting in a score of 4.",
+  "usage": {
+    "input_tokens": 2573,
+    "output_tokens": 233
+  }
+}

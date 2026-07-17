@@ -1,0 +1,15 @@
+{
+  "form_pipeline": "json_all",
+  "xai_model": "ebm",
+  "feature": "yr",
+  "form_type": "monotonic",
+  "judge_model": "gpt-4o",
+  "faithfulness": 3,
+  "clarity": 4,
+  "completeness": 3,
+  "faithfulness_reasoning": "The explanation correctly identifies the monotonic increase from 2011 to 2012 and ranks the feature as third in importance, matching the reference. However, it describes the effect as a \"step change,\" which is not explicitly supported by the reference's monotonic description. Anchor 4, -1 (step change not in reference), max(1, 4-1)=3.",
+  "usage": {
+    "input_tokens": 2378,
+    "output_tokens": 238
+  }
+}

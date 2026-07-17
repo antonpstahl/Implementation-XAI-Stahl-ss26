@@ -1,0 +1,15 @@
+{
+  "form_pipeline": "json_all",
+  "xai_model": "ebm",
+  "feature": "hum",
+  "form_type": "non-monotonic",
+  "judge_model": "gpt-4o",
+  "faithfulness": 4,
+  "clarity": 5,
+  "completeness": 4,
+  "faithfulness_reasoning": "The explanation captures the non-monotonic nature and the peak at moderate humidity (~30-40%), aligning with the reference. However, it overemphasizes the negative effect at high humidity, which is not specified in the reference. The importance rank is correctly stated as 5. Anchor 4, no deduction.",
+  "usage": {
+    "input_tokens": 2475,
+    "output_tokens": 184
+  }
+}

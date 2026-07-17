@@ -1,0 +1,15 @@
+{
+  "form_pipeline": "vision_all",
+  "xai_model": "ebm",
+  "feature": "hum",
+  "form_type": "non-monotonic",
+  "judge_model": "gpt-4o",
+  "faithfulness": 3,
+  "clarity": 4,
+  "completeness": 3,
+  "faithfulness_reasoning": "The explanation correctly identifies the non-monotonic shape and the early jump in humidity's effect, but it misses the peak at ~36% and the sign change at ~9.9%. The importance rank is correctly stated as fifth. Anchor 4, -1 (peak missed), resulting in a score of 3.",
+  "usage": {
+    "input_tokens": 2472,
+    "output_tokens": 214
+  }
+}

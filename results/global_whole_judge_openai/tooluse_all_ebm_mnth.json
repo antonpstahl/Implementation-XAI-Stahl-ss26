@@ -1,0 +1,15 @@
+{
+  "form_pipeline": "tooluse_all",
+  "xai_model": "ebm",
+  "feature": "mnth",
+  "form_type": "categorical",
+  "judge_model": "gpt-4o",
+  "faithfulness": 4,
+  "clarity": 4,
+  "completeness": 5,
+  "faithfulness_reasoning": "The explanation correctly identifies October as the peak month and January and February as the lowest, aligning with the reference. The importance rank is accurately stated as 4th. However, the explanation inaccurately describes the pattern as non-monotonic, which is not applicable to categorical data. Anchor 5, -1 (incorrect description of pattern), resulting in a score of 4.",
+  "usage": {
+    "input_tokens": 2555,
+    "output_tokens": 226
+  }
+}

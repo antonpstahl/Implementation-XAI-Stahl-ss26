@@ -1,0 +1,15 @@
+{
+  "form_pipeline": "vision_all",
+  "xai_model": "ebm",
+  "feature": "temp",
+  "form_type": "non-monotonic",
+  "judge_model": "gpt-4o",
+  "faithfulness": 5,
+  "clarity": 4,
+  "completeness": 5,
+  "faithfulness_reasoning": "The explanation accurately describes the non-monotonic effect of temperature, capturing the peak around 31 °C and the sign change near 18 °C. The importance rank is correctly stated as 2nd. The structure is well captured, matching the reference. Anchor 5, no deduction.",
+  "usage": {
+    "input_tokens": 2503,
+    "output_tokens": 207
+  }
+}

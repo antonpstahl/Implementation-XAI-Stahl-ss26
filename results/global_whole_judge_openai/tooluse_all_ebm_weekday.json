@@ -1,0 +1,15 @@
+{
+  "form_pipeline": "tooluse_all",
+  "xai_model": "ebm",
+  "feature": "weekday",
+  "form_type": "near-flat",
+  "judge_model": "gpt-4o",
+  "faithfulness": 5,
+  "clarity": 4,
+  "completeness": 5,
+  "faithfulness_reasoning": "The explanation correctly identifies the effect of the day of the week as small and near-flat, with Sunday having the most negative contribution and Friday the most positive, aligning with the reference. The importance rank of 7 is accurate. Anchor 5, no deduction.",
+  "usage": {
+    "input_tokens": 2554,
+    "output_tokens": 186
+  }
+}

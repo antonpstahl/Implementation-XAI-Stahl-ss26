@@ -1,0 +1,15 @@
+{
+  "form_pipeline": "json_all",
+  "xai_model": "xgb",
+  "feature": "weathersit",
+  "form_type": "categorical",
+  "judge_model": "gpt-4o",
+  "faithfulness": 5,
+  "clarity": 5,
+  "completeness": 5,
+  "faithfulness_reasoning": "The explanation correctly describes the categorical nature and order of the weather categories, with clear skies having the highest positive impact and light rain the largest penalty. It also notes the anomaly with heavy rain due to data sparsity, aligning with the reference. The importance rank is correctly stated as 7. Anchor 5, no deduction.",
+  "usage": {
+    "input_tokens": 2647,
+    "output_tokens": 213
+  }
+}

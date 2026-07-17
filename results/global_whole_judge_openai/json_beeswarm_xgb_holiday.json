@@ -1,0 +1,15 @@
+{
+  "form_pipeline": "json_beeswarm",
+  "xai_model": "xgb",
+  "feature": "holiday",
+  "form_type": "near-flat",
+  "judge_model": "gpt-4o",
+  "faithfulness": 4,
+  "clarity": 5,
+  "completeness": 3,
+  "faithfulness_reasoning": "The explanation correctly identifies the direction as decreasing and the importance rank as 9th, matching the reference. However, it does not emphasize the near-flat nature of the feature, which is crucial for understanding its negligible impact. Anchor 5, -1 (missed near-flat nature), resulting in a score of 4.",
+  "usage": {
+    "input_tokens": 2392,
+    "output_tokens": 219
+  }
+}

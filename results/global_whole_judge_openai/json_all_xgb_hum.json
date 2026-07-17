@@ -1,0 +1,15 @@
+{
+  "form_pipeline": "json_all",
+  "xai_model": "xgb",
+  "feature": "hum",
+  "form_type": "non-monotonic",
+  "judge_model": "gpt-4o",
+  "faithfulness": 4,
+  "clarity": 4,
+  "completeness": 4,
+  "faithfulness_reasoning": "The explanation correctly describes the non-monotonic effect and captures the peak around 34% humidity, aligning with the reference. The importance rank is accurately stated as 6. However, the explanation introduces additional details about extreme humidity levels that are not specified in the reference. Anchor 5, -1 (additional unverified details), resulting in a score of 4.",
+  "usage": {
+    "input_tokens": 2508,
+    "output_tokens": 243
+  }
+}

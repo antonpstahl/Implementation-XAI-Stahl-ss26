@@ -1,0 +1,15 @@
+{
+  "form_pipeline": "vision_beeswarm",
+  "xai_model": "xgb",
+  "feature": "mnth",
+  "form_type": "categorical",
+  "judge_model": "gpt-4o",
+  "faithfulness": 2,
+  "clarity": 4,
+  "completeness": 1,
+  "faithfulness_reasoning": "The explanation correctly identifies the general pattern of winter months being negative and summer months being positive, aligning with the reference. However, it exaggerates the values (−0.8 and +0.3) compared to the reference values. The importance rank is not mentioned. Anchor 3, -1 (exaggerated values), max(1, 3-1)=2.",
+  "usage": {
+    "input_tokens": 2408,
+    "output_tokens": 216
+  }
+}

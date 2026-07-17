@@ -1,0 +1,15 @@
+{
+  "form_pipeline": "tooluse_all",
+  "xai_model": "ebm",
+  "feature": "windspeed",
+  "form_type": "near-flat",
+  "judge_model": "gpt-4o",
+  "faithfulness": 4,
+  "clarity": 5,
+  "completeness": 4,
+  "faithfulness_reasoning": "The explanation correctly identifies the effect as negligible at low wind speeds and only meaningful at high winds, aligning with the near-flat reference. However, it introduces a specific negative contribution at high speeds, which is not supported by the reference. The importance rank is correctly stated as 8th. Anchor 5, -1 (specific negative contribution not in reference), final score 4.",
+  "usage": {
+    "input_tokens": 2442,
+    "output_tokens": 204
+  }
+}

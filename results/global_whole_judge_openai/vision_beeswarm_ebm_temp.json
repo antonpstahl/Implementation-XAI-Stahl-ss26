@@ -1,0 +1,15 @@
+{
+  "form_pipeline": "vision_beeswarm",
+  "xai_model": "ebm",
+  "feature": "temp",
+  "form_type": "non-monotonic",
+  "judge_model": "gpt-4o",
+  "faithfulness": 1,
+  "clarity": 2,
+  "completeness": 4,
+  "faithfulness_reasoning": "The explanation incorrectly describes the relationship as roughly monotonic, which contradicts the non-monotonic nature of the reference. It also misses the peak at ~31.2 °C and the sign change at ~18 °C. However, the importance rank is correctly identified as 2. Anchor 3, -1 (direction/monotonicity contradicts), -1 (peak missed), max(1, 3-2)=1.",
+  "usage": {
+    "input_tokens": 2414,
+    "output_tokens": 242
+  }
+}

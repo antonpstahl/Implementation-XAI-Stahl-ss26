@@ -1,0 +1,15 @@
+{
+  "form_pipeline": "json_all",
+  "xai_model": "ebm",
+  "feature": "weathersit",
+  "form_type": "categorical",
+  "judge_model": "gpt-4o",
+  "faithfulness": 5,
+  "clarity": 5,
+  "completeness": 5,
+  "faithfulness_reasoning": "The explanation correctly identifies category 1 as having a positive effect and category 3 as having the most negative effect, aligning with the reference. It also notes the unusual behavior of category 4 due to data sparsity, which is consistent with the reference note. The importance rank is correctly stated as sixth. Anchor 5, no deduction.",
+  "usage": {
+    "input_tokens": 2593,
+    "output_tokens": 208
+  }
+}

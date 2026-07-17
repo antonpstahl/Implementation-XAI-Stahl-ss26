@@ -1,0 +1,15 @@
+{
+  "form_pipeline": "vision_all",
+  "xai_model": "ebm",
+  "feature": "weathersit",
+  "form_type": "categorical",
+  "judge_model": "gpt-4o",
+  "faithfulness": 4,
+  "clarity": 4,
+  "completeness": 3,
+  "faithfulness_reasoning": "The explanation correctly identifies the categorical nature and order of the weather categories, with category 1 being the highest and category 3 the lowest, which matches the reference. The importance rank is also correctly stated as 6th. However, the explanation inaccurately describes category 4 as suppressing demand less than category 3, which contradicts the reference. Anchor 5, -1 (category 4 suppression misdescribed), resulting in a score of 4.",
+  "usage": {
+    "input_tokens": 2596,
+    "output_tokens": 252
+  }
+}

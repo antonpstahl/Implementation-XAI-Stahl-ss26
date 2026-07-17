@@ -1,0 +1,15 @@
+{
+  "form_pipeline": "tooluse_all",
+  "xai_model": "ebm",
+  "feature": "hr",
+  "form_type": "categorical",
+  "judge_model": "gpt-4o",
+  "faithfulness": 4,
+  "clarity": 5,
+  "completeness": 5,
+  "faithfulness_reasoning": "The explanation correctly identifies the categorical nature of the feature and captures the key structure with two peaks, but it inaccurately places the highest peak at 5 p.m. instead of 17 (5 p.m. is 17 in 24-hour time). The importance rank is correctly identified as 1st. Anchor 5, -1 (peak location error), resulting in a score of 4.",
+  "usage": {
+    "input_tokens": 2600,
+    "output_tokens": 209
+  }
+}

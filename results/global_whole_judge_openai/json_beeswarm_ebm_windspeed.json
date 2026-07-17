@@ -1,0 +1,15 @@
+{
+  "form_pipeline": "json_beeswarm",
+  "xai_model": "ebm",
+  "feature": "windspeed",
+  "form_type": "near-flat",
+  "judge_model": "gpt-4o",
+  "faithfulness": 5,
+  "clarity": 5,
+  "completeness": 5,
+  "faithfulness_reasoning": "The explanation correctly identifies the direction as decreasing and the monotonicity as monotonic decreasing, which matches the reference. The importance rank is also correctly stated as 8th. The near-flat nature of the feature is acknowledged by describing the effect as relatively small. Anchor 5, no deduction.",
+  "usage": {
+    "input_tokens": 2384,
+    "output_tokens": 194
+  }
+}

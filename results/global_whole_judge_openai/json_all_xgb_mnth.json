@@ -1,0 +1,15 @@
+{
+  "form_pipeline": "json_all",
+  "xai_model": "xgb",
+  "feature": "mnth",
+  "form_type": "categorical",
+  "judge_model": "gpt-4o",
+  "faithfulness": 3,
+  "clarity": 4,
+  "completeness": 3,
+  "faithfulness_reasoning": "The explanation correctly identifies January as having the largest negative contribution and September and October as having the highest positive contributions, aligning with the reference. The importance rank is also correctly stated as 5. However, the explanation inaccurately describes the effect as a \"non-monotonic, seasonal arch,\" which is misleading for a categorical feature. Anchor 4, -1 (misleading shape description), max(1, 4-1)=3.",
+  "usage": {
+    "input_tokens": 2544,
+    "output_tokens": 264
+  }
+}

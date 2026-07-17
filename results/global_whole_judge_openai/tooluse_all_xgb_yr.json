@@ -1,0 +1,15 @@
+{
+  "form_pipeline": "tooluse_all",
+  "xai_model": "xgb",
+  "feature": "yr",
+  "form_type": "monotonic",
+  "judge_model": "gpt-4o",
+  "faithfulness": 4,
+  "clarity": 4,
+  "completeness": 4,
+  "faithfulness_reasoning": "The explanation correctly identifies the monotonic increase between the two years, aligning with the reference. The importance rank is accurately stated as 2nd. However, the explanation describes a step change rather than a continuous monotonic increase, which slightly misrepresents the form. Anchor 4, no deduction.",
+  "usage": {
+    "input_tokens": 2434,
+    "output_tokens": 197
+  }
+}
