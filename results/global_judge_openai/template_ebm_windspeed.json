@@ -4,12 +4,12 @@
   "feature": "windspeed",
   "form_type": "near-flat",
   "judge_model": "gpt-4o",
-  "faithfulness": 1,
-  "clarity": 4,
+  "faithfulness": 5,
+  "clarity": 5,
   "completeness": 5,
-  "faithfulness_reasoning": "The explanation incorrectly describes the effect of wind speed as non-monotonic with a peak, contradicting the reference which states it is monotonic decreasing and near-flat. The importance rank is correct. Anchor 2, -1 (direction/monotonicity contradicts), -1 (peak claimed but not present), max(1, 2-2)=1.",
+  "faithfulness_reasoning": "The explanation correctly identifies the effect as decreasing and negligible, matching the near-flat reference. The importance rank is also accurately stated as 8 of 9. Anchor 5, no deduction.",
   "usage": {
-    "input_tokens": 2353,
-    "output_tokens": 185
+    "input_tokens": 2320,
+    "output_tokens": 151
   }
 }

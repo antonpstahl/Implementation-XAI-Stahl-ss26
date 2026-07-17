@@ -1,0 +1,14 @@
+{
+  "form": "vision_beeswarm",
+  "scope": "global_whole",
+  "llm_model": "claude-sonnet-4-6",
+  "loss_key": "poisson_log",
+  "xai_model": "ebm",
+  "feature": "weekday",
+  "explanation": "[EFFECT] The dots for all weekdays cluster very tightly around zero, with blue and red dots intermingled and no clear directional pattern. The effect of the day of the week on predicted demand is negligible in this model.\n[IMPORTANCE] This is the seventh most important feature and is effectively negligible — its spread is tiny compared to all features above it.\n[RECOMMENDATION] Focus operational planning — bike availability and staffing — primarily on the hour of day and temperature, as these two features drive the vast majority of demand variation; ensure full availability during warm-weather daytime hours and scale back overnight and in cold conditions.",
+  "dropped": false,
+  "condition": "vision_beeswarm",
+  "modality": "vision",
+  "representation": "beeswarm",
+  "mechanism": "push"
+}

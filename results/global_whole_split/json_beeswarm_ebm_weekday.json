@@ -1,0 +1,14 @@
+{
+  "form": "json_beeswarm",
+  "scope": "global_whole",
+  "llm_model": "claude-sonnet-4-6",
+  "loss_key": "poisson_log",
+  "xai_model": "ebm",
+  "feature": "weekday",
+  "explanation": "[EFFECT] The day of the week influences demand in a non-ordinal, category-like way — contributions vary across the days without a simple rising or falling pattern from Sunday through Saturday. The spread is narrow, so the effect of weekday on the model's predictions is relatively modest compared to features like hour or temperature.\n[IMPORTANCE] This is the seventh most important feature, with a narrow spread indicating a limited but still detectable role in predictions.\n[RECOMMENDATION] Focus operational planning — bike availability, rebalancing, and staffing — primarily around the hour of the day and the temperature, as these two features drive the largest swings in predicted demand by a considerable margin. Scheduling more resources during high-demand hours and warmer conditions will have the greatest impact on meeting customer needs.",
+  "dropped": false,
+  "condition": "json_beeswarm",
+  "modality": "json",
+  "representation": "beeswarm",
+  "mechanism": "push"
+}

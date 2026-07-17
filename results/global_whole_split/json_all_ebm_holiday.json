@@ -1,0 +1,14 @@
+{
+  "form": "json_all",
+  "scope": "global_whole",
+  "llm_model": "claude-sonnet-4-6",
+  "loss_key": "poisson_log",
+  "xai_model": "ebm",
+  "feature": "holiday",
+  "explanation": "[EFFECT] Being a holiday produces a small negative contribution to predicted demand compared with a normal working day, which is near zero. The effect is a simple step: non-holidays are essentially neutral and holidays slightly reduce the model's prediction.\n[IMPORTANCE] Ranked last (ninth) with the lowest importance score — its effect is negligible and should not meaningfully influence operational planning on its own.\n[RECOMMENDATION] Plan your bike availability and staffing primarily around the hour of the day — ensuring high fleet availability and staff support around the 8 a.m. and 5 p.m. peaks — and secondarily around temperature, scaling up resources on warm days (around 20–31 °C) and scaling back on cold or very rainy days.",
+  "dropped": false,
+  "condition": "json_all",
+  "modality": "json",
+  "representation": "all",
+  "mechanism": "push"
+}

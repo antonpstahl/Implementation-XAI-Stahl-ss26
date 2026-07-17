@@ -1,0 +1,15 @@
+{
+  "form_pipeline": "vision_beeswarm",
+  "xai_model": "xgb",
+  "feature": "mnth",
+  "form_type": "categorical",
+  "judge_model": "claude-opus-4-8",
+  "faithfulness": 4,
+  "clarity": 3,
+  "completeness": 1,
+  "faithfulness_reasoning": "Direction is correct (winter negative, summer positive), consistent with reference bottom categories (Jan/Feb/Mar) and top categories (Sep/Oct/Jul); but no importance rank and it doesn't pinpoint the true peak months (Sep/Oct rather than pure summer). Anchor 4; no deduction applies since direction matches and general structure is right. Score 4.",
+  "usage": {
+    "input_tokens": 602,
+    "output_tokens": 380
+  }
+}

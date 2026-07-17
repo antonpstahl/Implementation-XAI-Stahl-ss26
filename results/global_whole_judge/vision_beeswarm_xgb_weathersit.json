@@ -1,0 +1,15 @@
+{
+  "form_pipeline": "vision_beeswarm",
+  "xai_model": "xgb",
+  "feature": "weathersit",
+  "form_type": "categorical",
+  "judge_model": "claude-opus-4-8",
+  "faithfulness": 1,
+  "clarity": 1,
+  "completeness": 1,
+  "faithfulness_reasoning": "The explanation is empty, so nothing matches the reference — no direction, structure, or rank is stated. Anchor 1.",
+  "usage": {
+    "input_tokens": 615,
+    "output_tokens": 187
+  }
+}

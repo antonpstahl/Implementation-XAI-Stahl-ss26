@@ -1,0 +1,15 @@
+{
+  "form_pipeline": "json_beeswarm",
+  "xai_model": "ebm",
+  "feature": "windspeed",
+  "form_type": "near-flat",
+  "judge_model": "claude-opus-4-8",
+  "faithfulness": 5,
+  "clarity": 3,
+  "completeness": 5,
+  "faithfulness_reasoning": "Direction (decreasing, monotonic) matches, rank 8 correct, and the \"small magnitude / minor factor\" framing captures the near-flat nature. Anchor 5, no deductions.",
+  "usage": {
+    "input_tokens": 646,
+    "output_tokens": 307
+  }
+}

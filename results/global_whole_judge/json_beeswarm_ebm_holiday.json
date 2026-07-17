@@ -1,0 +1,15 @@
+{
+  "form_pipeline": "json_beeswarm",
+  "xai_model": "ebm",
+  "feature": "holiday",
+  "form_type": "near-flat",
+  "judge_model": "claude-opus-4-8",
+  "faithfulness": 5,
+  "clarity": 4,
+  "completeness": 5,
+  "faithfulness_reasoning": "Direction (holiday lowers demand) matches decreasing reference, rank 9 correct, and negligibility explicitly framed. Anchor 5, no deductions.",
+  "usage": {
+    "input_tokens": 608,
+    "output_tokens": 258
+  }
+}

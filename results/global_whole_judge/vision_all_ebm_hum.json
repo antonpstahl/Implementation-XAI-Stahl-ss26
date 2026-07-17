@@ -1,0 +1,15 @@
+{
+  "form_pipeline": "vision_all",
+  "xai_model": "ebm",
+  "feature": "hum",
+  "form_type": "non-monotonic",
+  "judge_model": "claude-opus-4-8",
+  "faithfulness": 5,
+  "clarity": 4,
+  "completeness": 2,
+  "faithfulness_reasoning": "Non-monotonic shape correct: rises to a positive plateau (~+0.10 near 36%) then declines, matching the max peak and mixed direction; rank 5 is correct. The peak at ~36% is captured (described as plateau reaching +0.10) and sign change at ~10% is roughly consistent. Anchor 5, no deductions.",
+  "usage": {
+    "input_tokens": 761,
+    "output_tokens": 390
+  }
+}

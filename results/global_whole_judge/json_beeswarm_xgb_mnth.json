@@ -1,0 +1,15 @@
+{
+  "form_pipeline": "json_beeswarm",
+  "xai_model": "xgb",
+  "feature": "mnth",
+  "form_type": "categorical",
+  "judge_model": "claude-opus-4-8",
+  "faithfulness": 3,
+  "clarity": 5,
+  "completeness": 2,
+  "faithfulness_reasoning": "Correctly identifies categorical non-ordinal nature and rank 5 of 9, but never names which months are highest (Sep/Oct) or lowest (Jan/Feb) — the key categorical structure. Anchor 4, -1 (top/bottom levels not stated), max(1,4-1)=3.",
+  "usage": {
+    "input_tokens": 765,
+    "output_tokens": 314
+  }
+}

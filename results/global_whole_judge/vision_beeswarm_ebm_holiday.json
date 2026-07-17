@@ -1,0 +1,15 @@
+{
+  "form_pipeline": "vision_beeswarm",
+  "xai_model": "ebm",
+  "feature": "holiday",
+  "form_type": "near-flat",
+  "judge_model": "claude-opus-4-8",
+  "faithfulness": 5,
+  "clarity": 5,
+  "completeness": 5,
+  "faithfulness_reasoning": "The reference is near-flat, rank 9 of 9; the explanation correctly frames the feature as negligible and least important. Anchor 5, no deductions.",
+  "usage": {
+    "input_tokens": 553,
+    "output_tokens": 252
+  }
+}

@@ -1,0 +1,15 @@
+{
+  "form_pipeline": "json_beeswarm",
+  "xai_model": "ebm",
+  "feature": "hr",
+  "form_type": "categorical",
+  "judge_model": "claude-opus-4-8",
+  "faithfulness": 3,
+  "clarity": 3,
+  "completeness": 5,
+  "faithfulness_reasoning": "Correctly identifies hr as the #1 feature and categorical/non-ordinal, but fails to name the key structure — the commuter peaks (17,18,8) and the pre-dawn troughs (3,4,5); it explicitly declines to state the daily profile. Anchor 3 (rank correct, direction fine, but key structure missing).",
+  "usage": {
+    "input_tokens": 801,
+    "output_tokens": 325
+  }
+}

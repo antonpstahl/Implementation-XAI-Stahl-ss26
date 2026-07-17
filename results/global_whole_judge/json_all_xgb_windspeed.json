@@ -1,0 +1,15 @@
+{
+  "form_pipeline": "json_all",
+  "xai_model": "xgb",
+  "feature": "windspeed",
+  "form_type": "near-flat",
+  "judge_model": "claude-opus-4-8",
+  "faithfulness": 3,
+  "clarity": 4,
+  "completeness": 2,
+  "faithfulness_reasoning": "The reference is near-flat (rank 8, negligible) with a slight positive early peak then mild negative — the explanation captures the sign change (~15 km/h) and negative-at-high-wind direction, and correctly states rank 8 as minor, but overstates the effect as \"meaningful demand reductions\" rather than framing it as negligible. Anchor 4; -1 for missing the near-flat negligibility framing (over-describing), max(1, 4-1)=3.",
+  "usage": {
+    "input_tokens": 783,
+    "output_tokens": 418
+  }
+}

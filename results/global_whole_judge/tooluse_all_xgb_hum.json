@@ -1,0 +1,15 @@
+{
+  "form_pipeline": "tooluse_all",
+  "xai_model": "xgb",
+  "feature": "hum",
+  "form_type": "non-monotonic",
+  "judge_model": "claude-opus-4-8",
+  "faithfulness": 5,
+  "clarity": 4,
+  "completeness": 2,
+  "faithfulness_reasoning": "Non-monotonic with peak ~34% and decline at high humidity matches the reference; rank 6 correct; the sign change described (penalty at very low, positive mid-range) aligns well with reference. Anchor 5, no deductions.",
+  "usage": {
+    "input_tokens": 792,
+    "output_tokens": 332
+  }
+}

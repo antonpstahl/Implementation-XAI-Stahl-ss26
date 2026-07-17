@@ -1,0 +1,14 @@
+{
+  "form": "json_all",
+  "scope": "global_whole",
+  "llm_model": "claude-sonnet-4-6",
+  "loss_key": "poisson_log",
+  "xai_model": "xgb",
+  "feature": "weekday",
+  "explanation": "[EFFECT] The day of the week has a gentle, broadly rising trend from Sunday (–0.08) through the working week to Friday (+0.03), with Saturday (+0.01) slightly below Friday. The overall range is small, and the pattern suggests weekdays — particularly Friday — see marginally higher demand than weekends on average.\n[IMPORTANCE] This is the fourth-ranked feature (rank 4, importance 0.173), and while statistically meaningful it is far less impactful than the hour of the day.\n[RECOMMENDATION] Operational planning should be driven overwhelmingly by the **hour of the day** — staff and bikes should be concentrated around the 8 a.m. and 5 p.m. rush-hour peaks and scaled back sharply overnight — with **temperature** as the key secondary lever, since demand climbs steadily from cold weather up to around 29–30°C and then softens in extreme heat.",
+  "dropped": false,
+  "condition": "json_all",
+  "modality": "json",
+  "representation": "all",
+  "mechanism": "push"
+}

@@ -1,0 +1,15 @@
+{
+  "form_pipeline": "json_all",
+  "xai_model": "ebm",
+  "feature": "yr",
+  "form_type": "monotonic",
+  "judge_model": "claude-opus-4-8",
+  "faithfulness": 5,
+  "clarity": 5,
+  "completeness": 2,
+  "faithfulness_reasoning": "Direction increasing matches (2011 negative, 2012 positive), step-change captures the monotonic rise, and rank 3 is correct. Anchor 5, no deductions.",
+  "usage": {
+    "input_tokens": 624,
+    "output_tokens": 293
+  }
+}

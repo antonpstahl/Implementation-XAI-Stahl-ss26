@@ -1,0 +1,14 @@
+{
+  "form": "json_all",
+  "scope": "global_whole",
+  "llm_model": "claude-sonnet-4-6",
+  "loss_key": "poisson_log",
+  "xai_model": "ebm",
+  "feature": "windspeed",
+  "explanation": "[EFFECT] At low to moderate wind speeds the contribution is close to zero or marginally positive, meaning wind has little effect under normal conditions. However, at high wind speeds (above roughly 30 km/h, normalised value ~0.45) the contribution becomes increasingly negative, reaching its most suppressive values at the highest recorded wind speeds (around 55 km/h).\n[IMPORTANCE] Ranked eighth, windspeed has a low overall importance — its effect is negligible for most hours and only becomes relevant during notably windy conditions.\n[RECOMMENDATION] Plan your bike availability and staffing primarily around the hour of the day — ensuring high fleet availability and staff support around the 8 a.m. and 5 p.m. peaks — and secondarily around temperature, scaling up resources on warm days (around 20–31 °C) and scaling back on cold or very rainy days.",
+  "dropped": false,
+  "condition": "json_all",
+  "modality": "json",
+  "representation": "all",
+  "mechanism": "push"
+}

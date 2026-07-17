@@ -1,0 +1,14 @@
+{
+  "form": "vision_all",
+  "scope": "global_whole",
+  "llm_model": "claude-sonnet-4-6",
+  "loss_key": "poisson_log",
+  "xai_model": "ebm",
+  "feature": "mnth",
+  "explanation": "[EFFECT] Month has a non-monotonic effect. Winter months are negative drivers: January (~–0.25) and February (~–0.20) most strongly suppress demand. Contributions rise through spring, are near zero in summer (July–August), and peak in autumn — especially October (~+0.35 to +0.37) — before easing in November and December.\n[IMPORTANCE] Fourth in importance (0.086); a moderate influence, spanning roughly 0.6 log units.\n[RECOMMENDATION] Hour of day and temperature are by far the two strongest drivers of predicted demand, so operational planning — such as bike redistribution and staffing — should be tightly organised around the two daily rush-hour peaks (around 8 a.m. and 5–6 p.m.) and scaled up noticeably in mild to warm weather while scaling back during cold spells or the early hours of the morning.",
+  "dropped": false,
+  "condition": "vision_all",
+  "modality": "vision",
+  "representation": "all",
+  "mechanism": "push"
+}

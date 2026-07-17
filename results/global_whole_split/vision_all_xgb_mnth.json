@@ -1,0 +1,14 @@
+{
+  "form": "vision_all",
+  "scope": "global_whole",
+  "llm_model": "claude-sonnet-4-6",
+  "loss_key": "poisson_log",
+  "xai_model": "xgb",
+  "feature": "mnth",
+  "explanation": "[EFFECT] Month has a broadly seasonal, non-monotonic shape. January (month 1) produces the most negative contributions (down to about −0.7), demand rises through spring and peaks across the summer months (roughly June–September, contributions around +0.1 to +0.25), then eases slightly in autumn and winter without returning to January lows.\n[IMPORTANCE] A moderate feature with a vertical range of roughly 0.9 log-units; similar in magnitude to humidity, and ranked around fourth or fifth.",
+  "dropped": false,
+  "condition": "vision_all",
+  "modality": "vision",
+  "representation": "all",
+  "mechanism": "push"
+}

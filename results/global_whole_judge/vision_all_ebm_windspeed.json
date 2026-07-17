@@ -1,0 +1,15 @@
+{
+  "form_pipeline": "vision_all",
+  "xai_model": "ebm",
+  "feature": "windspeed",
+  "form_type": "near-flat",
+  "judge_model": "claude-opus-4-8",
+  "faithfulness": 5,
+  "clarity": 4,
+  "completeness": 3,
+  "faithfulness_reasoning": "Direction (decreasing) matches, monotonic decreasing captured, rank 8 correct, and it acknowledges the feature is minor/near-flat. Anchor 5, no deductions.",
+  "usage": {
+    "input_tokens": 696,
+    "output_tokens": 313
+  }
+}

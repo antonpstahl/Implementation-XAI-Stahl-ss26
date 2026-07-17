@@ -4,12 +4,12 @@
   "feature": "windspeed",
   "form_type": "near-flat",
   "judge_model": "claude-opus-4-8",
-  "faithfulness": 1,
-  "clarity": 3,
+  "faithfulness": 5,
+  "clarity": 5,
   "completeness": 5,
-  "faithfulness_reasoning": "Reference is near-flat, monotonic decreasing; the explanation calls it non-monotonic with a peak at 7.3 km/h and misses the negligibility framing. Anchor 2 (direction partly wrong/vague), -1 (fabricated peak the reference does not have), -1 (contradicts monotonic decreasing form), max(1, 2-2)=1. Rank 8 is correct.",
+  "faithfulness_reasoning": "Direction (decreasing) matches, rank 8 of 9 correct, and it explicitly frames the effect as negligible/near-flat as the reference requires. Anchor 5, no deductions.",
   "usage": {
-    "input_tokens": 573,
-    "output_tokens": 367
+    "input_tokens": 538,
+    "output_tokens": 275
   }
 }

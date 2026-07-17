@@ -1,0 +1,15 @@
+{
+  "form_pipeline": "tooluse_all",
+  "xai_model": "xgb",
+  "feature": "windspeed",
+  "form_type": "near-flat",
+  "judge_model": "claude-opus-4-8",
+  "faithfulness": 3,
+  "clarity": 4,
+  "completeness": 3,
+  "faithfulness_reasoning": "The reference is near-flat (rank 8) with a slight positive early bump and sign change ~15.9 km/h; the explanation captures the mixed shape (slightly positive at low winds, negative above ~17 km/h) and the correct rank, though it overstates the effect as \"roughly monotonic\" penalties rather than framing it as negligible/near-flat. Anchor 4; -1 for missing the near-flat negligibility framing (over-describing a minor effect). max(1,4-1)=3.",
+  "usage": {
+    "input_tokens": 808,
+    "output_tokens": 410
+  }
+}

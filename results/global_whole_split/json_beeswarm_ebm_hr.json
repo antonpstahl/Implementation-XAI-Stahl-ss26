@@ -1,0 +1,14 @@
+{
+  "form": "json_beeswarm",
+  "scope": "global_whole",
+  "llm_model": "claude-sonnet-4-6",
+  "loss_key": "poisson_log",
+  "xai_model": "ebm",
+  "feature": "hr",
+  "explanation": "[EFFECT] The hour of the day has a complex, non-monotonic effect on predicted demand — contributions do not simply rise or fall as the hour number increases, but vary across the day in a pattern with no single ordinal direction. The model treats different hours quite differently from one another, producing a wide spread of contributions. Because no per-value curve was provided, the exact shape of the daily profile cannot be stated precisely.\n[IMPORTANCE] This is the single most important feature in the model, with a wide spread that clearly separates it from all others.\n[RECOMMENDATION] Focus operational planning — bike availability, rebalancing, and staffing — primarily around the hour of the day and the temperature, as these two features drive the largest swings in predicted demand by a considerable margin. Scheduling more resources during high-demand hours and warmer conditions will have the greatest impact on meeting customer needs.",
+  "dropped": false,
+  "condition": "json_beeswarm",
+  "modality": "json",
+  "representation": "beeswarm",
+  "mechanism": "push"
+}

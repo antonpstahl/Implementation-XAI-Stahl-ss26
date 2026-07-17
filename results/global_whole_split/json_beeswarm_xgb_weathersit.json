@@ -1,0 +1,14 @@
+{
+  "form": "json_beeswarm",
+  "scope": "global_whole",
+  "llm_model": "claude-sonnet-4-6",
+  "loss_key": "poisson_log",
+  "xai_model": "xgb",
+  "feature": "weathersit",
+  "explanation": "[EFFECT] Weather situation has a categorical effect, but the pattern across the four weather categories is not simply ordinal. Its narrow spread means the overall shift in predictions from weather conditions is relatively small.\n[IMPORTANCE] Weather situation ranks 7th, with a narrow spread, making it one of the weaker features despite its intuitive relevance.\n\n---\n[RECOMMENDATION] Staffing and bike-availability planning should be driven first by the **hour of the day**, which is by far the strongest predictor of demand, and second by the **year-on-year growth trend**, which shows demand was meaningfully higher in 2012 than 2011 — so planners should expect continued growth and scale capacity accordingly.",
+  "dropped": false,
+  "condition": "json_beeswarm",
+  "modality": "json",
+  "representation": "beeswarm",
+  "mechanism": "push"
+}

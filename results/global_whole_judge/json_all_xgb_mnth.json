@@ -1,0 +1,15 @@
+{
+  "form_pipeline": "json_all",
+  "xai_model": "xgb",
+  "feature": "mnth",
+  "form_type": "categorical",
+  "judge_model": "claude-opus-4-8",
+  "faithfulness": 5,
+  "clarity": 4,
+  "completeness": 3,
+  "faithfulness_reasoning": "Correctly identifies September/October as top and January as most negative, matching the reference; rank 5 is exact and the seasonal arch is captured. Anchor 5, no deductions.",
+  "usage": {
+    "input_tokens": 826,
+    "output_tokens": 310
+  }
+}

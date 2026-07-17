@@ -4,12 +4,12 @@
   "feature": "temp",
   "form_type": "non-monotonic",
   "judge_model": "claude-opus-4-8",
-  "faithfulness": 4,
-  "clarity": 4,
+  "faithfulness": 5,
+  "clarity": 3,
   "completeness": 5,
-  "faithfulness_reasoning": "Non-monotonic rise-then-fall and rank 3 of 9 match the reference; but the claimed peak ~21.3 °C is notably off from the true ~29.5 °C, making the key structure imprecise. Anchor 4 (rank correct, structure slightly imprecise), no additional deduction since a peak does exist. Score 4.",
+  "faithfulness_reasoning": "Non-monotonic rise-then-fall with peak ~29.5 C matches the reference, and rank 3 of 9 is correct; structure captured. Anchor 5, no deductions.",
   "usage": {
     "input_tokens": 622,
-    "output_tokens": 327
+    "output_tokens": 290
   }
 }

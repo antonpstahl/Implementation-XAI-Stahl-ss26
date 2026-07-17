@@ -1,0 +1,14 @@
+{
+  "form": "vision_all",
+  "scope": "global_whole",
+  "llm_model": "claude-sonnet-4-6",
+  "loss_key": "poisson_log",
+  "xai_model": "ebm",
+  "feature": "weathersit",
+  "explanation": "[EFFECT] Weather acts as a step function across four categories. Clear skies (category 1) give a small positive boost (~+0.045); mist/cloud (2) is nearly neutral (~0); light rain or snow (3) substantially suppresses demand (~–0.35); and heavy rain (4) also suppresses demand (~–0.25) — slightly less than category 3 in this model.\n[IMPORTANCE] Sixth in importance (0.061); meaningful but smaller in magnitude than temperature or year.\n[RECOMMENDATION] Hour of day and temperature are by far the two strongest drivers of predicted demand, so operational planning — such as bike redistribution and staffing — should be tightly organised around the two daily rush-hour peaks (around 8 a.m. and 5–6 p.m.) and scaled up noticeably in mild to warm weather while scaling back during cold spells or the early hours of the morning.",
+  "dropped": false,
+  "condition": "vision_all",
+  "modality": "vision",
+  "representation": "all",
+  "mechanism": "push"
+}

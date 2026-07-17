@@ -1,0 +1,15 @@
+{
+  "form_pipeline": "tooluse_all",
+  "xai_model": "ebm",
+  "feature": "windspeed",
+  "form_type": "near-flat",
+  "judge_model": "claude-opus-4-8",
+  "faithfulness": 5,
+  "clarity": 4,
+  "completeness": 5,
+  "faithfulness_reasoning": "Direction (decreasing at high winds) matches and rank 8 is exactly correct; the near-flat/negligible framing is captured well. Anchor 5, no deductions apply.",
+  "usage": {
+    "input_tokens": 730,
+    "output_tokens": 308
+  }
+}

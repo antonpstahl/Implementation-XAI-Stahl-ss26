@@ -1,0 +1,15 @@
+{
+  "form_pipeline": "vision_all",
+  "xai_model": "xgb",
+  "feature": "weathersit",
+  "form_type": "categorical",
+  "judge_model": "claude-opus-4-8",
+  "faithfulness": 5,
+  "clarity": 3,
+  "completeness": 2,
+  "faithfulness_reasoning": "Direction/ordering matches: clear positive, mist near-neutral, light rain strongly negative, heavy rain negative; top category (1) correct and rank ~6–7 matches true 7. Anchor 5, no deductions.",
+  "usage": {
+    "input_tokens": 810,
+    "output_tokens": 296
+  }
+}

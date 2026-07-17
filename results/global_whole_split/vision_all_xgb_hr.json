@@ -1,0 +1,14 @@
+{
+  "form": "vision_all",
+  "scope": "global_whole",
+  "llm_model": "claude-sonnet-4-6",
+  "loss_key": "poisson_log",
+  "xai_model": "xgb",
+  "feature": "hr",
+  "explanation": "[EFFECT] The hour of the day has a strongly non-monotonic effect. Demand is heavily suppressed in the pre-dawn hours, reaching its lowest point around 4–5 a.m. (contribution ≈ −3.5 in log space). It then climbs sharply through the morning, peaks around the evening rush at roughly 5–6 p.m. (contribution ≈ +1), and falls back through the late evening. A secondary rise is visible around 8 a.m.\n[IMPORTANCE] This is by far the most important feature, with a vertical range of about 4.5 log-units — more than four times larger than any other feature.",
+  "dropped": false,
+  "condition": "vision_all",
+  "modality": "vision",
+  "representation": "all",
+  "mechanism": "push"
+}

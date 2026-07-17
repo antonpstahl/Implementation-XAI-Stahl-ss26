@@ -1,0 +1,15 @@
+{
+  "form_pipeline": "json_all",
+  "xai_model": "xgb",
+  "feature": "weathersit",
+  "form_type": "categorical",
+  "judge_model": "claude-opus-4-8",
+  "faithfulness": 5,
+  "clarity": 5,
+  "completeness": 4,
+  "faithfulness_reasoning": "The explanation matches the category values, identifies category 1 as top and category 3 as the largest penalty, correctly flags category 4's noise, and gives rank 7 accurately. Anchor 5, no deductions.",
+  "usage": {
+    "input_tokens": 992,
+    "output_tokens": 284
+  }
+}

@@ -1,0 +1,15 @@
+{
+  "form_pipeline": "json_all",
+  "xai_model": "ebm",
+  "feature": "weathersit",
+  "form_type": "categorical",
+  "judge_model": "claude-opus-4-8",
+  "faithfulness": 5,
+  "clarity": 5,
+  "completeness": 4,
+  "faithfulness_reasoning": "Correctly identifies category 1 as top (positive), 2 as neutral, 3 as sharpest drop, and notes category 4's noisy low-sample caveat; rank 6 is exact. Anchor 5, no deduction.",
+  "usage": {
+    "input_tokens": 918,
+    "output_tokens": 302
+  }
+}

@@ -1,0 +1,15 @@
+{
+  "form_pipeline": "json_beeswarm",
+  "xai_model": "ebm",
+  "feature": "temp",
+  "form_type": "non-monotonic",
+  "judge_model": "claude-opus-4-8",
+  "faithfulness": 3,
+  "clarity": 3,
+  "completeness": 5,
+  "faithfulness_reasoning": "Non-monotonic mixed direction and rank 2 of 9 are both correct, but the explanation explicitly declines to state the peak (~31 °C) and misses the ~18 °C sign change, so the key structure is absent. Anchor 4 (direction correct, structure imprecise), -1 (clear peak missed), max(1, 4-1)=3.",
+  "usage": {
+    "input_tokens": 722,
+    "output_tokens": 360
+  }
+}

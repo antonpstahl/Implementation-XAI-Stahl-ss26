@@ -1,0 +1,14 @@
+{
+  "form": "vision_beeswarm",
+  "scope": "global_whole",
+  "llm_model": "claude-sonnet-4-6",
+  "loss_key": "poisson_log",
+  "xai_model": "ebm",
+  "feature": "windspeed",
+  "explanation": "[EFFECT] Higher wind speeds (red dots) sit slightly on the negative side (down to roughly −0.3), while low wind speeds (blue) are near zero, meaning stronger winds modestly reduce predicted demand. The overall effect is small.\n[IMPORTANCE] This is the eighth most important feature, with a very small spread and only a minor influence on predictions.\n[RECOMMENDATION] Focus operational planning — bike availability and staffing — primarily on the hour of day and temperature, as these two features drive the vast majority of demand variation; ensure full availability during warm-weather daytime hours and scale back overnight and in cold conditions.",
+  "dropped": false,
+  "condition": "vision_beeswarm",
+  "modality": "vision",
+  "representation": "beeswarm",
+  "mechanism": "push"
+}

@@ -1,0 +1,14 @@
+{
+  "form": "json_all",
+  "scope": "global_whole",
+  "llm_model": "claude-sonnet-4-6",
+  "loss_key": "poisson_log",
+  "xai_model": "ebm",
+  "feature": "hum",
+  "explanation": "[EFFECT] Humidity has a predominantly negative effect at high levels. At moderate humidity (roughly 30–40%), the contribution is slightly positive, but as humidity climbs above about 70–75%, the contribution turns negative and continues declining, reaching its most suppressive values near 100% humidity. Very low humidity (below ~10%) also shows a negative value, though this may reflect very few such observations.\n[IMPORTANCE] Ranked fifth, humidity has a modest but real effect — smaller than month, and most noticeable at the high end of the humidity range where it noticeably reduces predicted demand.\n[RECOMMENDATION] Plan your bike availability and staffing primarily around the hour of the day — ensuring high fleet availability and staff support around the 8 a.m. and 5 p.m. peaks — and secondarily around temperature, scaling up resources on warm days (around 20–31 °C) and scaling back on cold or very rainy days.",
+  "dropped": false,
+  "condition": "json_all",
+  "modality": "json",
+  "representation": "all",
+  "mechanism": "push"
+}

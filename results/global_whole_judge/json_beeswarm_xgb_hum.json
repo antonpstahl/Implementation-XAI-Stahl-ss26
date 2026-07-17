@@ -1,0 +1,15 @@
+{
+  "form_pipeline": "json_beeswarm",
+  "xai_model": "xgb",
+  "feature": "hum",
+  "form_type": "non-monotonic",
+  "judge_model": "claude-opus-4-8",
+  "faithfulness": 3,
+  "clarity": 4,
+  "completeness": 2,
+  "faithfulness_reasoning": "Direction is correctly described as mixed/non-monotone and rank 6 is correct, but the explanation misses the peak near ~34% humidity and frames the effect as merely \"small/unclear.\" Anchor 4 (direction correct, key structure imprecise), -1 (clear peak missed), max(1, 4-1)=3.",
+  "usage": {
+    "input_tokens": 670,
+    "output_tokens": 368
+  }
+}

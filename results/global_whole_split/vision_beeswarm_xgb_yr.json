@@ -1,0 +1,14 @@
+{
+  "form": "vision_beeswarm",
+  "scope": "global_whole",
+  "llm_model": "claude-sonnet-4-6",
+  "loss_key": "poisson_log",
+  "xai_model": "xgb",
+  "feature": "yr",
+  "explanation": "[EFFECT] This is a binary step: both 2011 (blue) and 2012 (red) contribute positively to demand, but 2012's cluster sits noticeably further right (~+0.5) than 2011's (~+0.2), reflecting the system's growth over time. The effect is a clean shift, not a gradual change.\n[IMPORTANCE] Year is the second most important feature overall, indicating that the year-on-year growth in ridership has a large systematic effect on every prediction.",
+  "dropped": false,
+  "condition": "vision_beeswarm",
+  "modality": "vision",
+  "representation": "beeswarm",
+  "mechanism": "push"
+}

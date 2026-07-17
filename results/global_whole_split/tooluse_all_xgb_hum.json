@@ -1,0 +1,14 @@
+{
+  "form": "tooluse_all",
+  "scope": "global_whole",
+  "llm_model": "claude-sonnet-4-6",
+  "loss_key": "poisson_log",
+  "xai_model": "xgb",
+  "feature": "hum",
+  "explanation": "[EFFECT] Humidity has a non-monotonic effect. Very low humidity (near 0%) is associated with a penalty on demand (−0.38), contributions rise to a mild positive in the low-to-mid range (around 25–35% humidity, contribution ≈ +0.08), and then steadily decrease as humidity climbs above roughly 65%, becoming increasingly negative above 80% and sharply negative near 100%.\n[IMPORTANCE] Ranked 6th with importance 0.077 — a moderate, secondary weather influence, notably weaker than temperature but stronger than weather situation on its own.\n\n---\n[RECOMMENDATION] Operational planning should be driven primarily by the **hour of the day** — scheduling significantly more bikes and staff for the 8 a.m. and 5–6 p.m. peaks — and secondarily by **temperature**, scaling up resources on mild-to-warm days (around 20–30 °C) and scaling down on very cold or very hot days, since together these two features account for the vast majority of the model's predictive power.",
+  "dropped": false,
+  "condition": "tooluse_all",
+  "modality": "tooluse",
+  "representation": "all",
+  "mechanism": "pull"
+}

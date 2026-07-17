@@ -1,0 +1,15 @@
+{
+  "form_pipeline": "json_beeswarm",
+  "xai_model": "xgb",
+  "feature": "weekday",
+  "form_type": "categorical",
+  "judge_model": "claude-opus-4-8",
+  "faithfulness": 3,
+  "clarity": 4,
+  "completeness": 2,
+  "faithfulness_reasoning": "Correctly identifies the categorical/non-ordinal nature and rank 4, but never names which days are highest (Fri/Sat) or lowest (Sun/Mon/Tue), so the key categorical structure is missing. Anchor 4, -1 (correct top level not identified), max(1,4-1)=3.",
+  "usage": {
+    "input_tokens": 780,
+    "output_tokens": 354
+  }
+}

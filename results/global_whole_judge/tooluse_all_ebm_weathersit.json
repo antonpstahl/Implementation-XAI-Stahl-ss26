@@ -1,0 +1,15 @@
+{
+  "form_pipeline": "tooluse_all",
+  "xai_model": "ebm",
+  "feature": "weathersit",
+  "form_type": "categorical",
+  "judge_model": "claude-opus-4-8",
+  "faithfulness": 5,
+  "clarity": 5,
+  "completeness": 4,
+  "faithfulness_reasoning": "Correct top category (1 positive), category 3 most negative, and rank 6 all match; it even notes category 4's noisiness. Anchor 5, no deductions.",
+  "usage": {
+    "input_tokens": 978,
+    "output_tokens": 284
+  }
+}

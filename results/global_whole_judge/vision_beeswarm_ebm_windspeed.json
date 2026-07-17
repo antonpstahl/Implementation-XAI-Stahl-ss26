@@ -1,0 +1,15 @@
+{
+  "form_pipeline": "vision_beeswarm",
+  "xai_model": "ebm",
+  "feature": "windspeed",
+  "form_type": "near-flat",
+  "judge_model": "claude-opus-4-8",
+  "faithfulness": 5,
+  "clarity": 3,
+  "completeness": 5,
+  "faithfulness_reasoning": "Direction (higher wind reduces demand) matches; rank 8 correct; and the explanation stresses the effect is small/minor, matching the near-flat framing. Anchor 5, no deductions apply.",
+  "usage": {
+    "input_tokens": 610,
+    "output_tokens": 311
+  }
+}

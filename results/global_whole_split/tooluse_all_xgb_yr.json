@@ -1,0 +1,14 @@
+{
+  "form": "tooluse_all",
+  "scope": "global_whole",
+  "llm_model": "claude-sonnet-4-6",
+  "loss_key": "poisson_log",
+  "xai_model": "xgb",
+  "feature": "yr",
+  "explanation": "[EFFECT] This is a simple step change between the two years in the data. Hours from 2012 (yr = 1) receive a positive boost to predicted demand (+0.17 in log space), while 2011 hours (yr = 0) receive a negative adjustment (−0.23). This likely reflects overall system growth over time.\n[IMPORTANCE] Ranked 2nd with importance 0.200, making it the second strongest driver after hour. Its influence is a flat uplift applied to every hour in 2012 compared with 2011.\n\n---\n[RECOMMENDATION] Operational planning should be driven primarily by the **hour of the day** — scheduling significantly more bikes and staff for the 8 a.m. and 5–6 p.m. peaks — and secondarily by **temperature**, scaling up resources on mild-to-warm days (around 20–30 °C) and scaling down on very cold or very hot days, since together these two features account for the vast majority of the model's predictive power.",
+  "dropped": false,
+  "condition": "tooluse_all",
+  "modality": "tooluse",
+  "representation": "all",
+  "mechanism": "pull"
+}

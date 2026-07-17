@@ -1,0 +1,15 @@
+{
+  "form_pipeline": "tooluse_all",
+  "xai_model": "ebm",
+  "feature": "hum",
+  "form_type": "non-monotonic",
+  "judge_model": "claude-opus-4-8",
+  "faithfulness": 5,
+  "clarity": 4,
+  "completeness": 4,
+  "faithfulness_reasoning": "The explanation captures the mixed/non-monotone shape: slightly positive at low-moderate humidity, turning negative at high humidity, with a peak in the moderate range consistent with ~36%; rank 5 is correct. Direction and structure match the reference. Anchor 5, no deductions.",
+  "usage": {
+    "input_tokens": 812,
+    "output_tokens": 347
+  }
+}

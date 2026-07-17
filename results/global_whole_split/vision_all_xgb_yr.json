@@ -1,0 +1,14 @@
+{
+  "form": "vision_all",
+  "scope": "global_whole",
+  "llm_model": "claude-sonnet-4-6",
+  "loss_key": "poisson_log",
+  "xai_model": "xgb",
+  "feature": "yr",
+  "explanation": "[EFFECT] Year acts as a step change: hours in 2011 receive a consistently negative contribution (around −0.25 to −0.30), while hours in 2012 receive a positive contribution (around +0.15 to +0.25), reflecting the system's overall growth between years.\n[IMPORTANCE] A moderately important feature with a step size of roughly 0.5–0.6 log-units; ranked around fifth or sixth overall.",
+  "dropped": false,
+  "condition": "vision_all",
+  "modality": "vision",
+  "representation": "all",
+  "mechanism": "push"
+}

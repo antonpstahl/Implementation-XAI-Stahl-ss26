@@ -4,12 +4,12 @@
   "feature": "windspeed",
   "form_type": "near-flat",
   "judge_model": "gpt-4o",
-  "faithfulness": 2,
+  "faithfulness": 5,
   "clarity": 5,
   "completeness": 5,
-  "faithfulness_reasoning": "The explanation correctly identifies the non-monotonic nature and low importance rank of wind speed. However, it inaccurately states the peak at 19.0 km/h, while the reference indicates a peak at ~11.0 km/h. Anchor 3, -1 (peak missed), max(1, 3-1)=2.",
+  "faithfulness_reasoning": "The explanation correctly identifies the effect as non-monotonic and near-flat, matching the reference. The importance rank is also accurately stated as 8 of 9. The negligible effect is appropriately highlighted. Anchor 5, no deduction.",
   "usage": {
-    "input_tokens": 2398,
-    "output_tokens": 181
+    "input_tokens": 2371,
+    "output_tokens": 166
   }
 }

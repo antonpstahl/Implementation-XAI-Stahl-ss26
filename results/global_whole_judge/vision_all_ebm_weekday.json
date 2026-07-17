@@ -1,0 +1,15 @@
+{
+  "form_pipeline": "vision_all",
+  "xai_model": "ebm",
+  "feature": "weekday",
+  "form_type": "near-flat",
+  "judge_model": "claude-opus-4-8",
+  "faithfulness": 5,
+  "clarity": 3,
+  "completeness": 3,
+  "faithfulness_reasoning": "Correctly identifies Friday (5) as top positive and Sunday (0) as most negative, rank 7 correct, and frames the effect as modest/small (near-flat honored). Anchor 5; the \"roughly increasing\" framing is slightly imprecise for a categorical feature but the key structure and negligibility are captured, no deduction warranted.",
+  "usage": {
+    "input_tokens": 818,
+    "output_tokens": 362
+  }
+}

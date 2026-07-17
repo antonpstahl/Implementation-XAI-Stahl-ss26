@@ -1,0 +1,15 @@
+{
+  "form_pipeline": "vision_beeswarm",
+  "xai_model": "xgb",
+  "feature": "holiday",
+  "form_type": "near-flat",
+  "judge_model": "claude-opus-4-8",
+  "faithfulness": 1,
+  "clarity": 1,
+  "completeness": 1,
+  "faithfulness_reasoning": "The explanation is empty, so it captures nothing of the reference (near-flat, decreasing, rank 9). Anchor 1.",
+  "usage": {
+    "input_tokens": 357,
+    "output_tokens": 212
+  }
+}

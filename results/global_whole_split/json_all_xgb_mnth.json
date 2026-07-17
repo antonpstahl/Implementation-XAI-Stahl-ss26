@@ -1,0 +1,14 @@
+{
+  "form": "json_all",
+  "scope": "global_whole",
+  "llm_model": "claude-sonnet-4-6",
+  "loss_key": "poisson_log",
+  "xai_model": "xgb",
+  "feature": "mnth",
+  "explanation": "[EFFECT] Month produces a non-monotonic, seasonal arch. January has the largest negative contribution (–0.34) and demand rises through spring and summer, peaking in September (+0.12) and remaining elevated in October (+0.12), before falling back in November and turning slightly negative again in December (–0.03).\n[IMPORTANCE] This is the fifth-ranked feature (rank 5, importance 0.118), a moderate influence that adds seasonal nuance on top of what temperature already captures.\n[RECOMMENDATION] Operational planning should be driven overwhelmingly by the **hour of the day** — staff and bikes should be concentrated around the 8 a.m. and 5 p.m. rush-hour peaks and scaled back sharply overnight — with **temperature** as the key secondary lever, since demand climbs steadily from cold weather up to around 29–30°C and then softens in extreme heat.",
+  "dropped": false,
+  "condition": "json_all",
+  "modality": "json",
+  "representation": "all",
+  "mechanism": "push"
+}

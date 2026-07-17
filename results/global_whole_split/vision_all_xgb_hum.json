@@ -1,0 +1,14 @@
+{
+  "form": "vision_all",
+  "scope": "global_whole",
+  "llm_model": "claude-sonnet-4-6",
+  "loss_key": "poisson_log",
+  "xai_model": "xgb",
+  "feature": "hum",
+  "explanation": "[EFFECT] Humidity has a non-monotonic effect. Very low humidity (near 0%) shows some strongly negative values (around −0.5), mid-range humidity (roughly 20–60%) sits slightly above zero (~+0.1), and very high humidity above 80% drives contributions sharply downward, reaching about −0.8 at near-saturation levels. The most favourable humidity is in the moderate range.\n[IMPORTANCE] A moderately important feature with a vertical range of about 0.9–1.0 log-units; comparable to month and ranked around third or fourth.",
+  "dropped": false,
+  "condition": "vision_all",
+  "modality": "vision",
+  "representation": "all",
+  "mechanism": "push"
+}

@@ -1,0 +1,14 @@
+{
+  "form": "vision_all",
+  "scope": "global_whole",
+  "llm_model": "claude-sonnet-4-6",
+  "loss_key": "poisson_log",
+  "xai_model": "ebm",
+  "feature": "windspeed",
+  "explanation": "[EFFECT] Wind speed has a mostly flat contribution at low speeds (below roughly 0.2 normalised, i.e. below ~13 km/h) and then monotonically decreases as wind increases, reaching around –0.35 at the highest observed speeds (~55 km/h). The decline becomes steeper above a normalised value of about 0.3.\n[IMPORTANCE] Eighth in importance (0.014); a minor feature whose penalty only becomes noticeable at quite high wind speeds.\n[RECOMMENDATION] Hour of day and temperature are by far the two strongest drivers of predicted demand, so operational planning — such as bike redistribution and staffing — should be tightly organised around the two daily rush-hour peaks (around 8 a.m. and 5–6 p.m.) and scaled up noticeably in mild to warm weather while scaling back during cold spells or the early hours of the morning.",
+  "dropped": false,
+  "condition": "vision_all",
+  "modality": "vision",
+  "representation": "all",
+  "mechanism": "push"
+}

@@ -1,0 +1,15 @@
+{
+  "form_pipeline": "json_all",
+  "xai_model": "ebm",
+  "feature": "windspeed",
+  "form_type": "near-flat",
+  "judge_model": "claude-opus-4-8",
+  "faithfulness": 4,
+  "clarity": 4,
+  "completeness": 2,
+  "faithfulness_reasoning": "Direction (decreasing) is consistent with the reference and the near-flat/negligible framing is correctly conveyed; rank 8 is correct. The sign change is placed at ~30 km/h rather than ~8.4 km/h, a slightly imprecise structural detail. Anchor 4, no deduction (direction correct, negligibility captured, rank right).",
+  "usage": {
+    "input_tokens": 693,
+    "output_tokens": 368
+  }
+}

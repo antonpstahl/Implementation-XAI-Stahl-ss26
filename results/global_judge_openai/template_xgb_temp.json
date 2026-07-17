@@ -4,12 +4,12 @@
   "feature": "temp",
   "form_type": "non-monotonic",
   "judge_model": "gpt-4o",
-  "faithfulness": 3,
-  "clarity": 4,
+  "faithfulness": 5,
+  "clarity": 5,
   "completeness": 5,
-  "faithfulness_reasoning": "The explanation correctly identifies the non-monotonic nature of the temperature effect and the importance rank of 3. However, it inaccurately states the peak at ~21.3 C instead of the reference ~29.5 C. Anchor 4, -1 (peak missed), max(1, 4-1)=3.",
+  "faithfulness_reasoning": "The explanation correctly identifies the non-monotonic nature of the temperature effect, the peak around ~29.5 °C, and the importance rank of 3. The key structure is captured accurately. Anchor 5, no deduction.",
   "usage": {
     "input_tokens": 2395,
-    "output_tokens": 191
+    "output_tokens": 167
   }
 }

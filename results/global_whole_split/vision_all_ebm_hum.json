@@ -1,0 +1,14 @@
+{
+  "form": "vision_all",
+  "scope": "global_whole",
+  "llm_model": "claude-sonnet-4-6",
+  "loss_key": "poisson_log",
+  "xai_model": "ebm",
+  "feature": "hum",
+  "explanation": "[EFFECT] Humidity has a non-monotonic shape with a sharp early jump. At extremely low humidity (below ~5%) demand is strongly suppressed (~–1.0). Contribution jumps quickly to a slight positive plateau (~+0.10) at moderate humidity and stays roughly flat up to about 60%, then gradually declines, reaching about –0.3 at 100% humidity.\n[IMPORTANCE] Fifth in importance (0.083), close to month; the extreme low-humidity penalty is notable but affects relatively few hours.\n[RECOMMENDATION] Hour of day and temperature are by far the two strongest drivers of predicted demand, so operational planning — such as bike redistribution and staffing — should be tightly organised around the two daily rush-hour peaks (around 8 a.m. and 5–6 p.m.) and scaled up noticeably in mild to warm weather while scaling back during cold spells or the early hours of the morning.",
+  "dropped": false,
+  "condition": "vision_all",
+  "modality": "vision",
+  "representation": "all",
+  "mechanism": "push"
+}

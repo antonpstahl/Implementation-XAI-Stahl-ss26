@@ -1,0 +1,15 @@
+{
+  "form_pipeline": "json_beeswarm",
+  "xai_model": "xgb",
+  "feature": "hr",
+  "form_type": "categorical",
+  "judge_model": "claude-opus-4-8",
+  "faithfulness": 3,
+  "clarity": 5,
+  "completeness": 5,
+  "faithfulness_reasoning": "Correctly identifies hr as categorical/non-ordinal with a wide spread and rank 1, but explicitly states no peak hour can be identified — the reference clearly has top hours (17, 18) and bottom hours (3–5) which the explanation misses. Anchor 4, -1 (fails to name the clear high/low levels that the reference provides), max(1, 4-1)=3.",
+  "usage": {
+    "input_tokens": 827,
+    "output_tokens": 320
+  }
+}

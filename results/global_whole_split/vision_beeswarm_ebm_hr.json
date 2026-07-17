@@ -1,0 +1,14 @@
+{
+  "form": "vision_beeswarm",
+  "scope": "global_whole",
+  "llm_model": "claude-sonnet-4-6",
+  "loss_key": "poisson_log",
+  "xai_model": "ebm",
+  "feature": "hr",
+  "explanation": "[EFFECT] The hour of day has a strongly non-monotonic effect: overnight hours (blue, low values) push predicted demand very far down, while certain daytime hours (red/orange, higher values) raise it above the baseline — the widest swing of any feature. The exact peak hour cannot be pinpointed from this plot alone, but the positive contributions clearly come from the higher-value hours.\n[IMPORTANCE] This is by far the most important feature, with a spread from roughly −3 to +1.3 in log space — larger than all other features combined.\n[RECOMMENDATION] Focus operational planning — bike availability and staffing — primarily on the hour of day and temperature, as these two features drive the vast majority of demand variation; ensure full availability during warm-weather daytime hours and scale back overnight and in cold conditions.",
+  "dropped": false,
+  "condition": "vision_beeswarm",
+  "modality": "vision",
+  "representation": "beeswarm",
+  "mechanism": "push"
+}

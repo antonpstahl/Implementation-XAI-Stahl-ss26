@@ -1,0 +1,15 @@
+{
+  "form_pipeline": "json_all",
+  "xai_model": "xgb",
+  "feature": "weekday",
+  "form_type": "categorical",
+  "judge_model": "claude-opus-4-8",
+  "faithfulness": 5,
+  "clarity": 4,
+  "completeness": 3,
+  "faithfulness_reasoning": "The categorical pattern is captured well: lowest on Sunday/Monday/Tuesday, highest on Friday (cat 5) with Saturday slightly below, matching top and bottom categories; rank 4 is correct. Anchor 5, no deductions.",
+  "usage": {
+    "input_tokens": 831,
+    "output_tokens": 364
+  }
+}

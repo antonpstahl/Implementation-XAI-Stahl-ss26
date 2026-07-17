@@ -1,0 +1,15 @@
+{
+  "form_pipeline": "vision_all",
+  "xai_model": "ebm",
+  "feature": "weathersit",
+  "form_type": "categorical",
+  "judge_model": "claude-opus-4-8",
+  "faithfulness": 5,
+  "clarity": 4,
+  "completeness": 2,
+  "faithfulness_reasoning": "Categorical ordering matches the reference (clear=+0.045 top, mist~0, cat3 lowest ~-0.35, cat4 ~-0.25), and rank 6 is correct; the ordering and top/bottom levels are captured accurately. Anchor 5, no deductions.",
+  "usage": {
+    "input_tokens": 910,
+    "output_tokens": 350
+  }
+}

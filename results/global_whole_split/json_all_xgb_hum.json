@@ -1,0 +1,14 @@
+{
+  "form": "json_all",
+  "scope": "global_whole",
+  "llm_model": "claude-sonnet-4-6",
+  "loss_key": "poisson_log",
+  "xai_model": "xgb",
+  "feature": "hum",
+  "explanation": "[EFFECT] Humidity has a non-monotonic effect with a notable quirk at the extremes. At very low humidity the contribution is negative (–0.38, likely driven by a small number of unusual observations), it turns positive across the moderate mid-range (roughly 27–35% relative humidity, contributions around +0.08–+0.09), and then falls steadily, turning clearly negative above about 67% humidity and reaching strongly negative values at very high humidity (≈–0.30 at 97–100%).\n[IMPORTANCE] This is the sixth-ranked feature (rank 6, importance 0.077), a secondary influence — real but noticeably smaller than temperature or month.\n[RECOMMENDATION] Operational planning should be driven overwhelmingly by the **hour of the day** — staff and bikes should be concentrated around the 8 a.m. and 5 p.m. rush-hour peaks and scaled back sharply overnight — with **temperature** as the key secondary lever, since demand climbs steadily from cold weather up to around 29–30°C and then softens in extreme heat.",
+  "dropped": false,
+  "condition": "json_all",
+  "modality": "json",
+  "representation": "all",
+  "mechanism": "push"
+}

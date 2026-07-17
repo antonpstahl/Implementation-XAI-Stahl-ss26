@@ -4,12 +4,12 @@
   "feature": "mnth",
   "form_type": "categorical",
   "judge_model": "claude-opus-4-8",
-  "faithfulness": 2,
+  "faithfulness": 5,
   "clarity": 4,
   "completeness": 5,
-  "faithfulness_reasoning": "Rank 5 of 9 is correct, but the top month is September (cat 9), not November (cat 10 is second, 11 not even in top-3); the peak level claim is wrong, and lowest months (Jan/Feb) are not identified. Anchor 3 (correct rank, wrong key structure/top category), -1 (wrong top level claimed), max(1,3-1)=2.",
+  "faithfulness_reasoning": "Top category September (9) is correct and rank 5 of 9 is exact; it correctly notes lowest is at the \"opposite end\" (Jan/Feb). Anchor 5; no deduction (no wrong direction, rank correct, top level correct).",
   "usage": {
     "input_tokens": 681,
-    "output_tokens": 331
+    "output_tokens": 300
   }
 }

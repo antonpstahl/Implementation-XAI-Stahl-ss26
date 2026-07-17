@@ -1,0 +1,15 @@
+{
+  "form_pipeline": "json_all",
+  "xai_model": "ebm",
+  "feature": "weekday",
+  "form_type": "near-flat",
+  "judge_model": "claude-opus-4-8",
+  "faithfulness": 5,
+  "clarity": 4,
+  "completeness": 4,
+  "faithfulness_reasoning": "Correctly frames weekday as near-flat/small effect, identifies Friday (cat 5) as top and Sunday (cat 0) as most negative, matching the reference; rank 7 is correct. Anchor 5, no deductions.",
+  "usage": {
+    "input_tokens": 778,
+    "output_tokens": 311
+  }
+}

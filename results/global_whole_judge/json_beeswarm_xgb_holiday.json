@@ -1,0 +1,15 @@
+{
+  "form_pipeline": "json_beeswarm",
+  "xai_model": "xgb",
+  "feature": "holiday",
+  "form_type": "near-flat",
+  "judge_model": "claude-opus-4-8",
+  "faithfulness": 3,
+  "clarity": 5,
+  "completeness": 2,
+  "faithfulness_reasoning": "Direction (holiday lowers demand) matches decreasing reference and rank 9 is correct; however the feature is near-flat/negligible and the explanation calls the downward shift \"notable\" rather than framing it as negligible. Anchor 4, -1 (misses negligibility of a near-flat feature), max(1,4-1)=3.",
+  "usage": {
+    "input_tokens": 637,
+    "output_tokens": 337
+  }
+}

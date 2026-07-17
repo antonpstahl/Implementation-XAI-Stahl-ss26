@@ -1,0 +1,14 @@
+{
+  "form": "tooluse_all",
+  "scope": "global_whole",
+  "llm_model": "claude-sonnet-4-6",
+  "loss_key": "poisson_log",
+  "xai_model": "xgb",
+  "feature": "mnth",
+  "explanation": "[EFFECT] Month captures a seasonal arc: winter months (especially January and February) suppress demand noticeably, contributions rise through spring, plateau across the summer and early autumn (with September and October having the highest contributions at around +0.12), and then dip back slightly in December. The shape is roughly a slow rise through the year that peaks in autumn and dips in winter.\n[IMPORTANCE] Ranked 5th with importance 0.118 — a moderate but real seasonal signal, about half the strength of temperature.\n\n---\n[RECOMMENDATION] Operational planning should be driven primarily by the **hour of the day** — scheduling significantly more bikes and staff for the 8 a.m. and 5–6 p.m. peaks — and secondarily by **temperature**, scaling up resources on mild-to-warm days (around 20–30 °C) and scaling down on very cold or very hot days, since together these two features account for the vast majority of the model's predictive power.",
+  "dropped": false,
+  "condition": "tooluse_all",
+  "modality": "tooluse",
+  "representation": "all",
+  "mechanism": "pull"
+}

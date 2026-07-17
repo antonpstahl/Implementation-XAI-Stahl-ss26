@@ -1,0 +1,14 @@
+{
+  "form": "tooluse_all",
+  "scope": "global_whole",
+  "llm_model": "claude-sonnet-4-6",
+  "loss_key": "poisson_log",
+  "xai_model": "ebm",
+  "feature": "temp",
+  "explanation": "[EFFECT] Temperature has a mostly upward, then slightly declining effect. Demand is strongly suppressed at very cold temperatures (near 0 °C) and rises steadily as conditions warm up, peaking around a normalised value of 0.74–0.76 (roughly 30–31 °C). At the very hottest extreme (near 40 °C) the contribution dips slightly back into negative territory, suggesting extreme heat mildly discourages rentals.\n[IMPORTANCE] Ranked 2nd with an importance of 0.253, temperature is the second-strongest driver of demand — a significant effect, though well below that of hour.\n\n---\n[RECOMMENDATION] Operational planning should be driven primarily by **time of day** and **temperature**: concentrate bike and staff resources around the 8 a.m. and 5 p.m. commuter peaks, and scale overall fleet availability up during warm weather (roughly 20–31 °C) while reducing it during cold snaps or heatwaves. Secondary adjustments for rain, season, and humidity can further refine scheduling, but day of week and holiday status need only minor attention.",
+  "dropped": false,
+  "condition": "tooluse_all",
+  "modality": "tooluse",
+  "representation": "all",
+  "mechanism": "pull"
+}

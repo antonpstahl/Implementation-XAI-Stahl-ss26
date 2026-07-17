@@ -1,0 +1,14 @@
+{
+  "form": "json_beeswarm",
+  "scope": "global_whole",
+  "llm_model": "claude-sonnet-4-6",
+  "loss_key": "poisson_log",
+  "xai_model": "xgb",
+  "feature": "yr",
+  "explanation": "[EFFECT] Year acts as a step change: being in 2012 (value = 1) raises predicted demand compared with 2011 (value = 0), reflecting system-wide growth over time. The contribution is consistent in direction, always pushing demand upward for the later year.\n[IMPORTANCE] Despite its narrow spread, year ranks 2nd in importance, meaning the system's overall growth between the two years is one of the strongest signals the model has learned.\n\n---\n[RECOMMENDATION] Staffing and bike-availability planning should be driven first by the **hour of the day**, which is by far the strongest predictor of demand, and second by the **year-on-year growth trend**, which shows demand was meaningfully higher in 2012 than 2011 — so planners should expect continued growth and scale capacity accordingly.",
+  "dropped": false,
+  "condition": "json_beeswarm",
+  "modality": "json",
+  "representation": "beeswarm",
+  "mechanism": "push"
+}

@@ -1,0 +1,14 @@
+{
+  "form": "json_all",
+  "scope": "global_whole",
+  "llm_model": "claude-sonnet-4-6",
+  "loss_key": "poisson_log",
+  "xai_model": "xgb",
+  "feature": "yr",
+  "explanation": "[EFFECT] Year acts as a simple step change: hours recorded in 2011 carry a negative contribution (–0.23) while those in 2012 carry a positive one (+0.17), meaning the model has learned that overall demand was noticeably higher in the second year of operation.\n[IMPORTANCE] This is the second-most important feature (rank 2, importance 0.200), and is essentially tied with temperature in its overall influence on predictions.\n[RECOMMENDATION] Operational planning should be driven overwhelmingly by the **hour of the day** — staff and bikes should be concentrated around the 8 a.m. and 5 p.m. rush-hour peaks and scaled back sharply overnight — with **temperature** as the key secondary lever, since demand climbs steadily from cold weather up to around 29–30°C and then softens in extreme heat.",
+  "dropped": false,
+  "condition": "json_all",
+  "modality": "json",
+  "representation": "all",
+  "mechanism": "push"
+}

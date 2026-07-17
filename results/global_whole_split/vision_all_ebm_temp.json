@@ -1,0 +1,14 @@
+{
+  "form": "vision_all",
+  "scope": "global_whole",
+  "llm_model": "claude-sonnet-4-6",
+  "loss_key": "poisson_log",
+  "xai_model": "ebm",
+  "feature": "temp",
+  "explanation": "[EFFECT] Temperature has a non-monotonic effect: very cold conditions (normalised temp near 0, i.e. close to 0 °C) strongly suppress demand (contribution around –1.5), and demand climbs steadily as temperature rises, peaking around a normalised value of 0.75 (roughly 31 °C, contribution ~+0.3). At the highest temperatures (near 41 °C) the contribution turns slightly negative again, suggesting extreme heat marginally reduces rentals.\n[IMPORTANCE] This is the second most important feature (importance 0.253), with a wide vertical range of roughly 1.8 log units.\n[RECOMMENDATION] Hour of day and temperature are by far the two strongest drivers of predicted demand, so operational planning — such as bike redistribution and staffing — should be tightly organised around the two daily rush-hour peaks (around 8 a.m. and 5–6 p.m.) and scaled up noticeably in mild to warm weather while scaling back during cold spells or the early hours of the morning.",
+  "dropped": false,
+  "condition": "vision_all",
+  "modality": "vision",
+  "representation": "all",
+  "mechanism": "push"
+}

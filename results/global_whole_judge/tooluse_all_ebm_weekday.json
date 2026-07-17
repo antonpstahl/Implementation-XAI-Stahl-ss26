@@ -1,0 +1,15 @@
+{
+  "form_pipeline": "tooluse_all",
+  "xai_model": "ebm",
+  "feature": "weekday",
+  "form_type": "near-flat",
+  "judge_model": "claude-opus-4-8",
+  "faithfulness": 5,
+  "clarity": 4,
+  "completeness": 5,
+  "faithfulness_reasoning": "Correctly frames the effect as small/near-flat, identifies Sunday (cat 0) as most negative and Friday (cat 5) as most positive at +0.041, matching top/bottom categories; rank 7 of 9 is exact. Anchor 5, no deductions.",
+  "usage": {
+    "input_tokens": 846,
+    "output_tokens": 302
+  }
+}

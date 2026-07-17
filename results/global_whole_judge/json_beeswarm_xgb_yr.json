@@ -1,0 +1,15 @@
+{
+  "form_pipeline": "json_beeswarm",
+  "xai_model": "xgb",
+  "feature": "yr",
+  "form_type": "monotonic",
+  "judge_model": "claude-opus-4-8",
+  "faithfulness": 5,
+  "clarity": 5,
+  "completeness": 5,
+  "faithfulness_reasoning": "Direction (increasing, 2012 > 2011) matches, importance rank 2 correct, and the step-change structure for this binary-like feature is captured. Anchor 5, no deductions.",
+  "usage": {
+    "input_tokens": 624,
+    "output_tokens": 262
+  }
+}

@@ -1,0 +1,15 @@
+{
+  "form_pipeline": "json_beeswarm",
+  "xai_model": "xgb",
+  "feature": "weathersit",
+  "form_type": "categorical",
+  "judge_model": "claude-opus-4-8",
+  "faithfulness": 4,
+  "clarity": 4,
+  "completeness": 2,
+  "faithfulness_reasoning": "Rank 7 is correct and the \"small/negligible spread\" framing fits a weak feature; however, the explanation doesn't identify which categories are best (clear=1) or worst (light rain=3), and calls it \"not simply ordinal\" whereas true severity is monotone 1>2>3>4. Anchor 4 (direction/rank correct but key categorical structure imprecise), no additional deduction since the noisy cat 4 caveat is minor; final 4.",
+  "usage": {
+    "input_tokens": 858,
+    "output_tokens": 394
+  }
+}

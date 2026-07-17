@@ -1,0 +1,15 @@
+{
+  "form_pipeline": "json_beeswarm",
+  "xai_model": "ebm",
+  "feature": "weathersit",
+  "form_type": "categorical",
+  "judge_model": "claude-opus-4-8",
+  "faithfulness": 2,
+  "clarity": 4,
+  "completeness": 4,
+  "faithfulness_reasoning": "The reference says weather severity is monotone 1>2>3>4 (clear best), but the explanation claims no clean monotonic/directional pattern and never identifies category 1 (clear) as the top level — missing the correct top category. Rank 6 is correct. Anchor 3 (structure/top level wrong), -1 (the correct top category / clear ordering is missed), max(1, 3-1)=2.",
+  "usage": {
+    "input_tokens": 882,
+    "output_tokens": 371
+  }
+}

@@ -1,0 +1,15 @@
+{
+  "form_pipeline": "json_beeswarm",
+  "xai_model": "ebm",
+  "feature": "mnth",
+  "form_type": "categorical",
+  "judge_model": "claude-opus-4-8",
+  "faithfulness": 3,
+  "clarity": 4,
+  "completeness": 4,
+  "faithfulness_reasoning": "Rank 4 is correct and the non-monotonic categorical framing is right, but the explanation explicitly declines to state which months are highest/lowest — missing the key structure (top: Oct/Nov/Sep; bottom: Jan/Feb). Anchor 4 (structure imprecise), -1 (fails to identify top/bottom levels), max(1, 4-1)=3.",
+  "usage": {
+    "input_tokens": 809,
+    "output_tokens": 352
+  }
+}

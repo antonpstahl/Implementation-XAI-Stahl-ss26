@@ -1,0 +1,15 @@
+{
+  "form_pipeline": "vision_all",
+  "xai_model": "xgb",
+  "feature": "windspeed",
+  "form_type": "near-flat",
+  "judge_model": "claude-opus-4-8",
+  "faithfulness": 1,
+  "clarity": 1,
+  "completeness": 1,
+  "faithfulness_reasoning": "The explanation is empty, so it captures nothing of the near-flat direction, negligible importance rank, or shape. Anchor 1.",
+  "usage": {
+    "input_tokens": 445,
+    "output_tokens": 184
+  }
+}

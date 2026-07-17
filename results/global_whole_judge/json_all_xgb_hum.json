@@ -1,0 +1,15 @@
+{
+  "form_pipeline": "json_all",
+  "xai_model": "xgb",
+  "feature": "hum",
+  "form_type": "non-monotonic",
+  "judge_model": "claude-opus-4-8",
+  "faithfulness": 4,
+  "clarity": 4,
+  "completeness": 3,
+  "faithfulness_reasoning": "Non-monotonic shape captured with peak around 27–35% (matches reference ~34%) and decline afterwards; rank 6 correct. The negative-at-very-low framing slightly conflicts with the reference sign change at ~7.3% (positive above that), but the core structure and rank are right. Anchor 5, no strong deduction warranted since direction and peak match; -1 for the imprecise low-humidity sign claim would be harsh but the mid-peak and rank are solid, so anchor 4.",
+  "usage": {
+    "input_tokens": 800,
+    "output_tokens": 437
+  }
+}

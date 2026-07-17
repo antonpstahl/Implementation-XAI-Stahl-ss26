@@ -1,0 +1,15 @@
+{
+  "form_pipeline": "tooluse_all",
+  "xai_model": "xgb",
+  "feature": "mnth",
+  "form_type": "categorical",
+  "judge_model": "claude-opus-4-8",
+  "faithfulness": 5,
+  "clarity": 4,
+  "completeness": 3,
+  "faithfulness_reasoning": "Top categories (Sep, Oct highest ~+0.12) and bottom (Jan, Feb lowest) match the reference, rank 5 correct, seasonal arc well captured. Anchor 5, no deductions.",
+  "usage": {
+    "input_tokens": 843,
+    "output_tokens": 324
+  }
+}

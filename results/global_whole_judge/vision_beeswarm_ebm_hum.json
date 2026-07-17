@@ -1,0 +1,15 @@
+{
+  "form_pipeline": "vision_beeswarm",
+  "xai_model": "ebm",
+  "feature": "hum",
+  "form_type": "non-monotonic",
+  "judge_model": "claude-opus-4-8",
+  "faithfulness": 2,
+  "clarity": 3,
+  "completeness": 4,
+  "faithfulness_reasoning": "The reference is non-monotonic with a peak at ~36% and a sign change ~10%, meaning low humidity is negative, mid is positive, high is negative; the explanation captures that high humidity reduces demand but misses the peak/inverted-U structure entirely and mischaracterizes low humidity as \"closer to zero.\" Rank 5 is correct. Anchor 3 (direction broadly right but key structure missed), -1 (clear peak missed), max(1,3-1)=2.",
+  "usage": {
+    "input_tokens": 685,
+    "output_tokens": 433
+  }
+}

@@ -1,0 +1,14 @@
+{
+  "form": "tooluse_all",
+  "scope": "global_whole",
+  "llm_model": "claude-sonnet-4-6",
+  "loss_key": "poisson_log",
+  "xai_model": "xgb",
+  "feature": "temp",
+  "explanation": "[EFFECT] Temperature has a non-monotonic (inverted-U) effect. Very cold temperatures (below roughly 10 °C, normalised ≤ 0.25) strongly suppress demand, while moderate-to-warm temperatures lift it. The contribution peaks at around 29–30 °C (normalised ≈ 0.70–0.74) and then declines again at very high temperatures (above ~37 °C), where the model predicts somewhat fewer rentals than at the moderate peak.\n[IMPORTANCE] Ranked 3rd with importance 0.197 — nearly as strong as the year effect and clearly meaningful. Temperature is the most important weather-related variable.\n\n---\n[RECOMMENDATION] Operational planning should be driven primarily by the **hour of the day** — scheduling significantly more bikes and staff for the 8 a.m. and 5–6 p.m. peaks — and secondarily by **temperature**, scaling up resources on mild-to-warm days (around 20–30 °C) and scaling down on very cold or very hot days, since together these two features account for the vast majority of the model's predictive power.",
+  "dropped": false,
+  "condition": "tooluse_all",
+  "modality": "tooluse",
+  "representation": "all",
+  "mechanism": "pull"
+}

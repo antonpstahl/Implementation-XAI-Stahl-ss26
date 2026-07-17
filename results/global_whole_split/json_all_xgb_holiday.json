@@ -1,0 +1,14 @@
+{
+  "form": "json_all",
+  "scope": "global_whole",
+  "llm_model": "claude-sonnet-4-6",
+  "loss_key": "poisson_log",
+  "xai_model": "xgb",
+  "feature": "holiday",
+  "explanation": "[EFFECT] Being a public holiday produces a clear step-down: non-holiday hours carry a negligible positive contribution (+0.001) while holiday hours see a moderate negative contribution (–0.17), meaning the model predicts meaningfully lower overall demand on public holidays.\n[IMPORTANCE] This is the least important feature in the model (rank 9, importance 0.012), and its effect is small enough that it should be treated as a minor adjustment rather than a primary planning driver.\n[RECOMMENDATION] Operational planning should be driven overwhelmingly by the **hour of the day** — staff and bikes should be concentrated around the 8 a.m. and 5 p.m. rush-hour peaks and scaled back sharply overnight — with **temperature** as the key secondary lever, since demand climbs steadily from cold weather up to around 29–30°C and then softens in extreme heat.",
+  "dropped": false,
+  "condition": "json_all",
+  "modality": "json",
+  "representation": "all",
+  "mechanism": "push"
+}

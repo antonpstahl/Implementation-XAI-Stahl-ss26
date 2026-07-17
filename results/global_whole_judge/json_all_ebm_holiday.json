@@ -1,0 +1,15 @@
+{
+  "form_pipeline": "json_all",
+  "xai_model": "ebm",
+  "feature": "holiday",
+  "form_type": "near-flat",
+  "judge_model": "claude-opus-4-8",
+  "faithfulness": 5,
+  "clarity": 5,
+  "completeness": 5,
+  "faithfulness_reasoning": "Direction (holiday slightly reduces demand) matches decreasing, near-flat negligibility is captured, and rank 9 of 9 is correct. Anchor 5, no deductions.",
+  "usage": {
+    "input_tokens": 610,
+    "output_tokens": 264
+  }
+}

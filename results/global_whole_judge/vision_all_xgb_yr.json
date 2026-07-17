@@ -1,0 +1,15 @@
+{
+  "form_pipeline": "vision_all",
+  "xai_model": "xgb",
+  "feature": "yr",
+  "form_type": "monotonic",
+  "judge_model": "claude-opus-4-8",
+  "faithfulness": 3,
+  "clarity": 3,
+  "completeness": 2,
+  "faithfulness_reasoning": "Direction (2011 negative, 2012 positive, increasing) matches the reference, but the rank is called fifth/sixth while the true rank is 2 — misjudged by more than one tier. Anchor 4, -1 (rank misjudged by tiers), max(1, 4-1)=3.",
+  "usage": {
+    "input_tokens": 498,
+    "output_tokens": 322
+  }
+}

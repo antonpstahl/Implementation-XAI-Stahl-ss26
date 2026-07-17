@@ -1,0 +1,14 @@
+{
+  "form": "json_all",
+  "scope": "global_whole",
+  "llm_model": "claude-sonnet-4-6",
+  "loss_key": "poisson_log",
+  "xai_model": "ebm",
+  "feature": "hr",
+  "explanation": "[EFFECT] Hour of day has a strongly non-monotonic, double-peaked effect. Demand is at its lowest in the very early morning (around 4 a.m., where the contribution is deeply negative), then rises sharply to a morning commuter peak at 8 a.m. It dips slightly through midday, then climbs to the highest point of the day at 5 p.m. (17:00), before falling steadily through the evening back to overnight lows.\n[IMPORTANCE] This is by far the most important feature (rank 1), with an importance score nearly three and a half times larger than the next feature — it dominates the model's predictions more than all other features combined.\n[RECOMMENDATION] Plan your bike availability and staffing primarily around the hour of the day — ensuring high fleet availability and staff support around the 8 a.m. and 5 p.m. peaks — and secondarily around temperature, scaling up resources on warm days (around 20–31 °C) and scaling back on cold or very rainy days.",
+  "dropped": false,
+  "condition": "json_all",
+  "modality": "json",
+  "representation": "all",
+  "mechanism": "push"
+}

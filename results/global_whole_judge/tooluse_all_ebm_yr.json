@@ -1,0 +1,15 @@
+{
+  "form_pipeline": "tooluse_all",
+  "xai_model": "ebm",
+  "feature": "yr",
+  "form_type": "monotonic",
+  "judge_model": "claude-opus-4-8",
+  "faithfulness": 5,
+  "clarity": 4,
+  "completeness": 3,
+  "faithfulness_reasoning": "Increasing direction (negative 2011, positive 2012) and the sign change around midpoint match the reference; rank 3 correct. Anchor 5, no deductions.",
+  "usage": {
+    "input_tokens": 655,
+    "output_tokens": 303
+  }
+}

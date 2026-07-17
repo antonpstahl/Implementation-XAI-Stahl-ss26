@@ -1,0 +1,14 @@
+{
+  "form": "tooluse_all",
+  "scope": "global_whole",
+  "llm_model": "claude-sonnet-4-6",
+  "loss_key": "poisson_log",
+  "xai_model": "xgb",
+  "feature": "holiday",
+  "explanation": "[EFFECT] Holiday is a simple binary step: non-holiday hours (0) are essentially neutral (+0.001), while public holiday hours (1) receive a small but consistent negative adjustment (−0.17), meaning the model predicts modestly fewer rentals on holidays overall.\n[IMPORTANCE] Ranked last (9th) with importance 0.012 — the weakest feature in the model. Its effect is real but small in magnitude.\n\n---\n[RECOMMENDATION] Operational planning should be driven primarily by the **hour of the day** — scheduling significantly more bikes and staff for the 8 a.m. and 5–6 p.m. peaks — and secondarily by **temperature**, scaling up resources on mild-to-warm days (around 20–30 °C) and scaling down on very cold or very hot days, since together these two features account for the vast majority of the model's predictive power.",
+  "dropped": false,
+  "condition": "tooluse_all",
+  "modality": "tooluse",
+  "representation": "all",
+  "mechanism": "pull"
+}

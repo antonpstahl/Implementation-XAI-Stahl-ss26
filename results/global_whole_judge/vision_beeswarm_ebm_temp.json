@@ -1,0 +1,15 @@
+{
+  "form_pipeline": "vision_beeswarm",
+  "xai_model": "ebm",
+  "feature": "temp",
+  "form_type": "non-monotonic",
+  "judge_model": "claude-opus-4-8",
+  "faithfulness": 3,
+  "clarity": 3,
+  "completeness": 5,
+  "faithfulness_reasoning": "Direction (warmer = more) is broadly right and rank 2 is correct, but it calls the relationship \"roughly monotonic\" and misses the inverted-U peak/decline at high heat. Anchor 4, -1 (clear peak missed), max(1, 4-1)=3.",
+  "usage": {
+    "input_tokens": 667,
+    "output_tokens": 298
+  }
+}

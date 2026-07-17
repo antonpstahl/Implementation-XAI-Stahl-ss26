@@ -1,0 +1,15 @@
+{
+  "form_pipeline": "vision_all",
+  "xai_model": "xgb",
+  "feature": "weekday",
+  "form_type": "categorical",
+  "judge_model": "claude-opus-4-8",
+  "faithfulness": 1,
+  "clarity": 1,
+  "completeness": 1,
+  "faithfulness_reasoning": "The explanation is empty, so it provides no direction, structure, or rank matching the reference. Anchor 1.",
+  "usage": {
+    "input_tokens": 522,
+    "output_tokens": 178
+  }
+}

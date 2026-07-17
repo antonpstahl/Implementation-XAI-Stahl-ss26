@@ -1,0 +1,15 @@
+{
+  "form_pipeline": "tooluse_all",
+  "xai_model": "xgb",
+  "feature": "yr",
+  "form_type": "monotonic",
+  "judge_model": "claude-opus-4-8",
+  "faithfulness": 5,
+  "clarity": 3,
+  "completeness": 2,
+  "faithfulness_reasoning": "Direction (2012 higher than 2011, increasing) matches, and rank 2 of 9 is correct; the step-change framing captures the structure well. Anchor 5, no deductions.",
+  "usage": {
+    "input_tokens": 677,
+    "output_tokens": 322
+  }
+}

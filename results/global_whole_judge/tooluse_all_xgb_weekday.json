@@ -1,0 +1,15 @@
+{
+  "form_pipeline": "tooluse_all",
+  "xai_model": "xgb",
+  "feature": "weekday",
+  "form_type": "categorical",
+  "judge_model": "claude-opus-4-8",
+  "faithfulness": 5,
+  "clarity": 3,
+  "completeness": 3,
+  "faithfulness_reasoning": "Reference: top categories are 5 (Fri) and 6 (Sat) positive, bottom are 0/1/2 (Sun/Mon/Tue) negative, rank 4. The explanation correctly identifies Fri/Sat as positive and early-week as negative, with correct magnitudes, and rank 4 is exact. Anchor 5, no deductions.",
+  "usage": {
+    "input_tokens": 908,
+    "output_tokens": 353
+  }
+}

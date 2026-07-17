@@ -1,0 +1,14 @@
+{
+  "form": "vision_all",
+  "scope": "global_whole",
+  "llm_model": "claude-sonnet-4-6",
+  "loss_key": "poisson_log",
+  "xai_model": "xgb",
+  "feature": "weathersit",
+  "explanation": "[EFFECT] Weather acts in steps: clear skies (1) give a small positive boost (~+0.03 to +0.05); mist or cloud (2) is near neutral to slightly negative; light rain or snow (3) strongly suppresses demand, with the bulk of hours falling between −0.15 and −0.65; the very few heavy-rain hours (4) also appear negative (around −0.2).\n[IMPORTANCE] A moderate feature with a range of about 0.7 log-units; ranked around sixth or seventh, meaningful mainly because light-rain hours are fairly common.",
+  "dropped": false,
+  "condition": "vision_all",
+  "modality": "vision",
+  "representation": "all",
+  "mechanism": "push"
+}

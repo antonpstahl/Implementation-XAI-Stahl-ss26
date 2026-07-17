@@ -1,0 +1,14 @@
+{
+  "form": "tooluse_all",
+  "scope": "global_whole",
+  "llm_model": "claude-sonnet-4-6",
+  "loss_key": "poisson_log",
+  "xai_model": "xgb",
+  "feature": "windspeed",
+  "explanation": "[EFFECT] Wind speed has a broadly negative and roughly monotonic effect beyond very low speeds. Light winds (below roughly 13 km/h, normalised ≤ 0.19) are near neutral or even slightly positive. Once wind speeds climb above about 17 km/h, the contribution turns negative and grows steadily more so, reaching notable penalties at high speeds (above ~35 km/h).\n[IMPORTANCE] Ranked 8th with importance 0.020 — a minor influence. Wind speed has a real direction (more wind = less demand) but its overall impact on the model is small compared with time, temperature, or year.\n\n---\n[RECOMMENDATION] Operational planning should be driven primarily by the **hour of the day** — scheduling significantly more bikes and staff for the 8 a.m. and 5–6 p.m. peaks — and secondarily by **temperature**, scaling up resources on mild-to-warm days (around 20–30 °C) and scaling down on very cold or very hot days, since together these two features account for the vast majority of the model's predictive power.",
+  "dropped": false,
+  "condition": "tooluse_all",
+  "modality": "tooluse",
+  "representation": "all",
+  "mechanism": "pull"
+}

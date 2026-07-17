@@ -1,0 +1,15 @@
+{
+  "form_pipeline": "json_all",
+  "xai_model": "ebm",
+  "feature": "hum",
+  "form_type": "non-monotonic",
+  "judge_model": "claude-opus-4-8",
+  "faithfulness": 5,
+  "clarity": 4,
+  "completeness": 3,
+  "faithfulness_reasoning": "The explanation correctly captures the non-monotonic shape: peak positive contribution around 30–40% (matching the ~36% max), decline at high humidity, and negative at very low humidity (matching the ~10% sign change); rank 5 is correct. Anchor 5, no deductions.",
+  "usage": {
+    "input_tokens": 758,
+    "output_tokens": 343
+  }
+}

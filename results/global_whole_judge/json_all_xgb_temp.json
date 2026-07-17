@@ -1,0 +1,15 @@
+{
+  "form_pipeline": "json_all",
+  "xai_model": "xgb",
+  "feature": "temp",
+  "form_type": "non-monotonic",
+  "judge_model": "claude-opus-4-8",
+  "faithfulness": 4,
+  "clarity": 4,
+  "completeness": 5,
+  "faithfulness_reasoning": "Arch-shaped non-monotonic with peak ~29-30 °C matches the reference peak (~29.5 °C), and rank 3 is correct; sign change described as ~37 °C is somewhat off from the reference (~18.7 °C) but the mid-range positive framing is otherwise faithful. Anchor 5, -1 for the imprecise sign-change location, giving 4.",
+  "usage": {
+    "input_tokens": 777,
+    "output_tokens": 378
+  }
+}

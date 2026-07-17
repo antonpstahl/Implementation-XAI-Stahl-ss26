@@ -1,0 +1,14 @@
+{
+  "form": "vision_all",
+  "scope": "global_whole",
+  "llm_model": "claude-sonnet-4-6",
+  "loss_key": "poisson_log",
+  "xai_model": "ebm",
+  "feature": "yr",
+  "explanation": "[EFFECT] Year acts as a single step change: hours in 2011 (yr = 0) carry a contribution of about –0.23, while hours in 2012 (yr = 1) carry a contribution of about +0.20, reflecting roughly 40% higher baseline demand in the second year of operation.\n[IMPORTANCE] Third in importance (0.217); though simple in shape, the shift between years is sizeable and affects every prediction.\n[RECOMMENDATION] Hour of day and temperature are by far the two strongest drivers of predicted demand, so operational planning — such as bike redistribution and staffing — should be tightly organised around the two daily rush-hour peaks (around 8 a.m. and 5–6 p.m.) and scaled up noticeably in mild to warm weather while scaling back during cold spells or the early hours of the morning.",
+  "dropped": false,
+  "condition": "vision_all",
+  "modality": "vision",
+  "representation": "all",
+  "mechanism": "push"
+}

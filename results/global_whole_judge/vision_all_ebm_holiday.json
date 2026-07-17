@@ -1,0 +1,15 @@
+{
+  "form_pipeline": "vision_all",
+  "xai_model": "ebm",
+  "feature": "holiday",
+  "form_type": "near-flat",
+  "judge_model": "claude-opus-4-8",
+  "faithfulness": 5,
+  "clarity": 4,
+  "completeness": 3,
+  "faithfulness_reasoning": "Direction (holiday lowers demand) matches the decreasing reference, rank 9/9 correct, and negligibility explicitly stated. Anchor 5, no deductions.",
+  "usage": {
+    "input_tokens": 613,
+    "output_tokens": 321
+  }
+}

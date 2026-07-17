@@ -1,0 +1,15 @@
+{
+  "form_pipeline": "vision_beeswarm",
+  "xai_model": "ebm",
+  "feature": "mnth",
+  "form_type": "categorical",
+  "judge_model": "claude-opus-4-8",
+  "faithfulness": 3,
+  "clarity": 3,
+  "completeness": 4,
+  "faithfulness_reasoning": "The direction (winter negative, warmer months positive) is broadly right and rank 4 is correct, but the reference peaks in autumn (October highest, then Nov, Sep), not a monotonic rise to summer — so the top-category structure is mischaracterized. Anchor 4; -1 (peak/top level structure wrong, claims monotonic summer peak instead of October), max(1,4-1)=3.",
+  "usage": {
+    "input_tokens": 742,
+    "output_tokens": 374
+  }
+}

@@ -1,0 +1,14 @@
+{
+  "form": "json_all",
+  "scope": "global_whole",
+  "llm_model": "claude-sonnet-4-6",
+  "loss_key": "poisson_log",
+  "xai_model": "xgb",
+  "feature": "weathersit",
+  "explanation": "[EFFECT] Weather conditions produce a step-down pattern as conditions worsen. Clear skies (category 1) give a small positive boost (+0.03), mist or cloud (category 2) is nearly neutral (–0.01), and light rain or snow (category 3) delivers the largest penalty (–0.33). Interestingly, heavy rain (category 4) shows a slightly smaller penalty (–0.17) than light rain, likely reflecting the very few heavy-rain hours in the data rather than a genuine behavioural effect.\n[IMPORTANCE] This is the seventh-ranked feature (rank 7, importance 0.051), a noticeable but relatively modest influence compared to hour, temperature, or year.\n[RECOMMENDATION] Operational planning should be driven overwhelmingly by the **hour of the day** — staff and bikes should be concentrated around the 8 a.m. and 5 p.m. rush-hour peaks and scaled back sharply overnight — with **temperature** as the key secondary lever, since demand climbs steadily from cold weather up to around 29–30°C and then softens in extreme heat.",
+  "dropped": false,
+  "condition": "json_all",
+  "modality": "json",
+  "representation": "all",
+  "mechanism": "push"
+}

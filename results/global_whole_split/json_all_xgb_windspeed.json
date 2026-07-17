@@ -1,0 +1,14 @@
+{
+  "form": "json_all",
+  "scope": "global_whole",
+  "llm_model": "claude-sonnet-4-6",
+  "loss_key": "poisson_log",
+  "xai_model": "xgb",
+  "feature": "windspeed",
+  "explanation": "[EFFECT] Wind speed has a mostly negative, roughly monotonic effect once speeds rise above a very low threshold. Calm to light winds (normalised values up to about 0.22, roughly up to 15 km/h) are nearly neutral or very slightly positive, but as wind strengthens the contribution turns increasingly negative, with high winds (above roughly 0.45, about 30 km/h) producing meaningful demand reductions.\n[IMPORTANCE] This is the eighth-ranked feature (rank 8, importance 0.020), a minor influence that matters mainly on unusually windy days.\n[RECOMMENDATION] Operational planning should be driven overwhelmingly by the **hour of the day** — staff and bikes should be concentrated around the 8 a.m. and 5 p.m. rush-hour peaks and scaled back sharply overnight — with **temperature** as the key secondary lever, since demand climbs steadily from cold weather up to around 29–30°C and then softens in extreme heat.",
+  "dropped": false,
+  "condition": "json_all",
+  "modality": "json",
+  "representation": "all",
+  "mechanism": "push"
+}

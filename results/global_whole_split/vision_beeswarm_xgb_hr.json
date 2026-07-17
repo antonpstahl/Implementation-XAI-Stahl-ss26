@@ -1,0 +1,14 @@
+{
+  "form": "vision_beeswarm",
+  "scope": "global_whole",
+  "llm_model": "claude-sonnet-4-6",
+  "loss_key": "poisson_log",
+  "xai_model": "xgb",
+  "feature": "hr",
+  "explanation": "[EFFECT] Hour of day has a strong non-monotonic effect: the early-morning overnight hours (blue, low values) drive predicted demand steeply down — contributions reach as far left as roughly −3.5 in log space — while afternoon and evening hours (red, high values) push demand up to around +1. The exact shape of peaks within the day cannot be pinpointed from this plot, but the overall swing is by far the largest of any feature.\n[IMPORTANCE] This is the single most important feature in the model, with a spread several times wider than any other — it dominates every prediction.",
+  "dropped": false,
+  "condition": "vision_beeswarm",
+  "modality": "vision",
+  "representation": "beeswarm",
+  "mechanism": "push"
+}

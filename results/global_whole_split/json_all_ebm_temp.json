@@ -1,0 +1,14 @@
+{
+  "form": "json_all",
+  "scope": "global_whole",
+  "llm_model": "claude-sonnet-4-6",
+  "loss_key": "poisson_log",
+  "xai_model": "ebm",
+  "feature": "temp",
+  "explanation": "[EFFECT] Warmer temperatures consistently raise predicted demand. The effect rises steeply from very cold conditions (around 1 °C, where contribution is strongly negative) up through mild and warm temperatures, peaking around 30–31 °C. Beyond that, at extreme heat (close to 40 °C), the contribution dips slightly back toward zero, suggesting a small reduction at very high temperatures.\n[IMPORTANCE] This is the second most important feature (rank 2) — a meaningful driver, though its influence is roughly one-third the size of the hour-of-day effect.\n[RECOMMENDATION] Plan your bike availability and staffing primarily around the hour of the day — ensuring high fleet availability and staff support around the 8 a.m. and 5 p.m. peaks — and secondarily around temperature, scaling up resources on warm days (around 20–31 °C) and scaling back on cold or very rainy days.",
+  "dropped": false,
+  "condition": "json_all",
+  "modality": "json",
+  "representation": "all",
+  "mechanism": "push"
+}

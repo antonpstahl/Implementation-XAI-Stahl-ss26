@@ -1,0 +1,15 @@
+{
+  "form_pipeline": "vision_all",
+  "xai_model": "xgb",
+  "feature": "hum",
+  "form_type": "non-monotonic",
+  "judge_model": "claude-opus-4-8",
+  "faithfulness": 3,
+  "clarity": 3,
+  "completeness": 2,
+  "faithfulness_reasoning": "Non-monotonic with a moderate-humidity peak (~34%) and decline at high humidity matches the reference well; however, rank is stated as \"third or fourth\" while the true rank is 6 (off by more than one tier). Anchor 4, -1 (rank misjudged by tiers), max(1,4-1)=3.",
+  "usage": {
+    "input_tokens": 631,
+    "output_tokens": 333
+  }
+}

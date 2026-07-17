@@ -1,0 +1,15 @@
+{
+  "form_pipeline": "vision_beeswarm",
+  "xai_model": "ebm",
+  "feature": "hr",
+  "form_type": "categorical",
+  "judge_model": "claude-opus-4-8",
+  "faithfulness": 4,
+  "clarity": 3,
+  "completeness": 5,
+  "faithfulness_reasoning": "Correctly identifies overnight hours (3–5) as lowest and daytime hours as highest, and rank 1 is correct; however it fails to pinpoint the commuter peaks (17/18, 8) which are the key structure for the hour feature. Anchor 4 (rank correct, structure slightly imprecise), no additional deduction since direction/categorical framing is right; the peak is not fabricated but hedged. Score 4.",
+  "usage": {
+    "input_tokens": 782,
+    "output_tokens": 364
+  }
+}

@@ -1,0 +1,15 @@
+{
+  "form_pipeline": "vision_beeswarm",
+  "xai_model": "xgb",
+  "feature": "yr",
+  "form_type": "monotonic",
+  "judge_model": "claude-opus-4-8",
+  "faithfulness": 5,
+  "clarity": 4,
+  "completeness": 2,
+  "faithfulness_reasoning": "Direction (increasing over time) matches the reference, rank 2 correct, and the step-up structure with 2012 higher than 2011 captures the monotone increase. Anchor 5, no deductions apply.",
+  "usage": {
+    "input_tokens": 512,
+    "output_tokens": 305
+  }
+}

@@ -1,0 +1,14 @@
+{
+  "form": "tooluse_all",
+  "scope": "global_whole",
+  "llm_model": "claude-sonnet-4-6",
+  "loss_key": "poisson_log",
+  "xai_model": "xgb",
+  "feature": "weathersit",
+  "explanation": "[EFFECT] Weather condition acts as a step-down scale. Clear skies (category 1) give a small positive nudge (+0.03); mist or clouds (category 2) are nearly neutral (−0.01); but light rain or snow (category 3) delivers a large negative hit (−0.33), cutting predicted demand substantially. Heavy rain (category 4) also reduces demand (−0.17), though its estimate is less reliable given how rarely it occurs in the data.\n[IMPORTANCE] Ranked 7th with importance 0.051 — a smaller overall influence than humidity, but its effect is concentrated into a sharp penalty whenever precipitation is present.\n\n---\n[RECOMMENDATION] Operational planning should be driven primarily by the **hour of the day** — scheduling significantly more bikes and staff for the 8 a.m. and 5–6 p.m. peaks — and secondarily by **temperature**, scaling up resources on mild-to-warm days (around 20–30 °C) and scaling down on very cold or very hot days, since together these two features account for the vast majority of the model's predictive power.",
+  "dropped": false,
+  "condition": "tooluse_all",
+  "modality": "tooluse",
+  "representation": "all",
+  "mechanism": "pull"
+}

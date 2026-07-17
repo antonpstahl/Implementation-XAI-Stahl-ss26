@@ -1,0 +1,15 @@
+{
+  "form_pipeline": "json_all",
+  "xai_model": "xgb",
+  "feature": "yr",
+  "form_type": "monotonic",
+  "judge_model": "claude-opus-4-8",
+  "faithfulness": 5,
+  "clarity": 4,
+  "completeness": 3,
+  "faithfulness_reasoning": "Direction (increasing, higher in 2012) matches; the step-change captures the monotone rise between two year levels and the sign change (~0.58 → 2011 negative, 2012 positive) is consistent; rank 2 correct. Anchor 5, no deductions.",
+  "usage": {
+    "input_tokens": 636,
+    "output_tokens": 358
+  }
+}

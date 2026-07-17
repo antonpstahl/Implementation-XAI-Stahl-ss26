@@ -1,0 +1,14 @@
+{
+  "form": "json_all",
+  "scope": "global_whole",
+  "llm_model": "claude-sonnet-4-6",
+  "loss_key": "poisson_log",
+  "xai_model": "ebm",
+  "feature": "weathersit",
+  "explanation": "[EFFECT] Clear weather (category 1) gives a small positive boost to demand; mist or cloud (category 2) is essentially neutral. Light rain or snow (category 3) produces the sharpest drop in predicted demand. Interestingly, heavy rain (category 4) shows a slightly less negative contribution than light rain, though this may reflect very few heavy-rain observations in the data.\n[IMPORTANCE] Ranked sixth, weather situation has a moderate impact — mainly felt when conditions deteriorate to rain or snow, where it meaningfully cuts predicted rentals.\n[RECOMMENDATION] Plan your bike availability and staffing primarily around the hour of the day — ensuring high fleet availability and staff support around the 8 a.m. and 5 p.m. peaks — and secondarily around temperature, scaling up resources on warm days (around 20–31 °C) and scaling back on cold or very rainy days.",
+  "dropped": false,
+  "condition": "json_all",
+  "modality": "json",
+  "representation": "all",
+  "mechanism": "push"
+}

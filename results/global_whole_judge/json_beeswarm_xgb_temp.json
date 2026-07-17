@@ -1,0 +1,15 @@
+{
+  "form_pipeline": "json_beeswarm",
+  "xai_model": "xgb",
+  "feature": "temp",
+  "form_type": "non-monotonic",
+  "judge_model": "claude-opus-4-8",
+  "faithfulness": 3,
+  "clarity": 4,
+  "completeness": 3,
+  "faithfulness_reasoning": "Direction is described as \"mixed\"/non-monotonic which matches the reference, and rank 3 is correct; however the explanation misses the clear inverted-U peak (~29.5 °C) and the sign change ~18.7 °C, treating it as vaguely context-dependent. Anchor 4, -1 (clear peak missed), max(1, 4-1)=3.",
+  "usage": {
+    "input_tokens": 706,
+    "output_tokens": 379
+  }
+}

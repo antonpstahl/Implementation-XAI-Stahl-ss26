@@ -1,0 +1,15 @@
+{
+  "form_pipeline": "tooluse_all",
+  "xai_model": "xgb",
+  "feature": "holiday",
+  "form_type": "near-flat",
+  "judge_model": "claude-opus-4-8",
+  "faithfulness": 5,
+  "clarity": 5,
+  "completeness": 4,
+  "faithfulness_reasoning": "Direction is decreasing (holidays lower demand) matching the reference, rank 9 of 9 correct, and it properly frames the feature as the weakest/near-negligible. Anchor 5, no deductions.",
+  "usage": {
+    "input_tokens": 657,
+    "output_tokens": 318
+  }
+}

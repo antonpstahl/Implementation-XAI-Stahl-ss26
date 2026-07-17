@@ -1,0 +1,15 @@
+{
+  "form_pipeline": "vision_all",
+  "xai_model": "ebm",
+  "feature": "mnth",
+  "form_type": "categorical",
+  "judge_model": "claude-opus-4-8",
+  "faithfulness": 5,
+  "clarity": 3,
+  "completeness": 4,
+  "faithfulness_reasoning": "Correctly identifies January/February as lowest and October as top, matching the reference's top/bottom categories, and rank 4 is exact. The October magnitude is overstated (~+0.35 vs actual 0.17) but the ordering and structure are right. Anchor 5, no deduction (direction/top level correct, rank correct).",
+  "usage": {
+    "input_tokens": 804,
+    "output_tokens": 353
+  }
+}

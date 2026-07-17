@@ -1,0 +1,15 @@
+{
+  "form_pipeline": "tooluse_all",
+  "xai_model": "xgb",
+  "feature": "weathersit",
+  "form_type": "categorical",
+  "judge_model": "claude-opus-4-8",
+  "faithfulness": 5,
+  "clarity": 5,
+  "completeness": 3,
+  "faithfulness_reasoning": "Correctly ranks the categories (1 positive, 2 near-neutral, 3 strongest negative, 4 negative but noisy), matches the reference values and notes category 4's unreliability; rank 7 correct. Anchor 5, no deductions apply.",
+  "usage": {
+    "input_tokens": 988,
+    "output_tokens": 302
+  }
+}

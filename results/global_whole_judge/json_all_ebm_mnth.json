@@ -1,0 +1,15 @@
+{
+  "form_pipeline": "json_all",
+  "xai_model": "ebm",
+  "feature": "mnth",
+  "form_type": "categorical",
+  "judge_model": "claude-opus-4-8",
+  "faithfulness": 5,
+  "clarity": 4,
+  "completeness": 3,
+  "faithfulness_reasoning": "Correctly identifies October as top, Sept/Nov positive, Jan/Feb lowest, and rank 4 — matching the reference. Anchor 5, no deductions.",
+  "usage": {
+    "input_tokens": 808,
+    "output_tokens": 311
+  }
+}

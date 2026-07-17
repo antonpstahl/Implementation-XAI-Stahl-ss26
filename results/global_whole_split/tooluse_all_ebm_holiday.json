@@ -1,0 +1,14 @@
+{
+  "form": "tooluse_all",
+  "scope": "global_whole",
+  "llm_model": "claude-sonnet-4-6",
+  "loss_key": "poisson_log",
+  "xai_model": "ebm",
+  "feature": "holiday",
+  "explanation": "[EFFECT] This is a near-negligible step change. Non-holiday hours have a contribution of essentially zero (+0.004), while public holiday hours carry a mild negative contribution (−0.145), meaning holidays slightly reduce predicted demand compared to a regular day.\n[IMPORTANCE] Ranked last (9th) with an importance of 0.008 — the weakest feature in the model by a clear margin. Its effect is negligible for most practical purposes.\n\n---\n[RECOMMENDATION] Operational planning should be driven primarily by **time of day** and **temperature**: concentrate bike and staff resources around the 8 a.m. and 5 p.m. commuter peaks, and scale overall fleet availability up during warm weather (roughly 20–31 °C) while reducing it during cold snaps or heatwaves. Secondary adjustments for rain, season, and humidity can further refine scheduling, but day of week and holiday status need only minor attention.",
+  "dropped": false,
+  "condition": "tooluse_all",
+  "modality": "tooluse",
+  "representation": "all",
+  "mechanism": "pull"
+}

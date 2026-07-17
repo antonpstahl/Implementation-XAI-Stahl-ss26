@@ -4,12 +4,12 @@
   "feature": "windspeed",
   "form_type": "near-flat",
   "judge_model": "claude-opus-4-8",
-  "faithfulness": 2,
+  "faithfulness": 5,
   "clarity": 4,
   "completeness": 5,
-  "faithfulness_reasoning": "The feature is near-flat (rank 8/9), which the explanation does note as \"minor,\" but it over-describes a meaningful non-monotonic effect rather than framing it as negligible, and the peak is stated at ~19 km/h vs the true ~11 km/h. Anchor 3 (rank correct, but negligibility missed and peak location wrong), -1 (misses the negligible framing / clear peak location), max(1, 3-1)=2.",
+  "faithfulness_reasoning": "The reference is near-flat and the explanation explicitly frames it as negligible/roughly flat, notes the non-monotonic shape, and gives the correct rank 8 of 9. Anchor 5, no deductions.",
   "usage": {
-    "input_tokens": 627,
-    "output_tokens": 368
+    "input_tokens": 596,
+    "output_tokens": 296
   }
 }

@@ -1,0 +1,15 @@
+{
+  "form_pipeline": "vision_all",
+  "xai_model": "xgb",
+  "feature": "temp",
+  "form_type": "non-monotonic",
+  "judge_model": "claude-opus-4-8",
+  "faithfulness": 4,
+  "clarity": 3,
+  "completeness": 2,
+  "faithfulness_reasoning": "Inverted-U direction and sign-change are correct; peak stated ~20-25 °C vs true ~29.5 °C is somewhat off but close, and rank called 2nd vs true 3rd is off by one. Anchor 4 (rank off by one / peak slightly imprecise), no additional deduction applies.",
+  "usage": {
+    "input_tokens": 669,
+    "output_tokens": 325
+  }
+}

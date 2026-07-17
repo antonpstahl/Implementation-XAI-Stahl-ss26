@@ -1,0 +1,14 @@
+{
+  "form": "tooluse_all",
+  "scope": "global_whole",
+  "llm_model": "claude-sonnet-4-6",
+  "loss_key": "poisson_log",
+  "xai_model": "xgb",
+  "feature": "hr",
+  "explanation": "[EFFECT] The hour of the day has a strongly non-monotonic, double-peaked effect. Demand is multiplied down heavily in the early-morning hours (roughly midnight through 5 a.m., with 4 a.m. being the lowest), then rises sharply into a morning peak around 8 a.m., dips slightly through midday, and reaches its highest point of the whole day at 5–6 p.m. (the evening commute), before falling again through the night.\n[IMPORTANCE] This is by far the most important feature — ranked 1st with an importance of 0.83, roughly four times larger than any other feature. Getting the hour right is critical to any prediction.\n\n---\n[RECOMMENDATION] Operational planning should be driven primarily by the **hour of the day** — scheduling significantly more bikes and staff for the 8 a.m. and 5–6 p.m. peaks — and secondarily by **temperature**, scaling up resources on mild-to-warm days (around 20–30 °C) and scaling down on very cold or very hot days, since together these two features account for the vast majority of the model's predictive power.",
+  "dropped": false,
+  "condition": "tooluse_all",
+  "modality": "tooluse",
+  "representation": "all",
+  "mechanism": "pull"
+}

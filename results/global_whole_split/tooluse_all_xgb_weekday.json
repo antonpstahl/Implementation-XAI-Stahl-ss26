@@ -1,0 +1,14 @@
+{
+  "form": "tooluse_all",
+  "scope": "global_whole",
+  "llm_model": "claude-sonnet-4-6",
+  "loss_key": "poisson_log",
+  "xai_model": "xgb",
+  "feature": "weekday",
+  "explanation": "[EFFECT] The day of the week has a modest directional trend: weekdays from Sunday through Wednesday carry small negative average contributions, Thursday is near neutral, and Friday and Saturday have small positive contributions (roughly +0.03 and +0.01). The overall range of average effects is narrow (~0.11 log units), though within any given day the model's spread can be wide because the hour-of-day interaction shifts demand patterns significantly between commuter weekdays and leisure weekends.\n[IMPORTANCE] Ranked 4th with importance 0.173 — the fourth most important feature, sitting just behind temperature. Its importance largely reflects how strongly the day type reshapes the hourly demand profile.\n\n---\n[RECOMMENDATION] Operational planning should be driven primarily by the **hour of the day** — scheduling significantly more bikes and staff for the 8 a.m. and 5–6 p.m. peaks — and secondarily by **temperature**, scaling up resources on mild-to-warm days (around 20–30 °C) and scaling down on very cold or very hot days, since together these two features account for the vast majority of the model's predictive power.",
+  "dropped": false,
+  "condition": "tooluse_all",
+  "modality": "tooluse",
+  "representation": "all",
+  "mechanism": "pull"
+}

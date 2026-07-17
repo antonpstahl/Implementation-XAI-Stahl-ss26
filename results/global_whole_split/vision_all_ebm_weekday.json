@@ -1,0 +1,14 @@
+{
+  "form": "vision_all",
+  "scope": "global_whole",
+  "llm_model": "claude-sonnet-4-6",
+  "loss_key": "poisson_log",
+  "xai_model": "ebm",
+  "feature": "weekday",
+  "explanation": "[EFFECT] Weekday has a modest, roughly increasing effect from Sunday to Friday. Sunday (0) carries the most negative contribution (~–0.065), Monday is slightly negative, midweek days are near zero, and Friday (5) has the highest positive contribution (~+0.040), with Saturday slightly lower. The total range is only about 0.1 log units.\n[IMPORTANCE] Seventh in importance (0.024); a real but small effect — day of week matters far less than time of day or temperature.\n[RECOMMENDATION] Hour of day and temperature are by far the two strongest drivers of predicted demand, so operational planning — such as bike redistribution and staffing — should be tightly organised around the two daily rush-hour peaks (around 8 a.m. and 5–6 p.m.) and scaled up noticeably in mild to warm weather while scaling back during cold spells or the early hours of the morning.",
+  "dropped": false,
+  "condition": "vision_all",
+  "modality": "vision",
+  "representation": "all",
+  "mechanism": "push"
+}

@@ -1,0 +1,14 @@
+{
+  "form": "vision_all",
+  "scope": "global_whole",
+  "llm_model": "claude-sonnet-4-6",
+  "loss_key": "poisson_log",
+  "xai_model": "xgb",
+  "feature": "temp",
+  "explanation": "[EFFECT] Temperature has a non-monotonic, inverted-U effect. Very cold conditions (normalised temp near 0, roughly below 5 °C) strongly suppress demand (down to about −0.8). Demand is boosted most at mild-to-warm temperatures around a normalised value of 0.5–0.6 (roughly 20–25 °C, contribution up to about +0.25–0.30). At the highest temperatures the effect turns negative again, suggesting very hot days slightly deter rentals.\n[IMPORTANCE] The second most important feature, with a vertical range of about 1.1 log-units; a meaningful but clearly secondary driver compared to the hour of day.",
+  "dropped": false,
+  "condition": "vision_all",
+  "modality": "vision",
+  "representation": "all",
+  "mechanism": "push"
+}

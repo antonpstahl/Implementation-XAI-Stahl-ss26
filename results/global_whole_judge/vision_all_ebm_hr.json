@@ -1,0 +1,15 @@
+{
+  "form_pipeline": "vision_all",
+  "xai_model": "ebm",
+  "feature": "hr",
+  "form_type": "categorical",
+  "judge_model": "claude-opus-4-8",
+  "faithfulness": 5,
+  "clarity": 4,
+  "completeness": 5,
+  "faithfulness_reasoning": "Both commuter peaks (8 a.m., 17–18) and the early-morning trough at 4 a.m. match the reference exactly; rank 1 of 9 correct. Anchor 5, no deductions apply.",
+  "usage": {
+    "input_tokens": 881,
+    "output_tokens": 306
+  }
+}
