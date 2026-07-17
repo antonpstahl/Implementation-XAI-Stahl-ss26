@@ -193,6 +193,111 @@ def cross_vendor_alpha(subdirs: list[str], criterion: str = "faithfulness",
 
 
 # ---------------------------------------------------------------------------
+# Whole-model (Phase G2b) — the two comparison axes + beeswarm readability
+# ---------------------------------------------------------------------------
+WHOLE_CONDITION_ORDER = ["json_all", "vision_all", "tooluse_all",
+                         "json_beeswarm", "vision_beeswarm"]
+# GT sub-fields a representation can carry: the beeswarm shows ranking + direction only,
+# so its `structure` (shape/peak) column is not a fair comparison (plan G2b).
+_BEESWARM_FIELDS = ["direction", "rank"]
+_ALL_FIELDS = ["direction", "rank", "structure"]
+
+
+def _whole_fair_total(row: pd.Series) -> float:
+    """Summary score over only the GT fields the representation can carry.
+
+    ``all`` representations: the full rubric total (direction+rank+structure).
+    ``beeswarm`` representations: mean of direction+rank only — scoring a beeswarm on
+    shape/peak would penalise it for information it never conveys (plan G2b).
+    """
+    if row.get("representation") == "beeswarm":
+        return round((row["direction"] + row["rank"]) / 2, 4)
+    return row["total"]
+
+
+def load_whole_rubric(results_dir: Path = RESULTS_DIR,
+                      split_subdir: str = "global_whole_split") -> Optional[pd.DataFrame]:
+    """Rubric-score every whole-model split record and attach its condition axes.
+
+    Reads ``results/{split_subdir}/*.json`` (written by
+    :func:`utils.global_whole.write_split_records`), scores each with the same
+    deterministic rubric used for G2a, and adds ``modality``/``representation``/
+    ``mechanism``/``dropped`` plus a ``fair_total`` (beeswarm scored only on the fields
+    it can carry). A **dropped** feature (the whole-model answer omitted it) is recorded
+    as a total miss (all sub-scores 0) — the "only 5 of 9 right" measurement. Returns
+    None if the directory is absent or empty (04Ge not run with RUN_API yet).
+    """
+    from utils import rubric  # local import: rubric imports nothing heavy, avoids cycle
+
+    src = Path(results_dir) / split_subdir
+    files = sorted(src.glob("*.json")) if src.is_dir() else []
+    if not files:
+        return None
+
+    rows = []
+    for p in files:
+        rec = json.loads(p.read_text())
+        scored = rubric.score_result_file(p)          # gives form_type for both cases
+        if rec.get("dropped"):
+            scored.update({"direction": 0.0, "rank": 0.0, "structure": 0.0, "total": 0.0})
+        scored.update({
+            "condition":      rec["form"],
+            "modality":       rec.get("modality"),
+            "representation": rec.get("representation"),
+            "mechanism":      rec.get("mechanism"),
+            "dropped":        bool(rec.get("dropped", False)),
+        })
+        rows.append(scored)
+
+    df = pd.DataFrame(rows)
+    df["fair_total"] = df.apply(_whole_fair_total, axis=1)
+    return df
+
+
+def whole_coverage(df: pd.DataFrame) -> pd.DataFrame:
+    """Features described (of 9) per condition x model — the "5 of 9" measurement."""
+    cov = (df.assign(covered=~df["dropped"])
+             .groupby(["condition", "xai_model"])["covered"].sum().unstack())
+    return cov.reindex([c for c in WHOLE_CONDITION_ORDER if c in cov.index])
+
+
+def axis1_representation(df: pd.DataFrame) -> pd.DataFrame:
+    """Axis 1 — per GT field, all-plots/curves vs the beeswarm (no aggregate winner).
+
+    Mean of each rubric sub-field (direction / rank / structure) per condition, so the
+    reader sees *which fields survive which representation* rather than a single number.
+    Read the beeswarm rows on ``direction``/``rank`` only (``structure`` is greyed out by
+    ``fair_total``).
+    """
+    tab = (df.groupby("condition")[_ALL_FIELDS + ["fair_total"]].mean()
+             .reindex([c for c in WHOLE_CONDITION_ORDER if c in df["condition"].unique()]))
+    return tab.round(3)
+
+
+def axis2_mechanism(df: pd.DataFrame, value: str = "total") -> pd.DataFrame:
+    """Axis 2 — push (vision_all/json_all) vs pull (tooluse_all) at full information.
+
+    Restricted to the ``all`` conditions (constant full information); the beeswarm
+    conditions belong to Axis 1, not here. Returns mean ``value`` by mechanism x model.
+    """
+    allc = df[df["representation"] == "all"]
+    return (allc.groupby(["mechanism", "xai_model"])[value].mean()
+                .unstack().round(3))
+
+
+def beeswarm_readability(df: pd.DataFrame, value: str = "fair_total") -> pd.DataFrame:
+    """Beeswarm readability — vision_beeswarm vs json_beeswarm (info-matched).
+
+    Both carry the same information (rank + direction + spread); the only difference is
+    modality (swarm image vs equivalent numbers), so the gap isolates the pure
+    visual-reading effect. Scored on ``fair_total`` (direction+rank) by default.
+    """
+    bee = df[df["representation"] == "beeswarm"]
+    return (bee.groupby(["condition", "xai_model"])[value].mean()
+               .unstack().round(3))
+
+
+# ---------------------------------------------------------------------------
 # CLI
 # ---------------------------------------------------------------------------
 

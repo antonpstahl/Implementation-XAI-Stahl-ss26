@@ -275,6 +275,7 @@ def run_global_judge(
     prompts_dir: Path = PROMPTS_DIR,
     k: int = 1,
     temperature: float | None = 0.0,
+    src_subdir: str = "global",
     out_subdir: str = "global_judge",
     only: Optional[list[str]] = None,
 ) -> pd.DataFrame:
@@ -286,13 +287,19 @@ def run_global_judge(
     (median per score). ``only`` filters on file stems (e.g. the dev-5) for cheap
     validation runs.
 
+    ``src_subdir`` selects the source directory under ``results/`` (default
+    ``"global"`` = the G2a per-feature records). Phase G2b passes
+    ``src_subdir="global_whole_split"`` to judge the whole-model split records with the
+    same reference-based rubric (they share the per-feature record schema), writing to
+    e.g. ``out_subdir="global_whole_judge"``.
+
     Warning: running this calls the API (billed). Returns a DataFrame with one row
     per explanation (scores + form type for the stratified evaluation).
     """
     from utils.judge import judge_with_retry, judge_with_self_consistency
 
     system = (prompts_dir / GLOBAL_JUDGE_SYSTEM_FILE).read_text()
-    src_dir = results_dir / "global"
+    src_dir = results_dir / src_subdir
     out_dir = results_dir / out_subdir
     out_dir.mkdir(parents=True, exist_ok=True)
 
