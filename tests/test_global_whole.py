@@ -69,6 +69,16 @@ def test_json_all_payload_has_every_feature_curve():
         assert "rank" in e and "importance" in e
 
 
+def test_json_all_aggregates_xgb_scatter_to_grid():
+    # XGB curve JSON is raw per-instance SHAP scatter (~12k points/feature); the whole-
+    # model payload must aggregate it or the 9-feature prompt exceeds the context window.
+    p = build_whole_json_all_payload("xgb", explanations_dir=EXPLANATIONS_DIR)
+    total_points = sum(len(e["curve"]["x"]) for e in p["features"])
+    assert total_points < 500, f"xgb json_all not aggregated ({total_points} points)"
+    for e in p["features"]:
+        assert len(e["curve"]["x"]) == len(e["curve"]["y"])
+
+
 def test_json_beeswarm_is_info_matched_no_curve():
     p = build_whole_json_beeswarm_payload("ebm", explanations_dir=EXPLANATIONS_DIR)
     assert p["n_features"] == len(FEATURES)

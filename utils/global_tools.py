@@ -31,6 +31,7 @@ from typing import Any
 
 from .global_feature import (
     _global_json,
+    aggregate_curve,
     beeswarm_plot_path,
     feature_importance_map,
     load_global_curve,
@@ -129,11 +130,17 @@ class GlobalToolBox:
         explanations_dir: Path | str,
         plots_dir: Path | str,
         loss_key: str = "poisson_log",
+        aggregate_curves: bool = False,
     ):
         self.model_name = model_name.lower()
         self.explanations_dir = Path(explanations_dir)
         self.plots_dir = Path(plots_dir)
         self.loss_key = loss_key
+        # aggregate_curves=True collapses the raw XGB SHAP scatter (~12k points/feature)
+        # to a grid before returning get_feature_curve. Off for the G2a per-feature
+        # pipeline (one curve pulled, raw is fine); ON for the whole-model pipeline
+        # (04Ge), where pulling several raw XGB curves would blow the context window.
+        self.aggregate_curves = aggregate_curves
         self.call_log: list[dict[str, Any]] = []
 
     # ------------------------------------------------------------------
@@ -182,12 +189,18 @@ class GlobalToolBox:
         imp = feature_importance_map(
             self.model_name, explanations_dir=self.explanations_dir, loss_key=self.loss_key
         ).get(feature, {})
+        if self.aggregate_curves:
+            xs, ys = aggregate_curve(curve["x"], curve["y"])
+            xs, ys = xs, [round(v, 5) for v in ys]
+            value_space = "mean contribution per feature value, log space"
+        else:
+            xs, ys, value_space = curve["x"], curve["y"], "contribution to the target in log space"
         return {
             "feature": feature,
             "kind": curve["kind"],
-            "x": curve["x"],
-            "y": curve["y"],
-            "value_space": "contribution to the target in log space",
+            "x": xs,
+            "y": ys,
+            "value_space": value_space,
             "importance": imp.get("importance"),
             "rank": imp.get("rank"),
         }

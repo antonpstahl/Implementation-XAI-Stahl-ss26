@@ -270,3 +270,15 @@ def test_toolbox_errors_are_results_not_exceptions(box):
     assert "error" in box.dispatch("unknown_tool", {})
     # every dispatch is logged, including the errors
     assert len(box.call_log) == 2
+
+
+def test_toolbox_aggregate_curves_flag():
+    # whole-model (04Ge) sets aggregate_curves=True so pulling several raw XGB scatter
+    # curves (~12k points each) cannot blow the context window; G2a default stays raw.
+    raw = GlobalToolBox("xgb", explanations_dir=EXPLANATIONS_DIR, plots_dir=PLOTS)
+    agg = GlobalToolBox("xgb", explanations_dir=EXPLANATIONS_DIR, plots_dir=PLOTS,
+                        aggregate_curves=True)
+    n_raw = len(raw.dispatch("get_feature_curve", {"feature": "temp"})["x"])
+    n_agg = len(agg.dispatch("get_feature_curve", {"feature": "temp"})["x"])
+    assert n_agg < n_raw and n_agg < 200   # 12152 -> ~49 unique feature values
+    assert len(agg.dispatch("get_feature_curve", {"feature": "temp"})["y"]) == n_agg

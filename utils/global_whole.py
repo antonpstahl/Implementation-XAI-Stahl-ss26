@@ -43,6 +43,7 @@ from typing import Any, Callable, Iterable, Optional
 
 from .global_feature import (
     _global_json,
+    aggregate_curve,
     beeswarm_plot_path,
     describe_curve,
     feature_importance_map,
@@ -100,9 +101,14 @@ def build_whole_json_all_payload(
 ) -> dict:
     """Full-push JSON payload: every feature's curve in one object (Axis-2 push side).
 
-    Information-matched to the ``vision_all`` condition (all 9 plots): the same raw
-    ``x``/``y`` curves the plots are drawn from, plus rank/importance context. Compact
-    per-feature entries (target/value-space stated once at the top, not repeated).
+    Information-matched to the ``vision_all`` condition (all 9 plots): each feature's
+    global curve plus rank/importance context. Curves are **aggregated to a grid**
+    (``aggregate_curve``: mean contribution per unique feature value) — a no-op for the
+    EBM shape functions, but essential for XGB, whose curve JSON is the raw per-instance
+    SHAP scatter (~12k points/feature). Dumping all 9 raw would be ~1M+ tokens and
+    exceed the context window; the aggregated grid is the mean dependence trend the
+    plot shows, and is what the model can actually read. (The vision_all plots still
+    carry the per-point scatter density — a small, documented representation difference.)
     """
     g = _global_json(model_name, explanations_dir=explanations_dir, loss_key=loss_key)
     features = list_global_features(
@@ -114,16 +120,17 @@ def build_whole_json_all_payload(
     entries = []
     for f in features:
         curve = load_global_curve(model_name, f, explanations_dir=explanations_dir)
+        xs, ys = aggregate_curve(curve["x"], curve["y"])
         entries.append({
             "feature": f,
             "kind": curve["kind"],
             "importance": imp[f]["importance"],
             "rank": imp[f]["rank"],
-            "curve": {"x": curve["x"], "y": curve["y"]},
+            "curve": {"x": xs, "y": [round(v, 5) for v in ys]},
         })
     return {
         "target": g["task"],
-        "value_space": _VALUE_SPACE,
+        "value_space": _VALUE_SPACE + "; curve = mean contribution per feature value",
         "model": model_name.lower(),
         "n_features": len(features),
         "features": entries,
