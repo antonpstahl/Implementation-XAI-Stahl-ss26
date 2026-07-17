@@ -7,7 +7,7 @@
   "importance_rank": 5,
   "form": "categorical",
   "n_grid": 12,
-  "verified": false,
+  "verified": true,
   "direction": "categorical",
   "monotonicity": "n/a",
   "peak": null,

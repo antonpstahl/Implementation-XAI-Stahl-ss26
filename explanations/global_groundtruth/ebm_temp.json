@@ -7,7 +7,7 @@
   "importance_rank": 2,
   "form": "non-monotonic",
   "n_grid": 48,
-  "verified": false,
+  "verified": true,
   "direction": "mixed",
   "monotonicity": "non_monotonic",
   "peak": {

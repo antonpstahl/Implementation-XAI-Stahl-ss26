@@ -7,7 +7,7 @@
   "importance_rank": 8,
   "form": "near-flat",
   "n_grid": 26,
-  "verified": false,
+  "verified": true,
   "direction": "decreasing",
   "monotonicity": "monotonic_decreasing",
   "peak": null,

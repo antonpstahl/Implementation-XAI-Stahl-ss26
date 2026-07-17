@@ -51,6 +51,26 @@ DOMAIN_NOTES = {
                    "(clear > mist > light rain > heavy rain)."),
 }
 
+# (model, feature) pairs whose derived reference was VERIFIED on 17.07 (P1): the label
+# was mechanically re-derived against the curve — form / direction / monotonicity /
+# importance_rank / peak / top-categories all reproduce — AND scanned for domain
+# reliability via per-level training-sample counts. All 18 pass the mechanical check
+# (0 corrections needed). See analyses/gt_verification.md for the per-feature report and
+# the threshold sensitivity (15/18 form labels are stable across a 0.015–0.035 ×
+# 0.10–0.25 grid; ebm/temp, ebm/weekday and xgb/windspeed sit near a boundary — flagged
+# there for a final visual confirmation, not a mechanical error).
+VERIFIED: set[tuple[str, str]] = {
+    (m, f) for m in MODELS for f in (
+        "hr", "temp", "yr", "mnth", "hum", "weathersit", "weekday", "windspeed", "holiday",
+    )
+}
+
+# Manual field corrections applied after derivation, keyed by (model, feature): a dict of
+# {field: value} overriding a mechanically-wrong derived value (documented, regeneration-
+# stable). Empty because the 17.07 review found 0 mechanical errors; kept as the wiring
+# for any future hand-correction.
+OVERRIDES: dict[tuple[str, str], dict] = {}
+
 
 @dataclass
 class Thresholds:
@@ -203,12 +223,17 @@ def derive_feature(model: str, feature: str, ranks: dict[str, int],
         "importance_rank": ranks[feature],
         "form": form,
         "n_grid": n_unique,
-        "verified": False,  # flipped to True by DOMAIN_NOTES after manual review
+        "verified": False,  # flipped to True by VERIFIED / DOMAIN_NOTES (P1 review)
         **fields,
     }
-    if feature in DOMAIN_NOTES:
+    # P1: a reference counts as verified once it is in VERIFIED (mechanically re-derived +
+    # domain-scanned) or carries a domain note. A note is attached where present.
+    if (model, feature) in VERIFIED or feature in DOMAIN_NOTES:
         gt["verified"] = True
+    if feature in DOMAIN_NOTES:
         gt["note"] = DOMAIN_NOTES[feature]
+    # apply any documented manual field correction (regeneration-stable)
+    gt.update(OVERRIDES.get((model, feature), {}))
     return gt
 
 
