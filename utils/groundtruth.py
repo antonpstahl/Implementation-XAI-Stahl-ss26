@@ -30,6 +30,12 @@ import json
 from dataclasses import dataclass, asdict
 from pathlib import Path
 
+# The form/direction/monotonicity classifier is shared with the deterministic baseline
+# (utils.global_feature.describe_curve), so GT and baseline can never disagree on the
+# form type (planning/korrekturen17_06.md P2). groundtruth stays the authority for the
+# thresholds; describe_curve is aligned to it.
+from .global_feature import aggregate_curve, classify_shape
+
 EXPL_DIR = Path(__file__).resolve().parent.parent / "explanations"
 GT_DIR = EXPL_DIR / "global_groundtruth"
 MODELS = ("ebm", "xgb")
@@ -76,23 +82,11 @@ def _feature_schema(model: str) -> dict:
 def _aggregate(x: list, y: list) -> tuple[list, list]:
     """Group duplicate x, average y, return sorted-by-x grid.
 
-    Works for both EBM (already a grid: no-op ordering) and XGB scatter.
-    Keeps categorical string x as-is (sorted numerically when possible).
+    Delegates to the shared :func:`utils.global_feature.aggregate_curve` so the GT and
+    the baseline aggregate identically (single source of truth, P2). Works for both EBM
+    (already a grid) and XGB scatter; categorical string x kept as-is.
     """
-    buckets: dict = {}
-    for xi, yi in zip(x, y):
-        buckets.setdefault(xi, []).append(yi)
-
-    def _key(k):
-        try:
-            return (0, float(k))
-        except (TypeError, ValueError):
-            return (1, str(k))
-
-    keys = sorted(buckets, key=_key)
-    xs = keys
-    ys = [sum(v) / len(v) for v in (buckets[k] for k in keys)]
-    return xs, ys
+    return aggregate_curve(x, y)
 
 
 # ---------------------------------------------------------------------------
@@ -177,17 +171,6 @@ def _categorical_fields(xs: list, ys: list[float], th: Thresholds) -> dict:
     }
 
 
-def _classify_form(kind: str, importance: float, cont: dict | None,
-                   th: Thresholds) -> str:
-    if importance < th.flat_threshold:
-        return "near-flat"
-    if kind == "categorical":
-        return "categorical"
-    # continuous, non-trivial importance
-    assert cont is not None
-    return "monotonic" if cont["monotonicity"].startswith("monotonic") else "non-monotonic"
-
-
 def derive_feature(model: str, feature: str, ranks: dict[str, int],
                    th: Thresholds) -> dict:
     curve = _load_curve(model, feature)
@@ -200,12 +183,16 @@ def derive_feature(model: str, feature: str, ranks: dict[str, int],
 
     if kind == "categorical":
         fields = _categorical_fields(xs, ys, th)
-        cont = None
     else:
-        cont = _continuous_fields([float(x) for x in xs], ys, th)
-        fields = cont
+        fields = _continuous_fields([float(x) for x in xs], ys, th)
 
-    form = _classify_form(kind, importance, cont, th)
+    # form / direction / monotonicity from the shared classifier (single source of truth
+    # with the baseline, P2); _continuous_fields still supplies peak/sign_change/ranges.
+    cls = classify_shape(ys, kind, importance,
+                         flat_importance=th.flat_threshold, mono_tol=th.mono_tol)
+    fields["direction"] = cls["direction"]
+    fields["monotonicity"] = cls["monotonicity"]
+    form = cls["form"]
 
     gt = {
         "model": model,

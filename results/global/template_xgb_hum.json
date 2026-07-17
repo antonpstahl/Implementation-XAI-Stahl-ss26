@@ -5,9 +5,9 @@
   "loss_key": "poisson_log",
   "xai_model": "xgb",
   "feature": "hum",
-  "explanation": "[EFFECT] The effect of humidity on hourly demand is non-monotonic — it rises and falls across the range. Its shape is non-monotonic, with the contribution highest around 43 %.\n\n[IMPORTANCE] Humidity ranks 6 of 9 features by global importance (importance 0.077) — a moderate driver of demand.\n\n[RECOMMENDATION] Account for humidity when planning bikes and staff: demand is highest around 43 %, so allocate more there and less at the opposite end.",
+  "explanation": "[EFFECT] The effect of humidity on hourly demand is non-monotonic — it rises and falls across the range. Its shape is non-monotonic, with the contribution highest around 34 %.\n\n[IMPORTANCE] Humidity ranks 6 of 9 features by global importance (importance 0.077) — a moderate driver of demand.\n\n[RECOMMENDATION] Account for humidity when planning bikes and staff: demand is highest around 34 %, so allocate more there and less at the opposite end.",
   "n_tool_calls": 0,
-  "elapsed_s": 0.002465,
+  "elapsed_s": 0.002081,
   "usage": {
     "input_tokens": 0,
     "output_tokens": 0,

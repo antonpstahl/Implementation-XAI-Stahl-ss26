@@ -7,7 +7,7 @@
   "feature": "weathersit",
   "explanation": "[EFFECT] The effect of weather on hourly demand is non-monotonic — it rises and falls across the range. Its shape is category-dependent, with the contribution highest around clear/few clouds.\n\n[IMPORTANCE] Weather ranks 6 of 9 features by global importance (importance 0.061) — a moderate driver of demand.\n\n[RECOMMENDATION] Account for weather when planning bikes and staff: demand is highest around clear/few clouds, so allocate more there and less at the opposite end.",
   "n_tool_calls": 0,
-  "elapsed_s": 0.000213,
+  "elapsed_s": 7.4e-05,
   "usage": {
     "input_tokens": 0,
     "output_tokens": 0,

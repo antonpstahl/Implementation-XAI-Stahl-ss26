@@ -141,55 +141,143 @@ def readable_feature_value(feature: str, raw: float) -> str:
     return str(raw)
 
 
+# Canonical classification thresholds — the SINGLE source of truth shared by the
+# deterministic baseline (describe_curve) and the G3 ground truth (utils.groundtruth),
+# so the two can never disagree on the form type (planning/korrekturen17_06.md P2).
+# Values are the GT authority's (utils.groundtruth.Thresholds): near-flat by *global
+# importance*, monotonic by *reversal share* — NOT by curve amplitude.
+_FLAT_IMPORTANCE = 0.025   # global importance below this => near-flat
+_MONO_TOL = 0.15           # reversal share (movement against the net) tolerated as monotone
+
+
+def aggregate_curve(x: list, y: list) -> tuple[list, list]:
+    """Group duplicate x, average y, return a sorted-by-x grid.
+
+    EBM shape functions are already a unique grid (no-op ordering); XGB SHAP scatter has
+    duplicate x (many instances per value) and is collapsed to a grid so the monotonicity
+    / peak logic sees the mean trend, not the per-instance noise. Categorical string x is
+    kept as-is (sorted numerically where possible).
+    """
+    buckets: dict = {}
+    for xi, yi in zip(x, y):
+        buckets.setdefault(xi, []).append(float(yi))
+
+    def _key(k):
+        try:
+            return (0, float(k))
+        except (TypeError, ValueError):
+            return (1, str(k))
+
+    keys = sorted(buckets, key=_key)
+    return keys, [sum(v) / len(v) for v in (buckets[k] for k in keys)]
+
+
+def _total_variation(y: list[float]) -> float:
+    return sum(abs(y[i + 1] - y[i]) for i in range(len(y) - 1))
+
+
+def _signed_movement(y: list[float]) -> tuple[float, float]:
+    up = down = 0.0
+    for i in range(len(y) - 1):
+        d = y[i + 1] - y[i]
+        if d >= 0:
+            up += d
+        else:
+            down += -d
+    return up, down
+
+
+def classify_shape(
+    ys: list[float],
+    kind: str,
+    importance: float,
+    *,
+    flat_importance: float = _FLAT_IMPORTANCE,
+    mono_tol: float = _MONO_TOL,
+) -> dict:
+    """Canonical form / direction / monotonicity of an *aggregated* curve.
+
+    The single classifier shared by :func:`describe_curve` (deterministic baseline 04Ga)
+    and :mod:`utils.groundtruth` (G3 ground truth), so both label a feature's form
+    identically (planning/korrekturen17_06.md P2). Criteria follow the GT authority:
+    near-flat by **global importance** (``< flat_importance``), monotonic by **reversal
+    share** (``<= mono_tol``). Direction / monotonicity are computed independently of the
+    near-flat override, so a near-flat feature still carries its underlying sign.
+
+    Returns ``{form, direction, monotonicity}`` (canonical vocab):
+      * ``form``         : ``near-flat`` | ``monotonic`` | ``non-monotonic`` | ``categorical``.
+      * ``direction``    : ``increasing`` | ``decreasing`` | ``mixed`` | ``categorical``.
+      * ``monotonicity`` : ``monotonic_increasing`` | ``monotonic_decreasing`` |
+                           ``non_monotonic`` | ``n/a``.
+    """
+    if kind == "categorical":
+        direction, monotonicity = "categorical", "n/a"
+    else:
+        tv = _total_variation(ys)
+        up, down = _signed_movement(ys)
+        net = ys[-1] - ys[0] if len(ys) >= 2 else 0.0
+        reversal = min(up, down) / tv if tv > 0 else 0.0
+        if reversal <= mono_tol:
+            direction = "increasing" if net >= 0 else "decreasing"
+            monotonicity = f"monotonic_{direction}"
+        else:
+            direction, monotonicity = "mixed", "non_monotonic"
+
+    if importance < flat_importance:
+        form = "near-flat"
+    elif kind == "categorical":
+        form = "categorical"
+    else:
+        form = "monotonic" if monotonicity.startswith("monotonic") else "non-monotonic"
+    return {"form": form, "direction": direction, "monotonicity": monotonicity}
+
+
+# Canonical -> describe_curve's compact vocab (kept for the 04Ga template + tests).
+_SHAPE_VOCAB = {"near-flat": "near_flat", "non-monotonic": "non_monotonic",
+                "monotonic": "monotonic", "categorical": "categorical"}
+_DIRECTION_VOCAB = {"increasing": "rising", "decreasing": "falling",
+                    "mixed": "mixed", "categorical": "mixed"}
+
+
 def describe_curve(
     model_name: str,
     feature: str,
     *,
     explanations_dir: Path | str,
-    flat_eps: float = 0.02,
+    flat_importance: float = _FLAT_IMPORTANCE,
+    mono_tol: float = _MONO_TOL,
 ) -> dict:
-    """Derive the structural facts of a feature's global curve.
+    """Derive the structural facts of a feature's global curve (deterministic baseline).
 
-    The **single source of truth** for the deterministic per-feature baseline (04Ga)
-    and the G3 ground truth — so the baseline is scored against fields derived exactly
-    the way it produced them (it should hit the structural GT fields by construction;
-    the open question is what the LLM adds on top).
+    Uses the shared :func:`classify_shape` (importance-based near-flat, reversal-share
+    monotonicity, on the aggregated curve), so the form type is **identical** to the G3
+    ground truth (:mod:`utils.groundtruth`) — the baseline is scored against the same
+    classification it was written from (planning/korrekturen17_06.md P2). A near-flat
+    feature keeps its underlying ``direction`` but reports ``shape="near_flat"``.
 
     Returns ``{feature, kind, direction, monotonicity, shape, peak_x, peak_value,
     peak_label}``:
-      * ``direction``    : ``rising`` | ``falling`` | ``mixed`` | ``flat`` (sign of the
-                           net change across the range; ``mixed`` = interior extremum).
-      * ``monotonicity`` : ``monotonic`` | ``non_monotonic`` | ``flat``.
-      * ``shape``        : ``categorical`` (categorical curve) | ``near_flat``
-                           (amplitude < ``flat_eps``) | else the monotonicity label —
-                           the coarse form type for the G3 stratification.
+      * ``direction``    : ``rising`` | ``falling`` | ``mixed`` (| ``flat``).
+      * ``monotonicity`` : ``monotonic`` | ``non_monotonic`` (| ``flat``).
+      * ``shape``        : ``monotonic`` | ``non_monotonic`` | ``categorical`` |
+                           ``near_flat`` — the coarse form type for the G3 stratification.
       * ``peak_*``       : the x (raw + readable) and y where the contribution is highest.
-
-    ``flat_eps`` is a heuristic amplitude threshold (log-space contribution range) for
-    "negligible effect"; the G3 ground truth is domain-verified on top of this.
     """
     curve = load_global_curve(model_name, feature, explanations_dir=explanations_dir)
-    x = [float(v) for v in curve["x"]]
-    y = [float(v) for v in curve["y"]]
     kind = curve["kind"]
-    n = len(y)
+    importance = float(curve.get("importance", 0.0))
+    xs, ys = aggregate_curve([float(v) for v in curve["x"]],
+                             [float(v) for v in curve["y"]])
+    n = len(ys)
 
-    peak_i = max(range(n), key=lambda i: y[i]) if n else 0
-    trough_i = min(range(n), key=lambda i: y[i]) if n else 0
-    amplitude = (max(y) - min(y)) if n else 0.0
+    cls = classify_shape(ys, kind, importance,
+                         flat_importance=flat_importance, mono_tol=mono_tol)
+    shape = _SHAPE_VOCAB[cls["form"]]
+    direction = _DIRECTION_VOCAB[cls["direction"]]
+    monotonicity = "monotonic" if cls["monotonicity"].startswith("monotonic") else "non_monotonic"
 
-    if n < 2 or amplitude < flat_eps:
-        direction, monotonicity, shape = "flat", "flat", "near_flat"
-    else:
-        interior_extremum = (0 < peak_i < n - 1) or (0 < trough_i < n - 1)
-        if interior_extremum:
-            direction, monotonicity = "mixed", "non_monotonic"
-        else:
-            direction = "rising" if y[-1] >= y[0] else "falling"
-            monotonicity = "monotonic"
-        shape = "categorical" if kind == "categorical" else monotonicity
-
-    peak_raw = x[peak_i] if n else 0.0
+    peak_i = max(range(n), key=lambda i: ys[i]) if n else 0
+    peak_raw = xs[peak_i] if n else 0.0
     if feature in _DISCRETE_FEATURES:
         peak_raw = round(peak_raw)
 
@@ -200,7 +288,7 @@ def describe_curve(
         "monotonicity": monotonicity,
         "shape": shape,
         "peak_x": peak_raw,
-        "peak_value": y[peak_i] if n else None,
+        "peak_value": ys[peak_i] if n else None,
         "peak_label": readable_feature_value(feature, peak_raw),
     }
 
