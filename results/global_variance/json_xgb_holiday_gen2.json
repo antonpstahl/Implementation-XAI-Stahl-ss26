@@ -1,0 +1,16 @@
+{
+  "form": "json",
+  "scope": "global",
+  "llm_model": "claude-sonnet-4-6",
+  "loss_key": "poisson_log",
+  "xai_model": "xgb",
+  "feature": "holiday",
+  "explanation": "[EFFECT] The holiday feature acts as an on/off switch: on regular days (holiday = 0), the model's contribution is essentially neutral — close to zero. On holidays (holiday = 1), the effect is large but varies dramatically by hour. A small number of hours see a positive boost to predicted demand, but the majority of holiday hours receive strong negative contributions, meaning the model predicts substantially fewer rentals during most hours of a holiday. The swings can be very large (contributions below −0.5 in log space, which corresponds to cutting predicted demand by more than 40%), especially during what would normally be peak commuter hours.\n\n[IMPORTANCE] Holiday is ranked 9th out of 9 features — the least influential feature in the model overall, with an importance score of about 0.012. While its effect on individual holiday hours can appear dramatic, holidays are rare events, so the feature contributes relatively little to predictions across all hours.\n\n[RECOMMENDATION] Since holidays suppress demand during typical commuter peaks, you may consider reducing bike availability or staff at commuter-heavy stations on public holidays, while potentially maintaining or slightly increasing availability during leisure hours when the holiday effect is positive.",
+  "elapsed_s": 31.23,
+  "usage": {
+    "input_tokens": 162968,
+    "output_tokens": 699,
+    "cache_read_input_tokens": 1033
+  },
+  "generation_idx": 2
+}

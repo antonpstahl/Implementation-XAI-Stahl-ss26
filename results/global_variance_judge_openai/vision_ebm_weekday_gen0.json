@@ -1,0 +1,15 @@
+{
+  "form_pipeline": "vision",
+  "xai_model": "ebm",
+  "feature": "weekday",
+  "form_type": "near-flat",
+  "judge_model": "gpt-4o",
+  "faithfulness": 4,
+  "clarity": 5,
+  "completeness": 5,
+  "faithfulness_reasoning": "The explanation correctly identifies the categorical nature of the feature and the top and bottom categories, with Sunday having the strongest negative contribution and Friday the highest positive. The importance rank of 7 out of 9 is also accurate. However, it describes the effect as non-monotonic, which is not applicable to categorical features. Anchor 5, -1 (non-monotonicity claim), final score 4.",
+  "usage": {
+    "input_tokens": 2521,
+    "output_tokens": 202
+  }
+}

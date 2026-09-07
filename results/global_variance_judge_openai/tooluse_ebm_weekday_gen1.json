@@ -1,0 +1,15 @@
+{
+  "form_pipeline": "tooluse",
+  "xai_model": "ebm",
+  "feature": "weekday",
+  "form_type": "near-flat",
+  "judge_model": "gpt-4o",
+  "faithfulness": 5,
+  "clarity": 4,
+  "completeness": 5,
+  "faithfulness_reasoning": "The explanation correctly identifies the categorical nature of the effect, the top and bottom categories, and the importance rank of 7. It accurately describes the near-flat effect and the relative contributions of each day, matching the reference. Anchor 5, no deduction.",
+  "usage": {
+    "input_tokens": 3013,
+    "output_tokens": 187
+  }
+}

@@ -1,0 +1,15 @@
+{
+  "form_pipeline": "vision",
+  "xai_model": "ebm",
+  "feature": "weekday",
+  "form_type": "near-flat",
+  "judge_model": "claude-opus-4-8",
+  "faithfulness": 5,
+  "clarity": 4,
+  "completeness": 5,
+  "faithfulness_reasoning": "Correctly identifies Friday (5) as top and Sunday (0) as lowest, matching the reference; rank 7 of 9 correct. It frames the feature as \"minor/small\" which respects the near-flat nature, though it slightly over-narrates a trend. Anchor 5, no deductions.",
+  "usage": {
+    "input_tokens": 1398,
+    "output_tokens": 316
+  }
+}

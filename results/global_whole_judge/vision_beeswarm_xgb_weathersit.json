@@ -4,12 +4,12 @@
   "feature": "weathersit",
   "form_type": "categorical",
   "judge_model": "claude-opus-4-8",
-  "faithfulness": 1,
-  "clarity": 1,
-  "completeness": 1,
-  "faithfulness_reasoning": "The explanation is empty, so nothing matches the reference — no direction, structure, or rank is stated. Anchor 1.",
+  "faithfulness": 5,
+  "clarity": 5,
+  "completeness": 3,
+  "faithfulness_reasoning": "The step-down direction (clear best, worsening lowers demand) matches the monotone severity 1>2>3>4, clear near zero/positive matches; rank 7 of 9 correct. The step pattern captures the categorical structure well. Anchor 5, no deductions.",
   "usage": {
-    "input_tokens": 615,
-    "output_tokens": 187
+    "input_tokens": 879,
+    "output_tokens": 322
   }
 }

@@ -4,12 +4,12 @@
   "feature": "weathersit",
   "form_type": "categorical",
   "judge_model": "claude-opus-4-8",
-  "faithfulness": 5,
+  "faithfulness": 4,
   "clarity": 3,
   "completeness": 2,
-  "faithfulness_reasoning": "Direction/ordering matches: clear positive, mist near-neutral, light rain strongly negative, heavy rain negative; top category (1) correct and rank ~6–7 matches true 7. Anchor 5, no deductions.",
+  "faithfulness_reasoning": "Correctly identifies category 1 as top positive, 2 near zero, 3 as most negative, and severity ordering 1>2>3; captures the categorical structure well. Rank \"lower-moderate/among the weaker\" fits rank 7 of 9. It claims category 4 continues the worsening trend, though the reference notes 4 is actually less negative than 3 (and noisy) — a slight imprecision. Anchor 4, no full deduction.",
   "usage": {
-    "input_tokens": 810,
-    "output_tokens": 296
+    "input_tokens": 949,
+    "output_tokens": 399
   }
 }

@@ -4,12 +4,12 @@
   "feature": "hr",
   "form_type": "categorical",
   "judge_model": "gpt-4o",
-  "faithfulness": 2,
+  "faithfulness": 3,
   "clarity": 2,
-  "completeness": 2,
-  "faithfulness_reasoning": "The explanation correctly identifies the feature as the most important, aligning with the reference rank of 1. However, it inaccurately describes the effect as non-monotonic and uses log space, which is not in the reference. It also fails to specify the top and bottom categories. Anchor 3, -1 (peak/shape missed), max(1, 3-1)=2.",
+  "completeness": 5,
+  "faithfulness_reasoning": "The explanation correctly identifies the categorical nature of the feature and highlights the non-monotonic effect, with low hours suppressing and high hours boosting demand. However, it does not specify the exact top and bottom categories as per the reference. The importance rank is correctly identified as the most important feature. Anchor 4, -1 (key structure slightly imprecise), max(1, 4-1)=3.",
   "usage": {
-    "input_tokens": 2480,
-    "output_tokens": 217
+    "input_tokens": 2560,
+    "output_tokens": 228
   }
 }

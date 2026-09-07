@@ -5,7 +5,7 @@
   "loss_key": "poisson_log",
   "xai_model": "xgb",
   "feature": "weathersit",
-  "explanation": "[EFFECT] Weather acts in steps: clear skies (1) give a small positive boost (~+0.03 to +0.05); mist or cloud (2) is near neutral to slightly negative; light rain or snow (3) strongly suppresses demand, with the bulk of hours falling between −0.15 and −0.65; the very few heavy-rain hours (4) also appear negative (around −0.2).\n[IMPORTANCE] A moderate feature with a range of about 0.7 log-units; ranked around sixth or seventh, meaningful mainly because light-rain hours are fairly common.",
+  "explanation": "[EFFECT] Weather situation has a step-wise, monotonically worsening effect: clear skies (category 1) give a small positive contribution (~+0.03 to +0.05); mist or cloud (2) is near zero; light rain or snow (3) produces a wide scatter of negative values, typically −0.15 to −0.60; and the rare heavy rain category (4) shows a handful of points around −0.15 to −0.25. Each step worsens demand.\n[IMPORTANCE] This is a lower-moderate-importance feature with a vertical range of roughly 0.65 log-units, among the weaker features.\n[RECOMMENDATION] Plan your staffing and bike availability primarily around the hour of the day — the evening peak (around 5–6 pm) and the morning shoulder (around 8 am) drive the largest swings in demand — and use temperature as the key weather signal, targeting comfortable mild days (~20–25 °C) for maximum expected ridership and scaling back during cold or very hot spells.",
   "dropped": false,
   "condition": "vision_all",
   "modality": "vision",

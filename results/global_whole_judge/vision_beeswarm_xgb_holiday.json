@@ -4,12 +4,12 @@
   "feature": "holiday",
   "form_type": "near-flat",
   "judge_model": "claude-opus-4-8",
-  "faithfulness": 1,
-  "clarity": 1,
-  "completeness": 1,
-  "faithfulness_reasoning": "The explanation is empty, so it captures nothing of the reference (near-flat, decreasing, rank 9). Anchor 1.",
+  "faithfulness": 5,
+  "clarity": 4,
+  "completeness": 4,
+  "faithfulness_reasoning": "Direction (holidays suppress demand, decreasing) matches, rank 9 of 9 correct, and negligibility is explicitly stated. Anchor 5, no deductions.",
   "usage": {
-    "input_tokens": 357,
-    "output_tokens": 212
+    "input_tokens": 625,
+    "output_tokens": 303
   }
 }

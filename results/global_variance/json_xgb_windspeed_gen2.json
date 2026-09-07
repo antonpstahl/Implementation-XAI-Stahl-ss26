@@ -1,0 +1,16 @@
+{
+  "form": "json",
+  "scope": "global",
+  "llm_model": "claude-sonnet-4-6",
+  "loss_key": "poisson_log",
+  "xai_model": "xgb",
+  "feature": "windspeed",
+  "explanation": "[EFFECT] As wind speed increases, the model progressively reduces its prediction of hourly bike demand. At calm or near-zero wind speeds the contribution is roughly neutral to slightly positive, but as wind picks up the contribution turns increasingly negative, with the strongest downward pull at very high wind speeds (above roughly 35–55 km/h). The relationship is broadly monotonically decreasing — more wind, fewer predicted rentals.\n\n[IMPORTANCE] Wind speed is the second-least influential feature in the model, ranking 8th out of 9, with an importance score of about 0.02. It has a real but modest effect compared to factors like the hour of day, temperature, or year.\n\n[RECOMMENDATION] Because wind speed has only a minor influence on overall demand, it does not need to drive major staffing or fleet decisions on its own; however, on unusually windy days — particularly when sustained speeds exceed around 35 km/h — planners may consider a small reduction in bike availability or staff hours at exposed stations, as demand is likely to be somewhat suppressed.",
+  "elapsed_s": 21.61,
+  "usage": {
+    "input_tokens": 172232,
+    "output_tokens": 801,
+    "cache_read_input_tokens": 1033
+  },
+  "generation_idx": 2
+}

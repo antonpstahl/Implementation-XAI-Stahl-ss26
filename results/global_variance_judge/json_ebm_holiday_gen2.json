@@ -1,0 +1,15 @@
+{
+  "form_pipeline": "json",
+  "xai_model": "ebm",
+  "feature": "holiday",
+  "form_type": "near-flat",
+  "judge_model": "claude-opus-4-8",
+  "faithfulness": 5,
+  "clarity": 4,
+  "completeness": 5,
+  "faithfulness_reasoning": "Direction (negative/decreasing) matches, rank 9 of 9 correct, and it frames the effect as small/least important consistent with near-flat. Anchor 5, no deductions.",
+  "usage": {
+    "input_tokens": 703,
+    "output_tokens": 255
+  }
+}

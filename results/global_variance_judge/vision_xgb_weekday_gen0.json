@@ -1,0 +1,15 @@
+{
+  "form_pipeline": "vision",
+  "xai_model": "xgb",
+  "feature": "weekday",
+  "form_type": "categorical",
+  "judge_model": "claude-opus-4-8",
+  "faithfulness": 2,
+  "clarity": 3,
+  "completeness": 5,
+  "faithfulness_reasoning": "Reference shows Friday (5) and Saturday (6) as top positive, and Sunday (0), Monday (1), Tuesday (2) as most negative; the explanation focuses on weekend \"variability/spread\" rather than the mean contribution and does not identify Friday as highest or that Sunday/Monday are lowest — the key categorical structure (which levels are highest/lowest) is missed. Rank 4 of 9 is correct and direction isn't contradicted. Anchor 3, -1 (correct top level missed), max(1,3-1)=2.",
+  "usage": {
+    "input_tokens": 2587,
+    "output_tokens": 421
+  }
+}

@@ -1,0 +1,15 @@
+{
+  "form_pipeline": "json",
+  "xai_model": "ebm",
+  "feature": "hr",
+  "form_type": "categorical",
+  "judge_model": "gpt-4o",
+  "faithfulness": 5,
+  "clarity": 5,
+  "completeness": 5,
+  "faithfulness_reasoning": "The explanation accurately captures the bimodal pattern with peaks at 8 a.m. and 5 p.m., matching the reference. The importance rank is correctly identified as 1. The top and bottom categories are correctly described. Anchor 5, no deduction.",
+  "usage": {
+    "input_tokens": 3069,
+    "output_tokens": 169
+  }
+}

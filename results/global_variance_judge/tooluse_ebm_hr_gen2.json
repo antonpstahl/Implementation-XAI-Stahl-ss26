@@ -1,0 +1,15 @@
+{
+  "form_pipeline": "tooluse",
+  "xai_model": "ebm",
+  "feature": "hr",
+  "form_type": "categorical",
+  "judge_model": "claude-opus-4-8",
+  "faithfulness": 5,
+  "clarity": 4,
+  "completeness": 5,
+  "faithfulness_reasoning": "Correctly captures double-peak structure with top at 5 PM (17) and morning peak at 8 AM (8), lowest at 4 AM, and rank #1 — all matching the reference. Anchor 5, no deductions.",
+  "usage": {
+    "input_tokens": 1589,
+    "output_tokens": 280
+  }
+}

@@ -6,10 +6,10 @@
   "judge_model": "claude-opus-4-8",
   "faithfulness": 5,
   "clarity": 4,
-  "completeness": 2,
-  "faithfulness_reasoning": "Direction (increasing over time) matches the reference, rank 2 correct, and the step-up structure with 2012 higher than 2011 captures the monotone increase. Anchor 5, no deductions apply.",
+  "completeness": 3,
+  "faithfulness_reasoning": "Direction (2012 > 2011, increasing) matches the reference, and rank 2 of 9 is correct; the step-change framing captures the structure. Anchor 5, no deductions.",
   "usage": {
-    "input_tokens": 512,
-    "output_tokens": 305
+    "input_tokens": 647,
+    "output_tokens": 313
   }
 }

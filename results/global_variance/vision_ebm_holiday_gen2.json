@@ -1,0 +1,17 @@
+{
+  "form": "vision",
+  "scope": "global",
+  "llm_model": "claude-sonnet-4-6",
+  "loss_key": "poisson_log",
+  "xai_model": "ebm",
+  "feature": "holiday",
+  "explanation": "<thinking>\nLet me analyze the EBM shape plot for the \"holiday\" feature.\n\nFrom the plot:\n- X-axis: holiday (0 = no, 1 = yes), binary feature\n- Y-axis: contribution in log space\n\n**Direction and Shape:**\n- When holiday = 0 (not a holiday): contribution is approximately 0.01 (very slightly above zero, essentially neutral)\n- When holiday = 1 (holiday): contribution drops sharply to approximately -0.145\n\nThis is a clear step change - a binary feature showing that holidays reduce predicted demand compared to regular days.\n\n**Peak:** The contribution is highest (near 0) on non-holidays.\n\n**Importance:** The importance value is 0.008, and it's ranked 9th out of 9 features - the least important feature in the model.\n\n**Magnitude:** The drop is about -0.145 in log space, which means holidays multiply demand by e^(-0.145) ≈ 0.865, roughly a 13-14% reduction in predicted demand.\n</thinking>\n\n[EFFECT] The holiday feature shows a clear step-change effect: on regular (non-holiday) days, it has virtually no impact on predicted demand. On holidays, however, demand is predicted to drop by roughly 13–14% compared to a non-holiday baseline. There is no gradual transition — it is simply \"on\" or \"off\" depending on whether the day is a holiday.\n\n[IMPORTANCE] This is the least important feature in the model, ranked 9th out of 9 with an importance score of 0.008. Its influence on predicted demand is minimal compared to factors like hour of day or temperature.\n\n[RECOMMENDATION] Because holidays are associated with slightly lower overall demand, you can plan for a modest reduction in bike availability or staffing on public holidays, though the effect is small enough that it should be a minor consideration relative to other factors such as time of day or weather.",
+  "plot_file": "ebm_shape_holiday.png",
+  "elapsed_s": 13.57,
+  "usage": {
+    "input_tokens": 1468,
+    "output_tokens": 606,
+    "cache_read_input_tokens": 0
+  },
+  "generation_idx": 2
+}

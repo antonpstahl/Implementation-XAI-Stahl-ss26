@@ -1,0 +1,15 @@
+{
+  "form_pipeline": "json",
+  "xai_model": "ebm",
+  "feature": "holiday",
+  "form_type": "near-flat",
+  "judge_model": "gpt-4o",
+  "faithfulness": 4,
+  "clarity": 5,
+  "completeness": 5,
+  "faithfulness_reasoning": "The explanation describes a step change effect for holidays, which aligns with the near-flat nature of the feature in the reference. The importance rank is correctly identified as 9th. However, the explanation suggests a meaningful decrease, which contradicts the near-flat description. Anchor 5, -1 (effect described as meaningful), max(1, 5-1)=4.",
+  "usage": {
+    "input_tokens": 2414,
+    "output_tokens": 192
+  }
+}

@@ -1,0 +1,12 @@
+{
+  "explanation": "[PREDICTION] For Tuesday, July 2011, 16:00 the model predicts 242 bike rentals in total (actual value: 277).\n\n[DRIVERS] The three most important influencing factors are:\n* hour (16:00): raising (contribution: +0.82)\n* year (2011): lowering (contribution: -0.23)\n* humidity (42 %): raising (contribution: +0.10)\n\n[RECOMMENDATION] Moderate demand during the daytime operation. Keep regular operational readiness.",
+  "elapsed_s": 1.6e-05,
+  "usage": {
+    "input_tokens": 0,
+    "output_tokens": 0,
+    "cache_read_input_tokens": 0
+  },
+  "n_tool_calls": 0,
+  "y_true": 277.0,
+  "prediction": 241.7738
+}

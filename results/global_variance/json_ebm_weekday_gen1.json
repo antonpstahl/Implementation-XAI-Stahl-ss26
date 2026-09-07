@@ -1,0 +1,16 @@
+{
+  "form": "json",
+  "scope": "global",
+  "llm_model": "claude-sonnet-4-6",
+  "loss_key": "poisson_log",
+  "xai_model": "ebm",
+  "feature": "weekday",
+  "explanation": "[EFFECT]\nThe day of the week has a mostly upward trend from Sunday through Friday, then a slight dip on Saturday. Sunday has the strongest negative pull on predicted demand (reducing it modestly below the baseline), while Monday through Saturday all have contributions at or above baseline. The effect peaks on Friday, which boosts predicted hourly rentals the most, with Saturday close behind but slightly lower.\n\n[IMPORTANCE]\nWeekday is ranked 7th out of 9 features in terms of importance, meaning it has a relatively minor influence on predicted demand compared to factors like hour of day or temperature. Its contribution shifts demand by only a few percent in either direction across the week.\n\n[RECOMMENDATION]\nSince Friday consistently shows the highest boost in predicted demand, operators may want to ensure bike availability and staffing are slightly elevated heading into the weekend, while Sunday — the lowest-demand day — could be used as a preferred window for maintenance or rebalancing operations.",
+  "elapsed_s": 16.9,
+  "usage": {
+    "input_tokens": 265,
+    "output_tokens": 541,
+    "cache_read_input_tokens": 1031
+  },
+  "generation_idx": 1
+}

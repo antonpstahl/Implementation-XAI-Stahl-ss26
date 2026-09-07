@@ -1,0 +1,17 @@
+{
+  "form": "vision",
+  "scope": "global",
+  "llm_model": "claude-sonnet-4-6",
+  "loss_key": "poisson_log",
+  "xai_model": "xgb",
+  "feature": "weekday",
+  "explanation": "[EFFECT]\nThe weekday feature has a non-monotonic, categorical effect — each day of the week produces its own distinct pattern of contributions rather than a simple rising or falling trend. Sunday (0) stands out with a strongly negative central tendency (SHAP values reaching as low as −0.9), suggesting demand is pulled down on Sundays relative to the average. Mid-week days (Monday through Friday, values 1–5) tend to cluster in positive territory (roughly +0.2 to +0.3 at their core), indicating a demand boost on workdays. Saturday (6) behaves similarly to Sunday, with a wide spread of both positive and negative values, reflecting that certain hours boost demand (leisure riding) while others suppress it.\n\n[IMPORTANCE]\nWeekday is the 4th most important feature out of 9, making it a moderately strong driver of predicted demand — clearly influential, though less so than the top three features.\n\n[RECOMMENDATION]\nPlan for higher baseline bike availability on weekdays (Monday–Friday) compared to Sunday, while on weekends staffing and redistribution should be timed to specific leisure-peak hours rather than assuming a flat daily pattern.",
+  "plot_file": "xgb_dependence_weekday.png",
+  "elapsed_s": 24.24,
+  "usage": {
+    "input_tokens": 1601,
+    "output_tokens": 1138,
+    "cache_read_input_tokens": 0
+  },
+  "generation_idx": 2
+}

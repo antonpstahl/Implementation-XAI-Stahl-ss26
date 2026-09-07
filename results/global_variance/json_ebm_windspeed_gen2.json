@@ -1,0 +1,16 @@
+{
+  "form": "json",
+  "scope": "global",
+  "llm_model": "claude-sonnet-4-6",
+  "loss_key": "poisson_log",
+  "xai_model": "ebm",
+  "feature": "windspeed",
+  "explanation": "[EFFECT]\nAt very low wind speeds (roughly up to about 7 km/h), windspeed has a very slight positive effect on predicted demand. Beyond that point, the contribution turns negative and declines steadily, becoming quite pronounced at higher speeds — at the strongest recorded winds (around 55 km/h), the model predicts roughly 29% fewer rentals compared to calm conditions. The overall pattern is a gentle uptick at near-calm speeds, followed by a clear and increasingly steep drop-off as winds strengthen.\n\n[IMPORTANCE]\nWindspeed is the second least important feature in the model, ranked 8th out of 9. Its influence on demand is relatively modest under normal conditions but becomes more noticeable at high wind speeds.\n\n[RECOMMENDATION]\nOn days with forecast strong winds (above roughly 25–30 km/h), consider deploying fewer bikes or reducing staff at stations, since demand is expected to be notably lower under those conditions.",
+  "elapsed_s": 13.12,
+  "usage": {
+    "input_tokens": 563,
+    "output_tokens": 556,
+    "cache_read_input_tokens": 1031
+  },
+  "generation_idx": 2
+}

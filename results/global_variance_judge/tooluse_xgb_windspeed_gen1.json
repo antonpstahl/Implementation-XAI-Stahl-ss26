@@ -1,0 +1,15 @@
+{
+  "form_pipeline": "tooluse",
+  "xai_model": "xgb",
+  "feature": "windspeed",
+  "form_type": "near-flat",
+  "judge_model": "claude-opus-4-8",
+  "faithfulness": 2,
+  "clarity": 4,
+  "completeness": 5,
+  "faithfulness_reasoning": "Reference says windspeed is near-flat/negligible with a tiny non-monotone bump (peak ~11 km/h), yet the explanation frames it as a \"roughly monotonic downward effect\" with \"strongly negative\" high-wind effects and even \"multiplying demand down by a large factor\" — overstating a near-flat feature and missing the negligibility framing. Rank 8 correct. Anchor 3 (direction of high-wind roughly right), -1 (over-describes a near-flat feature, misses negligibility). Score max(1,3-1)=2.",
+  "usage": {
+    "input_tokens": 1739,
+    "output_tokens": 392
+  }
+}

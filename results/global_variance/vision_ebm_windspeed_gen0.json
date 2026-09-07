@@ -1,0 +1,16 @@
+{
+  "form": "vision",
+  "scope": "global",
+  "llm_model": "claude-sonnet-4-6",
+  "loss_key": "poisson_log",
+  "xai_model": "ebm",
+  "feature": "windspeed",
+  "explanation": "[EFFECT]\nWind speed has a mostly negative effect on predicted bike demand, and the impact grows stronger as wind speed increases. At low wind speeds (roughly below 13 km/h), the contribution is near zero or very slightly positive. Beyond about 20 km/h, demand is increasingly suppressed, with the contribution falling to around −0.35 in log space at the highest observed speeds (around 54 km/h), meaning demand could be reduced by roughly 30% compared to calm conditions.\n\n[IMPORTANCE]\nWind speed is ranked 8th out of 9 features in terms of importance (importance score = 0.014), making it one of the weakest drivers of predicted demand in the model. Its overall influence is modest compared to factors like hour of day or temperature.\n\n[RECOMMENDATION]\nOn days forecast to have high winds (above roughly 40–50 km/h), operators can expect slightly lower ridership and may consider deploying fewer bikes or adjusting staff levels accordingly, though the effect is small relative to other factors.",
+  "plot_file": "ebm_shape_windspeed.png",
+  "elapsed_s": 11.46,
+  "usage": {
+    "input_tokens": 1470,
+    "output_tokens": 505,
+    "cache_read_input_tokens": 0
+  }
+}

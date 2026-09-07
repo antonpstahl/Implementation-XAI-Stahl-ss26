@@ -56,6 +56,7 @@ from .global_feature import (  # noqa: F401
     assemble_global_system_prompt,
     global_generation_filename,
     build_global_record,
+    seed_generation_zero,
     run_resumable_global_generation,
 )
 from .global_tools import (  # noqa: F401
@@ -80,6 +81,12 @@ from .global_whole import (  # noqa: F401
     split_whole_model_record,
     write_split_records,
     run_resumable_whole_generation,
+    TruncatedGenerationError,
+    is_truncated,
+    assert_not_truncated,
+    find_truncated_records,
+    invalidate_whole_condition,
+    WHOLE_JUDGE_SUBDIRS,
 )
 
 __all__ = [
@@ -116,6 +123,7 @@ __all__ = [
     "assemble_global_system_prompt",
     "global_generation_filename",
     "build_global_record",
+    "seed_generation_zero",
     "run_resumable_global_generation",
     "GLOBAL_TOOL_DEFINITIONS",
     "GlobalToolBox",
@@ -136,4 +144,10 @@ __all__ = [
     "split_whole_model_record",
     "write_split_records",
     "run_resumable_whole_generation",
+    "TruncatedGenerationError",
+    "is_truncated",
+    "assert_not_truncated",
+    "find_truncated_records",
+    "invalidate_whole_condition",
+    "WHOLE_JUDGE_SUBDIRS",
 ]

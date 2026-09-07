@@ -1,0 +1,1122 @@
+[
+  {
+    "pipeline_label": "Template",
+    "xai_model": "XGB",
+    "instance_id": 224,
+    "faithfulness": 5,
+    "clarity": 5,
+    "completeness": 5,
+    "reasoning": {
+      "faithfulness": "All three top drivers are named correctly with accurate directions of effect (temp and month are lowering, hr is raising). The predicted number of 112 is provided and compared with the actual value of 96. Anchor point 5, no deduction.",
+      "clarity": "The explanation uses mostly everyday language, is clear, and is logically structured, making it accessible to non-experts. There are no significant uses of jargon, just a slight technicality in terms of \"contribution.\" Anchor point 5, no deduction.",
+      "completeness": "All three required sections are present: the prediction with actual comparison, the drivers with directions, and a practical recommendation. Anchor point 5, no deduction."
+    },
+    "raw_response": "<faithfulness_reasoning>All three top drivers are named correctly with accurate directions of effect (temp and month are lowering, hr is raising). The predicted number of 112 is provided and compared with the actual value of 96. Anchor point 5, no deduction.</faithfulness_reasoning>\n<faithfulness>5</faithfulness>\n<clarity_reasoning>The explanation uses mostly everyday language, is clear, and is logically structured, making it accessible to non-experts. There are no significant uses of jargon, just a slight technicality in terms of \"contribution.\" Anchor point 5, no deduction.</clarity_reasoning>\n<clarity>5</clarity>\n<completeness_reasoning>All three required sections are present: the prediction with actual comparison, the drivers with directions, and a practical recommendation. Anchor point 5, no deduction.</completeness_reasoning>\n<completeness>5</completeness>"
+  },
+  {
+    "pipeline_label": "Template",
+    "xai_model": "XGB",
+    "instance_id": 580,
+    "faithfulness": 5,
+    "clarity": 5,
+    "completeness": 5,
+    "reasoning": {
+      "faithfulness": "All top 3 drivers are named correctly with their contributions and directions of effect stated accurately. The predicted number is 65, and comparison with the actual value of 63 is present, so no deductions apply. Final score is 5.",
+      "clarity": "The explanation is clear and uses everyday language without jargon; the logical structure helps the reader understand the prediction and its drivers. Therefore, the score is 5, with no deductions needed.",
+      "completeness": "All three required sections (prediction with comparison, drivers with directions, and a practical recommendation) are present and substantial. There are no deductions, so the final score is 5."
+    },
+    "raw_response": "<faithfulness_reasoning>All top 3 drivers are named correctly with their contributions and directions of effect stated accurately. The predicted number is 65, and comparison with the actual value of 63 is present, so no deductions apply. Final score is 5.</faithfulness_reasoning>\n<faithfulness>5</faithfulness>\n<clarity_reasoning>The explanation is clear and uses everyday language without jargon; the logical structure helps the reader understand the prediction and its drivers. Therefore, the score is 5, with no deductions needed.</clarity_reasoning>\n<clarity>5</clarity>\n<completeness_reasoning>All three required sections (prediction with comparison, drivers with directions, and a practical recommendation) are present and substantial. There are no deductions, so the final score is 5.</completeness_reasoning>\n<completeness>5</completeness>"
+  },
+  {
+    "pipeline_label": "Template",
+    "xai_model": "XGB",
+    "instance_id": 1041,
+    "faithfulness": 5,
+    "clarity": 5,
+    "completeness": 5,
+    "reasoning": {
+      "faithfulness": "All three top drivers (hour, year, weekday) are correctly identified, with the correct direction of effects noted; the prediction (385) and the actual count (387) are provided. Anchor point 5, no deductions.",
+      "clarity": "No jargon is used; the language is clear and structured logically. Anchor point 5, no deductions.",
+      "completeness": "All three required sections are present and substantial, including a clear prediction alongside a comparison, driver explanations, and a practical recommendation. Anchor point 5, no deductions."
+    },
+    "raw_response": "<faithfulness_reasoning>All three top drivers (hour, year, weekday) are correctly identified, with the correct direction of effects noted; the prediction (385) and the actual count (387) are provided. Anchor point 5, no deductions.</faithfulness_reasoning>\n<faithfulness>5</faithfulness>\n<clarity_reasoning>No jargon is used; the language is clear and structured logically. Anchor point 5, no deductions.</clarity_reasoning>\n<clarity>5</clarity>\n<completeness_reasoning>All three required sections are present and substantial, including a clear prediction alongside a comparison, driver explanations, and a practical recommendation. Anchor point 5, no deductions.</completeness_reasoning>\n<completeness>5</completeness>"
+  },
+  {
+    "pipeline_label": "Template",
+    "xai_model": "XGB",
+    "instance_id": 1481,
+    "faithfulness": 4,
+    "clarity": 4,
+    "completeness": 4,
+    "reasoning": {
+      "faithfulness": "All three top drivers are named correctly with their contributions, however, the predicted number (229) is mentioned but compared to the actual value (277) inaccurately, which is a small inaccuracy. The anchor point is 4, and no deductions apply, so the final score is 4.",
+      "clarity": "The explanation is mostly clear and uses everyday language, but the phrasing \"raising\" and \"lowering\" could be slightly confusing to a layperson. The anchor point is 4; no deductions apply, leading to a score of 4.",
+      "completeness": "All three required sections are present: prediction with comparison, drivers with directions, and a practical recommendation, though the recommendation is quite brief. The anchor point is 4, with no deductions, so the final score is 4."
+    },
+    "raw_response": "<faithfulness_reasoning>All three top drivers are named correctly with their contributions, however, the predicted number (229) is mentioned but compared to the actual value (277) inaccurately, which is a small inaccuracy. The anchor point is 4, and no deductions apply, so the final score is 4.</faithfulness_reasoning>\n<faithfulness>4</faithfulness>\n<clarity_reasoning>The explanation is mostly clear and uses everyday language, but the phrasing \"raising\" and \"lowering\" could be slightly confusing to a layperson. The anchor point is 4; no deductions apply, leading to a score of 4.</clarity_reasoning>\n<clarity>4</clarity>\n<completeness_reasoning>All three required sections are present: prediction with comparison, drivers with directions, and a practical recommendation, though the recommendation is quite brief. The anchor point is 4, with no deductions, so the final score is 4.</completeness_reasoning>\n<completeness>4</completeness>"
+  },
+  {
+    "pipeline_label": "Template",
+    "xai_model": "XGB",
+    "instance_id": 1677,
+    "faithfulness": 4,
+    "clarity": 5,
+    "completeness": 5,
+    "reasoning": {
+      "faithfulness": "All three top drivers correctly identified with their contributions and directions of effect accurately described. The predicted number of 254 is given, but the actual value comparison is present only in terms of \"actual value: 286\" without direct comparison which will subtract one point. Anchor point 5, -1 (no direct comparison), final score max(1, 5 - 1) = 4.",
+      "clarity": "The explanation uses clear everyday language and avoids technical jargon, making it accessible for non-experts. The structure presents information logically under distinct sections for prediction, drivers, and recommendation. Anchor point 5, no deductions needed.",
+      "completeness": "All required sections are present with substantial content, including prediction, drivers, and a recommendation. However, the recommendation could be viewed as slightly lacking in operational detail. Anchor point 5, no deductions."
+    },
+    "raw_response": "<faithfulness_reasoning>All three top drivers correctly identified with their contributions and directions of effect accurately described. The predicted number of 254 is given, but the actual value comparison is present only in terms of \"actual value: 286\" without direct comparison which will subtract one point. Anchor point 5, -1 (no direct comparison), final score max(1, 5 - 1) = 4.</faithfulness_reasoning>\n<faithfulness>4</faithfulness>\n<clarity_reasoning>The explanation uses clear everyday language and avoids technical jargon, making it accessible for non-experts. The structure presents information logically under distinct sections for prediction, drivers, and recommendation. Anchor point 5, no deductions needed.</clarity_reasoning>\n<clarity>5</clarity>\n<completeness_reasoning>All required sections are present with substantial content, including prediction, drivers, and a recommendation. However, the recommendation could be viewed as slightly lacking in operational detail. Anchor point 5, no deductions.</completeness_reasoning>\n<completeness>5</completeness>"
+  },
+  {
+    "pipeline_label": "Template",
+    "xai_model": "XGB",
+    "instance_id": 2058,
+    "faithfulness": 5,
+    "clarity": 5,
+    "completeness": 5,
+    "reasoning": {
+      "faithfulness": "All three top drivers are named correctly with their contributions, and the direction of effect is stated accurately. The predicted number (194) is given, and while it’s lower than the actual (243), it is acknowledged, resulting in an anchor point of 5 with no deductions.",
+      "clarity": "No jargon is used, and the explanation is clear and understandable for a layperson. The terminology is accessible, and the structure is logical, leading to a score of 5 with no deductions.",
+      "completeness": "All three required sections (prediction, drivers, recommendation) are present and substantial, meeting the requirements for completeness. Thus, the score is set at 5 with no deductions."
+    },
+    "raw_response": "<faithfulness_reasoning>All three top drivers are named correctly with their contributions, and the direction of effect is stated accurately. The predicted number (194) is given, and while it’s lower than the actual (243), it is acknowledged, resulting in an anchor point of 5 with no deductions.</faithfulness_reasoning>\n<faithfulness>5</faithfulness>\n<clarity_reasoning>No jargon is used, and the explanation is clear and understandable for a layperson. The terminology is accessible, and the structure is logical, leading to a score of 5 with no deductions.</clarity_reasoning>\n<clarity>5</clarity>\n<completeness_reasoning>All three required sections (prediction, drivers, recommendation) are present and substantial, meeting the requirements for completeness. Thus, the score is set at 5 with no deductions.</completeness_reasoning>\n<completeness>5</completeness>"
+  },
+  {
+    "pipeline_label": "Template",
+    "xai_model": "XGB",
+    "instance_id": 2510,
+    "faithfulness": 3,
+    "clarity": 3,
+    "completeness": 4,
+    "reasoning": {
+      "faithfulness": "All top 3 drivers are correctly identified with the right direction of effect: hr is raising, yr is lowering, and temp is lowering. The prediction of 326 is given but does not compare directly to the true value of 372, so the score is anchored at 4 with -1 deduction for the missing comparison. Final score: max(1, 4 - 1) = 3.",
+      "clarity": "The explanation uses clear language that is mostly understandable; however, phrases like \"raising\" and \"lowering\" could be clearer for a layperson. Therefore, the score is anchored at 4 with a -1 deduction for clarity, leading to a final score of max(1, 4 - 1) = 3.",
+      "completeness": "All three required sections are present: prediction with an actual value, drivers with directions, and a recommendation, although the recommendation could be more specific. Thus, the score is anchored at 5 with a -1 deduction for lacking practical implications, giving a final score of max(1, 5 - 1) = 4."
+    },
+    "raw_response": "<faithfulness_reasoning>All top 3 drivers are correctly identified with the right direction of effect: hr is raising, yr is lowering, and temp is lowering. The prediction of 326 is given but does not compare directly to the true value of 372, so the score is anchored at 4 with -1 deduction for the missing comparison. Final score: max(1, 4 - 1) = 3.</faithfulness_reasoning>\n<faithfulness>3</faithfulness>\n<clarity_reasoning>The explanation uses clear language that is mostly understandable; however, phrases like \"raising\" and \"lowering\" could be clearer for a layperson. Therefore, the score is anchored at 4 with a -1 deduction for clarity, leading to a final score of max(1, 4 - 1) = 3.</clarity_reasoning>\n<clarity>3</clarity>\n<completeness_reasoning>All three required sections are present: prediction with an actual value, drivers with directions, and a recommendation, although the recommendation could be more specific. Thus, the score is anchored at 5 with a -1 deduction for lacking practical implications, giving a final score of max(1, 5 - 1) = 4.</completeness_reasoning>\n<completeness>4</completeness>"
+  },
+  {
+    "pipeline_label": "Template",
+    "xai_model": "XGB",
+    "instance_id": 3543,
+    "faithfulness": 4,
+    "clarity": 4,
+    "completeness": 5,
+    "reasoning": {
+      "faithfulness": "All top 3 drivers are named correctly with their contributions and are identified as raising, which is accurate. The predicted number is also nearly correct but slightly over the actual value; therefore, the anchor point is 4 with no deductions, yielding a score of 4.",
+      "clarity": "The explanation uses clear and everyday language, making it understandable for non-experts, though the term \"raising\" is somewhat technical. The overall structure is logical and comprehensible, leading to an anchor point of 4 with no deductions.",
+      "completeness": "All three required sections are present: prediction, drivers (with contributions), and a practical recommendation, demonstrating substantial content. There are no missing elements, which results in a score of 5."
+    },
+    "raw_response": "<faithfulness_reasoning>All top 3 drivers are named correctly with their contributions and are identified as raising, which is accurate. The predicted number is also nearly correct but slightly over the actual value; therefore, the anchor point is 4 with no deductions, yielding a score of 4.</faithfulness_reasoning>\n<faithfulness>4</faithfulness>\n<clarity_reasoning>The explanation uses clear and everyday language, making it understandable for non-experts, though the term \"raising\" is somewhat technical. The overall structure is logical and comprehensible, leading to an anchor point of 4 with no deductions.</clarity_reasoning>\n<clarity>4</clarity>\n<completeness_reasoning>All three required sections are present: prediction, drivers (with contributions), and a practical recommendation, demonstrating substantial content. There are no missing elements, which results in a score of 5.</completeness_reasoning>\n<completeness>5</completeness>"
+  },
+  {
+    "pipeline_label": "Template",
+    "xai_model": "XGB",
+    "instance_id": 3847,
+    "faithfulness": 4,
+    "clarity": 5,
+    "completeness": 5,
+    "reasoning": {
+      "faithfulness": "All top 3 drivers are named correctly (hr, weekday, yr), and their contributions are correctly described as raising. The prediction of 586 is slightly off from the actual value of 531, but this is a small inaccuracy; therefore, the anchor point is 4 with no deductions.",
+      "clarity": "The language used is clear and accessible, with no jargon present, making it understandable for non-experts. The logical structure and straightforward presentation of the information lead to an anchor point of 5, with no deductions.",
+      "completeness": "All three required sections (prediction, drivers, and recommendation) are present and substantial. The prediction includes a comparison with the actual value, and the recommendation is practical; therefore, the anchor point is 5 with no deductions."
+    },
+    "raw_response": "<faithfulness_reasoning>All top 3 drivers are named correctly (hr, weekday, yr), and their contributions are correctly described as raising. The prediction of 586 is slightly off from the actual value of 531, but this is a small inaccuracy; therefore, the anchor point is 4 with no deductions.</faithfulness_reasoning>\n<faithfulness>4</faithfulness>\n<clarity_reasoning>The language used is clear and accessible, with no jargon present, making it understandable for non-experts. The logical structure and straightforward presentation of the information lead to an anchor point of 5, with no deductions.</clarity_reasoning>\n<clarity>5</clarity>\n<completeness_reasoning>All three required sections (prediction, drivers, and recommendation) are present and substantial. The prediction includes a comparison with the actual value, and the recommendation is practical; therefore, the anchor point is 5 with no deductions.</completeness_reasoning>\n<completeness>5</completeness>"
+  },
+  {
+    "pipeline_label": "Template",
+    "xai_model": "XGB",
+    "instance_id": 4454,
+    "faithfulness": 5,
+    "clarity": 5,
+    "completeness": 5,
+    "reasoning": {
+      "faithfulness": "All top 3 drivers are correctly named and their contributions are accurately described as raising. The predicted number and actual value are both presented correctly. Anchor point 5, no deductions.",
+      "clarity": "No jargon is used, and the explanation is clear and straightforward for a layperson. The structure is logical and easy to follow, leading to a clarity score of 5.",
+      "completeness": "All three required sections are present and substantial: prediction with comparison to the actual value, identification of the top drivers, and a practical recommendation. Anchor point 5, no deduction."
+    },
+    "raw_response": "<faithfulness_reasoning>All top 3 drivers are correctly named and their contributions are accurately described as raising. The predicted number and actual value are both presented correctly. Anchor point 5, no deductions.</faithfulness_reasoning>\n<faithfulness>5</faithfulness>\n<clarity_reasoning>No jargon is used, and the explanation is clear and straightforward for a layperson. The structure is logical and easy to follow, leading to a clarity score of 5. </clarity_reasoning>\n<clarity>5</clarity>\n<completeness_reasoning>All three required sections are present and substantial: prediction with comparison to the actual value, identification of the top drivers, and a practical recommendation. Anchor point 5, no deduction.</completeness_reasoning>\n<completeness>5</completeness>"
+  },
+  {
+    "pipeline_label": "Template",
+    "xai_model": "EBM",
+    "instance_id": 224,
+    "faithfulness": 5,
+    "clarity": 5,
+    "completeness": 5,
+    "reasoning": {
+      "faithfulness": "All three top drivers are correctly identified with their contributions and directions matched accurately to the model's output. The predicted number of bike rentals is provided and compared to the actual value, so there are no deductions. Anchor point 5, no deductions.",
+      "clarity": "The explanation uses clear, everyday language without jargon, making it understandable for a layperson. It is well-structured, with distinct sections for prediction, drivers, and recommendations, which supports clarity. Anchor point 5, no deductions.",
+      "completeness": "All three required sections (prediction, drivers, recommendation) are present and sufficiently detailed. There is a clear comparison of predicted versus actual values and a practical recommendation provided. Anchor point 5, no deductions."
+    },
+    "raw_response": "<faithfulness_reasoning>All three top drivers are correctly identified with their contributions and directions matched accurately to the model's output. The predicted number of bike rentals is provided and compared to the actual value, so there are no deductions. Anchor point 5, no deductions.</faithfulness_reasoning>\n<faithfulness>5</faithfulness>\n<clarity_reasoning>The explanation uses clear, everyday language without jargon, making it understandable for a layperson. It is well-structured, with distinct sections for prediction, drivers, and recommendations, which supports clarity. Anchor point 5, no deductions.</clarity_reasoning>\n<clarity>5</clarity>\n<completeness_reasoning>All three required sections (prediction, drivers, recommendation) are present and sufficiently detailed. There is a clear comparison of predicted versus actual values and a practical recommendation provided. Anchor point 5, no deductions.</completeness_reasoning>\n<completeness>5</completeness>"
+  },
+  {
+    "pipeline_label": "Template",
+    "xai_model": "EBM",
+    "instance_id": 580,
+    "faithfulness": 5,
+    "clarity": 5,
+    "completeness": 5,
+    "reasoning": {
+      "faithfulness": "All three top drivers are correctly identified with their contributions; directions of effect are correctly stated (year and temperature as lowering, hour as raising); the predicted value of 73 is noted and compared with the actual value of 63. Anchor point 5, no deductions.",
+      "clarity": "The explanation uses clear language that is accessible to non-experts, with no jargon present. It is logically structured and conveys the information effectively. Anchor point 5, no deductions.",
+      "completeness": "All three required sections are present and substantial, including the prediction with comparison, drivers with their directions, and an operational recommendation. Anchor point 5, no deductions."
+    },
+    "raw_response": "<faithfulness_reasoning>All three top drivers are correctly identified with their contributions; directions of effect are correctly stated (year and temperature as lowering, hour as raising); the predicted value of 73 is noted and compared with the actual value of 63. Anchor point 5, no deductions.</faithfulness_reasoning>\n<faithfulness>5</faithfulness>\n<clarity_reasoning>The explanation uses clear language that is accessible to non-experts, with no jargon present. It is logically structured and conveys the information effectively. Anchor point 5, no deductions.</clarity_reasoning>\n<clarity>5</clarity>\n<completeness_reasoning>All three required sections are present and substantial, including the prediction with comparison, drivers with their directions, and an operational recommendation. Anchor point 5, no deductions.</completeness_reasoning>\n<completeness>5</completeness>"
+  },
+  {
+    "pipeline_label": "Template",
+    "xai_model": "EBM",
+    "instance_id": 1041,
+    "faithfulness": 5,
+    "clarity": 5,
+    "completeness": 5,
+    "reasoning": {
+      "faithfulness": "All three top drivers are named correctly with the correct direction of effect provided, and the predicted number (390) is compared with the actual value (387). Anchor point 5, no deductions.",
+      "clarity": "No jargon is used, and the explanation is structured clearly, making it understandable for a layperson. Anchor point 5, no deductions.",
+      "completeness": "All three required sections are present and substantial: prediction with a comparison, drivers with their effects, and a clear recommendation. Anchor point 5, no deductions."
+    },
+    "raw_response": "<faithfulness_reasoning>All three top drivers are named correctly with the correct direction of effect provided, and the predicted number (390) is compared with the actual value (387). Anchor point 5, no deductions.</faithfulness_reasoning>\n<faithfulness>5</faithfulness>\n<clarity_reasoning>No jargon is used, and the explanation is structured clearly, making it understandable for a layperson. Anchor point 5, no deductions.</clarity_reasoning>\n<clarity>5</clarity>\n<completeness_reasoning>All three required sections are present and substantial: prediction with a comparison, drivers with their effects, and a clear recommendation. Anchor point 5, no deductions.</completeness_reasoning>\n<completeness>5</completeness>"
+  },
+  {
+    "pipeline_label": "Template",
+    "xai_model": "EBM",
+    "instance_id": 1481,
+    "faithfulness": 4,
+    "clarity": 4,
+    "completeness": 5,
+    "reasoning": {
+      "faithfulness": "All three top drivers are correctly identified with their contributions and directions of effect accurately described. The predicted number is slightly inaccurate (242 vs actual 277, within 1.5% margin), so the anchor point is 4, and no deductions apply.",
+      "clarity": "The explanation uses clear language and a logical structure, making it easy to understand. However, the terminology like \"raising\" and \"lowering\" might still be slightly technical for a layperson, so the anchor point is 4 with no deductions.",
+      "completeness": "All three required sections are present: prediction with actual value comparison, identification of top drivers, and a practical recommendation. There are no deductions, thus, the anchor point is 5."
+    },
+    "raw_response": "<faithfulness_reasoning>All three top drivers are correctly identified with their contributions and directions of effect accurately described. The predicted number is slightly inaccurate (242 vs actual 277, within 1.5% margin), so the anchor point is 4, and no deductions apply.</faithfulness_reasoning>\n<faithfulness>4</faithfulness>\n<clarity_reasoning>The explanation uses clear language and a logical structure, making it easy to understand. However, the terminology like \"raising\" and \"lowering\" might still be slightly technical for a layperson, so the anchor point is 4 with no deductions.</clarity_reasoning>\n<clarity>4</clarity>\n<completeness_reasoning>All three required sections are present: prediction with actual value comparison, identification of top drivers, and a practical recommendation. There are no deductions, thus, the anchor point is 5.</completeness_reasoning>\n<completeness>5</completeness>"
+  },
+  {
+    "pipeline_label": "Template",
+    "xai_model": "EBM",
+    "instance_id": 1677,
+    "faithfulness": 5,
+    "clarity": 5,
+    "completeness": 5,
+    "reasoning": {
+      "faithfulness": "All three top drivers are named correctly with their contributions and directions of effect accurately described. The predicted number of rentals (260) is stated, along with a comparison to the actual value (286), leading to anchor point 5 with no deductions.",
+      "clarity": "No jargon is used, and the explanation is structured clearly with headings. It is understandable for non-experts, leading to anchor point 5 with no deductions.",
+      "completeness": "All three sections (prediction, drivers, recommendation) are present and substantial, with a clear prediction comparison and operational recommendation. Therefore, the anchor point is 5 with no deductions."
+    },
+    "raw_response": "<faithfulness_reasoning>All three top drivers are named correctly with their contributions and directions of effect accurately described. The predicted number of rentals (260) is stated, along with a comparison to the actual value (286), leading to anchor point 5 with no deductions.</faithfulness_reasoning>\n<faithfulness>5</faithfulness>\n<clarity_reasoning>No jargon is used, and the explanation is structured clearly with headings. It is understandable for non-experts, leading to anchor point 5 with no deductions.</clarity_reasoning>\n<clarity>5</clarity>\n<completeness_reasoning>All three sections (prediction, drivers, recommendation) are present and substantial, with a clear prediction comparison and operational recommendation. Therefore, the anchor point is 5 with no deductions.</completeness_reasoning>\n<completeness>5</completeness>"
+  },
+  {
+    "pipeline_label": "Template",
+    "xai_model": "EBM",
+    "instance_id": 2058,
+    "faithfulness": 5,
+    "clarity": 4,
+    "completeness": 4,
+    "reasoning": {
+      "faithfulness": "All three top drivers are correctly identified, with the contributions and their effects accurately described. The predicted number is 177, and the actual value is mentioned, so the anchor point is 5 with no deductions.",
+      "clarity": "The explanation is largely clear with everyday language, but the use of \"raising\" and \"lowering\" may be slightly technical for a layperson. Therefore, I rate it 4, as it's mostly understandable but has minor elements of technical language.",
+      "completeness": "All three required sections are present: the prediction with a comparison to the actual value, a clear list of drivers, and a recommendation, although the recommendation is somewhat generic. Thus, the anchor point is 4, with no deductions."
+    },
+    "raw_response": "<faithfulness_reasoning>All three top drivers are correctly identified, with the contributions and their effects accurately described. The predicted number is 177, and the actual value is mentioned, so the anchor point is 5 with no deductions.</faithfulness_reasoning>\n<faithfulness>5</faithfulness>\n<clarity_reasoning>The explanation is largely clear with everyday language, but the use of \"raising\" and \"lowering\" may be slightly technical for a layperson. Therefore, I rate it 4, as it's mostly understandable but has minor elements of technical language.</clarity_reasoning>\n<clarity>4</clarity>\n<completeness_reasoning>All three required sections are present: the prediction with a comparison to the actual value, a clear list of drivers, and a recommendation, although the recommendation is somewhat generic. Thus, the anchor point is 4, with no deductions.</completeness_reasoning>\n<completeness>4</completeness>"
+  },
+  {
+    "pipeline_label": "Template",
+    "xai_model": "EBM",
+    "instance_id": 2510,
+    "faithfulness": 3,
+    "clarity": 5,
+    "completeness": 5,
+    "reasoning": {
+      "faithfulness": "All top 3 drivers are correctly named with their contributions and directions of effect appropriately described. The predicted number (311) is present, but there is a mismatch in the actual value presented (372) versus the predicted value with a notable deviation. Thus, the anchor point is 4, with a deduction of -1 for the prediction accuracy. Final score is 3.",
+      "clarity": "The explanation uses clear language and provides a logical structure without jargon, making it mostly comprehensible to a non-expert audience. Since it’s clear throughout, the anchor point is 5, with no deductions needed. Final score is 5.",
+      "completeness": "All three required sections are present: the prediction with a comparison, the identified drivers, and a practical recommendation. Each section is substantial, therefore the anchor point is 5 with no deductions. Final score is 5."
+    },
+    "raw_response": "<faithfulness_reasoning>All top 3 drivers are correctly named with their contributions and directions of effect appropriately described. The predicted number (311) is present, but there is a mismatch in the actual value presented (372) versus the predicted value with a notable deviation. Thus, the anchor point is 4, with a deduction of -1 for the prediction accuracy. Final score is 3.</faithfulness_reasoning>\n<faithfulness>3</faithfulness>\n<clarity_reasoning>The explanation uses clear language and provides a logical structure without jargon, making it mostly comprehensible to a non-expert audience. Since it’s clear throughout, the anchor point is 5, with no deductions needed. Final score is 5.</clarity_reasoning>\n<clarity>5</clarity>\n<completeness_reasoning>All three required sections are present: the prediction with a comparison, the identified drivers, and a practical recommendation. Each section is substantial, therefore the anchor point is 5 with no deductions. Final score is 5.</completeness_reasoning>\n<completeness>5</completeness>"
+  },
+  {
+    "pipeline_label": "Template",
+    "xai_model": "EBM",
+    "instance_id": 3543,
+    "faithfulness": 5,
+    "clarity": 5,
+    "completeness": 5,
+    "reasoning": {
+      "faithfulness": "All top 3 drivers (hour, year, humidity) are correctly identified and their contributions are correctly stated as positive/raising. The prediction is close to the actual value and is specified; hence the anchor point is 5 with no deductions.",
+      "clarity": "The explanation uses clear language suitable for a layperson, with well-defined sections that logically present the information. While it does not include complex terminology, it remains concise and straightforward; therefore, the anchor point is 5 with no deductions.",
+      "completeness": "All three required sections (prediction, drivers, and recommendation) are present and sufficiently detailed, with a clear comparison of prediction versus actual value. The recommendation is practical and relevant; thus the anchor point is 5 with no deductions."
+    },
+    "raw_response": "<faithfulness_reasoning>All top 3 drivers (hour, year, humidity) are correctly identified and their contributions are correctly stated as positive/raising. The prediction is close to the actual value and is specified; hence the anchor point is 5 with no deductions.</faithfulness_reasoning>\n<faithfulness>5</faithfulness>\n<clarity_reasoning>The explanation uses clear language suitable for a layperson, with well-defined sections that logically present the information. While it does not include complex terminology, it remains concise and straightforward; therefore, the anchor point is 5 with no deductions.</clarity_reasoning>\n<clarity>5</clarity>\n<completeness_reasoning>All three required sections (prediction, drivers, and recommendation) are present and sufficiently detailed, with a clear comparison of prediction versus actual value. The recommendation is practical and relevant; thus the anchor point is 5 with no deductions.</completeness_reasoning>\n<completeness>5</completeness>"
+  },
+  {
+    "pipeline_label": "Template",
+    "xai_model": "EBM",
+    "instance_id": 3847,
+    "faithfulness": 5,
+    "clarity": 4,
+    "completeness": 5,
+    "reasoning": {
+      "faithfulness": "All top drivers are correctly named with the correct direction of effect (raising), and the predicted number 593 connects clearly with the actual number. Anchor point 5, no deductions.",
+      "clarity": "The explanation uses clear language throughout, with a logical structure that is easy for a layperson to understand, except the use of \"+0.66\", which might seem slightly technical. Anchor point 4, -1 for technical jargon, resulting in a score of 3.",
+      "completeness": "All three sections (prediction, drivers, and recommendation) are present and substantial, providing clear insights. Anchor point 5, no deductions."
+    },
+    "raw_response": "<faithfulness_reasoning>All top drivers are correctly named with the correct direction of effect (raising), and the predicted number 593 connects clearly with the actual number. Anchor point 5, no deductions.</faithfulness_reasoning>\n<faithfulness>5</faithfulness>\n<clarity_reasoning>The explanation uses clear language throughout, with a logical structure that is easy for a layperson to understand, except the use of \"+0.66\", which might seem slightly technical. Anchor point 4, -1 for technical jargon, resulting in a score of 3.</clarity_reasoning>\n<clarity>4</clarity>\n<completeness_reasoning>All three sections (prediction, drivers, and recommendation) are present and substantial, providing clear insights. Anchor point 5, no deductions.</completeness_reasoning>\n<completeness>5</completeness>"
+  },
+  {
+    "pipeline_label": "Template",
+    "xai_model": "EBM",
+    "instance_id": 4454,
+    "faithfulness": 5,
+    "clarity": 5,
+    "completeness": 5,
+    "reasoning": {
+      "faithfulness": "The prediction of 332 is close to the actual value of 354; all top three drivers are named correctly with their directions correctly identified as positive. Anchor point 5, no deductions apply.",
+      "clarity": "No jargon is used, and the language is clear and understandable, with a logical structure presented in sections. Anchor point 5, no deductions apply.",
+      "completeness": "All three required sections (prediction with comparison, drivers with directions, and a practical recommendation) are present and substantial. Anchor point 5, no deductions apply."
+    },
+    "raw_response": "<faithfulness_reasoning>The prediction of 332 is close to the actual value of 354; all top three drivers are named correctly with their directions correctly identified as positive. Anchor point 5, no deductions apply.</faithfulness_reasoning>\n<faithfulness>5</faithfulness>\n<clarity_reasoning>No jargon is used, and the language is clear and understandable, with a logical structure presented in sections. Anchor point 5, no deductions apply.</clarity_reasoning>\n<clarity>5</clarity>\n<completeness_reasoning>All three required sections (prediction with comparison, drivers with directions, and a practical recommendation) are present and substantial. Anchor point 5, no deductions apply.</completeness_reasoning>\n<completeness>5</completeness>"
+  },
+  {
+    "pipeline_label": "JSON to Text",
+    "xai_model": "XGB",
+    "instance_id": 224,
+    "faithfulness": 5,
+    "clarity": 4,
+    "completeness": 5,
+    "reasoning": {
+      "faithfulness": "All three top drivers are correctly identified, with the correct direction of effect noted for each (temp down, hr up, mnth down). The predicted number (112) is provided and compared reasonably with the actual count (96), resulting in an anchor point of 5 and no deductions.",
+      "clarity": "The explanation uses clear language with some technical terms, but it allows comprehension for a layperson. The structure is logical, although a minor use of \"normalised value\" could be simplified for broader accessibility, leading to an anchor point of 4 (with -1 for technical language).",
+      "completeness": "All required sections (prediction, drivers, and recommendation) are present and substantial. The explanation includes a comparison of prediction and actual value, resulting in a score of 5 with no deductions."
+    },
+    "raw_response": "<faithfulness_reasoning>All three top drivers are correctly identified, with the correct direction of effect noted for each (temp down, hr up, mnth down). The predicted number (112) is provided and compared reasonably with the actual count (96), resulting in an anchor point of 5 and no deductions.</faithfulness_reasoning>\n<faithfulness>5</faithfulness>\n<clarity_reasoning>The explanation uses clear language with some technical terms, but it allows comprehension for a layperson. The structure is logical, although a minor use of \"normalised value\" could be simplified for broader accessibility, leading to an anchor point of 4 (with -1 for technical language).</clarity_reasoning>\n<clarity>4</clarity>\n<completeness_reasoning>All required sections (prediction, drivers, and recommendation) are present and substantial. The explanation includes a comparison of prediction and actual value, resulting in a score of 5 with no deductions.</completeness_reasoning>\n<completeness>5</completeness>"
+  },
+  {
+    "pipeline_label": "JSON to Text",
+    "xai_model": "XGB",
+    "instance_id": 580,
+    "faithfulness": 5,
+    "clarity": 4,
+    "completeness": 5,
+    "reasoning": {
+      "faithfulness": "All three top drivers are mentioned with the correct direction of effect: hr, yr, and mnth all contribute negatively as expected. The predicted number (about 65) is correctly compared with the actual count (63), thus no deductions apply. Anchor point 5, no deductions.",
+      "clarity": "The explanation uses mostly clear everyday language, with some minor technical terms that are explained (e.g., \"dampening factor\"). However, the phrase \"influence –0.36\" is somewhat jargonistic. Anchor point 4, -1 for slight jargon, so final score is 3.",
+      "completeness": "All three sections (prediction, drivers, and recommendation) are present and substantial. The prediction is compared to the actual, and a practical operational recommendation is provided. Anchor point 5, no deductions."
+    },
+    "raw_response": "<faithfulness_reasoning>All three top drivers are mentioned with the correct direction of effect: hr, yr, and mnth all contribute negatively as expected. The predicted number (about 65) is correctly compared with the actual count (63), thus no deductions apply. Anchor point 5, no deductions.</faithfulness_reasoning>\n<faithfulness>5</faithfulness>\n<clarity_reasoning>The explanation uses mostly clear everyday language, with some minor technical terms that are explained (e.g., \"dampening factor\"). However, the phrase \"influence –0.36\" is somewhat jargonistic. Anchor point 4, -1 for slight jargon, so final score is 3.</clarity_reasoning>\n<clarity>4</clarity>\n<completeness_reasoning>All three sections (prediction, drivers, and recommendation) are present and substantial. The prediction is compared to the actual, and a practical operational recommendation is provided. Anchor point 5, no deductions.</completeness_reasoning>\n<completeness>5</completeness>"
+  },
+  {
+    "pipeline_label": "JSON to Text",
+    "xai_model": "XGB",
+    "instance_id": 1041,
+    "faithfulness": 5,
+    "clarity": 5,
+    "completeness": 5,
+    "reasoning": {
+      "faithfulness": "All top 3 drivers are identified correctly (hr raising, yr damping, weekday raising) with correct directions of effect; the prediction of 385 is compared to the actual value of 387. Anchor point 5, no deductions.",
+      "clarity": "Clear and everyday language is used throughout the explanation with no jargon, making it easily understandable for non-experts. Anchor point 5, no required deductions.",
+      "completeness": "All three sections are present and substantial: prediction with comparison, detailed drivers with directions, and practical recommendations for addressing high demand. Anchor point 5, no deductions."
+    },
+    "raw_response": "<faithfulness_reasoning>All top 3 drivers are identified correctly (hr raising, yr damping, weekday raising) with correct directions of effect; the prediction of 385 is compared to the actual value of 387. Anchor point 5, no deductions.</faithfulness_reasoning>\n<faithfulness>5</faithfulness>\n<clarity_reasoning>Clear and everyday language is used throughout the explanation with no jargon, making it easily understandable for non-experts. Anchor point 5, no required deductions.</clarity_reasoning>\n<clarity>5</clarity>\n<completeness_reasoning>All three sections are present and substantial: prediction with comparison, detailed drivers with directions, and practical recommendations for addressing high demand. Anchor point 5, no deductions.</completeness_reasoning>\n<completeness>5</completeness>"
+  },
+  {
+    "pipeline_label": "JSON to Text",
+    "xai_model": "XGB",
+    "instance_id": 1481,
+    "faithfulness": 3,
+    "clarity": 3,
+    "completeness": 4,
+    "reasoning": {
+      "faithfulness": "Prediction is close but slightly off; the predicted number (229) is applied correctly but the actual (277) is presented as being about 17% off, while specifically named drivers are also accurate, with directions correctly identified. Anchor point is 4, with a deduction for missing the exact predicted number. Final score is max(1, 4 - 1) = 3.",
+      "clarity": "The explanation uses mostly clear language and logical structure but does contain some technical terms that may confuse a layperson, e.g., \"damping direction.\" The anchor point is 4, but one deduction applies for the technical terms. Final score is max(1, 4 - 1) = 3.",
+      "completeness": "All sections of the explanation are present, covering prediction, drivers, and a practical recommendation comprehensively; however, it can be seen that one section is slightly lengthier than others. The anchor point is 4, with no deductions. Final score is 4."
+    },
+    "raw_response": "<faithfulness_reasoning>Prediction is close but slightly off; the predicted number (229) is applied correctly but the actual (277) is presented as being about 17% off, while specifically named drivers are also accurate, with directions correctly identified. Anchor point is 4, with a deduction for missing the exact predicted number. Final score is max(1, 4 - 1) = 3.</faithfulness_reasoning>\n<faithfulness>3</faithfulness>\n<clarity_reasoning>The explanation uses mostly clear language and logical structure but does contain some technical terms that may confuse a layperson, e.g., \"damping direction.\" The anchor point is 4, but one deduction applies for the technical terms. Final score is max(1, 4 - 1) = 3.</clarity_reasoning>\n<clarity>3</clarity>\n<completeness_reasoning>All sections of the explanation are present, covering prediction, drivers, and a practical recommendation comprehensively; however, it can be seen that one section is slightly lengthier than others. The anchor point is 4, with no deductions. Final score is 4.</completeness_reasoning>\n<completeness>4</completeness>"
+  },
+  {
+    "pipeline_label": "JSON to Text",
+    "xai_model": "XGB",
+    "instance_id": 1677,
+    "faithfulness": 3,
+    "clarity": 4,
+    "completeness": 5,
+    "reasoning": {
+      "faithfulness": "All top 3 drivers are identified correctly with their contributions and directions clearly stated. The predicted number is mentioned alongside the actual count, showing the model's accuracy; however, it incorrectly states the rank of 'hr' as 1, when it is actually ranked 1 per ground truth. Anchor point 4; one deduction for a wrong ranking gives a final score of 3.",
+      "clarity": "The explanation uses mostly clear and accessible language, making it understandable to non-experts; there is only a minor use of technical terms. Overall, only one slightly unclear term is present, leading to a strong score. Anchor point 4, no deductions applied gives a final score of 4.",
+      "completeness": "All three required sections—prediction, drivers, and recommendations—are present and provide substantial details. There is a clear comparison of prediction versus actual value. No deductions apply, leading to a final score of 5."
+    },
+    "raw_response": "<faithfulness_reasoning>All top 3 drivers are identified correctly with their contributions and directions clearly stated. The predicted number is mentioned alongside the actual count, showing the model's accuracy; however, it incorrectly states the rank of 'hr' as 1, when it is actually ranked 1 per ground truth. Anchor point 4; one deduction for a wrong ranking gives a final score of 3.</faithfulness_reasoning>\n<faithfulness>3</faithfulness>\n<clarity_reasoning>The explanation uses mostly clear and accessible language, making it understandable to non-experts; there is only a minor use of technical terms. Overall, only one slightly unclear term is present, leading to a strong score. Anchor point 4, no deductions applied gives a final score of 4.</clarity_reasoning>\n<clarity>4</clarity>\n<completeness_reasoning>All three required sections—prediction, drivers, and recommendations—are present and provide substantial details. There is a clear comparison of prediction versus actual value. No deductions apply, leading to a final score of 5.</completeness_reasoning>\n<completeness>5</completeness>"
+  },
+  {
+    "pipeline_label": "JSON to Text",
+    "xai_model": "XGB",
+    "instance_id": 2058,
+    "faithfulness": 3,
+    "clarity": 3,
+    "completeness": 3,
+    "reasoning": {
+      "faithfulness": "All three top drivers are mentioned correctly, with their contributions and directions clarified; however, the actual predicted number is vaguely referred to as \"approximately 194\" without specific acknowledgment of its inclusion in the final comparison. Anchor point 4 for correct drivers and direction, -1 for vague phrasing of prediction. Final score max(1, 4 - 1) = 3.",
+      "clarity": "The explanation utilizes mostly everyday language and is structured logically, making it understandable; however, some terms like \"damping factor\" could be confusing for laypersons. Anchor point 4, deduction for slightly technical language makes it a 3. Final score max(1, 4 - 1) = 3.",
+      "completeness": "All three sections (prediction, drivers, recommendation) are present and adequately covered; however, the comparison between predicted and actual values could be more explicit. Anchor point 4 for substantial presence, -1 for the need for more clarity on the prediction vs. actual. Final score max(1, 4 - 1) = 3."
+    },
+    "raw_response": "<faithfulness_reasoning>All three top drivers are mentioned correctly, with their contributions and directions clarified; however, the actual predicted number is vaguely referred to as \"approximately 194\" without specific acknowledgment of its inclusion in the final comparison. Anchor point 4 for correct drivers and direction, -1 for vague phrasing of prediction. Final score max(1, 4 - 1) = 3.</faithfulness_reasoning>\n<faithfulness>3</faithfulness>\n\n<clarity_reasoning>The explanation utilizes mostly everyday language and is structured logically, making it understandable; however, some terms like \"damping factor\" could be confusing for laypersons. Anchor point 4, deduction for slightly technical language makes it a 3. Final score max(1, 4 - 1) = 3.</clarity_reasoning>\n<clarity>3</clarity>\n\n<completeness_reasoning>All three sections (prediction, drivers, recommendation) are present and adequately covered; however, the comparison between predicted and actual values could be more explicit. Anchor point 4 for substantial presence, -1 for the need for more clarity on the prediction vs. actual. Final score max(1, 4 - 1) = 3.</completeness_reasoning>\n<completeness>3</completeness>"
+  },
+  {
+    "pipeline_label": "JSON to Text",
+    "xai_model": "XGB",
+    "instance_id": 2510,
+    "faithfulness": 3,
+    "clarity": 4,
+    "completeness": 5,
+    "reasoning": {
+      "faithfulness": "All three top drivers are correctly identified, with accurate directions of effect provided. However, the predicted number is 326, and while the actual number is mentioned, the specific prediction is briefly expressed as being \"12 percent below,\" which could confuse the reader; the minor inaccuracy leads to deduction. Anchor point is 4 minus 1 due to the miscommunication of the prediction. Final score = 3.",
+      "clarity": "The explanation utilizes mostly clear language that would be understandable to a lay person, though it does contain some technical aspects like \"damping factor.\" It is mostly clear with a coherent structure. Anchor point is 4 with no deductions. Final score = 4.",
+      "completeness": "All required sections are present: a prediction with a comparison, a detailed description of drivers, and a practical recommendation. The recommendation also logically follows from the discussed drivers. Anchor point is 5 with no deductions. Final score = 5."
+    },
+    "raw_response": "<faithfulness_reasoning>All three top drivers are correctly identified, with accurate directions of effect provided. However, the predicted number is 326, and while the actual number is mentioned, the specific prediction is briefly expressed as being \"12 percent below,\" which could confuse the reader; the minor inaccuracy leads to deduction. Anchor point is 4 minus 1 due to the miscommunication of the prediction. Final score = 3.</faithfulness_reasoning>\n<faithfulness>3</faithfulness>\n<clarity_reasoning>The explanation utilizes mostly clear language that would be understandable to a lay person, though it does contain some technical aspects like \"damping factor.\" It is mostly clear with a coherent structure. Anchor point is 4 with no deductions. Final score = 4.</clarity_reasoning>\n<clarity>4</clarity>\n<completeness_reasoning>All required sections are present: a prediction with a comparison, a detailed description of drivers, and a practical recommendation. The recommendation also logically follows from the discussed drivers. Anchor point is 5 with no deductions. Final score = 5.</completeness_reasoning>\n<completeness>5</completeness>"
+  },
+  {
+    "pipeline_label": "JSON to Text",
+    "xai_model": "XGB",
+    "instance_id": 3543,
+    "faithfulness": 4,
+    "clarity": 4,
+    "completeness": 5,
+    "reasoning": {
+      "faithfulness": "All top 3 drivers are named correctly (yr, hr, hum) with their contributions and directions identified properly. The prediction is included, with a mention of the actual count for context; minor inaccuracy in percentage estimation noted, but overall, the information aligns well. Anchor point 4, no deductions.",
+      "clarity": "The explanation uses clear language and has a logical structure throughout sections; some technical terms such as \"contribution\" and \"baseline prediction\" are present but are not overly complex. Anchor point 4, one slight reduction for technicality, giving a very accessible explanation overall.",
+      "completeness": "All three required sections (prediction with actual comparison, drivers with directions, and a substantial recommendation) are present and adequately detailed. Anchor point 5, no deductions."
+    },
+    "raw_response": "<faithfulness_reasoning>All top 3 drivers are named correctly (yr, hr, hum) with their contributions and directions identified properly. The prediction is included, with a mention of the actual count for context; minor inaccuracy in percentage estimation noted, but overall, the information aligns well. Anchor point 4, no deductions.</faithfulness_reasoning>\n<faithfulness>4</faithfulness>\n<clarity_reasoning>The explanation uses clear language and has a logical structure throughout sections; some technical terms such as \"contribution\" and \"baseline prediction\" are present but are not overly complex. Anchor point 4, one slight reduction for technicality, giving a very accessible explanation overall. </clarity_reasoning>\n<clarity>4</clarity>\n<completeness_reasoning>All three required sections (prediction with actual comparison, drivers with directions, and a substantial recommendation) are present and adequately detailed. Anchor point 5, no deductions.</completeness_reasoning>\n<completeness>5</completeness>"
+  },
+  {
+    "pipeline_label": "JSON to Text",
+    "xai_model": "XGB",
+    "instance_id": 3847,
+    "faithfulness": 5,
+    "clarity": 5,
+    "completeness": 5,
+    "reasoning": {
+      "faithfulness": "All three top drivers are correctly named with appropriate contributions noted, and the direction of their effects is accurately described. Prediction of 586 is present and compared against the actual count of 531, indicating a strong alignment, so the final score is 5.",
+      "clarity": "No jargon is used, and the explanation is structured in clear, everyday language that is accessible to non-experts. Thus, the score for clarity is a 5.",
+      "completeness": "All three sections are present and substantial: the prediction is compared to the actual value, the top drivers are clearly discussed, and a practical recommendation is given. Therefore, the completeness score is 5."
+    },
+    "raw_response": "<faithfulness_reasoning>All three top drivers are correctly named with appropriate contributions noted, and the direction of their effects is accurately described. Prediction of 586 is present and compared against the actual count of 531, indicating a strong alignment, so the final score is 5.</faithfulness_reasoning>\n<faithfulness>5</faithfulness>\n<clarity_reasoning>No jargon is used, and the explanation is structured in clear, everyday language that is accessible to non-experts. Thus, the score for clarity is a 5.</clarity_reasoning>\n<clarity>5</clarity>\n<completeness_reasoning>All three sections are present and substantial: the prediction is compared to the actual value, the top drivers are clearly discussed, and a practical recommendation is given. Therefore, the completeness score is 5.</completeness_reasoning>\n<completeness>5</completeness>"
+  },
+  {
+    "pipeline_label": "JSON to Text",
+    "xai_model": "XGB",
+    "instance_id": 4454,
+    "faithfulness": 3,
+    "clarity": 4,
+    "completeness": 5,
+    "reasoning": {
+      "faithfulness": "Anchor point 4 fits as at least 2 out of the top 3 drivers are named correctly with accurate effects described; however, the predicted number is not mentioned correctly. The score is reduced by -1 for the missing predicted number. Final score is max(1, 4 - 1) = 3.",
+      "clarity": "The explanation is largely understandable, using mostly everyday language, though some technical terms like \"influence\" and \"positive boost\" might pose slight challenges for a layperson. Thus, it fits anchor point 4, and no deductions are necessary. Final score is 4.",
+      "completeness": "All three required sections are present and substantial, including a prediction comparison, driver explanations, and a practical recommendation; thus, it meets the criteria for anchor point 5. There are no deductions. Final score is 5."
+    },
+    "raw_response": "<faithfulness_reasoning>Anchor point 4 fits as at least 2 out of the top 3 drivers are named correctly with accurate effects described; however, the predicted number is not mentioned correctly. The score is reduced by -1 for the missing predicted number. Final score is max(1, 4 - 1) = 3.</faithfulness_reasoning>\n<faithfulness>3</faithfulness>\n<clarity_reasoning>The explanation is largely understandable, using mostly everyday language, though some technical terms like \"influence\" and \"positive boost\" might pose slight challenges for a layperson. Thus, it fits anchor point 4, and no deductions are necessary. Final score is 4.</clarity_reasoning>\n<clarity>4</clarity>\n<completeness_reasoning>All three required sections are present and substantial, including a prediction comparison, driver explanations, and a practical recommendation; thus, it meets the criteria for anchor point 5. There are no deductions. Final score is 5.</completeness_reasoning>\n<completeness>5</completeness>"
+  },
+  {
+    "pipeline_label": "JSON to Text",
+    "xai_model": "EBM",
+    "instance_id": 224,
+    "faithfulness": 5,
+    "clarity": 5,
+    "completeness": 5,
+    "reasoning": {
+      "faithfulness": "All three top drivers are correctly named (hr as +ve, temp as -ve, yr as -ve), and their directions of effect are accurately stated. The predicted number (117) is provided and compared with actual count (96). Anchor point 5, no deductions.",
+      "clarity": "No jargon is used, and the explanation is structured clearly with accessible language. The way the drivers and their influences are described is easy to follow for non-experts. Anchor point 5, no deductions.",
+      "completeness": "All three required sections are present (prediction with comparison, drivers with directions, and a practical recommendation). Each section is substantial and well-developed. Anchor point 5, no deductions."
+    },
+    "raw_response": "<faithfulness_reasoning>All three top drivers are correctly named (hr as +ve, temp as -ve, yr as -ve), and their directions of effect are accurately stated. The predicted number (117) is provided and compared with actual count (96). Anchor point 5, no deductions.</faithfulness_reasoning>\n<faithfulness>5</faithfulness>\n<clarity_reasoning>No jargon is used, and the explanation is structured clearly with accessible language. The way the drivers and their influences are described is easy to follow for non-experts. Anchor point 5, no deductions.</clarity_reasoning>\n<clarity>5</clarity>\n<completeness_reasoning>All three required sections are present (prediction with comparison, drivers with directions, and a practical recommendation). Each section is substantial and well-developed. Anchor point 5, no deductions.</completeness_reasoning>\n<completeness>5</completeness>"
+  },
+  {
+    "pipeline_label": "JSON to Text",
+    "xai_model": "EBM",
+    "instance_id": 580,
+    "faithfulness": 4,
+    "clarity": 4,
+    "completeness": 5,
+    "reasoning": {
+      "faithfulness": "All three top drivers are named correctly with their contributions and directions of effect accurately described. The prediction of 73 with a mention of the actual count 63 supports an anchor point of 4, but a minor deduction is necessary due to the inaccuracy in the predicted number being taken as \"about 73\" rather than precisely stating it. Final score is 4.",
+      "clarity": "The explanation is mostly clear and understandable, using everyday language while explaining the drivers. There are minor technical terms used such as \"damping factor\" which could confuse a layperson, so the anchor point is adjusted down to 4 with no applicable deductions. Final score is 4.",
+      "completeness": "All three sections are present and substantial: the prediction includes a comparison with the actual value, the drivers are listed with detailed descriptions, and there is a practical recommendation provided. The completeness is strong, leading to an anchor point of 5 with no deductions. Final score is 5."
+    },
+    "raw_response": "<faithfulness_reasoning>All three top drivers are named correctly with their contributions and directions of effect accurately described. The prediction of 73 with a mention of the actual count 63 supports an anchor point of 4, but a minor deduction is necessary due to the inaccuracy in the predicted number being taken as \"about 73\" rather than precisely stating it. Final score is 4.</faithfulness_reasoning>\n<faithfulness>4</faithfulness>\n\n<clarity_reasoning>The explanation is mostly clear and understandable, using everyday language while explaining the drivers. There are minor technical terms used such as \"damping factor\" which could confuse a layperson, so the anchor point is adjusted down to 4 with no applicable deductions. Final score is 4.</clarity_reasoning>\n<clarity>4</clarity>\n\n<completeness_reasoning>All three sections are present and substantial: the prediction includes a comparison with the actual value, the drivers are listed with detailed descriptions, and there is a practical recommendation provided. The completeness is strong, leading to an anchor point of 5 with no deductions. Final score is 5.</completeness_reasoning>\n<completeness>5</completeness>"
+  },
+  {
+    "pipeline_label": "JSON to Text",
+    "xai_model": "EBM",
+    "instance_id": 1041,
+    "faithfulness": 5,
+    "clarity": 4,
+    "completeness": 5,
+    "reasoning": {
+      "faithfulness": "All top 3 drivers are named correctly with their contributions and directions of effect accurately described. The prediction of 390 is also provided and compared against the actual count of 387, leading to an anchor point of 5 with no deductions.",
+      "clarity": "The explanation is mostly clear and uses everyday language, although it includes some technical terms like \"dominant influence\" and \"damping force\". This brings the clarity score down slightly to an anchor point of 4, with no deductions.",
+      "completeness": "All three sections (prediction, drivers, recommendation) are present and substantial, with the prediction compared to the actual value, and a practical recommendation provided. The score is anchor point 5 with no deductions."
+    },
+    "raw_response": "<faithfulness_reasoning>All top 3 drivers are named correctly with their contributions and directions of effect accurately described. The prediction of 390 is also provided and compared against the actual count of 387, leading to an anchor point of 5 with no deductions.</faithfulness_reasoning>\n<faithfulness>5</faithfulness>\n<clarity_reasoning>The explanation is mostly clear and uses everyday language, although it includes some technical terms like \"dominant influence\" and \"damping force\". This brings the clarity score down slightly to an anchor point of 4, with no deductions.</clarity_reasoning>\n<clarity>4</clarity>\n<completeness_reasoning>All three sections (prediction, drivers, recommendation) are present and substantial, with the prediction compared to the actual value, and a practical recommendation provided. The score is anchor point 5 with no deductions.</completeness_reasoning>\n<completeness>5</completeness>"
+  },
+  {
+    "pipeline_label": "JSON to Text",
+    "xai_model": "EBM",
+    "instance_id": 1481,
+    "faithfulness": 4,
+    "clarity": 3,
+    "completeness": 5,
+    "reasoning": {
+      "faithfulness": "All three top drivers are identified correctly with their contributions and directions of effect stated accurately. The prediction value of 242 is mentioned but slightly inaccurately described as \"approximately\" without providing the exact prediction of 241.77, leading to a slight deduction. Anchor point 5, -1 for approximating the prediction, resulting in a final score of 4.",
+      "clarity": "The language used is mostly straightforward and logical, with detailed explanations and everyday terminology enhancing understandability. However, the use of phrases like \"this single factor accounts for the bulk\" may be slightly complex for complete laypersons, leading to a minor deduction. Anchor point 4, -1 for slight complexity, resulting in a final score of 3.",
+      "completeness": "All three required sections (prediction, drivers, and recommendations) are present and substantial, with each section providing relevant details. No sections are weak or missing, so the score remains high. Anchor point 5, no deductions applied, resulting in a final score of 5."
+    },
+    "raw_response": "<faithfulness_reasoning>All three top drivers are identified correctly with their contributions and directions of effect stated accurately. The prediction value of 242 is mentioned but slightly inaccurately described as \"approximately\" without providing the exact prediction of 241.77, leading to a slight deduction. Anchor point 5, -1 for approximating the prediction, resulting in a final score of 4.</faithfulness_reasoning>\n<faithfulness>4</faithfulness>\n<clarity_reasoning>The language used is mostly straightforward and logical, with detailed explanations and everyday terminology enhancing understandability. However, the use of phrases like \"this single factor accounts for the bulk\" may be slightly complex for complete laypersons, leading to a minor deduction. Anchor point 4, -1 for slight complexity, resulting in a final score of 3.</clarity_reasoning>\n<clarity>3</clarity>\n<completeness_reasoning>All three required sections (prediction, drivers, and recommendations) are present and substantial, with each section providing relevant details. No sections are weak or missing, so the score remains high. Anchor point 5, no deductions applied, resulting in a final score of 5.</completeness_reasoning>\n<completeness>5</completeness>"
+  },
+  {
+    "pipeline_label": "JSON to Text",
+    "xai_model": "EBM",
+    "instance_id": 1677,
+    "faithfulness": 5,
+    "clarity": 4,
+    "completeness": 5,
+    "reasoning": {
+      "faithfulness": "All three top drivers are correctly identified and their contributions described accurately, as well as the direction of effect. The predicted number of bikes is mentioned and compared to the actual value, leading to an anchor point of 5 with no deductions.",
+      "clarity": "The explanation is mostly understandable with some technical details, but overall, it uses clear language that can be grasped by a non-expert. There is a slight use of jargon, such as \"damping factor,\" but it does not impede understanding, so the anchor point is 4 with no deductions.",
+      "completeness": "All three required sections are present: a clear prediction with a comparison, thorough identification of drivers, and actionable recommendations. The explanation is substantial in each aspect, resulting in an anchor point of 5 with no deductions."
+    },
+    "raw_response": "<faithfulness_reasoning>All three top drivers are correctly identified and their contributions described accurately, as well as the direction of effect. The predicted number of bikes is mentioned and compared to the actual value, leading to an anchor point of 5 with no deductions.</faithfulness_reasoning>\n<faithfulness>5</faithfulness>\n<clarity_reasoning>The explanation is mostly understandable with some technical details, but overall, it uses clear language that can be grasped by a non-expert. There is a slight use of jargon, such as \"damping factor,\" but it does not impede understanding, so the anchor point is 4 with no deductions.</clarity_reasoning>\n<clarity>4</clarity>\n<completeness_reasoning>All three required sections are present: a clear prediction with a comparison, thorough identification of drivers, and actionable recommendations. The explanation is substantial in each aspect, resulting in an anchor point of 5 with no deductions.</completeness_reasoning>\n<completeness>5</completeness>"
+  },
+  {
+    "pipeline_label": "JSON to Text",
+    "xai_model": "EBM",
+    "instance_id": 2058,
+    "faithfulness": 4,
+    "clarity": 4,
+    "completeness": 5,
+    "reasoning": {
+      "faithfulness": "All three top drivers named correctly (hr up, temp up, yr down); the direction of effect for each is also stated correctly. The predicted number is mentioned (approximately 177) and compared to the actual count (243), but the percentage gap mentioned could lead to confusion about the level of accuracy. Anchor point 5, minus 1 for the confusing representation of the 27 percent; final score is 4.",
+      "clarity": "The language is mostly clear and understandable, but the mention of contributions using specific numerical values might be a bit technical for a layperson. Overall, it is structured logically and communicates the necessary information well, so it scores at anchor point 4 with no deductions.",
+      "completeness": "All required sections are present: prediction with comparison to the actual value, drivers with directions of effect, and a practical operational recommendation. However, the richness of detail in the drivers section might be overwhelming, but it is still substantial. Anchor point 5 with no deductions."
+    },
+    "raw_response": "<faithfulness_reasoning>All three top drivers named correctly (hr up, temp up, yr down); the direction of effect for each is also stated correctly. The predicted number is mentioned (approximately 177) and compared to the actual count (243), but the percentage gap mentioned could lead to confusion about the level of accuracy. Anchor point 5, minus 1 for the confusing representation of the 27 percent; final score is 4.</faithfulness_reasoning>\n<faithfulness>4</faithfulness>\n<clarity_reasoning>The language is mostly clear and understandable, but the mention of contributions using specific numerical values might be a bit technical for a layperson. Overall, it is structured logically and communicates the necessary information well, so it scores at anchor point 4 with no deductions.</clarity_reasoning>\n<clarity>4</clarity>\n<completeness_reasoning>All required sections are present: prediction with comparison to the actual value, drivers with directions of effect, and a practical operational recommendation. However, the richness of detail in the drivers section might be overwhelming, but it is still substantial. Anchor point 5 with no deductions.</completeness_reasoning>\n<completeness>5</completeness>"
+  },
+  {
+    "pipeline_label": "JSON to Text",
+    "xai_model": "EBM",
+    "instance_id": 2510,
+    "faithfulness": 4,
+    "clarity": 4,
+    "completeness": 5,
+    "reasoning": {
+      "faithfulness": "All three top drivers are identified correctly: hr as a strong positive factor, yr as a damping factor (correctly classified as negative), and temp as a slight negative influence. However, the predicted number is inaccurately stated as \"approximately 311\" without acknowledging the precise number of 311.43, leading to a deduction of -1. Final score calculated as 4.",
+      "clarity": "The explanation uses mostly clear and accessible language, explaining terms like \"evening commuter peak\" effectively for laypeople, but there are a few technical terms that might confuse some non-experts. Additionally, the use of \"normalised\" could have been explained better. Overall, it's largely understandable with minor deductions resulting in a score of 4.",
+      "completeness": "All three sections—prediction, drivers, and recommendation—are present and substantial, with the prediction including a comparison to the actual value. There are no missing elements, leading to a full score of 5."
+    },
+    "raw_response": "<faithfulness_reasoning>All three top drivers are identified correctly: hr as a strong positive factor, yr as a damping factor (correctly classified as negative), and temp as a slight negative influence. However, the predicted number is inaccurately stated as \"approximately 311\" without acknowledging the precise number of 311.43, leading to a deduction of -1. Final score calculated as 4.</faithfulness_reasoning>\n<faithfulness>4</faithfulness>\n<clarity_reasoning>The explanation uses mostly clear and accessible language, explaining terms like \"evening commuter peak\" effectively for laypeople, but there are a few technical terms that might confuse some non-experts. Additionally, the use of \"normalised\" could have been explained better. Overall, it's largely understandable with minor deductions resulting in a score of 4.</clarity_reasoning>\n<clarity>4</clarity>\n<completeness_reasoning>All three sections—prediction, drivers, and recommendation—are present and substantial, with the prediction including a comparison to the actual value. There are no missing elements, leading to a full score of 5.</completeness_reasoning>\n<completeness>5</completeness>"
+  },
+  {
+    "pipeline_label": "JSON to Text",
+    "xai_model": "EBM",
+    "instance_id": 3543,
+    "faithfulness": 5,
+    "clarity": 4,
+    "completeness": 5,
+    "reasoning": {
+      "faithfulness": "All top 3 drivers (hr, yr, hum) are correctly identified with accurate contributions and directional effects. The prediction of approximately 296 and actual value of 286 are both included, leading to an anchor point of 5 with no deductions.",
+      "clarity": "The explanation uses clear language and largely avoids jargon, making it accessible to non-experts. The structure is logical, but the detail about temperature could confuse some laypersons, granting an anchor point of 4 with no deductions.",
+      "completeness": "All three sections are present and substantial, including prediction with comparison, identified drivers, and a practical recommendation. An anchor point of 5 is appropriate, with no deductions."
+    },
+    "raw_response": "<faithfulness_reasoning>All top 3 drivers (hr, yr, hum) are correctly identified with accurate contributions and directional effects. The prediction of approximately 296 and actual value of 286 are both included, leading to an anchor point of 5 with no deductions.</faithfulness_reasoning>\n<faithfulness>5</faithfulness>\n<clarity_reasoning>The explanation uses clear language and largely avoids jargon, making it accessible to non-experts. The structure is logical, but the detail about temperature could confuse some laypersons, granting an anchor point of 4 with no deductions.</clarity_reasoning>\n<clarity>4</clarity>\n<completeness_reasoning>All three sections are present and substantial, including prediction with comparison, identified drivers, and a practical recommendation. An anchor point of 5 is appropriate, with no deductions.</completeness_reasoning>\n<completeness>5</completeness>"
+  },
+  {
+    "pipeline_label": "JSON to Text",
+    "xai_model": "EBM",
+    "instance_id": 3847,
+    "faithfulness": 5,
+    "clarity": 5,
+    "completeness": 5,
+    "reasoning": {
+      "faithfulness": "All top 3 drivers are named correctly (hr, temp, yr) and their contributions align with the actual contributions reported in the model outputs. The predicted number (593) and actual number (531) are included and the direction of effect is correct for the top drivers, so no deductions are applied. Final score is 5.",
+      "clarity": "The explanation uses clear language and avoids jargon, effectively communicating the prediction, driver effects, and recommendations in an understandable way. There are no deductions for technical language, leading to a score of 5.",
+      "completeness": "All three required sections (prediction, drivers, and recommendation) are present and well-developed, with the prediction compared to the actual value. As there are no deductions, the score is 5."
+    },
+    "raw_response": "<faithfulness_reasoning>All top 3 drivers are named correctly (hr, temp, yr) and their contributions align with the actual contributions reported in the model outputs. The predicted number (593) and actual number (531) are included and the direction of effect is correct for the top drivers, so no deductions are applied. Final score is 5.</faithfulness_reasoning>\n<faithfulness>5</faithfulness>\n<clarity_reasoning>The explanation uses clear language and avoids jargon, effectively communicating the prediction, driver effects, and recommendations in an understandable way. There are no deductions for technical language, leading to a score of 5.</clarity_reasoning>\n<clarity>5</clarity>\n<completeness_reasoning>All three required sections (prediction, drivers, and recommendation) are present and well-developed, with the prediction compared to the actual value. As there are no deductions, the score is 5.</completeness_reasoning>\n<completeness>5</completeness>"
+  },
+  {
+    "pipeline_label": "JSON to Text",
+    "xai_model": "EBM",
+    "instance_id": 4454,
+    "faithfulness": 5,
+    "clarity": 5,
+    "completeness": 5,
+    "reasoning": {
+      "faithfulness": "All top 3 drivers correctly identified with their contributions and directions accurately described: hr correct as increasing, temp as increasing, and yr as increasing. The predicted number (approximately 332) and actual number (354) are compared, which is appropriate; thus, the anchor point is 5 with no deductions.",
+      "clarity": "The explanation uses clear and straightforward language, with a logical structure that makes it easy to follow for a non-expert. There is no jargon present, so the anchor point remains at 5 with no deductions.",
+      "completeness": "All three required sections are present: the prediction with comparison to the actual value, drivers with contributions, and a practical recommendation. Each section is substantial, so the anchor point is 5 with no deductions."
+    },
+    "raw_response": "<faithfulness_reasoning>All top 3 drivers correctly identified with their contributions and directions accurately described: hr correct as increasing, temp as increasing, and yr as increasing. The predicted number (approximately 332) and actual number (354) are compared, which is appropriate; thus, the anchor point is 5 with no deductions.</faithfulness_reasoning>\n<faithfulness>5</faithfulness>\n<clarity_reasoning>The explanation uses clear and straightforward language, with a logical structure that makes it easy to follow for a non-expert. There is no jargon present, so the anchor point remains at 5 with no deductions.</clarity_reasoning>\n<clarity>5</clarity>\n<completeness_reasoning>All three required sections are present: the prediction with comparison to the actual value, drivers with contributions, and a practical recommendation. Each section is substantial, so the anchor point is 5 with no deductions.</completeness_reasoning>\n<completeness>5</completeness>"
+  },
+  {
+    "pipeline_label": "Vision",
+    "xai_model": "XGB",
+    "instance_id": 224,
+    "faithfulness": 3,
+    "clarity": 3,
+    "completeness": 5,
+    "reasoning": {
+      "faithfulness": "All top drivers are mentioned, with the correct contributions and directions described; however, the year 2011's contribution is mischaracterized as it wasn't explicitly mentioned as a top driver impacting the prediction negatively. The predicted number is compared with the actual value. Anchor point 4, minus 1 for misrepresenting the year leading to a final score of 3.",
+      "clarity": "The explanation is largely understandable for a non-expert, with clear descriptions of the drivers and their contributions, though some technical terms like \"normalised\" and \"damping\" may pose challenges. Thus, it's mainly clear but has a couple of terms that could be simplified. Anchor point 4, with one minor deduction for clarity, leads to a score of 3.",
+      "completeness": "All three required sections (prediction, drivers, and recommendations) are present and well-elaborated. The explanation includes a prediction with a comparison and actionable recommendations. Anchor point 5, with no deductions, leads to a final score of 5."
+    },
+    "raw_response": "<faithfulness_reasoning>All top drivers are mentioned, with the correct contributions and directions described; however, the year 2011's contribution is mischaracterized as it wasn't explicitly mentioned as a top driver impacting the prediction negatively. The predicted number is compared with the actual value. Anchor point 4, minus 1 for misrepresenting the year leading to a final score of 3.</faithfulness_reasoning>\n<faithfulness>3</faithfulness>\n<clarity_reasoning>The explanation is largely understandable for a non-expert, with clear descriptions of the drivers and their contributions, though some technical terms like \"normalised\" and \"damping\" may pose challenges. Thus, it's mainly clear but has a couple of terms that could be simplified. Anchor point 4, with one minor deduction for clarity, leads to a score of 3.</clarity_reasoning>\n<clarity>3</clarity>\n<completeness_reasoning>All three required sections (prediction, drivers, and recommendations) are present and well-elaborated. The explanation includes a prediction with a comparison and actionable recommendations. Anchor point 5, with no deductions, leads to a final score of 5.</completeness_reasoning>\n<completeness>5</completeness>"
+  },
+  {
+    "pipeline_label": "Vision",
+    "xai_model": "XGB",
+    "instance_id": 580,
+    "faithfulness": 5,
+    "clarity": 5,
+    "completeness": 5,
+    "reasoning": {
+      "faithfulness": "All top 3 drivers mentioned correctly with the correct direction of effect; the predicted number is present and compared to the actual count. Anchor point 5, no deductions.",
+      "clarity": "No technical jargon is used, and the explanation is clear and easy to understand for a layperson. Anchor point 5, no deductions.",
+      "completeness": "All three required sections are present and substantial, including prediction comparison, driver explanations, and practical recommendations. Anchor point 5, no deductions."
+    },
+    "raw_response": "<faithfulness_reasoning>All top 3 drivers mentioned correctly with the correct direction of effect; the predicted number is present and compared to the actual count. Anchor point 5, no deductions.</faithfulness_reasoning>\n<faithfulness>5</faithfulness>\n<clarity_reasoning>No technical jargon is used, and the explanation is clear and easy to understand for a layperson. Anchor point 5, no deductions.</clarity_reasoning>\n<clarity>5</clarity>\n<completeness_reasoning>All three required sections are present and substantial, including prediction comparison, driver explanations, and practical recommendations. Anchor point 5, no deductions.</completeness_reasoning>\n<completeness>5</completeness>"
+  },
+  {
+    "pipeline_label": "Vision",
+    "xai_model": "XGB",
+    "instance_id": 1041,
+    "faithfulness": 5,
+    "clarity": 5,
+    "completeness": 5,
+    "reasoning": {
+      "faithfulness": "All top 3 drivers are named correctly with their contributions accurately described and directions of effect clear. The predicted number and actual count are also correct and compared, resulting in an anchor point of 5 with no deductions.",
+      "clarity": "The explanation is well-structured, using clear everyday language without jargon, making it easily understandable. There are no deductions, leading to an anchor point of 5.",
+      "completeness": "All three required sections are present and substantial, including a detailed prediction with comparison, clear identification of drivers, and practical recommendations. There are no deductions, resulting in an anchor point of 5."
+    },
+    "raw_response": "<faithfulness_reasoning>All top 3 drivers are named correctly with their contributions accurately described and directions of effect clear. The predicted number and actual count are also correct and compared, resulting in an anchor point of 5 with no deductions.</faithfulness_reasoning>  \n<faithfulness>5</faithfulness>  \n<clarity_reasoning>The explanation is well-structured, using clear everyday language without jargon, making it easily understandable. There are no deductions, leading to an anchor point of 5.</clarity_reasoning>  \n<clarity>5</clarity>  \n<completeness_reasoning>All three required sections are present and substantial, including a detailed prediction with comparison, clear identification of drivers, and practical recommendations. There are no deductions, resulting in an anchor point of 5.</completeness_reasoning>  \n<completeness>5</completeness>"
+  },
+  {
+    "pipeline_label": "Vision",
+    "xai_model": "XGB",
+    "instance_id": 1481,
+    "faithfulness": 4,
+    "clarity": 3,
+    "completeness": 5,
+    "reasoning": {
+      "faithfulness": "At least 2 of the top 3 drivers were correctly named, and the direction of effect for hr and yr is accurate. The predicted number is slightly off at 229 vs 228.58, but the lack of precision doesn't warrant a deduction. Anchor point 4, no deductions.",
+      "clarity": "The explanation uses mostly clear language with some technical terms that are explained well, although phrases like \"red bar\" and \"blue bar\" may confuse some readers. Overall, the structure is logical, making it largely understandable for a non-expert. Anchor point 4, -1 for some potential jargon, leading to a final score of 3.",
+      "completeness": "All three required sections are present: prediction with a comparison to the actual value, details on drivers, and a substantial operational recommendation. No deductions apply since each section is well-developed. Anchor point 5, no deductions."
+    },
+    "raw_response": "<faithfulness_reasoning>At least 2 of the top 3 drivers were correctly named, and the direction of effect for hr and yr is accurate. The predicted number is slightly off at 229 vs 228.58, but the lack of precision doesn't warrant a deduction. Anchor point 4, no deductions.</faithfulness_reasoning>\n<faithfulness>4</faithfulness>\n\n<clarity_reasoning>The explanation uses mostly clear language with some technical terms that are explained well, although phrases like \"red bar\" and \"blue bar\" may confuse some readers. Overall, the structure is logical, making it largely understandable for a non-expert. Anchor point 4, -1 for some potential jargon, leading to a final score of 3.</clarity_reasoning>\n<clarity>3</clarity>\n\n<completeness_reasoning>All three required sections are present: prediction with a comparison to the actual value, details on drivers, and a substantial operational recommendation. No deductions apply since each section is well-developed. Anchor point 5, no deductions.</completeness_reasoning>\n<completeness>5</completeness>"
+  },
+  {
+    "pipeline_label": "Vision",
+    "xai_model": "XGB",
+    "instance_id": 1677,
+    "faithfulness": 5,
+    "clarity": 5,
+    "completeness": 5,
+    "reasoning": {
+      "faithfulness": "Top drivers hr (correct direction), yr (correct direction), temp (correct direction) are all accurately mentioned. The prediction of 254 and the actual count of 286 is correctly stated. Thus, the anchor point is 5 with no deductions.",
+      "clarity": "No jargon is used, and the explanation is structured clearly in everyday language, making it accessible. The explanation overall is understandable and well-organized, justifying an anchor point of 5 without deductions.",
+      "completeness": "All three required sections (prediction with comparison, drivers with directions, and clear operational recommendation) are present and substantial. The completeness is strong, thus the anchor point is 5 with no deductions."
+    },
+    "raw_response": "<faithfulness_reasoning>Top drivers hr (correct direction), yr (correct direction), temp (correct direction) are all accurately mentioned. The prediction of 254 and the actual count of 286 is correctly stated. Thus, the anchor point is 5 with no deductions.</faithfulness_reasoning>\n<faithfulness>5</faithfulness>\n<clarity_reasoning>No jargon is used, and the explanation is structured clearly in everyday language, making it accessible. The explanation overall is understandable and well-organized, justifying an anchor point of 5 without deductions.</clarity_reasoning>\n<clarity>5</clarity>\n<completeness_reasoning>All three required sections (prediction with comparison, drivers with directions, and clear operational recommendation) are present and substantial. The completeness is strong, thus the anchor point is 5 with no deductions.</completeness_reasoning>\n<completeness>5</completeness>"
+  },
+  {
+    "pipeline_label": "Vision",
+    "xai_model": "XGB",
+    "instance_id": 2058,
+    "faithfulness": 3,
+    "clarity": 3,
+    "completeness": 4,
+    "reasoning": {
+      "faithfulness": "Prediction given as 194, actual count 243 (comparison included), but main drivers only partially accurate; the year is mentioned, but the driver for September and Saturday are not part of the top 3 acknowledged in the ground truth. Anchor point 4 (2 of 3 drivers mentioned correctly and directions are accurate), deduct -1 for missing the absolute number. Final score max(1, 4 - 1) = 3.",
+      "clarity": "Clear language used throughout; however, some explanations could be moderately dense (e.g. \"blue bar,\" \"red bar,\" and \"damping effect\"), making them slightly less accessible to laypersons. Anchor point 4, with a -1 deduction for some technical terms that may confuse non-experts. Final score max(1, 4 - 1) = 3.",
+      "completeness": "All three sections (prediction, drivers, recommendation) are present; however, while they are substantial, the prediction section could be clearer in comparing predicted vs actual values. Anchor point 4, with no deductions since all sections are present. Final score = 4."
+    },
+    "raw_response": "<faithfulness_reasoning>Prediction given as 194, actual count 243 (comparison included), but main drivers only partially accurate; the year is mentioned, but the driver for September and Saturday are not part of the top 3 acknowledged in the ground truth. Anchor point 4 (2 of 3 drivers mentioned correctly and directions are accurate), deduct -1 for missing the absolute number. Final score max(1, 4 - 1) = 3.</faithfulness_reasoning>\n<faithfulness>3</faithfulness>\n<clarity_reasoning>Clear language used throughout; however, some explanations could be moderately dense (e.g. \"blue bar,\" \"red bar,\" and \"damping effect\"), making them slightly less accessible to laypersons. Anchor point 4, with a -1 deduction for some technical terms that may confuse non-experts. Final score max(1, 4 - 1) = 3.</clarity_reasoning>\n<clarity>3</clarity>\n<completeness_reasoning>All three sections (prediction, drivers, recommendation) are present; however, while they are substantial, the prediction section could be clearer in comparing predicted vs actual values. Anchor point 4, with no deductions since all sections are present. Final score = 4.</completeness_reasoning>\n<completeness>4</completeness>"
+  },
+  {
+    "pipeline_label": "Vision",
+    "xai_model": "XGB",
+    "instance_id": 2510,
+    "faithfulness": 5,
+    "clarity": 4,
+    "completeness": 5,
+    "reasoning": {
+      "faithfulness": "All top 3 drivers identified correctly (hr up, yr down, temp down), and their effects are accurately described; the prediction of 326 is mentioned, along with the comparison to actual rentals (372). Anchor point 5, no deductions.",
+      "clarity": "The explanation uses clear, everyday language with structured sections, making it easy to understand for non-experts; there is only slight technical terminology regarding driver contributions. Anchor point 5, no deductions, but lowered to 4 for slightly technical phrasing around the contributions.",
+      "completeness": "All three required sections are present: a prediction with comparison, clear identification of top drivers with effect directions, and a practical operational recommendation. Anchor point 5, no deductions."
+    },
+    "raw_response": "<faithfulness_reasoning>All top 3 drivers identified correctly (hr up, yr down, temp down), and their effects are accurately described; the prediction of 326 is mentioned, along with the comparison to actual rentals (372). Anchor point 5, no deductions.</faithfulness_reasoning>\n<faithfulness>5</faithfulness>\n<clarity_reasoning>The explanation uses clear, everyday language with structured sections, making it easy to understand for non-experts; there is only slight technical terminology regarding driver contributions. Anchor point 5, no deductions, but lowered to 4 for slightly technical phrasing around the contributions.</clarity_reasoning>\n<clarity>4</clarity>\n<completeness_reasoning>All three required sections are present: a prediction with comparison, clear identification of top drivers with effect directions, and a practical operational recommendation. Anchor point 5, no deductions.</completeness_reasoning>\n<completeness>5</completeness>"
+  },
+  {
+    "pipeline_label": "Vision",
+    "xai_model": "XGB",
+    "instance_id": 3543,
+    "faithfulness": 3,
+    "clarity": 4,
+    "completeness": 5,
+    "reasoning": {
+      "faithfulness": "Prediction of 310 is close to 286 but slightly higher, correctly reflecting the one top driver of year 2012 as positive, and the direction of effects for hr and hum are also correctly described. However, the predicted number is not exact, thus the anchor point is 4, but one deduction is applied for the exact predicted number being missing, leading to a final score of 3.",
+      "clarity": "The explanation uses mostly clear, everyday language with logical structure, though it contains some technical terms like \"upward influence\" and \"damping factor.\" The absence of layperson-friendly translations of numerical values also hinders comprehension slightly; thus, the anchor point is adjusted from 5 to 4 for one deduction.",
+      "completeness": "All three sections (prediction, drivers, recommendation) are present and substantial, addressing prediction accuracy and practical implications, meeting expectations. There are no deductions, allowing the anchor point to remain at 5."
+    },
+    "raw_response": "<faithfulness_reasoning>Prediction of 310 is close to 286 but slightly higher, correctly reflecting the one top driver of year 2012 as positive, and the direction of effects for hr and hum are also correctly described. However, the predicted number is not exact, thus the anchor point is 4, but one deduction is applied for the exact predicted number being missing, leading to a final score of 3.</faithfulness_reasoning>\n<faithfulness>3</faithfulness>\n<clarity_reasoning>The explanation uses mostly clear, everyday language with logical structure, though it contains some technical terms like \"upward influence\" and \"damping factor.\" The absence of layperson-friendly translations of numerical values also hinders comprehension slightly; thus, the anchor point is adjusted from 5 to 4 for one deduction.</clarity_reasoning>\n<clarity>4</clarity>\n<completeness_reasoning>All three sections (prediction, drivers, recommendation) are present and substantial, addressing prediction accuracy and practical implications, meeting expectations. There are no deductions, allowing the anchor point to remain at 5.</completeness_reasoning>\n<completeness>5</completeness>"
+  },
+  {
+    "pipeline_label": "Vision",
+    "xai_model": "XGB",
+    "instance_id": 3847,
+    "faithfulness": 4,
+    "clarity": 4,
+    "completeness": 5,
+    "reasoning": {
+      "faithfulness": "All three top drivers are correctly identified: hr is correctly stated as having a positive contribution, as is weekday and year. The predicted number of 586 is mentioned, but while the statement about the overshoot is noted, it does not provide the specific predicted value; thus, the score is lowered by one. Anchor point 4, -1 for the missing precise prediction. Final score is 3.",
+      "clarity": "The explanation uses clear language with minimal jargon and provides a logical structure, making it generally understandable for non-experts. However, the explanation could benefit from avoiding fewer technical terms or more casual context. Anchor point 4, with no deductions. Final score is 4.",
+      "completeness": "All three sections are present with substantial content: the prediction details the model's output compared to the actual rentals, the drivers list includes their effects, and the recommendation discusses operational changes. Anchor point 5 with no deductions. Final score is 5."
+    },
+    "raw_response": "<faithfulness_reasoning>All three top drivers are correctly identified: hr is correctly stated as having a positive contribution, as is weekday and year. The predicted number of 586 is mentioned, but while the statement about the overshoot is noted, it does not provide the specific predicted value; thus, the score is lowered by one. Anchor point 4, -1 for the missing precise prediction. Final score is 3.</faithfulness_reasoning>\n<faithfulness>4</faithfulness>\n<clarity_reasoning>The explanation uses clear language with minimal jargon and provides a logical structure, making it generally understandable for non-experts. However, the explanation could benefit from avoiding fewer technical terms or more casual context. Anchor point 4, with no deductions. Final score is 4.</clarity_reasoning>\n<clarity>4</clarity>\n<completeness_reasoning>All three sections are present with substantial content: the prediction details the model's output compared to the actual rentals, the drivers list includes their effects, and the recommendation discusses operational changes. Anchor point 5 with no deductions. Final score is 5.</completeness_reasoning>\n<completeness>5</completeness>"
+  },
+  {
+    "pipeline_label": "Vision",
+    "xai_model": "XGB",
+    "instance_id": 4454,
+    "faithfulness": 3,
+    "clarity": 3,
+    "completeness": 5,
+    "reasoning": {
+      "faithfulness": "Two of the top three drivers (hr and temp) are correctly identified as influencing factors, and their directions are correctly described. However, the specific contributions (yr effect) are vaguely stated and this affects the deduction; the predicted number and actual count are presented, but the deviation calculation is not precise. Anchor point 4, -1 for vague yr effect, max(1, 4 - 1) = 3.",
+      "clarity": "The explanation is mostly clear and uses everyday language, with only slight technical phrasing such as \"normalised.\" It effectively communicates the need for clarity although phrases like \"moderately matched reality\" could confuse a layperson, reducing clarity slightly. Anchor point 4, -1 for mild technical terms, max(1, 4 - 1) = 3.",
+      "completeness": "All sections are present, including prediction with comparison, driver influences, and practical recommendations. Each section is substantial and well-explained, fulfilling the criteria for completeness. Anchor point 5, no deductions apply."
+    },
+    "raw_response": "<faithfulness_reasoning>Two of the top three drivers (hr and temp) are correctly identified as influencing factors, and their directions are correctly described. However, the specific contributions (yr effect) are vaguely stated and this affects the deduction; the predicted number and actual count are presented, but the deviation calculation is not precise. Anchor point 4, -1 for vague yr effect, max(1, 4 - 1) = 3.</faithfulness_reasoning>\n<faithfulness>3</faithfulness>\n<clarity_reasoning>The explanation is mostly clear and uses everyday language, with only slight technical phrasing such as \"normalised.\" It effectively communicates the need for clarity although phrases like \"moderately matched reality\" could confuse a layperson, reducing clarity slightly. Anchor point 4, -1 for mild technical terms, max(1, 4 - 1) = 3.</clarity_reasoning>\n<clarity>3</clarity>\n<completeness_reasoning>All sections are present, including prediction with comparison, driver influences, and practical recommendations. Each section is substantial and well-explained, fulfilling the criteria for completeness. Anchor point 5, no deductions apply.</completeness_reasoning>\n<completeness>5</completeness>"
+  },
+  {
+    "pipeline_label": "Vision",
+    "xai_model": "EBM",
+    "instance_id": 224,
+    "faithfulness": 4,
+    "clarity": 3,
+    "completeness": 5,
+    "reasoning": {
+      "faithfulness": "All top 3 drivers are identified correctly (hr raising, temp and yr damping), and the direction effects are accurately represented. The predicted number (117) is also correctly stated, but the deduction is needed since it did not explicitly compare the prediction with the actual value. Anchor point 5, -1 for no comparison with actual value leads to a final score of 4.",
+      "clarity": "The explanation uses clear, everyday language and maintains a logical structure throughout. There is slight technical language with terms like \"damping\" and \"normalized\" that could confuse laypersons, resulting in a slightly lower clarity score. Anchor point 4, -1 for jargon leads to a final score of 3.",
+      "completeness": "All three required sections (prediction, drivers, and recommendation) are present and substantial. The prediction clearly states the predicted number and the actual number, and the recommendation provides practical advice. Anchor point 5, no deductions. Final score remains 5."
+    },
+    "raw_response": "<faithfulness_reasoning>All top 3 drivers are identified correctly (hr raising, temp and yr damping), and the direction effects are accurately represented. The predicted number (117) is also correctly stated, but the deduction is needed since it did not explicitly compare the prediction with the actual value. Anchor point 5, -1 for no comparison with actual value leads to a final score of 4.</faithfulness_reasoning>\n<faithfulness>4</faithfulness>\n<clarity_reasoning>The explanation uses clear, everyday language and maintains a logical structure throughout. There is slight technical language with terms like \"damping\" and \"normalized\" that could confuse laypersons, resulting in a slightly lower clarity score. Anchor point 4, -1 for jargon leads to a final score of 3.</clarity_reasoning>\n<clarity>3</clarity>\n<completeness_reasoning>All three required sections (prediction, drivers, and recommendation) are present and substantial. The prediction clearly states the predicted number and the actual number, and the recommendation provides practical advice. Anchor point 5, no deductions. Final score remains 5.</completeness_reasoning>\n<completeness>5</completeness>"
+  },
+  {
+    "pipeline_label": "Vision",
+    "xai_model": "EBM",
+    "instance_id": 580,
+    "faithfulness": 5,
+    "clarity": 4,
+    "completeness": 5,
+    "reasoning": {
+      "faithfulness": "All top 3 drivers are recognized correctly with appropriate directions for their effects: yr is negative, temp is negative, and hr (not directly named but inferred as contributing positively). The predicted number (73.1) and its comparison to actual value (63) are correctly presented. Anchor point 5, no deductions.",
+      "clarity": "The explanation is clear and uses everyday language with logical structure throughout all sections; while there are some technical terms, they are adequately explained within context. Anchor point 5, with slight complexity dropping to 4 due to the density of information in parts.",
+      "completeness": "All three sections (prediction, drivers, recommendations) are well-presented and substantial; comparison of predicted vs actual values is included and the recommendation is practical. Anchor point 5, no deductions."
+    },
+    "raw_response": "<faithfulness_reasoning>All top 3 drivers are recognized correctly with appropriate directions for their effects: yr is negative, temp is negative, and hr (not directly named but inferred as contributing positively). The predicted number (73.1) and its comparison to actual value (63) are correctly presented. Anchor point 5, no deductions.</faithfulness_reasoning>\n<faithfulness>5</faithfulness>\n<clarity_reasoning>The explanation is clear and uses everyday language with logical structure throughout all sections; while there are some technical terms, they are adequately explained within context. Anchor point 5, with slight complexity dropping to 4 due to the density of information in parts.</clarity_reasoning>\n<clarity>4</clarity>\n<completeness_reasoning>All three sections (prediction, drivers, recommendations) are well-presented and substantial; comparison of predicted vs actual values is included and the recommendation is practical. Anchor point 5, no deductions.</completeness_reasoning>\n<completeness>5</completeness>"
+  },
+  {
+    "pipeline_label": "Vision",
+    "xai_model": "EBM",
+    "instance_id": 1041,
+    "faithfulness": 5,
+    "clarity": 5,
+    "completeness": 5,
+    "reasoning": {
+      "faithfulness": "The prediction of 389.6817 is correctly rounded, and the explanation accurately names the top three drivers along with their effects. Each driver’s influence is correctly characterized, with no inaccuracies present, thus achieving an anchor point of 5 and no deductions.",
+      "clarity": "The explanation uses clear, everyday language with no jargon, making it accessible to non-experts. The logical structure and clarity throughout justify an anchor point of 5 without any deductions.",
+      "completeness": "All three required sections are present and detailed: the prediction with a comparison to the actual count, a thorough discussion of the drivers, and a practical recommendation. The completeness justifies an anchor point of 5 with no deductions."
+    },
+    "raw_response": "<faithfulness_reasoning>The prediction of 389.6817 is correctly rounded, and the explanation accurately names the top three drivers along with their effects. Each driver’s influence is correctly characterized, with no inaccuracies present, thus achieving an anchor point of 5 and no deductions.</faithfulness_reasoning>\n<faithfulness>5</faithfulness>\n<clarity_reasoning>The explanation uses clear, everyday language with no jargon, making it accessible to non-experts. The logical structure and clarity throughout justify an anchor point of 5 without any deductions.</clarity_reasoning>\n<clarity>5</clarity>\n<completeness_reasoning>All three required sections are present and detailed: the prediction with a comparison to the actual count, a thorough discussion of the drivers, and a practical recommendation. The completeness justifies an anchor point of 5 with no deductions.</completeness_reasoning>\n<completeness>5</completeness>"
+  },
+  {
+    "pipeline_label": "Vision",
+    "xai_model": "EBM",
+    "instance_id": 1481,
+    "faithfulness": 5,
+    "clarity": 5,
+    "completeness": 5,
+    "reasoning": {
+      "faithfulness": "All three top drivers are identified correctly, with the hour contributing positively, the year negatively, and humidity contributing slightly positively, and the prediction number is stated along with a comparison to the actual value. Anchor point 5, no deductions.",
+      "clarity": "The explanation uses clear everyday language, presents the information in a logical structure, and avoids jargon, making it understandable for non-experts. Anchor point 5, no deductions.",
+      "completeness": "All three required sections are present and substantial: the prediction is clearly compared to the actual value, drivers are detailed, and a practical operational recommendation is given. Anchor point 5, no deductions."
+    },
+    "raw_response": "<faithfulness_reasoning>All three top drivers are identified correctly, with the hour contributing positively, the year negatively, and humidity contributing slightly positively, and the prediction number is stated along with a comparison to the actual value. Anchor point 5, no deductions.</faithfulness_reasoning>\n<faithfulness>5</faithfulness>\n<clarity_reasoning>The explanation uses clear everyday language, presents the information in a logical structure, and avoids jargon, making it understandable for non-experts. Anchor point 5, no deductions.</clarity_reasoning>\n<clarity>5</clarity>\n<completeness_reasoning>All three required sections are present and substantial: the prediction is clearly compared to the actual value, drivers are detailed, and a practical operational recommendation is given. Anchor point 5, no deductions.</completeness_reasoning>\n<completeness>5</completeness>"
+  },
+  {
+    "pipeline_label": "Vision",
+    "xai_model": "EBM",
+    "instance_id": 1677,
+    "faithfulness": 5,
+    "clarity": 4,
+    "completeness": 5,
+    "reasoning": {
+      "faithfulness": "All three top drivers are identified correctly (hr up, temp up, yr down), and the direction of the contributors is accurate. The predicted number is presented, and its comparison with the actual value is clearly stated, leading to an anchor point of 5 with no deductions.",
+      "clarity": "The explanation uses clear language and avoids jargon, making it understandable for non-experts. However, the term \"longest red bar\" could be slightly confusing for some, so the score is anchored at 4 with a deduction for minor technical nuances.",
+      "completeness": "All three sections (prediction, drivers, and recommendations) are present and substantial. Since there is a clear prediction versus actual comparison and practical recommendation included, the score is anchored at 5 with no deductions."
+    },
+    "raw_response": "<faithfulness_reasoning>All three top drivers are identified correctly (hr up, temp up, yr down), and the direction of the contributors is accurate. The predicted number is presented, and its comparison with the actual value is clearly stated, leading to an anchor point of 5 with no deductions.</faithfulness_reasoning>\n<faithfulness>5</faithfulness>\n<clarity_reasoning>The explanation uses clear language and avoids jargon, making it understandable for non-experts. However, the term \"longest red bar\" could be slightly confusing for some, so the score is anchored at 4 with a deduction for minor technical nuances.</clarity_reasoning>\n<clarity>4</clarity>\n<completeness_reasoning>All three sections (prediction, drivers, and recommendations) are present and substantial. Since there is a clear prediction versus actual comparison and practical recommendation included, the score is anchored at 5 with no deductions.</completeness_reasoning>\n<completeness>5</completeness>"
+  },
+  {
+    "pipeline_label": "Vision",
+    "xai_model": "EBM",
+    "instance_id": 2058,
+    "faithfulness": 5,
+    "clarity": 4,
+    "completeness": 5,
+    "reasoning": {
+      "faithfulness": "All three top drivers are correctly identified (hr, temp as positive, yr as negative), and the predicted count is given as approximately 177, but the direction of the impact for \"yr\" is explained accurately. The predicted number is stated; therefore, there are no deductions. Anchor point 5, final score 5.",
+      "clarity": "The explanation uses clear, everyday language with a logical progression. It effectively communicates concepts related to bike rentals without technical jargon, though some phrasing may be slightly complex for non-experts. Anchor point 4, no deductions.",
+      "completeness": "All three required sections are present and substantial: the prediction includes a comparison to the actual count, drivers are detailed with explanations and directions, and practical recommendations are provided. Anchor point 5, no deductions."
+    },
+    "raw_response": "<faithfulness_reasoning>All three top drivers are correctly identified (hr, temp as positive, yr as negative), and the predicted count is given as approximately 177, but the direction of the impact for \"yr\" is explained accurately. The predicted number is stated; therefore, there are no deductions. Anchor point 5, final score 5.</faithfulness_reasoning>\n<faithfulness>5</faithfulness>\n\n<clarity_reasoning>The explanation uses clear, everyday language with a logical progression. It effectively communicates concepts related to bike rentals without technical jargon, though some phrasing may be slightly complex for non-experts. Anchor point 4, no deductions.</clarity_reasoning>\n<clarity>4</clarity>\n\n<completeness_reasoning>All three required sections are present and substantial: the prediction includes a comparison to the actual count, drivers are detailed with explanations and directions, and practical recommendations are provided. Anchor point 5, no deductions.</completeness_reasoning>\n<completeness>5</completeness>"
+  },
+  {
+    "pipeline_label": "Vision",
+    "xai_model": "EBM",
+    "instance_id": 2510,
+    "faithfulness": 4,
+    "clarity": 4,
+    "completeness": 5,
+    "reasoning": {
+      "faithfulness": "All top 3 drivers are named correctly with their contributions and directions accurately described; however, the predicted number is slightly less than the actual figure which introduces some inaccuracy. Anchor point 4 for having 2 of the top 3 correct with minor inaccuracies, no deductions.",
+      "clarity": "The explanation is largely understandable with only slight technical language; phrases like \"longest red bar\" may be slightly vague for non-experts but overall the language is clear. Anchor point 4, with no necessary deductions applied.",
+      "completeness": "All three necessary sections are present and substantial, providing prediction accuracy, drivers' influence, and a practical recommendation, but the mention of a specific comparison would enhance completeness. Anchor point 5, no deductions."
+    },
+    "raw_response": "<faithfulness_reasoning>All top 3 drivers are named correctly with their contributions and directions accurately described; however, the predicted number is slightly less than the actual figure which introduces some inaccuracy. Anchor point 4 for having 2 of the top 3 correct with minor inaccuracies, no deductions.</faithfulness_reasoning>\n<faithfulness>4</faithfulness>\n<clarity_reasoning>The explanation is largely understandable with only slight technical language; phrases like \"longest red bar\" may be slightly vague for non-experts but overall the language is clear. Anchor point 4, with no necessary deductions applied.</clarity_reasoning>\n<clarity>4</clarity>\n<completeness_reasoning>All three necessary sections are present and substantial, providing prediction accuracy, drivers' influence, and a practical recommendation, but the mention of a specific comparison would enhance completeness. Anchor point 5, no deductions.</completeness_reasoning>\n<completeness>5</completeness>"
+  },
+  {
+    "pipeline_label": "Vision",
+    "xai_model": "EBM",
+    "instance_id": 3543,
+    "faithfulness": 5,
+    "clarity": 4,
+    "completeness": 5,
+    "reasoning": {
+      "faithfulness": "All top 3 drivers are correctly identified (hr up, yr up, hum up) and their contributions are accurately described. The predicted number of 296 and actual number of 286 were also correctly mentioned, resulting in an anchor point of 5, with no deductions.",
+      "clarity": "The explanation uses clear language and provides a logical structure, making it largely understandable for non-experts. There are no significant jargon terms, but minor technical elements may require some prior knowledge; hence, I assign a score of 4.",
+      "completeness": "All three sections (prediction, drivers, and recommendation) are present and substantial. The prediction is compared with the actual value and a practical operational recommendation is provided, resulting in an anchor point of 5 with no deductions."
+    },
+    "raw_response": "<faithfulness_reasoning>All top 3 drivers are correctly identified (hr up, yr up, hum up) and their contributions are accurately described. The predicted number of 296 and actual number of 286 were also correctly mentioned, resulting in an anchor point of 5, with no deductions.</faithfulness_reasoning>\n<faithfulness>5</faithfulness>\n<clarity_reasoning>The explanation uses clear language and provides a logical structure, making it largely understandable for non-experts. There are no significant jargon terms, but minor technical elements may require some prior knowledge; hence, I assign a score of 4.</clarity_reasoning>\n<clarity>4</clarity>\n<completeness_reasoning>All three sections (prediction, drivers, and recommendation) are present and substantial. The prediction is compared with the actual value and a practical operational recommendation is provided, resulting in an anchor point of 5 with no deductions.</completeness_reasoning>\n<completeness>5</completeness>"
+  },
+  {
+    "pipeline_label": "Vision",
+    "xai_model": "EBM",
+    "instance_id": 3847,
+    "faithfulness": 5,
+    "clarity": 4,
+    "completeness": 5,
+    "reasoning": {
+      "faithfulness": "All top 3 drivers are correctly named with correct directions of effect, and the predicted value of 593 is compared to the actual value of 531. Anchor point is 5, no deductions.",
+      "clarity": "The explanation is generally clear and understandable for non-experts, with clear everyday language used throughout, although some concepts could be simplified. Anchor point is 4, with slight deduction for vague terms like \"strongly raising\" which could be clearer.",
+      "completeness": "All three sections are present with substantial content: a prediction with comparison, detailed drivers, and a practical operational recommendation. Anchor point is 5, no deductions."
+    },
+    "raw_response": "<faithfulness_reasoning>All top 3 drivers are correctly named with correct directions of effect, and the predicted value of 593 is compared to the actual value of 531. Anchor point is 5, no deductions.</faithfulness_reasoning>\n<faithfulness>5</faithfulness>\n<clarity_reasoning>The explanation is generally clear and understandable for non-experts, with clear everyday language used throughout, although some concepts could be simplified. Anchor point is 4, with slight deduction for vague terms like \"strongly raising\" which could be clearer.</clarity_reasoning>\n<clarity>4</clarity>\n<completeness_reasoning>All three sections are present with substantial content: a prediction with comparison, detailed drivers, and a practical operational recommendation. Anchor point is 5, no deductions.</completeness_reasoning>\n<completeness>5</completeness>"
+  },
+  {
+    "pipeline_label": "Vision",
+    "xai_model": "EBM",
+    "instance_id": 4454,
+    "faithfulness": 5,
+    "clarity": 4,
+    "completeness": 5,
+    "reasoning": {
+      "faithfulness": "All three top drivers are correctly identified (hr increasing, temp increasing, yr increasing), and the direction of the effects is appropriately described. The predicted number is also provided along with a reference to the actual number, so no deductions apply. Anchor point 5, no deductions.",
+      "clarity": "The explanation uses clear and mostly everyday language with a logical structure, avoiding technical jargon. However, the term \"long red bar\" might be confusing without context; thus, while largely effective, it slightly detracts from perfect clarity. Anchor point 4, -1 for slight technical terminology, resulting in a score of 4.",
+      "completeness": "All three required sections (prediction comparison, drivers with directions, and operational recommendation) are present and substantial. The comparison of prediction versus actual value is clear, and the recommendation is detailed and actionable. Anchor point 5, no deductions apply."
+    },
+    "raw_response": "<faithfulness_reasoning>All three top drivers are correctly identified (hr increasing, temp increasing, yr increasing), and the direction of the effects is appropriately described. The predicted number is also provided along with a reference to the actual number, so no deductions apply. Anchor point 5, no deductions.</faithfulness_reasoning>\n<faithfulness>5</faithfulness>\n\n<clarity_reasoning>The explanation uses clear and mostly everyday language with a logical structure, avoiding technical jargon. However, the term \"long red bar\" might be confusing without context; thus, while largely effective, it slightly detracts from perfect clarity. Anchor point 4, -1 for slight technical terminology, resulting in a score of 4.</clarity_reasoning>\n<clarity>4</clarity>\n\n<completeness_reasoning>All three required sections (prediction comparison, drivers with directions, and operational recommendation) are present and substantial. The comparison of prediction versus actual value is clear, and the recommendation is detailed and actionable. Anchor point 5, no deductions apply.</completeness_reasoning>\n<completeness>5</completeness>"
+  },
+  {
+    "pipeline_label": "Tool Use",
+    "xai_model": "XGB",
+    "instance_id": 224,
+    "faithfulness": 4,
+    "clarity": 3,
+    "completeness": 5,
+    "reasoning": {
+      "faithfulness": "Top 3 drivers correctly identified and their directions are accurately described; predicted number of bikes is stated as 112, but the actual value of 96 is not mentioned. Anchor point 5, -1 for missing actual count, yielding a score of 4.",
+      "clarity": "The explanation uses mostly clear and everyday language, with an overall logical structure, but the phrase \"pulling in the same downward direction as temperature\" might confuse some laypersons; however, jargon is limited. Anchor point 4, -1 for a slightly unclear passage, resulting in a score of 3.",
+      "completeness": "All three required sections (prediction, drivers, recommendation) are present and substantial, with a prediction vs actual comparison made. Anchor point 5, no deductions, therefore the score remains 5."
+    },
+    "raw_response": "<faithfulness_reasoning>Top 3 drivers correctly identified and their directions are accurately described; predicted number of bikes is stated as 112, but the actual value of 96 is not mentioned. Anchor point 5, -1 for missing actual count, yielding a score of 4.</faithfulness_reasoning>\n<faithfulness>4</faithfulness>\n<clarity_reasoning>The explanation uses mostly clear and everyday language, with an overall logical structure, but the phrase \"pulling in the same downward direction as temperature\" might confuse some laypersons; however, jargon is limited. Anchor point 4, -1 for a slightly unclear passage, resulting in a score of 3.</clarity_reasoning>\n<clarity>3</clarity>\n<completeness_reasoning>All three required sections (prediction, drivers, recommendation) are present and substantial, with a prediction vs actual comparison made. Anchor point 5, no deductions, therefore the score remains 5.</completeness_reasoning>\n<completeness>5</completeness>"
+  },
+  {
+    "pipeline_label": "Tool Use",
+    "xai_model": "XGB",
+    "instance_id": 580,
+    "faithfulness": 5,
+    "clarity": 5,
+    "completeness": 5,
+    "reasoning": {
+      "faithfulness": "All three top drivers are mentioned correctly (hr down, yr down, mnth down), with correct directions of effect noted. The predicted number (64.58) is provided alongside the actual value (63), indicating a strong match. Anchor point 5, no deductions.",
+      "clarity": "The explanation uses clear and accessible language, explaining the contributions and effects without unnecessary jargon. While it is detailed, it remains understandable for a layperson. Anchor point 5, no deductions.",
+      "completeness": "All three requisite sections—prediction, drivers, and a practical recommendation—are present and substantial. The recommendation ties the insights effectively to operational strategies. Anchor point 5, no deductions."
+    },
+    "raw_response": "<faithfulness_reasoning>All three top drivers are mentioned correctly (hr down, yr down, mnth down), with correct directions of effect noted. The predicted number (64.58) is provided alongside the actual value (63), indicating a strong match. Anchor point 5, no deductions.</faithfulness_reasoning>\n<faithfulness>5</faithfulness>\n<clarity_reasoning>The explanation uses clear and accessible language, explaining the contributions and effects without unnecessary jargon. While it is detailed, it remains understandable for a layperson. Anchor point 5, no deductions.</clarity_reasoning>\n<clarity>5</clarity>\n<completeness_reasoning>All three requisite sections—prediction, drivers, and a practical recommendation—are present and substantial. The recommendation ties the insights effectively to operational strategies. Anchor point 5, no deductions.</completeness_reasoning>\n<completeness>5</completeness>"
+  },
+  {
+    "pipeline_label": "Tool Use",
+    "xai_model": "XGB",
+    "instance_id": 1041,
+    "faithfulness": 5,
+    "clarity": 5,
+    "completeness": 5,
+    "reasoning": {
+      "faithfulness": "All top three drivers are correctly identified with their contributions and directions stated accurately. The predicted number is included, along with a comparison to the actual value. Anchor point is 5, no deductions apply.",
+      "clarity": "The explanation uses clear, everyday language without jargon, providing a logical structure and flow that is easily understandable. It communicates all relevant details without overwhelming the reader. Anchor point is 5, no deductions apply.",
+      "completeness": "All three required sections are present: a prediction with a comparison, a detailed description of drivers, and a practical operational recommendation. Each section is substantial and well-articulated. Anchor point is 5, no deductions apply."
+    },
+    "raw_response": "<faithfulness_reasoning>All top three drivers are correctly identified with their contributions and directions stated accurately. The predicted number is included, along with a comparison to the actual value. Anchor point is 5, no deductions apply.</faithfulness_reasoning>\n<faithfulness>5</faithfulness>\n<clarity_reasoning>The explanation uses clear, everyday language without jargon, providing a logical structure and flow that is easily understandable. It communicates all relevant details without overwhelming the reader. Anchor point is 5, no deductions apply.</clarity_reasoning>\n<clarity>5</clarity>\n<completeness_reasoning>All three required sections are present: a prediction with a comparison, a detailed description of drivers, and a practical operational recommendation. Each section is substantial and well-articulated. Anchor point is 5, no deductions apply.</completeness_reasoning>\n<completeness>5</completeness>"
+  },
+  {
+    "pipeline_label": "Tool Use",
+    "xai_model": "XGB",
+    "instance_id": 1481,
+    "faithfulness": 3,
+    "clarity": 5,
+    "completeness": 5,
+    "reasoning": {
+      "faithfulness": "Anchor point 4 fits best as two out of the three top drivers (hr and yr) are correctly identified, with one direction correct (hr as positive and yr as negative). However, the predicted number of bikes is off (229 mentioned instead of the correct 228.58), leading to a deduction of -1 for this inaccuracy. Final score is max(1, 4 - 1) = 3.",
+      "clarity": "Anchor point 5 aligns well since the explanation uses clear language and logically presents information without technical jargon. There are no deductions needed, so the score remains at 5.",
+      "completeness": "All three sections are present and substantial: the prediction with a comparison to the actual count, the drivers explained with their contributions, and a practical recommendation. There are no deductions, leading to an anchor point of 5. Final score is 5."
+    },
+    "raw_response": "<faithfulness_reasoning>Anchor point 4 fits best as two out of the three top drivers (hr and yr) are correctly identified, with one direction correct (hr as positive and yr as negative). However, the predicted number of bikes is off (229 mentioned instead of the correct 228.58), leading to a deduction of -1 for this inaccuracy. Final score is max(1, 4 - 1) = 3.</faithfulness_reasoning>\n<faithfulness>3</faithfulness>\n\n<clarity_reasoning>Anchor point 5 aligns well since the explanation uses clear language and logically presents information without technical jargon. There are no deductions needed, so the score remains at 5.</clarity_reasoning>\n<clarity>5</clarity>\n\n<completeness_reasoning>All three sections are present and substantial: the prediction with a comparison to the actual count, the drivers explained with their contributions, and a practical recommendation. There are no deductions, leading to an anchor point of 5. Final score is 5.</completeness_reasoning>\n<completeness>5</completeness>"
+  },
+  {
+    "pipeline_label": "Tool Use",
+    "xai_model": "XGB",
+    "instance_id": 1677,
+    "faithfulness": 5,
+    "clarity": 5,
+    "completeness": 5,
+    "reasoning": {
+      "faithfulness": "All top 3 drivers are correctly identified with their effects accurate (hr raising, yr damping, temp raising); the predicted number is mentioned, along with a comparison to the actual value. Anchor point 5, no deductions.",
+      "clarity": "No jargon is used, and the explanation is clear and well-structured with accessible language throughout. The structure and detailed descriptions enhance understandability, keeping it at anchor point 5 with no required deductions.",
+      "completeness": "All three sections are present and substantially detailed: the prediction includes a comparison, there is a thorough description of drivers, and a practical recommendation is provided. Thus, the anchor point is 5 with no deductions."
+    },
+    "raw_response": "<faithfulness_reasoning>All top 3 drivers are correctly identified with their effects accurate (hr raising, yr damping, temp raising); the predicted number is mentioned, along with a comparison to the actual value. Anchor point 5, no deductions.</faithfulness_reasoning>\n<faithfulness>5</faithfulness>\n<clarity_reasoning>No jargon is used, and the explanation is clear and well-structured with accessible language throughout. The structure and detailed descriptions enhance understandability, keeping it at anchor point 5 with no required deductions.</clarity_reasoning>\n<clarity>5</clarity>\n<completeness_reasoning>All three sections are present and substantially detailed: the prediction includes a comparison, there is a thorough description of drivers, and a practical recommendation is provided. Thus, the anchor point is 5 with no deductions.</completeness_reasoning>\n<completeness>5</completeness>"
+  },
+  {
+    "pipeline_label": "Tool Use",
+    "xai_model": "XGB",
+    "instance_id": 2058,
+    "faithfulness": 5,
+    "clarity": 5,
+    "completeness": 5,
+    "reasoning": {
+      "faithfulness": "All top 3 drivers named correctly with accurate contributions and directions of effect; the predicted number 194 and the actual count of 243 are correctly compared. Anchor point 5, no deductions.",
+      "clarity": "No jargon used; the language is accessible and the structure is logical, making the explanation easy to follow for non-experts. Anchor point 5, no deductions.",
+      "completeness": "All three required sections are present and substantial: the prediction with a comparison, detailed descriptions of the drivers, and a clear operational recommendation. Anchor point 5, no deductions."
+    },
+    "raw_response": "<faithfulness_reasoning>All top 3 drivers named correctly with accurate contributions and directions of effect; the predicted number 194 and the actual count of 243 are correctly compared. Anchor point 5, no deductions.</faithfulness_reasoning>\n<faithfulness>5</faithfulness>\n<clarity_reasoning>No jargon used; the language is accessible and the structure is logical, making the explanation easy to follow for non-experts. Anchor point 5, no deductions.</clarity_reasoning>\n<clarity>5</clarity>\n<completeness_reasoning>All three required sections are present and substantial: the prediction with a comparison, detailed descriptions of the drivers, and a clear operational recommendation. Anchor point 5, no deductions.</completeness_reasoning>\n<completeness>5</completeness>"
+  },
+  {
+    "pipeline_label": "Tool Use",
+    "xai_model": "XGB",
+    "instance_id": 2510,
+    "faithfulness": 5,
+    "clarity": 5,
+    "completeness": 5,
+    "reasoning": {
+      "faithfulness": "All top 3 drivers are correctly identified, with the hour (hr) contributing positively, the year (yr) contributing negatively, and the temperature (temp) also dampening the prediction. The predicted number of 326 is correctly stated, and the discrepancy with the actual count of 372 is mentioned. Anchor point 5, no deductions.",
+      "clarity": "The language is clear and accessible to non-experts, with minimal jargon and thorough explanations of the drivers. The structure is logical, allowing the reader to follow the reasoning easily. Anchor point 5, no deductions.",
+      "completeness": "All three sections (prediction, drivers, recommendation) are present and substantial, with detailed insights provided in each one. The recommendation includes practical operational advice based on the drivers identified. Anchor point 5, no deductions."
+    },
+    "raw_response": "<faithfulness_reasoning>All top 3 drivers are correctly identified, with the hour (hr) contributing positively, the year (yr) contributing negatively, and the temperature (temp) also dampening the prediction. The predicted number of 326 is correctly stated, and the discrepancy with the actual count of 372 is mentioned. Anchor point 5, no deductions.</faithfulness_reasoning>\n<faithfulness>5</faithfulness>\n<clarity_reasoning>The language is clear and accessible to non-experts, with minimal jargon and thorough explanations of the drivers. The structure is logical, allowing the reader to follow the reasoning easily. Anchor point 5, no deductions.</clarity_reasoning>\n<clarity>5</clarity>\n<completeness_reasoning>All three sections (prediction, drivers, recommendation) are present and substantial, with detailed insights provided in each one. The recommendation includes practical operational advice based on the drivers identified. Anchor point 5, no deductions.</completeness_reasoning>\n<completeness>5</completeness>"
+  },
+  {
+    "pipeline_label": "Tool Use",
+    "xai_model": "XGB",
+    "instance_id": 3543,
+    "faithfulness": 5,
+    "clarity": 4,
+    "completeness": 5,
+    "reasoning": {
+      "faithfulness": "All top 3 drivers are correctly named with their contributions and effects described accurately; prediction of 310 and actual of 286 stated with the deviation calculated. Anchor point 5, no deductions.",
+      "clarity": "The explanation uses accessible language with a logical structure; however, the phrase \"small damper\" and specific statistical details may confuse non-experts slightly. Anchor point 4, no deductions.",
+      "completeness": "All three sections (prediction, drivers, recommendation) are substantial and well-explained; there's a clear comparison of the prediction and actual values, as well as practical recommendations. Anchor point 5, no deductions."
+    },
+    "raw_response": "<faithfulness_reasoning>All top 3 drivers are correctly named with their contributions and effects described accurately; prediction of 310 and actual of 286 stated with the deviation calculated. Anchor point 5, no deductions.</faithfulness_reasoning>\n<faithfulness>5</faithfulness>\n<clarity_reasoning>The explanation uses accessible language with a logical structure; however, the phrase \"small damper\" and specific statistical details may confuse non-experts slightly. Anchor point 4, no deductions.</clarity_reasoning>\n<clarity>4</clarity>\n<completeness_reasoning>All three sections (prediction, drivers, recommendation) are substantial and well-explained; there's a clear comparison of the prediction and actual values, as well as practical recommendations. Anchor point 5, no deductions.</completeness_reasoning>\n<completeness>5</completeness>"
+  },
+  {
+    "pipeline_label": "Tool Use",
+    "xai_model": "XGB",
+    "instance_id": 3847,
+    "faithfulness": 4,
+    "clarity": 4,
+    "completeness": 5,
+    "reasoning": {
+      "faithfulness": "All three top drivers (hr, weekday, yr) are correctly identified, with accurate directions of effect and contributions discussed. However, there is a minor discrepancy as the predicted number should be 585.77, but is indicated as 586, leading to a deduction. Anchor point 5, -1 for the prediction rounding, final score 4.",
+      "clarity": "The explanation uses clear language and logically structured sections that are understandable for non-experts, with only minor technical language used. There is no excessive jargon, but mentioning \"contribution\" might be slightly technical for some readers. Anchor point 5, -1 for minor technical terms leading to a final score of 4.",
+      "completeness": "All three sections (prediction with comparison, drivers with contributions, practical recommendation) are present and substantial, providing a comprehensive overview of the analysis. No deductions are applicable here. Anchor point 5, no deductions, final score 5."
+    },
+    "raw_response": "<faithfulness_reasoning>All three top drivers (hr, weekday, yr) are correctly identified, with accurate directions of effect and contributions discussed. However, there is a minor discrepancy as the predicted number should be 585.77, but is indicated as 586, leading to a deduction. Anchor point 5, -1 for the prediction rounding, final score 4.</faithfulness_reasoning>\n<faithfulness>4</faithfulness>\n\n<clarity_reasoning>The explanation uses clear language and logically structured sections that are understandable for non-experts, with only minor technical language used. There is no excessive jargon, but mentioning \"contribution\" might be slightly technical for some readers. Anchor point 5, -1 for minor technical terms leading to a final score of 4.</clarity_reasoning>\n<clarity>4</clarity>\n\n<completeness_reasoning>All three sections (prediction with comparison, drivers with contributions, practical recommendation) are present and substantial, providing a comprehensive overview of the analysis. No deductions are applicable here. Anchor point 5, no deductions, final score 5.</completeness_reasoning>\n<completeness>5</completeness>"
+  },
+  {
+    "pipeline_label": "Tool Use",
+    "xai_model": "XGB",
+    "instance_id": 4454,
+    "faithfulness": 5,
+    "clarity": 4,
+    "completeness": 5,
+    "reasoning": {
+      "faithfulness": "All three top drivers are correctly identified (hr as raising, temp as raising, yr as raising); their contributions and directions are also correctly described. The predicted number is included, and a comparison with the actual value is made. Anchor point 5, no deductions.",
+      "clarity": "The explanation uses mostly clear and everyday language, though it includes some slightly complex phrases. However, it avoids all significant jargon and maintains a logical structure throughout. Anchor point 4, with no deductions.",
+      "completeness": "All three sections are present: a prediction comparison, detailed drivers, and practical recommendations. Each section is substantial enough to give the necessary context and actionable insights. Anchor point 5, no deductions."
+    },
+    "raw_response": "<faithfulness_reasoning>All three top drivers are correctly identified (hr as raising, temp as raising, yr as raising); their contributions and directions are also correctly described. The predicted number is included, and a comparison with the actual value is made. Anchor point 5, no deductions.</faithfulness_reasoning>\n<faithfulness>5</faithfulness>\n<clarity_reasoning>The explanation uses mostly clear and everyday language, though it includes some slightly complex phrases. However, it avoids all significant jargon and maintains a logical structure throughout. Anchor point 4, with no deductions.</clarity_reasoning>\n<clarity>4</clarity>\n<completeness_reasoning>All three sections are present: a prediction comparison, detailed drivers, and practical recommendations. Each section is substantial enough to give the necessary context and actionable insights. Anchor point 5, no deductions.</completeness_reasoning>\n<completeness>5</completeness>"
+  },
+  {
+    "pipeline_label": "Tool Use",
+    "xai_model": "EBM",
+    "instance_id": 224,
+    "faithfulness": 5,
+    "clarity": 4,
+    "completeness": 5,
+    "reasoning": {
+      "faithfulness": "All three top drivers named correctly (hr up, temp down, yr down); their contributions and directions of effect are described accurately. Prediction is stated (117) and comparison to actual count (96) is made, with an estimate percentage error mentioned. Anchor point 5, no deductions.",
+      "clarity": "The explanation uses clear language, making it mostly understandable for non-experts, though some technical phrases are introduced. It could improve slightly by simplifying descriptions of statistical percentiles and contributions. Anchor point 4, with one deduction for slightly technical explanation.",
+      "completeness": "All three sections (prediction with actual comparison, detailed drivers, and practical recommendation) are present and substantial. Each section is clearly articulated, showcasing a well-structured response. Anchor point 5, no deductions."
+    },
+    "raw_response": "<faithfulness_reasoning>All three top drivers named correctly (hr up, temp down, yr down); their contributions and directions of effect are described accurately. Prediction is stated (117) and comparison to actual count (96) is made, with an estimate percentage error mentioned. Anchor point 5, no deductions.</faithfulness_reasoning>\n<faithfulness>5</faithfulness>\n\n<clarity_reasoning>The explanation uses clear language, making it mostly understandable for non-experts, though some technical phrases are introduced. It could improve slightly by simplifying descriptions of statistical percentiles and contributions. Anchor point 4, with one deduction for slightly technical explanation.</clarity_reasoning>\n<clarity>4</clarity>\n\n<completeness_reasoning>All three sections (prediction with actual comparison, detailed drivers, and practical recommendation) are present and substantial. Each section is clearly articulated, showcasing a well-structured response. Anchor point 5, no deductions.</completeness_reasoning>\n<completeness>5</completeness>"
+  },
+  {
+    "pipeline_label": "Tool Use",
+    "xai_model": "EBM",
+    "instance_id": 580,
+    "faithfulness": 5,
+    "clarity": 4,
+    "completeness": 4,
+    "reasoning": {
+      "faithfulness": "All top 3 drivers are named correctly with correct directions of effect, and the prediction value of 73 and actual value of 63 are accounted for. Anchor point is 5, no deductions apply.",
+      "clarity": "The explanation uses clear language and is structured well, making it understandable for non-experts, although it uses some specific values without general context. Anchor point is 4, with one deduction for slightly lacking everyday translations of specific temperature values.",
+      "completeness": "All three sections (prediction, drivers, recommendation) are present and well-developed, but the prediction section could benefit from slightly more comparison detail. Anchor point is 5, but one deduction for the slight lack of detailed comparison of the prediction vs. actual value."
+    },
+    "raw_response": "<faithfulness_reasoning>All top 3 drivers are named correctly with correct directions of effect, and the prediction value of 73 and actual value of 63 are accounted for. Anchor point is 5, no deductions apply.</faithfulness_reasoning>\n<faithfulness>5</faithfulness>\n<clarity_reasoning>The explanation uses clear language and is structured well, making it understandable for non-experts, although it uses some specific values without general context. Anchor point is 4, with one deduction for slightly lacking everyday translations of specific temperature values.</clarity_reasoning>\n<clarity>4</clarity>\n<completeness_reasoning>All three sections (prediction, drivers, recommendation) are present and well-developed, but the prediction section could benefit from slightly more comparison detail. Anchor point is 5, but one deduction for the slight lack of detailed comparison of the prediction vs. actual value.</completeness_reasoning>\n<completeness>4</completeness>"
+  },
+  {
+    "pipeline_label": "Tool Use",
+    "xai_model": "EBM",
+    "instance_id": 1041,
+    "faithfulness": 5,
+    "clarity": 4,
+    "completeness": 5,
+    "reasoning": {
+      "faithfulness": "All three top drivers are named correctly, and their contributions and directions are accurately described. The predicted number is also correctly mentioned, which leads to an anchor point of 5 with no deductions.",
+      "clarity": "The explanation is largely clear, using everyday language with only slight technical mentions. However, the detail about contributions, while useful, may require careful reading for non-experts, so the anchor point is set at 4.",
+      "completeness": "All three required sections (prediction, drivers, recommendation) are present and well-developed. Therefore, the explanation receives a score of 5 with no deductions."
+    },
+    "raw_response": "<faithfulness_reasoning>All three top drivers are named correctly, and their contributions and directions are accurately described. The predicted number is also correctly mentioned, which leads to an anchor point of 5 with no deductions.</faithfulness_reasoning>\n<faithfulness>5</faithfulness>\n<clarity_reasoning>The explanation is largely clear, using everyday language with only slight technical mentions. However, the detail about contributions, while useful, may require careful reading for non-experts, so the anchor point is set at 4.</clarity_reasoning>\n<clarity>4</clarity>\n<completeness_reasoning>All three required sections (prediction, drivers, recommendation) are present and well-developed. Therefore, the explanation receives a score of 5 with no deductions.</completeness_reasoning>\n<completeness>5</completeness>"
+  },
+  {
+    "pipeline_label": "Tool Use",
+    "xai_model": "EBM",
+    "instance_id": 1481,
+    "faithfulness": 5,
+    "clarity": 4,
+    "completeness": 5,
+    "reasoning": {
+      "faithfulness": "All three top drivers are identified correctly with their respective contributions and directions. The prediction of 242 is present, and a comparison with the actual value of 277 is made, ensuring no deductions apply. Anchor point is 5, no deductions.",
+      "clarity": "The explanation is clear and logically structured in everyday language, making it accessible for non-experts with minimal jargon. Some technical details are present but do not hinder comprehension; therefore, it scores slightly lower. Anchor point is 4, no deductions applied.",
+      "completeness": "All three required sections are present: a prediction with a clear comparison, detailed driver descriptions, and substantial operational recommendations. Each section is well-developed and informative. Anchor point is 5, no deductions applied."
+    },
+    "raw_response": "<faithfulness_reasoning>All three top drivers are identified correctly with their respective contributions and directions. The prediction of 242 is present, and a comparison with the actual value of 277 is made, ensuring no deductions apply. Anchor point is 5, no deductions.</faithfulness_reasoning>\n<faithfulness>5</faithfulness>\n<clarity_reasoning>The explanation is clear and logically structured in everyday language, making it accessible for non-experts with minimal jargon. Some technical details are present but do not hinder comprehension; therefore, it scores slightly lower. Anchor point is 4, no deductions applied.</clarity_reasoning>\n<clarity>4</clarity>\n<completeness_reasoning>All three required sections are present: a prediction with a clear comparison, detailed driver descriptions, and substantial operational recommendations. Each section is well-developed and informative. Anchor point is 5, no deductions applied.</completeness_reasoning>\n<completeness>5</completeness>"
+  },
+  {
+    "pipeline_label": "Tool Use",
+    "xai_model": "EBM",
+    "instance_id": 1677,
+    "faithfulness": 5,
+    "clarity": 5,
+    "completeness": 5,
+    "reasoning": {
+      "faithfulness": "All top 3 drivers are correctly identified with accurate directions of effect (hr up, temp up, yr down); the predicted number 260 is mentioned and compared to actual 286. Anchor point 5, no deduction.",
+      "clarity": "The explanation uses clear everyday language with a logical structure, and while it includes some technical terms, they are explained properly. Anchor point 5, no deduction.",
+      "completeness": "All three sections (prediction with comparison, drivers with directions, and a substantial operational recommendation) are present and well-detailed. Anchor point 5, no deduction."
+    },
+    "raw_response": "<faithfulness_reasoning>All top 3 drivers are correctly identified with accurate directions of effect (hr up, temp up, yr down); the predicted number 260 is mentioned and compared to actual 286. Anchor point 5, no deduction.</faithfulness_reasoning>\n<faithfulness>5</faithfulness>\n<clarity_reasoning>The explanation uses clear everyday language with a logical structure, and while it includes some technical terms, they are explained properly. Anchor point 5, no deduction.</clarity_reasoning>\n<clarity>5</clarity>\n<completeness_reasoning>All three sections (prediction with comparison, drivers with directions, and a substantial operational recommendation) are present and well-detailed. Anchor point 5, no deduction.</completeness_reasoning>\n<completeness>5</completeness>"
+  },
+  {
+    "pipeline_label": "Tool Use",
+    "xai_model": "EBM",
+    "instance_id": 2058,
+    "faithfulness": 4,
+    "clarity": 3,
+    "completeness": 5,
+    "reasoning": {
+      "faithfulness": "All three top drivers are correctly identified with correct directions of effects and their contributions are provided accurately. The predicted number is 177 (which is rounded from 176.8649) and compared with the actual count of 243, indicating a small inaccuracy but sufficient identification. Anchor point 4, no deductions applied.",
+      "clarity": "The explanation is mostly clear and organized, providing substantial context without excessive jargon. However, \"damping force\" and \"positive lift\" may confuse non-experts slightly, justifying a slight deduction. Anchor point 4, -1 for clarity due to slight technical terms, results in a score of 3.",
+      "completeness": "All three required sections are fully present and substantial, including prediction, drivers with their contributions, and practical recommendations. The prediction accurately compares against the actual value, and an operational recommendation is provided. Anchor point 5, no deductions."
+    },
+    "raw_response": "<faithfulness_reasoning>All three top drivers are correctly identified with correct directions of effects and their contributions are provided accurately. The predicted number is 177 (which is rounded from 176.8649) and compared with the actual count of 243, indicating a small inaccuracy but sufficient identification. Anchor point 4, no deductions applied.</faithfulness_reasoning>\n<faithfulness>4</faithfulness>\n\n<clarity_reasoning>The explanation is mostly clear and organized, providing substantial context without excessive jargon. However, \"damping force\" and \"positive lift\" may confuse non-experts slightly, justifying a slight deduction. Anchor point 4, -1 for clarity due to slight technical terms, results in a score of 3.</clarity_reasoning>\n<clarity>3</clarity>\n\n<completeness_reasoning>All three required sections are fully present and substantial, including prediction, drivers with their contributions, and practical recommendations. The prediction accurately compares against the actual value, and an operational recommendation is provided. Anchor point 5, no deductions. </completeness_reasoning>\n<completeness>5</completeness>"
+  },
+  {
+    "pipeline_label": "Tool Use",
+    "xai_model": "EBM",
+    "instance_id": 2510,
+    "faithfulness": 5,
+    "clarity": 5,
+    "completeness": 5,
+    "reasoning": {
+      "faithfulness": "The explanation correctly identifies all three top drivers (hour raising, year damping, temperature slight damping), correctly states their contributions, and compares the predicted (311 bikes) with the actual (372 bikes). Anchor point 5, no deductions apply.",
+      "clarity": "The explanation uses clear, everyday language with a logical structure, making it accessible without technical jargon. While \"underprediction\" may require some understanding, it is not overly complex, so I assign it an anchor point of 5, with no deductions.",
+      "completeness": "All three sections are present: a prediction with a comparison, specified drivers with contributions, and actionable recommendations. There are no deductions, leading to an anchor point of 5."
+    },
+    "raw_response": "<faithfulness_reasoning>The explanation correctly identifies all three top drivers (hour raising, year damping, temperature slight damping), correctly states their contributions, and compares the predicted (311 bikes) with the actual (372 bikes). Anchor point 5, no deductions apply.</faithfulness_reasoning>\n<faithfulness>5</faithfulness>\n<clarity_reasoning>The explanation uses clear, everyday language with a logical structure, making it accessible without technical jargon. While \"underprediction\" may require some understanding, it is not overly complex, so I assign it an anchor point of 5, with no deductions.</clarity_reasoning>\n<clarity>5</clarity>\n<completeness_reasoning>All three sections are present: a prediction with a comparison, specified drivers with contributions, and actionable recommendations. There are no deductions, leading to an anchor point of 5.</completeness_reasoning>\n<completeness>5</completeness>"
+  },
+  {
+    "pipeline_label": "Tool Use",
+    "xai_model": "EBM",
+    "instance_id": 3543,
+    "faithfulness": 5,
+    "clarity": 4,
+    "completeness": 5,
+    "reasoning": {
+      "faithfulness": "All three top drivers (hour, year, humidity) are correctly identified with their contributions accurately described; the direction of the effects is also correct, and the predicted value is included. Anchor point 5, no deductions.",
+      "clarity": "The explanation uses clear language and is structured logically; however, some terms like \"counterfactual shift\" may be slightly technical for non-experts. Anchor point 4, -1 for slightly technical terminology.",
+      "completeness": "All three required sections (prediction, drivers, recommendation) are present and substantial. Anchor point 5, no deductions."
+    },
+    "raw_response": "<faithfulness_reasoning>All three top drivers (hour, year, humidity) are correctly identified with their contributions accurately described; the direction of the effects is also correct, and the predicted value is included. Anchor point 5, no deductions.</faithfulness_reasoning>\n<faithfulness>5</faithfulness>\n<clarity_reasoning>The explanation uses clear language and is structured logically; however, some terms like \"counterfactual shift\" may be slightly technical for non-experts. Anchor point 4, -1 for slightly technical terminology.</clarity_reasoning>\n<clarity>4</clarity>\n<completeness_reasoning>All three required sections (prediction, drivers, recommendation) are present and substantial. Anchor point 5, no deductions.</completeness_reasoning>\n<completeness>5</completeness>"
+  },
+  {
+    "pipeline_label": "Tool Use",
+    "xai_model": "EBM",
+    "instance_id": 3847,
+    "faithfulness": 5,
+    "clarity": 3,
+    "completeness": 5,
+    "reasoning": {
+      "faithfulness": "All top 3 drivers (hr, temp, yr) are correctly identified with their contributions and signs described accurately. The predicted number (593) and actual count (531) are both mentioned, though the explanation could have been clearer on how the predicted count deviates from the actual. Anchor point 5, no deductions apply.",
+      "clarity": "The explanation uses some technical language and detailed descriptions that may confuse a non-expert, particularly the discussion around 'counterfactuals'. However, the core message regarding the prediction, drivers, and their influences remains largely clear. Anchor point 4, subject to one deduction for the technical discussion on counterfactuals.",
+      "completeness": "All required sections are present: prediction comparison, detailed drivers with contributions, and practical recommendations. Each section is substantial, especially the recommendations which provide actionable insights. Anchor point 5, no deductions apply."
+    },
+    "raw_response": "<faithfulness_reasoning>All top 3 drivers (hr, temp, yr) are correctly identified with their contributions and signs described accurately. The predicted number (593) and actual count (531) are both mentioned, though the explanation could have been clearer on how the predicted count deviates from the actual. Anchor point 5, no deductions apply.</faithfulness_reasoning>\n<faithfulness>5</faithfulness>\n<clarity_reasoning>The explanation uses some technical language and detailed descriptions that may confuse a non-expert, particularly the discussion around 'counterfactuals'. However, the core message regarding the prediction, drivers, and their influences remains largely clear. Anchor point 4, subject to one deduction for the technical discussion on counterfactuals.</clarity_reasoning>\n<clarity>3</clarity>\n<completeness_reasoning>All required sections are present: prediction comparison, detailed drivers with contributions, and practical recommendations. Each section is substantial, especially the recommendations which provide actionable insights. Anchor point 5, no deductions apply.</completeness_reasoning>\n<completeness>5</completeness>"
+  },
+  {
+    "pipeline_label": "Tool Use",
+    "xai_model": "EBM",
+    "instance_id": 4454,
+    "faithfulness": 5,
+    "clarity": 4,
+    "completeness": 5,
+    "reasoning": {
+      "faithfulness": "All top 3 drivers (hr, temp, yr) are correctly identified with their contributions accurately described. The prediction value of 332 is mentioned, and the comparison with the actual count of 354 is made, leading to a strong confidence in the faithfulness score. Anchor point 5, no deductions.",
+      "clarity": "Everyday language is largely used, with clear explanations of the model's prediction and drivers, but a few technical terms like \"contribution\" and \"percentile\" might confuse a layperson. Just a slight deduction for these terms keeps it understandable. Anchor point 4, -1 for the technical terms.",
+      "completeness": "All three required sections (prediction with comparison, drivers with their effects, and a substantial operational recommendation) are present in the explanation. This meets the criteria for completeness without needing further details. Anchor point 5, no deductions."
+    },
+    "raw_response": "<faithfulness_reasoning>All top 3 drivers (hr, temp, yr) are correctly identified with their contributions accurately described. The prediction value of 332 is mentioned, and the comparison with the actual count of 354 is made, leading to a strong confidence in the faithfulness score. Anchor point 5, no deductions.</faithfulness_reasoning>\n<faithfulness>5</faithfulness>\n<clarity_reasoning>Everyday language is largely used, with clear explanations of the model's prediction and drivers, but a few technical terms like \"contribution\" and \"percentile\" might confuse a layperson. Just a slight deduction for these terms keeps it understandable. Anchor point 4, -1 for the technical terms.</clarity_reasoning>\n<clarity>4</clarity>\n<completeness_reasoning>All three required sections (prediction with comparison, drivers with their effects, and a substantial operational recommendation) are present in the explanation. This meets the criteria for completeness without needing further details. Anchor point 5, no deductions.</completeness_reasoning>\n<completeness>5</completeness>"
+  }
+]

@@ -1,0 +1,15 @@
+{
+  "form_pipeline": "vision",
+  "xai_model": "ebm",
+  "feature": "holiday",
+  "form_type": "near-flat",
+  "judge_model": "gpt-4o",
+  "faithfulness": 2,
+  "clarity": 4,
+  "completeness": 5,
+  "faithfulness_reasoning": "The explanation correctly identifies the direction as decreasing and the importance rank as 9th, matching the reference. However, it describes a step-change effect rather than a near-flat monotonic decrease, which is a mischaracterization of the feature's form. Anchor 3, -1 (shape mischaracterized), resulting in a score of 2.",
+  "usage": {
+    "input_tokens": 2684,
+    "output_tokens": 202
+  }
+}

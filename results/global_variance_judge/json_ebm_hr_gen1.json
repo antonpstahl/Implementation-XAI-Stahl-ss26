@@ -1,0 +1,15 @@
+{
+  "form_pipeline": "json",
+  "xai_model": "ebm",
+  "feature": "hr",
+  "form_type": "categorical",
+  "judge_model": "claude-opus-4-8",
+  "faithfulness": 5,
+  "clarity": 5,
+  "completeness": 5,
+  "faithfulness_reasoning": "Double-peak captured with peak at 5 PM (17) and morning rush at 8 AM (8), lowest at 4 AM — all match top/bottom categories; rank 1 of 9 correct. Anchor 5, no deductions.",
+  "usage": {
+    "input_tokens": 886,
+    "output_tokens": 267
+  }
+}

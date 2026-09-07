@@ -1,0 +1,15 @@
+{
+  "form_pipeline": "vision",
+  "xai_model": "ebm",
+  "feature": "weekday",
+  "form_type": "near-flat",
+  "judge_model": "gpt-4o",
+  "faithfulness": 5,
+  "clarity": 5,
+  "completeness": 5,
+  "faithfulness_reasoning": "The explanation correctly identifies the near-flat nature of the feature and the correct importance rank of 7. It accurately describes the top and bottom categories, with Friday as the highest and Sunday as the lowest. Anchor 5, no deduction.",
+  "usage": {
+    "input_tokens": 2869,
+    "output_tokens": 168
+  }
+}

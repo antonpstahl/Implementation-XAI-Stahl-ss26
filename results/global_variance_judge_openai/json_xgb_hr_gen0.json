@@ -1,0 +1,15 @@
+{
+  "form_pipeline": "json",
+  "xai_model": "xgb",
+  "feature": "hr",
+  "form_type": "categorical",
+  "judge_model": "gpt-4o",
+  "faithfulness": 5,
+  "clarity": 3,
+  "completeness": 5,
+  "faithfulness_reasoning": "The explanation accurately captures the categorical nature of the feature, correctly identifies the top and bottom categories, and describes the double-peaked structure. The importance rank is correctly stated as 1st. Anchor 5, no deduction.",
+  "usage": {
+    "input_tokens": 2629,
+    "output_tokens": 167
+  }
+}

@@ -6,10 +6,10 @@
   "judge_model": "claude-opus-4-8",
   "faithfulness": 4,
   "clarity": 3,
-  "completeness": 2,
-  "faithfulness_reasoning": "Inverted-U direction and sign-change are correct; peak stated ~20-25 °C vs true ~29.5 °C is somewhat off but close, and rank called 2nd vs true 3rd is off by one. Anchor 4 (rank off by one / peak slightly imprecise), no additional deduction applies.",
+  "completeness": 4,
+  "faithfulness_reasoning": "Inverted-U with cold suppression, rise, peak (~25 °C claimed vs ~29.5 °C reference — slightly off but same shape), and decline all match; rank \"top three or four\" includes true rank 3. Anchor 5; peak location slightly imprecise but structure captured, so minor imprecision keeps it at 4.",
   "usage": {
-    "input_tokens": 669,
-    "output_tokens": 325
+    "input_tokens": 807,
+    "output_tokens": 364
   }
 }

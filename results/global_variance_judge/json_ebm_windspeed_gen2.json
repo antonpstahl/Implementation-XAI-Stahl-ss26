@@ -1,0 +1,15 @@
+{
+  "form_pipeline": "json",
+  "xai_model": "ebm",
+  "feature": "windspeed",
+  "form_type": "near-flat",
+  "judge_model": "claude-opus-4-8",
+  "faithfulness": 3,
+  "clarity": 5,
+  "completeness": 5,
+  "faithfulness_reasoning": "Direction (decreasing) matches, sign change ~7 km/h matches ~8.4 km/h, rank 8 correct. However the reference is near-flat/negligible, while the explanation overstates the effect (\"quite pronounced\", \"29% fewer\"); anchor 4, -1 for missing the negligibility framing, max(1,4-1)=3.",
+  "usage": {
+    "input_tokens": 734,
+    "output_tokens": 289
+  }
+}

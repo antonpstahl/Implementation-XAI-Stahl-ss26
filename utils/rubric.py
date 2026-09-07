@@ -13,8 +13,8 @@ plus their mean, so the number is fully auditable and reproducible:
 
 This is the non-LLM half of the G3 evaluation; the reference-based LLM judge
 (step b) handles the semantic nuance the keyword rules deliberately skip.
-Everything here is intentionally transparent regex/keyword matching — no model
-calls — so scores are deterministic across runs.
+Everything here is intentionally transparent regex/keyword matching, no model
+calls, so scores are deterministic across runs.
 """
 
 from __future__ import annotations

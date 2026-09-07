@@ -1,0 +1,15 @@
+{
+  "form_pipeline": "json",
+  "xai_model": "ebm",
+  "feature": "windspeed",
+  "form_type": "near-flat",
+  "judge_model": "gpt-4o",
+  "faithfulness": 1,
+  "clarity": 5,
+  "completeness": 5,
+  "faithfulness_reasoning": "The explanation describes a non-negligible effect with a threshold and steep drop at high wind speeds, which contradicts the near-flat nature of the feature in the reference. The importance rank is correct. Anchor 2, -1 (effect fabricated), max(1, 2-1)=1.",
+  "usage": {
+    "input_tokens": 2425,
+    "output_tokens": 171
+  }
+}

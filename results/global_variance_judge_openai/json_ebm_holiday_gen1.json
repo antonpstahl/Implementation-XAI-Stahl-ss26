@@ -1,0 +1,15 @@
+{
+  "form_pipeline": "json",
+  "xai_model": "ebm",
+  "feature": "holiday",
+  "form_type": "near-flat",
+  "judge_model": "gpt-4o",
+  "faithfulness": 5,
+  "clarity": 5,
+  "completeness": 5,
+  "faithfulness_reasoning": "The explanation correctly identifies the negative effect of holidays on demand and describes the feature as near-flat, aligning with the reference. The importance rank is accurately stated as 9th. The explanation captures the key structure of the effect being negligible. Anchor 5, no deduction.",
+  "usage": {
+    "input_tokens": 2434,
+    "output_tokens": 190
+  }
+}

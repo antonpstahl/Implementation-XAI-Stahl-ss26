@@ -52,12 +52,12 @@ DOMAIN_NOTES = {
 }
 
 # (model, feature) pairs whose derived reference was VERIFIED on 17.07 (P1): the label
-# was mechanically re-derived against the curve — form / direction / monotonicity /
-# importance_rank / peak / top-categories all reproduce — AND scanned for domain
+# was mechanically re-derived against the curve (form / direction / monotonicity /
+# importance_rank / peak / top-categories all reproduce) AND scanned for domain
 # reliability via per-level training-sample counts. All 18 pass the mechanical check
 # (0 corrections needed). See analyses/gt_verification.md for the per-feature report and
-# the threshold sensitivity (15/18 form labels are stable across a 0.015–0.035 ×
-# 0.10–0.25 grid; ebm/temp, ebm/weekday and xgb/windspeed sit near a boundary — flagged
+# the threshold sensitivity (15/18 form labels are stable across a 0.015-0.035 ×
+# 0.10-0.25 grid; ebm/temp, ebm/weekday and xgb/windspeed sit near a boundary, flagged
 # there for a final visual confirmation, not a mechanical error).
 VERIFIED: set[tuple[str, str]] = {
     (m, f) for m in MODELS for f in (

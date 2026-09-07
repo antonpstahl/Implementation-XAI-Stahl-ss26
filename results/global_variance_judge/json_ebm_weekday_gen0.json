@@ -1,0 +1,15 @@
+{
+  "form_pipeline": "json",
+  "xai_model": "ebm",
+  "feature": "weekday",
+  "form_type": "near-flat",
+  "judge_model": "claude-opus-4-8",
+  "faithfulness": 3,
+  "clarity": 4,
+  "completeness": 5,
+  "faithfulness_reasoning": "The feature is near-flat; the explanation correctly identifies day 5 (Friday) as highest and day 0 (Sunday) as lowest, and rank 7 is correct, but it over-describes a \"near-monotonic rising\" trend rather than framing the effect as negligible (bottom cats 1 and 2 are near zero, not smoothly rising). Anchor 4; -1 for missing the negligibility framing of a near-flat feature, giving 3.",
+  "usage": {
+    "input_tokens": 876,
+    "output_tokens": 377
+  }
+}

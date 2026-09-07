@@ -1,0 +1,15 @@
+{
+  "form_pipeline": "tooluse",
+  "xai_model": "xgb",
+  "feature": "weekday",
+  "form_type": "categorical",
+  "judge_model": "gpt-4o",
+  "faithfulness": 2,
+  "clarity": 2,
+  "completeness": 5,
+  "faithfulness_reasoning": "The explanation correctly identifies the categorical nature of the effect and the importance rank of 4. However, it inaccurately describes the effect on weekends, suggesting a wide spread of SHAP contributions that is not supported by the reference, which shows Saturday as a top category and Sunday as a bottom category. Anchor 3, -1 (peak/shape claimed not in reference), max(1, 3-1)=2.",
+  "usage": {
+    "input_tokens": 3212,
+    "output_tokens": 236
+  }
+}

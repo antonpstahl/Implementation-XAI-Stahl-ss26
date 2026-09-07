@@ -2,7 +2,8 @@
 
 No API calls: builds whole-model records, writes split records with the real writer,
 and checks load_whole_rubric (axis attachment, dropped -> total miss, beeswarm
-fair_total) plus the coverage / axis-1 / axis-2 / beeswarm-readability tables.
+fair_total) plus the coverage / axis-1 / axis-2 / beeswarm-readability tables, including
+the disaggregated axis-2 view that keeps a pooled push mean from hiding a weak condition.
 """
 import sys
 from pathlib import Path
@@ -80,3 +81,46 @@ def test_axis_tables_run(tmp_path):
 
 def test_load_whole_rubric_none_when_absent(tmp_path):
     assert global_eval.load_whole_rubric(results_dir=tmp_path) is None
+
+
+def test_axis2_pairwise_exposes_a_push_condition_that_beats_pull():
+    """The pooled push mean can hide that one push condition actually wins.
+
+    Synthetic: pull sits between a strong and a weak push condition, so the pooled mean
+    says "pull > push" while the strong push condition in fact beats it.
+    """
+    import pandas as pd
+
+    df = pd.DataFrame([
+        {"condition": "tooluse_all", "representation": "all", "mechanism": "pull",
+         "xai_model": "ebm", "fair_total": 0.90},
+        {"condition": "json_all", "representation": "all", "mechanism": "push",
+         "xai_model": "ebm", "fair_total": 0.96},
+        {"condition": "vision_all", "representation": "all", "mechanism": "push",
+         "xai_model": "ebm", "fair_total": 0.60},
+        # a beeswarm row must be ignored: it belongs to axis 1, not here
+        {"condition": "json_beeswarm", "representation": "beeswarm", "mechanism": "push",
+         "xai_model": "ebm", "fair_total": 0.10},
+    ])
+
+    pooled = global_eval.axis2_mechanism(df, value="fair_total")
+    assert pooled.loc["pull", "ebm"] > pooled.loc["push", "ebm"]   # the misleading view
+
+    pw = global_eval.axis2_mechanism_pairwise(df, value="fair_total")
+    assert set(pw["push_condition"]) == {"json_all", "vision_all"}   # beeswarm excluded
+    json_row = pw[pw.push_condition == "json_all"].iloc[0]
+    vision_row = pw[pw.push_condition == "vision_all"].iloc[0]
+    assert json_row["delta_pull_minus_push"] < 0      # json_all actually beat pull
+    assert vision_row["delta_pull_minus_push"] > 0
+
+
+def test_axis2_pairwise_on_the_real_records():
+    df = global_eval.load_whole_rubric()
+    if df is None:
+        import pytest
+        pytest.skip("04Ge not run with RUN_API")
+    pw = global_eval.axis2_mechanism_pairwise(df)
+    assert list(pw.columns) == ["push_condition", "xai_model", "pull", "push",
+                                "delta_pull_minus_push"]
+    assert len(pw) == 4          # 2 push conditions x 2 xai models
+    assert "tooluse_all" not in set(pw["push_condition"])

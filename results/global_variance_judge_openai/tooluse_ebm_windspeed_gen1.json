@@ -1,0 +1,15 @@
+{
+  "form_pipeline": "tooluse",
+  "xai_model": "ebm",
+  "feature": "windspeed",
+  "form_type": "near-flat",
+  "judge_model": "gpt-4o",
+  "faithfulness": 2,
+  "clarity": 4,
+  "completeness": 5,
+  "faithfulness_reasoning": "The explanation correctly identifies the overall decreasing effect of windspeed on demand and the low importance rank (8th of 9). However, it overstates the effect by describing a sharp decline and significant impact at high wind speeds, which contradicts the near-flat nature of the feature. Anchor 3, -1 (peak missed), max(1, 3-1)=2.",
+  "usage": {
+    "input_tokens": 2960,
+    "output_tokens": 215
+  }
+}

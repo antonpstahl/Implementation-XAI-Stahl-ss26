@@ -1,0 +1,15 @@
+{
+  "form_pipeline": "json",
+  "xai_model": "xgb",
+  "feature": "hr",
+  "form_type": "categorical",
+  "judge_model": "gpt-4o",
+  "faithfulness": 5,
+  "clarity": 5,
+  "completeness": 5,
+  "faithfulness_reasoning": "The explanation correctly identifies the categorical nature of the feature, the top category (hour 17), and the bottom categories (early morning hours). The importance rank is accurately stated as 1st. The double-peaked structure is well captured. Anchor 5, no deduction.",
+  "usage": {
+    "input_tokens": 2609,
+    "output_tokens": 179
+  }
+}

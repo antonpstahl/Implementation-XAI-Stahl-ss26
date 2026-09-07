@@ -3,14 +3,14 @@
 Merges the deterministic rubric scores (:mod:`utils.rubric`, no LLM) with the
 reference-based judge scores (:func:`utils.eval.run_global_judge`) and reports
 them stratified by shape type (monotonic / non-monotonic / categorical /
-near-flat) x modality (json / vision / tooluse / template) — the level the
+near-flat) x modality (json / vision / tooluse / template), the level the
 supervisor asked results to be broken down at, rather than a single aggregate.
 
 Also provides the judge-robustness figure for the global track: Krippendorff's
 alpha (interval metric) across judge vendors, computed with the exact estimator
 promoted from NB 05 (:func:`utils.stats.krippendorff_alpha_interval`).
 
-Everything here is pure post-processing of files already on disk — no API calls.
+Everything here is pure post-processing of files already on disk, with no API calls.
 The judge tables are optional: with only the rubric CSV present the report still
 runs (rubric columns only).
 """
@@ -114,7 +114,7 @@ def report(df: pd.DataFrame) -> dict[str, pd.DataFrame]:
 
 def rubric_judge_correlation(df: pd.DataFrame) -> dict:
     """Spearman correlation between the deterministic rubric total and the
-    judge's faithfulness — a validity check that the LLM-free rubric and the
+    judge's faithfulness, a validity check that the LLM-free rubric and the
     reference-based judge rank explanations consistently.
     """
     if "faithfulness" not in df.columns:
@@ -132,8 +132,8 @@ def modality_significance(judge_df: pd.DataFrame,
                           metric: str = "faithfulness") -> pd.DataFrame:
     """Pairwise Wilcoxon signed-rank tests across modalities on a judge metric.
 
-    Observations are paired on (feature, xai_model) — the same feature-curve
-    judged under two modalities — so the test respects the matched design.
+    Observations are paired on (feature, xai_model): the same feature-curve
+    judged under two modalities, so the test respects the matched design.
     Holm-corrected over the pairwise family; Cliff's delta as effect size.
     """
     from utils.stats import wilcoxon_pairwise
@@ -144,7 +144,7 @@ def modality_significance(judge_df: pd.DataFrame,
 
 
 def ceiling_flags(df: pd.DataFrame, tol: float = 0.1) -> dict[str, str]:
-    """Detect judge criteria with (near) zero variance — non-informative ceilings.
+    """Detect judge criteria with (near) zero variance, i.e. non-informative ceilings.
 
     Returns {criterion: message} only for the criteria that are constant or
     near-constant across all explanations (e.g. completeness pinned at 5).
@@ -193,7 +193,7 @@ def cross_vendor_alpha(subdirs: list[str], criterion: str = "faithfulness",
 
 
 # ---------------------------------------------------------------------------
-# Whole-model (Phase G2b) — the two comparison axes + beeswarm readability
+# Whole-model (Phase G2b): the two comparison axes + beeswarm readability
 # ---------------------------------------------------------------------------
 WHOLE_CONDITION_ORDER = ["json_all", "vision_all", "tooluse_all",
                          "json_beeswarm", "vision_beeswarm"]
@@ -207,7 +207,7 @@ def _whole_fair_total(row: pd.Series) -> float:
     """Summary score over only the GT fields the representation can carry.
 
     ``all`` representations: the full rubric total (direction+rank+structure).
-    ``beeswarm`` representations: mean of direction+rank only — scoring a beeswarm on
+    ``beeswarm`` representations: mean of direction+rank only, since scoring a beeswarm on
     shape/peak would penalise it for information it never conveys (plan G2b).
     """
     if row.get("representation") == "beeswarm":
@@ -224,7 +224,7 @@ def load_whole_rubric(results_dir: Path = RESULTS_DIR,
     deterministic rubric used for G2a, and adds ``modality``/``representation``/
     ``mechanism``/``dropped`` plus a ``fair_total`` (beeswarm scored only on the fields
     it can carry). A **dropped** feature (the whole-model answer omitted it) is recorded
-    as a total miss (all sub-scores 0) — the "only 5 of 9 right" measurement. Returns
+    as a total miss (all sub-scores 0), the "only 5 of 9 right" measurement. Returns
     None if the directory is absent or empty (04Ge not run with RUN_API yet).
     """
     from utils import rubric  # local import: rubric imports nothing heavy, avoids cycle
@@ -255,14 +255,14 @@ def load_whole_rubric(results_dir: Path = RESULTS_DIR,
 
 
 def whole_coverage(df: pd.DataFrame) -> pd.DataFrame:
-    """Features described (of 9) per condition x model — the "5 of 9" measurement."""
+    """Features described (of 9) per condition x model, the "5 of 9" measurement."""
     cov = (df.assign(covered=~df["dropped"])
              .groupby(["condition", "xai_model"])["covered"].sum().unstack())
     return cov.reindex([c for c in WHOLE_CONDITION_ORDER if c in cov.index])
 
 
 def axis1_representation(df: pd.DataFrame) -> pd.DataFrame:
-    """Axis 1 — per GT field, all-plots/curves vs the beeswarm (no aggregate winner).
+    """Axis 1: per GT field, all-plots/curves vs the beeswarm (no aggregate winner).
 
     Mean of each rubric sub-field (direction / rank / structure) per condition, so the
     reader sees *which fields survive which representation* rather than a single number.
@@ -275,7 +275,7 @@ def axis1_representation(df: pd.DataFrame) -> pd.DataFrame:
 
 
 def axis2_mechanism(df: pd.DataFrame, value: str = "total") -> pd.DataFrame:
-    """Axis 2 — push (vision_all/json_all) vs pull (tooluse_all) at full information.
+    """Axis 2: push (vision_all/json_all) vs pull (tooluse_all) at full information.
 
     Restricted to the ``all`` conditions (constant full information); the beeswarm
     conditions belong to Axis 1, not here. Returns mean ``value`` by mechanism x model.
@@ -285,8 +285,35 @@ def axis2_mechanism(df: pd.DataFrame, value: str = "total") -> pd.DataFrame:
                 .unstack().round(3))
 
 
+def axis2_mechanism_pairwise(df: pd.DataFrame, value: str = "fair_total") -> pd.DataFrame:
+    """Axis 2 disaggregated: pull vs **each** push condition separately.
+
+    :func:`axis2_mechanism` pools ``json_all`` and ``vision_all`` into one "push" group,
+    which mixes mechanism with modality (``limitations.md`` 4.4): if one push condition is
+    weak, the pooled mean makes pull look uniformly better. This reports the pull minus
+    push delta per condition and model, so a pooled advantage that rests on a single weak
+    condition is visible instead of hidden.
+
+    Returns one row per (push condition, xai_model) with the two means and their
+    difference; a **negative** delta means that push condition beat pull.
+    """
+    allc = df[df["representation"] == "all"]
+    means = allc.groupby(["condition", "xai_model"])[value].mean()
+    pull_name = "tooluse_all"
+    rows = []
+    for cond in sorted({c for c, _ in means.index} - {pull_name}):
+        for model in sorted({m for _, m in means.index}):
+            pull, push = means.get((pull_name, model)), means.get((cond, model))
+            if pull is None or push is None:
+                continue
+            rows.append({"push_condition": cond, "xai_model": model,
+                         "pull": round(pull, 3), "push": round(push, 3),
+                         "delta_pull_minus_push": round(pull - push, 3)})
+    return pd.DataFrame(rows)
+
+
 def beeswarm_readability(df: pd.DataFrame, value: str = "fair_total") -> pd.DataFrame:
-    """Beeswarm readability — vision_beeswarm vs json_beeswarm (info-matched).
+    """Beeswarm readability: vision_beeswarm vs json_beeswarm (info-matched).
 
     Both carry the same information (rank + direction + spread); the only difference is
     modality (swarm image vs equivalent numbers), so the gap isolates the pure

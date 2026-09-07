@@ -1,0 +1,16 @@
+{
+  "form": "json",
+  "scope": "global",
+  "llm_model": "claude-sonnet-4-6",
+  "loss_key": "poisson_log",
+  "xai_model": "xgb",
+  "feature": "windspeed",
+  "explanation": "[EFFECT]\nHigher wind speeds consistently push predicted bike demand downward, and this effect grows stronger as wind increases — making the relationship broadly monotonic and negative. At calm conditions (near zero wind), the model's contribution is close to neutral. As wind climbs above roughly 17–23 km/h (normalised values ~0.25–0.35), contributions turn noticeably negative, and at very high speeds (above ~40 km/h) the suppressive effect becomes quite severe. There is no peak where wind helps demand; it only hurts, and increasingly so.\n\n[IMPORTANCE]\nWindspeed is the second-least influential feature in the model, ranked 8th out of 9. Its overall impact on predicted demand is modest compared to factors like hour of day, temperature, or year, meaning it shifts forecasts only at the extremes rather than being a primary driver.\n\n[RECOMMENDATION]\nOn days forecast to be very windy (say, above 30–40 km/h), planners can expect meaningfully lower ridership and may choose to reduce staff or redistribute bikes accordingly, though this adjustment matters most at high wind extremes rather than on typical breezy days.",
+  "elapsed_s": 21.13,
+  "usage": {
+    "input_tokens": 172232,
+    "output_tokens": 795,
+    "cache_read_input_tokens": 0
+  },
+  "generation_idx": 1
+}

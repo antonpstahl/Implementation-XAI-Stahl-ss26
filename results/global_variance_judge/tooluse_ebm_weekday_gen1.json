@@ -1,0 +1,15 @@
+{
+  "form_pipeline": "tooluse",
+  "xai_model": "ebm",
+  "feature": "weekday",
+  "form_type": "near-flat",
+  "judge_model": "claude-opus-4-8",
+  "faithfulness": 5,
+  "clarity": 3,
+  "completeness": 5,
+  "faithfulness_reasoning": "Correct top category (5/Friday) and bottom (0/Sunday), rank 7 correct; though the reference calls it near-flat, the explanation does acknowledge it as a minor driver, so importance framing is fine. Anchor 5, no deduction applies since direction/levels match and it flags it as modest.",
+  "usage": {
+    "input_tokens": 1565,
+    "output_tokens": 295
+  }
+}

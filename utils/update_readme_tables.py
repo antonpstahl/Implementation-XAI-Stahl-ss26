@@ -29,6 +29,19 @@ RESULTS = ROOT / "results"
 _PIPELINE_ORDER = ["Template", "JSON to Text", "Vision", "Tool Use"]
 _FAITH_ORDER = ["JSON to Text", "Tool Use", "Vision"]
 
+# --- global track (G2a per-feature / G2b whole-model) ---
+# Presentation order = the argument's order: the deterministic baseline first, then the
+# three LLM handover formats, so the "what does the LLM add over a template?" comparison
+# reads top-down.
+_GLOBAL_FORM_ORDER = ["template", "json", "vision", "tooluse"]
+_GLOBAL_FORM_LABEL = {"template": "Template", "json": "JSON", "vision": "Vision",
+                      "tooluse": "Tool Use"}
+# Ascending by mean faithfulness: near-flat is the failure mode, so it leads the table.
+_FORM_TYPE_ORDER = ["near-flat", "categorical", "non-monotonic", "monotonic"]
+# Axis 1 (all vs beeswarm) pairs first, the pull condition last.
+_WHOLE_ORDER = ["json_all", "vision_all", "tooluse_all", "json_beeswarm", "vision_beeswarm"]
+_JUDGE_METRICS = ("faithfulness", "clarity", "completeness")
+
 
 # --- markdown helpers ---
 
@@ -99,6 +112,75 @@ def _load_faithfulness() -> dict[str, dict]:
     return rows
 
 
+def _load_judge_records(subdir: str) -> list[dict]:
+    """All judge records under results/<subdir> (one JSON per scored explanation)."""
+    out = []
+    for path in sorted((RESULTS / subdir).glob("*.json")):
+        with open(path, encoding="utf-8") as f:
+            out.append(json.load(f))
+    return out
+
+
+def _mean(values: list[float]) -> float:
+    return sum(values) / len(values) if values else float("nan")
+
+
+def _group_means(records: list[dict], key: str) -> dict[str, dict[str, float]]:
+    """Mean of each judge metric per value of *key* (e.g. form_pipeline, form_type)."""
+    buckets: dict[str, dict[str, list[float]]] = {}
+    for r in records:
+        b = buckets.setdefault(r[key], {m: [] for m in _JUDGE_METRICS})
+        for m in _JUDGE_METRICS:
+            b[m].append(float(r[m]))
+    return {k: {m: _mean(v[m]) for m in _JUDGE_METRICS} | {"n": len(v["faithfulness"])}
+            for k, v in buckets.items()}
+
+
+def _load_global_process() -> dict[str, dict[str, float]]:
+    """Mean process metrics per G2a form: tokens, latency, tool calls (results/global).
+
+    These come straight off the persisted generation records, so the cost/effort side of
+    the comparison is reproducible from the same artefacts as the quality side.
+    """
+    acc: dict[str, dict[str, list[float]]] = {}
+    for path in sorted((RESULTS / "global").glob("*.json")):
+        with open(path, encoding="utf-8") as f:
+            r = json.load(f)
+        u = r.get("usage", {})
+        b = acc.setdefault(r["form"], {k: [] for k in
+                                       ("tok_in", "cache", "tok_out", "latency", "calls")})
+        b["tok_in"].append(float(u.get("input_tokens", 0)))
+        b["cache"].append(float(u.get("cache_read_input_tokens", 0)))
+        b["tok_out"].append(float(u.get("output_tokens", 0)))
+        b["latency"].append(float(r.get("elapsed_s") or 0))
+        b["calls"].append(float(r.get("n_tool_calls") or 0))
+    return {form: {k: _mean(v) for k, v in d.items()} for form, d in acc.items()}
+
+
+def _load_global_rubric() -> dict[str, float]:
+    """Mean deterministic rubric total per form (results/global_rubric.csv)."""
+    totals: dict[str, list[float]] = {}
+    with open(RESULTS / "global_rubric.csv", newline="", encoding="utf-8") as f:
+        for row in csv.DictReader(f):
+            totals.setdefault(row["form_pipeline"], []).append(float(row["total"]))
+    return {k: _mean(v) for k, v in totals.items()}
+
+
+def _load_whole_coverage() -> dict[str, dict[str, int]]:
+    """Features actually described per (condition, xai_model), out of 9.
+
+    Read from the split records: a feature the whole-model answer omitted is written as
+    ``dropped: true``, so coverage is just the non-dropped count.
+    """
+    cov: dict[str, dict[str, int]] = {}
+    for path in sorted((RESULTS / "global_whole_split").glob("*.json")):
+        with open(path, encoding="utf-8") as f:
+            r = json.load(f)
+        per_model = cov.setdefault(r["condition"], {})
+        per_model[r["xai_model"]] = per_model.get(r["xai_model"], 0) + (0 if r["dropped"] else 1)
+    return cov
+
+
 # --- English table generators ---
 
 def gen_model_metrics_en() -> str:
@@ -160,6 +242,89 @@ def gen_faithfulness_en() -> str:
             f"{float(r['VA']):.3f}",
         ])
     return _padded_table(headers, rows)
+
+
+def _global_feature_rows(fmt, fmt_rubric):
+    """Shared row builder for the G2a per-feature table (EN/DE differ only in number format)."""
+    rubric = _load_global_rubric()
+    judge = _group_means(_load_judge_records("global_judge"), "form_pipeline")
+    judge_o = _group_means(_load_judge_records("global_judge_openai"), "form_pipeline")
+    rows = []
+    for form in _GLOBAL_FORM_ORDER:
+        j, o = judge[form], judge_o[form]
+        rows.append([
+            _GLOBAL_FORM_LABEL[form],
+            fmt_rubric(rubric[form]),
+            fmt(j["faithfulness"]),
+            fmt(j["clarity"]),
+            fmt(j["completeness"]),
+            fmt(o["faithfulness"]),
+        ])
+    return rows
+
+
+def gen_global_feature_en() -> str:
+    """G2a: 4 handover forms x 2 XAI models x 9 features = 72 per-feature descriptions."""
+    headers = ["Form", "Rubric total", "Judge Faith.", "Clarity", "Complete.",
+               "Faith. (OpenAI)"]
+    return _padded_table(headers, _global_feature_rows(
+        lambda v: f"{v:.2f}", lambda v: f"{v:.3f}"))
+
+
+def gen_global_formtype_en() -> str:
+    """G2a judge faithfulness stratified by ground-truth shape type (the core finding)."""
+    strata = _group_means(_load_judge_records("global_judge"), "form_type")
+    headers = ["Shape type", "n", "Judge Faith.", "Clarity", "Complete."]
+    rows = [[ft, str(strata[ft]["n"]), f"{strata[ft]['faithfulness']:.2f}",
+             f"{strata[ft]['clarity']:.2f}", f"{strata[ft]['completeness']:.2f}"]
+            for ft in _FORM_TYPE_ORDER if ft in strata]
+    return _padded_table(headers, rows)
+
+
+def _global_process_rows(fmt_int, fmt_1):
+    proc = _load_global_process()
+    rows = []
+    for form in _GLOBAL_FORM_ORDER:
+        m = proc[form]
+        rows.append([
+            _GLOBAL_FORM_LABEL[form],
+            fmt_int(m["tok_in"]),
+            fmt_int(m["tok_out"]),
+            fmt_1(m["latency"]) + " s",
+            "n/a" if form != "tooluse" else fmt_1(m["calls"]),
+        ])
+    return rows
+
+
+def gen_global_process_en() -> str:
+    """G2a process metrics per form: billed input/output tokens, latency, tool calls."""
+    headers = ["Form", "Avg input tok.", "Avg output tok.", "Avg latency", "Avg tool calls"]
+    return _padded_table(headers, _global_process_rows(
+        lambda v: f"{_round_half_up(v):,}", lambda v: f"{v:.1f}"))
+
+
+def _global_whole_rows(fmt):
+    cov = _load_whole_coverage()
+    judge = _group_means(_load_judge_records("global_whole_judge"), "form_pipeline")
+    judge_o = _group_means(_load_judge_records("global_whole_judge_openai"), "form_pipeline")
+    rows = []
+    for cond in _WHOLE_ORDER:
+        c = cov[cond]
+        rows.append([
+            cond,
+            f"{c['ebm']}/9 \u00b7 {c['xgb']}/9",
+            fmt(judge[cond]["faithfulness"]),
+            fmt(judge_o[cond]["faithfulness"]),
+            fmt(judge[cond]["completeness"]),
+        ])
+    return rows
+
+
+def gen_global_whole_en() -> str:
+    """G2b: 5 whole-model conditions x 2 XAI models, split into 90 per-feature records."""
+    headers = ["Condition", "Coverage (ebm \u00b7 xgb)", "Judge Faith.", "Faith. (OpenAI)",
+               "Complete."]
+    return _padded_table(headers, _global_whole_rows(lambda v: f"{v:.2f}"))
 
 
 # --- German table generators (for Readme_DE.md) ---
@@ -254,6 +419,37 @@ def gen_faithfulness_de() -> str:
     return _minimal_table(headers, rows)
 
 
+def gen_global_feature_de() -> str:
+    """G2a per-Feature-Tabelle, deutsches Zahlenformat."""
+    headers = ["Form", "Rubric gesamt", "Judge Faithfulness", "Clarity", "Completeness",
+               "Faithfulness (OpenAI)"]
+    return _minimal_table(headers, _global_feature_rows(_de, lambda v: _de(v, 3)))
+
+
+def gen_global_formtype_de() -> str:
+    """G2a Judge-Faithfulness nach GT-Formtyp, deutsches Zahlenformat."""
+    strata = _group_means(_load_judge_records("global_judge"), "form_type")
+    headers = ["Formtyp", "n", "Judge Faithfulness", "Clarity", "Completeness"]
+    rows = [[ft, str(strata[ft]["n"]), _de(strata[ft]["faithfulness"]),
+             _de(strata[ft]["clarity"]), _de(strata[ft]["completeness"])]
+            for ft in _FORM_TYPE_ORDER if ft in strata]
+    return _minimal_table(headers, rows)
+
+
+def gen_global_whole_de() -> str:
+    """G2b Whole-Model-Tabelle, deutsches Zahlenformat."""
+    headers = ["Bedingung", "Coverage (ebm \u00b7 xgb)", "Judge Faithfulness",
+               "Faithfulness (OpenAI)", "Completeness"]
+    return _minimal_table(headers, _global_whole_rows(_de))
+
+
+def gen_global_process_de() -> str:
+    """G2a Prozesskennzahlen je Form, deutsches Zahlenformat."""
+    headers = ["Form", "Ø Input-Tokens", "Ø Output-Tokens", "Ø Latenz", "Ø Tool-Calls"]
+    return _minimal_table(headers, _global_process_rows(
+        _de_int, lambda v: _de(v, 1)))
+
+
 # --- README updater ---
 
 _SENTINEL_RE = re.compile(
@@ -291,9 +487,19 @@ def replace_table(text: str, name: str, table: str) -> str:
 # Table definitions: (readme_path, sentinel_name, generator_function)
 _TABLES: list[tuple[Path, str, object]] = [
     (ROOT / "Readme.md",    "model-metrics",      gen_model_metrics_en),
+    # global track (the main track since the 30.06. meeting)
+    (ROOT / "Readme.md",    "global-feature",     gen_global_feature_en),
+    (ROOT / "Readme.md",    "global-formtype",    gen_global_formtype_en),
+    (ROOT / "Readme.md",    "global-whole",       gen_global_whole_en),
+    (ROOT / "Readme.md",    "global-process",     gen_global_process_en),
+    # local n=20 track (comparison basis)
     (ROOT / "Readme.md",    "pipeline-eval",      gen_pipeline_eval_en),
     (ROOT / "Readme.md",    "faithfulness",       gen_faithfulness_en),
     (ROOT / "Readme_DE.md", "model-comparison-de", gen_model_comparison_de),
+    (ROOT / "Readme_DE.md", "global-feature-de",  gen_global_feature_de),
+    (ROOT / "Readme_DE.md", "global-formtype-de", gen_global_formtype_de),
+    (ROOT / "Readme_DE.md", "global-whole-de",    gen_global_whole_de),
+    (ROOT / "Readme_DE.md", "global-process-de",  gen_global_process_de),
     (ROOT / "Readme_DE.md", "pipeline-quant-de",  gen_pipeline_quant_de),
     (ROOT / "Readme_DE.md", "judge-scores-de",    gen_judge_scores_de),
     (ROOT / "Readme_DE.md", "faithfulness-de",    gen_faithfulness_de),

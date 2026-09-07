@@ -1,0 +1,15 @@
+{
+  "form_pipeline": "json",
+  "xai_model": "ebm",
+  "feature": "weekday",
+  "form_type": "near-flat",
+  "judge_model": "claude-opus-4-8",
+  "faithfulness": 3,
+  "clarity": 5,
+  "completeness": 5,
+  "faithfulness_reasoning": "The feature is near-flat (rank 7); the explanation does note it's minor but frames a fairly strong \"upward trend\" narrative instead of stressing negligibility. Top category is Friday (cat 5) and bottom is Sunday (cat 0), both correctly identified, and rank 7 is exact. Anchor 4 (structure slightly overstated for a near-flat feature), -1 (over-describes a negligible effect rather than framing it as negligible), max(1,4-1)=3.",
+  "usage": {
+    "input_tokens": 859,
+    "output_tokens": 345
+  }
+}

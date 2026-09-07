@@ -1,0 +1,15 @@
+{
+  "form_pipeline": "vision",
+  "xai_model": "ebm",
+  "feature": "windspeed",
+  "form_type": "near-flat",
+  "judge_model": "claude-opus-4-8",
+  "faithfulness": 4,
+  "clarity": 4,
+  "completeness": 5,
+  "faithfulness_reasoning": "Direction (decreasing) and rank (8 of 9) both match the reference; the feature is near-flat and the explanation does acknowledge it is one of the weakest drivers with a small effect, though it slightly over-describes a −0.35/30% impact rather than framing it as negligible. Anchor 4 (rank correct, structure slightly imprecise on negligibility), no deduction applies fully. max(1,4)=4.",
+  "usage": {
+    "input_tokens": 748,
+    "output_tokens": 336
+  }
+}

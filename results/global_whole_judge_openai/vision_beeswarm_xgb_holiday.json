@@ -4,12 +4,12 @@
   "feature": "holiday",
   "form_type": "near-flat",
   "judge_model": "gpt-4o",
-  "faithfulness": 1,
-  "clarity": 1,
-  "completeness": 1,
-  "faithfulness_reasoning": "The explanation is missing entirely, so it cannot be evaluated against the reference. Anchor 1, no deductions possible.",
+  "faithfulness": 2,
+  "clarity": 5,
+  "completeness": 5,
+  "faithfulness_reasoning": "The explanation correctly identifies the feature as near-flat and the least important (rank 9), aligning with the reference. However, it describes a step change between non-holiday and holiday hours, which is not supported by the reference's monotonic decreasing direction. Anchor 3, -1 (step change claimed), max(1, 3-1)=2.",
   "usage": {
-    "input_tokens": 2213,
-    "output_tokens": 119
+    "input_tokens": 2382,
+    "output_tokens": 187
   }
 }

@@ -1,0 +1,15 @@
+{
+  "form_pipeline": "tooluse",
+  "xai_model": "ebm",
+  "feature": "hr",
+  "form_type": "categorical",
+  "judge_model": "gpt-4o",
+  "faithfulness": 2,
+  "clarity": 5,
+  "completeness": 5,
+  "faithfulness_reasoning": "The explanation correctly identifies the categorical nature of the feature and its top importance rank. However, it inaccurately describes the peak hours, stating 8 AM and 5 PM instead of the reference's 8 AM, 17, and 18. The lowest point at 4 AM is correct. Anchor 3, -1 (peak hours incorrect), max(1, 3-1)=2.",
+  "usage": {
+    "input_tokens": 3039,
+    "output_tokens": 199
+  }
+}

@@ -1,0 +1,15 @@
+{
+  "form_pipeline": "json",
+  "xai_model": "ebm",
+  "feature": "windspeed",
+  "form_type": "near-flat",
+  "judge_model": "gpt-4o",
+  "faithfulness": 1,
+  "clarity": 5,
+  "completeness": 5,
+  "faithfulness_reasoning": "The explanation describes a non-monotonic effect with an initial positive impact, which contradicts the reference's monotonic decreasing direction. The importance rank is correct. Anchor 2, -1 (direction contradicts), max(1, 2-1)=1.",
+  "usage": {
+    "input_tokens": 2435,
+    "output_tokens": 161
+  }
+}

@@ -1,0 +1,15 @@
+{
+  "form_pipeline": "json",
+  "xai_model": "xgb",
+  "feature": "windspeed",
+  "form_type": "near-flat",
+  "judge_model": "gpt-4o",
+  "faithfulness": 1,
+  "clarity": 4,
+  "completeness": 5,
+  "faithfulness_reasoning": "The explanation incorrectly describes the effect as broadly monotonically decreasing, contradicting the reference's non-monotonic and near-flat nature. It also fabricates a strong downward pull at high wind speeds, which is not supported by the reference. The importance rank is correctly stated as 8th. Anchor 2, -1 (direction contradicts), -1 (fabricated effect), max(1, 2-2)=1.",
+  "usage": {
+    "input_tokens": 2500,
+    "output_tokens": 205
+  }
+}

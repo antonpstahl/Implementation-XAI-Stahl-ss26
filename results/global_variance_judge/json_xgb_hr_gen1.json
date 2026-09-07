@@ -1,0 +1,15 @@
+{
+  "form_pipeline": "json",
+  "xai_model": "xgb",
+  "feature": "hr",
+  "form_type": "categorical",
+  "judge_model": "claude-opus-4-8",
+  "faithfulness": 5,
+  "clarity": 4,
+  "completeness": 5,
+  "faithfulness_reasoning": "Captures both commuter peaks with hour 17 as the strongest, deep early-morning troughs (3–5 a.m. lowest), and rank 1 of 9 — all matching the reference. Anchor 5, no deductions.",
+  "usage": {
+    "input_tokens": 927,
+    "output_tokens": 289
+  }
+}

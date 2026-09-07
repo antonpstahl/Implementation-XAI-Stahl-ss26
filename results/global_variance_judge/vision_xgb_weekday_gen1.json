@@ -1,0 +1,15 @@
+{
+  "form_pipeline": "vision",
+  "xai_model": "xgb",
+  "feature": "weekday",
+  "form_type": "categorical",
+  "judge_model": "claude-opus-4-8",
+  "faithfulness": 2,
+  "clarity": 3,
+  "completeness": 5,
+  "faithfulness_reasoning": "The reference shows top categories are days 5 (Fri) and 6 (Sat), bottom categories are days 0 (Sun), 1 (Mon), 2 (Tue) — so Sunday is actually the LOWEST contributor, not a source of \"highest peaks\"; the explanation frames weekends (incl. Sunday) as high boosters and never identifies Friday/Saturday as top or Sunday/Monday/Tuesday as bottom. Rank 4 is correct. Anchor 3 (top level wrong / structure not captured), -1 (direction of key levels contradicts reference — Sunday called a high peak when it is the lowest), max(1,3-1)=2.",
+  "usage": {
+    "input_tokens": 2480,
+    "output_tokens": 443
+  }
+}

@@ -1,0 +1,15 @@
+{
+  "form_pipeline": "tooluse",
+  "xai_model": "xgb",
+  "feature": "weekday",
+  "form_type": "categorical",
+  "judge_model": "gpt-4o",
+  "faithfulness": 1,
+  "clarity": 4,
+  "completeness": 5,
+  "faithfulness_reasoning": "The explanation correctly identifies the categorical nature of the feature and the importance rank as 4th. However, it inaccurately describes Saturday's contribution as much higher than the reference, which shows a smaller positive effect. The explanation also misrepresents the variability of Sunday, which is consistently negative in the reference. Anchor 3, -1 (incorrect top category), -1 (incorrect bottom category), max(1, 3-2)=1.",
+  "usage": {
+    "input_tokens": 3154,
+    "output_tokens": 240
+  }
+}

@@ -1,0 +1,17 @@
+{
+  "pipeline": "05_vision",
+  "llm_model": "claude-sonnet-4-6",
+  "loss_key": "poisson_log",
+  "xai_model": "ebm",
+  "instance_id": 2510,
+  "explanation": "<prediction>The EBM model predicted 311 rented bikes for this hour, while 372 were actually counted — an underestimate of about 60 bikes (roughly 16%). The prediction is moderately matched; the model captures the general level but misses some of the actual demand.</prediction>\n\n<drivers>By far the strongest influence comes from the hour of day: hr=18 (Friday evening peak) is the dominant upward driver, with the longest red bar in the plot by a wide margin. This single factor pushes the prediction well above the base value of about 4.6. The second most important factor works in the opposite direction — the blue bar for yr=0 (2011) noticeably damps the prediction, reflecting that 2011 was a lower-demand year in the system's history. Third, a small interaction between month and humidity (December combined with the prevailing humidity) also pulls demand slightly downward, followed closely by temperature: at about 16 °C (normalised 0.40), the temperature is on the cool side and contributes a modest negative influence.</drivers>\n\n<recommendation>Friday evening at 18:00 is a high-demand slot even in December, so stations along commuter corridors should be fully stocked well before 17:00. Given that the model consistently underestimates demand in this scenario, consider adding a small buffer of extra bikes at key drop-off points on Friday evenings during the winter months to avoid shortfalls.</recommendation>",
+  "plot_file": "waterfall_ebm_poisson_log_inst2510.png",
+  "elapsed_s": 12.23,
+  "usage": {
+    "input_tokens": 976,
+    "output_tokens": 554,
+    "cache_read_input_tokens": 1845
+  },
+  "prediction": 311.4291,
+  "y_true": 372.0
+}

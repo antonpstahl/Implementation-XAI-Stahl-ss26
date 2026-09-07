@@ -1,0 +1,17 @@
+{
+  "form": "vision",
+  "scope": "global",
+  "llm_model": "claude-sonnet-4-6",
+  "loss_key": "poisson_log",
+  "xai_model": "ebm",
+  "feature": "holiday",
+  "explanation": "<thinking>\nLet me analyze the EBM shape plot for the \"holiday\" feature.\n\nFrom the plot:\n- The x-axis shows holiday values (0 = no holiday, 1 = yes holiday)\n- The y-axis shows contribution in log space\n- When holiday = 0 (non-holiday), the contribution is approximately 0 (just slightly above 0, essentially flat near zero)\n- When holiday = 1 (holiday), the contribution drops sharply to approximately -0.145\n\nSo this is a step change: non-holiday days have essentially neutral contribution (~0), while holiday days have a negative contribution of about -0.145 in log space, which means holidays reduce predicted demand.\n\nThe importance is 0.008, and it's ranked 9th out of 9 features - the least important feature.\n\nDirection: Holidays lower predicted demand compared to non-holidays.\nShape: Step change - binary feature, so it's a clear step down when holiday = 1.\nPeak: The contribution is at its highest (near 0) on non-holiday days.\n\nThe contribution of -0.145 in log space means e^(-0.145) ≈ 0.865, so about a 13-14% reduction in predicted demand on holidays.\n</thinking>\n\n[EFFECT] The holiday feature produces a clear step-change effect: on regular (non-holiday) days, the contribution is essentially neutral, sitting right at zero. On public holidays, the contribution drops sharply to about −0.145 in log space, which translates to roughly a 13–14% reduction in predicted bike rentals. There is no gradual transition — it is an all-or-nothing switch between the two values.\n\n[IMPORTANCE] This is the least important feature in the model, ranked 9th out of 9 with an importance score of just 0.008. Its influence on predicted demand is small compared to factors like hour of the day or temperature.\n\n[RECOMMENDATION] Since holidays slightly but consistently reduce overall demand, consider scaling back bike availability and staffing modestly on public holidays — though the effect is minor enough that other factors (like weather or time of day) should take priority in planning decisions.",
+  "plot_file": "ebm_shape_holiday.png",
+  "elapsed_s": 13.56,
+  "usage": {
+    "input_tokens": 1468,
+    "output_tokens": 622,
+    "cache_read_input_tokens": 0
+  },
+  "generation_idx": 1
+}

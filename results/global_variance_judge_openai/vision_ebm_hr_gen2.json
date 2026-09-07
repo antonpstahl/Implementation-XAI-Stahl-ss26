@@ -1,0 +1,15 @@
+{
+  "form_pipeline": "vision",
+  "xai_model": "ebm",
+  "feature": "hr",
+  "form_type": "categorical",
+  "judge_model": "gpt-4o",
+  "faithfulness": 5,
+  "clarity": 4,
+  "completeness": 5,
+  "faithfulness_reasoning": "The explanation correctly identifies the bimodal peaks at 8 a.m. and 17–18, matching the reference's top categories. It accurately describes the lowest demand around 4–5 a.m., aligning with the bottom categories. The importance rank is correctly stated as 1st. Anchor 5, no deduction.",
+  "usage": {
+    "input_tokens": 2616,
+    "output_tokens": 188
+  }
+}

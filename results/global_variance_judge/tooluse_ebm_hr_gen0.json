@@ -1,0 +1,15 @@
+{
+  "form_pipeline": "tooluse",
+  "xai_model": "ebm",
+  "feature": "hr",
+  "form_type": "categorical",
+  "judge_model": "claude-opus-4-8",
+  "faithfulness": 5,
+  "clarity": 4,
+  "completeness": 5,
+  "faithfulness_reasoning": "Correctly identifies the two commuter peaks at 8 AM and 5 PM (17 is the true top category), the deep trough at 4 AM, and rank 1 by a wide margin — all matching the reference. Anchor 5, no deductions.",
+  "usage": {
+    "input_tokens": 1567,
+    "output_tokens": 291
+  }
+}

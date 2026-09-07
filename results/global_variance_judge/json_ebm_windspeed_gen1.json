@@ -1,0 +1,15 @@
+{
+  "form_pipeline": "json",
+  "xai_model": "ebm",
+  "feature": "windspeed",
+  "form_type": "near-flat",
+  "judge_model": "claude-opus-4-8",
+  "faithfulness": 3,
+  "clarity": 5,
+  "completeness": 5,
+  "faithfulness_reasoning": "Direction (decreasing) matches and rank 8 of 9 is correct, but the reference calls this near-flat/negligible, whereas the explanation over-describes a strong 30–40% drop at high winds and puts the crossing at ~17 km/h vs ~8.4 km/h. Anchor 4, -1 (negligibility of near-flat feature missed, over-described), max(1, 4-1)=3.",
+  "usage": {
+    "input_tokens": 709,
+    "output_tokens": 319
+  }
+}

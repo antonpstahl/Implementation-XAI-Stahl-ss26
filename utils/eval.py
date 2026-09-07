@@ -1,4 +1,4 @@
-"""utils/eval.py – Skalierungs-Evaluation (Phase 3b).
+"""utils/eval.py: Skalierungs-Evaluation (Phase 3b).
 
 Gen-aware Loading der Generierungs-Artefakte und Aufbau des Judge-Prompts für
 den n≈200-Vollauf. Bewusst getrennt vom n=20-**Validitäts**-Notebook (NB 07):
@@ -9,11 +9,11 @@ den n≈200-Vollauf. Bewusst getrennt vom n=20-**Validitäts**-Notebook (NB 07):
     Opus-Judge + Cross-Vendor auf den 200 Instanzen × N Generationen.
 
 `build_judge_prompt` ist ein **treuer Port** des Judge-Prompt-Aufbaus aus NB 07
-(Zelle 9) — identisches Format (XML-Reason-then-Score, dieselben
+(Zelle 9): identisches Format (XML-Reason-then-Score, dieselben
 menschenlesbaren Feature-Werte), damit der Skalierungs-Judge exakt nach der in
 Phase 3·2 validierten Rubrik bewertet. Der einzige Unterschied: das Tool-Use-
 Transkript (Pipeline 06) wird **explizit** übergeben (`tool_trace`), statt aus
-einem festen Pfad gelesen zu werden — denn bei N Generationen ist die
+einem festen Pfad gelesen zu werden, denn bei N Generationen ist die
 Trace-Datei generationsspezifisch (`…_gen{g}.json`).
 """
 
@@ -45,7 +45,7 @@ DETERMINISTIC_PIPELINES = frozenset({"04La"})
 # Tool-Use-Pipeline (client-seitiger Tool-Loop; Trace wird dem Judge beigelegt).
 TOOLUSE_PIPELINES = frozenset({"04Ld"})
 
-# Kosten pro 1M Token (claude-sonnet-4-6) — nur fürs Reporting, identisch zu NB 07.
+# Kosten pro 1M Token (claude-sonnet-4-6), nur fürs Reporting, identisch zu NB 07.
 COST_INPUT_PER_M      = 3.00
 COST_CACHE_READ_PER_M = 0.30
 COST_OUTPUT_PER_M     = 15.00
@@ -88,7 +88,7 @@ def load_scale_records(
     ``scale_subdir=""`` liest direkt aus ``{pipeline}/`` (z. B. für Tests).
 
     Jede Zeile trägt zusätzlich zur NB-07-Spaltenmenge eine ``generation``-Spalte
-    (0-basiert) und — für Tool-Use — die volle ``tool_calls``-Liste (für den
+    (0-basiert) und (für Tool-Use) die volle ``tool_calls``-Liste (für den
     Judge-Trace). Fehlende Dateien werden gemeldet; mit ``require_complete=True``
     lösen sie einen ``FileNotFoundError`` aus (Schutz vor stillen Lücken vor der
     Auswertung).
@@ -222,7 +222,7 @@ def build_global_judge_prompt(
 
     Unlike the local ``build_judge_prompt`` (top-3 drivers per instance), this
     attaches the structured reference derived from the G0 curves
-    (`explanations/global_groundtruth/{model}_{feature}.json`) — the judge scores
+    (`explanations/global_groundtruth/{model}_{feature}.json`), the judge scores
     generated *against* reference instead of blindly. For the tool-use pipeline
     the retrieval transcript from ``record['tool_calls']`` is attached.
     """
@@ -351,7 +351,7 @@ def build_judge_prompt(
     explanations_dir: Path = EXPLANATIONS_DIR,
     tool_trace: Optional[list[dict]] = None,
 ) -> str:
-    """Baut den Judge-User-Prompt (JSON) für eine Erklärung — Port aus NB 07.
+    """Baut den Judge-User-Prompt (JSON) für eine Erklärung, Port aus NB 07.
 
     Identisch zum Validitäts-Notebook: menschenlesbare Feature-Werte, Top-3-
     Treiber, Reason-then-Score-XML-Ausgabeanweisung. Für Tool-Use wird das

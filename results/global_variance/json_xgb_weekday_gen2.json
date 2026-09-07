@@ -1,0 +1,16 @@
+{
+  "form": "json",
+  "scope": "global",
+  "llm_model": "claude-sonnet-4-6",
+  "loss_key": "poisson_log",
+  "xai_model": "xgb",
+  "feature": "weekday",
+  "explanation": "[EFFECT]\nWeekday has a clearly non-monotonic, categorical effect on predicted demand — each day of the week carries its own contribution rather than following a simple rising or falling trend. Contributions span a wide range, from roughly –0.9 (a strong downward multiplier) to about +0.55 (a meaningful upward multiplier) in log-contribution space. The most negative extremes tend to cluster around Sunday (0), Monday (1), and Saturday (6), while the mid-week days (Tuesday through Friday) show a higher concentration of positive contributions, suggesting demand is boosted on those days relative to the weekend fringe days.\n\n[IMPORTANCE]\nWeekday ranks 4th out of 9 features in importance (importance score ≈ 0.17), placing it solidly in the middle tier — influential, but behind the top-ranked features such as hour of day. It meaningfully shifts predicted demand up or down depending on the day, but other variables ultimately drive more of the model's variation.\n\n[RECOMMENDATION]\nPlan for noticeably higher demand on mid-week days (roughly Tuesday through Friday) and adjust staffing and bike rebalancing accordingly, while expecting somewhat lower overall demand on Sundays and Saturdays compared to the typical weekday pattern.",
+  "elapsed_s": 39.73,
+  "usage": {
+    "input_tokens": 164401,
+    "output_tokens": 1759,
+    "cache_read_input_tokens": 1033
+  },
+  "generation_idx": 2
+}

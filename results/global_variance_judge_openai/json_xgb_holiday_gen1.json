@@ -1,0 +1,15 @@
+{
+  "form_pipeline": "json",
+  "xai_model": "xgb",
+  "feature": "holiday",
+  "form_type": "near-flat",
+  "judge_model": "gpt-4o",
+  "faithfulness": 1,
+  "clarity": 5,
+  "completeness": 5,
+  "faithfulness_reasoning": "The explanation describes a step-change effect with variability across hours, which contradicts the near-flat, monotonic decreasing nature of the reference. The importance rank is correctly identified as 9th. Anchor 2, -1 (direction/monotonicity contradicts), max(1, 2-1)=1.",
+  "usage": {
+    "input_tokens": 2461,
+    "output_tokens": 171
+  }
+}

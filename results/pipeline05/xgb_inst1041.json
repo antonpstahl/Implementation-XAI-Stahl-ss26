@@ -1,0 +1,17 @@
+{
+  "pipeline": "05_vision",
+  "llm_model": "claude-sonnet-4-6",
+  "loss_key": "poisson_log",
+  "xai_model": "xgb",
+  "instance_id": 1041,
+  "explanation": "<prediction>The XGBoost model predicted 385.4 rented bikes for this hour, while the actual count was 387. The two values are virtually identical, making this an excellent match — the model captured demand almost perfectly for this Friday morning in May 2011.</prediction>\n\n<drivers>The dominant driver is the hour of the day: hr=8 contributes the longest red bar (+0.75), strongly raising the prediction, which reflects the well-known morning commuter peak. Second comes the year: yr=0 (2011) shows a blue bar pointing left (−0.22), meaning it damps the prediction — 2011 was the lower-demand phase of the system, pulling the forecast noticeably downward. Third, the fact that it is a Friday (weekday=5) adds a meaningful positive influence (+0.19 red bar), as Fridays carry a strong commuter load. Partially offsetting these upward forces, a humidity of 88 percent produces the fourth bar — blue and pointing left (−0.16) — reflecting that very muggy conditions discourage some riders.</drivers>\n\n<recommendation>On Friday mornings at 8 in the morning, especially during spring and summer, commuter demand is very high despite high humidity. Ensure that key commuter stations are fully stocked well before 8 a.m. on weekday mornings. Since high humidity is a recurring dampening factor in this dataset, consider using humidity forecasts the evening before to fine-tune how many bikes are redistributed overnight, avoiding both under-stocking and unnecessary rebalancing effort.</recommendation>",
+  "plot_file": "waterfall_xgb_poisson_log_inst1041.png",
+  "elapsed_s": 12.8,
+  "usage": {
+    "input_tokens": 1217,
+    "output_tokens": 555,
+    "cache_read_input_tokens": 1845
+  },
+  "prediction": 385.3899,
+  "y_true": 387.0
+}

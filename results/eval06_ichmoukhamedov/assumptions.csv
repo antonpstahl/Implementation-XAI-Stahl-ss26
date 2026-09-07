@@ -1,0 +1,341 @@
+pipeline_label,xai_model,instance_id,feature,assumption
+JSON to Text,XGB,224,temp,"Cold temperatures deter people from renting bikes, reducing demand."
+JSON to Text,XGB,224,hr,Evening commuter peak hours see higher bike rental demand as people travel home from work.
+JSON to Text,XGB,224,mnth,February is a winter month with typically lower outdoor activity and bike rental demand.
+JSON to Text,XGB,224,yr,"2011 was an earlier, lower-demand phase of the bike-sharing system's history with a smaller user base."
+JSON to Text,XGB,224,weekday,Thursdays are regular workdays generating commuter traffic that slightly boosts bike rentals.
+JSON to Text,XGB,224,hum,"Moderate humidity is neither too dry nor too damp, having a marginal positive effect on cycling comfort."
+JSON to Text,XGB,580,hr,Late-night hours see reduced bike rental demand as the evening peak has passed.
+JSON to Text,XGB,580,yr,2011 was a lower-demand year compared to 2012 in the dataset.
+JSON to Text,XGB,580,mnth,March is an early-spring month with cooler weather and lower rental activity than peak summer months.
+JSON to Text,XGB,580,temp,Cooler temperatures discourage cycling as riders prefer milder conditions.
+JSON to Text,XGB,580,weathersit,Clear skies make cycling more attractive compared to adverse weather conditions.
+JSON to Text,XGB,580,weekday,Saturdays attract leisure riders who may stay out later into the evening.
+JSON to Text,XGB,1041,hr,"8 AM falls within the morning commuter peak, driving high bike rental demand."
+JSON to Text,XGB,1041,yr,In 2011 the bike-sharing system was newer and had lower overall ridership compared to 2012.
+JSON to Text,XGB,1041,weekday,Friday sees strong commuter demand as the last working day of the week.
+JSON to Text,XGB,1041,hum,High humidity and damp conditions discourage cyclists from renting bikes.
+JSON to Text,XGB,1041,temp,"Mild temperatures around 20°C are comfortable for cycling, encouraging rentals."
+JSON to Text,XGB,1041,mnth,"May is a spring month with generally pleasant weather, supporting higher bike demand."
+JSON to Text,XGB,1481,hr,The afternoon commuter rush at 16:00 drives high demand for bike rentals.
+JSON to Text,XGB,1481,yr,"2011 was an earlier, lower-demand phase of the bike rental system compared to 2012."
+JSON to Text,XGB,1481,hum,Relatively dry air (lower humidity) mildly encourages riders to cycle.
+JSON to Text,XGB,1481,mnth,July provides a positive seasonal boost to bike rental demand due to summer conditions.
+JSON to Text,XGB,1481,temp,Extreme heat deters some cyclists even during otherwise busy commuter periods.
+JSON to Text,XGB,1677,hr,8 p.m. is just past the evening commuter peak and still carries meaningful demand.
+JSON to Text,XGB,1677,yr,"2011 had lower overall system usage compared to 2012, dampening predictions."
+JSON to Text,XGB,1677,temp,"Temperatures around 28.7 °C are in the optimal comfort range for cycling, boosting demand."
+JSON to Text,XGB,1677,mnth,August is a peak season month with higher overall bike rental demand.
+JSON to Text,XGB,1677,weekday,Thursday is a mid-week workday with regular commuter patterns supporting demand.
+JSON to Text,XGB,1677,hum,"Higher humidity can slightly discourage cycling, reducing demand."
+JSON to Text,XGB,2058,yr,"2011 represents the early, lower-demand phase of the bike rental system's history."
+JSON to Text,XGB,2058,temp,Warm temperatures encourage outdoor cycling activity.
+JSON to Text,XGB,2058,hum,High humidity makes cycling less comfortable and deters riders.
+JSON to Text,XGB,2058,mnth,September benefits from late-summer weather conditions that support strong ridership.
+JSON to Text,XGB,2058,weekday,"Saturdays may show different, sometimes lower, commuter-driven demand patterns compared to weekdays."
+JSON to Text,XGB,2058,hr,The 20:00 evening hour still sees some leisure cycling activity.
+JSON to Text,XGB,2510,hr,Evening commuter peak hours see high bike rental demand as people travel home from work.
+JSON to Text,XGB,2510,yr,In 2011 the bike sharing system was newer and had lower overall ridership compared to 2012.
+JSON to Text,XGB,2510,temp,Temperatures below the optimal cycling range discourage casual riders from renting bikes.
+JSON to Text,XGB,2510,weekday,"Fridays see strong end-of-week commuter activity, boosting bike rental demand."
+JSON to Text,XGB,2510,hum,Moderate humidity around 50 percent is comfortable for cycling and does not deter riders.
+JSON to Text,XGB,3543,yr,2012 represented a higher-demand growth phase for the bike rental system compared to 2011.
+JSON to Text,XGB,3543,hr,"The evening hour of 20:00 falls at the tail end of the commuter and leisure peak, sustaining high demand."
+JSON to Text,XGB,3543,hum,Low humidity (dry air conditions) is associated with more comfortable and favourable cycling conditions.
+JSON to Text,XGB,3543,temp,"Mild temperatures around 20.5°C are comfortable for cycling, encouraging more rentals."
+JSON to Text,XGB,3543,weathersit,Clear weather conditions are generally favourable for cycling and increase rental demand.
+JSON to Text,XGB,3543,weekday,Fridays see higher bike rental activity due to both commuter traffic and the start of weekend leisure riding.
+JSON to Text,XGB,3847,hr,"Noon sits in the midday leisure window, driving high demand for bike rentals."
+JSON to Text,XGB,3847,weekday,"Saturdays see leisure riders spread across midday hours, boosting demand beyond typical commuter patterns."
+JSON to Text,XGB,3847,yr,"By 2012 the bike-sharing system had grown, resulting in higher overall ridership levels."
+JSON to Text,XGB,3847,temp,Warm temperatures encourage cycling and increase bike rental demand.
+JSON to Text,XGB,3847,hum,"Low humidity means dry, comfortable air that is pleasant for cycling, reinforcing demand."
+JSON to Text,XGB,3847,mnth,June provides a seasonal lift due to favourable summer weather conditions for cycling.
+JSON to Text,XGB,4454,hr,Evening peak hours around 19:00 correspond to high commuter and leisure cycling demand.
+JSON to Text,XGB,4454,temp,"Pleasant temperatures around 26°C are attractive for cycling, encouraging more rentals."
+JSON to Text,XGB,4454,yr,"The year 2012 saw higher overall bike-sharing system demand compared to 2011, reflecting growth in the system."
+JSON to Text,XGB,4454,weekday,"Saturday evening peaks are less sharp than weekday commuter-driven spikes, reducing demand relative to weekday evenings."
+JSON to Text,XGB,4454,hum,"High humidity can make cycling uncomfortable, moderating rental demand."
+JSON to Text,XGB,4454,weathersit,"Misty or cloudy weather conditions discourage some potential cyclists, lowering demand."
+JSON to Text,EBM,224,hr,Evening commuter peak hours see high bike rental demand as people travel home from work.
+JSON to Text,EBM,224,temp,"Cold temperatures deter cyclists from renting bikes, reducing demand."
+JSON to Text,EBM,224,yr,"2011 was an earlier, lower-demand phase of the bike rental system's history compared to 2012."
+JSON to Text,EBM,224,mnth,February is a winter month with cold weather that suppresses bike rental demand.
+JSON to Text,EBM,224,hum,Moderate humidity around 40% is comfortable for cycling and contributes positively to demand.
+JSON to Text,EBM,224,weathersit,Clear weather conditions encourage more people to rent bikes compared to adverse weather.
+JSON to Text,EBM,580,yr,2011 was the first year of operation with lower overall demand compared to 2012.
+JSON to Text,EBM,580,temp,Cool temperatures below the optimal riding range deter casual cyclists.
+JSON to Text,EBM,580,hr,Late-night weekend hours attract some leisure riders despite the late hour.
+JSON to Text,EBM,580,weathersit,Clear weather encourages cycling by removing weather-related deterrents.
+JSON to Text,EBM,580,mnth,March is early spring and still has lower seasonal demand compared to peak summer months.
+JSON to Text,EBM,1041,hr,"8:00 AM falls within the morning commuter peak, driving high bike rental demand."
+JSON to Text,EBM,1041,yr,2011 was the early phase of the bike rental system with lower overall demand levels.
+JSON to Text,EBM,1041,hum,High humidity makes cycling less comfortable and discourages riders.
+JSON to Text,EBM,1041,temp,Mild temperatures around 20.5°C are comfortable for cycling and encourage ridership.
+JSON to Text,EBM,1041,weekday,"Fridays see strong commuter traffic, boosting bike rental demand."
+JSON to Text,EBM,1041,mnth,May is a pleasant spring month that slightly encourages cycling activity.
+JSON to Text,EBM,1481,hr,The evening commuter peak around 16:00 drives high bike rental demand as workers return home.
+JSON to Text,EBM,1481,yr,"2011 was the earlier, lower-demand year of the bike rental system, so the model assigns it a dampening effect."
+JSON to Text,EBM,1481,hum,"Low humidity means more comfortable riding conditions, encouraging bike rentals."
+JSON to Text,EBM,1481,temp,"Warm temperatures generally encourage cycling, though extreme heat can sometimes deter riders."
+JSON to Text,EBM,1481,weathersit,"Clear weather conditions make cycling more appealing, boosting rental demand."
+JSON to Text,EBM,1677,hr,"8 PM falls in the tail end of the evening peak, which drives higher bike rental demand."
+JSON to Text,EBM,1677,temp,Warm temperatures around 28.7°C are within a comfortable cycling range and encourage ridership.
+JSON to Text,EBM,1677,yr,"2011 represented the lower-demand phase of the bike rental system, dampening predicted rentals."
+JSON to Text,EBM,1677,weekday,"Thursdays see typical weekday commuter behaviour, providing a small upward nudge to demand."
+JSON to Text,EBM,1677,hum,"Higher humidity can slightly discourage cycling, exerting a minor downward influence on rentals."
+JSON to Text,EBM,1677,mnth,"August as a month exerts a very minor downward influence, possibly due to seasonal patterns in this dataset."
+JSON to Text,EBM,2058,hr,"Early evening hours after peak commute still attract leisure cyclists, sustaining solid demand."
+JSON to Text,EBM,2058,temp,"Temperatures around 25°C are within the optimal cycling comfort range, encouraging rentals."
+JSON to Text,EBM,2058,yr,"2011 was the earlier, lower-demand phase of the bike rental system before ridership matured."
+JSON to Text,EBM,2058,mnth,September is a peak season month with favorable weather and high outdoor activity levels.
+JSON to Text,EBM,2058,hum,"High humidity at 83% makes cycling less comfortable, slightly reducing demand."
+JSON to Text,EBM,2058,weathersit,"Clear weather conditions make cycling more attractive and safe, boosting rentals."
+JSON to Text,EBM,2510,hr,The evening commuter peak at 18:00 drives high bike rental demand.
+JSON to Text,EBM,2510,yr,"2011 represented an earlier, lower-demand phase of the bike rental system's history."
+JSON to Text,EBM,2510,temp,Cooler temperatures slightly below the optimal comfort range reduce cycling demand.
+JSON to Text,EBM,2510,hum,Moderate humidity at 50 percent is comfortable and does not deter cyclists.
+JSON to Text,EBM,2510,weathersit,Clear weather encourages bike rentals by providing favorable cycling conditions.
+JSON to Text,EBM,3543,hr,Evening hours around 8 pm still carry high demand following the earlier commuter peak.
+JSON to Text,EBM,3543,yr,2012 represented a higher-demand phase of the bike-sharing system's growth compared to 2011.
+JSON to Text,EBM,3543,hum,"Low humidity creates comfortable, dry cycling conditions that encourage bike use."
+JSON to Text,EBM,3543,temp,Mild temperatures around 20.5 °C are comfortable for cycling and positively influence demand.
+JSON to Text,EBM,3543,weathersit,Clear skies make cycling more attractive and increase rental demand.
+JSON to Text,EBM,3543,weekday,"Fridays see a mix of commuters and leisure riders in the evening, boosting demand."
+JSON to Text,EBM,3847,hr,"Midday hours fall within peak daytime cycling demand, especially on weekends."
+JSON to Text,EBM,3847,temp,Warm temperatures around 32.8°C are in the optimal range that encourages cycling activity.
+JSON to Text,EBM,3847,yr,The second year of the bike rental system saw higher overall demand as the service matured and gained more users.
+JSON to Text,EBM,3847,hum,"Low humidity makes outdoor activity more comfortable, encouraging more cycling."
+JSON to Text,EBM,3847,weathersit,Clear weather conditions are favorable for cycling and increase rental demand.
+JSON to Text,EBM,3847,weekday,Saturdays see increased leisure cycling compared to weekdays.
+JSON to Text,EBM,4454,hr,The evening rush hour at 19:00 is a peak demand period for bike rentals as commuters return home.
+JSON to Text,EBM,4454,temp,A comfortable warm temperature around 26°C encourages outdoor cycling activity.
+JSON to Text,EBM,4454,yr,"The bike rental system had grown significantly by 2012, resulting in higher overall demand compared to 2011."
+JSON to Text,EBM,4454,hum,High humidity makes cycling less comfortable and can deter some riders.
+JSON to Text,EBM,4454,weekday,Saturdays see increased leisure cycling activity compared to typical weekdays.
+JSON to Text,EBM,4454,mnth,August may show a slight dip relative to other summer months possibly due to vacation patterns affecting commuter rentals.
+Vision,XGB,224,temp,Cold temperatures around 8°C deter people from renting bikes.
+Vision,XGB,224,hr,"Evening hours around 7 pm correspond to commuter return time, driving high demand."
+Vision,XGB,224,mnth,February is a winter month with typically low bike rental demand.
+Vision,XGB,224,yr,"2011 was the earlier, lower-demand phase of the bike rental system's history."
+Vision,XGB,224,weekday,Thursdays are workdays with commuter activity that moderately boosts rentals.
+Vision,XGB,224,weathersit,Clear weather conditions encourage bike rentals.
+Vision,XGB,224,hum,"Low humidity is more comfortable for cycling, slightly increasing demand."
+Vision,XGB,224,windspeed,"Calm winds make cycling easier and more pleasant, slightly increasing demand."
+Vision,XGB,580,hr,Late night hours see reduced bike demand as most people have finished their journeys.
+Vision,XGB,580,yr,2011 was the lower-demand phase of the bike rental service compared to 2012.
+Vision,XGB,580,mnth,Early spring months have not yet built up the warm-weather demand that drives higher rentals.
+Vision,XGB,580,temp,Cool temperatures are on the lower side of the optimal range and discourage cycling.
+Vision,XGB,580,weathersit,Clear weather encourages outdoor activity including bike rentals.
+Vision,XGB,580,weekday,Saturdays can see leisure riders which slightly boosts demand.
+Vision,XGB,580,windspeed,Calm wind conditions are more comfortable for cycling and mildly increase demand.
+Vision,XGB,1041,hr,The morning rush hour at 8 a.m. corresponds to peak commuter demand for bike rentals.
+Vision,XGB,1041,yr,"2011 was the earlier, lower-demand phase of the bike-sharing system compared to 2012."
+Vision,XGB,1041,weekday,"Fridays have strong commuter traffic, boosting bike rental demand."
+Vision,XGB,1041,hum,"Very high humidity makes cycling uncomfortable, discouraging some riders."
+Vision,XGB,1481,hr,"4 p.m. falls at the start of the afternoon commuter peak, driving high bike rental demand."
+Vision,XGB,1481,yr,2011 was the first year of the bike-share system with lower overall ridership compared to 2012.
+Vision,XGB,1481,temp,Extremely high temperatures above roughly 37 °C begin to deter cyclists from renting bikes.
+Vision,XGB,1481,mnth,July is a summer month with generally higher outdoor activity and bike rental demand.
+Vision,XGB,1481,hum,"Low humidity makes conditions more comfortable for cycling, encouraging rentals."
+Vision,XGB,1677,hr,"The evening hour around 8 p.m. still captures residual commuter and leisure ridership, driving high demand."
+Vision,XGB,1677,yr,"2011 was the early, lower-demand phase of the bike-share system before it reached maturity, resulting in fewer rentals overall."
+Vision,XGB,1677,temp,"A warm temperature around 28.7°C falls in the optimal comfort range for cycling, encouraging more rentals."
+Vision,XGB,1677,mnth,August is a peak summer month with high seasonal demand for bike rentals.
+Vision,XGB,1677,weekday,Thursday is a typical weekday with regular commuter patterns that support steady ridership.
+Vision,XGB,2058,yr,"2011 was the lower-demand phase of the bike rental service's history, so the model treats it as a drag on expected rentals."
+Vision,XGB,2058,temp,Comfortable late-summer warmth around 25°C encourages cycling activity.
+Vision,XGB,2058,hum,High humidity tends to deter riders even when temperatures are pleasant.
+Vision,XGB,2058,mnth,September reflects typically high late-summer demand for bike rentals.
+Vision,XGB,2058,weekday,"On Saturdays commuter traffic is absent, leading the model to expect a flatter evening demand profile than on weekdays."
+Vision,XGB,2510,hr,"Evening rush hour at 18:00 corresponds to the commuter peak when people head home, driving high bike rental demand."
+Vision,XGB,2510,yr,"In 2011 the bike rental system was in an earlier, lower-demand phase with fewer registered users and less overall ridership."
+Vision,XGB,2510,temp,Cooler temperatures around 16°C discourage casual cycling and reduce overall rental demand.
+Vision,XGB,2510,weekday,"Fridays are workdays with strong commuter traffic, boosting evening bike rentals."
+Vision,XGB,2510,hum,Moderate humidity is comfortable for cycling and does not deter riders.
+Vision,XGB,2510,weathersit,"Clear skies make cycling more attractive, increasing rental likelihood."
+Vision,XGB,2510,holiday,Non-holiday weekdays maintain regular commuter demand for bike rentals.
+Vision,XGB,2510,windspeed,"Virtually no wind makes cycling easier and more appealing, slightly boosting rentals."
+Vision,XGB,3543,yr,"The bike rental system had grown substantially by 2012, leading to a higher baseline demand compared to 2011."
+Vision,XGB,3543,hr,The evening hour of 20:00 falls within the evening peak window when commuters and leisure riders returning home keep demand elevated.
+Vision,XGB,3543,hum,Low humidity creates more comfortable and dry conditions that encourage cycling.
+Vision,XGB,3543,temp,Mild temperatures around 20.5°C are comfortable for cycling and encourage ridership.
+Vision,XGB,3543,weathersit,"Clear weather conditions make cycling more attractive and safe, increasing demand."
+Vision,XGB,3543,mnth,April exerts a very slight seasonal downward pull on demand despite being a spring month with generally growing demand.
+Vision,XGB,3847,hr,Midday hours represent a busy leisure window with high bike rental demand.
+Vision,XGB,3847,weekday,"Saturdays attract leisure riders throughout the day, boosting demand above the weekly average."
+Vision,XGB,3847,yr,"2012 was a higher-demand year in the dataset, reflecting overall growth in bike rentals."
+Vision,XGB,3847,temp,Temperatures near the upper edge of the optimal comfort range encourage more cycling activity.
+Vision,XGB,3847,hum,"Low humidity makes cycling more comfortable, increasing rental demand."
+Vision,XGB,4454,hr,Evening peak hours see high demand from commuters returning home and leisure riders.
+Vision,XGB,4454,temp,"Comfortable temperatures around 26°C are ideal for cycling, encouraging more rentals."
+Vision,XGB,4454,yr,Overall system demand was higher in 2012 than in 2011 due to growth in the bike rental network.
+Vision,XGB,4454,weekday,"Weekends lack sharp commuter spikes, producing a flatter and lower demand profile compared to weekdays."
+Vision,XGB,4454,hum,"High humidity makes conditions less comfortable for cycling, discouraging some riders."
+Vision,EBM,224,hr,Evening rush hour around 19:00 is a peak commuter window with high bike demand.
+Vision,EBM,224,temp,Cold temperatures around 8°C discourage cycling and reduce rental demand.
+Vision,EBM,224,yr,"2011 was an earlier, lower-demand phase of the bike rental system compared to 2012."
+Vision,EBM,224,mnth,February is a winter month with lower cycling demand due to cold and shorter days.
+Vision,EBM,580,yr,2011 was the early adoption phase of the bike rental system with lower overall demand compared to 2012.
+Vision,EBM,580,mnth,"March in 2011 compounds the low-demand period, as early spring in the first year of operation sees reduced ridership."
+Vision,EBM,580,temp,"Cooler temperatures reduce the attractiveness of cycling, dampening rental demand."
+Vision,EBM,580,weekday,Saturday nights attract leisure riders who are more likely to rent bikes for recreational purposes late in the evening.
+Vision,EBM,580,hr,Late-night hours on weekends see increased leisure cycling activity.
+Vision,EBM,580,weathersit,Clear weather conditions encourage bike rentals by making cycling more comfortable and appealing.
+Vision,EBM,1041,hr,The morning rush hour at 8 AM corresponds to peak commuter demand for bike rentals.
+Vision,EBM,1041,hr & weekday,"The interaction between a weekday morning peak and Friday amplifies ridership beyond what hour alone predicts, reflecting strong commuter patterns."
+Vision,EBM,1041,yr,"2011 was an earlier, lower-demand phase of the bike rental system's growth, resulting in fewer rentals compared to later years."
+Vision,EBM,1041,hum,High humidity makes cycling uncomfortable and discourages many potential riders.
+Vision,EBM,1041,temp,"A temperature of approximately 20.5°C is in a comfortable range for cycling, mildly encouraging ridership."
+Vision,EBM,1481,hr,The evening commuter peak around 16:00-18:00 drives high bike rental demand as people travel home from work.
+Vision,EBM,1481,yr,In 2011 the bike sharing system was less mature and had lower overall ridership compared to 2012.
+Vision,EBM,1481,hum,"Low humidity makes cycling more comfortable, encouraging more rentals."
+Vision,EBM,1481,temp,Warm temperatures generally encourage outdoor activities including cycling.
+Vision,EBM,1481,weathersit,Clear weather conditions make cycling more appealing and safe.
+Vision,EBM,1481,mnth,"July is a summer month with favorable conditions for cycling, boosting seasonal demand."
+Vision,EBM,1677,hr,Evening peak hours see high demand from commuters and leisure riders returning home.
+Vision,EBM,1677,temp,Warm and comfortable temperatures encourage more people to rent bikes.
+Vision,EBM,1677,yr,"2011 was the earlier, lower-demand phase of the bike rental system before it grew in 2012."
+Vision,EBM,1677,weekday,Thursday evenings reflect typical weekday commuter surges boosting bike rental demand.
+Vision,EBM,1677,mnth,August is a warm summer month that encourages cycling activity.
+Vision,EBM,1677,weathersit,Misty or cloudy weather conditions slightly discourage bike rentals compared to clear conditions.
+Vision,EBM,2058,hr,"Evening hours around 20:00 see solid leisure cycling activity, especially on weekends."
+Vision,EBM,2058,temp,Around 25°C is a very comfortable temperature that encourages cycling.
+Vision,EBM,2058,yr,2011 was the lower-demand year in the dataset compared to 2012.
+Vision,EBM,2058,weekday,Saturday evenings attract less cycling activity than equivalent weekday commuter peaks at the same hour.
+Vision,EBM,2058,mnth,September benefits from high late-summer demand for cycling.
+Vision,EBM,2058,hum,High humidity at 83% creates mild discomfort that slightly reduces cycling demand.
+Vision,EBM,2510,hr,"Evening rush hour at 18:00 corresponds to the end of the workday commute, driving high bike rental demand."
+Vision,EBM,2510,yr,2011 was the earlier year of operation with a smaller user base and lower overall demand compared to 2012.
+Vision,EBM,2510,mnth,December combined with prevailing humidity levels typically reduces cycling demand due to cold and damp conditions.
+Vision,EBM,2510,temp,"Cooler temperatures around 16°C discourage casual cycling, reducing rental demand compared to warmer conditions."
+Vision,EBM,3543,hr,Evening commuter hours see high bike rental demand as people return home from work.
+Vision,EBM,3543,yr,"2012 had higher overall bike rental demand than 2011, reflecting growth in the system's user base."
+Vision,EBM,3543,hum,"Low humidity means more comfortable cycling conditions, encouraging more rentals."
+Vision,EBM,3543,temp,"Mild temperatures around 20°C are comfortable for cycling, boosting demand."
+Vision,EBM,3543,weathersit,"Clear weather makes cycling more attractive, increasing rentals."
+Vision,EBM,3543,weekday,Fridays tend to have elevated bike rental activity due to commuter and leisure demand.
+Vision,EBM,3543,hr & hum,The interaction between evening hours and very low humidity slightly moderates the overall positive prediction.
+Vision,EBM,3847,hr,Midday hours typically see peak bike rental demand as people commute or engage in leisure activities.
+Vision,EBM,3847,hr & weekday,"Saturday midday combines weekend leisure time with peak daytime hours, amplifying rental demand beyond weekday patterns."
+Vision,EBM,3847,temp,Warm temperatures around 33°C fall in an optimal range that encourages outdoor cycling activity.
+Vision,EBM,3847,hr & temp,"Very warm midday temperatures can slightly deter some cyclists due to heat discomfort, causing the model to apply a small downward correction."
+Vision,EBM,4454,hr,Evening peak hours see high bike rental demand due to commuters and leisure riders returning home.
+Vision,EBM,4454,temp,Comfortable warm temperatures around 26°C encourage cycling activity.
+Vision,EBM,4454,yr,System usage grew in 2012 compared to 2011 as the bike rental service expanded its user base.
+Vision,EBM,4454,weekday,"Saturday evenings attract leisure riders who spread trips more evenly, replacing the dense commuter wave of weekday peaks."
+Vision,EBM,4454,hum,High humidity makes cycling less comfortable and can deter some riders.
+Tool Use,XGB,224,temp,"Cold temperatures deter cyclists from renting bikes, reducing demand significantly."
+Tool Use,XGB,224,hr,The evening commuter peak around 17-19h drives higher bike rental demand.
+Tool Use,XGB,224,mnth,February is a winter month with lower overall bike rental demand.
+Tool Use,XGB,224,yr,"2011 was the earlier, lower-growth year for the bike rental system, resulting in fewer rentals."
+Tool Use,XGB,224,weekday,Thursday is a working weekday that generates commuter traffic and slightly boosts demand.
+Tool Use,XGB,580,hr,Late-night hours are past the evening peak and bike traffic winds down sharply.
+Tool Use,XGB,580,yr,"In 2011 the bike-sharing system was still in its growth phase, so overall demand was lower than in later years."
+Tool Use,XGB,580,mnth,March is an early-spring month with cooler conditions and historically lower bike rental demand.
+Tool Use,XGB,580,temp,"Cooler temperatures deter casual riders, reducing overall demand."
+Tool Use,XGB,1041,hr,"8 a.m. corresponds to the morning commuter peak, driving exceptionally high bike rental demand."
+Tool Use,XGB,1041,yr,2011 had lower overall demand compared to 2012 as the bike-sharing network was less established.
+Tool Use,XGB,1041,weekday,"Friday commuter traffic is high, boosting demand during morning peak hours."
+Tool Use,XGB,1041,hum,"High humidity discourages cycling, reducing rental demand."
+Tool Use,XGB,1041,temp,"Mild temperatures around 20.5°C are comfortable for cycling, slightly increasing demand."
+Tool Use,XGB,1481,hr,"16:00 falls at the start of the evening commuter rush, one of the busiest periods for bike rentals."
+Tool Use,XGB,1481,yr,"In 2011 the bike-sharing system was still in its growth phase, so overall demand was structurally lower than in later years."
+Tool Use,XGB,1481,temp,"Extreme heat (here ~36.9 °C, 99.6th percentile) deters riders from cycling, suppressing demand."
+Tool Use,XGB,1481,hum,Moderate humidity levels are comfortable for cycling and do not discourage rentals.
+Tool Use,XGB,1481,mnth,Summer months like July generally see higher outdoor activity and thus more bike rentals.
+Tool Use,XGB,1677,hr,Evening post-commute hours see high cycling demand as people travel home or recreate.
+Tool Use,XGB,1677,yr,"In 2011 the bike-sharing system was in an earlier, lower-demand growth phase compared to 2012."
+Tool Use,XGB,1677,temp,Warm temperatures around 28.7°C are comfortable for cycling and increase rental demand.
+Tool Use,XGB,1677,mnth,"August is a summer month with favorable weather, boosting outdoor cycling activity."
+Tool Use,XGB,1677,weekday,Thursdays are workdays with regular commuting patterns that drive consistent bike rental demand.
+Tool Use,XGB,1677,hum,"High humidity can make cycling uncomfortable, slightly reducing demand."
+Tool Use,XGB,1677,weathersit,"Misty or cloudy weather is less favorable for cycling than clear conditions, mildly dampening demand."
+Tool Use,XGB,2058,yr,The bike rental system had lower overall demand in 2011 compared to 2012 as the service was still growing.
+Tool Use,XGB,2058,temp,Comfortable warm temperatures around 25°C encourage more people to rent bikes.
+Tool Use,XGB,2058,hum,High humidity makes cycling uncomfortable and discourages rentals.
+Tool Use,XGB,2058,mnth,September benefits from favorable late-summer weather conditions that support higher bike demand.
+Tool Use,XGB,2058,hr,Evening hours around 20:00 see leisure and post-work cycling activity.
+Tool Use,XGB,2058,weekday,Weekends may show slightly lower commuter-driven demand compared to weekdays.
+Tool Use,XGB,2510,hr,"18:00 is the evening commuter peak, a high-demand slot for bike rentals."
+Tool Use,XGB,2510,yr,2011 was a lower-demand period compared to the two-year average the model was trained on.
+Tool Use,XGB,2510,temp,Cooler temperatures reduce cycling demand as riders prefer warmer conditions.
+Tool Use,XGB,2510,weekday,Fridays see higher bike demand due to commuter traffic patterns.
+Tool Use,XGB,2510,weathersit,Clear weather encourages more people to rent bikes.
+Tool Use,XGB,2510,windspeed,Calm winds make cycling more comfortable and increase demand.
+Tool Use,XGB,2510,hum,Moderate humidity at 50% is comfortable for cycling and does not deter riders.
+Tool Use,XGB,2510,mnth,December is a winter month with generally lower cycling demand.
+Tool Use,XGB,3543,yr,"The bike-sharing system grew significantly from 2011 to 2012, resulting in higher overall demand in 2012."
+Tool Use,XGB,3543,hr,Evening hours around 20:00 capture the tail end of commuter and leisure traffic peaks on weekdays.
+Tool Use,XGB,3543,hum,"Low humidity makes cycling more comfortable, encouraging more riders to rent bikes."
+Tool Use,XGB,3543,mnth,"April sits slightly below the model's average seasonal baseline, possibly because peak cycling months occur later in the year."
+Tool Use,XGB,3847,hr,Noon is a high-activity window for leisure riders on weekends.
+Tool Use,XGB,3847,weekday,Saturday leisure demand around midday is considerably higher than on a typical mid-week day.
+Tool Use,XGB,3847,yr,The year 2012 reflects broader system growth compared to 2011.
+Tool Use,XGB,3847,temp,Warm temperatures encourage cycling and increase demand.
+Tool Use,XGB,3847,hum,"Low humidity makes conditions more comfortable for riders, boosting demand."
+Tool Use,XGB,3847,mnth,June is a summer month with favorable conditions for cycling.
+Tool Use,XGB,3847,weathersit,Clear skies are favorable for cycling and increase demand.
+Tool Use,XGB,4454,hr,"The early evening hour catches both the commuter evening peak and leisure riders, consistently attracting high demand."
+Tool Use,XGB,4454,temp,"Comfortably warm temperatures around 26°C are ideal cycling conditions, sitting in the model's sweet spot for demand."
+Tool Use,XGB,4454,yr,"The bike-share system grew over time, so 2012 reflects higher overall ridership compared to 2011."
+Tool Use,XGB,4454,weekday,"Saturday lacks the weekday commuter crowd, reducing the evening peak compared to workdays."
+Tool Use,XGB,4454,hum,"High humidity makes conditions less comfortable for cycling, dampening demand."
+Tool Use,XGB,4454,weathersit,"Misty or cloudy weather is less conducive to cycling than clear conditions, slightly reducing demand."
+Tool Use,EBM,224,hr,The evening rush hour at 19:00 is the highest-demand slot of the day for bike rentals.
+Tool Use,EBM,224,temp,Cold temperatures deter cyclists and significantly reduce bike rental demand.
+Tool Use,EBM,224,yr,The first year of the bike-share system (2011) had lower overall demand compared to 2012.
+Tool Use,EBM,224,mnth,February is a winter month associated with a typical seasonal lull in bike rentals.
+Tool Use,EBM,224,hum,"Low humidity is more comfortable for cycling, slightly increasing demand."
+Tool Use,EBM,224,weathersit,Clear weather conditions encourage more people to rent bikes.
+Tool Use,EBM,224,weekday,Workdays (Thursday) see commuter-driven demand that boosts rentals.
+Tool Use,EBM,224,windspeed,"Calm winds make cycling more comfortable, providing a small positive effect on rentals."
+Tool Use,EBM,224,holiday,Non-holiday workdays support regular commuter demand for bike rentals.
+Tool Use,EBM,580,yr,2011 represented a lower overall demand phase for the bike rental system compared to 2012.
+Tool Use,EBM,580,temp,Cool temperatures below the model's sweet spot of 20–33°C deter cycling activity.
+Tool Use,EBM,580,hr,"22:00 on a Saturday is late but still active, maintaining some demand."
+Tool Use,EBM,580,weathersit,Clear weather encourages bike rentals.
+Tool Use,EBM,580,weekday,Saturdays see higher leisure evening use compared to weekdays.
+Tool Use,EBM,1041,hr,The morning commuter peak at 8 a.m. drives high bike rental demand on weekdays.
+Tool Use,EBM,1041,yr,"2011 was the lower-demand phase of the two recorded years, reflecting earlier adoption and smaller user base."
+Tool Use,EBM,1041,hum,High humidity is uncomfortable for cycling and discourages rentals.
+Tool Use,EBM,1041,temp,Mild temperatures around 20.5°C are comfortable for cycling and moderately boost demand.
+Tool Use,EBM,1041,weekday,"Friday is a regular workday, supporting commuter demand."
+Tool Use,EBM,1041,mnth,May offers pleasant spring weather that encourages cycling.
+Tool Use,EBM,1041,weathersit,Mist or cloudy conditions slightly reduce the appeal of cycling compared to clear weather.
+Tool Use,EBM,1481,hr,"The evening commuter ramp-up begins at 16:00, making it a high-demand slot for bike rentals."
+Tool Use,EBM,1481,yr,"2011 had lower overall bike rental demand compared to 2012, dampening predictions for that year."
+Tool Use,EBM,1481,hum,"Lower humidity means more comfortable riding conditions, slightly encouraging rental activity."
+Tool Use,EBM,1481,temp,"Warm temperatures generally encourage cycling, though extreme heat can begin to deter users."
+Tool Use,EBM,1481,weathersit,Clear weather conditions are more favourable for cycling than rain or overcast skies.
+Tool Use,EBM,1677,hr,"Evening hours around 20:00 coincide with commuters returning home, creating a peak demand period."
+Tool Use,EBM,1677,temp,"Warm temperatures in the 20–33°C range make cycling more attractive, increasing rentals."
+Tool Use,EBM,1677,yr,"2011 was an earlier, lower-demand phase of the bike rental system's growth compared to 2012."
+Tool Use,EBM,2058,hr,"Evening hours around 8 pm sustain leisure cycling demand, contributing positively to bike rentals."
+Tool Use,EBM,2058,temp,"Warm temperatures in the sweet spot of 20-33°C make outdoor cycling attractive, increasing demand."
+Tool Use,EBM,2058,yr,"2011 was the lower-demand phase of the dataset, so the model applies a systematic downward correction for that year."
+Tool Use,EBM,2058,mnth,September offers pleasant weather conditions that support higher bike rental demand.
+Tool Use,EBM,2058,hum,High humidity creates uncomfortable sticky conditions that slightly deter cycling.
+Tool Use,EBM,2058,weathersit,Clear weather encourages outdoor activity and increases bike rental demand.
+Tool Use,EBM,2510,hr,Evening commuter peak at 18:00 on a Friday drives high bike rental demand.
+Tool Use,EBM,2510,yr,"In 2011 the bikeshare system had fewer registered users than in 2012, so the model expects lower ridership."
+Tool Use,EBM,2510,temp,Cooler temperatures below the optimal range deter cyclists and reduce demand.
+Tool Use,EBM,2510,weathersit,Clear weather encourages bike rentals by making cycling more comfortable.
+Tool Use,EBM,2510,hum,Moderate humidity at 50% is comfortable for cycling and does not deter riders.
+Tool Use,EBM,2510,windspeed,Zero wind speed makes cycling easier and more appealing.
+Tool Use,EBM,3543,hr,Late evening hours still carry residual commuter and leisure demand after the peak evening rush.
+Tool Use,EBM,3543,yr,"The bike rental system grew substantially in 2012 compared to 2011, reflecting increased adoption and infrastructure."
+Tool Use,EBM,3543,hum,"Low humidity creates comfortable cycling conditions, encouraging more riders to use bikes."
+Tool Use,EBM,3543,temp,Mild spring temperatures around 20°C are comfortable for cycling and increase demand.
+Tool Use,EBM,3847,hr,Midday is a high-activity leisure hour with strong cycling demand.
+Tool Use,EBM,3847,temp,Warm but not extreme temperatures encourage cycling activity.
+Tool Use,EBM,3847,yr,"The bike rental system grew between 2011 and 2012, so 2012 reflects higher overall demand."
+Tool Use,EBM,3847,hum,Low humidity provides a comfort bonus that encourages cycling.
+Tool Use,EBM,3847,weathersit,Clear weather is favorable for cycling and raises demand.
+Tool Use,EBM,3847,weekday,Saturdays have a leisure dynamic that supports higher bike rental demand.
+Tool Use,EBM,4454,hr,"Evening hours around 17:00–19:00 capture commuter and leisure demand peaks, driving strong rental activity."
+Tool Use,EBM,4454,temp,"Comfortable warm temperatures around 26°C are ideal for cycling, encouraging higher bike rental demand."
+Tool Use,EBM,4454,yr,The second year of operation reflects a higher baseline ridership as the bike-sharing system matured and gained more users.
+Tool Use,EBM,4454,hum,"Higher humidity makes cycling less comfortable, slightly reducing rental demand."
+Tool Use,EBM,4454,weathersit,"Misty or cloudy weather conditions are less appealing for cycling compared to clear skies, mildly suppressing demand."
+Tool Use,EBM,4454,windspeed,"Higher wind speeds make cycling more physically demanding and less enjoyable, slightly reducing rentals."

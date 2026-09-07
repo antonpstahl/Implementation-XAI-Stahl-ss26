@@ -5,7 +5,7 @@
   "loss_key": "poisson_log",
   "xai_model": "xgb",
   "feature": "mnth",
-  "explanation": "[EFFECT] Winter months (blue, low values) sit on the negative side (around −0.8), while summer months (red, high values) sit on the positive side (around +0.3), suggesting a broadly seasonal pattern where warmer months boost demand",
+  "explanation": "[EFFECT] Winter months (blue, low values) are associated with negative contributions (around −1), while summer months (red, high values) lean positive (around +0.3). The relationship is broadly positive — later, warmer months increase predicted demand — though the exact shape cannot be read in fine detail from the plot.\n[IMPORTANCE] Month is the fifth most important feature, with a moderate spread and influence clearly smaller than hour, year, and temperature.\n\n---\n[RECOMMENDATION] Operational planning should be driven overwhelmingly by the **hour of day** — staffing and bike availability must follow the daily demand curve closely, as this single feature dwarfs all others. **Temperature** (and to a lesser extent month) should be the second planning lever, with management scaling up resources during warm periods and scaling back during cold spells.",
   "dropped": false,
   "condition": "vision_beeswarm",
   "modality": "vision",

@@ -1,0 +1,15 @@
+{
+  "form_pipeline": "vision",
+  "xai_model": "xgb",
+  "feature": "hr",
+  "form_type": "categorical",
+  "judge_model": "claude-opus-4-8",
+  "faithfulness": 5,
+  "clarity": 3,
+  "completeness": 5,
+  "faithfulness_reasoning": "Correctly identifies hour 17 (5 PM) as the top and 4–5 AM as the lowest, with the morning-8AM commuter rise; rank 1 is correct. Both key structures captured. Anchor 5, no deduction.",
+  "usage": {
+    "input_tokens": 930,
+    "output_tokens": 282
+  }
+}

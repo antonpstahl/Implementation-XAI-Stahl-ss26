@@ -5,7 +5,7 @@
   "loss_key": "poisson_log",
   "xai_model": "xgb",
   "feature": "hr",
-  "explanation": "[EFFECT] The hour of the day has a strongly non-monotonic effect. Demand is heavily suppressed in the pre-dawn hours, reaching its lowest point around 4–5 a.m. (contribution ≈ −3.5 in log space). It then climbs sharply through the morning, peaks around the evening rush at roughly 5–6 p.m. (contribution ≈ +1), and falls back through the late evening. A secondary rise is visible around 8 a.m.\n[IMPORTANCE] This is by far the most important feature, with a vertical range of about 4.5 log-units — more than four times larger than any other feature.",
+  "explanation": "[EFFECT] The hour of day is highly non-monotonic: contributions are moderately negative around midnight, plunge to their lowest point (roughly −3.5 in log units) in the pre-dawn window of 4–5 am, then recover sharply through the morning. The contribution reaches its highest point around 5–6 pm (~+1.0), before falling again toward midnight. There is a smaller morning shoulder around 8 am and a broad daytime plateau; the evening peak is clearly the strongest.\n[IMPORTANCE] This is by far the most important feature, with a vertical range of roughly 4.5 log-units — several times larger than any other feature.\n[RECOMMENDATION] Plan your staffing and bike availability primarily around the hour of the day — the evening peak (around 5–6 pm) and the morning shoulder (around 8 am) drive the largest swings in demand — and use temperature as the key weather signal, targeting comfortable mild days (~20–25 °C) for maximum expected ridership and scaling back during cold or very hot spells.",
   "dropped": false,
   "condition": "vision_all",
   "modality": "vision",

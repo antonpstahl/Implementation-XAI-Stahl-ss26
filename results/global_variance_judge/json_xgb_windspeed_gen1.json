@@ -1,0 +1,15 @@
+{
+  "form_pipeline": "json",
+  "xai_model": "xgb",
+  "feature": "windspeed",
+  "form_type": "near-flat",
+  "judge_model": "claude-opus-4-8",
+  "faithfulness": 1,
+  "clarity": 5,
+  "completeness": 5,
+  "faithfulness_reasoning": "Reference is near-flat (negligible) and non-monotonic with a small positive peak ~11 km/h and sign change ~15.9 km/h; the explanation calls it \"broadly monotonic and negative\" with an increasingly severe effect, missing the negligibility and misdescribing shape. Rank 8 is correct. Anchor 2, -1 (direction/monotonicity contradicts the mixed non-monotone reference), -1 (misses negligibility of a near-flat feature and claims no positive region), max(1,2-2)=1.",
+  "usage": {
+    "input_tokens": 847,
+    "output_tokens": 385
+  }
+}

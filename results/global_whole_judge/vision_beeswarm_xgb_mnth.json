@@ -4,12 +4,12 @@
   "feature": "mnth",
   "form_type": "categorical",
   "judge_model": "claude-opus-4-8",
-  "faithfulness": 4,
-  "clarity": 3,
-  "completeness": 1,
-  "faithfulness_reasoning": "Direction is correct (winter negative, summer positive), consistent with reference bottom categories (Jan/Feb/Mar) and top categories (Sep/Oct/Jul); but no importance rank and it doesn't pinpoint the true peak months (Sep/Oct rather than pure summer). Anchor 4; no deduction applies since direction matches and general structure is right. Score 4.",
+  "faithfulness": 5,
+  "clarity": 4,
+  "completeness": 4,
+  "faithfulness_reasoning": "The explanation correctly identifies winter months (Jan/Feb) as most negative and later warmer months (Sept/Oct) as most positive, matching the reference top/bottom categories; rank 5 of 9 is correct. Anchor 5, no deductions.",
   "usage": {
-    "input_tokens": 602,
-    "output_tokens": 380
+    "input_tokens": 799,
+    "output_tokens": 356
   }
 }

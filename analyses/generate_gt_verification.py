@@ -1,11 +1,11 @@
-"""Generate analyses/gt_verification.md — the P1 ground-truth verification report.
+"""Generate analyses/gt_verification.md, the P1 ground-truth verification report.
 
 Two objective checks over the 18 structured references in
 ``explanations/global_groundtruth/``:
 
   (A) Mechanical re-derivation: reload each feature's curve, aggregate it, and recompute
       form / direction / monotonicity (shared classifier) + importance rank + peak +
-      top categories. A reference passes if every stored field reproduces — proving the
+      top categories. A reference passes if every stored field reproduces, proving the
       heuristic derivation is self-consistent and the file is not stale/corrupt.
 
   (B) Domain reliability: per categorical level, count training-sample support and flag

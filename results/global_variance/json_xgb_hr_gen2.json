@@ -1,0 +1,16 @@
+{
+  "form": "json",
+  "scope": "global",
+  "llm_model": "claude-sonnet-4-6",
+  "loss_key": "poisson_log",
+  "xai_model": "xgb",
+  "feature": "hr",
+  "explanation": "[EFFECT]\nThe hour of day shows a strong non-monotonic, double-peaked pattern on predicted bike demand. Contributions are deeply negative in the very early morning (roughly midnight to 5 a.m.), indicating demand is heavily suppressed, then rise sharply around the morning commute (hour 8), dip slightly through midday, and reach their highest point in the late-afternoon/evening commute window around hours 17–18. After the evening peak, contributions fall steadily back into negative territory by late night.\n\n[IMPORTANCE]\nHour of day is by far the most influential feature in the model — ranked 1st out of all 9 features, with an importance score of 0.83, which dwarfs every other variable. Virtually all other conditions being equal, the time of day drives more variation in predicted demand than temperature, weather, season, or any other factor.\n\n[RECOMMENDATION]\nFleet and staff planning should be tightly aligned with the two daily demand peaks: ensure maximum bike availability and servicing around the morning commute (roughly 7–9 a.m.) and the stronger evening commute (roughly 4–7 p.m.), while reducing operational effort during the low-demand overnight and early-morning hours.",
+  "elapsed_s": 19.22,
+  "usage": {
+    "input_tokens": 164082,
+    "output_tokens": 732,
+    "cache_read_input_tokens": 1033
+  },
+  "generation_idx": 2
+}

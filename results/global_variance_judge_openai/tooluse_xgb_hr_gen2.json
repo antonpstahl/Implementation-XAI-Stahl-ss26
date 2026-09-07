@@ -1,0 +1,15 @@
+{
+  "form_pipeline": "tooluse",
+  "xai_model": "xgb",
+  "feature": "hr",
+  "form_type": "categorical",
+  "judge_model": "gpt-4o",
+  "faithfulness": 5,
+  "clarity": 5,
+  "completeness": 5,
+  "faithfulness_reasoning": "The explanation accurately describes the non-monotonic effect of the hour on demand, correctly identifying the lowest point around 4 AM and the peak at 5 PM. The importance rank is correctly stated as the most important feature. However, the peak value is slightly overstated as +1.0 instead of the reference's 0.79947. Anchor 5, no deduction.",
+  "usage": {
+    "input_tokens": 3208,
+    "output_tokens": 225
+  }
+}

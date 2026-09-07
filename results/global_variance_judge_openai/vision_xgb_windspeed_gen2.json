@@ -1,0 +1,15 @@
+{
+  "form_pipeline": "vision",
+  "xai_model": "xgb",
+  "feature": "windspeed",
+  "form_type": "near-flat",
+  "judge_model": "gpt-4o",
+  "faithfulness": 1,
+  "clarity": 2,
+  "completeness": 5,
+  "faithfulness_reasoning": "The explanation incorrectly describes the effect as mostly monotonically decreasing, while the reference indicates a near-flat effect with a non-monotonic form. The peak is also misrepresented as occurring at very low wind speeds, contradicting the reference peak at ~11 km/h. The importance rank is correctly stated. Anchor 3, -1 (direction/monotonicity contradicts), -1 (peak misrepresented), max(1, 3-2)=1.",
+  "usage": {
+    "input_tokens": 2751,
+    "output_tokens": 248
+  }
+}

@@ -1,0 +1,17 @@
+{
+  "pipeline": "05_vision",
+  "llm_model": "claude-sonnet-4-6",
+  "loss_key": "poisson_log",
+  "xai_model": "xgb",
+  "instance_id": 2058,
+  "explanation": "<prediction>The XGBoost model predicted 194 rented bikes for this Saturday evening at 20:00, while the actual count was 243. That is an underprediction of about 49 bikes, so the model matched this instance only moderately well — it captured the general ballpark but missed a meaningful share of actual demand.</prediction>\n\n<drivers>The strongest single influence in the plot is the blue bar for yr=0 (year 2011), which is the largest bar and points left, damping the prediction by −0.19. Since 2011 was the lower-demand phase of the service's history, the model treats it as a drag on expected rentals. Directly behind it, the red bar for temperature at about 25 °C (normalised 0.62) is the strongest upward driver at +0.16 — a comfortable late-summer warmth that clearly encourages cycling. Third in line is another blue bar: humidity at 83 percent pulls the prediction down by −0.13, as high humidity tends to deter riders even when temperatures are pleasant. September (month 9) adds a modest positive boost of +0.12, reflecting the typically high late-summer demand, while Saturday (weekday 6) has a small damping effect of −0.08, likely because commuter traffic is absent and the model expects a flatter evening profile than on weekdays.</drivers>\n\n<recommendation>On warm Saturday evenings in September, actual demand can outrun the model's forecast, partly because leisure riders are harder to predict than commuters. Operators should keep a buffer of extra bikes at popular leisure and waterfront stations during late-evening hours (19:00–21:00) in late summer, and treat the model's Saturday evening predictions as a lower bound rather than a firm target.</recommendation>",
+  "plot_file": "waterfall_xgb_poisson_log_inst2058.png",
+  "elapsed_s": 13.22,
+  "usage": {
+    "input_tokens": 1160,
+    "output_tokens": 598,
+    "cache_read_input_tokens": 1845
+  },
+  "prediction": 194.0592,
+  "y_true": 243.0
+}

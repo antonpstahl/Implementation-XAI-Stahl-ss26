@@ -1,0 +1,15 @@
+{
+  "form_pipeline": "json",
+  "xai_model": "xgb",
+  "feature": "holiday",
+  "form_type": "near-flat",
+  "judge_model": "claude-opus-4-8",
+  "faithfulness": 3,
+  "clarity": 3,
+  "completeness": 5,
+  "faithfulness_reasoning": "The reference is near-flat, monotonic decreasing, rank 9; the explanation correctly identifies decreasing effect on holidays and the correct rank 9, but over-dramatizes a near-flat feature by describing \"large\" and \"dramatic\" hour-varying swings that the reference does not support. Anchor 4 (direction correct, rank correct, but negligibility framing distorted), -1 (over-describes a near-flat feature as dramatic, missing its negligibility), max(1,4-1)=3.",
+  "usage": {
+    "input_tokens": 766,
+    "output_tokens": 374
+  }
+}

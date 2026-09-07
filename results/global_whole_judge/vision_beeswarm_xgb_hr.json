@@ -5,11 +5,11 @@
   "form_type": "categorical",
   "judge_model": "claude-opus-4-8",
   "faithfulness": 4,
-  "clarity": 3,
-  "completeness": 2,
-  "faithfulness_reasoning": "Direction matches (overnight hours 3-5 strongly negative, evening hours push up), rank 1 correct, and it captures the low/high structure though it doesn't name the 17:00-18:00 peaks explicitly. Anchor 5; no deduction applies since direction is right, rank is right, and the general structure is captured.",
+  "clarity": 2,
+  "completeness": 5,
+  "faithfulness_reasoning": "Direction matches: overnight hours (3-5) strongly suppress, evening/daytime (17,18,8) boost, and rank 1 is correct. However it never names the actual peak hours (17-18 evening commute, 8 morning), giving only vague \"daytime and evening\" framing, so key structure is slightly imprecise. Anchor 4, no deductions.",
   "usage": {
-    "input_tokens": 709,
-    "output_tokens": 334
+    "input_tokens": 846,
+    "output_tokens": 342
   }
 }

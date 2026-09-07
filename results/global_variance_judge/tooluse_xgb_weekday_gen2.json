@@ -1,0 +1,15 @@
+{
+  "form_pipeline": "tooluse",
+  "xai_model": "xgb",
+  "feature": "weekday",
+  "form_type": "categorical",
+  "judge_model": "claude-opus-4-8",
+  "faithfulness": 3,
+  "clarity": 3,
+  "completeness": 5,
+  "faithfulness_reasoning": "Reference top category is day 5 (Friday) then 6 (Saturday), and bottom are days 0,1,2; the explanation names Saturday (6) as the strongest, which is second-highest not top, and misidentifies the strongest positive level. Rank 4 correct. Anchor 4 (structure slightly imprecise on top level), -1 for wrong top category, max(1,3)=3.",
+  "usage": {
+    "input_tokens": 1675,
+    "output_tokens": 339
+  }
+}

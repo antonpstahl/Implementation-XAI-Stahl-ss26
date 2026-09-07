@@ -1,0 +1,15 @@
+{
+  "form_pipeline": "tooluse",
+  "xai_model": "ebm",
+  "feature": "holiday",
+  "form_type": "near-flat",
+  "judge_model": "claude-opus-4-8",
+  "faithfulness": 5,
+  "clarity": 3,
+  "completeness": 5,
+  "faithfulness_reasoning": "Direction (decreasing on holidays) matches, rank 9 of 9 correct, and the step drop to −0.145 is faithfully captured; however the near-flat/negligible framing is somewhat undercut by describing a \"sharp\" drop and \"13–15%\" effect, yet it does note it's the weakest signal. Anchor 5, no deduction since importance is correctly framed as least important.",
+  "usage": {
+    "input_tokens": 1321,
+    "output_tokens": 324
+  }
+}

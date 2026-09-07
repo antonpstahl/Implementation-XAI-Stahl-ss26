@@ -1,0 +1,15 @@
+{
+  "form_pipeline": "json",
+  "xai_model": "xgb",
+  "feature": "hr",
+  "form_type": "categorical",
+  "judge_model": "claude-opus-4-8",
+  "faithfulness": 5,
+  "clarity": 4,
+  "completeness": 5,
+  "faithfulness_reasoning": "Double-peaked structure with top hours 17-18 and 8 matches top_categories, low early-morning (3-5) matches bottom_categories, and rank 1 of 9 is correct. Anchor 5, no deductions.",
+  "usage": {
+    "input_tokens": 931,
+    "output_tokens": 286
+  }
+}

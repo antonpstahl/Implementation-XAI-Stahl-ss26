@@ -1,0 +1,17 @@
+{
+  "pipeline": "05_vision",
+  "llm_model": "claude-sonnet-4-6",
+  "loss_key": "poisson_log",
+  "xai_model": "ebm",
+  "instance_id": 2058,
+  "explanation": "<prediction>The EBM model predicted approximately 177 rented bikes for this hour, while the actual count was 243. That is a noticeable underestimate of about 66 bikes, so the prediction is only moderately matched — the model captures the general activity level but misses the true magnitude of demand.</prediction>\n\n<drivers>The strongest driver by far is the hour of day (20:00, evening), whose long red bar raises the prediction substantially — the evening period still sees solid leisure activity, especially on a Saturday. The second red bar belongs to temperature at about 25 °C, a very comfortable riding temperature that pulls demand upward meaningfully. Counteracting these two positive forces, the year 2011 produces the third-largest bar, which is blue and points clearly to the left: 2011 was the lower-demand year in the dataset, and this damping effect is sizeable. Just behind it, the interaction between hour and weekday (Saturday evening) also points left, suggesting that Saturday evenings draw somewhat less activity than the equivalent weekday commuter peaks at the same hour. September as the month adds a moderate positive boost, consistent with high late-summer demand, while humidity at 83% introduces a small additional drag.</drivers>\n\n<recommendation>Even with the year-2011 and Saturday-evening dampening effects, this is clearly a high-demand window. Operators should ensure adequate bike availability at popular leisure stations on Saturday evenings in late summer, particularly around 20:00. The near-zero wind and clear weather conditions mean no operational barriers to cycling, so redistribution runs should be completed before this peak rather than during it.</recommendation>",
+  "plot_file": "waterfall_ebm_poisson_log_inst2058.png",
+  "elapsed_s": 13.12,
+  "usage": {
+    "input_tokens": 976,
+    "output_tokens": 571,
+    "cache_read_input_tokens": 1845
+  },
+  "prediction": 176.8649,
+  "y_true": 243.0
+}

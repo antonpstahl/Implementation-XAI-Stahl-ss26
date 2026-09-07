@@ -6,10 +6,10 @@
   "judge_model": "claude-opus-4-8",
   "faithfulness": 3,
   "clarity": 2,
-  "completeness": 2,
-  "faithfulness_reasoning": "Direction (warmer raises demand) is correct and rank 3 is exactly right, but the explanation claims \"roughly monotonic\" and misses the peak (~29.5 °C) and decline at high heat. Anchor 4 (direction correct, structure imprecise), -1 (clear peak missed), max(1, 4-1)=3.",
+  "completeness": 5,
+  "faithfulness_reasoning": "Direction (warmer→more) is right and rank 3 is correct, but the explanation calls the relationship \"broadly monotonic positive\" and misses the inverted-U peak (~29.5 °C) and high-heat decline. Anchor 4 (rank correct, structure imprecise), -1 (clear peak missed), max(1, 4-1)=3.",
   "usage": {
-    "input_tokens": 586,
-    "output_tokens": 334
+    "input_tokens": 720,
+    "output_tokens": 344
   }
 }

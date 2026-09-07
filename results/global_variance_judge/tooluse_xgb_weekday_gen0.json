@@ -1,0 +1,15 @@
+{
+  "form_pipeline": "tooluse",
+  "xai_model": "xgb",
+  "feature": "weekday",
+  "form_type": "categorical",
+  "judge_model": "claude-opus-4-8",
+  "faithfulness": 2,
+  "clarity": 3,
+  "completeness": 5,
+  "faithfulness_reasoning": "Reference shows top categories are days 5 (Fri) and 6 (Sat) positive, and days 0/1/2 (Sun/Mon/Tue) most negative; the explanation instead frames Saturday AND Sunday as top positive and calls Friday only \"slightly positive,\" which mislabels Sunday (day 0, the most negative) and understates Friday (day 5, the strongest positive). It also introduces a \"spread of SHAP\" narrative not supported by the categorical mean contributions. Rank 4 is correct. Anchor 3 (key structure/top level partly wrong), -1 (top category identification wrong: Sunday claimed as top, actually bottom) → max(1,2)=2.",
+  "usage": {
+    "input_tokens": 1756,
+    "output_tokens": 455
+  }
+}

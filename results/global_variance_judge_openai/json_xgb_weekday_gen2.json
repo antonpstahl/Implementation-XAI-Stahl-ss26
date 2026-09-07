@@ -1,0 +1,15 @@
+{
+  "form_pipeline": "json",
+  "xai_model": "xgb",
+  "feature": "weekday",
+  "form_type": "categorical",
+  "judge_model": "gpt-4o",
+  "faithfulness": 4,
+  "clarity": 3,
+  "completeness": 5,
+  "faithfulness_reasoning": "The explanation correctly identifies the categorical nature of the effect and the importance rank of 4th, matching the reference. However, it inaccurately describes the top and bottom categories, as Saturday (6) is actually a top category, not a bottom one. Anchor 5, -1 (incorrect top/bottom categories), resulting in a score of 4.",
+  "usage": {
+    "input_tokens": 2611,
+    "output_tokens": 217
+  }
+}

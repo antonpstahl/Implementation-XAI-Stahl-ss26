@@ -1,0 +1,15 @@
+{
+  "form_pipeline": "tooluse",
+  "xai_model": "xgb",
+  "feature": "hr",
+  "form_type": "categorical",
+  "judge_model": "gpt-4o",
+  "faithfulness": 5,
+  "clarity": 4,
+  "completeness": 5,
+  "faithfulness_reasoning": "The explanation correctly identifies the categorical nature of the feature and captures the double-peaked structure with peaks at 8-9 a.m. and 5 p.m., aligning with the reference. The importance rank is accurately stated as 1st. However, the effect size at 5 p.m. is slightly overstated (~+1.0 in log space vs. ~0.8 in the reference). Anchor 5, no deduction.",
+  "usage": {
+    "input_tokens": 3165,
+    "output_tokens": 229
+  }
+}

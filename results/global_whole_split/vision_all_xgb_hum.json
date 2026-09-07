@@ -5,7 +5,7 @@
   "loss_key": "poisson_log",
   "xai_model": "xgb",
   "feature": "hum",
-  "explanation": "[EFFECT] Humidity has a non-monotonic effect. Very low humidity (near 0%) shows some strongly negative values (around −0.5), mid-range humidity (roughly 20–60%) sits slightly above zero (~+0.1), and very high humidity above 80% drives contributions sharply downward, reaching about −0.8 at near-saturation levels. The most favourable humidity is in the moderate range.\n[IMPORTANCE] A moderately important feature with a vertical range of about 0.9–1.0 log-units; comparable to month and ranked around third or fourth.",
+  "explanation": "[EFFECT] Humidity has a non-monotonic effect with a clear penalty at extremes: moderate humidity (roughly 20–60%) produces small positive contributions (~+0.05 to +0.15), but very high humidity (above ~75–80%) drives contributions sharply negative, reaching around −0.7 to −0.8 near 100% humidity. Very low humidity shows some negative scatter but those are sparse observations.\n[IMPORTANCE] This is a moderate-importance feature with a vertical range of roughly 0.9 log-units, similar in magnitude to month.\n[RECOMMENDATION] Plan your staffing and bike availability primarily around the hour of the day — the evening peak (around 5–6 pm) and the morning shoulder (around 8 am) drive the largest swings in demand — and use temperature as the key weather signal, targeting comfortable mild days (~20–25 °C) for maximum expected ridership and scaling back during cold or very hot spells.",
   "dropped": false,
   "condition": "vision_all",
   "modality": "vision",

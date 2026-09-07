@@ -1,0 +1,15 @@
+{
+  "form_pipeline": "vision",
+  "xai_model": "ebm",
+  "feature": "windspeed",
+  "form_type": "near-flat",
+  "judge_model": "claude-opus-4-8",
+  "faithfulness": 3,
+  "clarity": 5,
+  "completeness": 5,
+  "faithfulness_reasoning": "Direction (decreasing) and rank (8 of 9) match the reference, and the sign change near ~8-10 km/h is captured; however the feature is near-flat/negligible and the explanation over-describes the effect (e.g. \"~30% reduction\") rather than framing it as negligible. Anchor 4, -1 (negligibility of near-flat feature missed/overstated), max(1,4-1)=3.",
+  "usage": {
+    "input_tokens": 738,
+    "output_tokens": 308
+  }
+}

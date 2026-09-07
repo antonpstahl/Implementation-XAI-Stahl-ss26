@@ -1,0 +1,15 @@
+{
+  "form_pipeline": "json",
+  "xai_model": "xgb",
+  "feature": "windspeed",
+  "form_type": "near-flat",
+  "judge_model": "gpt-4o",
+  "faithfulness": 1,
+  "clarity": 3,
+  "completeness": 5,
+  "faithfulness_reasoning": "The explanation incorrectly describes the effect of wind speed as consistently reducing demand, which contradicts the near-flat and mixed direction in the reference. It also claims a broadly monotonic relationship, which is incorrect. The importance rank is correctly stated as 8th. Anchor 2, -1 (direction/monotonicity contradicts), max(1, 2-1)=1.",
+  "usage": {
+    "input_tokens": 2532,
+    "output_tokens": 213
+  }
+}

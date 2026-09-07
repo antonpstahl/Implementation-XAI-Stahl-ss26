@@ -1,0 +1,17 @@
+{
+  "pipeline": "05_vision",
+  "llm_model": "claude-sonnet-4-6",
+  "loss_key": "poisson_log",
+  "xai_model": "xgb",
+  "instance_id": 1481,
+  "explanation": "<prediction>The XGBoost model predicted about 229 rented bikes for this hour, while 277 were actually counted. That is a gap of roughly 48 bikes, or about 17 percent below reality, so the prediction is only moderately matched — the model underestimates demand noticeably here.</prediction>\n\n<drivers>The strongest influence by far is the time of day: hr=16 carries the largest red bar, pushing the prediction well above the baseline, as 4 p.m. sits right at the edge of the afternoon commuter build-up. Directly behind it, the second-largest bar belongs to the year: yr=0 (2011) is a clearly blue bar pointing left, meaning it acts as a damping factor — 2011 was the lower-demand phase of the system, pulling the prediction back down considerably. Third, the very high temperature of about 37 °C (normalised 0.90) produces a small blue bar, slightly damping demand because temperatures above roughly 37 °C begin to deter riders. Partly offsetting that, July (month 7) and the low humidity of 42 percent each add small positive red bars.</drivers>\n\n<recommendation>At 4 p.m. on a clear summer Tuesday the system still sees strong demand despite the heat, so stations near offices and transit hubs should be well stocked ahead of the afternoon commute. Because the model consistently underestimated actual rentals in 2011 conditions at this hour, operations teams should add a small manual buffer to model-based rebalancing decisions during afternoon peaks on hot days.</recommendation>",
+  "plot_file": "waterfall_xgb_poisson_log_inst1481.png",
+  "elapsed_s": 12.79,
+  "usage": {
+    "input_tokens": 1216,
+    "output_tokens": 557,
+    "cache_read_input_tokens": 1845
+  },
+  "prediction": 228.5813,
+  "y_true": 277.0
+}

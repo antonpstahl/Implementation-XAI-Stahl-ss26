@@ -5,11 +5,11 @@
   "form_type": "monotonic",
   "judge_model": "gpt-4o",
   "faithfulness": 2,
-  "clarity": 4,
-  "completeness": 2,
-  "faithfulness_reasoning": "The explanation correctly identifies the direction as increasing and the importance rank as 2, which matches the reference. However, it describes the effect as a binary step rather than a continuous monotonic increase, which is a mischaracterization of the feature's form. Anchor 3, -1 (form mischaracterized), max(1, 3-1)=2.",
+  "clarity": 5,
+  "completeness": 3,
+  "faithfulness_reasoning": "The explanation correctly identifies the direction as increasing and the importance rank as 2, matching the reference. However, it describes a step change rather than a monotonic increase, which is a key structure error. Anchor 3, -1 (key structure missed), max(1, 3-1)=2.",
   "usage": {
-    "input_tokens": 2322,
-    "output_tokens": 213
+    "input_tokens": 2401,
+    "output_tokens": 196
   }
 }

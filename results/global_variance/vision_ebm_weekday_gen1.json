@@ -1,0 +1,17 @@
+{
+  "form": "vision",
+  "scope": "global",
+  "llm_model": "claude-sonnet-4-6",
+  "loss_key": "poisson_log",
+  "xai_model": "ebm",
+  "feature": "weekday",
+  "explanation": "<thinking>\nLet me analyze the EBM shape plot for the \"weekday\" feature.\n\nFrom the plot:\n- Weekday 0 (Sunday): large negative contribution, approximately -0.065\n- Weekday 1 (Monday): small negative contribution, approximately -0.01\n- Weekday 2 (Tuesday): very small, near zero, slightly negative or zero\n- Weekday 3 (Wednesday): small positive contribution, approximately +0.005\n- Weekday 4 (Thursday): positive contribution, approximately +0.022\n- Weekday 5 (Friday): largest positive contribution, approximately +0.040\n- Weekday 6 (Saturday): positive contribution, approximately +0.020\n\nDirection and shape: The pattern is non-monotonic but shows a general trend from negative (weekend/start of week) to positive (mid-to-end of week), with Sunday being the lowest, Monday slightly negative, Tuesday near zero, and Wednesday through Saturday positive, peaking on Friday (weekday 5).\n\nWait - Sunday (0) is very negative, then Monday (1) is slightly negative, Tuesday (2) is near zero, Wednesday (3) is slightly positive, Thursday (4) is positive, Friday (5) is highest positive, Saturday (6) is positive but less than Friday.\n\nSo the pattern is roughly: weekends/early week suppress demand, mid-to-late week boosts demand, with Friday being the peak.\n\nImportance: rank 7 of 9, importance = 0.024, so it's relatively low importance.\n</thinking>\n\n[EFFECT] The day of the week has a non-monotonic but broadly rising effect on predicted hourly demand as the week progresses. Sunday strongly suppresses demand (the lowest contribution), Monday is slightly negative, and from Tuesday onward the contribution turns positive, peaking on Friday. Saturday remains positive but is noticeably lower than Friday, suggesting weekday commuter patterns drive demand upward mid-to-late week.\n\n[IMPORTANCE] Weekday is a relatively minor factor, ranking 7th out of 9 features with an importance score of 0.024. It has a real but small influence compared to features like hour of day or temperature.\n\n[RECOMMENDATION] Staff and bike availability can be slightly increased toward the end of the working week, particularly on Fridays, while Sunday operations could be scaled back modestly — though the overall weekday effect is small enough that other factors (like weather or hour of day) should take priority in planning decisions.",
+  "plot_file": "ebm_shape_weekday.png",
+  "elapsed_s": 15.36,
+  "usage": {
+    "input_tokens": 1469,
+    "output_tokens": 757,
+    "cache_read_input_tokens": 0
+  },
+  "generation_idx": 1
+}

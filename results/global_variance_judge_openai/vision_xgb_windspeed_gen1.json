@@ -1,0 +1,15 @@
+{
+  "form_pipeline": "vision",
+  "xai_model": "xgb",
+  "feature": "windspeed",
+  "form_type": "near-flat",
+  "judge_model": "gpt-4o",
+  "faithfulness": 1,
+  "clarity": 5,
+  "completeness": 5,
+  "faithfulness_reasoning": "The explanation incorrectly describes the effect as consistently negative, contradicting the reference's mixed direction and near-flat form. The importance rank is correct, but the explanation misses the near-flat nature of the feature. Anchor 2, -1 (direction contradicts), -1 (missed near-flat nature), max(1, 2-2)=1.",
+  "usage": {
+    "input_tokens": 2468,
+    "output_tokens": 185
+  }
+}

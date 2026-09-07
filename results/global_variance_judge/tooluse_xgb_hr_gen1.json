@@ -1,0 +1,15 @@
+{
+  "form_pipeline": "tooluse",
+  "xai_model": "xgb",
+  "feature": "hr",
+  "form_type": "categorical",
+  "judge_model": "claude-opus-4-8",
+  "faithfulness": 5,
+  "clarity": 3,
+  "completeness": 5,
+  "faithfulness_reasoning": "Double-peaked structure, morning peak ~8, evening peak at 17, and trough at 4–5 all match the reference top/bottom categories; rank 1 correct. Anchor 5, no deductions.",
+  "usage": {
+    "input_tokens": 1665,
+    "output_tokens": 271
+  }
+}

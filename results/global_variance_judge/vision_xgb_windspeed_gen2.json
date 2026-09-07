@@ -1,0 +1,15 @@
+{
+  "form_pipeline": "vision",
+  "xai_model": "xgb",
+  "feature": "windspeed",
+  "form_type": "near-flat",
+  "judge_model": "claude-opus-4-8",
+  "faithfulness": 2,
+  "clarity": 3,
+  "completeness": 5,
+  "faithfulness_reasoning": "The reference is a near-flat feature (rank 8/9) with a tiny peak (~0.018) around 11 km/h and a sign change at ~16 km/h; the explanation instead sells a strong monotonic decline reaching -0.7, overstating a negligible effect and misplacing the peak at 0 km/h. Anchor 3 (direction roughly right that higher wind lowers demand), -1 (missed the negligibility/near-flat framing and claims a peak at 0 that the reference does not have), giving 2. Rank is correct, so no rank deduction.",
+  "usage": {
+    "input_tokens": 1226,
+    "output_tokens": 435
+  }
+}

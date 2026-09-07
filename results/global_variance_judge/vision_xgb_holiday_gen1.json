@@ -1,0 +1,15 @@
+{
+  "form_pipeline": "vision",
+  "xai_model": "xgb",
+  "feature": "holiday",
+  "form_type": "near-flat",
+  "judge_model": "claude-opus-4-8",
+  "faithfulness": 3,
+  "clarity": 3,
+  "completeness": 5,
+  "faithfulness_reasoning": "Direction (holidays reduce demand) matches the decreasing reference and rank 9/9 is correct; however the feature is near-flat/negligible, and while the explanation notes small non-holiday effects it over-describes a wide negative spread rather than clearly framing the effect as negligible. Anchor 4, -1 (misses the negligibility framing, describing a substantial −1.2 spread), max(1,4-1)=3.",
+  "usage": {
+    "input_tokens": 1319,
+    "output_tokens": 377
+  }
+}

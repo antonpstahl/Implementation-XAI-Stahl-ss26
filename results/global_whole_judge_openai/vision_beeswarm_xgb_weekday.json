@@ -4,12 +4,12 @@
   "feature": "weekday",
   "form_type": "categorical",
   "judge_model": "gpt-4o",
-  "faithfulness": 1,
-  "clarity": 1,
-  "completeness": 1,
-  "faithfulness_reasoning": "The explanation is missing entirely, so it cannot be evaluated against the reference. Anchor 1, no deductions possible.",
+  "faithfulness": 3,
+  "clarity": 4,
+  "completeness": 3,
+  "faithfulness_reasoning": "The explanation correctly identifies the categorical nature of the feature and its non-monotonic relationship, but it does not specify the top and bottom categories as per the reference. The importance rank is correctly stated as fourth. Anchor 4, -1 (key structure of top/bottom categories missed), resulting in a score of 3.",
   "usage": {
-    "input_tokens": 2352,
-    "output_tokens": 118
+    "input_tokens": 2534,
+    "output_tokens": 213
   }
 }

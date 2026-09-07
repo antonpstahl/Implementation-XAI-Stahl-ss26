@@ -1,0 +1,15 @@
+{
+  "form_pipeline": "json",
+  "xai_model": "xgb",
+  "feature": "weekday",
+  "form_type": "categorical",
+  "judge_model": "claude-opus-4-8",
+  "faithfulness": 1,
+  "clarity": 1,
+  "completeness": 1,
+  "faithfulness_reasoning": "The reference says Friday (5) and Saturday (6) are top positive, and Sunday (0)/Monday (1)/Tuesday (2) are most negative, with rank 4 of 9; the explanation never states these clearly, rambles, and even mislabels x=0 as Sunday's contributions with contradictory guesses, giving no coherent conclusion. Anchor 2 (direction only vaguely/partly wrong), -1 (no correct top category identified / structure missed), max(1,2-1)=1.",
+  "usage": {
+    "input_tokens": 3146,
+    "output_tokens": 373
+  }
+}

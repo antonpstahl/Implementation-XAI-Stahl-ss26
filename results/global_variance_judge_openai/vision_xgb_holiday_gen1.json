@@ -1,0 +1,15 @@
+{
+  "form_pipeline": "vision",
+  "xai_model": "xgb",
+  "feature": "holiday",
+  "form_type": "near-flat",
+  "judge_model": "gpt-4o",
+  "faithfulness": 2,
+  "clarity": 2,
+  "completeness": 5,
+  "faithfulness_reasoning": "The explanation correctly identifies the feature as the least important (rank 9) and notes a generally negative effect on holidays, aligning with the reference's monotonic decreasing direction. However, it incorrectly describes a wide spread of SHAP values and a mixed effect, which contradicts the near-flat nature of the feature. Anchor 3, -1 (peak/shape claimed that reference does not have), max(1, 3-1)=2.",
+  "usage": {
+    "input_tokens": 2832,
+    "output_tokens": 243
+  }
+}

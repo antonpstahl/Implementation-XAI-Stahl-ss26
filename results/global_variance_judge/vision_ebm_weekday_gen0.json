@@ -1,0 +1,15 @@
+{
+  "form_pipeline": "vision",
+  "xai_model": "ebm",
+  "feature": "weekday",
+  "form_type": "near-flat",
+  "judge_model": "claude-opus-4-8",
+  "faithfulness": 3,
+  "clarity": 4,
+  "completeness": 5,
+  "faithfulness_reasoning": "The feature is near-flat but the explanation correctly identifies the top category (5=Friday) and bottom (0=Sunday), and rank 7 is exact; however it frames the effect as a meaningful \"non-monotonic\" pattern rather than acknowledging near-negligibility, though it does call it a weaker driver. Anchor 4, -1 for missing the negligibility framing, max(1,4-1)=3.",
+  "usage": {
+    "input_tokens": 821,
+    "output_tokens": 335
+  }
+}

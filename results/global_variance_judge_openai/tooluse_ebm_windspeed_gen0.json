@@ -1,0 +1,15 @@
+{
+  "form_pipeline": "tooluse",
+  "xai_model": "ebm",
+  "feature": "windspeed",
+  "form_type": "near-flat",
+  "judge_model": "gpt-4o",
+  "faithfulness": 3,
+  "clarity": 3,
+  "completeness": 5,
+  "faithfulness_reasoning": "The explanation describes a near-neutral effect at low wind speeds and a decline at higher speeds, which aligns with the reference's monotonic decreasing direction. However, it incorrectly claims a peak around 7 km/h, which the reference does not support. The importance rank is correctly stated as 8th. Anchor 4, -1 (peak claimed but not in reference), resulting in a score of 3.",
+  "usage": {
+    "input_tokens": 2951,
+    "output_tokens": 231
+  }
+}

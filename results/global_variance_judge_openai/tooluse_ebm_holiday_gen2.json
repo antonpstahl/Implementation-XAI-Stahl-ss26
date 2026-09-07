@@ -1,0 +1,15 @@
+{
+  "form_pipeline": "tooluse",
+  "xai_model": "ebm",
+  "feature": "holiday",
+  "form_type": "near-flat",
+  "judge_model": "gpt-4o",
+  "faithfulness": 3,
+  "clarity": 5,
+  "completeness": 5,
+  "faithfulness_reasoning": "The explanation correctly identifies the feature as the least important (rank 9) and describes the effect as a negative step change, which aligns with the reference's monotonic decreasing direction. However, it overstates the effect as a \"sharp step change\" rather than acknowledging the near-flat nature. Anchor 4, -1 (peak/shape claimed that reference does not have), max(1, 4-1)=3.",
+  "usage": {
+    "input_tokens": 2824,
+    "output_tokens": 211
+  }
+}

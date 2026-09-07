@@ -3,8 +3,9 @@
 No API calls: condition registry, whole-model payloads (full "all" vs the info-matched
 numeric beeswarm control), vision plot paths, prompt assembly (byte-identical core +
 per-condition handover), the forced per-feature schema splitter (shared recommendation,
-dropped features), and that a split record round-trips through the G3 rubric. Reads the
-real G0/G1 artifacts under explanations/.
+dropped features), that a split record round-trips through the G3 rubric, and the
+output-token truncation guards (P0-1). Reads the real G0/G1 artifacts under
+explanations/.
 """
 import json
 import sys
@@ -21,7 +22,12 @@ from utils.global_feature import list_global_features
 from utils.global_whole import (
     WHOLE_CONDITIONS,
     WHOLE_CONDITIONS_BY_NAME,
+    TruncatedGenerationError,
     WholeCondition,
+    assert_not_truncated,
+    find_truncated_records,
+    invalidate_whole_condition,
+    is_truncated,
     assemble_whole_system_prompt,
     beeswarm_colour_direction,
     build_whole_json_all_payload,
@@ -83,7 +89,7 @@ def test_json_beeswarm_is_info_matched_no_curve():
     p = build_whole_json_beeswarm_payload("ebm", explanations_dir=EXPLANATIONS_DIR)
     assert p["n_features"] == len(FEATURES)
     for e in p["features"]:
-        # only rank + colour direction + coarse spread — deliberately no curve/peak/shape
+        # only rank + colour direction + coarse spread, deliberately no curve/peak/shape
         assert set(e.keys()) == {"feature", "rank", "colour_direction", "spread"}
         assert e["spread"] in {"narrow", "moderate", "wide"}
     # ranks form the full 1..9 set (feature ordering, what the swarm shows)
@@ -235,7 +241,7 @@ def test_split_marks_dropped_features():
 
 def test_split_record_roundtrips_through_rubric():
     # a well-formed hr block should score well on the deterministic rubric (rank 1 hit,
-    # both commuter peaks captured) — proves the split output is G3-scoreable unchanged.
+    # both commuter peaks captured), proving the split output is G3-scoreable unchanged.
     text = (
         "[FEATURE: hr]\n[EFFECT] Demand is highest at the morning commute around 8 and "
         "the evening peak around 17-18, and lowest overnight.\n[IMPORTANCE] The most "
@@ -288,3 +294,117 @@ def test_generate_returning_none_leaves_unit_open(tmp_path):
     run_resumable_whole_generation(model_names=["ebm"], conditions=conds,
                                    out_dir=tmp_path, generate=lambda m, c: None)
     assert not (tmp_path / whole_generation_filename("json_all", "ebm")).exists()
+
+
+# -----------------------------------------------------------------------------
+# Truncation guards (P0-1): a token-ceiling hit must never pass as a modality effect
+# -----------------------------------------------------------------------------
+
+def _rec(*, stop_reason=None, max_tokens=None, out_tokens=100, condition="vision_all"):
+    return build_whole_record(
+        condition=WHOLE_CONDITIONS_BY_NAME[condition], model_name="xgb",
+        explanation="[FEATURE: hr]\n[EFFECT] e\n[IMPORTANCE] i\n[RECOMMENDATION] r",
+        usage={"input_tokens": 10, "output_tokens": out_tokens}, llm_model="stub",
+        stop_reason=stop_reason, max_tokens=max_tokens)
+
+
+def test_record_carries_stop_reason_and_max_tokens_on_every_path():
+    # The pre-fix bug: only the tool-use path persisted stop_reason, so a truncated
+    # json/vision answer was indistinguishable from a short one.
+    rec = _rec(stop_reason="end_turn", max_tokens=16384)
+    assert rec["stop_reason"] == "end_turn" and rec["max_tokens"] == 16384
+    # both keys exist even when unknown, so the schema is uniform across modalities
+    bare = _rec()
+    assert bare["stop_reason"] is None and bare["max_tokens"] is None
+
+
+def test_extra_stop_reason_still_wins_for_tooluse_call_sites():
+    rec = build_whole_record(
+        condition=WHOLE_CONDITIONS_BY_NAME["tooluse_all"], model_name="xgb",
+        explanation="x", usage={"input_tokens": 1, "output_tokens": 1},
+        llm_model="stub", extra={"stop_reason": "end_turn", "n_tool_calls": 3})
+    assert rec["stop_reason"] == "end_turn" and rec["n_tool_calls"] == 3
+
+
+@pytest.mark.parametrize("kwargs", [
+    {"stop_reason": "max_tokens", "max_tokens": 16384, "out_tokens": 16384},
+    {"stop_reason": None, "max_tokens": 4096, "out_tokens": 4096},   # arithmetic fallback
+])
+def test_is_truncated_detects_ceiling_hits(kwargs):
+    assert is_truncated(_rec(**kwargs))
+    with pytest.raises(TruncatedGenerationError):
+        assert_not_truncated(_rec(**kwargs))
+
+
+def test_complete_answer_passes_the_gate():
+    rec = _rec(stop_reason="end_turn", max_tokens=16384, out_tokens=2578)
+    assert not is_truncated(rec)
+    assert assert_not_truncated(rec) is rec
+
+
+def test_legacy_record_needs_an_assumed_ceiling():
+    # A pre-P0-1 record carries neither field; without the caller supplying the old
+    # ceiling it cannot self-report, which is exactly how the artefact stayed invisible.
+    legacy = {"condition": "vision_beeswarm", "xai_model": "xgb",
+              "usage": {"input_tokens": 1, "output_tokens": 4096}}
+    assert not is_truncated(legacy)
+    assert is_truncated(legacy, assume_max_tokens=4096)
+
+
+def test_find_truncated_records_scans_a_directory(tmp_path):
+    (tmp_path / "ok.json").write_text(json.dumps(
+        _rec(stop_reason="end_turn", max_tokens=16384, out_tokens=500)))
+    (tmp_path / "cut.json").write_text(json.dumps(
+        _rec(stop_reason="max_tokens", max_tokens=16384, out_tokens=16384)))
+    (tmp_path / "legacy.json").write_text(json.dumps(
+        {"condition": "vision_all", "xai_model": "xgb",
+         "usage": {"input_tokens": 1, "output_tokens": 4096}}))
+    assert [p.name for p in find_truncated_records(tmp_path)] == ["cut.json"]
+    assert [p.name for p in find_truncated_records(tmp_path, assume_max_tokens=4096)] == \
+        ["cut.json", "legacy.json"]
+
+
+def test_truncated_record_is_never_persisted_by_the_resumable_loop(tmp_path):
+    # The notebook gate: generate_api raises, the loop stores nothing for that condition.
+    def gen(model, cond):
+        return assert_not_truncated(
+            _rec(stop_reason="max_tokens", max_tokens=16384, out_tokens=16384,
+                 condition=cond.name))
+
+    conds = [WHOLE_CONDITIONS_BY_NAME["vision_all"]]
+    with pytest.raises(TruncatedGenerationError):
+        run_resumable_whole_generation(model_names=["xgb"], conditions=conds,
+                                       out_dir=tmp_path, generate=gen)
+    assert not (tmp_path / whole_generation_filename("vision_all", "xgb")).exists()
+
+
+def test_invalidate_clears_the_whole_downstream_chain(tmp_path):
+    # run_global_judge is idempotent, so a stale judge verdict for a regenerated answer
+    # would silently survive. Invalidation must reach every downstream directory.
+    layout = {
+        "global_whole": ["vision_all_xgb.json", "json_all_xgb.json"],
+        "global_whole_split": ["vision_all_xgb_hr.json", "vision_all_xgb_temp.json",
+                               "json_all_xgb_hr.json", "vision_all_ebm_hr.json"],
+        "global_whole_judge": ["vision_all_xgb_hr.json", "json_all_xgb_hr.json"],
+        "global_whole_judge_openai": ["vision_all_xgb_hr.json"],
+    }
+    for sub, names in layout.items():
+        (tmp_path / sub).mkdir()
+        for n in names:
+            (tmp_path / sub / n).write_text("{}")
+
+    deleted = invalidate_whole_condition("vision_all", "xgb", results_dir=tmp_path)
+    assert {p.name for p in deleted} == {"vision_all_xgb.json", "vision_all_xgb_hr.json",
+                                         "vision_all_xgb_temp.json"}
+    assert len(deleted) == 5   # 1 raw + 2 split + 1 judge + 1 judge_openai
+    # a different condition and a different xai_model are untouched
+    assert (tmp_path / "global_whole" / "json_all_xgb.json").exists()
+    assert (tmp_path / "global_whole_split" / "json_all_xgb_hr.json").exists()
+    assert (tmp_path / "global_whole_split" / "vision_all_ebm_hr.json").exists()
+
+
+def test_invalidate_is_safe_on_a_condition_that_was_never_run(tmp_path):
+    for sub in ("global_whole", "global_whole_split", "global_whole_judge",
+                "global_whole_judge_openai"):
+        (tmp_path / sub).mkdir()
+    assert invalidate_whole_condition("tooluse_all", "ebm", results_dir=tmp_path) == []

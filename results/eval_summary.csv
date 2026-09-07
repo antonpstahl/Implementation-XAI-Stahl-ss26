@@ -1,0 +1,5 @@
+pipeline_label,words,tokens_in,tokens_out,cost_usd,time_s,tool_calls,Judge_Faith,Judge_Clarity,Judge_Complete,Judge_Faith_std,Judge_Clarity_std,Judge_Complete_std,Judge_n
+JSON to Text,249.6,599.55,523.8,0.17,11.49,0.0,5.0,4.1,5.0,0.0,0.308,0.0,20
+Template,56.9,0.0,0.0,0.0,0.0,0.0,5.0,4.15,4.8,0.0,0.366,0.41,20
+Tool Use,403.0,5786.3,1268.3,0.73,33.01,6.2,5.0,4.1,5.0,0.0,0.447,0.0,20
+Vision,238.9,1084.9,571.45,0.19,13.15,0.0,4.5,4.0,5.0,0.688,0.324,0.0,20

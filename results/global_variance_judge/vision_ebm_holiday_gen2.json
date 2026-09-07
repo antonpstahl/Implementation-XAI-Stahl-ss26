@@ -1,0 +1,15 @@
+{
+  "form_pipeline": "vision",
+  "xai_model": "ebm",
+  "feature": "holiday",
+  "form_type": "near-flat",
+  "judge_model": "claude-opus-4-8",
+  "faithfulness": 4,
+  "clarity": 4,
+  "completeness": 5,
+  "faithfulness_reasoning": "Direction (holidays lower demand) matches the decreasing reference, rank 9 of 9 correct, and the explanation appropriately frames the feature as least important/minimal. It slightly over-describes a near-flat feature with precise magnitude, but does acknowledge it's negligible. Anchor 4, no deduction applies since negligibility is stated. Score 4.",
+  "usage": {
+    "input_tokens": 1028,
+    "output_tokens": 351
+  }
+}

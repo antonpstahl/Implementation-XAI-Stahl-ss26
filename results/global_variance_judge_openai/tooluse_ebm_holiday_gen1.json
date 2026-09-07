@@ -1,0 +1,15 @@
+{
+  "form_pipeline": "tooluse",
+  "xai_model": "ebm",
+  "feature": "holiday",
+  "form_type": "near-flat",
+  "judge_model": "gpt-4o",
+  "faithfulness": 5,
+  "clarity": 5,
+  "completeness": 5,
+  "faithfulness_reasoning": "The explanation correctly identifies the feature as near-flat and the least important (rank 9 of 9), matching the reference. It accurately describes the monotonic decreasing effect and the negligible impact. Anchor 5, no deduction.",
+  "usage": {
+    "input_tokens": 2835,
+    "output_tokens": 172
+  }
+}

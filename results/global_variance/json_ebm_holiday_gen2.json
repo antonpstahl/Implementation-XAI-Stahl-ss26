@@ -1,0 +1,16 @@
+{
+  "form": "json",
+  "scope": "global",
+  "llm_model": "claude-sonnet-4-6",
+  "loss_key": "poisson_log",
+  "xai_model": "ebm",
+  "feature": "holiday",
+  "explanation": "[EFFECT] Holidays have a negative effect on predicted hourly bike demand. When the value is near 0 (non-holiday), the contribution is essentially neutral (close to zero), but when the value is near 1 (a holiday), the contribution drops to about −0.14 in log space, which means roughly 13–15% fewer bikes rented than on a typical non-holiday hour. The effect is essentially a downward step: demand is slightly suppressed on holidays compared to regular days.\n\n[IMPORTANCE] \"Holiday\" is the least important feature in the model, ranked 9th out of 9 features with an importance score of only 0.008. Its influence on predicted demand is very small relative to factors like hour of the day, temperature, or weather.\n\n[RECOMMENDATION] Because the effect of holidays on demand is small but consistently negative, planners can make a modest reduction in bike availability or staffing on public holidays, while keeping in mind that other factors — especially the time of day — will have a far greater impact on how many bikes are actually needed.",
+  "elapsed_s": 11.68,
+  "usage": {
+    "input_tokens": 202,
+    "output_tokens": 498,
+    "cache_read_input_tokens": 1031
+  },
+  "generation_idx": 2
+}

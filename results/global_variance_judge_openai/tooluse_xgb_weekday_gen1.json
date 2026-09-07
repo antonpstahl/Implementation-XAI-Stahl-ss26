@@ -1,0 +1,15 @@
+{
+  "form_pipeline": "tooluse",
+  "xai_model": "xgb",
+  "feature": "weekday",
+  "form_type": "categorical",
+  "judge_model": "gpt-4o",
+  "faithfulness": 2,
+  "clarity": 4,
+  "completeness": 5,
+  "faithfulness_reasoning": "The explanation correctly identifies the categorical nature of the feature and the importance rank as 4th. However, it inaccurately describes weekdays as having moderate positive contributions and weekends as having a mixed effect, whereas the reference shows specific top and bottom categories with Sunday (0) and Monday (1) as the lowest. The explanation misses the specific top categories (Friday, Saturday, Thursday). Anchor 3, -1 (top/bottom categories misrepresented), max(1, 3-1)=2.",
+  "usage": {
+    "input_tokens": 3207,
+    "output_tokens": 233
+  }
+}

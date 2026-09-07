@@ -1,0 +1,15 @@
+{
+  "form_pipeline": "vision",
+  "xai_model": "xgb",
+  "feature": "weekday",
+  "form_type": "categorical",
+  "judge_model": "claude-opus-4-8",
+  "faithfulness": 1,
+  "clarity": 3,
+  "completeness": 5,
+  "faithfulness_reasoning": "The reference shows top days are 5 (Fri) and 6 (Sat) positive, bottom days 0, 1, 2 (Sun, Mon, Tue) negative; the explanation calls all weekdays 1–5 positive and Saturday like Sunday, which is wrong — Monday/Tuesday are actually the most negative and Saturday is positive. Rank 4 is correct. Anchor 2 (partly wrong category structure), -1 (top category wrong / structure misrepresented), max(1, 2-1)=1.",
+  "usage": {
+    "input_tokens": 932,
+    "output_tokens": 394
+  }
+}

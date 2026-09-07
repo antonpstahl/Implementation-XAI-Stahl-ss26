@@ -1,0 +1,15 @@
+{
+  "form_pipeline": "json",
+  "xai_model": "xgb",
+  "feature": "hr",
+  "form_type": "categorical",
+  "judge_model": "claude-opus-4-8",
+  "faithfulness": 5,
+  "clarity": 3,
+  "completeness": 5,
+  "faithfulness_reasoning": "Both commuter peaks captured (evening ~17-18 highest, morning ~8), overnight trough at 3-5 correctly identified as lowest, rank 1 of 9 correct. Anchor 5, no deduction.",
+  "usage": {
+    "input_tokens": 953,
+    "output_tokens": 281
+  }
+}

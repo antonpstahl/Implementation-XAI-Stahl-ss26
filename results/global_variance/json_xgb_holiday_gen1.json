@@ -1,0 +1,16 @@
+{
+  "form": "json",
+  "scope": "global",
+  "llm_model": "claude-sonnet-4-6",
+  "loss_key": "poisson_log",
+  "xai_model": "xgb",
+  "feature": "holiday",
+  "explanation": "[EFFECT] Whether a given hour falls on a public holiday has a clear step-change effect on predicted bike demand. During non-holiday hours (value = 0), the model's contribution is essentially neutral — hovering very close to zero. When a holiday is flagged (value = 1), the contribution is predominantly negative, meaning the model predicts fewer rentals, sometimes substantially so. The magnitude of this negative shift varies across hours of the day, with some holiday hours showing very large reductions in demand and a handful showing modest increases, likely reflecting leisure riders.\n\n[IMPORTANCE] Holiday is ranked last (9th out of 9 features) in terms of importance, with an importance score of approximately 0.012. It is by far the weakest driver of predicted demand among all features considered, having a much smaller overall influence than factors like hour of day, temperature, or year.\n\n[RECOMMENDATION] Because holidays reduce predicted demand on average but have varied effects across hours, staffing and bike redistribution plans for public holidays can generally be scaled back from a typical weekday — though leisure-oriented hours (e.g., mid-morning to afternoon) may still see reasonable demand and should not be completely deprioritised.",
+  "elapsed_s": 25.8,
+  "usage": {
+    "input_tokens": 162968,
+    "output_tokens": 609,
+    "cache_read_input_tokens": 1033
+  },
+  "generation_idx": 1
+}

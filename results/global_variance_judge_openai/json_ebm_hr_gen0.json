@@ -1,0 +1,15 @@
+{
+  "form_pipeline": "json",
+  "xai_model": "ebm",
+  "feature": "hr",
+  "form_type": "categorical",
+  "judge_model": "gpt-4o",
+  "faithfulness": 4,
+  "clarity": 5,
+  "completeness": 5,
+  "faithfulness_reasoning": "The explanation correctly identifies the hour as a categorical feature with a bimodal effect, capturing the key commuter peaks at 8 am and 5 pm. However, it incorrectly states the highest point is at 5 pm, while the reference indicates 17 (5 pm) is the top category. The importance rank is correctly identified as 1. Anchor 5, -1 (incorrect peak claim), resulting in a score of 4.",
+  "usage": {
+    "input_tokens": 2589,
+    "output_tokens": 220
+  }
+}

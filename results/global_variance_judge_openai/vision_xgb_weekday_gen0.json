@@ -1,0 +1,15 @@
+{
+  "form_pipeline": "vision",
+  "xai_model": "xgb",
+  "feature": "weekday",
+  "form_type": "categorical",
+  "judge_model": "gpt-4o",
+  "faithfulness": 3,
+  "clarity": 5,
+  "completeness": 5,
+  "faithfulness_reasoning": "The explanation correctly identifies the categorical nature of the feature and the variability in demand on weekends, with Sunday and Saturday showing wide swings. It accurately ranks the feature as 4th in importance. However, it does not clearly identify Friday as the top category, which is a key structure. Anchor 4, -1 (key structure slightly imprecise), resulting in a score of 3.",
+  "usage": {
+    "input_tokens": 3666,
+    "output_tokens": 214
+  }
+}

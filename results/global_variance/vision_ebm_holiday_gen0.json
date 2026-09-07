@@ -1,0 +1,16 @@
+{
+  "form": "vision",
+  "scope": "global",
+  "llm_model": "claude-sonnet-4-6",
+  "loss_key": "poisson_log",
+  "xai_model": "ebm",
+  "feature": "holiday",
+  "explanation": "<thinking>\nLet me analyze the EBM shape plot for the \"holiday\" feature.\n\nFrom the plot:\n- X-axis: holiday (0 = no, 1 = yes), though the plot shows values from about 0.2 to 0.75\n- Y-axis: contribution in log space\n\n**Direction and Shape:**\n- When holiday = 0 (non-holiday): contribution is approximately 0.00 (essentially flat, just slightly above zero)\n- When holiday = 1 (holiday): contribution drops sharply to approximately -0.145\n\nThis is a step change (binary feature). The contribution is near zero for non-holidays and drops to about -0.145 for holidays.\n\n**Peak:** The highest contribution is at holiday = 0 (non-holiday days), where contribution ≈ 0.\n\n**Importance:** The importance is 0.008, ranked 9th out of 9 features - the least important feature overall.\n\n**Effect:** Holidays reduce predicted demand compared to regular days. A contribution of -0.145 in log space means the predicted demand is multiplied by e^(-0.145) ≈ 0.865, so roughly a 13.5% reduction in demand on holidays.\n\n**Operational implication:** Slightly fewer bikes/staff may be needed on public holidays compared to regular days.\n</thinking>\n\n[EFFECT] The holiday feature has a simple step-change effect: on regular (non-holiday) days it has virtually no influence on predicted demand, while on public holidays the model predicts noticeably fewer rentals — roughly 13–14% lower demand. There is no gradual trend; it is a sharp drop the moment the day is flagged as a holiday.\n\n[IMPORTANCE] This is the least important feature in the model, ranked 9th out of 9 with an importance score of only 0.008. Its influence on predicted demand is small compared to factors like hour of day or temperature.\n\n[RECOMMENDATION] While holidays do slightly reduce overall ridership, the effect is modest, so major reductions in bike availability or staffing on public holidays are not strongly justified by this feature alone — other factors (such as hour of day and weather) should drive those decisions.",
+  "plot_file": "ebm_shape_holiday.png",
+  "elapsed_s": 14.2,
+  "usage": {
+    "input_tokens": 1468,
+    "output_tokens": 668,
+    "cache_read_input_tokens": 0
+  }
+}

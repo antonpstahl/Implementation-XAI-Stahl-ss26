@@ -1,0 +1,15 @@
+{
+  "form_pipeline": "tooluse",
+  "xai_model": "ebm",
+  "feature": "hr",
+  "form_type": "categorical",
+  "judge_model": "claude-opus-4-8",
+  "faithfulness": 5,
+  "clarity": 5,
+  "completeness": 5,
+  "faithfulness_reasoning": "Rank 1 correct, both commuter peaks (8 AM and 17/5 PM) identified with 17 as highest, and lowest point at 4 AM matches bottom category; structure fully captured. Anchor 5, no deductions.",
+  "usage": {
+    "input_tokens": 1577,
+    "output_tokens": 298
+  }
+}

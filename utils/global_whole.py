@@ -103,12 +103,12 @@ def build_whole_json_all_payload(
 
     Information-matched to the ``vision_all`` condition (all 9 plots): each feature's
     global curve plus rank/importance context. Curves are **aggregated to a grid**
-    (``aggregate_curve``: mean contribution per unique feature value) — a no-op for the
+    (``aggregate_curve``: mean contribution per unique feature value), a no-op for the
     EBM shape functions, but essential for XGB, whose curve JSON is the raw per-instance
     SHAP scatter (~12k points/feature). Dumping all 9 raw would be ~1M+ tokens and
     exceed the context window; the aggregated grid is the mean dependence trend the
     plot shows, and is what the model can actually read. (The vision_all plots still
-    carry the per-point scatter density — a small, documented representation difference.)
+    carry the per-point scatter density, a small, documented representation difference.)
     """
     g = _global_json(model_name, explanations_dir=explanations_dir, loss_key=loss_key)
     features = list_global_features(
@@ -324,6 +324,113 @@ def whole_generation_filename(condition_name: str, model_name: str) -> str:
     return f"{condition_name}_{model_name.lower()}.json"
 
 
+class TruncatedGenerationError(RuntimeError):
+    """A whole-model answer hit the output-token ceiling and is therefore incomplete.
+
+    Raised by :func:`assert_not_truncated`. A truncated answer silently loses whole
+    ``[FEATURE: ...]`` blocks, so its coverage score measures the token limit rather
+    than the modality - the exact failure that invalidated the first ``04Ge`` vision
+    run (see ``planning/korrekturen17_06.md`` / Schreibplan P0-1).
+    """
+
+
+def is_truncated(record: dict, *, assume_max_tokens: Optional[int] = None) -> bool:
+    """True if *record* shows an output-token ceiling hit.
+
+    Two independent signals, because neither alone is sufficient:
+
+    * ``stop_reason == "max_tokens"`` - the API's own verdict, authoritative when present.
+    * ``output_tokens >= max_tokens`` - the arithmetic fallback.
+
+    Records written **before** the P0-1 fix carry neither field (the JSON/vision path
+    persisted no ``stop_reason``, which is precisely why the truncation was invisible).
+    Such a record cannot self-report, so the caller must supply the ceiling the old run
+    used via ``assume_max_tokens`` (4096 for the first ``04Ge`` run); it is only applied
+    when the record has no ``max_tokens`` of its own.
+    """
+    if record.get("stop_reason") == "max_tokens":
+        return True
+    cap = record.get("max_tokens") or assume_max_tokens
+    out_tok = (record.get("usage") or {}).get("output_tokens")
+    return bool(cap and out_tok and out_tok >= cap)
+
+
+def assert_not_truncated(record: dict, *, assume_max_tokens: Optional[int] = None) -> dict:
+    """Return *record*, or raise :class:`TruncatedGenerationError` if it was cut off.
+
+    The hard gate for the billed ``04Ge`` run: a truncated answer must never reach
+    ``results/global_whole/``, because downstream coverage/Achse-1/Achse-2 numbers
+    would then report a token-limit artefact as a modality effect.
+    """
+    if is_truncated(record, assume_max_tokens=assume_max_tokens):
+        usage = record.get("usage") or {}
+        raise TruncatedGenerationError(
+            f"{record.get('condition')}/{record.get('xai_model')} was truncated: "
+            f"stop_reason={record.get('stop_reason')!r}, "
+            f"output_tokens={usage.get('output_tokens')}, "
+            f"max_tokens={record.get('max_tokens') or assume_max_tokens}. Raise "
+            f"MAX_TOKENS and re-run this condition; do not score this record."
+        )
+    return record
+
+
+def find_truncated_records(
+    out_dir: Path | str, *, assume_max_tokens: Optional[int] = None
+) -> list[Path]:
+    """All persisted whole-model records in *out_dir* that hit the token ceiling.
+
+    Audit helper for the invalidation step before a re-run: delete what this returns,
+    then let :func:`run_resumable_whole_generation` recompute exactly those conditions.
+    ``assume_max_tokens`` is forwarded to :func:`is_truncated` for pre-P0-1 records.
+    """
+    out_dir = Path(out_dir)
+    if not out_dir.is_dir():
+        return []
+    hits = []
+    for path in sorted(out_dir.glob("*.json")):
+        try:
+            record = json.loads(path.read_text())
+        except (json.JSONDecodeError, OSError):
+            continue
+        if is_truncated(record, assume_max_tokens=assume_max_tokens):
+            hits.append(path)
+    return hits
+
+
+# Every downstream directory a whole-model record feeds into. Invalidating a condition
+# has to clear all of them: run_global_judge is idempotent, so a stale judge record for a
+# regenerated answer would silently survive and be scored as if it were current.
+WHOLE_JUDGE_SUBDIRS = ("global_whole_judge", "global_whole_judge_openai")
+
+
+def invalidate_whole_condition(
+    condition: str,
+    model_name: str,
+    *,
+    results_dir: Path | str,
+    judge_subdirs: Iterable[str] = WHOLE_JUDGE_SUBDIRS,
+) -> list[Path]:
+    """Delete the raw record, split records and judge scores for one (condition, model).
+
+    Returns the deleted paths. Use before a re-run: the resumable loop then recomputes
+    exactly this condition, ``write_split_records`` overwrites its split records, and
+    ``run_global_judge`` re-scores them instead of loading the superseded verdicts.
+    """
+    results_dir = Path(results_dir)
+    stem = f"{condition}_{model_name.lower()}"
+    targets = [results_dir / WHOLE_RESULTS_SUBDIR / f"{stem}.json"]
+    targets += sorted((results_dir / WHOLE_SPLIT_SUBDIR).glob(f"{stem}_*.json"))
+    for sub in judge_subdirs:
+        targets += sorted((results_dir / sub).glob(f"{stem}_*.json"))
+
+    deleted = []
+    for path in targets:
+        if path.exists():
+            path.unlink()
+            deleted.append(path)
+    return deleted
+
+
 def build_whole_record(
     *,
     condition: WholeCondition,
@@ -334,13 +441,22 @@ def build_whole_record(
     loss_key: str = "poisson_log",
     elapsed_s: Optional[float] = None,
     include_cache: bool = True,
+    stop_reason: Optional[str] = None,
+    max_tokens: Optional[int] = None,
     extra: Optional[dict] = None,
 ) -> dict:
     """Persisted record for one whole-model explanation.
 
     Carries the condition axes (modality/representation/mechanism) so the eval can slice
     by axis without re-deriving them. ``extra`` holds modality-specific fields (vision:
-    ``plot_files``; tool-use: ``stop_reason`` / ``tool_calls`` / ``n_tool_calls``).
+    ``plot_files``; tool-use: ``tool_calls`` / ``n_tool_calls``).
+
+    ``stop_reason`` and ``max_tokens`` are written for **every** modality, not just
+    tool-use. Without them a truncated answer is indistinguishable from a short one, and
+    the resulting coverage gap reads as a modality effect (Schreibplan P0-1); with them
+    :func:`is_truncated` can decide it from the record alone. ``stop_reason`` may also
+    arrive inside ``extra`` (the tool-use loop's return value) - that value wins, so the
+    existing tool-use call sites keep working unchanged.
     """
     in_tok = usage.get("input_tokens", 0)
     out_tok = usage.get("output_tokens", 0)
@@ -359,6 +475,8 @@ def build_whole_record(
         "xai_model": model_name.lower(),
         "explanation": explanation,
     }
+    record["stop_reason"] = stop_reason
+    record["max_tokens"] = max_tokens
     if extra:
         record.update(extra)
     record["elapsed_s"] = elapsed_s

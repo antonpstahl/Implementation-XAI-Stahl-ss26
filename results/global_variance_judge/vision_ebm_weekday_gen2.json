@@ -1,0 +1,15 @@
+{
+  "form_pipeline": "vision",
+  "xai_model": "ebm",
+  "feature": "weekday",
+  "form_type": "near-flat",
+  "judge_model": "claude-opus-4-8",
+  "faithfulness": 3,
+  "clarity": 4,
+  "completeness": 5,
+  "faithfulness_reasoning": "Correctly identifies top category (day 5/Friday) and bottom category (day 0/Sunday), and rank 7 is exact; however it frames a near-flat feature as a meaningful non-monotonic pattern rather than negligible, though it does acknowledge the effect is modest. Anchor 4, -1 (over-describes a near-flat feature's structure instead of stressing negligibility), max(1,4-1)=3.",
+  "usage": {
+    "input_tokens": 860,
+    "output_tokens": 359
+  }
+}

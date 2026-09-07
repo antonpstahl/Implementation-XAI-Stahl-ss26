@@ -1,0 +1,17 @@
+{
+  "pipeline": "05_vision",
+  "llm_model": "claude-sonnet-4-6",
+  "loss_key": "poisson_log",
+  "xai_model": "xgb",
+  "instance_id": 3847,
+  "explanation": "<prediction>The XGBoost model predicted approximately 586 rented bikes for this hour, while the actual count was 531. The model overshoots by about 55 bikes (roughly 10%), which is a moderate match — reasonable but not pinpoint accurate.</prediction>\n\n<drivers>The strongest upward influence comes from the hour of day: hr=12 (midday Saturday) pushes the prediction up the most with a contribution of +0.41, reflecting the busy midday leisure window. Right behind it, weekday=6 (Saturday) adds another notable push of +0.21 — Saturdays draw steady leisure riders throughout the day, boosting demand above the weekly average. The year 2012 (yr=1) contributes a further +0.16 in the same direction, as 2012 was the higher-demand year in the dataset. Temperature at about 32.8 °C (normalised 0.80) also raises the prediction meaningfully (+0.15), sitting near the upper edge of the optimal comfort range. Interestingly, low humidity at just 29% adds a small positive nudge (+0.11), as dry air makes cycling more comfortable.</drivers>\n\n<recommendation>On clear Saturday lunchtimes in June, demand peaks strongly and all conditions align favourably. Operations should ensure high bike availability at popular leisure and tourist stations well before noon. Since the model slightly overestimates actual rentals, it may be worth reserving a small buffer rather than fully staffing to the predicted peak, particularly at stations where the model has historically run high.</recommendation>",
+  "plot_file": "waterfall_xgb_poisson_log_inst3847.png",
+  "elapsed_s": 12.46,
+  "usage": {
+    "input_tokens": 1216,
+    "output_tokens": 547,
+    "cache_read_input_tokens": 1845
+  },
+  "prediction": 585.7666,
+  "y_true": 531.0
+}

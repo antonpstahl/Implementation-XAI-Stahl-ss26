@@ -1,0 +1,15 @@
+{
+  "form_pipeline": "json",
+  "xai_model": "ebm",
+  "feature": "weekday",
+  "form_type": "near-flat",
+  "judge_model": "claude-opus-4-8",
+  "faithfulness": 3,
+  "clarity": 5,
+  "completeness": 5,
+  "faithfulness_reasoning": "The reference is near-flat with the highest level being cat 5 (Friday) and lowest cat 0 (Sunday) — the explanation correctly identifies Friday highest and Sunday lowest, and notes the small spread; rank 7 correct. However it invents a \"generally rising Sunday→Friday\" ordering that the reference does not support (e.g. cat 4/Thu is second-highest, cat 6/Sat mid) and only lightly conveys the near-flat/negligible framing. Anchor 4; -1 for asserting a rising-shape structure the near-flat reference does not have, max(1,4-1)=3.",
+  "usage": {
+    "input_tokens": 880,
+    "output_tokens": 400
+  }
+}

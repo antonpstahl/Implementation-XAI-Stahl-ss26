@@ -1,0 +1,15 @@
+{
+  "form_pipeline": "tooluse",
+  "xai_model": "xgb",
+  "feature": "weekday",
+  "form_type": "categorical",
+  "judge_model": "claude-opus-4-8",
+  "faithfulness": 2,
+  "clarity": 3,
+  "completeness": 5,
+  "faithfulness_reasoning": "The reference shows top categories are Friday(5) and Saturday(6) positive, and bottom are Sunday(0), Monday(1), Tuesday(2) negative — so the claim that all weekdays 1–5 are positive is wrong (Mon/Tue are strongly negative), and Saturday(6) is actually positive not suppressive. Rank 4 is correct. Anchor 3 (direction partly wrong, key structure/top level misassigned), -1 for getting the top/bottom categories substantially wrong, max(1,3-1)=2.",
+  "usage": {
+    "input_tokens": 1750,
+    "output_tokens": 399
+  }
+}

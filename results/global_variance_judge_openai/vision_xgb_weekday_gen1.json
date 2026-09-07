@@ -1,0 +1,15 @@
+{
+  "form_pipeline": "vision",
+  "xai_model": "xgb",
+  "feature": "weekday",
+  "form_type": "categorical",
+  "judge_model": "gpt-4o",
+  "faithfulness": 3,
+  "clarity": 4,
+  "completeness": 5,
+  "faithfulness_reasoning": "The explanation correctly identifies the non-monotonic nature of the effect and highlights the variability on weekends, particularly Sunday, which aligns with the reference. The importance rank is accurately stated as 4th. However, the explanation does not clearly identify the top categories as Friday and Saturday, which are crucial according to the reference. Anchor 4, -1 (top categories missed), max(1, 4-1)=3.",
+  "usage": {
+    "input_tokens": 3606,
+    "output_tokens": 223
+  }
+}

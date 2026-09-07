@@ -1,0 +1,16 @@
+{
+  "form": "json",
+  "scope": "global",
+  "llm_model": "claude-sonnet-4-6",
+  "loss_key": "poisson_log",
+  "xai_model": "ebm",
+  "feature": "hr",
+  "explanation": "[EFFECT]\nThe hour of the day is the most complex driver of bike demand, showing a clear double-peak pattern rather than a simple rise or fall. Demand is strongly suppressed in the early morning (roughly 1 AM to 5 AM, with the lowest point around 4 AM), then rises sharply through a morning rush-hour peak at 8 AM. After a moderate mid-day plateau (9 AM–3 PM), demand climbs again to its highest point of the day at 5 PM, before gradually declining through the evening and into the night.\n\n[IMPORTANCE]\nHour of the day is by far the most important feature in the model — ranked 1st out of 9 features, with an importance score nearly double what you'd expect from a typical feature. It has a greater influence on predicted demand than temperature, weather, or any other variable.\n\n[RECOMMENDATION]\nBike availability and staffing should be concentrated around the two daily peaks — approximately 7–9 AM and 4–6 PM — while overnight periods (especially 2–5 AM) can be used for maintenance and rebalancing with minimal disruption to riders.",
+  "elapsed_s": 14.18,
+  "usage": {
+    "input_tokens": 472,
+    "output_tokens": 594,
+    "cache_read_input_tokens": 1031
+  },
+  "generation_idx": 1
+}

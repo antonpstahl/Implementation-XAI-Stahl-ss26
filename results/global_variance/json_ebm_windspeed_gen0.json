@@ -1,0 +1,15 @@
+{
+  "form": "json",
+  "scope": "global",
+  "llm_model": "claude-sonnet-4-6",
+  "loss_key": "poisson_log",
+  "xai_model": "ebm",
+  "feature": "windspeed",
+  "explanation": "[EFFECT]\nAt low to moderate wind speeds (roughly up to about 20 km/h), wind has almost no meaningful effect on predicted bike demand — contributions hover near zero. As wind speed climbs above that threshold, demand is progressively pulled down, with the strongest negative impact at the highest wind speeds (around 50+ km/h), where predicted rentals could be reduced to about 70% of the baseline. The relationship is essentially flat at first, then steadily and noticeably negative.\n\n[IMPORTANCE]\nWind speed is the second least important feature in the model, ranking 8th out of 9 features. Its influence on demand is limited and really only becomes meaningful at quite high wind speeds.\n\n[RECOMMENDATION]\nExpecting reduced ridership only during genuinely windy conditions (strong gusts above ~20 km/h) is a reasonable planning approach — there is little need to adjust bike or staff availability on typical low-to-moderate wind days, but scaling back supply during storms or high-wind advisories could help avoid overstocking.",
+  "elapsed_s": 13.52,
+  "usage": {
+    "input_tokens": 563,
+    "output_tokens": 546,
+    "cache_read_input_tokens": 1031
+  }
+}

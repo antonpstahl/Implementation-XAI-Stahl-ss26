@@ -1,0 +1,15 @@
+{
+  "form_pipeline": "json",
+  "xai_model": "xgb",
+  "feature": "weekday",
+  "form_type": "categorical",
+  "judge_model": "claude-opus-4-8",
+  "faithfulness": 4,
+  "clarity": 4,
+  "completeness": 5,
+  "faithfulness_reasoning": "The reference shows top category is Friday (5) then Saturday (6), and bottom is Sunday (0), Monday (1), Tuesday (2); the explanation identifies Saturday as most positive and Sunday/mid-week as negative, which is broadly correct in spirit though it misses Friday as the actual top and slightly muddles mid-week. Rank 4 of 9 is correct. Anchor 4 (correct top level slightly imprecise), no deduction applies strongly. Score 4.",
+  "usage": {
+    "input_tokens": 988,
+    "output_tokens": 413
+  }
+}

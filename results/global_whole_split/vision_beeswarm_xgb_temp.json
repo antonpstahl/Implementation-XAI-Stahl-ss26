@@ -5,7 +5,7 @@
   "loss_key": "poisson_log",
   "xai_model": "xgb",
   "feature": "temp",
-  "explanation": "[EFFECT] Higher temperatures (red) push predicted demand up by roughly +0.3 to +0.5 in log space, while low temperatures (blue) pull it down to around −1. The relationship appears roughly monotonic: warmer weather consistently raises the forecast across the dataset.\n[IMPORTANCE] Temperature is the third-ranked feature; its influence is meaningful but clearly smaller than hour of day and year.",
+  "explanation": "[EFFECT] Higher temperatures (red) consistently push predicted demand upward, while cooler temperatures (blue) pull it down — a broadly monotonic positive relationship. The negative contributions from cold conditions reach roughly −1 in log space, while warm conditions contribute around +0.3 to +0.4.\n[IMPORTANCE] Temperature is the third most important feature, with a meaningful but clearly smaller spread than hour of day and year.\n\n---\n[RECOMMENDATION] Operational planning should be driven overwhelmingly by the **hour of day** — staffing and bike availability must follow the daily demand curve closely, as this single feature dwarfs all others. **Temperature** (and to a lesser extent month) should be the second planning lever, with management scaling up resources during warm periods and scaling back during cold spells.",
   "dropped": false,
   "condition": "vision_beeswarm",
   "modality": "vision",

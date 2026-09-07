@@ -1,0 +1,17 @@
+{
+  "pipeline": "05_vision",
+  "llm_model": "claude-sonnet-4-6",
+  "loss_key": "poisson_log",
+  "xai_model": "ebm",
+  "instance_id": 1481,
+  "explanation": "<prediction>The EBM model predicted approximately 242 rented bikes for this hour, while 277 were actually counted. The prediction falls about 13 percent below the real figure, which represents a moderate match — reasonable but slightly underestimating the true demand for this busy afternoon slot.</prediction>\n\n<drivers>By far the strongest driver is the hour of the day: 16:00 sits at the beginning of the evening commuter peak, producing the longest red bar in the plot (+0.819) and pushing the prediction well above the base value. Pulling firmly in the opposite direction is the year 2011 — the blue bar for yr=0 (-0.226) is the second largest contribution and acts as a clear damping factor, reflecting that overall system demand in 2011 was lower than the two-year average. Two smaller red bars then nudge the prediction upward: low humidity at 42 percent raises demand slightly (+0.096), and the very warm temperature of about 37 °C contributes positively as well (+0.082), though the interaction term between hour and temperature marginally offsets this with a small blue bar (-0.044), suggesting the heat at this specific time of day slightly tempers the pure temperature effect. Clear weather and the July seasonal interaction add further modest upward support.</drivers>\n\n<recommendation>Even though 2011 demand was structurally lower, the 16:00 evening peak on a clear, warm Tuesday in July still drives substantial rental activity. Station managers should ensure full bike availability at commuter hubs from around 15:30 onward. Maintenance and rebalancing tasks are best scheduled during the early morning hours (0:00–5:00) when demand is negligible.</recommendation>",
+  "plot_file": "waterfall_ebm_poisson_log_inst1481.png",
+  "elapsed_s": 13.94,
+  "usage": {
+    "input_tokens": 976,
+    "output_tokens": 609,
+    "cache_read_input_tokens": 1845
+  },
+  "prediction": 241.7738,
+  "y_true": 277.0
+}

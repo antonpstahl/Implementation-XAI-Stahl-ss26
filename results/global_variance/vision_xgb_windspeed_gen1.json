@@ -1,0 +1,17 @@
+{
+  "form": "vision",
+  "scope": "global",
+  "llm_model": "claude-sonnet-4-6",
+  "loss_key": "poisson_log",
+  "xai_model": "xgb",
+  "feature": "windspeed",
+  "explanation": "[EFFECT] Higher wind speeds consistently lower the predicted number of bike rentals. At very low wind speeds, the effect on demand is roughly neutral (near zero contribution). As wind speed increases, the contribution becomes progressively more negative, meaning demand is multiplied down increasingly — with the strongest suppression at the highest wind speeds (above roughly 33 km/h, i.e., normalized values above ~0.5).\n\n[IMPORTANCE] Windspeed is the 8th most important feature out of 9, making it one of the weakest drivers of demand in the model. Its influence is noticeable mainly at high wind speeds, but for most hours it plays a relatively minor role.\n\n[RECOMMENDATION] On days forecast to have strong winds (above roughly 30–35 km/h), expect somewhat lower rental demand and consider adjusting staffing or bike redistribution efforts accordingly, particularly if high winds coincide with other unfavourable conditions.",
+  "plot_file": "xgb_dependence_windspeed.png",
+  "elapsed_s": 11.57,
+  "usage": {
+    "input_tokens": 1623,
+    "output_tokens": 478,
+    "cache_read_input_tokens": 0
+  },
+  "generation_idx": 1
+}

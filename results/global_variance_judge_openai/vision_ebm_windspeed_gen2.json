@@ -1,0 +1,15 @@
+{
+  "form_pipeline": "vision",
+  "xai_model": "ebm",
+  "feature": "windspeed",
+  "form_type": "near-flat",
+  "judge_model": "gpt-4o",
+  "faithfulness": 4,
+  "clarity": 5,
+  "completeness": 5,
+  "faithfulness_reasoning": "The explanation captures the near-flat effect at low wind speeds and the decreasing trend at higher speeds, aligning with the reference. The importance rank is correctly stated as 8th. However, the explanation suggests a slight positive nudge at the lowest speeds, which is not supported by the reference. Anchor 5, -1 (slight positive nudge not in reference), max(1, 5-1)=4.",
+  "usage": {
+    "input_tokens": 2457,
+    "output_tokens": 207
+  }
+}

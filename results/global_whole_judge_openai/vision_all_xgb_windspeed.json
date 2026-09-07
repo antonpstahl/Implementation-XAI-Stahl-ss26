@@ -5,11 +5,11 @@
   "form_type": "near-flat",
   "judge_model": "gpt-4o",
   "faithfulness": 1,
-  "clarity": 1,
-  "completeness": 1,
-  "faithfulness_reasoning": "The explanation is missing entirely, so it cannot be evaluated against the reference. Anchor 1, no deductions possible.",
+  "clarity": 3,
+  "completeness": 2,
+  "faithfulness_reasoning": "The explanation claims a monotonically negative effect, contradicting the reference's near-flat, non-monotonic nature. It also overstates the importance by comparing it to year and weather situation, while the true rank is 8 of 9. Anchor 2, -1 (direction contradicts), -1 (rank misjudged by tiers), max(1, 2-2)=1.",
   "usage": {
-    "input_tokens": 2281,
-    "output_tokens": 116
+    "input_tokens": 2469,
+    "output_tokens": 217
   }
 }

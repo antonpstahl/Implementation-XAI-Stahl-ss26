@@ -1,0 +1,15 @@
+{
+  "form_pipeline": "json",
+  "xai_model": "ebm",
+  "feature": "holiday",
+  "form_type": "near-flat",
+  "judge_model": "claude-opus-4-8",
+  "faithfulness": 5,
+  "clarity": 4,
+  "completeness": 5,
+  "faithfulness_reasoning": "Direction (negative/decreasing) matches, rank 9/9 correct, and it acknowledges the effect is small; the step-down framing is reasonable for a near-flat feature though it slightly over-quantifies (13-14%). Anchor 5, no deduction as negligibility is conveyed.",
+  "usage": {
+    "input_tokens": 710,
+    "output_tokens": 321
+  }
+}

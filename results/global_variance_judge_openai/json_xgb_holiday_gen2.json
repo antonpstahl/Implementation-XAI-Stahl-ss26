@@ -1,0 +1,15 @@
+{
+  "form_pipeline": "json",
+  "xai_model": "xgb",
+  "feature": "holiday",
+  "form_type": "near-flat",
+  "judge_model": "gpt-4o",
+  "faithfulness": 1,
+  "clarity": 3,
+  "completeness": 5,
+  "faithfulness_reasoning": "The explanation describes the holiday feature as having a large effect with dramatic swings, which contradicts the near-flat nature of the feature in the reference. The importance rank is correctly identified as 9th. Anchor 2, -1 (effect fabricated), max(1, 2-1)=1.",
+  "usage": {
+    "input_tokens": 2459,
+    "output_tokens": 188
+  }
+}

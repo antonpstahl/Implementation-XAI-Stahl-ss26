@@ -1,0 +1,15 @@
+{
+  "form_pipeline": "vision",
+  "xai_model": "xgb",
+  "feature": "holiday",
+  "form_type": "near-flat",
+  "judge_model": "gpt-4o",
+  "faithfulness": 4,
+  "clarity": 3,
+  "completeness": 5,
+  "faithfulness_reasoning": "The explanation correctly identifies the feature as near-flat and the least important (rank 9 of 9), aligning with the reference. However, it describes a wide spread of SHAP values on holidays, which contradicts the near-flat nature. Anchor 5, -1 (contradictory spread description), max(1, 5-1)=4.",
+  "usage": {
+    "input_tokens": 2785,
+    "output_tokens": 211
+  }
+}

@@ -1,0 +1,15 @@
+{
+  "form_pipeline": "json",
+  "xai_model": "xgb",
+  "feature": "holiday",
+  "form_type": "near-flat",
+  "judge_model": "gpt-4o",
+  "faithfulness": 1,
+  "clarity": 5,
+  "completeness": 5,
+  "faithfulness_reasoning": "The explanation describes the holiday feature as having a complex effect with both negative and positive contributions, which contradicts the reference's monotonic decreasing and near-flat nature. The importance rank is correctly identified as 9th. Anchor 2, -1 (direction contradicts), -1 (peak/shape claimed that reference does not have), max(1, 2-2)=1.",
+  "usage": {
+    "input_tokens": 2470,
+    "output_tokens": 185
+  }
+}

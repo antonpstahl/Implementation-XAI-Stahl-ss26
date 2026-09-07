@@ -1,0 +1,16 @@
+{
+  "pipeline": "04_json",
+  "llm_model": "claude-sonnet-4-6",
+  "loss_key": "poisson_log",
+  "xai_model": "ebm",
+  "instance_id": 580,
+  "explanation": "<prediction>The model predicted about 73 rented bikes for this hour; the actual count was 63. That is an overshoot of roughly 16 percent, so the prediction moderately matched reality — acceptable but not tight for a relatively quiet hour.</prediction>\n\n<drivers>The two strongest influences in this hour both work against demand. First, the year 2011 (yr=0) acts as the single biggest damping factor (rank 1, influence −0.23): since 2011 was the lower-demand phase of the two-year period, it pulls the prediction down noticeably. Second, the temperature of about 14.8 °C — a cool March evening — also reduces demand (rank 2, influence −0.14): at this level, temperatures are clearly below the optimal riding range and deter many casual users. Partly offsetting these is the hour itself: 22:00 on a Saturday still attracts some late-night leisure riders and contributes a modest positive push (rank 3, influence +0.06). Clear weather (weathersit = 1) adds a small further boost (rank 4, influence +0.05), while March as a month contributes a mild seasonal drag (rank 5, influence −0.04).</drivers>\n\n<recommendation>On cool Saturday evenings in early spring, demand is modest and strongly suppressed by temperature and the seasonal calendar. Stations near nightlife areas may still see some activity around 22:00, so a light stock of bikes there is worthwhile, but this is a good window for redistribution and light maintenance at quieter residential docks where turnover will be low.</recommendation>",
+  "elapsed_s": 11.42,
+  "usage": {
+    "input_tokens": 598,
+    "output_tokens": 497,
+    "cache_read_input_tokens": 1776
+  },
+  "prediction": 73.0919,
+  "y_true": 63.0
+}

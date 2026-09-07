@@ -1,0 +1,15 @@
+{
+  "form_pipeline": "vision",
+  "xai_model": "xgb",
+  "feature": "hr",
+  "form_type": "categorical",
+  "judge_model": "gpt-4o",
+  "faithfulness": 5,
+  "clarity": 3,
+  "completeness": 5,
+  "faithfulness_reasoning": "The explanation correctly identifies the non-monotonic nature of the effect, the peak at hour 17, and the bottom at hour 4, aligning with the reference. The importance rank is accurately stated as 1st. However, the SHAP values and log space references are not part of the ground truth. Anchor 5, no deduction.",
+  "usage": {
+    "input_tokens": 2613,
+    "output_tokens": 215
+  }
+}

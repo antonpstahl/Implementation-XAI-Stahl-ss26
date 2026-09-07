@@ -1,0 +1,15 @@
+{
+  "form_pipeline": "tooluse",
+  "xai_model": "ebm",
+  "feature": "windspeed",
+  "form_type": "near-flat",
+  "judge_model": "gpt-4o",
+  "faithfulness": 2,
+  "clarity": 5,
+  "completeness": 5,
+  "faithfulness_reasoning": "The explanation correctly identifies the direction as decreasing and the importance rank as 8th, which matches the reference. However, it describes a more pronounced effect at higher wind speeds, which contradicts the near-flat nature of the feature. Anchor 3, -1 (peak/shape claimed that reference does not have), max(1, 3-1)=2.",
+  "usage": {
+    "input_tokens": 2977,
+    "output_tokens": 197
+  }
+}

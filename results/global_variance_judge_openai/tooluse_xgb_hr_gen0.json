@@ -1,0 +1,15 @@
+{
+  "form_pipeline": "tooluse",
+  "xai_model": "xgb",
+  "feature": "hr",
+  "form_type": "categorical",
+  "judge_model": "gpt-4o",
+  "faithfulness": 5,
+  "clarity": 4,
+  "completeness": 5,
+  "faithfulness_reasoning": "The explanation accurately describes the non-monotonic effect of the hour on demand, correctly identifying the negative contributions during early morning hours and the peak at hour 17. The importance rank is correctly stated as 1st. The key structure, including the top and bottom categories, is captured. Anchor 5, no deduction.",
+  "usage": {
+    "input_tokens": 3208,
+    "output_tokens": 206
+  }
+}

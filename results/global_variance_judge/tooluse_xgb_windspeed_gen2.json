@@ -1,0 +1,15 @@
+{
+  "form_pipeline": "tooluse",
+  "xai_model": "xgb",
+  "feature": "windspeed",
+  "form_type": "near-flat",
+  "judge_model": "claude-opus-4-8",
+  "faithfulness": 3,
+  "clarity": 4,
+  "completeness": 5,
+  "faithfulness_reasoning": "The reference is a near-flat feature (rank 8/9) with a small positive peak ~11 km/h then a sign change to slightly negative — the explanation captures the mixed direction (small positive at calm, negative later) and the correct rank 8/9, and appropriately frames it as a minor driver, but it overstates the effect (\"steep and severe\", \"large margin\") rather than emphasising negligibility. Anchor 4; deduction for over-describing a near-flat feature as meaningful (missing negligibility framing) applies, so max(1, 4-1)=3.",
+  "usage": {
+    "input_tokens": 1570,
+    "output_tokens": 416
+  }
+}

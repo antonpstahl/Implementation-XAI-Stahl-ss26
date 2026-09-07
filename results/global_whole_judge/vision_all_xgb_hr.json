@@ -5,11 +5,11 @@
   "form_type": "categorical",
   "judge_model": "claude-opus-4-8",
   "faithfulness": 5,
-  "clarity": 4,
-  "completeness": 2,
-  "faithfulness_reasoning": "Correctly identifies the evening peak (17-18h), morning secondary rise (8h), and the 4-5 a.m. trough, matching top/bottom categories; rank 1 of 9 correct. Structure fully captured, anchor 5, no deductions.",
+  "clarity": 3,
+  "completeness": 5,
+  "faithfulness_reasoning": "Evening peak at 17–18 (5–6 pm), morning shoulder at 8 am, and the pre-dawn trough at 4–5 am all match the reference top/bottom categories; rank 1 correct. Anchor 5, no deductions.",
   "usage": {
-    "input_tokens": 729,
-    "output_tokens": 294
+    "input_tokens": 869,
+    "output_tokens": 303
   }
 }

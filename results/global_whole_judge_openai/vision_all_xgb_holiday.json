@@ -5,11 +5,11 @@
   "form_type": "near-flat",
   "judge_model": "gpt-4o",
   "faithfulness": 1,
-  "clarity": 1,
-  "completeness": 1,
-  "faithfulness_reasoning": "The explanation is missing entirely, so it cannot be evaluated against the reference. Anchor 1, no deductions possible.",
+  "clarity": 2,
+  "completeness": 2,
+  "faithfulness_reasoning": "The explanation describes a non-flat effect with variability on holidays, contradicting the near-flat reference. It also incorrectly places the feature in the middle of the importance ranking, while it is actually the least important (rank 9). Anchor 2, -1 (direction contradicts), -1 (rank misjudged by tiers), max(1, 2-2)=1.",
   "usage": {
-    "input_tokens": 2213,
-    "output_tokens": 119
+    "input_tokens": 2449,
+    "output_tokens": 235
   }
 }

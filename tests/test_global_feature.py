@@ -137,7 +137,7 @@ def test_assemble_resolves_and_names(form, model, needle):
 
 def test_assemble_core_identical_across_modalities():
     # Everything after the handover block (from GROUNDING on) must be byte-identical
-    # across json/vision/tooluse for the same model — the modality-comparison invariant.
+    # across json/vision/tooluse for the same model, the modality-comparison invariant.
     tails = {
         f: assemble_global_system_prompt(f, "ebm", prompts_dir=PROMPTS_DIR)
            .split("## GROUNDING", 1)[1]
@@ -282,3 +282,52 @@ def test_toolbox_aggregate_curves_flag():
     n_agg = len(agg.dispatch("get_feature_curve", {"feature": "temp"})["x"])
     assert n_agg < n_raw and n_agg < 200   # 12152 -> ~49 unique feature values
     assert len(agg.dispatch("get_feature_curve", {"feature": "temp"})["y"]) == n_agg
+
+
+# -----------------------------------------------------------------------------
+# Variance-run seeding (P1-2): reuse the frozen record as generation 0
+# -----------------------------------------------------------------------------
+
+def test_seed_generation_zero_copies_and_renames(tmp_path):
+    from utils.global_feature import seed_generation_zero, global_generation_filename
+
+    src, out = tmp_path / "frozen", tmp_path / "var"
+    src.mkdir()
+    (src / "json_ebm_hr.json").write_text('{"explanation": "a"}')
+    (src / "json_xgb_hr.json").write_text('{"explanation": "b"}')
+
+    written = seed_generation_zero(
+        form="json", model_names=["ebm", "xgb"], features=["hr"],
+        src_dir=src, out_dir=out, n_generations=3)
+
+    assert {p.name for p in written} == {"json_ebm_hr_gen0.json", "json_xgb_hr_gen0.json"}
+    # content is carried over verbatim - it must be the same draw, not a re-run
+    assert (out / global_generation_filename("json", "ebm", "hr", 0, 3)).read_text() == \
+        '{"explanation": "a"}'
+
+
+def test_seed_generation_zero_never_replaces_an_existing_draw(tmp_path):
+    """Re-seeding must not swap out a draw that later generations were compared against."""
+    from utils.global_feature import seed_generation_zero
+
+    src, out = tmp_path / "frozen", tmp_path / "var"
+    src.mkdir(); out.mkdir()
+    (src / "json_ebm_hr.json").write_text('{"explanation": "new"}')
+    (out / "json_ebm_hr_gen0.json").write_text('{"explanation": "already here"}')
+
+    assert seed_generation_zero(
+        form="json", model_names=["ebm"], features=["hr"],
+        src_dir=src, out_dir=out, n_generations=3) == []
+    assert (out / "json_ebm_hr_gen0.json").read_text() == '{"explanation": "already here"}'
+
+
+def test_seed_generation_zero_skips_missing_sources(tmp_path):
+    from utils.global_feature import seed_generation_zero
+
+    src, out = tmp_path / "frozen", tmp_path / "var"
+    src.mkdir()
+    (src / "json_ebm_hr.json").write_text("{}")
+    written = seed_generation_zero(
+        form="json", model_names=["ebm"], features=["hr", "temp"],
+        src_dir=src, out_dir=out, n_generations=3)
+    assert [p.name for p in written] == ["json_ebm_hr_gen0.json"]

@@ -141,11 +141,11 @@ def readable_feature_value(feature: str, raw: float) -> str:
     return str(raw)
 
 
-# Canonical classification thresholds — the SINGLE source of truth shared by the
+# Canonical classification thresholds: the SINGLE source of truth shared by the
 # deterministic baseline (describe_curve) and the G3 ground truth (utils.groundtruth),
 # so the two can never disagree on the form type (planning/korrekturen17_06.md P2).
 # Values are the GT authority's (utils.groundtruth.Thresholds): near-flat by *global
-# importance*, monotonic by *reversal share* — NOT by curve amplitude.
+# importance*, monotonic by *reversal share*, NOT by curve amplitude.
 _FLAT_IMPORTANCE = 0.025   # global importance below this => near-flat
 _MONO_TOL = 0.15           # reversal share (movement against the net) tolerated as monotone
 
@@ -251,7 +251,7 @@ def describe_curve(
 
     Uses the shared :func:`classify_shape` (importance-based near-flat, reversal-share
     monotonicity, on the aggregated curve), so the form type is **identical** to the G3
-    ground truth (:mod:`utils.groundtruth`) — the baseline is scored against the same
+    ground truth (:mod:`utils.groundtruth`), the baseline is scored against the same
     classification it was written from (planning/korrekturen17_06.md P2). A near-flat
     feature keeps its underlying ``direction`` but reports ``shape="near_flat"``.
 
@@ -260,7 +260,7 @@ def describe_curve(
       * ``direction``    : ``rising`` | ``falling`` | ``mixed`` (| ``flat``).
       * ``monotonicity`` : ``monotonic`` | ``non_monotonic`` (| ``flat``).
       * ``shape``        : ``monotonic`` | ``non_monotonic`` | ``categorical`` |
-                           ``near_flat`` — the coarse form type for the G3 stratification.
+                           ``near_flat``, the coarse form type for the G3 stratification.
       * ``peak_*``       : the x (raw + readable) and y where the contribution is highest.
     """
     curve = load_global_curve(model_name, feature, explanations_dir=explanations_dir)
@@ -363,7 +363,7 @@ def assemble_global_system_prompt(
     (and, for vision, {{ARTIFACT}}). ``form`` in {"json", "vision", "tooluse"}.
     Raises if any ``{{placeholder}}`` is left unresolved (catches template drift).
     The per-feature {{FEATURE}}/{{HANDOVER}} placeholders live in the USER MESSAGE, not
-    here — the notebook builds that at call time.
+    here; the notebook builds that at call time.
     """
     md = (Path(prompts_dir) / prompt_file).read_text()
     try:
@@ -413,6 +413,46 @@ def global_generation_filename(
     if n_generations == 1:
         return f"{base}.json"
     return f"{base}_gen{generation_idx}.json"
+
+
+def seed_generation_zero(
+    *,
+    form: str,
+    model_names: Iterable[str],
+    features: Iterable[str],
+    src_dir: Path | str,
+    out_dir: Path | str,
+    n_generations: int,
+) -> list[Path]:
+    """Copy each frozen single-generation record in as generation 0 of a variance run.
+
+    A multi-draw variance study (P1-2) does not need to pay for the first draw: the
+    existing ``{form}_{model}_{feature}.json`` was produced by the same prompt and code
+    path, so it is a legitimate draw. Copying it to ``..._gen0.json`` cuts the billed
+    calls from ``k`` to ``k-1`` per cell and anchors the spread to the exact records the
+    reported results came from.
+
+    Idempotent: an existing generation-0 file is left untouched, so a re-run never
+    replaces a draw that later draws were already compared against. Missing sources are
+    skipped and returned separately by the caller's own check, not raised - a partial
+    subset is a legitimate state while earlier notebooks are still running.
+
+    Returns the paths newly written.
+    """
+    src_dir, out_dir = Path(src_dir), Path(out_dir)
+    out_dir.mkdir(parents=True, exist_ok=True)
+    written: list[Path] = []
+    for model_name in model_names:
+        for feature in features:
+            src = src_dir / global_generation_filename(form, model_name, feature)
+            dst = out_dir / global_generation_filename(
+                form, model_name, feature, 0, n_generations
+            )
+            if not src.exists() or dst.exists():
+                continue
+            dst.write_text(src.read_text())
+            written.append(dst)
+    return written
 
 
 def build_global_record(

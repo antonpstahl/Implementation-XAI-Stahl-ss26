@@ -4,12 +4,12 @@
   "feature": "hr",
   "form_type": "categorical",
   "judge_model": "gpt-4o",
-  "faithfulness": 2,
-  "clarity": 3,
-  "completeness": 2,
-  "faithfulness_reasoning": "The explanation correctly identifies the hour as the most important feature and captures the low demand in pre-dawn hours. However, it inaccurately describes the peak as occurring around 5–6 p.m., whereas the reference indicates the top category is 17.0 (5 p.m.). The secondary rise around 8 a.m. is correctly noted. Anchor 3, -1 (peak misidentified), resulting in a score of 2.",
+  "faithfulness": 3,
+  "clarity": 4,
+  "completeness": 5,
+  "faithfulness_reasoning": "The explanation correctly identifies the non-monotonic nature and the importance rank of the feature. However, it inaccurately describes the peak hour as 5–6 pm instead of 5 pm, and the highest contribution is overstated as ~+1.0 instead of the actual ~0.8. The morning shoulder is correctly identified. Anchor 4, -1 (peak hour misrepresented), max(1, 4-1)=3.",
   "usage": {
-    "input_tokens": 2492,
-    "output_tokens": 233
+    "input_tokens": 2577,
+    "output_tokens": 223
   }
 }

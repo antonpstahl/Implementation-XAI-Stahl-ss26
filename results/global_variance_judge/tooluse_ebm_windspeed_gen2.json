@@ -1,0 +1,15 @@
+{
+  "form_pipeline": "tooluse",
+  "xai_model": "ebm",
+  "feature": "windspeed",
+  "form_type": "near-flat",
+  "judge_model": "claude-opus-4-8",
+  "faithfulness": 3,
+  "clarity": 4,
+  "completeness": 5,
+  "faithfulness_reasoning": "Direction (decreasing) matches and rank 8 is correct, but the reference is near-flat/negligible while the explanation overstates a \"steep and continuous\" drop with a \"meaningful downward multiplier\" rather than framing it as negligible. Anchor 4; -1 for missing the negligibility framing of a near-flat feature, giving max(1, 4-1)=3.",
+  "usage": {
+    "input_tokens": 1484,
+    "output_tokens": 330
+  }
+}

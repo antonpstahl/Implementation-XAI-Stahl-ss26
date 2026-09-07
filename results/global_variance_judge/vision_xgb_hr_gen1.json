@@ -1,0 +1,15 @@
+{
+  "form_pipeline": "vision",
+  "xai_model": "xgb",
+  "feature": "hr",
+  "form_type": "categorical",
+  "judge_model": "claude-opus-4-8",
+  "faithfulness": 5,
+  "clarity": 4,
+  "completeness": 5,
+  "faithfulness_reasoning": "Correctly identifies the 5 PM (hour 17) peak, the 4 AM trough, and the morning ramp-up, matching top/bottom categories; rank 1 correct. Anchor 5, no deductions.",
+  "usage": {
+    "input_tokens": 918,
+    "output_tokens": 267
+  }
+}
