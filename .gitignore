@@ -10,3 +10,4 @@ __pycache__/
 planning/
 .pytest_cache
 **/_archive/
+LaTeX/
