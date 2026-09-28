@@ -34,6 +34,7 @@ _WEEKDAYS = {0: "sunday", 1: "monday", 2: "tuesday", 3: "wednesday",
              4: "thursday", 5: "friday", 6: "saturday"}
 _ORDINALS = {"first": 1, "second": 2, "third": 3, "fourth": 4, "fifth": 5,
              "sixth": 6, "seventh": 7, "eighth": 8, "ninth": 9}
+_ORDINAL_RE = "|".join(sorted(_ORDINALS.keys(), key=len, reverse=True))
 
 # direction vocabulary
 _UP = r"increase|increasing|rise|rising|rises|higher|grow|growth|more|greater|positive|boost|up\b"
@@ -106,30 +107,124 @@ def _score_direction(effect: str, gt: dict) -> float:
 
 
 def _extract_rank(importance: str) -> int | None:
+    """Extract the rank claim the *subject* feature makes about itself.
+
+    Collects every rank cue the text carries and returns the earliest one by
+    text position, so a comparison to another feature ("more than the
+    second-ranked feature, temperature") cannot outrank the subject's own
+    claim earlier in the sentence.
+    """
     # normalise markdown emphasis / code ticks so "**7th**" parses like "7th"
     importance = re.sub(r"[*_`]", "", importance)
-    # "rank 2", "ranks 7th", "ranked #2"
-    m = re.search(r"(?:rank(?:s|ed)?|#)\s*#?\s*(\d+)(?:st|nd|rd|th)?", importance)
-    if m:
-        return int(m.group(1))
+    # unify hyphens between an ordinal and a modifier ("third-most",
+    # "fifth-ranked", "second-strongest", "second-least") so the patterns
+    # below can treat them as adjacent words.
+    importance = re.sub(
+        rf"\b({_ORDINAL_RE})[- ]+(most|least|ranked|strongest|weakest|highest|"
+        r"lowest|influential|impactful|important|significant|dominant)\b",
+        r"\1 \2", importance, flags=re.I,
+    )
+
+    # Candidates: (position, value, is_kth_least). ``is_kth_least`` marks the
+    # "N-th least/lowest" idiom, which infers rank as ``10 - k`` under the
+    # assumption of nine features. When the same text also carries an
+    # explicit "N of 9" claim, the numeric claim wins.
+    candidates: list[tuple[int, int, bool]] = []
+    has_n_of_9 = False
+
+    def _add(pos: int, val: int, kth_least: bool = False) -> None:
+        if 1 <= val <= 9:
+            candidates.append((pos, val, kth_least))
+
+    _most = r"most\s+(?:important|influential|impactful|significant|dominant)"
+    _least = (r"(?:least|lowest)\s+(?:important|influential|impactful|"
+              r"significant|dominant|ranked)")
+
+    # ---- 1. numeric rank near a rank/# cue --------------------------------
+    # "rank 2", "ranks 7th", "ranked #2", "Ranked 1st", "rank of 4"
+    for m in re.finditer(
+        r"\brank(?:s|ed)?\s+(?:of\s+)?#?\s*(\d+)(?:st|nd|rd|th)?\b",
+        importance, flags=re.I,
+    ):
+        _add(m.start(), int(m.group(1)))
+    # "#1", " #2" -- '#' is not a word char, so no \b before it
+    for m in re.finditer(r"(?:^|[^\w#])#\s*(\d+)(?:st|nd|rd|th)?\b",
+                         importance, flags=re.I):
+        _add(m.start(), int(m.group(1)))
     # "7th out of 9", "2 of 9", "8 / 9"
-    m = re.search(r"\b(\d+)(?:st|nd|rd|th)?\s*(?:of|out of|/)\s*9\b", importance)
-    if m:
-        return int(m.group(1))
-    _most = r"most\s+(?:important|influential|impactful|significant)"
-    m = re.search(rf"\b(\d+)(?:st|nd|rd|th)\s+{_most}", importance)
-    if m:
-        return int(m.group(1))
+    for m in re.finditer(
+        r"\b(\d+)(?:st|nd|rd|th)?\s*(?:of|out of|/)\s*9\b",
+        importance, flags=re.I,
+    ):
+        _add(m.start(), int(m.group(1)))
+        has_n_of_9 = True
+
+    # ---- 2. word ordinal near a rank cue ----------------------------------
+    for m in re.finditer(r"\brank(?:s|ed)?\s+last\b", importance, flags=re.I):
+        _add(m.start(), 9)
+    for m in re.finditer(rf"\brank(?:s|ed)?\s+({_ORDINAL_RE})\b",
+                         importance, flags=re.I):
+        _add(m.start(), _ORDINALS[m.group(1).lower()])
+
+    # ---- 3. numeric ordinal + "most X" / "least X" ------------------------
+    for m in re.finditer(rf"\b(\d+)(?:st|nd|rd|th)\s+{_most}",
+                         importance, flags=re.I):
+        _add(m.start(), int(m.group(1)))
+    # "2nd least important" / "3rd lowest ranked" -> 10 - k (nine features)
+    for m in re.finditer(rf"\b(\d+)(?:st|nd|rd|th)\s+{_least}",
+                         importance, flags=re.I):
+        _add(m.start(), 10 - int(m.group(1)), kth_least=True)
+
+    # ---- 4. word ordinal in rank-anchoring phrases ------------------------
     for word, num in _ORDINALS.items():
-        if re.search(rf"\b{word}\s+{_most}", importance):
-            return num
-    if re.search(rf"\b(?:single|the)\s+{_most}", importance):
-        return 1
-    if re.search(rf"\b{_most}\b", importance) and "second" not in importance:
-        return 1
-    if re.search(r"\bleast important\b", importance):
-        return 9
-    return None
+        patterns: tuple[tuple[str, int, bool], ...] = (
+            (rf"\b{word}\s+{_most}\b",                                   num,      False),
+            (rf"\b{word}\s+{_least}\b",                                  10 - num, True),
+            (rf"\b{word}\s+in\s+importance\b",                           num,      False),
+            (rf"\b{word}\s+in\s+the\s+(?:ranking|model|importance)\b",   num,      False),
+            (rf"\b{word}\s+(?:strongest|highest|"
+             rf"most\s+influential|most\s+dominant)\b",                  num,      False),
+            (rf"\b{word}\s+(?:weakest|lowest)\b",                        10 - num, True),
+            (rf"\b{word}\s+ranked\b",                                    num,      False),
+            (rf"\b(?:is|it\s+is|as)\s+the\s+{word}\s+most\s+"
+             rf"(?:important|influential|impactful|significant|dominant)\b",
+                                                                         num,      False),
+        )
+        for pat, val, kth in patterns:
+            for m in re.finditer(pat, importance, flags=re.I):
+                _add(m.start(), val, kth_least=kth)
+
+    # ---- 5. superlatives that unambiguously imply rank 1 or 9 -------------
+    # These bare-superlative patterns must not fire when directly preceded by
+    # an ordinal ("second-least important" is not the same claim as
+    # "the least important").
+    _ordinal_prefix = rf"(?:{_ORDINAL_RE}|\d+(?:st|nd|rd|th))[\s-]+$"
+    for pat, val in (
+        (rf"\b(?:single|the)\s+{_most}\b",                                  1),
+        (r"\bby\s+far\s+(?:the\s+)?(?:single\s+)?(?:most\s+"
+         r"(?:important|influential|impactful|significant|dominant)|"
+         r"strongest|largest)\b",                                           1),
+        (r"\bthe\s+strongest\s+feature\b",                                  1),
+        (r"\b(?:the\s+)?least\s+important\b|\blowest\s+importance\b|"
+         r"\bweakest\s+feature\b|\bsmallest\s+importance\b|"
+         r"\blowest\s+ranked\b|\blast\s+in\s+(?:the\s+)?ranking\b",         9),
+    ):
+        for m in re.finditer(pat, importance, flags=re.I):
+            pre = importance[max(0, m.start() - 24):m.start()]
+            if re.search(_ordinal_prefix, pre, flags=re.I):
+                continue
+            _add(m.start(), val)
+
+    # If the text carries an explicit "N of 9" claim, drop the k-th-least
+    # idiom candidates: the concrete numeric claim is more reliable than the
+    # inferred "10 - k".
+    if has_n_of_9:
+        candidates = [c for c in candidates if not c[2]]
+
+    if not candidates:
+        return None
+    candidates.sort(key=lambda x: x[0])
+    return candidates[0][1]
 
 
 def _score_rank(importance: str, gt: dict) -> float:

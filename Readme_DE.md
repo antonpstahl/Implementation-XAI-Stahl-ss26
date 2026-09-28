@@ -196,7 +196,7 @@ deterministischen Rubric **und** vom referenz-gestützten Judge (zwei Vendor):
 | Template | 0,944 | 4,50 | 4,06 | 5,00 | 4,72 |
 | JSON | 0,889 | 4,28 | 4,00 | 5,00 | 3,56 |
 | Vision | 0,898 | 4,39 | 3,50 | 5,00 | 3,94 |
-| Tool Use | 0,898 | 4,39 | 3,44 | 5,00 | 4,06 |
+| Tool Use | 0,926 | 4,39 | 3,44 | 5,00 | 4,06 |
 <!-- /AUTO-TABLE:global-feature-de -->
 
 Die deterministische **Template-Baseline wird hier nicht geschlagen**: sie liegt mit 4,50
@@ -211,7 +211,7 @@ Cliff's *d* durchgehend „negligible").
 > Und: Nicht-Signifikanz ist **keine** belegte Äquivalenz (dafür bräuchte es einen
 > TOST-Äquivalenztest), sondern „kein nachweisbarer Unterschied".
 
-Rubric und Judge korrelieren mit Spearman 0,534 (n = 72, p < 0,001) — interne Konsistenz
+Rubric und Judge korrelieren mit Spearman 0,499 (n = 72, p < 0,001) — interne Konsistenz
 zweier GT-gebundener Scorer, keine unabhängige Kriteriumsvalidität.
 
 Der belastbare Befund ist keine Modalitäts-Rangfolge, sondern ein **Fehlermodus**:
@@ -253,28 +253,28 @@ Zwei Achsen, die der Per-Feature-Track nicht öffnen kann:
 
 - **Achse 1 — Repräsentation:** alle 9 Kurven/Plots (`*_all`) gegen den einen Beeswarm
   (`*_beeswarm`). Beide tragen *unterschiedliche* Information, werden daher **pro
-  GT-Feld** bewertet. Befund: `vision_all` bricht beim **Rang** ein (0,111 gegen 0,611 für
-  `json_all` und 0,889 für `tooluse_all`), hält aber bei der Richtung (0,944). Neun
-  einzelne Plots transportieren *Formen*, verlieren aber die *Ordnung* zwischen den
-  Features — der eine Beeswarm, der Rang als Zeilenreihenfolge kodiert, liegt dort bei
-  0,944–1,000.
-- **Achse 2 — Mechanismus (push vs. pull)** bei konstanter Informationsmenge: gepoolt
-  liegt `tooluse_all` (das Modell holt sich, was es braucht) im fairen Aggregat vorn
-  (0,935 / 0,926 gegen 0,671 / 0,769). **Aufgeschlüsselt ist dieser Vorsprung aber nicht
-  gleichmäßig** — das Poolen vermischt Mechanismus mit Modalität:
+  GT-Feld** bewertet. Befund: `vision_all` bricht beim **Rang** nur auf dem XGB-Arm ein
+  (1/9 gestattet, alle korrekt) — dessen Dependence-Plots tragen weder Titel noch
+  Importance-Wert. Auf dem EBM-Arm, dessen Shape-Plot-Titel die Feature-Importance
+  ausdrucken, gibt `vision_all` alle 9 Ränge an, alle korrekt. Wo überhaupt ein Rang
+  angegeben wurde, ist er in jeder Whole-Model-Bedingung exakt richtig (**82 / 82** über
+  die fünf Bedingungen auf beiden XAI-Armen).
+- **Achse 2 — Mechanismus (push vs. pull)** bei konstanter Informationsmenge: sobald der
+  Rang-Parser verbale Ordinale genauso wie numerische akzeptiert, liegen `tooluse_all`
+  (pull) und `json_all` (numerisches push) auf dem fairen Aggregat **exakt gleichauf** —
+  auf beiden XAI-Modellen. Pull schlägt nur die **Bild**-Übergabe (`vision_all`), und der
+  gesamte push–pull-Abstand kommt aus einem XAI-Arm:
 
   | Push-Bedingung | XAI-Modell | pull | push | pull − push |
   | --- | --- | --- | --- | --- |
-  | `json_all` | ebm | 0,935 | 0,713 | +0,222 |
-  | `json_all` | xgb | 0,926 | 0,963 | **−0,037** |
-  | `vision_all` | ebm | 0,935 | 0,630 | +0,306 |
-  | `vision_all` | xgb | 0,926 | 0,574 | +0,352 |
+  | `json_all` | ebm | 0,972 | 0,972 | 0,000 |
+  | `json_all` | xgb | 0,963 | 0,963 | 0,000 |
+  | `vision_all` | ebm | 0,972 | 0,926 | +0,046 |
+  | `vision_all` | xgb | 0,963 | 0,574 | **+0,389** |
 
-  Pull schlägt die **Bild**-Übergabe auf beiden Modellen deutlich; gegen die **numerische**
-  Übergabe ist es ein Unentschieden (`json_all` gewinnt bei XGB sogar). Der stabile Effekt
-  heißt also *„das Bild verliert"*, nicht *„Pull gewinnt"* — so berichten, und
-  „Pull-Architektur" als eingeschränkte Empfehlung führen, nicht als Schlagzeile.
-  (`utils.global_eval.axis2_mechanism_pairwise`)
+  Der stabile Effekt heißt also *„die neun-Plot-Bildübergabe verliert auf XGB"*, nicht
+  *„Pull gewinnt"* — so berichten, und „Pull-Architektur" als Designerwartung führen,
+  nicht als Schlagzeile. (`utils.global_eval.axis2_mechanism_pairwise`)
 - **Beeswarm-Lesbarkeit:** `json_beeswarm` und `vision_beeswarm` sind bewusst
   **informations-gematcht** (Rang + Farbrichtung + grobe Streuung, **keine** Kurve pro
   Wert), sodass die Differenz den reinen Modalitätseffekt isoliert.
@@ -291,11 +291,11 @@ Zwei Achsen, die der Per-Feature-Track nicht öffnen kann:
 
 > **Ein Befund, der nicht überlebt hat.** Das frühere Ergebnis „Beeswarm-Bild ≪
 > Beeswarm-Zahlen" hing praktisch vollständig am abgeschnittenen `vision_beeswarm_xgb`
-> (fair_total 0,319). Nach dem Neu-Lauf liegt es bei **0,917** — identisch mit der
-> EBM-Variante, die nie abgeschnitten war. Die ehrliche Lesart ist ein **kleiner,
-> konsistenter** Modalitätsabstand (json_beeswarm 1,000 / 0,972 gegen vision_beeswarm
-> 0,917 / 0,917), nicht der dramatische, der zuerst berichtet wurde: das LLM liest das
-> Swarm-Bild fast so gut wie die äquivalenten Zahlen.
+> (fair_total 0,319). Nach dem Neu-Lauf liegt es bei 0,972 — identisch mit der
+> numerischen XGB-Seite. Die ehrliche Lesart ist ein **kleiner Restabstand auf dem
+> EBM-Arm und ein Gleichstand auf XGB** (`json_beeswarm` 1,000 / 0,972 gegen
+> `vision_beeswarm` 0,917 / 0,972), nicht der dramatische Abstand, der zuerst berichtet
+> wurde: das LLM liest das Swarm-Bild im Wesentlichen so gut wie die äquivalenten Zahlen.
 
 ### Prozesskennzahlen (G2a)
 
@@ -318,10 +318,11 @@ G2b behebt das durch Aggregation auf ein Gitter; G2a bewusst nicht, und die Asym
 wirkt in eine nützliche Richtung: JSON hatte die 53-fache Informationsmenge und schlug das
 deterministische Template trotzdem nicht.
 
-Zweitens: **Tool-Use ruft im Schnitt nur 3,1 Tools ab.** Das Modell holt sich das erfragte
-Feature und hört auf; Rang-Kontext zum Vergleich zieht es kaum nach. Diese Sparsamkeit ist
-ein eigenständiger Befund und passt zum Rang-Einbruch von `vision_all` im
-Whole-Model-Track: Rang-Information ist das, was diese Pipelines am ehesten liegen lassen.
+Zweitens: **Tool-Use ruft im Schnitt nur 3,1 Tools ab**, in nahezu fester Reihenfolge:
+`get_feature_importances` wird in **18 von 18** Records aufgerufen (in 17 davon als erstes),
+gefolgt von `get_feature_curve` und, in 17 von 18 Records, `get_feature_plot`. Die Loop
+zieht also jedes Mal den vollen Rang-Kontext ab; da der Tool-Use-Prompt diese Tools bereits
+„je Feature" benennt, ist das Instruction-Following und kein emergent-agentisches Suchen.
 
 ### Generierungs-Varianz (`04Gf`) — gemessen, und sie ändert die Lesart von G2a
 
@@ -332,7 +333,7 @@ jede Ziehung mit dem Rubric **und** beiden Judges bewertet.
 
 | Instrument | Within-Cell-sd | aufzulösende Modalitätsspanne | Verhältnis |
 | --- | --- | --- | --- |
-| Rubric-Total | 0,089 | 0,055 | 1,6× |
+| Rubric-Total | 0,078 | 0,055 | 1,4× |
 | Judge-Faithfulness (Anthropic) | **0,662** | 0,222 | **3,0×** |
 | Judge-Faithfulness (OpenAI) | 0,669 | 0,222 | 3,0× |
 
@@ -353,7 +354,7 @@ Kontrollzellen sd = 0,385, wo Rubric und Anthropic-Judge beide 0 liefern. Ein Te
 gemessenen Streuung ist also judge-seitig, die 0,662 sind eine **Obergrenze** der reinen
 Generierungsvarianz.
 
-Das ist zugleich der Fall, den eine Rubric-only-Studie übersehen hätte: 0,089 liest sich
+Das ist zugleich der Fall, den eine Rubric-only-Studie übersehen hätte: 0,078 liest sich
 beruhigend klein, erst der Judge zeigt das Ausmaß.
 
 ### Judge-Robustheit
@@ -626,13 +627,14 @@ er stehen geblieben ist.
    near-flat-Grenze ist auch die Klassenzuordnung am wenigsten robust, was den Befund erklärt
    und zugleich limitiert.
 
-3. **Das Bild verliert — „Pull gewinnt" trägt nicht.** Gepoolt erreicht `tooluse_all` im fairen
-   Aggregat 0,935 / 0,926 gegenüber 0,671 / 0,769 für die Push-Bedingungen. **Aufgeschlüsselt
-   hält das aber nur gegen die Bild-Übergabe**: `vision_all` verliert auf beiden Modellen deutlich
-   (+0,306 / +0,352 für Pull), gegen die numerische Übergabe ist es ein Unentschieden —
-   `json_all` schlägt Pull bei XGB sogar (−0,037). Das Poolen vermischt Mechanismus mit
-   Modalität (`limitations.md` 4.4, `axis2_mechanism_pairwise`). Als **eingeschränkte**
-   Architektur-Empfehlung führen, nicht als Schlagzeile.
+3. **Die neun-Plot-Bildübergabe verliert auf XGB — „Pull gewinnt" trägt nicht.** Nach
+   der Rang-Parser-Korrektur liegen `tooluse_all` (pull) und `json_all` (numerisches push)
+   auf dem fairen Aggregat **exakt gleichauf** (EBM 0,972 / 0,972; XGB 0,963 / 0,963). Der
+   gesamte push–pull-Abstand kommt aus `vision_all` — und dort fast vollständig aus dem
+   XGB-Arm (+0,046 EBM, +0,389 XGB). Wo überhaupt ein Rang angegeben wurde, ist er in
+   jeder Whole-Model-Bedingung exakt richtig (82 / 82 über die fünf Bedingungen; die
+   XGB-Vision-Lücke ist ein Rang-Ausdruck, kein Rang-Fehler). Als Design*erwartung*
+   führen, nicht als Schlagzeile (`limitations.md` 4.4, `axis2_mechanism_pairwise`).
 
 4. **Der Whole-Model-Track bricht den Completeness-Ceiling.** Im Per-Feature-Track ist
    Completeness konstant 5,00 (α undefiniert, nicht informativ); im Whole-Model-Track variiert
