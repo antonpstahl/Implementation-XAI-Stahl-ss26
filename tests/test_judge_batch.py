@@ -17,14 +17,13 @@ from __future__ import annotations
 
 import sys
 from pathlib import Path
-from types import SimpleNamespace
 
 import pytest
 
 ROOT = Path(__file__).resolve().parent.parent
 sys.path.insert(0, str(ROOT))
 
-from utils.judge import judge_batch_sc, SCORE_KEYS, parse_judge_response
+from utils.judge import judge_batch_sc, SCORE_KEYS
 from tests.test_batch import FakeBatches, make_client, NOSLEEP
 
 

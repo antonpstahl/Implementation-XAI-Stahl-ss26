@@ -12,7 +12,7 @@ SHAP-style visualisation assembled here from those contributions (row order =
 aggregated local importance, x = the shape-curve value per instance, colour = feature
 value). So the *contributions* are native/exact; the *plot* is a rebuild. Contrast
 with XGB, whose beeswarm relies on TreeSHAP - a post-hoc attribution.
-Feasibility: arXiv 2603.17175v1.
+Feasibility: Hsiao, Kumar & Rathje (2026), "Domain-Informed Explainable Boosting Machines for Trustworthy Lateral Spread Predictions", arXiv:2603.17175 (Fig. 13 demonstrates a beeswarm-shaped visualisation of an EBM on top of SHAP; this module computes the beeswarm directly from the EBM's exact term contributions).
 
 `ebm_local_contributions` uses ``model.eval_terms(X)``, the vectorised equivalent of
 the per-instance ``model.explain_local(X)`` term scores (verified byte-identical on

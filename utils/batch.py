@@ -40,7 +40,7 @@ import logging
 import re
 import time as _time
 from pathlib import Path
-from typing import Any, Callable, Iterable, Iterator, Optional
+from typing import Any, Callable, Iterator, Optional
 
 logger = logging.getLogger(__name__)
 

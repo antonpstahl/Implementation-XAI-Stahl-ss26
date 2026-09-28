@@ -22,7 +22,6 @@ import pytest
 ROOT = Path(__file__).resolve().parent.parent
 sys.path.insert(0, str(ROOT))
 
-from utils import batch
 from utils.batch import (
     make_custom_id,
     message_request,

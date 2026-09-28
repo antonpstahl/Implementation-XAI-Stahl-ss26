@@ -24,13 +24,12 @@ import sys
 from pathlib import Path
 
 import pandas as pd
-import pytest
 
 ROOT = Path(__file__).resolve().parent.parent
 sys.path.insert(0, str(ROOT))
 
 from utils.batch import make_custom_id
-from utils.judge import judge_batch_sc, SCORE_KEYS
+from utils.judge import judge_batch_sc
 from tests.test_batch import FakeBatches, make_client, NOSLEEP
 from tests.test_judge_batch import _xml, _mk_succeeded, _mk_errored
 

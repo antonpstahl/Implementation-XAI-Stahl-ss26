@@ -53,4 +53,4 @@ Form labels that flip when the two derivation thresholds move (baseline: flat_th
 - **ebm/weekday**: near-flat→categorical
 - **xgb/windspeed**: near-flat→non-monotonic
 
-These three sit near a classification boundary (e.g. `ebm/temp` has reversal 0.191, just above mono_tol 0.15 — an inverted-U that is domain-correct as non-monotonic). They are the references to eyeball on the plot; the baseline thresholds classify all three defensibly.
+These 3 features sit near a classification boundary (e.g. `ebm/temp` has reversal 0.191, just above mono_tol 0.15 — an inverted-U that is domain-correct as non-monotonic). They are the references to eyeball on the plot; the baseline thresholds classify all of them defensibly.

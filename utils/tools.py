@@ -12,7 +12,7 @@ from typing import Any
 import numpy as np
 import pandas as pd
 
-from .data import CATEGORICAL_COLS, NUMERIC_COLS
+from .data import CATEGORICAL_COLS
 from .explanations import FEATURE_SCHEMA, humanize_feature
 
 

@@ -143,6 +143,44 @@ def modality_significance(judge_df: pd.DataFrame,
                              id_cols=("feature", "xai_model"))
 
 
+def method_format_interaction(df: pd.DataFrame,
+                              value: str = "total") -> pd.DataFrame:
+    """Proposal FF3, descriptive: does the handover-format effect differ by XAI method?
+
+    Returns the eight cell means (modality x ``xai_model``) with the per-modality
+    difference ``delta = ebm - xgb`` and the cell counts. The interaction *is* the
+    variation of ``delta`` across modalities: a roughly constant delta means the
+    format effect is the same under both explanation bases, a varying delta means
+    it is not.
+
+    Reported descriptively and deliberately **without** a significance test.
+    ``xai_model`` is perfectly confounded with the prediction model (SHAP is
+    computed on XGBoost, shape functions are available only from the EBM), so an
+    interaction term involving it inherits the confound of RQ5: a difference could
+    stem from the explanation method or from the two models having learned
+    different functions, and the design cannot separate the two. At n = 9 per cell
+    an interaction test would in any case be underpowered relative to the main
+    effects, which are themselves not significant (all Holm-adjusted p = 1.0).
+    """
+    sub = df[df[value].notna()]
+    means = sub.pivot_table(index="form_pipeline", columns="xai_model",
+                            values=value, aggfunc="mean")
+    counts = sub.pivot_table(index="form_pipeline", columns="xai_model",
+                             values=value, aggfunc="count")
+    order = [m for m in MODALITY_ORDER if m in means.index]
+    means, counts = means.reindex(order), counts.reindex(order)
+
+    out = pd.DataFrame(index=means.index)
+    for model in ("ebm", "xgb"):
+        out[model] = means[model] if model in means.columns else np.nan
+    out["delta"] = out["ebm"] - out["xgb"]
+    for model in ("ebm", "xgb"):
+        out[f"n_{model}"] = (counts[model] if model in counts.columns
+                             else 0).astype("Int64")
+    out.index.name = "modality"
+    return out.round(3)
+
+
 def ceiling_flags(df: pd.DataFrame, tol: float = 0.1) -> dict[str, str]:
     """Detect judge criteria with (near) zero variance, i.e. non-informative ceilings.
 

@@ -38,7 +38,6 @@ from utils.batch import (  # Wiederverwendung: identische custom_id-Constraints/
     STATUS_SERVER_ERROR,
     STATUS_SUCCEEDED,
     _attr,
-    make_custom_id,
 )
 
 logger = logging.getLogger(__name__)

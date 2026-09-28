@@ -62,7 +62,7 @@ results/
 ## Pipeline
 
 **1. Data preprocessing** (`01_Data_Preprocessing.ipynb`)
-UCI Bike Sharing dataset (17,379 hourly observations, 2011-2012). Leakage and redundant features removed; multicollinearity handled (`atemp` vs. `temp`, r ≈ 0.99); categorical encoding for native splits; log1p target transform; 70/30 train/test split. Nine features remain (`hr`, `mnth`, `weekday`, `weathersit`, `yr`, `holiday`, `temp`, `hum`, `windspeed`).
+UCI Bike Sharing dataset (17,379 hourly observations, 2011-2012). Leakage and redundant features removed; multicollinearity handled (`atemp` vs. `temp`, r ≈ 0.99); categorical encoding for native splits; log1p target transform; **day-level** 70/30 train/test split (whole days assigned as units — 511 train days, 220 test days, no day in both, so neighbouring hours of the same day never straddle the split). Nine features remain (`hr`, `mnth`, `weekday`, `weathersit`, `yr`, `holiday`, `temp`, `hum`, `windspeed`).
 
 **2. Modeling** (`02a_Modeling_AllOptions.ipynb`, `02b_Comparison.ipynb`)
 XGBoost and EBM (InterpretML), each trained with three loss functions. Poisson-log was selected for all downstream steps (best Poisson deviance, no negative predictions).

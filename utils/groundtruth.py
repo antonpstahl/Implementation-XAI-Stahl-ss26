@@ -27,7 +27,7 @@ Classification defaults (documented, overridable via ``Thresholds``):
 from __future__ import annotations
 
 import json
-from dataclasses import dataclass, asdict
+from dataclasses import dataclass
 from pathlib import Path
 
 # The form/direction/monotonicity classifier is shared with the deterministic baseline

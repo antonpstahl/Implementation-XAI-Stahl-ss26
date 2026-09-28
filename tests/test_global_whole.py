@@ -23,7 +23,6 @@ from utils.global_whole import (
     WHOLE_CONDITIONS,
     WHOLE_CONDITIONS_BY_NAME,
     TruncatedGenerationError,
-    WholeCondition,
     assert_not_truncated,
     find_truncated_records,
     invalidate_whole_condition,

@@ -77,7 +77,7 @@ results/
 | Multikollinearität | `atemp` entfernt | Korrelation mit `temp` r ≈ 0,99 |
 | Dtype-Kodierung | `mnth`, `hr`, `weekday`, `weathersit` → `category` | EBM und XGBoost nutzen native Kategorie-Splits |
 | Zieltransformation | `cnt_log1p = log(1 + cnt)` | Skewness-Reduktion (2,44 → 0,17) |
-| Split | 70 % Train / 30 % Test, zufällig | Gleichmäßige Jahresverteilung (2011/2012) |
+| Split | 70 % / 30 %, **auf Tagesebene** randomisiert (511 Train-, 220 Test-Tage von 731, keine Überschneidung) | Ganze Tage als Einheit → benachbarte Stunden desselben Tages landen nie in Train *und* Test; gleichmäßige Jahresverteilung (2011/2012) |
 
 **Verbleibende 9 Features:**
 

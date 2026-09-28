@@ -28,7 +28,7 @@ import pandas as pd
 ROOT = Path(__file__).resolve().parent.parent
 sys.path.insert(0, str(ROOT))
 from utils.global_feature import aggregate_curve, classify_shape, list_global_features
-from utils.groundtruth import Thresholds, _continuous_fields, MODELS
+from utils.groundtruth import Thresholds, MODELS
 
 EXPL = ROOT / "explanations"
 GT = EXPL / "global_groundtruth"
@@ -122,12 +122,13 @@ def sensitivity():
             grid.append((flat, mono, len(flips)))
             for k, a, b in flips:
                 fragile.setdefault(k, set()).add((a, b))
-    return grid, fragile
+    return grid, fragile, len(base)
 
 
-def main():
+def build_report() -> str:
     df = verify()
-    grid, fragile = sensitivity()
+    grid, fragile, n_total = sensitivity()
+    n_stable = n_total - len(fragile)
 
     L = ["# Ground-truth verification (Phase G3 / P1)", ""]
     L.append("Objective verification of the 18 structured references in "
@@ -137,9 +138,10 @@ def main():
     L.append(f"**Result:** {int(df.mech_ok.sum())}/{len(df)} references pass the mechanical "
              "re-derivation (form / direction / monotonicity / rank / peak / top-categories "
              "all reproduce). 0 manual corrections were needed. `verified=true` is set for "
-             "all 18 (mechanical + domain scan); the domain caveat below is attached as a "
-             "`note`. The 3 boundary-sensitive features should still get a final visual "
-             "plot confirmation.")
+             f"all {len(df)} (mechanical + domain scan); the domain caveat below is attached "
+             f"as a `note`. The {len(fragile)} boundary-sensitive feature"
+             f"{'s' if len(fragile) != 1 else ''} should still get a final visual plot "
+             "confirmation.")
     L.append("")
 
     # (A) mechanical + (B) domain table
@@ -193,20 +195,26 @@ def main():
         mark = " ← baseline row" if flat == TH.flat_threshold else ""
         L.append(f"| **{flat}** | {cells} |{mark}")
     L.append("")
-    L.append(f"**15 of 18 labels are stable across the whole grid.** Boundary-sensitive "
-             "features (flip under at least one nearby setting):")
+    L.append(f"**{n_stable} of {n_total} labels are stable across the whole grid.** "
+             "Boundary-sensitive features (flip under at least one nearby setting):")
     for k in sorted(fragile):
         trans = ", ".join(f"{a}→{b}" for a, b in sorted(fragile[k]))
         L.append(f"- **{k[0]}/{k[1]}**: {trans}")
     L.append("")
-    L.append("These three sit near a classification boundary (e.g. `ebm/temp` has "
-             "reversal 0.191, just above mono_tol 0.15 — an inverted-U that is domain-"
-             "correct as non-monotonic). They are the references to eyeball on the plot; "
-             "the baseline thresholds classify all three defensibly.")
+    L.append(f"These {len(fragile)} feature{'s' if len(fragile) != 1 else ''} sit near a "
+             "classification boundary (e.g. `ebm/temp` has reversal 0.191, just above "
+             "mono_tol 0.15 — an inverted-U that is domain-correct as non-monotonic). They "
+             "are the references to eyeball on the plot; the baseline thresholds classify "
+             "all of them defensibly.")
     L.append("")
 
-    OUT.write_text("\n".join(L))
-    print(f"wrote {OUT}  ({int(df.mech_ok.sum())}/{len(df)} mechanical pass)")
+    return "\n".join(L)
+
+
+def main():
+    report = build_report()
+    OUT.write_text(report)
+    print(f"wrote {OUT}  ({report.count(chr(10))} lines)")
 
 
 if __name__ == "__main__":

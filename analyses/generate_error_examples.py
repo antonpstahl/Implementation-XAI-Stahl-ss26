@@ -28,8 +28,9 @@ INTERPRETATION = {
         "the feature is described as a meaningful driver instead of being flagged as "
         "negligible (e.g. 'a strong monotone decline reaching -0.7'); (2) **fabricated "
         "structure** — inventing a peak / non-monotonic shape the flat curve does not "
-        "have. The deterministic `template` baseline is the worst offender, but all "
-        "LLM modalities over-attribute here."
+        "have. All four handover formats over-attribute here; the `template` baseline "
+        "is not worse than the LLM formats on this stratum (n = 5 per format, so no "
+        "ordering among them is read into it)."
     ),
     "categorical": (
         "Failures come from **mis-ranking the levels**: naming the wrong best/worst "
@@ -38,14 +39,12 @@ INTERPRETATION = {
         "of stating which levels are highest and lowest."
     ),
     "non-monotonic": (
-        "Mostly handled well. Residual failures are **missing the downturn** (claiming "
-        "a monotone rise and overlooking the inverted-U peak) or an **imprecise peak "
-        "location** (right shape, wrong temperature/humidity value)."
+        "Mostly handled well. The residual failure is **missing the downturn**: "
+        "claiming a monotone rise and overlooking the inverted-U peak."
     ),
     "monotonic": (
-        "Near-perfect. The only failure is the `template` baseline **inventing a "
-        "rise-and-fall** on a strictly monotone feature (year), while LLMs capture the "
-        "step change and its direction cleanly."
+        "At ceiling: every format, including the `template` baseline, captures the "
+        "step change and its direction."
     ),
 }
 
@@ -58,7 +57,7 @@ def load_by_formtype() -> dict[str, list[dict]]:
     return by
 
 
-def main() -> None:
+def build_report() -> str:
     by = load_by_formtype()
     lines: list[str] = []
     w = lines.append
@@ -103,8 +102,13 @@ def main() -> None:
               f"{r['faithfulness_reasoning']}")
         w("")
 
-    OUT.write_text("\n".join(lines) + "\n")
-    print(f"wrote {OUT.relative_to(ROOT)} ({len(lines)} lines)")
+    return "\n".join(lines) + "\n"
+
+
+def main() -> None:
+    report = build_report()
+    OUT.write_text(report)
+    print(f"wrote {OUT.relative_to(ROOT)} ({report.count(chr(10))} lines)")
 
 
 if __name__ == "__main__":
