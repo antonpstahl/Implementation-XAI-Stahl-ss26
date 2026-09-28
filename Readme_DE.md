@@ -76,7 +76,7 @@ results/
 | Redundanz-Reduktion | `workingday` entfernt | Vollständig aus `weekday` + `holiday` ableitbar |
 | Multikollinearität | `atemp` entfernt | Korrelation mit `temp` r ≈ 0,99 |
 | Dtype-Kodierung | `mnth`, `hr`, `weekday`, `weathersit` → `category` | EBM und XGBoost nutzen native Kategorie-Splits |
-| Zieltransformation | `cnt_log1p = log(1 + cnt)` | Skewness-Reduktion (2,44 → 0,17) |
+| Zielvariable | rohes `cnt` mit Poisson-Deviance-Loss (Log-Link) | Schiefe wird intern durch die Log-Link-Fitfunktion absorbiert, keine explizite `log1p`-Transformation nötig |
 | Split | 70 % / 30 %, **auf Tagesebene** randomisiert (511 Train-, 220 Test-Tage von 731, keine Überschneidung) | Ganze Tage als Einheit → benachbarte Stunden desselben Tages landen nie in Train *und* Test; gleichmäßige Jahresverteilung (2011/2012) |
 
 **Verbleibende 9 Features:**
@@ -551,7 +551,7 @@ Er ist ein hartes Gate: ein frischer Generierungslauf darf erst starten, wenn al
 
 Der README-Konsistenztest gehört zu diesem Gate: jede numerische Tabelle in beiden READMEs ist in `<!-- AUTO-TABLE:name -->`-Sentinels gefasst und wird von `utils/update_readme_tables.py` aus `results/` regeneriert. Eine Zahl, die von ihrem Artefakt abweicht, lässt die Suite rot werden — genau das verhindert, dass wieder zwei Judge-Generationen in einem Dokument stehen.
 
-**Test-Status:** `pytest tests/` → **282 passed** (2026-09-07, Python 3.13).
+**Test-Status:** `pytest tests/` → **353 passed** (2026-09-28, Python 3.13, Commit `441a102`).
 
 **Wenn ein Prompt absichtlich verbessert wird:**
 1. Prompt-Datei bearbeiten.
