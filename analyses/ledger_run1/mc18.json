@@ -1,0 +1,53 @@
+{
+  "first_place_stable": {
+    "json": 0.0428,
+    "tooluse": 0.6796,
+    "vision": 0.2776
+  },
+  "first_place_strict": {
+    "json": 0.0088,
+    "tooluse": 0.5892,
+    "vision": 0.1296
+  },
+  "judge": "anthropic",
+  "last_place_stable": {
+    "json": 0.7758,
+    "tooluse": 0.0358,
+    "vision": 0.1884
+  },
+  "last_place_strict": {
+    "json": 0.6418,
+    "tooluse": 0.0056,
+    "vision": 0.0802
+  },
+  "mean_spread": 0.2476,
+  "modal_ordering": "tooluse_vision_json",
+  "modal_share": 0.5154,
+  "n_cells_fixed": 30,
+  "n_cells_sampled": 24,
+  "n_iter": 5000,
+  "orderings_stable": {
+    "json_tooluse_vision": 0.0242,
+    "json_vision_tooluse": 0.0186,
+    "tooluse_json_vision": 0.1642,
+    "tooluse_vision_json": 0.5154,
+    "vision_json_tooluse": 0.0172,
+    "vision_tooluse_json": 0.2604
+  },
+  "pairwise_share": {
+    "json_tooluse": 0.02,
+    "json_vision": 0.1056,
+    "tooluse_json": 0.94,
+    "tooluse_vision": 0.7038,
+    "vision_json": 0.793,
+    "vision_tooluse": 0.1488
+  },
+  "per_format_sd": {
+    "json": 0.0989,
+    "tooluse": 0.0742,
+    "vision": 0.0818
+  },
+  "seed": 42,
+  "ties_share": 0.2724,
+  "variant": "18"
+}

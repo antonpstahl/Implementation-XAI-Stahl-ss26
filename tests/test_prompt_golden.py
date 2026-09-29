@@ -122,7 +122,28 @@ from utils.llm import strip_scratchpad  # noqa: E402
         "<analysis></analysis>\n<prediction>Empty.</prediction>",
         "<prediction>Empty.</prediction>",
     ),
+    # <thinking> block is removed too (the second scratchpad tag Sonnet emits)
+    (
+        "<thinking>\nhr=8: positive\n</thinking>\n\n<prediction>Text.</prediction>",
+        "<prediction>Text.</prediction>",
+    ),
+    # Both <analysis> and <thinking> blocks are removed
+    (
+        "<analysis>A</analysis>\n<thinking>B</thinking>\n<prediction>Both.</prediction>",
+        "<prediction>Both.</prediction>",
+    ),
+    # Unclosed <thinking> is left untouched (truncated output is caught by the
+    # truncation gate, not by the stripper)
+    (
+        "<thinking>\nhr=8: positive\n<prediction>Trunc.</prediction>",
+        "<thinking>\nhr=8: positive\n<prediction>Trunc.</prediction>",
+    ),
+    # Prose containing the word "thinking" without tags is unchanged
+    (
+        "<prediction>I am thinking about this.</prediction>",
+        "<prediction>I am thinking about this.</prediction>",
+    ),
 ])
 def test_strip_scratchpad(raw: str, expected: str) -> None:
-    """strip_scratchpad removes <analysis> blocks and leaves the prose unchanged."""
+    """strip_scratchpad removes <analysis> and <thinking> blocks and leaves the prose unchanged."""
     assert strip_scratchpad(raw) == expected

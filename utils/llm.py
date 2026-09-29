@@ -39,8 +39,9 @@ except ImportError:
 #
 # max_tokens by context:
 #   MAX_TOKENS_GENERATION      = 2048  (pipelines 04 / 05 / 06)
-#     Note: the scratchpad (<analysis> ... </analysis>) comes before the prose
-#     (about 50 to 100 tokens) and is removed via strip_scratchpad() before saving.
+#     Note: the scratchpad (<analysis>...</analysis> or <thinking>...</thinking>)
+#     comes before the prose (about 50 to 100 tokens) and is removed via
+#     strip_scratchpad() before saving.
 #   MAX_TOKENS_JUDGE           = 900   (judge calls NB 05; + reasoning)
 #   MAX_TOKENS_ICHMOUKHAMEDOV  = 700   (LLM calls NB 06)
 #
@@ -99,13 +100,17 @@ def model_accepts_temperature(model: str) -> bool:
 
 
 def strip_scratchpad(text: str) -> str:
-    """Removes the <analysis> ... </analysis> scratchpad block from generated text.
+    """Removes <analysis>...</analysis> and <thinking>...</thinking> scratchpad
+    blocks from generated text.
 
     The block is written by the model before the prose (think before write) and
     must be discarded before persisting the explanation. Handles optional leading
-    or trailing whitespace and CRLF line endings.
+    or trailing whitespace and CRLF line endings. Unclosed blocks are left
+    untouched (truncated output is caught by the truncation gate, not here).
     """
-    return _re.sub(r"<analysis>.*?</analysis>\s*", "", text, flags=_re.DOTALL).strip()
+    return _re.sub(
+        r"<(analysis|thinking)>.*?</\1>\s*", "", text, flags=_re.DOTALL
+    ).strip()
 
 
 try:
