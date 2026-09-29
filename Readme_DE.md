@@ -194,9 +194,9 @@ deterministischen Rubric **und** vom referenz-gestützten Judge (zwei Vendor):
 | Form | Rubric gesamt | Judge Faithfulness | Clarity | Completeness | Faithfulness (OpenAI) |
 |---|---|---|---|---|---|
 | Template | 0,944 | 4,50 | 4,06 | 5,00 | 4,72 |
-| JSON | 0,889 | 4,28 | 4,00 | 5,00 | 3,56 |
-| Vision | 0,898 | 4,39 | 3,50 | 5,00 | 3,94 |
-| Tool Use | 0,926 | 4,39 | 3,44 | 5,00 | 4,06 |
+| JSON | 0,889 | 4,28 | 4,00 | 5,00 | 3,44 |
+| Vision | 0,907 | 4,61 | 3,67 | 5,00 | 3,83 |
+| Tool Use | 0,880 | 4,44 | 3,67 | 5,00 | 3,83 |
 <!-- /AUTO-TABLE:global-feature-de -->
 
 Die deterministische **Template-Baseline wird hier nicht geschlagen**: sie liegt mit 4,50
@@ -219,10 +219,10 @@ Der belastbare Befund ist keine Modalitäts-Rangfolge, sondern ein **Fehlermodus
 <!-- AUTO-TABLE:global-formtype-de -->
 | Formtyp | n | Judge Faithfulness | Clarity | Completeness |
 |---|---|---|---|---|
-| near-flat | 20 | 3,70 | 3,90 | 5,00 |
-| categorical | 28 | 4,43 | 3,68 | 5,00 |
-| non-monotonic | 16 | 4,88 | 3,75 | 5,00 |
-| monotonic | 8 | 5,00 | 3,62 | 5,00 |
+| near-flat | 20 | 3,85 | 4,20 | 5,00 |
+| categorical | 28 | 4,54 | 3,71 | 5,00 |
+| non-monotonic | 16 | 4,81 | 3,62 | 5,00 |
+| monotonic | 8 | 5,00 | 3,88 | 5,00 |
 <!-- /AUTO-TABLE:global-formtype-de -->
 
 **Über-Attribution vernachlässigbarer Features** ist der durchgängige Fehler, konvergent
@@ -243,10 +243,10 @@ Miss — damit wird **Coverage** direkt messbar (die Sorge aus dem Meeting: „w
 | Bedingung | Coverage (ebm · xgb) | Judge Faithfulness | Faithfulness (OpenAI) | Completeness |
 |---|---|---|---|---|
 | json_all | 9/9 · 9/9 | 4,72 | 3,39 | 3,61 |
-| vision_all | 9/9 · 9/9 | 4,22 | 3,06 | 2,94 |
-| tooluse_all | 9/9 · 9/9 | 4,89 | 3,72 | 3,89 |
+| vision_all | 9/9 · 9/9 | 4,61 | 3,44 | 3,39 |
+| tooluse_all | 9/9 · 9/9 | 4,83 | 3,50 | 3,89 |
 | json_beeswarm | 9/9 · 9/9 | 3,61 | 3,44 | 3,72 |
-| vision_beeswarm | 9/9 · 9/9 | 3,89 | 2,72 | 4,00 |
+| vision_beeswarm | 9/9 · 9/9 | 3,94 | 2,83 | 3,78 |
 <!-- /AUTO-TABLE:global-whole-de -->
 
 Zwei Achsen, die der Per-Feature-Track nicht öffnen kann:
@@ -306,8 +306,8 @@ Direkt aus den persistierten Generierungs-Records:
 |---|---|---|---|---|
 | Template | 0 | 0 | 0,0 s | n/a |
 | JSON | 82 421 | 720 | 18,2 s | n/a |
-| Vision | 1 542 | 768 | 16,9 s | n/a |
-| Tool Use | 69 274 | 884 | 22,1 s | 3,1 |
+| Vision | 1 554 | 704 | 17,8 s | n/a |
+| Tool Use | 69 228 | 901 | 25,0 s | 3,1 |
 <!-- /AUTO-TABLE:global-process-de -->
 
 Zwei Dinge sind hier abzulesen. Erstens: **der Modalitätsvergleich ist nicht

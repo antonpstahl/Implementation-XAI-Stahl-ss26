@@ -93,9 +93,9 @@ The unit of explanation is not a single prediction but the **model's use of a fe
 | Form     | Rubric total | Judge Faith. | Clarity | Complete. | Faith. (OpenAI) |
 | -------- | ------------ | ------------ | ------- | --------- | --------------- |
 | Template | 0.944        | 4.50         | 4.06    | 5.00      | 4.72            |
-| JSON     | 0.889        | 4.28         | 4.00    | 5.00      | 3.56            |
-| Vision   | 0.898        | 4.39         | 3.50    | 5.00      | 3.94            |
-| Tool Use | 0.926        | 4.39         | 3.44    | 5.00      | 4.06            |
+| JSON     | 0.889        | 4.28         | 4.00    | 5.00      | 3.44            |
+| Vision   | 0.907        | 4.61         | 3.67    | 5.00      | 3.83            |
+| Tool Use | 0.880        | 4.44         | 3.67    | 5.00      | 3.83            |
 <!-- /AUTO-TABLE:global-feature -->
 
 The deterministic **template is not beaten** here: it leads nominally at 4.50, and **none** of the six pairwise comparisons is significant (Wilcoxon signed-rank on `(feature, xai_model)` pairs, Holm-corrected, all `p_adj = 1.0`, Cliff's *d* throughout "negligible"). Note the framing constraint: since the threshold unification the baseline hits the shape type *by construction*, which makes it a strict **reference floor** rather than an independent competitor. Rubric and judge correlate at Spearman 0.499 (n = 72, p < 0.001) — internal consistency between two ground-truth-bound scorers, not independent criterion validity.
@@ -105,10 +105,10 @@ The stable finding is not a modality ranking but a **failure mode**:
 <!-- AUTO-TABLE:global-formtype -->
 | Shape type    | n  | Judge Faith. | Clarity | Complete. |
 | ------------- | -- | ------------ | ------- | --------- |
-| near-flat     | 20 | 3.70         | 3.90    | 5.00      |
-| categorical   | 28 | 4.43         | 3.68    | 5.00      |
-| non-monotonic | 16 | 4.88         | 3.75    | 5.00      |
-| monotonic     | 8  | 5.00         | 3.62    | 5.00      |
+| near-flat     | 20 | 3.85         | 4.20    | 5.00      |
+| categorical   | 28 | 4.54         | 3.71    | 5.00      |
+| non-monotonic | 16 | 4.81         | 3.62    | 5.00      |
+| monotonic     | 8  | 5.00         | 3.88    | 5.00      |
 <!-- /AUTO-TABLE:global-formtype -->
 
 **Over-attribution of negligible features** is the consistent error, converging across rubric, judge and the qualitative analysis (`analyses/error_examples_by_formtype.md`). The stratum sizes are too small for tests, so these are descriptive means.
@@ -119,10 +119,10 @@ The stable finding is not a modality ranking but a **failure mode**:
 | Condition       | Coverage (ebm · xgb) | Judge Faith. | Faith. (OpenAI) | Complete. |
 | --------------- | -------------------- | ------------ | --------------- | --------- |
 | json_all        | 9/9 · 9/9            | 4.72         | 3.39            | 3.61      |
-| vision_all      | 9/9 · 9/9            | 4.22         | 3.06            | 2.94      |
-| tooluse_all     | 9/9 · 9/9            | 4.89         | 3.72            | 3.89      |
+| vision_all      | 9/9 · 9/9            | 4.61         | 3.44            | 3.39      |
+| tooluse_all     | 9/9 · 9/9            | 4.83         | 3.50            | 3.89      |
 | json_beeswarm   | 9/9 · 9/9            | 3.61         | 3.44            | 3.72      |
-| vision_beeswarm | 9/9 · 9/9            | 3.89         | 2.72            | 4.00      |
+| vision_beeswarm | 9/9 · 9/9            | 3.94         | 2.83            | 3.78      |
 <!-- /AUTO-TABLE:global-whole -->
 
 Two axes this opens that the per-feature track cannot:
@@ -150,8 +150,8 @@ Two axes this opens that the per-feature track cannot:
 | -------- | -------------- | --------------- | ----------- | -------------- |
 | Template | 0              | 0               | 0.0 s       | n/a            |
 | JSON     | 82,421         | 720             | 18.2 s      | n/a            |
-| Vision   | 1,542          | 768             | 16.9 s      | n/a            |
-| Tool Use | 69,274         | 884             | 22.1 s      | 3.1            |
+| Vision   | 1,554          | 704             | 17.8 s      | n/a            |
+| Tool Use | 69,228         | 901             | 25.0 s      | 3.1            |
 <!-- /AUTO-TABLE:global-process -->
 
 Two things to read here. First, **the modality comparison is not information-matched**: JSON receives the raw per-instance SHAP scatter (~12k points per feature) and Vision only the rendered plot — a **53:1** input-token ratio. The comparison therefore measures information *volume* as well as modality. G2b fixes this by aggregating the curve to a grid; G2a deliberately does not, and the asymmetry cuts in a useful direction: JSON had 53× the information and still did not beat the deterministic template. Second, **Tool-Use averages only 3.1 calls**, and the sequence is nearly fixed: `get_feature_importances` is called in **18 / 18** records (first in 17 of them), followed by `get_feature_curve` and, in 17 of 18 records, `get_feature_plot`. The loop pulls the full rank context every time, but the tool-use prompt already names those tools "per feature", so this should be read as instruction-following rather than as an emergent agentic pull.
