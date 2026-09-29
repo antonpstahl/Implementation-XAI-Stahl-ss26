@@ -25,8 +25,6 @@ import json
 import re
 from pathlib import Path
 
-import pytest
-
 ROOT = Path(__file__).resolve().parent.parent
 RESULTS = ROOT / "results"
 
@@ -68,15 +66,6 @@ def _find_leaks() -> list[str]:
     return leaks
 
 
-@pytest.mark.xfail(
-    strict=True,
-    reason=(
-        "Expected to fail until analyses/restrip_scratchpad.py --apply has been "
-        "run and the XGB records have been regenerated (Part C of the fair-plots "
-        "rerun plan). Remove this marker once the guard is green — the marker is "
-        "there so the passing-test count stays honest during the rerun window."
-    ),
-)
 def test_no_leaked_scratchpad_tag() -> None:
     """Every persisted `explanation` must be free of scratchpad opening tags."""
     leaks = _find_leaks()
