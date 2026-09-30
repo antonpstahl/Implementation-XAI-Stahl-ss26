@@ -1,0 +1,15 @@
+{
+  "form_pipeline": "tooluse",
+  "xai_model": "xgb",
+  "feature": "holiday",
+  "form_type": "near-flat",
+  "judge_model": "gpt-4o",
+  "faithfulness": 2,
+  "clarity": 3,
+  "completeness": 5,
+  "faithfulness_reasoning": "The explanation correctly identifies the direction as decreasing and the importance rank as 9th, matching the reference. However, it describes a step change and variability in effect strength, which is not supported by the near-flat reference. Anchor 3, -1 (peak/shape claimed), max(1, 3-1)=2.",
+  "usage": {
+    "input_tokens": 3009,
+    "output_tokens": 193
+  }
+}

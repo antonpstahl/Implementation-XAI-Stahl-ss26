@@ -1,0 +1,15 @@
+{
+  "form_pipeline": "vision_beeswarm",
+  "xai_model": "xgb",
+  "feature": "hum",
+  "form_type": "non-monotonic",
+  "judge_model": "gpt-4o",
+  "faithfulness": 1,
+  "clarity": 4,
+  "completeness": 2,
+  "faithfulness_reasoning": "The explanation incorrectly describes the direction as consistently negative, contradicting the reference's non-monotonic mixed direction with a peak at ~34%. The importance rank is correct. Anchor 2, -1 (direction contradicts), -1 (peak missed), max(1, 2-2)=1.",
+  "usage": {
+    "input_tokens": 2453,
+    "output_tokens": 195
+  }
+}

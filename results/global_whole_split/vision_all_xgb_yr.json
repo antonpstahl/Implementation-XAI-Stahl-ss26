@@ -1,0 +1,14 @@
+{
+  "form": "vision_all",
+  "scope": "global_whole",
+  "llm_model": "claude-sonnet-4-6",
+  "loss_key": "poisson_log",
+  "xai_model": "xgb",
+  "feature": "yr",
+  "explanation": "[EFFECT] This feature acts as a simple step: hours in 2011 (value 0) consistently receive a negative contribution (roughly −0.25 to −0.35), while hours in 2012 (value 1) receive a positive contribution (roughly +0.15 to +0.25), reflecting that the bike-share system grew substantially between the two years.\n[IMPORTANCE] Second most important feature (importance 0.200), with a clear and consistent shift of about 0.5 log-units between the two years.\n[RECOMMENDATION] Staffing and bike-redistribution plans should be built primarily around the hour of the day — particularly the sharp morning (≈8 a.m.) and evening (≈5 p.m.) peaks — and adjusted for temperature, since warm mild days can roughly double predicted rentals compared with cold or very hot ones. All other factors, including weather and weekday type, provide useful fine-tuning but are secondary to getting the time-of-day and temperature conditions right.",
+  "dropped": false,
+  "condition": "vision_all",
+  "modality": "vision",
+  "representation": "all",
+  "mechanism": "push"
+}

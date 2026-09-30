@@ -1,0 +1,15 @@
+{
+  "form_pipeline": "tooluse",
+  "xai_model": "xgb",
+  "feature": "weekday",
+  "form_type": "categorical",
+  "judge_model": "gpt-4o",
+  "faithfulness": 2,
+  "clarity": 3,
+  "completeness": 5,
+  "faithfulness_reasoning": "The explanation correctly identifies the categorical nature of the effect and the importance rank of 4. However, it inaccurately describes the SHAP contributions, exaggerating the values and missing the specific top and bottom categories. Anchor 3, -1 (key structure missed), max(1, 3-1)=2.",
+  "usage": {
+    "input_tokens": 3199,
+    "output_tokens": 194
+  }
+}

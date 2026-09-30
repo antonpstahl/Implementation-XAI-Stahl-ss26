@@ -1,0 +1,15 @@
+{
+  "form_pipeline": "vision",
+  "xai_model": "xgb",
+  "feature": "windspeed",
+  "form_type": "near-flat",
+  "judge_model": "claude-opus-4-8",
+  "faithfulness": 2,
+  "clarity": 3,
+  "completeness": 5,
+  "faithfulness_reasoning": "The reference is near-flat and negligible (rank 8/9), with a small positive peak ~11 km/h and sign change ~16 km/h; the explanation instead paints a substantial monotone downward suppression (−0.4 to −0.7) and misses the negligibility framing while exaggerating the effect. Anchor 3 (direction \"mixed/downward at high wind\" partly right), -1 (misses near-flat negligibility / claims strong effect where curve is essentially flat), max(1,3-1)=2.",
+  "usage": {
+    "input_tokens": 808,
+    "output_tokens": 373
+  }
+}

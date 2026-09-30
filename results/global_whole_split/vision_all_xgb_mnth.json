@@ -1,0 +1,14 @@
+{
+  "form": "vision_all",
+  "scope": "global_whole",
+  "llm_model": "claude-sonnet-4-6",
+  "loss_key": "poisson_log",
+  "xai_model": "xgb",
+  "feature": "mnth",
+  "explanation": "[EFFECT] Contributions are most negative in January (down to about −0.7), rise progressively through spring, and remain broadly positive from May through November (around +0.1 to +0.25). December dips back toward −0.4, so winter months at both ends of the year suppress predicted demand while the warmer mid-year months support it.\n[IMPORTANCE] Fifth most important feature (importance 0.118); its effect is meaningful but roughly half the size of temperature or year.\n[RECOMMENDATION] Staffing and bike-redistribution plans should be built primarily around the hour of the day — particularly the sharp morning (≈8 a.m.) and evening (≈5 p.m.) peaks — and adjusted for temperature, since warm mild days can roughly double predicted rentals compared with cold or very hot ones. All other factors, including weather and weekday type, provide useful fine-tuning but are secondary to getting the time-of-day and temperature conditions right.",
+  "dropped": false,
+  "condition": "vision_all",
+  "modality": "vision",
+  "representation": "all",
+  "mechanism": "push"
+}

@@ -1,0 +1,15 @@
+{
+  "form_pipeline": "vision",
+  "xai_model": "xgb",
+  "feature": "holiday",
+  "form_type": "near-flat",
+  "judge_model": "claude-opus-4-8",
+  "faithfulness": 5,
+  "clarity": 5,
+  "completeness": 5,
+  "faithfulness_reasoning": "Direction (holidays lower demand) matches the decreasing reference, rank 9 of 9 is correct, and the explanation explicitly frames it as least influential/near-negligible. Anchor 5, no deductions.",
+  "usage": {
+    "input_tokens": 666,
+    "output_tokens": 279
+  }
+}

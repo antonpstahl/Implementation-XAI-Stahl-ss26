@@ -1,0 +1,15 @@
+{
+  "form_pipeline": "tooluse_all",
+  "xai_model": "xgb",
+  "feature": "weekday",
+  "form_type": "categorical",
+  "judge_model": "claude-opus-4-8",
+  "faithfulness": 5,
+  "clarity": 3,
+  "completeness": 3,
+  "faithfulness_reasoning": "The categorical structure matches the reference: Friday (5) and Saturday (6) are the top positive levels, Sunday (0), Monday (1), Tuesday (2) the most negative, and rank 4 is correct. The numeric contributions and ordering align well. Anchor 5, no deductions.",
+  "usage": {
+    "input_tokens": 913,
+    "output_tokens": 354
+  }
+}

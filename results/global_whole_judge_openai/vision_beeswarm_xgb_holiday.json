@@ -1,0 +1,15 @@
+{
+  "form_pipeline": "vision_beeswarm",
+  "xai_model": "xgb",
+  "feature": "holiday",
+  "form_type": "near-flat",
+  "judge_model": "gpt-4o",
+  "faithfulness": 3,
+  "clarity": 2,
+  "completeness": 5,
+  "faithfulness_reasoning": "The explanation describes a binary step change with non-holiday hours having a positive cluster and holiday hours indicating reduced demand, which aligns with the reference's decreasing direction. The importance rank is correctly identified as the least important. However, the explanation does not clearly convey the near-flat nature of the feature. Anchor 4, -1 (near-flat nature missed), max(1, 4-1)=3.",
+  "usage": {
+    "input_tokens": 2435,
+    "output_tokens": 232
+  }
+}

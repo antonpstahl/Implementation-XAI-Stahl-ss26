@@ -1,0 +1,15 @@
+{
+  "form_pipeline": "vision_beeswarm",
+  "xai_model": "xgb",
+  "feature": "temp",
+  "form_type": "non-monotonic",
+  "judge_model": "gpt-4o",
+  "faithfulness": 2,
+  "clarity": 4,
+  "completeness": 4,
+  "faithfulness_reasoning": "The explanation incorrectly describes the effect as broadly monotonic, missing the non-monotonic nature and peak at ~29.5 °C. However, it correctly identifies the importance rank as 3. Anchor 3, -1 (peak missed), max(1, 3-1)=2.",
+  "usage": {
+    "input_tokens": 2475,
+    "output_tokens": 180
+  }
+}

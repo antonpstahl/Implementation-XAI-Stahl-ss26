@@ -1,0 +1,15 @@
+{
+  "form_pipeline": "vision_all",
+  "xai_model": "xgb",
+  "feature": "mnth",
+  "form_type": "categorical",
+  "judge_model": "claude-opus-4-8",
+  "faithfulness": 5,
+  "clarity": 4,
+  "completeness": 2,
+  "faithfulness_reasoning": "Direction matches: winter months (Jan/Feb, and Dec) most negative and mid/late-year positive, with top being fall months consistent with cat 9/10 being highest; rank 5 of 9 correct. Anchor 5; the specific magnitudes (−0.7, +0.25) slightly overstate the reference values, a minor imprecision but structure and top/bottom levels are captured, no deduction warranted.",
+  "usage": {
+    "input_tokens": 838,
+    "output_tokens": 409
+  }
+}

@@ -1,0 +1,15 @@
+{
+  "form_pipeline": "tooluse",
+  "xai_model": "xgb",
+  "feature": "weathersit",
+  "form_type": "categorical",
+  "judge_model": "claude-opus-4-8",
+  "faithfulness": 5,
+  "clarity": 4,
+  "completeness": 5,
+  "faithfulness_reasoning": "The step-down ordering (clear positive, mist neutral/slightly negative, light rain strongly negative) matches the reference top/bottom categories, category 3 is correctly the most negative, and rank 7 of 9 is exact. No deductions apply. Anchor 5.",
+  "usage": {
+    "input_tokens": 1964,
+    "output_tokens": 319
+  }
+}

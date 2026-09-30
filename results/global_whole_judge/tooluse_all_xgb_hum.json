@@ -1,0 +1,15 @@
+{
+  "form_pipeline": "tooluse_all",
+  "xai_model": "xgb",
+  "feature": "hum",
+  "form_type": "non-monotonic",
+  "judge_model": "claude-opus-4-8",
+  "faithfulness": 5,
+  "clarity": 4,
+  "completeness": 2,
+  "faithfulness_reasoning": "Non-monotonic with a mid-range positive plateau peaking around +0.09 and a sharp negative drop at high humidity matches the reference (peak ~34%, max +0.087); rank 6 correct. The sign-change is placed slightly off (says positive from ~20% whereas crossing is ~7%), but overall structure and direction are right. Anchor 5, no deduction.",
+  "usage": {
+    "input_tokens": 822,
+    "output_tokens": 369
+  }
+}

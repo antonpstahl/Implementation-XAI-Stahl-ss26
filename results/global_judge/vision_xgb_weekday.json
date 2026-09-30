@@ -1,0 +1,15 @@
+{
+  "form_pipeline": "vision",
+  "xai_model": "xgb",
+  "feature": "weekday",
+  "form_type": "categorical",
+  "judge_model": "claude-opus-4-8",
+  "faithfulness": 4,
+  "clarity": 3,
+  "completeness": 5,
+  "faithfulness_reasoning": "The reference shows day 5 highest and day 6 also positive, with days 0,1,2 lowest — the explanation frames weekends (0 and 6) as extreme both ways, but day 0 (Sunday) is actually strongly negative, not a big positive contributor, so the top-category framing is partly off. Rank 4 is correct. Anchor 4 (direction roughly captured, structure slightly imprecise), no additional deduction beyond that since it doesn't outright contradict. Score 4.",
+  "usage": {
+    "input_tokens": 932,
+    "output_tokens": 383
+  }
+}

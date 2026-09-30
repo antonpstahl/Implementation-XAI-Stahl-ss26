@@ -1,0 +1,18 @@
+{
+  "form": "vision",
+  "scope": "global",
+  "llm_model": "claude-sonnet-4-6",
+  "loss_key": "poisson_log",
+  "xai_model": "xgb",
+  "feature": "hum",
+  "explanation": "[EFFECT] Humidity has a non-monotonic (rises-then-falls) effect on predicted bike demand. Moderate humidity levels (roughly 20–75% relative humidity) are associated with a mild positive boost to demand, while very high humidity (above about 80%) sharply reduces predicted rentals — the contribution can drop as low as –0.7 in log space at near-saturation humidity. Very low humidity (below ~15%) also shows some negative contributions, though these hours are rare.\n\n[IMPORTANCE] Humidity is the 6th most important feature out of 9, with a global importance score of 0.077. It has a moderate influence on demand — meaningful, but clearly less impactful than top features like hour or temperature.\n\n[RECOMMENDATION] Pay close attention to forecasted humidity when planning staffing and bike availability: on days when humidity is expected to climb above 80%, significantly lower demand is likely, so over-stocking bikes or scheduling extra staff on those hours may not be necessary.",
+  "plot_file": "xgb_dependence_hum.png",
+  "stop_reason": "end_turn",
+  "max_tokens": 2048,
+  "elapsed_s": 19.09,
+  "usage": {
+    "input_tokens": 1628,
+    "output_tokens": 901,
+    "cache_read_input_tokens": 0
+  }
+}

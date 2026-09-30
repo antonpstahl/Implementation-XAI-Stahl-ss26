@@ -1,0 +1,14 @@
+{
+  "form": "vision_all",
+  "scope": "global_whole",
+  "llm_model": "claude-sonnet-4-6",
+  "loss_key": "poisson_log",
+  "xai_model": "xgb",
+  "feature": "weathersit",
+  "explanation": "[EFFECT] Each weather category produces a distinct step down in contribution: clear sky (1) gives a small positive boost (~+0.04), mist or cloud (2) is approximately neutral to slightly negative (~0 to −0.05), and light rain or snow (3) causes a large negative pull (SHAP ranging from about −0.15 to −0.6). The rare heavy-rain category (4) sits in a moderately negative range based on very few data points.\n[IMPORTANCE] Seventh most important feature (importance 0.051); a noticeable but secondary influence, mainly felt when conditions deteriorate to light precipitation or worse.\n[RECOMMENDATION] Staffing and bike-redistribution plans should be built primarily around the hour of the day — particularly the sharp morning (≈8 a.m.) and evening (≈5 p.m.) peaks — and adjusted for temperature, since warm mild days can roughly double predicted rentals compared with cold or very hot ones. All other factors, including weather and weekday type, provide useful fine-tuning but are secondary to getting the time-of-day and temperature conditions right.",
+  "dropped": false,
+  "condition": "vision_all",
+  "modality": "vision",
+  "representation": "all",
+  "mechanism": "push"
+}

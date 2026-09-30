@@ -1,0 +1,15 @@
+{
+  "form_pipeline": "vision",
+  "xai_model": "xgb",
+  "feature": "hr",
+  "form_type": "categorical",
+  "judge_model": "gpt-4o",
+  "faithfulness": 4,
+  "clarity": 5,
+  "completeness": 5,
+  "faithfulness_reasoning": "The explanation correctly identifies the categorical nature of the feature and captures the key structure with two peaks, although it inaccurately places the evening peak at 5 PM instead of 6 PM (18:00). The importance rank is correctly stated as 1st. Anchor 5, -1 (evening peak misplacement), resulting in a score of 4.",
+  "usage": {
+    "input_tokens": 2606,
+    "output_tokens": 189
+  }
+}

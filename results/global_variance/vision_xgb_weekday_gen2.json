@@ -1,0 +1,19 @@
+{
+  "form": "vision",
+  "scope": "global",
+  "llm_model": "claude-sonnet-4-6",
+  "loss_key": "poisson_log",
+  "xai_model": "xgb",
+  "feature": "weekday",
+  "explanation": "[EFFECT]\nThe day of the week has a non-monotonic effect on predicted demand: weekdays (Monday through Friday) produce consistently moderate positive contributions, meaning they reliably boost expected rentals above the baseline. Weekends — both Sunday and Saturday — are highly variable, generating both the largest positive contributions (up to about +0.6 in log terms) and the most negative ones (down to roughly −0.8), meaning some weekend hours see much higher demand than a typical weekday hour, while other weekend hours see sharply lower demand.\n\n[IMPORTANCE]\nWeekday is the 4th most important feature out of nine, with an importance score of 0.173. It has a meaningful influence on predicted demand, though hour of the day, temperature, and year are stronger drivers.\n\n[RECOMMENDATION]\nBecause weekday demand is relatively stable and predictable, you can plan staffing and bike availability for Monday–Friday with confidence; for weekends, however, the wide hour-to-hour swings mean you should plan more flexibly — building in extra capacity for peak leisure hours while avoiding over-stocking during off-peak periods.",
+  "plot_file": "xgb_dependence_weekday.png",
+  "elapsed_s": 42.71,
+  "usage": {
+    "input_tokens": 1628,
+    "output_tokens": 2042,
+    "cache_read_input_tokens": 0
+  },
+  "generation_idx": 2,
+  "stop_reason": "end_turn",
+  "max_tokens": 2048
+}

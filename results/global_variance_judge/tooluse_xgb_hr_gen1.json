@@ -1,0 +1,15 @@
+{
+  "form_pipeline": "tooluse",
+  "xai_model": "xgb",
+  "feature": "hr",
+  "form_type": "categorical",
+  "judge_model": "claude-opus-4-8",
+  "faithfulness": 5,
+  "clarity": 4,
+  "completeness": 5,
+  "faithfulness_reasoning": "Double-peak structure with peaks at 8 a.m. and 5 p.m. (hour 17 highest) matches top_categories; lowest around 4 a.m. matches bottom_categories; rank 1 correct. Anchor 5, no deductions.",
+  "usage": {
+    "input_tokens": 1644,
+    "output_tokens": 325
+  }
+}

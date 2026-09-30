@@ -1,0 +1,15 @@
+{
+  "form_pipeline": "tooluse",
+  "xai_model": "xgb",
+  "feature": "mnth",
+  "form_type": "categorical",
+  "judge_model": "gpt-4o",
+  "faithfulness": 3,
+  "clarity": 3,
+  "completeness": 5,
+  "faithfulness_reasoning": "The explanation correctly identifies the top and bottom months, with September and October among the top contributors and January among the lowest, aligning with the reference. The importance rank is accurately stated as 5th. However, the description of a \"non-monotonic, arch-shaped effect\" is misleading for a categorical feature. Anchor 4, -1 (misleading shape description), max(1, 4-1)=3.",
+  "usage": {
+    "input_tokens": 3305,
+    "output_tokens": 234
+  }
+}

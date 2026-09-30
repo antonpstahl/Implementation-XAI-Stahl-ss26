@@ -1,0 +1,15 @@
+{
+  "form_pipeline": "vision",
+  "xai_model": "xgb",
+  "feature": "weathersit",
+  "form_type": "categorical",
+  "judge_model": "claude-opus-4-8",
+  "faithfulness": 5,
+  "clarity": 3,
+  "completeness": 5,
+  "faithfulness_reasoning": "Category order matches reference: cat 1 positive, cat 2 near-neutral, cat 3 biggest drop; rank 7 correct; the explanation even correctly flags cat 4 as noisy and not clearly worse than cat 3, consistent with the reference note. Anchor 5, no deductions.",
+  "usage": {
+    "input_tokens": 958,
+    "output_tokens": 309
+  }
+}

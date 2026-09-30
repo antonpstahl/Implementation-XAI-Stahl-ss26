@@ -1,0 +1,14 @@
+{
+  "form": "tooluse_all",
+  "scope": "global_whole",
+  "llm_model": "claude-sonnet-4-6",
+  "loss_key": "poisson_log",
+  "xai_model": "xgb",
+  "feature": "mnth",
+  "explanation": "[EFFECT] Month shows a broadly rising-then-plateauing pattern across the year. January has the strongest negative pull (contribution ≈ −0.34) and demand builds through spring, plateauing across summer and early autumn with September being the highest month (contribution ≈ +0.12). December dips slightly back to near-neutral (−0.03).\n[IMPORTANCE] Rank 5 (importance 0.118), a moderate contributor — meaningful for seasonal planning but well below hour, year, and temperature.\n\n---\n[RECOMMENDATION] Hour of the day and temperature are overwhelmingly the strongest demand drivers, so staffing and bike redistribution plans should first be built around the two daily rush-hour peaks (morning around 8 a.m. and evening around 5 p.m.) and then adjusted upward or downward based on the day's forecast temperature — scaling up resources for mild, warm days and scaling back for very cold or very hot conditions.",
+  "dropped": false,
+  "condition": "tooluse_all",
+  "modality": "tooluse",
+  "representation": "all",
+  "mechanism": "pull"
+}

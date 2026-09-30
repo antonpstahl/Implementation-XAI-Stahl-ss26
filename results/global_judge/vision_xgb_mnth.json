@@ -1,0 +1,15 @@
+{
+  "form_pipeline": "vision",
+  "xai_model": "xgb",
+  "feature": "mnth",
+  "form_type": "categorical",
+  "judge_model": "claude-opus-4-8",
+  "faithfulness": 5,
+  "clarity": 4,
+  "completeness": 5,
+  "faithfulness_reasoning": "Direction matches the reference: winter months (Jan–Mar) most negative, autumn months (Sep–Oct) highest, rank 5 of 9 correct. It slightly overstates Nov and the exact magnitudes, but the key structure (top Sep/Oct, bottom Jan/Feb) is captured. Anchor 5, no deduction applies.",
+  "usage": {
+    "input_tokens": 850,
+    "output_tokens": 345
+  }
+}

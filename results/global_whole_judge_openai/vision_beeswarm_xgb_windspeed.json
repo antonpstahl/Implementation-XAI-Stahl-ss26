@@ -1,0 +1,15 @@
+{
+  "form_pipeline": "vision_beeswarm",
+  "xai_model": "xgb",
+  "feature": "windspeed",
+  "form_type": "near-flat",
+  "judge_model": "gpt-4o",
+  "faithfulness": 1,
+  "clarity": 5,
+  "completeness": 4,
+  "faithfulness_reasoning": "The explanation incorrectly describes the effect as directionally consistent and negative, while the reference indicates a mixed, near-flat effect with a non-monotonic form. The importance rank is correctly identified as 8th. The explanation misses the near-flat nature and the peak at ~11.0 km/h. Anchor 3, -1 (direction contradicts), -1 (peak missed), max(1, 3-2)=1.",
+  "usage": {
+    "input_tokens": 2463,
+    "output_tokens": 208
+  }
+}

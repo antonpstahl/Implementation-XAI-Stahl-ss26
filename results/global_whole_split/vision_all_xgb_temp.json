@@ -1,0 +1,14 @@
+{
+  "form": "vision_all",
+  "scope": "global_whole",
+  "llm_model": "claude-sonnet-4-6",
+  "loss_key": "poisson_log",
+  "xai_model": "xgb",
+  "feature": "temp",
+  "explanation": "[EFFECT] The effect is non-monotonic: very cold temperatures (normalised value near 0, i.e. around 0 °C) strongly suppress demand (SHAP ≈ −0.9), contributions rise steeply through mild conditions, and peak at a normalised temperature of roughly 0.65–0.75 (about 27–31 °C). Beyond that, very high temperatures cause the contribution to fall back, so extreme heat also reduces predicted demand.\n[IMPORTANCE] Third most important feature (importance 0.197), essentially tied with year; temperature has a large effect spanning nearly 1.1 log-units from coldest to peak.\n[RECOMMENDATION] Staffing and bike-redistribution plans should be built primarily around the hour of the day — particularly the sharp morning (≈8 a.m.) and evening (≈5 p.m.) peaks — and adjusted for temperature, since warm mild days can roughly double predicted rentals compared with cold or very hot ones. All other factors, including weather and weekday type, provide useful fine-tuning but are secondary to getting the time-of-day and temperature conditions right.",
+  "dropped": false,
+  "condition": "vision_all",
+  "modality": "vision",
+  "representation": "all",
+  "mechanism": "push"
+}

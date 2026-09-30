@@ -1,0 +1,15 @@
+{
+  "form_pipeline": "tooluse",
+  "xai_model": "xgb",
+  "feature": "windspeed",
+  "form_type": "near-flat",
+  "judge_model": "claude-opus-4-8",
+  "faithfulness": 2,
+  "clarity": 3,
+  "completeness": 5,
+  "faithfulness_reasoning": "The reference says windspeed is near-flat (rank 8, negligible, with a tiny non-monotone max ~11 km/h), but the explanation frames it as a consistently strong monotonic suppressor reaching −0.7, overstating a negligible effect and missing the \"negligible\" framing; rank 8 is correct. Anchor 3, -1 (misses negligibility of a near-flat feature). Direction (mildly negative overall) is roughly right so no direction-contradiction deduction. max(1,3-1)=2.",
+  "usage": {
+    "input_tokens": 1832,
+    "output_tokens": 386
+  }
+}

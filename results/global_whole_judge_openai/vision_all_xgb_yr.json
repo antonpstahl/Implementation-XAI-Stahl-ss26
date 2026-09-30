@@ -1,0 +1,15 @@
+{
+  "form_pipeline": "vision_all",
+  "xai_model": "xgb",
+  "feature": "yr",
+  "form_type": "monotonic",
+  "judge_model": "gpt-4o",
+  "faithfulness": 4,
+  "clarity": 4,
+  "completeness": 3,
+  "faithfulness_reasoning": "The explanation correctly identifies the monotonic increase from 2011 to 2012, aligning with the reference's direction and monotonicity. The importance rank is accurately stated as 2nd. However, the explanation introduces a step function concept not present in the reference, which describes a continuous monotonic increase. Anchor 5, -1 (step function not in reference), resulting in a score of 4.",
+  "usage": {
+    "input_tokens": 2426,
+    "output_tokens": 259
+  }
+}

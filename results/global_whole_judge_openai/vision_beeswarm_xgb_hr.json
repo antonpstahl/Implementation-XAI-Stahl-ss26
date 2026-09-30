@@ -1,0 +1,15 @@
+{
+  "form_pipeline": "vision_beeswarm",
+  "xai_model": "xgb",
+  "feature": "hr",
+  "form_type": "categorical",
+  "judge_model": "gpt-4o",
+  "faithfulness": 4,
+  "clarity": 5,
+  "completeness": 5,
+  "faithfulness_reasoning": "The explanation correctly identifies the categorical nature of the feature and highlights the strong negative contributions of early morning hours and positive contributions of mid-to-late daytime hours, aligning with the reference. It also accurately states the feature's top importance rank. However, it does not specify the exact top categories (17, 18, 8) or bottom categories (4, 3, 5) as per the reference. Anchor 5, -1 (top/bottom categories not specified), resulting in a score of 4.",
+  "usage": {
+    "input_tokens": 2568,
+    "output_tokens": 235
+  }
+}

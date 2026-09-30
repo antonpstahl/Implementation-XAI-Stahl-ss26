@@ -1,0 +1,15 @@
+{
+  "form_pipeline": "vision_beeswarm",
+  "xai_model": "xgb",
+  "feature": "weekday",
+  "form_type": "categorical",
+  "judge_model": "gpt-4o",
+  "faithfulness": 3,
+  "clarity": 3,
+  "completeness": 3,
+  "faithfulness_reasoning": "The explanation correctly identifies the feature as categorical and acknowledges the complexity of the weekday effect, which aligns with the reference. However, it fails to specify the top and bottom categories, which are crucial for categorical features. The importance rank is correctly stated as fourth. Anchor 4, -1 (top/bottom categories missed), resulting in a score of 3.",
+  "usage": {
+    "input_tokens": 2562,
+    "output_tokens": 236
+  }
+}

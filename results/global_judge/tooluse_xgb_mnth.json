@@ -1,0 +1,15 @@
+{
+  "form_pipeline": "tooluse",
+  "xai_model": "xgb",
+  "feature": "mnth",
+  "form_type": "categorical",
+  "judge_model": "claude-opus-4-8",
+  "faithfulness": 5,
+  "clarity": 3,
+  "completeness": 5,
+  "faithfulness_reasoning": "Correctly identifies January as most negative, months 9/10 as peak positive, and April crossing — matching the reference top (9,10,7) and bottom (1,2,3) categories; rank 5 of 9 is correct. Minor imprecision: says December pulls down, though Dec isn't among the worst months, but the overall structure is faithful. Anchor 5, no deduction applies.",
+  "usage": {
+    "input_tokens": 1855,
+    "output_tokens": 346
+  }
+}

@@ -1,0 +1,19 @@
+{
+  "form": "vision",
+  "scope": "global",
+  "llm_model": "claude-sonnet-4-6",
+  "loss_key": "poisson_log",
+  "xai_model": "xgb",
+  "feature": "holiday",
+  "explanation": "[EFFECT] The holiday feature has a step-change effect: on regular (non-holiday) days, it contributes almost nothing to predicted demand — the model treats it as a neutral baseline. On holidays, the contribution shifts mostly negative, meaning the model predicts fewer rentals on holidays, though there is considerable variability and a small number of holiday hours still see a slight positive contribution.\n\n[IMPORTANCE] Holiday is the least influential of all nine features in the model, ranked 9th out of 9 with an importance score of just 0.012. Its effect on predicted demand is minor compared to factors like hour of day or temperature.\n\n[RECOMMENDATION] Since holidays generally nudge predicted demand slightly downward (but with high variability), operations teams do not need to make large adjustments based on holiday status alone — it is better to combine this information with the hour of day and weather conditions, which drive demand far more strongly.",
+  "plot_file": "xgb_dependence_holiday.png",
+  "elapsed_s": 18.18,
+  "usage": {
+    "input_tokens": 1649,
+    "output_tokens": 761,
+    "cache_read_input_tokens": 0
+  },
+  "generation_idx": 1,
+  "stop_reason": "end_turn",
+  "max_tokens": 2048
+}

@@ -1,0 +1,15 @@
+{
+  "form_pipeline": "json",
+  "xai_model": "ebm",
+  "feature": "hr",
+  "form_type": "categorical",
+  "judge_model": "gpt-4o",
+  "faithfulness": 4,
+  "clarity": 5,
+  "completeness": 5,
+  "faithfulness_reasoning": "The explanation correctly identifies the categorical nature of the feature and captures the key structure with the morning and evening peaks. However, it incorrectly states the overall daily peak at 5 p.m. instead of 17:00 (5 p.m.) being the top category, and misses the top category at 17:00. The importance rank is correctly identified as 1. Anchor 5, -1 (incorrect peak claim), max(1, 5-1)=4.",
+  "usage": {
+    "input_tokens": 2614,
+    "output_tokens": 221
+  }
+}

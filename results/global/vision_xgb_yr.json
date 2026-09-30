@@ -1,0 +1,18 @@
+{
+  "form": "vision",
+  "scope": "global",
+  "llm_model": "claude-sonnet-4-6",
+  "loss_key": "poisson_log",
+  "xai_model": "xgb",
+  "feature": "yr",
+  "explanation": "[EFFECT]\nBecause `yr` is effectively a two-value feature (0 = 2011, 1 = 2012), the plot shows a clear step change rather than a gradual trend. In 2011, the model's contribution is firmly negative (roughly −0.15 to −0.50 in log space), meaning demand is pulled downward. In 2012, the contribution flips to positive (roughly +0.05 to +0.28), meaning demand is pushed upward. The shift between the two years represents a substantial overall increase in predicted ridership.\n\n[IMPORTANCE]\nThis is the **2nd most important feature** out of nine, with an importance score of 0.200. Only one other feature has a stronger influence on predicted hourly demand, making year a major driver in the model.\n\n[RECOMMENDATION]\nThe system experienced a strong growth in ridership from 2011 to 2012, and this historical baseline matters for forecasting — if ridership continues to grow year over year, planning for bike availability and staffing should explicitly account for a rising demand trend rather than assuming stable historical averages.",
+  "plot_file": "xgb_dependence_yr.png",
+  "stop_reason": "end_turn",
+  "max_tokens": 2048,
+  "elapsed_s": 18.45,
+  "usage": {
+    "input_tokens": 1649,
+    "output_tokens": 718,
+    "cache_read_input_tokens": 0
+  }
+}

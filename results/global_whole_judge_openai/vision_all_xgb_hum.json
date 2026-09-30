@@ -1,0 +1,15 @@
+{
+  "form_pipeline": "vision_all",
+  "xai_model": "xgb",
+  "feature": "hum",
+  "form_type": "non-monotonic",
+  "judge_model": "gpt-4o",
+  "faithfulness": 3,
+  "clarity": 5,
+  "completeness": 3,
+  "faithfulness_reasoning": "The explanation correctly identifies the non-monotonic nature of the effect and the penalties at both extremes, aligning with the reference. The importance rank is accurately stated as sixth. However, the peak at ~34% is not mentioned, which is a key structure. Anchor 4, -1 (peak missed), max(1, 4-1)=3.",
+  "usage": {
+    "input_tokens": 2487,
+    "output_tokens": 206
+  }
+}

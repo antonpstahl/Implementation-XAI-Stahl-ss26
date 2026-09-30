@@ -1,0 +1,15 @@
+{
+  "form_pipeline": "vision_all",
+  "xai_model": "xgb",
+  "feature": "weathersit",
+  "form_type": "categorical",
+  "judge_model": "claude-opus-4-8",
+  "faithfulness": 5,
+  "clarity": 3,
+  "completeness": 3,
+  "faithfulness_reasoning": "Correctly identifies clear (1) as positive, mist (2) near-neutral, light rain (3) as strongly negative, and captures the correct ordering with rank 7 exactly matching; it even flags category 4's noisy few-sample nature. Anchor 5, no deductions.",
+  "usage": {
+    "input_tokens": 990,
+    "output_tokens": 358
+  }
+}

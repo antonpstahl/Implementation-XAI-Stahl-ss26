@@ -1,0 +1,15 @@
+{
+  "form_pipeline": "vision",
+  "xai_model": "xgb",
+  "feature": "holiday",
+  "form_type": "near-flat",
+  "judge_model": "claude-opus-4-8",
+  "faithfulness": 5,
+  "clarity": 5,
+  "completeness": 5,
+  "faithfulness_reasoning": "Direction (holidays reduce demand) matches decreasing reference, rank 9 of 9 correct, and the explanation explicitly frames the feature as least important / small effect, capturing its near-flat nature. Anchor 5, no deductions apply.",
+  "usage": {
+    "input_tokens": 670,
+    "output_tokens": 322
+  }
+}

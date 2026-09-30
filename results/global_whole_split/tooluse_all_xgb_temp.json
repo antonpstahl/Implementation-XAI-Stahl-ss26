@@ -1,0 +1,14 @@
+{
+  "form": "tooluse_all",
+  "scope": "global_whole",
+  "llm_model": "claude-sonnet-4-6",
+  "loss_key": "poisson_log",
+  "xai_model": "xgb",
+  "feature": "temp",
+  "explanation": "[EFFECT] Temperature has a non-monotonic (inverted-U) effect. Very cold conditions (normalised temp ≈ 0.02–0.10, i.e. roughly 1–4 °C) strongly suppress demand (contribution around −0.75 to −0.82). As temperature rises, demand increases steeply, peaking at a normalised value of about 0.70–0.74 (roughly 29–30 °C, contribution ≈ +0.17). Above that sweet spot, very high temperatures begin to pull demand back down, with the hottest readings (≈ 41 °C) returning to negative territory (contribution ≈ −0.23).\n[IMPORTANCE] Rank 3 (importance 0.197), nearly tied with yr — one of the three most influential features in the model.\n\n---\n[RECOMMENDATION] Hour of the day and temperature are overwhelmingly the strongest demand drivers, so staffing and bike redistribution plans should first be built around the two daily rush-hour peaks (morning around 8 a.m. and evening around 5 p.m.) and then adjusted upward or downward based on the day's forecast temperature — scaling up resources for mild, warm days and scaling back for very cold or very hot conditions.",
+  "dropped": false,
+  "condition": "tooluse_all",
+  "modality": "tooluse",
+  "representation": "all",
+  "mechanism": "pull"
+}

@@ -1,0 +1,15 @@
+{
+  "form_pipeline": "vision_all",
+  "xai_model": "xgb",
+  "feature": "hr",
+  "form_type": "categorical",
+  "judge_model": "gpt-4o",
+  "faithfulness": 2,
+  "clarity": 3,
+  "completeness": 5,
+  "faithfulness_reasoning": "The explanation describes a double-peak pattern with peaks at 8 a.m. and 5 p.m., which does not match the reference that identifies 17:00 (5 p.m.) as the top category. The importance rank is correctly identified as the most important feature. However, the explanation misses the correct top categories and incorrectly describes the peak structure. Anchor 3, -1 (peak structure incorrect), max(1, 3-1)=2.",
+  "usage": {
+    "input_tokens": 2592,
+    "output_tokens": 223
+  }
+}

@@ -1,0 +1,15 @@
+{
+  "form_pipeline": "vision_beeswarm",
+  "xai_model": "xgb",
+  "feature": "hum",
+  "form_type": "non-monotonic",
+  "judge_model": "claude-opus-4-8",
+  "faithfulness": 2,
+  "clarity": 3,
+  "completeness": 2,
+  "faithfulness_reasoning": "The reference is non-monotonic with a small peak near 34% and a positive-to-negative sign change at ~7%, so the effect is mostly negative but not simply monotone; the explanation calls it \"consistently negative\" and misses the low-humidity peak/rise. Direction is broadly correct (rises then falls, mostly negative overall) and rank 6 is correct. Anchor 3 (structure missed), -1 for missing the clear peak, max(1, 3-1)=2.",
+  "usage": {
+    "input_tokens": 744,
+    "output_tokens": 454
+  }
+}

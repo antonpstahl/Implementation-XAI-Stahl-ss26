@@ -1,0 +1,15 @@
+{
+  "form_pipeline": "tooluse",
+  "xai_model": "xgb",
+  "feature": "hr",
+  "form_type": "categorical",
+  "judge_model": "gpt-4o",
+  "faithfulness": 5,
+  "clarity": 4,
+  "completeness": 5,
+  "faithfulness_reasoning": "The explanation correctly identifies the non-monotonic, double-peaked nature of the effect, with peaks at 8 am and 5–6 pm, aligning with the reference's top categories. The importance rank is accurately stated as 1st. However, the peak at 5–6 pm is slightly off, as the reference indicates 17.0 (5 pm) as the top category. Anchor 5, no deduction as the structure is captured well.",
+  "usage": {
+    "input_tokens": 3122,
+    "output_tokens": 239
+  }
+}

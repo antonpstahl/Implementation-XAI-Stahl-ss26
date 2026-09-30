@@ -1,0 +1,15 @@
+{
+  "form_pipeline": "tooluse_all",
+  "xai_model": "xgb",
+  "feature": "mnth",
+  "form_type": "categorical",
+  "judge_model": "gpt-4o",
+  "faithfulness": 3,
+  "clarity": 4,
+  "completeness": 4,
+  "faithfulness_reasoning": "The explanation correctly identifies January as the lowest month and gives a reasonable description of the pattern, but incorrectly states September as the highest month instead of September. The importance rank is correctly identified as 5. Anchor 4, -1 (incorrect top category), max(1, 4-1)=3.",
+  "usage": {
+    "input_tokens": 2553,
+    "output_tokens": 194
+  }
+}

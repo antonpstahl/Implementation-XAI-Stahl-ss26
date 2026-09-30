@@ -1,0 +1,14 @@
+{
+  "form": "vision_beeswarm",
+  "scope": "global_whole",
+  "llm_model": "claude-sonnet-4-6",
+  "loss_key": "poisson_log",
+  "xai_model": "xgb",
+  "feature": "windspeed",
+  "explanation": "[EFFECT] Higher wind speeds (red dots) sit on the left — the negative side — indicating that strong winds reduce predicted demand, while calmer conditions (blue dots) are associated with contributions near zero. The effect is directionally consistent: windier hours are multiplied down, though the magnitude is modest.\n[IMPORTANCE] Wind speed is the eighth-ranked feature, with a relatively narrow spread; its influence is present but small compared to the features above it.\n\n---\n[RECOMMENDATION] Staffing and bike-redistribution plans should be driven primarily by the **hour of the day** — which overwhelmingly determines whether a given hour will be busy or quiet — and secondarily by **temperature**, since warm spells can substantially lift demand even in off-peak hours. Scheduling more bikes and staff during warm, mid-to-late day hours will capture the greatest share of predicted demand variation.",
+  "dropped": false,
+  "condition": "vision_beeswarm",
+  "modality": "vision",
+  "representation": "beeswarm",
+  "mechanism": "push"
+}

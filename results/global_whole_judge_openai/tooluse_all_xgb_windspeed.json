@@ -1,0 +1,15 @@
+{
+  "form_pipeline": "tooluse_all",
+  "xai_model": "xgb",
+  "feature": "windspeed",
+  "form_type": "near-flat",
+  "judge_model": "gpt-4o",
+  "faithfulness": 1,
+  "clarity": 4,
+  "completeness": 3,
+  "faithfulness_reasoning": "The explanation describes wind speed as having a mostly negative and roughly monotonic effect, which contradicts the reference's near-flat and non-monotonic nature. The importance rank is correctly identified as 8. The explanation misses the near-flat nature of the feature. Anchor 2, -1 (direction contradicts), -1 (peak missed), max(1, 2-2)=1.",
+  "usage": {
+    "input_tokens": 2488,
+    "output_tokens": 220
+  }
+}

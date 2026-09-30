@@ -1,0 +1,15 @@
+{
+  "form_pipeline": "vision_all",
+  "xai_model": "xgb",
+  "feature": "temp",
+  "form_type": "non-monotonic",
+  "judge_model": "gpt-4o",
+  "faithfulness": 5,
+  "clarity": 3,
+  "completeness": 5,
+  "faithfulness_reasoning": "The explanation correctly identifies the non-monotonic effect with a peak around 27–31 °C, which aligns with the reference peak at ~29.5 °C. The importance rank is accurately stated as third. The structure, including the rise and fall in demand, is captured well. Anchor 5, no deduction.",
+  "usage": {
+    "input_tokens": 2517,
+    "output_tokens": 212
+  }
+}

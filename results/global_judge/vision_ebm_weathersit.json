@@ -1,0 +1,15 @@
+{
+  "form_pipeline": "vision",
+  "xai_model": "ebm",
+  "feature": "weathersit",
+  "form_type": "categorical",
+  "judge_model": "claude-opus-4-8",
+  "faithfulness": 5,
+  "clarity": 3,
+  "completeness": 5,
+  "faithfulness_reasoning": "Top category (1 clear, positive) and bottom (3, worst) are correct, rank 6 exact, and the values match the reference; the explanation correctly notes cat 4 is less penalising than cat 3 but misses that cat 4's high position is noisy/unreliable. Anchor 5, no direction contradiction, no rank error, structure captured — no deductions.",
+  "usage": {
+    "input_tokens": 970,
+    "output_tokens": 347
+  }
+}

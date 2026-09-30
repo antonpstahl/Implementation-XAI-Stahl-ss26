@@ -1,0 +1,15 @@
+{
+  "form_pipeline": "vision",
+  "xai_model": "ebm",
+  "feature": "yr",
+  "form_type": "monotonic",
+  "judge_model": "claude-opus-4-8",
+  "faithfulness": 5,
+  "clarity": 3,
+  "completeness": 5,
+  "faithfulness_reasoning": "Direction (increasing, 2011 negative → 2012 positive) matches, the sign change near x≈0.51 aligns with the year jump, and rank 3 of 9 is correct. Anchor 5, no deductions.",
+  "usage": {
+    "input_tokens": 701,
+    "output_tokens": 287
+  }
+}

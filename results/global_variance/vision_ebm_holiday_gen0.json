@@ -1,0 +1,17 @@
+{
+  "form": "vision",
+  "scope": "global",
+  "llm_model": "claude-sonnet-4-6",
+  "loss_key": "poisson_log",
+  "xai_model": "ebm",
+  "feature": "holiday",
+  "explanation": "[EFFECT] The holiday feature has a simple step-change effect: on regular (non-holiday) days it has virtually no influence on predicted demand, while on public holidays the model predicts noticeably fewer rentals — roughly 13–14% lower demand. There is no gradual trend; it is a sharp drop the moment the day is flagged as a holiday.\n\n[IMPORTANCE] This is the least important feature in the model, ranked 9th out of 9 with an importance score of only 0.008. Its influence on predicted demand is small compared to factors like hour of day or temperature.\n\n[RECOMMENDATION] While holidays do slightly reduce overall ridership, the effect is modest, so major reductions in bike availability or staffing on public holidays are not strongly justified by this feature alone — other factors (such as hour of day and weather) should drive those decisions.",
+  "plot_file": "ebm_shape_holiday.png",
+  "elapsed_s": 14.2,
+  "usage": {
+    "input_tokens": 1468,
+    "output_tokens": 668,
+    "cache_read_input_tokens": 0
+  },
+  "scratchpad_restripped": "2026-09-29"
+}

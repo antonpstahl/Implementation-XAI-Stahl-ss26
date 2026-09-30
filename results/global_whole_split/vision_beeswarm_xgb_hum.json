@@ -1,0 +1,14 @@
+{
+  "form": "vision_beeswarm",
+  "scope": "global_whole",
+  "llm_model": "claude-sonnet-4-6",
+  "loss_key": "poisson_log",
+  "xai_model": "xgb",
+  "feature": "hum",
+  "explanation": "[EFFECT] Higher humidity (red dots) clearly sits on the left — the negative side — meaning humid conditions reduce predicted rentals. Lower humidity (blue dots) is associated with near-zero or slightly positive contributions. The direction is consistently negative: as humidity rises, demand is multiplied downward.\n[IMPORTANCE] Humidity is the sixth-ranked feature; its effect is real and visible but smaller in spread than the top four features.\n\n---\n[RECOMMENDATION] Staffing and bike-redistribution plans should be driven primarily by the **hour of the day** — which overwhelmingly determines whether a given hour will be busy or quiet — and secondarily by **temperature**, since warm spells can substantially lift demand even in off-peak hours. Scheduling more bikes and staff during warm, mid-to-late day hours will capture the greatest share of predicted demand variation.",
+  "dropped": false,
+  "condition": "vision_beeswarm",
+  "modality": "vision",
+  "representation": "beeswarm",
+  "mechanism": "push"
+}

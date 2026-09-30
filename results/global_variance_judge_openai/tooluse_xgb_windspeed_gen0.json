@@ -1,0 +1,15 @@
+{
+  "form_pipeline": "tooluse",
+  "xai_model": "xgb",
+  "feature": "windspeed",
+  "form_type": "near-flat",
+  "judge_model": "gpt-4o",
+  "faithfulness": 1,
+  "clarity": 3,
+  "completeness": 5,
+  "faithfulness_reasoning": "The explanation incorrectly describes windspeed as having a consistent negative effect, contradicting the reference which indicates a near-flat, non-monotonic effect. The importance rank is correctly identified as 8th. The explanation fabricates a severe negative impact at high wind speeds, which is not supported by the reference. Anchor 2, -1 (direction contradicts), -1 (fabricated peak), max(1, 2-2)=1.",
+  "usage": {
+    "input_tokens": 3010,
+    "output_tokens": 221
+  }
+}

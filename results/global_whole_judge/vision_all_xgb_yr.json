@@ -1,0 +1,15 @@
+{
+  "form_pipeline": "vision_all",
+  "xai_model": "xgb",
+  "feature": "yr",
+  "form_type": "monotonic",
+  "judge_model": "claude-opus-4-8",
+  "faithfulness": 5,
+  "clarity": 3,
+  "completeness": 3,
+  "faithfulness_reasoning": "Direction (increasing 2011→2012) matches the monotonic increasing reference, rank 2 is correct, and the step structure with sign change is captured. Anchor 5; no deductions.",
+  "usage": {
+    "input_tokens": 681,
+    "output_tokens": 311
+  }
+}

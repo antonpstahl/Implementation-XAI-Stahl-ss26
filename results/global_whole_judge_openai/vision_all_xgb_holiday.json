@@ -1,0 +1,15 @@
+{
+  "form_pipeline": "vision_all",
+  "xai_model": "xgb",
+  "feature": "holiday",
+  "form_type": "near-flat",
+  "judge_model": "gpt-4o",
+  "faithfulness": 4,
+  "clarity": 5,
+  "completeness": 5,
+  "faithfulness_reasoning": "The explanation correctly identifies the feature as near-flat and negligible, aligning with the reference. It also accurately states the feature's rank as the least important (9 of 9). However, it describes a spread of contributions for holiday hours, which is not supported by the reference's monotonic decreasing direction. Anchor 5, -1 (spread of contributions not in reference), max(1, 5-1)=4.",
+  "usage": {
+    "input_tokens": 2422,
+    "output_tokens": 217
+  }
+}

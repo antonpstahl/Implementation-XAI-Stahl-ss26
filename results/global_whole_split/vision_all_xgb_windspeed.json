@@ -1,0 +1,14 @@
+{
+  "form": "vision_all",
+  "scope": "global_whole",
+  "llm_model": "claude-sonnet-4-6",
+  "loss_key": "poisson_log",
+  "xai_model": "xgb",
+  "feature": "windspeed",
+  "explanation": "[EFFECT] The trend is broadly downward: at very low wind speeds contributions hover near zero, and as wind speed increases the effect becomes progressively more negative, reaching around −0.2 to −0.4 at moderate speeds and approaching −0.7 at the highest observed speeds. Higher wind consistently reduces predicted demand.\n[IMPORTANCE] Eighth most important feature (importance 0.020); a minor but directionally clear negative effect, notably smaller than all other features.\n[RECOMMENDATION] Staffing and bike-redistribution plans should be built primarily around the hour of the day — particularly the sharp morning (≈8 a.m.) and evening (≈5 p.m.) peaks — and adjusted for temperature, since warm mild days can roughly double predicted rentals compared with cold or very hot ones. All other factors, including weather and weekday type, provide useful fine-tuning but are secondary to getting the time-of-day and temperature conditions right.",
+  "dropped": false,
+  "condition": "vision_all",
+  "modality": "vision",
+  "representation": "all",
+  "mechanism": "push"
+}

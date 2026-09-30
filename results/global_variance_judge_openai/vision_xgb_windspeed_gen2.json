@@ -1,0 +1,15 @@
+{
+  "form_pipeline": "vision",
+  "xai_model": "xgb",
+  "feature": "windspeed",
+  "form_type": "near-flat",
+  "judge_model": "gpt-4o",
+  "faithfulness": 1,
+  "clarity": 5,
+  "completeness": 5,
+  "faithfulness_reasoning": "The explanation incorrectly describes the effect as broadly monotonic and consistently negative, contradicting the reference which indicates a near-flat, non-monotonic effect with mixed direction. The importance rank is correctly stated as 8th. Anchor 2, -1 (direction/monotonicity contradicts), max(1, 2-1)=1.",
+  "usage": {
+    "input_tokens": 2461,
+    "output_tokens": 177
+  }
+}

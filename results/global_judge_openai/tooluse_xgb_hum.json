@@ -1,0 +1,15 @@
+{
+  "form_pipeline": "tooluse",
+  "xai_model": "xgb",
+  "feature": "hum",
+  "form_type": "non-monotonic",
+  "judge_model": "gpt-4o",
+  "faithfulness": 2,
+  "clarity": 3,
+  "completeness": 5,
+  "faithfulness_reasoning": "The explanation correctly identifies the non-monotonic nature of the effect and the importance rank of 6. However, it incorrectly describes the peak negative effect at the highest humidity levels, whereas the reference indicates a peak at ~34%. The explanation also misses the sign change at ~7.3%. Anchor 3, -1 (peak missed), resulting in a score of 2.",
+  "usage": {
+    "input_tokens": 3013,
+    "output_tokens": 215
+  }
+}

@@ -1,0 +1,14 @@
+{
+  "form": "vision_beeswarm",
+  "scope": "global_whole",
+  "llm_model": "claude-sonnet-4-6",
+  "loss_key": "poisson_log",
+  "xai_model": "xgb",
+  "feature": "hr",
+  "explanation": "[EFFECT] Hour of the day has a non-monotonic effect: very early morning hours (midnight to roughly 4 a.m.) deliver the largest negative contributions, dramatically pulling predicted demand down, while mid-to-late daytime and evening hours push demand up. The relationship is not a simple climb — contributions vary across the full 24-hour cycle — but the clearest signal is that night hours strongly suppress and peak-use hours strongly boost rentals.\n[IMPORTANCE] This is by far the most important feature in the model, with a horizontal spread roughly four times wider than any other feature; no other variable comes close.\n\n---\n[RECOMMENDATION] Staffing and bike-redistribution plans should be driven primarily by the **hour of the day** — which overwhelmingly determines whether a given hour will be busy or quiet — and secondarily by **temperature**, since warm spells can substantially lift demand even in off-peak hours. Scheduling more bikes and staff during warm, mid-to-late day hours will capture the greatest share of predicted demand variation.",
+  "dropped": false,
+  "condition": "vision_beeswarm",
+  "modality": "vision",
+  "representation": "beeswarm",
+  "mechanism": "push"
+}

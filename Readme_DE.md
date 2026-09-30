@@ -253,49 +253,36 @@ Zwei Achsen, die der Per-Feature-Track nicht öffnen kann:
 
 - **Achse 1 — Repräsentation:** alle 9 Kurven/Plots (`*_all`) gegen den einen Beeswarm
   (`*_beeswarm`). Beide tragen *unterschiedliche* Information, werden daher **pro
-  GT-Feld** bewertet. Befund: `vision_all` bricht beim **Rang** nur auf dem XGB-Arm ein
-  (1/9 gestattet, alle korrekt) — dessen Dependence-Plots tragen weder Titel noch
-  Importance-Wert. Auf dem EBM-Arm, dessen Shape-Plot-Titel die Feature-Importance
-  ausdrucken, gibt `vision_all` alle 9 Ränge an, alle korrekt. Wo überhaupt ein Rang
-  angegeben wurde, ist er in jeder Whole-Model-Bedingung exakt richtig (**82 / 82** über
-  die fünf Bedingungen auf beiden XAI-Armen).
-- **Achse 2 — Mechanismus (push vs. pull)** bei konstanter Informationsmenge: sobald der
-  Rang-Parser verbale Ordinale genauso wie numerische akzeptiert, liegen `tooluse_all`
-  (pull) und `json_all` (numerisches push) auf dem fairen Aggregat **exakt gleichauf** —
-  auf beiden XAI-Modellen. Pull schlägt nur die **Bild**-Übergabe (`vision_all`), und der
-  gesamte push–pull-Abstand kommt aus einem XAI-Arm:
+  GT-Feld** bewertet. `vision_all` gibt auf **beiden** XAI-Armen alle 9 Ränge an, alle
+  korrekt (`fair_total` 0,926 auf EBM, 0,889 auf XGB). Die Antworten zitieren die im
+  Plot-Titel gedruckte Importance (XGB `holiday`: *„least important feature in the model
+  (importance 0.012)"*). Auf dem XGB-Arm wäre die vertikale Skala im Plot ein
+  irreführender Rang-Proxy (Spearman ρ = 0,23 gegen den Ground-Truth-Rang; `holiday` hat
+  die zweitgrößte Streuung, aber Rang 9); die Antworten folgen dem gedruckten Wert
+  stattdessen. Wo überhaupt ein Rang angegeben wurde, ist er in jeder
+  Whole-Model-Bedingung exakt richtig (**90 / 90** über die fünf Bedingungen auf beiden
+  XAI-Armen). Die verbleibende Differenz zwischen `vision_all` und `json_all` auf XGB
+  sitzt im Structure-Feld (0,722 vs. 0,889), nicht im Rang.
+- **Achse 2 — Mechanismus (push vs. pull)** bei konstanter Informationsmenge:
+  `tooluse_all` (pull) und `json_all` (numerisches push) liegen auf dem fairen Aggregat
+  auf beiden XAI-Modellen innerhalb von 0,05, und kein push–pull-Vergleich über die vier
+  (push, Arm)-Zellen überschreitet 0,05:
 
   | Push-Bedingung | XAI-Modell | pull | push | pull − push |
   | --- | --- | --- | --- | --- |
   | `json_all` | ebm | 0,972 | 0,972 | 0,000 |
-  | `json_all` | xgb | 0,963 | 0,963 | 0,000 |
+  | `json_all` | xgb | 0,926 | 0,963 | −0,037 |
   | `vision_all` | ebm | 0,972 | 0,926 | +0,046 |
-  | `vision_all` | xgb | 0,963 | 0,574 | **+0,389** |
+  | `vision_all` | xgb | 0,926 | 0,889 | +0,037 |
 
-  Der stabile Effekt heißt also *„die neun-Plot-Bildübergabe verliert auf XGB"*, nicht
-  *„Pull gewinnt"* — so berichten, und „Pull-Architektur" als Designerwartung führen,
-  nicht als Schlagzeile. (`utils.global_eval.axis2_mechanism_pairwise`)
+  „Pull ≈ numerisches push" ist damit die ehrliche Lesart bei Whole-Model-Komplexität;
+  „Pull-Architektur" als Designerwartung führen, nicht als Schlagzeile.
+  (`utils.global_eval.axis2_mechanism_pairwise`)
 - **Beeswarm-Lesbarkeit:** `json_beeswarm` und `vision_beeswarm` sind bewusst
   **informations-gematcht** (Rang + Farbrichtung + grobe Streuung, **keine** Kurve pro
-  Wert), sodass die Differenz den reinen Modalitätseffekt isoliert.
-
-> **Zur Coverage-Spalte.** Der erste `04Ge`-Lauf begrenzte die Ausgabe auf
-> `MAX_TOKENS = 4096` und schrieb für den JSON-/Vision-Pfad **kein** `stop_reason` mit;
-> `vision_all_xgb` und `vision_beeswarm_xgb` wurden dadurch unbemerkt abgeschnitten und
-> zeigten 6/9 bzw. 4/9. Beide wurden mit 16384 neu gerechnet (`vision_all_xgb` brauchte
-> **6503** Output-Tokens — es war also echt abgeschnitten) und decken jetzt 9/9 ab, wie
-> jede andere Bedingung auch. **Coverage differenziert zwischen diesen Bedingungen also
-> überhaupt nicht**; die frühere Lücke war ein Token-Limit-Artefakt. `stop_reason` und
-> `max_tokens` werden jetzt auf jedem Pfad persistiert, `assert_not_truncated` verweigert
-> das Speichern eines abgeschnittenen Records.
-
-> **Ein Befund, der nicht überlebt hat.** Das frühere Ergebnis „Beeswarm-Bild ≪
-> Beeswarm-Zahlen" hing praktisch vollständig am abgeschnittenen `vision_beeswarm_xgb`
-> (fair_total 0,319). Nach dem Neu-Lauf liegt es bei 0,972 — identisch mit der
-> numerischen XGB-Seite. Die ehrliche Lesart ist ein **kleiner Restabstand auf dem
-> EBM-Arm und ein Gleichstand auf XGB** (`json_beeswarm` 1,000 / 0,972 gegen
-> `vision_beeswarm` 0,917 / 0,972), nicht der dramatische Abstand, der zuerst berichtet
-> wurde: das LLM liest das Swarm-Bild im Wesentlichen so gut wie die äquivalenten Zahlen.
+  Wert), sodass die Differenz den reinen Modalitätseffekt isoliert. Auf dem fairen
+  Aggregat liest das LLM das Bild im Wesentlichen so gut wie die äquivalenten Zahlen
+  (`json_beeswarm` 1,000 / 0,972 gegen `vision_beeswarm` 0,917 / 0,972).
 
 ### Prozesskennzahlen (G2a)
 
@@ -319,8 +306,8 @@ wirkt in eine nützliche Richtung: JSON hatte die 53-fache Informationsmenge und
 deterministische Template trotzdem nicht.
 
 Zweitens: **Tool-Use ruft im Schnitt nur 3,1 Tools ab**, in nahezu fester Reihenfolge:
-`get_feature_importances` wird in **18 von 18** Records aufgerufen (in 17 davon als erstes),
-gefolgt von `get_feature_curve` und, in 17 von 18 Records, `get_feature_plot`. Die Loop
+`get_feature_importances` wird in **18 von 18** Records aufgerufen (in 15 davon als erstes),
+gefolgt von `get_feature_curve` und, in 16 von 18 Records, `get_feature_plot`. Die Loop
 zieht also jedes Mal den vollen Rang-Kontext ab; da der Tool-Use-Prompt diese Tools bereits
 „je Feature" benennt, ist das Instruction-Following und kein emergent-agentisches Suchen.
 
@@ -333,43 +320,42 @@ jede Ziehung mit dem Rubric **und** beiden Judges bewertet.
 
 | Instrument | Within-Cell-sd | aufzulösende Modalitätsspanne | Verhältnis |
 | --- | --- | --- | --- |
-| Rubric-Total | 0,078 | 0,055 | 1,4× |
-| Judge-Faithfulness (Anthropic) | **0,662** | 0,222 | **3,0×** |
-| Judge-Faithfulness (OpenAI) | 0,669 | 0,222 | 3,0× |
+| Rubric-Total | 0,089 | 0,064 | 1,4× |
+| Judge-Faithfulness (Anthropic) | **0,604** | 0,333 | **1,8×** |
+| Judge-Faithfulness (OpenAI) | 0,553 | 1,278 | 0,4× |
 
-Eine einzelne Ziehung bewegt den Score um das **Dreifache** des gesamten
-Modalitätsunterschieds. Zieht man 5 000-mal je eine Ziehung pro Zelle und rankt die Formen,
-treten **alle sechs möglichen Rangfolgen** auf (Tool-Use führt in 67 % der Ziehungen,
-JSON in 23 %, Vision in 10 %); die mittlere Spannweite zwischen bester und schlechtester
-Form beträgt je Ziehung 0,448 — das Doppelte der in `05G` berichteten 0,222.
+Eine einzelne Anthropic-Judge-Ziehung bewegt den Score um fast das Doppelte des gesamten
+Modalitätsunterschieds. Zieht man 5 000-mal je eine Ziehung pro Zelle und berichtet Ties
+explizit, treten **alle sechs möglichen Rangfolgen** auf (Anthropic-Judge: Vision führt
+strikt in 34 %, Tool-Use in 25 %, JSON in 5 %; die drei Formen liegen in 37 % gleichauf);
+die modale Rangfolge (`vision` > `tooluse` > `json`) wird in 38,5 % der Iterationen
+gezogen, die mittlere Spannweite je Ziehung beträgt 0,409. Ein zweiter Monte-Carlo-Lauf
+skaliert das auf den vollen Mean-of-18: die zehn nicht neu gezogenen Zellen bleiben bei
+ihrer beobachteten Ziehung fix, nur die acht neu gezogenen Zellen je Format werden
+resampled — mit einer per-Format-Standardabweichung von 0,08–0,10, vergleichbar mit der
+Mean-of-18-Modalitätsspanne in der G2a-Tabelle oben.
 
-Zwei Konsequenzen. Der **Nullbefund wird stärker**: „kein nachweisbarer
-Modalitätsunterschied" gilt aus einem härteren Grund als bloß kleinen Effekten — eine
-einzelne Ziehung kann sie **grundsätzlich nicht auflösen**. Jede Aussage, die auf der
-*nominalen Rangfolge* aufbaut, ist dagegen ein Artefakt der einen gezogenen Stichprobe und
-darf nicht in den Text. Die Decken-Kontrolle verhält sich wie erwartet: `hr` zeigt beim
-Rubric und beim Anthropic-Judge sd = 0,000 — die Varianz sitzt ausschließlich im
-near-flat-Stratum. Ein Vorbehalt auf der Judge-Seite: der OpenAI-Judge zeigt auch auf den
-Kontrollzellen sd = 0,385, wo Rubric und Anthropic-Judge beide 0 liefern. Ein Teil der
-gemessenen Streuung ist also judge-seitig, die 0,662 sind eine **Obergrenze** der reinen
-Generierungsvarianz.
-
-Das ist zugleich der Fall, den eine Rubric-only-Studie übersehen hätte: 0,078 liest sich
-beruhigend klein, erst der Judge zeigt das Ausmaß.
+Zwei Konsequenzen. Der **Nullbefund wird stärker** auf dem Anthropic-Judge: „kein
+nachweisbarer Modalitätsunterschied" gilt aus einem härteren Grund als bloß kleinen
+Effekten — eine einzelne Ziehung kann nicht auflösen, welche von `vision` und `tooluse`
+oben steht. Jede Aussage, die auf der *nominalen Spitze* aufbaut, ist dagegen ein
+Artefakt der einen gezogenen Stichprobe und darf nicht in den Text; stabil ist nur `json`
+am unteren Ende (in 89 % der Full-18-Iterationen letzter Platz). Die Decken-Kontrolle
+verhält sich wie erwartet: `hr` zeigt beim Rubric und beim Anthropic-Judge sd = 0,000 —
+die Varianz sitzt ausschließlich im near-flat-Stratum. Ein Vorbehalt auf der Judge-Seite:
+der OpenAI-Judge zeigt auch auf den Kontrollzellen sd = 0,385, wo Rubric und
+Anthropic-Judge beide 0 liefern. Ein Teil der gemessenen Streuung ist also judge-seitig.
 
 ### Judge-Robustheit
 
 Beide Tracks werden von zwei Vendor unter identischem Rubric bewertet. Cross-Vendor
-Krippendorff-α: per-Feature Faithfulness 0,575 / Clarity 0,339 / Completeness 0,000
-(konstant 5 — ein Deckeneffekt, keine Übereinstimmung); Whole-Model 0,329 / 0,584 / 0,623.
-Die Whole-Model-Aufgabe bricht zwar weiterhin den Per-Feature-Completeness-Ceiling, die
-Reliabilität ist aber **bestenfalls moderat** — und deutlich niedriger als die
-0,489 / 0,803 / 0,801 vor dem Truncation-Fix. Dieser Rückgang ist selbst informativ: die
-beiden abgeschnittenen Antworten wurden von **beiden** Vendor niedrig bewertet, und diese
-gemeinsame, artefakt-getriebene Übereinstimmung hat die Reliabilitätsschätzung nach oben
-verzerrt. OpenAI bewertet Faithfulness systematisch strenger (Δ ≈ 1,0 im Whole-Model) —
-ein **Kalibrierungs-Offset**, keine Rang-Uneinigkeit: die Reihenfolge der Bedingungen ist
-unter beiden Vendor gleich. Also **relative** Vergleiche berichten, keine absoluten Niveaus.
+Krippendorff-α: per-Feature Faithfulness 0,481 / Clarity 0,435 / Completeness n/a
+(beide Judges vergeben auf allen 72 Records den Wert 5 — der Kriterien-Deckeneffekt macht
+α undefiniert, nicht null); Whole-Model 0,295 / 0,396 / 0,638. Die Reliabilität ist
+**bestenfalls moderat**. OpenAI bewertet Faithfulness systematisch strenger (Δ ≈ 0,7 im
+Whole-Model auf `vision_all`) — ein **Kalibrierungs-Offset**, keine Rang-Uneinigkeit: die
+Reihenfolge der Bedingungen ist unter beiden Vendor weitgehend gleich. Also **relative**
+Vergleiche berichten, keine absoluten Niveaus.
 
 ---
 
@@ -480,7 +466,7 @@ Mittelwerte über 20 Erklärungen pro Pipeline (2 XAI-Modelle × 10 Instanzen):
   voller Breite — lokal (`results/eval_llm_judge_openai.json`, α in
   `results/eval_krippendorff_alpha.csv`) und global (`results/global_judge_openai/` 72 Records,
   `results/global_whole_judge_openai/` 90 Records). Er ist damit kein offener Punkt mehr, sondern
-  ein Ergebnis: Faithfulness-α 0,575 (G2a) bzw. **0,329** (G2b), OpenAI systematisch strenger, aber
+  ein Ergebnis: Faithfulness-α 0,481 (G2a) bzw. **0,295** (G2b), OpenAI systematisch strenger, aber
   **rang-gleich**. Details im Abschnitt „Judge-Robustheit" des globalen Tracks.
 
 **Tool-Use-Kontext für den Judge:** v3 (Opus) erhält das vollständige Tool-Call-Transkript
@@ -627,24 +613,23 @@ er stehen geblieben ist.
    near-flat-Grenze ist auch die Klassenzuordnung am wenigsten robust, was den Befund erklärt
    und zugleich limitiert.
 
-3. **Die neun-Plot-Bildübergabe verliert auf XGB — „Pull gewinnt" trägt nicht.** Nach
-   der Rang-Parser-Korrektur liegen `tooluse_all` (pull) und `json_all` (numerisches push)
-   auf dem fairen Aggregat **exakt gleichauf** (EBM 0,972 / 0,972; XGB 0,963 / 0,963). Der
-   gesamte push–pull-Abstand kommt aus `vision_all` — und dort fast vollständig aus dem
-   XGB-Arm (+0,046 EBM, +0,389 XGB). Wo überhaupt ein Rang angegeben wurde, ist er in
-   jeder Whole-Model-Bedingung exakt richtig (82 / 82 über die fünf Bedingungen; die
-   XGB-Vision-Lücke ist ein Rang-Ausdruck, kein Rang-Fehler). Als Design*erwartung*
-   führen, nicht als Schlagzeile (`limitations.md` 4.4, `axis2_mechanism_pairwise`).
+3. **„Pull ≈ numerisches push" auf dem Whole-Model-Track.** `tooluse_all` (pull) und
+   `json_all` (numerisches push) liegen auf dem fairen Aggregat auf beiden XAI-Modellen
+   innerhalb von 0,05 (EBM 0,972 / 0,972; XGB 0,926 / 0,963); kein push–pull-Vergleich
+   über die vier (push, Arm)-Zellen überschreitet 0,05. Wo überhaupt ein Rang angegeben
+   wurde, ist er in jeder Whole-Model-Bedingung exakt richtig (**90 / 90** über die fünf
+   Bedingungen auf beiden XAI-Armen). „Pull-Architektur" als Design*erwartung* führen,
+   nicht als Schlagzeile (`limitations.md` 4.4, `axis2_mechanism_pairwise`).
 
 4. **Der Whole-Model-Track bricht den Completeness-Ceiling.** Im Per-Feature-Track ist
    Completeness konstant 5,00 (α undefiniert, nicht informativ); im Whole-Model-Track variiert
-   sie und ist cross-vendor am reliabelsten von allen drei Kriterien (α = **0,623**). Der Ceiling war ein Artefakt der
+   sie und ist cross-vendor am reliabelsten von allen drei Kriterien (α = **0,638**). Der Ceiling war ein Artefakt der
    *einfachen* Aufgabe, keine Eigenschaft der Metrik.
 
-5. **Judge-Robustheit ist cross-vendor abgesichert, aber moderat.** Faithfulness-α 0,575 (G2a)
-   bzw. **0,329** (G2b) liegen unter 0,667; OpenAI bewertet systematisch strenger (Δ ≈ 1,0 im
-   Whole-Model). Das **Ranking** bleibt unter beiden Vendor gleich → **relative** Vergleiche
-   berichten, keine absoluten Niveaus.
+5. **Judge-Robustheit ist cross-vendor abgesichert, aber moderat.** Faithfulness-α 0,481 (G2a)
+   bzw. **0,295** (G2b) liegen unter 0,667; OpenAI bewertet systematisch strenger (Δ ≈ 0,7 auf
+   `vision_all`). Das **Ranking** bleibt unter beiden Vendor weitgehend gleich → **relative**
+   Vergleiche berichten, keine absoluten Niveaus.
 
 ### Lokaler Track (Vergleichsbasis, n = 20 je Pipeline)
 

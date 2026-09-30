@@ -1,0 +1,15 @@
+{
+  "form_pipeline": "vision_all",
+  "xai_model": "xgb",
+  "feature": "temp",
+  "form_type": "non-monotonic",
+  "judge_model": "claude-opus-4-8",
+  "faithfulness": 5,
+  "clarity": 3,
+  "completeness": 4,
+  "faithfulness_reasoning": "Non-monotone inverted-U with peak ~27–31 °C (matches ~29.5 °C), cold suppression and heat decline all correct; rank 3 correct. Anchor 5, no deductions.",
+  "usage": {
+    "input_tokens": 823,
+    "output_tokens": 322
+  }
+}

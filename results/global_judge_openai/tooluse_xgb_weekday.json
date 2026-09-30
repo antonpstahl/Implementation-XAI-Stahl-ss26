@@ -1,0 +1,15 @@
+{
+  "form_pipeline": "tooluse",
+  "xai_model": "xgb",
+  "feature": "weekday",
+  "form_type": "categorical",
+  "judge_model": "gpt-4o",
+  "faithfulness": 2,
+  "clarity": 3,
+  "completeness": 5,
+  "faithfulness_reasoning": "The explanation correctly identifies Sunday as having the most negative contribution and acknowledges the importance rank as 4th, which matches the reference. However, it inaccurately describes mid-week days as having a positive contribution, whereas the reference indicates they are not among the top categories. Additionally, it incorrectly states that Saturday has a wide spread of SHAP values, which is not supported by the reference. Anchor 3, -1 (incorrect top categories), max(1, 3-1)=2.",
+  "usage": {
+    "input_tokens": 3154,
+    "output_tokens": 235
+  }
+}

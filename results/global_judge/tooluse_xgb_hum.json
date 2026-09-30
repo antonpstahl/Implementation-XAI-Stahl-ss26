@@ -1,0 +1,15 @@
+{
+  "form_pipeline": "tooluse",
+  "xai_model": "xgb",
+  "feature": "hum",
+  "form_type": "non-monotonic",
+  "judge_model": "claude-opus-4-8",
+  "faithfulness": 4,
+  "clarity": 3,
+  "completeness": 5,
+  "faithfulness_reasoning": "Non-monotonic with high humidity suppressing demand matches the reference direction, and rank 6 of 9 is correct; however the reference peak (max positive) is at ~34% while the explanation frames the \"peak\" only as the negative extreme near 100% and misses the true positive peak location. Anchor 4 (direction correct, structure slightly imprecise), no additional deduction since the general non-monotone shape and downturn are captured; score 4.",
+  "usage": {
+    "input_tokens": 1492,
+    "output_tokens": 363
+  }
+}

@@ -1,0 +1,15 @@
+{
+  "form_pipeline": "vision",
+  "xai_model": "xgb",
+  "feature": "hum",
+  "form_type": "non-monotonic",
+  "judge_model": "gpt-4o",
+  "faithfulness": 3,
+  "clarity": 3,
+  "completeness": 5,
+  "faithfulness_reasoning": "The explanation correctly identifies the non-monotonic nature of the effect and the importance rank of 6, matching the reference. However, it inaccurately describes the peak location as between 20-75% instead of around 34%, and the sign change is not mentioned. Anchor 4, -1 (peak location imprecise), max(1, 4-1)=3.",
+  "usage": {
+    "input_tokens": 2493,
+    "output_tokens": 207
+  }
+}

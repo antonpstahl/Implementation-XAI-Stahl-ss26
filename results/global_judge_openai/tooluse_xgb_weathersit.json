@@ -1,0 +1,15 @@
+{
+  "form_pipeline": "tooluse",
+  "xai_model": "xgb",
+  "feature": "weathersit",
+  "form_type": "categorical",
+  "judge_model": "gpt-4o",
+  "faithfulness": 5,
+  "clarity": 5,
+  "completeness": 5,
+  "faithfulness_reasoning": "The explanation correctly identifies the categorical nature of the feature and the general direction of effects (worse weather leads to fewer rentals). It accurately describes the top category (clear skies) and the bottom category (light rain/snow), aligning with the reference. The importance rank is correctly stated as 7th. Anchor 5, no deduction.",
+  "usage": {
+    "input_tokens": 3356,
+    "output_tokens": 200
+  }
+}

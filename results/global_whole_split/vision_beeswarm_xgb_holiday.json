@@ -1,0 +1,14 @@
+{
+  "form": "vision_beeswarm",
+  "scope": "global_whole",
+  "llm_model": "claude-sonnet-4-6",
+  "loss_key": "poisson_log",
+  "xai_model": "xgb",
+  "feature": "holiday",
+  "explanation": "[EFFECT] This is a binary step change: non-holiday hours (blue, value 0) form a dense positive cluster (around +0.5 to +0.7 in log space), while holiday hours (red, value 1) are scattered toward the left, indicating reduced predicted demand on holidays. The model has learned that, on balance, declared holidays see fewer rentals than ordinary days — consistent with commuter-dominated usage patterns.\n[IMPORTANCE] Holiday is the least important feature in the model; its spread is narrow and the number of affected hours is small, so its overall impact on the model is negligible compared to all other features.\n\n---\n[RECOMMENDATION] Staffing and bike-redistribution plans should be driven primarily by the **hour of the day** — which overwhelmingly determines whether a given hour will be busy or quiet — and secondarily by **temperature**, since warm spells can substantially lift demand even in off-peak hours. Scheduling more bikes and staff during warm, mid-to-late day hours will capture the greatest share of predicted demand variation.",
+  "dropped": false,
+  "condition": "vision_beeswarm",
+  "modality": "vision",
+  "representation": "beeswarm",
+  "mechanism": "push"
+}

@@ -1,0 +1,15 @@
+{
+  "form_pipeline": "vision_all",
+  "xai_model": "xgb",
+  "feature": "hum",
+  "form_type": "non-monotonic",
+  "judge_model": "claude-opus-4-8",
+  "faithfulness": 4,
+  "clarity": 5,
+  "completeness": 3,
+  "faithfulness_reasoning": "Non-monotonic with penalties at extremes matches the mixed shape and rank 6 is correct; however the reference peak is at ~34% with sign change ~7.3%, and the explanation describes moderate humidity as only \"near zero or slightly positive\" rather than pinpointing a clear peak around 34%. Anchor 4 (structure slightly imprecise), no additional deductions, score 4.",
+  "usage": {
+    "input_tokens": 789,
+    "output_tokens": 369
+  }
+}

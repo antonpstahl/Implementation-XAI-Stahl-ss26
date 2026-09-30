@@ -1,0 +1,14 @@
+{
+  "form": "tooluse_all",
+  "scope": "global_whole",
+  "llm_model": "claude-sonnet-4-6",
+  "loss_key": "poisson_log",
+  "xai_model": "xgb",
+  "feature": "windspeed",
+  "explanation": "[EFFECT] Wind speed has a mostly negative and roughly monotonic effect once winds rise above a low threshold. At low wind speeds (up to roughly 17 km/h, normalised ≈ 0.25), the contribution is near-neutral to very slightly positive. Above that, higher wind speeds progressively lower predicted demand, reaching around −0.14 to −0.69 at the strongest winds recorded.\n[IMPORTANCE] Rank 8 (importance 0.020) — a minor feature with a real directional signal but small overall influence compared to the features above it.\n\n---\n[RECOMMENDATION] Hour of the day and temperature are overwhelmingly the strongest demand drivers, so staffing and bike redistribution plans should first be built around the two daily rush-hour peaks (morning around 8 a.m. and evening around 5 p.m.) and then adjusted upward or downward based on the day's forecast temperature — scaling up resources for mild, warm days and scaling back for very cold or very hot conditions.",
+  "dropped": false,
+  "condition": "tooluse_all",
+  "modality": "tooluse",
+  "representation": "all",
+  "mechanism": "pull"
+}

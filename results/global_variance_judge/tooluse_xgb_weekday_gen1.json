@@ -1,0 +1,15 @@
+{
+  "form_pipeline": "tooluse",
+  "xai_model": "xgb",
+  "feature": "weekday",
+  "form_type": "categorical",
+  "judge_model": "claude-opus-4-8",
+  "faithfulness": 4,
+  "clarity": 3,
+  "completeness": 5,
+  "faithfulness_reasoning": "Reference shows top categories are 5 (Fri) and 6 (Sat), and bottom are 0 (Sun), 1 (Mon), 2 (Tue); the explanation correctly identifies Sunday as most negative and Friday/Saturday as higher, and rank 4 is correct. However it frames the effect partly through per-hour SHAP swings (interaction) which is somewhat off for a global categorical curve, but the core direction and top/bottom levels align. Anchor 5, -1 (introduces SHAP-value swings/peaks not part of the categorical reference structure), = 4.",
+  "usage": {
+    "input_tokens": 1730,
+    "output_tokens": 408
+  }
+}

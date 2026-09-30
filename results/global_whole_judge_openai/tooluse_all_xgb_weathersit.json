@@ -1,0 +1,15 @@
+{
+  "form_pipeline": "tooluse_all",
+  "xai_model": "xgb",
+  "feature": "weathersit",
+  "form_type": "categorical",
+  "judge_model": "gpt-4o",
+  "faithfulness": 4,
+  "clarity": 5,
+  "completeness": 4,
+  "faithfulness_reasoning": "The explanation correctly identifies the categorical nature and order of the weather categories, with category 1 being the highest and category 3 the lowest, matching the reference. The importance rank of 7 is also accurate. However, the explanation does not emphasize the negligible impact of category 4 due to its few samples, which is noted in the reference. Anchor 5, -1 (missed emphasis on category 4's unreliability), final score 4.",
+  "usage": {
+    "input_tokens": 2641,
+    "output_tokens": 241
+  }
+}

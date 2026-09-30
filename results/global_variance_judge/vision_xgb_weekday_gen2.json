@@ -1,0 +1,15 @@
+{
+  "form_pipeline": "vision",
+  "xai_model": "xgb",
+  "feature": "weekday",
+  "form_type": "categorical",
+  "judge_model": "claude-opus-4-8",
+  "faithfulness": 1,
+  "clarity": 3,
+  "completeness": 5,
+  "faithfulness_reasoning": "The reference shows top categories are weekend days (5=Sat, 6=Sun positive) and bottom are weekdays (0,1,2 strongly negative), but the explanation claims the opposite — that weekdays boost demand positively while weekends are highly variable/most negative. This contradicts the reference's structure (top vs bottom levels reversed), plus it fabricates a \"non-monotonic\" frame and log-value ranges not in the reference. Rank 4 is correct. Anchor 2, -1 (top/bottom levels contradict reference), max(1,2-1)=1.",
+  "usage": {
+    "input_tokens": 914,
+    "output_tokens": 412
+  }
+}

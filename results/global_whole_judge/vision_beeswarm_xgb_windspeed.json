@@ -1,0 +1,15 @@
+{
+  "form_pipeline": "vision_beeswarm",
+  "xai_model": "xgb",
+  "feature": "windspeed",
+  "form_type": "near-flat",
+  "judge_model": "claude-opus-4-8",
+  "faithfulness": 2,
+  "clarity": 2,
+  "completeness": 2,
+  "faithfulness_reasoning": "The reference is near-flat (rank 8/9) with a mild non-monotonic shape peaking ~11 km/h then turning negative; the explanation frames wind as a directionally consistent negative effect and does not describe the negligibility or the small early peak, and uses \"multiplied down\" mentioning jargon-ish log framing. Direction (strong wind slightly reduces demand) is roughly consistent with the sign change, rank 8 correct, but the near-flat negligibility and the small peak are missed. Anchor 3, -1 (misses negligibility/peak of a near-flat feature), max(1,3-1)=2.",
+  "usage": {
+    "input_tokens": 754,
+    "output_tokens": 480
+  }
+}

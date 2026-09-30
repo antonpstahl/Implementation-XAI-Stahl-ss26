@@ -1,0 +1,15 @@
+{
+  "form_pipeline": "vision",
+  "xai_model": "ebm",
+  "feature": "holiday",
+  "form_type": "near-flat",
+  "judge_model": "gpt-4o",
+  "faithfulness": 2,
+  "clarity": 5,
+  "completeness": 5,
+  "faithfulness_reasoning": "The explanation correctly identifies the feature as the least important (rank 9), but it describes a step-change effect rather than a near-flat monotonic decrease. The reference indicates a near-flat effect, which is not captured. Anchor 3, -1 (peak/shape missed), max(1, 3-1)=2.",
+  "usage": {
+    "input_tokens": 2404,
+    "output_tokens": 173
+  }
+}

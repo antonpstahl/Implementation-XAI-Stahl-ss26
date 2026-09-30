@@ -1,0 +1,15 @@
+{
+  "form_pipeline": "vision",
+  "xai_model": "xgb",
+  "feature": "windspeed",
+  "form_type": "near-flat",
+  "judge_model": "gpt-4o",
+  "faithfulness": 1,
+  "clarity": 1,
+  "completeness": 5,
+  "faithfulness_reasoning": "The explanation describes a mostly downward effect, which contradicts the near-flat nature of the feature in the reference. It also emphasizes a strong effect at high wind speeds, which is not supported by the reference. The importance rank is correctly stated as 8th. Anchor 2, -1 (direction contradicts), -1 (peak missed), max(1, 2-2)=1.",
+  "usage": {
+    "input_tokens": 2506,
+    "output_tokens": 210
+  }
+}

@@ -1,0 +1,14 @@
+{
+  "form": "tooluse_all",
+  "scope": "global_whole",
+  "llm_model": "claude-sonnet-4-6",
+  "loss_key": "poisson_log",
+  "xai_model": "xgb",
+  "feature": "hum",
+  "explanation": "[EFFECT] Humidity has a non-monotonic effect with a gentle plateau in the middle and a sharp drop at the high end. At moderate humidity levels (roughly 20–55%, normalised 0.20–0.55), the contribution is mildly positive (up to about +0.09). Once humidity climbs above about 75% (normalised ≈ 0.75), the effect turns increasingly negative, reaching around −0.30 at 100% humidity. Extremely low humidity (near 0%) is also slightly negative, but those conditions are rare.\n[IMPORTANCE] Rank 6 (importance 0.077) — a noticeable but secondary weather factor, roughly half the influence of month.\n\n---\n[RECOMMENDATION] Hour of the day and temperature are overwhelmingly the strongest demand drivers, so staffing and bike redistribution plans should first be built around the two daily rush-hour peaks (morning around 8 a.m. and evening around 5 p.m.) and then adjusted upward or downward based on the day's forecast temperature — scaling up resources for mild, warm days and scaling back for very cold or very hot conditions.",
+  "dropped": false,
+  "condition": "tooluse_all",
+  "modality": "tooluse",
+  "representation": "all",
+  "mechanism": "pull"
+}

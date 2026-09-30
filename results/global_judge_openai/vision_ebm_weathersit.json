@@ -1,0 +1,15 @@
+{
+  "form_pipeline": "vision",
+  "xai_model": "ebm",
+  "feature": "weathersit",
+  "form_type": "categorical",
+  "judge_model": "gpt-4o",
+  "faithfulness": 5,
+  "clarity": 3,
+  "completeness": 5,
+  "faithfulness_reasoning": "The explanation correctly identifies the top category (1) and the bottom category (3), aligning with the reference. The importance rank of 6 is also accurate. However, the explanation's mention of \"log space\" is unnecessary and could mislead, but it does not contradict the reference. Anchor 5, no deduction.",
+  "usage": {
+    "input_tokens": 2631,
+    "output_tokens": 208
+  }
+}

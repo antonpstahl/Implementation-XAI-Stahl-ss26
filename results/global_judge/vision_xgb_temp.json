@@ -1,0 +1,15 @@
+{
+  "form_pipeline": "vision",
+  "xai_model": "xgb",
+  "feature": "temp",
+  "form_type": "non-monotonic",
+  "judge_model": "claude-opus-4-8",
+  "faithfulness": 5,
+  "clarity": 3,
+  "completeness": 5,
+  "faithfulness_reasoning": "Inverted-U with peak ~25–31 °C brackets the true ~29.5 °C peak, direction mixed matches, and rank 3 of 9 is exactly correct. Anchor 5, no deductions.",
+  "usage": {
+    "input_tokens": 805,
+    "output_tokens": 272
+  }
+}

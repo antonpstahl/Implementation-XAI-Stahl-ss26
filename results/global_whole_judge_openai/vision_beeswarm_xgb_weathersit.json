@@ -1,0 +1,15 @@
+{
+  "form_pipeline": "vision_beeswarm",
+  "xai_model": "xgb",
+  "feature": "weathersit",
+  "form_type": "categorical",
+  "judge_model": "gpt-4o",
+  "faithfulness": 4,
+  "clarity": 3,
+  "completeness": 3,
+  "faithfulness_reasoning": "The explanation correctly identifies the categorical nature of the feature and the general pattern of worse weather leading to lower demand, aligning with the reference's monotone severity order. The importance rank is accurately stated as 7th. However, the explanation introduces \"log space\" and suggests a step-down pattern not explicitly detailed in the reference. Anchor 5, -1 (step-down pattern not in reference), max(1, 5-1)=4.",
+  "usage": {
+    "input_tokens": 2631,
+    "output_tokens": 274
+  }
+}

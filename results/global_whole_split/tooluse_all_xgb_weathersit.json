@@ -1,0 +1,14 @@
+{
+  "form": "tooluse_all",
+  "scope": "global_whole",
+  "llm_model": "claude-sonnet-4-6",
+  "loss_key": "poisson_log",
+  "xai_model": "xgb",
+  "feature": "weathersit",
+  "explanation": "[EFFECT] Weather situation has a categorical step-down pattern. Clear skies (category 1) provide a small boost (contribution ≈ +0.03); mist or cloud (category 2) is nearly neutral (−0.01); light rain or snow (category 3) causes a substantial drop in predicted demand (contribution ≈ −0.33); heavy rain (category 4) is also negative (−0.17), though its estimate is based on very few hours in the data.\n[IMPORTANCE] Rank 7 (importance 0.051) — a real but modest effect, roughly a quarter the size of temperature.\n\n---\n[RECOMMENDATION] Hour of the day and temperature are overwhelmingly the strongest demand drivers, so staffing and bike redistribution plans should first be built around the two daily rush-hour peaks (morning around 8 a.m. and evening around 5 p.m.) and then adjusted upward or downward based on the day's forecast temperature — scaling up resources for mild, warm days and scaling back for very cold or very hot conditions.",
+  "dropped": false,
+  "condition": "tooluse_all",
+  "modality": "tooluse",
+  "representation": "all",
+  "mechanism": "pull"
+}

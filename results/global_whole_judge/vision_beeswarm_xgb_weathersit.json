@@ -1,0 +1,15 @@
+{
+  "form_pipeline": "vision_beeswarm",
+  "xai_model": "xgb",
+  "feature": "weathersit",
+  "form_type": "categorical",
+  "judge_model": "claude-opus-4-8",
+  "faithfulness": 5,
+  "clarity": 3,
+  "completeness": 3,
+  "faithfulness_reasoning": "Direction matches the reference (clear best, worse weather more negative, category 3 strongly negative), rank 7 correct, and the step-down structure aligns with the monotone severity ordering. Anchor 5; no deductions apply since direction is right, rank is correct, and no false peak is claimed (category 4's noisiness is not misrepresented as important).",
+  "usage": {
+    "input_tokens": 976,
+    "output_tokens": 358
+  }
+}

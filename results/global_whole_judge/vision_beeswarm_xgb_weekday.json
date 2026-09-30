@@ -1,0 +1,15 @@
+{
+  "form_pipeline": "vision_beeswarm",
+  "xai_model": "xgb",
+  "feature": "weekday",
+  "form_type": "categorical",
+  "judge_model": "claude-opus-4-8",
+  "faithfulness": 3,
+  "clarity": 2,
+  "completeness": 2,
+  "faithfulness_reasoning": "Rank 4 is correct, and the \"no simple higher-weekday-means-more\" framing is fine, but it fails to identify the actual pattern: weekends (5, 6) highest and early-week days (0, 1, 2) lowest — the correct top/bottom levels are not stated. Anchor 3 (categorical, direction not contradicted but key structure — which levels are highest/lowest — missing).",
+  "usage": {
+    "input_tokens": 883,
+    "output_tokens": 411
+  }
+}

@@ -1,0 +1,15 @@
+{
+  "form_pipeline": "tooluse",
+  "xai_model": "xgb",
+  "feature": "weekday",
+  "form_type": "categorical",
+  "judge_model": "claude-opus-4-8",
+  "faithfulness": 2,
+  "clarity": 3,
+  "completeness": 5,
+  "faithfulness_reasoning": "The reference shows top categories are Friday (5) and Saturday (6) with weekend/Friday positive, and bottom being Sunday (0), Monday (1), Tuesday (2). The explanation correctly identifies Sunday as most negative and rank 4, but wrongly claims Mon–Thu (1–4) are positive when the reference shows Mon (1), Tue (2) are among the lowest; it also misses that Friday (5) is the strongest positive. Anchor 3 (correct direction on Sunday and rank but key structure partly wrong), -1 for misrepresenting which levels are highest. max(1,3-1)=2.",
+  "usage": {
+    "input_tokens": 1671,
+    "output_tokens": 425
+  }
+}

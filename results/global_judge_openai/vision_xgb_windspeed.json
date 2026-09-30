@@ -1,0 +1,15 @@
+{
+  "form_pipeline": "vision",
+  "xai_model": "xgb",
+  "feature": "windspeed",
+  "form_type": "near-flat",
+  "judge_model": "gpt-4o",
+  "faithfulness": 1,
+  "clarity": 5,
+  "completeness": 5,
+  "faithfulness_reasoning": "The explanation incorrectly describes the effect of windspeed as consistently reducing demand, contradicting the near-flat and mixed direction in the reference. It also misses the peak at ~11 km/h and the sign change at ~15.9 km/h. The importance rank is correctly stated as 8th. Anchor 2, -1 (direction contradicts), -1 (peak missed), max(1, 2-2)=1.",
+  "usage": {
+    "input_tokens": 2491,
+    "output_tokens": 201
+  }
+}

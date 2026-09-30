@@ -1,0 +1,15 @@
+{
+  "form_pipeline": "vision",
+  "xai_model": "xgb",
+  "feature": "temp",
+  "form_type": "non-monotonic",
+  "judge_model": "gpt-4o",
+  "faithfulness": 5,
+  "clarity": 3,
+  "completeness": 5,
+  "faithfulness_reasoning": "The explanation correctly identifies the non-monotonic, inverted U-shaped effect with a peak around 25–31°C, which aligns with the reference peak at ~29.5°C. The importance rank is accurately stated as 3rd. However, the explanation uses \"log space\" which is not in the reference. Anchor 5, no deduction.",
+  "usage": {
+    "input_tokens": 2501,
+    "output_tokens": 213
+  }
+}

@@ -127,21 +127,19 @@ The stable finding is not a modality ranking but a **failure mode**:
 
 Two axes this opens that the per-feature track cannot:
 
-- **Mechanism (push vs pull)**, at constant information: once the rank parser accepts verbal ordinals as well as numeric ones, `tooluse_all` (pull) and `json_all` (numeric push) **tie exactly** on the fair aggregate on both XAI models. Pull only beats the **image** push condition (`vision_all`), and the entire push–pull gap comes from one XAI arm:
+- **Mechanism (push vs pull)**, at constant information: `tooluse_all` (pull) and `json_all` (numeric push) lie within 0.05 of each other on the fair aggregate on both XAI models, and no push–pull difference across the four (push, arm) cells exceeds 0.05:
 
 | Push condition | XAI model | pull | push | pull − push |
 | --- | --- | --- | --- | --- |
 | `json_all` | ebm | 0.972 | 0.972 | 0.000 |
-| `json_all` | xgb | 0.963 | 0.963 | 0.000 |
+| `json_all` | xgb | 0.926 | 0.963 | −0.037 |
 | `vision_all` | ebm | 0.972 | 0.926 | +0.046 |
-| `vision_all` | xgb | 0.963 | 0.574 | **+0.389** |
+| `vision_all` | xgb | 0.926 | 0.889 | +0.037 |
 
-  The stable effect is therefore *"the nine-plot image loses on XGB"*, not *"pull wins"* — report it that way, and treat "pull architecture" as a design expectation rather than a headline. (`utils.global_eval.axis2_mechanism_pairwise`)
-- **Representation**: `vision_all` collapses on **rank** only on the XGB arm, whose dependence plots carry no title or importance cue (1/9 stated, all correct). On the EBM arm, whose shape-plot titles print each feature's importance, `vision_all` states all 9 ranks and all 9 are correct. Where a rank is stated at all it is exactly correct in every whole-model condition (**82 / 82** total, across the five conditions on both XAI arms).
+  "Pull ≈ numeric push" is therefore the honest reading at whole-model complexity; treat "pull architecture" as a design expectation rather than a headline result. (`utils.global_eval.axis2_mechanism_pairwise`)
+- **Representation**: `vision_all` states all 9 ranks on both XAI arms, all correct (`fair_total` 0.926 on EBM, 0.889 on XGB). The answers quote the importance printed in each plot title (XGB `holiday`: *"least important feature in the model (importance 0.012)"*). On the XGB arm the plotted vertical range would mislead as a rank proxy (Spearman ρ = 0.23 against ground-truth rank; `holiday` has the second-widest scatter but rank 9); the answers follow the printed value instead. Where a rank is stated it is exactly correct in every whole-model condition (**90 / 90** total, across the five conditions on both XAI arms). The remaining gap between `vision_all` and `json_all` on XGB sits in the structure sub-score (0.722 vs. 0.889), not in the rank column.
 
-> **Note on the coverage column.** The first `04Ge` run capped output at `MAX_TOKENS = 4096` and persisted no `stop_reason` for the JSON/vision paths, so `vision_all_xgb` and `vision_beeswarm_xgb` were silently truncated, showing 6/9 and 4/9. Both were regenerated at 16384 (`vision_all_xgb` needed 6503 output tokens — it was genuinely cut short) and now cover 9/9, as does every other condition. **Coverage therefore does not discriminate between these conditions at all**; the earlier gap was a token-limit artefact. `stop_reason` and `max_tokens` are now persisted on every path and `assert_not_truncated` refuses to store a truncated record.
-
-> **A finding that did not survive.** The earlier "beeswarm image ≪ beeswarm numbers" result rested almost entirely on the truncated `vision_beeswarm_xgb` (fair_total 0.319). After the re-run it scores 0.972 — identical to the XGB numeric side. The honest reading is a **small residual gap on the EBM side and a tie on XGB** (`json_beeswarm` 1.000 / 0.972 vs. `vision_beeswarm` 0.917 / 0.972), not the dramatic one first reported. The LLM reads the swarm image essentially as well as the equivalent numbers.
+> **Beeswarm readability.** `json_beeswarm` and `vision_beeswarm` are information-matched (rank + colour direction + rough spread, **no** per-value curve), so the difference isolates the pure modality effect. On the fair aggregate the image scores essentially as well as the equivalent numbers (`json_beeswarm` 1.000 / 0.972 vs. `vision_beeswarm` 0.917 / 0.972).
 
 **Process metrics (G2a).** Straight off the persisted generation records:
 
@@ -154,23 +152,23 @@ Two axes this opens that the per-feature track cannot:
 | Tool Use | 69,228         | 901             | 25.0 s      | 3.1            |
 <!-- /AUTO-TABLE:global-process -->
 
-Two things to read here. First, **the modality comparison is not information-matched**: JSON receives the raw per-instance SHAP scatter (~12k points per feature) and Vision only the rendered plot — a **53:1** input-token ratio. The comparison therefore measures information *volume* as well as modality. G2b fixes this by aggregating the curve to a grid; G2a deliberately does not, and the asymmetry cuts in a useful direction: JSON had 53× the information and still did not beat the deterministic template. Second, **Tool-Use averages only 3.1 calls**, and the sequence is nearly fixed: `get_feature_importances` is called in **18 / 18** records (first in 17 of them), followed by `get_feature_curve` and, in 17 of 18 records, `get_feature_plot`. The loop pulls the full rank context every time, but the tool-use prompt already names those tools "per feature", so this should be read as instruction-following rather than as an emergent agentic pull.
+Two things to read here. First, **the modality comparison is not information-matched**: JSON receives the raw per-instance SHAP scatter (~12k points per feature) and Vision only the rendered plot — a **53:1** input-token ratio. The comparison therefore measures information *volume* as well as modality. G2b fixes this by aggregating the curve to a grid; G2a deliberately does not, and the asymmetry cuts in a useful direction: JSON had 53× the information and still did not beat the deterministic template. Second, **Tool-Use averages only 3.1 calls**, and the sequence is nearly fixed: `get_feature_importances` is called in **18 / 18** records (first in 15 of them), followed by `get_feature_curve` and, in 16 of 18 records, `get_feature_plot`. The loop pulls the full rank context every time, but the tool-use prompt already names those tools "per feature", so this should be read as instruction-following rather than as an emergent agentic pull.
 
 **Generation variance (`04Gf`) — measured, and it changes how G2a must be read.** Every G2a number rests on one draw per cell at `temperature = 1.0`. `04Gf` re-drew 24 cells (`windspeed`, `holiday`, `weekday` — the near-flat stratum where all between-modality variation lives — plus `hr` as a ceiling control) three times each and scored every draw with both the rubric and both judges.
 
 | Instrument | Within-cell sd | Between-modality range to resolve | Ratio |
 | --- | --- | --- | --- |
-| Rubric total | 0.078 | 0.055 | 1.4× |
-| Judge faithfulness (Anthropic) | **0.662** | 0.222 | **3.0×** |
-| Judge faithfulness (OpenAI) | 0.669 | 0.222 | 3.0× |
+| Rubric total | 0.089 | 0.064 | 1.4× |
+| Judge faithfulness (Anthropic) | **0.604** | 0.333 | **1.8×** |
+| Judge faithfulness (OpenAI) | 0.553 | 1.278 | 0.4× |
 
-A single draw moves the score by three times the entire modality difference. Resampling one draw per cell 5,000 times, **all six possible modality orderings occur** (tool-use leads in 67 % of draws, JSON in 23 %, vision in 10 %); the mean best-to-worst spread per draw is 0.448, twice the 0.222 reported in `05G`.
+A single Anthropic-judge draw moves the score by nearly twice the entire modality difference. Resampling one draw per cell 5,000 times and reporting ties explicitly, **all six possible modality orderings occur** (Anthropic judge: vision leads outright in 34 %, tool-use in 25 %, JSON in 5 %; the three formats tie in 37 %); the modal ordering (`vision` > `tooluse` > `json`) is drawn 38.5 % of the time and the mean best-to-worst spread per draw is 0.409. A second Monte Carlo puts this on the full mean-of-18 scale: holding the ten non-redrawn cells fixed at their observed draw and resampling only the eight redrawn cells per format gives a per-format resampled-mean standard deviation of 0.08–0.10 — comparable to the mean-of-18 modality span in the G2a table above.
 
-Two consequences. The **null finding is strengthened** — "no detectable modality difference" holds for a harder reason than small effects: a single draw cannot resolve them at all. But any claim resting on the *nominal ordering* is an artefact of the one sample drawn and must not appear in the write-up. The ceiling control behaves as it should: `hr` shows sd = 0.000 under both the rubric and the Anthropic judge, so the variance sits entirely in the near-flat stratum. One caveat on the judge side: the OpenAI judge shows sd = 0.385 even on those control cells, where the rubric and the Anthropic judge both show zero — part of the measured spread is judge-side, so 0.662 is an **upper bound** on pure generation variance.
+Two consequences. The **null finding is strengthened** on the Anthropic judge — "no detectable modality difference" holds for a harder reason than small effects: a single draw cannot resolve which of `vision` and `tooluse` comes out on top. But any claim resting on the *nominal top* of the ordering is an artefact of the one sample drawn and must not appear in the write-up; only `json` at the bottom is stable (last in 89 % of full-18 iterations). The ceiling control behaves as it should: `hr` shows sd = 0.000 under both the rubric and the Anthropic judge, so the variance sits entirely in the near-flat stratum. One caveat on the judge side: the OpenAI judge shows sd = 0.385 even on those control cells, where the rubric and the Anthropic judge both show zero — part of the measured spread is judge-side.
 
-This is also the case a rubric-only study would have missed: 0.078 reads as reassuringly small, and only the judge reveals the scale.
+This is also the case a rubric-only study would have missed: 0.089 reads as reassuringly small, and only the judge reveals the scale.
 
-**Judge robustness.** Both tracks are scored by two vendors under an identical rubric. Cross-vendor Krippendorff's α: per-feature Faithfulness 0.575 / Clarity 0.339 / Completeness 0.000 (constant 5 — a ceiling, not agreement); whole-model 0.329 / 0.584 / 0.623. The whole-model task still breaks the per-feature completeness ceiling, but the reliability is **moderate at best** — and notably lower than the 0.489 / 0.803 / 0.801 measured before the truncation fix. That drop is itself informative: the two truncated answers were scored low by *both* vendors, and that shared, artefact-driven agreement was inflating the reliability estimate. OpenAI scores Faithfulness systematically stricter (Δ ≈ 1.0 on the whole-model track) — a calibration offset, not a ranking disagreement: the ordering of conditions is the same under both vendors. Report **relative** comparisons, not absolute levels.
+**Judge robustness.** Both tracks are scored by two vendors under an identical rubric. Cross-vendor Krippendorff's α: per-feature Faithfulness 0.481 / Clarity 0.435 / Completeness n/a (both judges give 5 on all 72 records — the criterion is at ceiling, so α is undefined, not zero); whole-model 0.295 / 0.396 / 0.638. Reliability is **moderate at best**. OpenAI scores Faithfulness systematically stricter (Δ ≈ 0.7 on the whole-model `vision_all` cell) — a calibration offset, not a ranking disagreement: the ordering of conditions is largely the same under both vendors. Report **relative** comparisons, not absolute levels.
 
 ---
 

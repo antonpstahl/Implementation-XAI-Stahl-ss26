@@ -1,0 +1,14 @@
+{
+  "form": "vision_all",
+  "scope": "global_whole",
+  "llm_model": "claude-sonnet-4-6",
+  "loss_key": "poisson_log",
+  "xai_model": "xgb",
+  "feature": "holiday",
+  "explanation": "[EFFECT] Non-holiday hours (value 0) cluster almost exactly at zero — the model sees no effect. Holiday hours (value 1) show a wide spread of contributions (roughly −1.2 to +0.5), with the centre of the cloud sitting around −0.2 to −0.3, indicating a slight average reduction in predicted demand on public holidays, though individual hours vary considerably.\n[IMPORTANCE] Least important feature in the model (importance 0.012); its effect is largely negligible and highly variable.\n[RECOMMENDATION] Staffing and bike-redistribution plans should be built primarily around the hour of the day — particularly the sharp morning (≈8 a.m.) and evening (≈5 p.m.) peaks — and adjusted for temperature, since warm mild days can roughly double predicted rentals compared with cold or very hot ones. All other factors, including weather and weekday type, provide useful fine-tuning but are secondary to getting the time-of-day and temperature conditions right.",
+  "dropped": false,
+  "condition": "vision_all",
+  "modality": "vision",
+  "representation": "all",
+  "mechanism": "push"
+}

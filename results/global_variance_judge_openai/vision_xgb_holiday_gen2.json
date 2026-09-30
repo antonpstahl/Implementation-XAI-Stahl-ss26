@@ -1,0 +1,15 @@
+{
+  "form_pipeline": "vision",
+  "xai_model": "xgb",
+  "feature": "holiday",
+  "form_type": "near-flat",
+  "judge_model": "gpt-4o",
+  "faithfulness": 2,
+  "clarity": 3,
+  "completeness": 5,
+  "faithfulness_reasoning": "The explanation correctly identifies the feature as the least important (rank 9) and notes its minor influence, aligning with the near-flat reference. However, it describes variability and a potential positive boost on holidays, which contradicts the monotonic decreasing direction. Anchor 3, -1 (direction contradicts), max(1, 3-1)=2.",
+  "usage": {
+    "input_tokens": 2417,
+    "output_tokens": 197
+  }
+}

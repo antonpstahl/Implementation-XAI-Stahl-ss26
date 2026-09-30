@@ -1,0 +1,15 @@
+{
+  "form_pipeline": "vision",
+  "xai_model": "ebm",
+  "feature": "holiday",
+  "form_type": "near-flat",
+  "judge_model": "claude-opus-4-8",
+  "faithfulness": 5,
+  "clarity": 4,
+  "completeness": 5,
+  "faithfulness_reasoning": "Direction (holidays reduce demand) matches the decreasing reference, rank 9 of 9 is correct, and the near-flat/negligibility is acknowledged; the step-change framing is reasonable for a binary-like feature. Anchor 5, no deductions.",
+  "usage": {
+    "input_tokens": 658,
+    "output_tokens": 278
+  }
+}

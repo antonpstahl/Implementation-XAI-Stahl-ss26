@@ -1,0 +1,14 @@
+{
+  "form": "tooluse_all",
+  "scope": "global_whole",
+  "llm_model": "claude-sonnet-4-6",
+  "loss_key": "poisson_log",
+  "xai_model": "xgb",
+  "feature": "weekday",
+  "explanation": "[EFFECT] Weekday shows a gradual upward trend from Sunday through Friday, with a slight dip on Saturday relative to Friday. Sunday and Monday have the most negative mean contributions (around −0.08 and −0.07), mid-week days are mildly negative (−0.06 to −0.02), while Friday and Saturday are lightly positive (+0.03 and +0.01). The overall range of mean contributions is small (about 0.10 log units), though within each day the model captures wide variation driven by other features like hour.\n[IMPORTANCE] Rank 4 (importance 0.173) — the fourth most important feature, reflecting differences in usage patterns across the week, though individual hours matter far more within any given day.\n\n---\n[RECOMMENDATION] Hour of the day and temperature are overwhelmingly the strongest demand drivers, so staffing and bike redistribution plans should first be built around the two daily rush-hour peaks (morning around 8 a.m. and evening around 5 p.m.) and then adjusted upward or downward based on the day's forecast temperature — scaling up resources for mild, warm days and scaling back for very cold or very hot conditions.",
+  "dropped": false,
+  "condition": "tooluse_all",
+  "modality": "tooluse",
+  "representation": "all",
+  "mechanism": "pull"
+}

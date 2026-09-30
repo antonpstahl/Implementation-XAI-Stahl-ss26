@@ -1,0 +1,19 @@
+{
+  "form": "vision",
+  "scope": "global",
+  "llm_model": "claude-sonnet-4-6",
+  "loss_key": "poisson_log",
+  "xai_model": "xgb",
+  "feature": "weekday",
+  "explanation": "[EFFECT] The day of the week has a non-monotonic, category-like effect on predicted demand: it does not simply rise or fall from Sunday to Saturday. Weekends (Sunday=0 and Saturday=6) show the widest range of contributions, with some hours on those days pushing demand strongly upward (SHAP values up to about +0.6) while other hours pull it sharply downward (down to about -0.9). Weekdays (Monday through Friday) show narrower, more moderate swings, with their contributions spread roughly between -0.3 and +0.3.\n\n[IMPORTANCE] With a global importance score of 0.173 and a rank of 4 out of 9 features, the day of the week is a moderately important driver of predicted demand — clearly meaningful but outweighed by a few other features such as hour of day or temperature.\n\n[RECOMMENDATION] Because weekend hours produce the most extreme swings in predicted demand (both very high and very low), operations teams should plan bike availability and staff allocation hour-by-hour on Saturdays and Sundays rather than treating the whole day uniformly, ensuring bikes are available during peak leisure hours while avoiding overstocking during quieter weekend hours.",
+  "plot_file": "xgb_dependence_weekday.png",
+  "elapsed_s": 38.6,
+  "usage": {
+    "input_tokens": 1628,
+    "output_tokens": 1922,
+    "cache_read_input_tokens": 0
+  },
+  "generation_idx": 1,
+  "stop_reason": "end_turn",
+  "max_tokens": 2048
+}

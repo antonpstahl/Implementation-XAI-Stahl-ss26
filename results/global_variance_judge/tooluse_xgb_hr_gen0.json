@@ -1,0 +1,15 @@
+{
+  "form_pipeline": "tooluse",
+  "xai_model": "xgb",
+  "feature": "hr",
+  "form_type": "categorical",
+  "judge_model": "claude-opus-4-8",
+  "faithfulness": 5,
+  "clarity": 4,
+  "completeness": 5,
+  "faithfulness_reasoning": "Double-peaked structure with morning (8 am) and higher evening (17–18) peaks matches top_categories exactly; night trough (3–5 am) matches bottom_categories; rank 1 correct. Anchor 5, no deductions.",
+  "usage": {
+    "input_tokens": 1585,
+    "output_tokens": 283
+  }
+}

@@ -1,0 +1,15 @@
+{
+  "form_pipeline": "vision",
+  "xai_model": "xgb",
+  "feature": "hr",
+  "form_type": "categorical",
+  "judge_model": "gpt-4o",
+  "faithfulness": 4,
+  "clarity": 3,
+  "completeness": 5,
+  "faithfulness_reasoning": "The explanation correctly identifies the non-monotonic nature of the effect and the top categories (17 and 18) as peak hours, aligning with the reference. The importance rank is accurately stated as 1st. However, it incorrectly claims a morning peak at 8 AM, which is not supported by the reference. Anchor 5, -1 (morning peak claimed but not in reference), resulting in a score of 4.",
+  "usage": {
+    "input_tokens": 2598,
+    "output_tokens": 229
+  }
+}

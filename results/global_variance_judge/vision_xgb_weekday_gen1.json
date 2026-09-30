@@ -1,0 +1,15 @@
+{
+  "form_pipeline": "vision",
+  "xai_model": "xgb",
+  "feature": "weekday",
+  "form_type": "categorical",
+  "judge_model": "claude-opus-4-8",
+  "faithfulness": 3,
+  "clarity": 3,
+  "completeness": 5,
+  "faithfulness_reasoning": "The reference shows categories 5 and 6 as highest and 0,1,2 as lowest, meaning weekend day 6 (Sat) and day 5 (Fri) are top, while Sunday=0 is actually the lowest — the explanation lumps Sunday and Saturday together as \"widest range\" and misidentifies Sunday as a strong-swing weekend day, missing that Sunday=0 is the bottom category. Rank 4 of 9 is correct. Anchor 4 (categorical direction partly captured, key top/bottom structure imprecise), no additional tier-level deduction; final 4... but the top level (5) being highest is not identified and bottom (0) is mislabeled, so -1 for wrong key structure: max(1,4-1)=3.",
+  "usage": {
+    "input_tokens": 925,
+    "output_tokens": 456
+  }
+}

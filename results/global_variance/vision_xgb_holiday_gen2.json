@@ -1,0 +1,19 @@
+{
+  "form": "vision",
+  "scope": "global",
+  "llm_model": "claude-sonnet-4-6",
+  "loss_key": "poisson_log",
+  "xai_model": "xgb",
+  "feature": "holiday",
+  "explanation": "[EFFECT] The `holiday` feature has a step-change effect since it is binary (0 = regular day, 1 = holiday). On regular days, this feature contributes almost nothing to predicted demand — its SHAP values sit right at zero. On holidays, the contribution varies widely across hours, but the bulk of values are negative, meaning holidays tend to reduce predicted demand on average, though a small number of holiday hours can still show a modest positive boost.\n\n[IMPORTANCE] This is the least important feature in the model, ranked 9th out of 9 with an importance score of 0.012. It has only a minor influence on predicted bike demand compared to features like hour of day or temperature.\n\n[RECOMMENDATION] Holidays generally signal slightly lower overall demand, but the wide variability means some holiday hours can still be busy — avoid drastically cutting bike availability on holidays, and instead monitor hour-by-hour patterns on those days rather than treating the whole day as uniformly quiet.",
+  "plot_file": "xgb_dependence_holiday.png",
+  "elapsed_s": 13.77,
+  "usage": {
+    "input_tokens": 1649,
+    "output_tokens": 440,
+    "cache_read_input_tokens": 0
+  },
+  "generation_idx": 2,
+  "stop_reason": "end_turn",
+  "max_tokens": 2048
+}

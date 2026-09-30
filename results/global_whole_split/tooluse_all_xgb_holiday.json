@@ -1,0 +1,14 @@
+{
+  "form": "tooluse_all",
+  "scope": "global_whole",
+  "llm_model": "claude-sonnet-4-6",
+  "loss_key": "poisson_log",
+  "xai_model": "xgb",
+  "feature": "holiday",
+  "explanation": "[EFFECT] Holiday is a simple two-value step: non-holiday hours have a contribution of essentially zero (+0.001), while holiday hours carry a negative contribution of about −0.17, meaning the model predicts noticeably fewer rentals on public holidays than on ordinary days.\n[IMPORTANCE] Rank 9 (importance 0.012) — the least influential feature in the model; its effect is real but small and can be considered a minor correction rather than a primary driver.\n\n---\n[RECOMMENDATION] Hour of the day and temperature are overwhelmingly the strongest demand drivers, so staffing and bike redistribution plans should first be built around the two daily rush-hour peaks (morning around 8 a.m. and evening around 5 p.m.) and then adjusted upward or downward based on the day's forecast temperature — scaling up resources for mild, warm days and scaling back for very cold or very hot conditions.",
+  "dropped": false,
+  "condition": "tooluse_all",
+  "modality": "tooluse",
+  "representation": "all",
+  "mechanism": "pull"
+}

@@ -1,0 +1,15 @@
+{
+  "form_pipeline": "vision",
+  "xai_model": "xgb",
+  "feature": "weathersit",
+  "form_type": "categorical",
+  "judge_model": "gpt-4o",
+  "faithfulness": 4,
+  "clarity": 3,
+  "completeness": 5,
+  "faithfulness_reasoning": "The explanation correctly identifies category 1 as having a positive effect and category 3 as having the largest negative effect, aligning with the reference. It also notes the uncertainty of category 4 due to few observations, which matches the reference's note. The importance rank of 7 is accurate. However, the explanation exaggerates the effect size for category 3 with \"SHAP values fall as low as −0.65 in log space,\" which is not supported by the reference. Anchor 5, -1 (exaggerated effect size), resulting in a score of 4.",
+  "usage": {
+    "input_tokens": 2636,
+    "output_tokens": 260
+  }
+}

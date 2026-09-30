@@ -1,0 +1,14 @@
+{
+  "form": "vision_all",
+  "scope": "global_whole",
+  "llm_model": "claude-sonnet-4-6",
+  "loss_key": "poisson_log",
+  "xai_model": "xgb",
+  "feature": "weekday",
+  "explanation": "[EFFECT] Each day of the week shows a wide spread of contributions (driven by interactions with hour), but the cloud centres tell the main story: mid-week days (Monday–Friday) tend to sit around +0.1 to +0.2, while Sunday and Saturday centres are closer to zero and include the largest downward tails (reaching about −0.9 on Sundays). On average, weekdays add slightly more to predicted demand than weekend days.\n[IMPORTANCE] Fourth most important feature (importance 0.173); a meaningful driver, especially when combined with the hour-of-day effect.\n[RECOMMENDATION] Staffing and bike-redistribution plans should be built primarily around the hour of the day — particularly the sharp morning (≈8 a.m.) and evening (≈5 p.m.) peaks — and adjusted for temperature, since warm mild days can roughly double predicted rentals compared with cold or very hot ones. All other factors, including weather and weekday type, provide useful fine-tuning but are secondary to getting the time-of-day and temperature conditions right.",
+  "dropped": false,
+  "condition": "vision_all",
+  "modality": "vision",
+  "representation": "all",
+  "mechanism": "push"
+}

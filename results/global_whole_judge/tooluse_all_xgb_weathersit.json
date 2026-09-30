@@ -1,0 +1,15 @@
+{
+  "form_pipeline": "tooluse_all",
+  "xai_model": "xgb",
+  "feature": "weathersit",
+  "form_type": "categorical",
+  "judge_model": "claude-opus-4-8",
+  "faithfulness": 5,
+  "clarity": 5,
+  "completeness": 3,
+  "faithfulness_reasoning": "Categorical contributions match the reference exactly (cat 1 +0.03, cat 2 −0.01, cat 3 −0.33, cat 4 −0.17), correctly flagging category 4's low-sample noise, and rank 7 is correct. Anchor 5, no deductions.",
+  "usage": {
+    "input_tokens": 967,
+    "output_tokens": 346
+  }
+}

@@ -1,0 +1,15 @@
+{
+  "form_pipeline": "tooluse_all",
+  "xai_model": "xgb",
+  "feature": "hr",
+  "form_type": "categorical",
+  "judge_model": "gpt-4o",
+  "faithfulness": 4,
+  "clarity": 4,
+  "completeness": 5,
+  "faithfulness_reasoning": "The explanation correctly identifies the top and bottom categories, with 5 p.m. as the highest and 4 a.m. as the lowest, matching the reference. The importance rank is accurately stated as 1. However, the explanation incorrectly claims a peak at 8 a.m., which is not among the top categories. Anchor 5, -1 (peak claimed not in reference), final score 4.",
+  "usage": {
+    "input_tokens": 2616,
+    "output_tokens": 218
+  }
+}

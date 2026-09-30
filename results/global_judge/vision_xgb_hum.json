@@ -1,0 +1,15 @@
+{
+  "form_pipeline": "vision",
+  "xai_model": "xgb",
+  "feature": "hum",
+  "form_type": "non-monotonic",
+  "judge_model": "claude-opus-4-8",
+  "faithfulness": 5,
+  "clarity": 3,
+  "completeness": 5,
+  "faithfulness_reasoning": "Non-monotonic rise-then-fall matches the reference, rank 6 of 9 correct, and the peak region (~34%) is captured within the described 20–75% positive band. Anchor 5; no deductions apply though the peak is broadly rather than precisely located. Score 5.",
+  "usage": {
+    "input_tokens": 779,
+    "output_tokens": 294
+  }
+}

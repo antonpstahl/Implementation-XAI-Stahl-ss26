@@ -1,0 +1,15 @@
+{
+  "form_pipeline": "vision_beeswarm",
+  "xai_model": "xgb",
+  "feature": "mnth",
+  "form_type": "categorical",
+  "judge_model": "gpt-4o",
+  "faithfulness": 3,
+  "clarity": 4,
+  "completeness": 3,
+  "faithfulness_reasoning": "The explanation correctly identifies that winter months decrease demand and summer months increase it, aligning with the top and bottom categories. However, it incorrectly suggests a non-monotonic effect across the calendar, which is not supported by the categorical nature of the feature. The importance rank is correctly stated as 5. Anchor 4, -1 (non-monotonicity claimed incorrectly), max(1, 4-1)=3.",
+  "usage": {
+    "input_tokens": 2550,
+    "output_tokens": 246
+  }
+}

@@ -1,0 +1,15 @@
+{
+  "form_pipeline": "vision_beeswarm",
+  "xai_model": "xgb",
+  "feature": "temp",
+  "form_type": "non-monotonic",
+  "judge_model": "claude-opus-4-8",
+  "faithfulness": 3,
+  "clarity": 3,
+  "completeness": 5,
+  "faithfulness_reasoning": "Direction (warmer -> more, cold -> less) matches the mixed-but-mostly-rising reference, and rank 3 is correct; but it calls the relationship \"broadly monotonic\" and misses the peak/decline near ~29.5 °C. Anchor 4, -1 (clear peak missed), max(1, 4-1)=3.",
+  "usage": {
+    "input_tokens": 778,
+    "output_tokens": 340
+  }
+}
