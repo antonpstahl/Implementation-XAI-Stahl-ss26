@@ -34,7 +34,7 @@ Objective verification of the 18 structured references in `explanations/global_g
 - **ebm/weathersit**: sparse level(s) {4: 3} (< 30 training rows) → learned contribution noisy. Captured as a `note` on the reference.
 - **xgb/weathersit**: sparse level(s) {4: 3} (< 30 training rows) → learned contribution noisy. Captured as a `note` on the reference.
 
-All other features are well-supported (min. samples ≥ 300). `weathersit` category 4 (heavy rain/thunderstorm) has only 3 training rows — its high rank is not domain-reliable; the reference note records this and that true weather severity is monotone 1>2>3>4.
+All other features are well-supported (min. samples ≥ 300). `weathersit` category 4 (heavy rain/thunderstorm) has only 3 training rows, its high rank is not domain-reliable; the reference note records this and that true weather severity is monotone 1>2>3>4.
 
 ## Threshold sensitivity
 
@@ -53,4 +53,4 @@ Form labels that flip when the two derivation thresholds move (baseline: flat_th
 - **ebm/weekday**: near-flat→categorical
 - **xgb/windspeed**: near-flat→non-monotonic
 
-These 3 features sit near a classification boundary (e.g. `ebm/temp` has reversal 0.191, just above mono_tol 0.15 — an inverted-U that is domain-correct as non-monotonic). They are the references to eyeball on the plot; the baseline thresholds classify all of them defensibly.
+These 3 features sit near a classification boundary (e.g. `ebm/temp` has reversal 0.191, just above mono_tol 0.15, an inverted-U that is domain-correct as non-monotonic). They are the references to eyeball on the plot; the baseline thresholds classify all of them defensibly.

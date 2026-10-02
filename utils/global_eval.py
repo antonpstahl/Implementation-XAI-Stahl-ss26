@@ -194,11 +194,11 @@ def ceiling_flags(df: pd.DataFrame, tol: float = 0.1) -> dict[str, str]:
         vals = df[crit].dropna()
         if vals.nunique() == 1:
             flags[crit] = (f"constant at {vals.iloc[0]:.0f} across all "
-                           f"{len(vals)} explanations — non-informative "
+                           f"{len(vals)} explanations, non-informative "
                            f"(cross-vendor alpha undefined/chance)")
         elif vals.std() < tol:
             flags[crit] = (f"near-constant (mean={vals.mean():.2f}, "
-                           f"std={vals.std():.2f}) — treat as ceiling effect")
+                           f"std={vals.std():.2f}), treat as ceiling effect")
     return flags
 
 
@@ -415,7 +415,7 @@ def _main() -> None:
                 a = cross_vendor_alpha(vendors, crit)
                 print(f"  {crit:13s}: {a:.3f}")
     else:
-        print("\n(no judge output yet — run utils.eval.run_global_judge to add "
+        print("\n(no judge output yet, run utils.eval.run_global_judge to add "
               "judge columns and robustness)")
 
 

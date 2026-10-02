@@ -1,13 +1,13 @@
-"""Monte Carlo orderings on the Anthropic judge faithfulness — Appendix F.
+"""Monte Carlo orderings on the Anthropic judge faithfulness, Appendix F.
 
 Draws one **judge faithfulness** score per cell (Anthropic vendor, since the paper
 runs both variants on that judge), averages per format, and ranks the three
 formats (json / vision / tooluse). Two variants:
 
-  * ``--variant 24`` — the "8 redrawn cells per format" variant. Only the
+  * ``--variant 24``, the "8 redrawn cells per format" variant. Only the
     variance-study cells contribute (4 features × 2 XAIs × 3 formats = 24 cells);
     nothing is fixed. Per-format means average over the 8 sampled cells.
-  * ``--variant 18`` — the "full 18" variant. All 9 features × 2 XAIs = 18 cells
+  * ``--variant 18``, the "full 18" variant. All 9 features × 2 XAIs = 18 cells
     per format; the 8 covered by the variance study are resampled (uniform
     over its up-to-3 gens), the remaining 10 are fixed at their G2a
     Anthropic-judge faithfulness. Per-format means average over 18 cells.
@@ -103,7 +103,7 @@ def _all_differ(means: dict[str, float]) -> bool:
 
 
 def _rank_stable(means: dict[str, float]) -> tuple[str, ...]:
-    """Stable sort in the paper's fixed modality order — ties go to the earlier
+    """Stable sort in the paper's fixed modality order, ties go to the earlier
     index. Reproduces run-1's `first_place_stable` shares."""
     return tuple(sorted(MODALITIES, key=lambda m: -means[m]))
 

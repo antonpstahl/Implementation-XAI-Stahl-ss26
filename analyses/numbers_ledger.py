@@ -199,7 +199,7 @@ def _variance(ledger: dict) -> None:
     all_feats = set(df["feature"].unique())
     non_hr = all_feats - {_HR_CONTROL}
 
-    # Per-cell keys (unchanged) — kept for backwards compatibility with earlier ledgers.
+    # Per-cell keys (unchanged), kept for backwards compatibility with earlier ledgers.
     for (f, x), g in df.groupby(["form", "xai"]):
         per_cell = g.groupby(["feature"])["total"].std().dropna()
         ledger[f"variance.sd_within.{f}.{x}.rubric_total"] = _round(per_cell.mean())
@@ -231,7 +231,7 @@ def _variance(ledger: dict) -> None:
 
     _emit_pool("variance.rubric", "total", df)
 
-    # judge-side variance per (form, xai) — per-cell + pooled — if verdicts present
+    # judge-side variance per (form, xai), per-cell + pooled, if verdicts present
     for vendor, _judge, var_sub, _whole in VENDORS:
         vdir = RESULTS / var_sub
         if not vdir.is_dir():
@@ -416,7 +416,7 @@ def _cost_and_tokens(ledger: dict) -> None:
 def _alpha(ledger: dict) -> None:
     """Cross-vendor Krippendorff α per judge criterion, on G2a and G2b. Any
     per-criterion failure lands as ``_error.alpha.<scope>.<crit>`` so the diff
-    sees it — bare ``except: pass`` was silently dropping keys."""
+    sees it, bare ``except: pass`` was silently dropping keys."""
     for crit in GE.JUDGE_CRITERIA:
         try:
             ledger[f"alpha.g2a.{crit}"] = _round(

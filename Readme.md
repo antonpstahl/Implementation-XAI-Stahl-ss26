@@ -1,8 +1,8 @@
-# LLM-Assisted XAI Explanations for ML Predictions
+# LLM-Assisted Explanation of Machine Learning Model Outputs: The Effect of XAI Method and Handover Format on Explanation Quality
 
 Comparing how the **choice of XAI method** and the **handover format** to a large language model (LLM) affect the quality of automatically generated, natural-language explanations of ML predictions.
 
-This repository accompanies a term project (*Studienarbeit*) at **TU Dresden**, supervised by **Prof. Dr. Patrick Zschech** (Chair of Business Information Systems, esp. Intelligent Systems and Services).
+This repository accompanies a research seminar paper (*Belegarbeit*) at **TU Dresden**, supervised by **Prof. Dr. Patrick Zschech** (Chair of Business Information Systems, esp. Intelligent Systems and Services).
 
 ## Overview
 
@@ -62,7 +62,7 @@ results/
 ## Pipeline
 
 **1. Data preprocessing** (`01_Data_Preprocessing.ipynb`)
-UCI Bike Sharing dataset (17,379 hourly observations, 2011-2012). Leakage and redundant features removed; multicollinearity handled (`atemp` vs. `temp`, r ≈ 0.99); categorical encoding for native splits; the target is the raw hourly count `cnt` and the models are trained with Poisson deviance (log link), which absorbs the right skew internally — no `log1p` target transform is applied; **day-level** 70/30 train/test split (whole days assigned as units — 511 train days, 220 test days, no day in both, so neighbouring hours of the same day never straddle the split). Nine features remain (`hr`, `mnth`, `weekday`, `weathersit`, `yr`, `holiday`, `temp`, `hum`, `windspeed`).
+UCI Bike Sharing dataset (17,379 hourly observations, 2011-2012). Leakage and redundant features removed; multicollinearity handled (`atemp` vs. `temp`, r ≈ 0.99); categorical encoding for native splits; the target is the raw hourly count `cnt` and the models are trained with Poisson deviance (log link), which absorbs the right skew internally, no `log1p` target transform is applied; **day-level** 70/30 train/test split (whole days assigned as units, 511 train days, 220 test days, no day in both, so neighbouring hours of the same day never straddle the split). Nine features remain (`hr`, `mnth`, `weekday`, `weathersit`, `yr`, `holiday`, `temp`, `hum`, `windspeed`).
 
 **2. Modeling** (`02a_Modeling_AllOptions.ipynb`, `02b_Comparison.ipynb`)
 XGBoost and EBM (InterpretML), each trained with three loss functions. Poisson-log was selected for all downstream steps (best Poisson deviance, no negative predictions).
@@ -83,11 +83,11 @@ Global explanations (SHAP feature importance for XGB; term importances for EBM) 
 
 ## Global track (main): how does the model use its features?
 
-The unit of explanation is not a single prediction but the **model's use of a feature** — and, in `04Ge`, the **whole model at once**. Every description is scored against a structured ground truth.
+The unit of explanation is not a single prediction but the **model's use of a feature**: and, in `04Ge`, the **whole model at once**. Every description is scored against a structured ground truth.
 
-**Ground truth** (`explanations/global_groundtruth/`, 18 references = 9 features × 2 XAI models). Per feature: shape type (`monotonic` / `non-monotonic` / `categorical` / `near-flat`), direction, importance rank, peak, top categories. Derived mechanically from the G0 curves via one shared `classify_shape` helper — the **same** helper the deterministic baseline uses, so the two cannot drift apart. All 18 references pass a mechanical re-derivation (`analyses/gt_verification.md`); a threshold sensitivity sweep leaves 15/18 labels stable across the whole grid, with the three border cases named explicitly.
+**Ground truth** (`explanations/global_groundtruth/`, 18 references = 9 features × 2 XAI models). Per feature: shape type (`monotonic` / `non-monotonic` / `categorical` / `near-flat`), direction, importance rank, peak, top categories. Derived mechanically from the G0 curves via one shared `classify_shape` helper, the **same** helper the deterministic baseline uses, so the two cannot drift apart. All 18 references pass a mechanical re-derivation (`analyses/gt_verification.md`); a threshold sensitivity sweep leaves 15/18 labels stable across the whole grid, with the three border cases named explicitly.
 
-**G2a — one feature per call** (`04Ga`–`04Gd`): four handover forms × 2 XAI models × 9 features = **72** descriptions, scored by the deterministic rubric *and* the reference-based judge (two vendors).
+**G2a, one feature per call** (`04Ga`–`04Gd`): four handover forms × 2 XAI models × 9 features = **72** descriptions, scored by the deterministic rubric *and* the reference-based judge (two vendors).
 
 <!-- AUTO-TABLE:global-feature -->
 | Form     | Rubric total | Judge Faith. | Clarity | Complete. | Faith. (OpenAI) |
@@ -98,7 +98,7 @@ The unit of explanation is not a single prediction but the **model's use of a fe
 | Tool Use | 0.880        | 4.44         | 3.67    | 5.00      | 3.83            |
 <!-- /AUTO-TABLE:global-feature -->
 
-The deterministic **template is not beaten** here: it leads nominally at 4.50, and **none** of the six pairwise comparisons is significant (Wilcoxon signed-rank on `(feature, xai_model)` pairs, Holm-corrected, all `p_adj = 1.0`, Cliff's *d* throughout "negligible"). Note the framing constraint: since the threshold unification the baseline hits the shape type *by construction*, which makes it a strict **reference floor** rather than an independent competitor. Rubric and judge correlate at Spearman 0.499 (n = 72, p < 0.001) — internal consistency between two ground-truth-bound scorers, not independent criterion validity.
+On the Anthropic judge `vision` leads nominally at 4.61 and the template is second at 4.50, with no pairwise comparison significant (Wilcoxon signed-rank on `(feature, xai_model)` pairs, Holm-corrected, all `p_adj ≥ 0.38`; five of six Cliff's *d* negligible, `json`–`vision` small at δ = −0.17). On the OpenAI judge the template leads all three LLM formats and template–`json` reaches `p_adj = 0.030` with δ = 0.57, but the crossing depends on a single verdict (0.067 if `json_ebm_weathersit` is scored 5) and does not survive correction across both judges (0.061). Note the framing constraint: since the threshold unification the baseline hits the shape type *by construction*, which makes it a strict **reference floor** rather than an independent competitor. Rubric and judge correlate at Spearman 0.458 (n = 72, p < 0.001), internal consistency between two ground-truth-bound scorers, not independent criterion validity.
 
 The stable finding is not a modality ranking but a **failure mode**:
 
@@ -113,7 +113,7 @@ The stable finding is not a modality ranking but a **failure mode**:
 
 **Over-attribution of negligible features** is the consistent error, converging across rubric, judge and the qualitative analysis (`analyses/error_examples_by_formtype.md`). The stratum sizes are too small for tests, so these are descriptive means.
 
-**G2b — the whole model per call** (`04Ge`, exploratory): five conditions × 2 XAI models. Each answer must emit a rigid `[FEATURE: name] [EFFECT] … [IMPORTANCE] …` block per feature; `split_whole_model_record` cuts it into **90** per-feature records the same rubric and judge score unchanged. A feature the answer omits counts as a miss — which makes **coverage** directly measurable.
+**G2b, the whole model per call** (`04Ge`, exploratory): five conditions × 2 XAI models. Each answer must emit a rigid `[FEATURE: name] [EFFECT] … [IMPORTANCE] …` block per feature; `split_whole_model_record` cuts it into **90** per-feature records the same rubric and judge score unchanged. A feature the answer omits counts as a miss, which makes **coverage** directly measurable.
 
 <!-- AUTO-TABLE:global-whole -->
 | Condition       | Coverage (ebm · xgb) | Judge Faith. | Faith. (OpenAI) | Complete. |
@@ -127,7 +127,7 @@ The stable finding is not a modality ranking but a **failure mode**:
 
 Two axes this opens that the per-feature track cannot:
 
-- **Mechanism (push vs pull)**, at constant information: `tooluse_all` (pull) and `json_all` (numeric push) lie within 0.05 of each other on the fair aggregate on both XAI models, and no push–pull difference across the four (push, arm) cells exceeds 0.05:
+- **Mechanism (push vs pull)**: `tooluse_all` (pull) and `json_all` (numeric push) lie within 0.05 of each other on the fair aggregate on both XAI models, and no push–pull difference across the four (push, arm) cells exceeds 0.05:
 
 | Push condition | XAI model | pull | push | pull − push |
 | --- | --- | --- | --- | --- |
@@ -152,9 +152,9 @@ Two axes this opens that the per-feature track cannot:
 | Tool Use | 69,228         | 901             | 25.0 s      | 3.1            |
 <!-- /AUTO-TABLE:global-process -->
 
-Two things to read here. First, **the modality comparison is not information-matched**: JSON receives the raw per-instance SHAP scatter (~12k points per feature) and Vision only the rendered plot — a **53:1** input-token ratio. The comparison therefore measures information *volume* as well as modality. G2b fixes this by aggregating the curve to a grid; G2a deliberately does not, and the asymmetry cuts in a useful direction: JSON had 53× the information and still did not beat the deterministic template. Second, **Tool-Use averages only 3.1 calls**, and the sequence is nearly fixed: `get_feature_importances` is called in **18 / 18** records (first in 15 of them), followed by `get_feature_curve` and, in 16 of 18 records, `get_feature_plot`. The loop pulls the full rank context every time, but the tool-use prompt already names those tools "per feature", so this should be read as instruction-following rather than as an emergent agentic pull.
+Two things to read here. First, **the modality comparison is not information-matched**: JSON receives the raw per-instance SHAP scatter (~12k points per feature) and Vision only the rendered plot, a **53:1** input-token ratio. The comparison therefore measures information *volume* as well as modality. G2b fixes this by aggregating the curve to a grid; G2a deliberately does not, and the asymmetry cuts in a useful direction: JSON had 53× the information and still did not beat the deterministic template. Second, **Tool-Use averages only 3.1 calls**, and the sequence is nearly fixed: `get_feature_importances` is called in **18 / 18** records (first in 15 of them), followed by `get_feature_curve` and, in 16 of 18 records, `get_feature_plot`. The loop pulls the full rank context every time, but the tool-use prompt already names those tools "per feature", so this should be read as instruction-following rather than as an emergent agentic pull.
 
-**Generation variance (`04Gf`) — measured, and it changes how G2a must be read.** Every G2a number rests on one draw per cell at `temperature = 1.0`. `04Gf` re-drew 24 cells (`windspeed`, `holiday`, `weekday` — the near-flat stratum where all between-modality variation lives — plus `hr` as a ceiling control) three times each and scored every draw with both the rubric and both judges.
+**Generation variance (`04Gf`), measured, and it changes how G2a must be read.** Every G2a number rests on one draw per cell at `temperature = 1.0`. `04Gf` re-drew 24 cells (the three low-importance features `windspeed`, `holiday`, `weekday`, plus `hr` as a ceiling control) three times each and scored every draw with both the rubric and both judges.
 
 | Instrument | Within-cell sd | Between-modality range to resolve | Ratio |
 | --- | --- | --- | --- |
@@ -162,13 +162,13 @@ Two things to read here. First, **the modality comparison is not information-mat
 | Judge faithfulness (Anthropic) | **0.604** | 0.333 | **1.8×** |
 | Judge faithfulness (OpenAI) | 0.553 | 1.278 | 0.4× |
 
-A single Anthropic-judge draw moves the score by nearly twice the entire modality difference. Resampling one draw per cell 5,000 times and reporting ties explicitly, **all six possible modality orderings occur** (Anthropic judge: vision leads outright in 34 %, tool-use in 25 %, JSON in 5 %; the three formats tie in 37 %); the modal ordering (`vision` > `tooluse` > `json`) is drawn 38.5 % of the time and the mean best-to-worst spread per draw is 0.409. A second Monte Carlo puts this on the full mean-of-18 scale: holding the ten non-redrawn cells fixed at their observed draw and resampling only the eight redrawn cells per format gives a per-format resampled-mean standard deviation of 0.08–0.10 — comparable to the mean-of-18 modality span in the G2a table above.
+A single Anthropic-judge draw moves the score by nearly twice the entire modality difference. Resampling one draw per cell 5,000 times and reporting ties explicitly, **all six possible modality orderings occur**; among the 63 % of iterations with no tie between the three LLM formats, `vision` leads in 54 %, `tooluse` in 39 %, `json` in 7 %, and the modal strict ordering `vision > tooluse > json` holds in 42 % of untied iterations; the mean best-to-worst spread per draw is 0.409. A second Monte Carlo puts this on the full mean-of-18 scale: holding the ten non-redrawn cells fixed at their observed draw and resampling only the eight redrawn cells per format gives a per-format resampled-mean standard deviation of 0.08–0.10, about a quarter of the mean-of-18 modality span in the G2a table above.
 
-Two consequences. The **null finding is strengthened** on the Anthropic judge — "no detectable modality difference" holds for a harder reason than small effects: a single draw cannot resolve which of `vision` and `tooluse` comes out on top. But any claim resting on the *nominal top* of the ordering is an artefact of the one sample drawn and must not appear in the write-up; only `json` at the bottom is stable (last in 89 % of full-18 iterations). The ceiling control behaves as it should: `hr` shows sd = 0.000 under both the rubric and the Anthropic judge, so the variance sits entirely in the near-flat stratum. One caveat on the judge side: the OpenAI judge shows sd = 0.385 even on those control cells, where the rubric and the Anthropic judge both show zero — part of the measured spread is judge-side.
+Two consequences. The **null finding is strengthened** on the Anthropic judge, "no detectable modality difference" holds for a harder reason than small effects: a single draw cannot resolve which of `vision` and `tooluse` comes out on top. But any claim resting on the *nominal top* of the ordering is an artefact of the one sample drawn and must not appear in the write-up; only `json` at the bottom is stable (last in 89 % of full-18 iterations). The ceiling control behaves as it should: `hr` shows sd = 0.000 under both the rubric and the Anthropic judge, so the variance sits entirely in the near-flat stratum. One caveat on the judge side: the OpenAI judge shows sd = 0.385 even on those control cells, where the rubric and the Anthropic judge both show zero, part of the measured spread is judge-side.
 
 This is also the case a rubric-only study would have missed: 0.089 reads as reassuringly small, and only the judge reveals the scale.
 
-**Judge robustness.** Both tracks are scored by two vendors under an identical rubric. Cross-vendor Krippendorff's α: per-feature Faithfulness 0.481 / Clarity 0.435 / Completeness n/a (both judges give 5 on all 72 records — the criterion is at ceiling, so α is undefined, not zero); whole-model 0.295 / 0.396 / 0.638. Reliability is **moderate at best**. OpenAI scores Faithfulness systematically stricter (Δ ≈ 0.7 on the whole-model `vision_all` cell) — a calibration offset, not a ranking disagreement: the ordering of conditions is largely the same under both vendors. Report **relative** comparisons, not absolute levels.
+**Judge robustness.** Both tracks are scored by two vendors under an identical rubric. Cross-vendor Krippendorff's α: per-feature Faithfulness 0.481 / Clarity 0.435 / Completeness n/a (both judges give 5 on all 72 records, the criterion is at ceiling, so α is undefined, not zero); whole-model 0.295 / 0.396 / 0.638. Reliability is **moderate at best**. OpenAI scores Faithfulness systematically stricter on the whole-model track (about 1.0 point on average, 1.17 on `vision_all`), and the two vendors order the conditions differently (the beeswarm pair flips, and `json_all` drops from second to fourth on OpenAI). Report comparisons **within one vendor**, not absolute levels.
 
 ---
 
@@ -215,11 +215,11 @@ The 30 lowest faithfulness explanations were hand coded into an error taxonomy, 
 
 1. **Judge faithfulness barely separates the pipelines.** Template, JSON→Text and Tool-Use all sit at 5.00, Vision at 4.50 (the only pipeline with non-zero variance, sd 0.69). With three pipelines pinned to the scale maximum, faithfulness is at a **ceiling** on this task and cannot rank them.
 2. **Vision is the one pipeline that loses information.** Its 4.50 matches the formal Rank-Agreement (0.846 vs. 1.000 for JSON→Text and 0.988 for Tool-Use): reading bar lengths off a waterfall plot is structurally less precise than numeric access. Sign and Value Agreement are 1.000 everywhere.
-3. **Clarity does not discriminate either** (4.00–4.15 across all four); the template lags only on completeness (4.80 vs. 5.00 — a thinner operational recommendation).
+3. **Clarity does not discriminate either** (4.00–4.15 across all four); the template lags only on completeness (4.80 vs. 5.00, a thinner operational recommendation).
 4. **JSON→Text is the most efficient LLM pipeline** (≈ $0.009 per explanation, lowest latency 11.5 s), because system-prompt caching keeps billed input tokens low.
 5. **Tool-Use produces the longest, evidence-backed explanations** (403 vs. 250 words, +61 % over JSON→Text, with partial-dependence and counterfactual support) at ~4.3× the cost and ~2.9× the latency, averaging 6.2 tool calls.
 6. **Vision** costs slightly more than JSON→Text (image tokens, no caching benefit) at comparable latency, and is the weakest on faithfulness.
-7. **This ceiling is why the global track exists.** A single-instance explanation is an easy task: it names three drivers, and every numeric pipeline gets them right. The differences the project is actually after only appear once the task is harder — describing a whole feature relationship, or the whole model at once. See the global track above.
+7. **This ceiling is why the global track exists.** A single-instance explanation is an easy task: it names three drivers, and every numeric pipeline gets them right. The differences the project is actually after only appear once the task is harder, describing a whole feature relationship, or the whole model at once. See the global track above.
 8. **Judge robustness.** The judge runs on two independent models (Opus as primary, OpenAI gpt-4o-mini as a cross vendor check) under an identical rubric. Since neither judge is the generation model (Sonnet), self-preference bias is avoided by design.
 
 ## Setup
@@ -245,7 +245,7 @@ Paths are relative to the project root; reproducibility is fixed via `RANDOM_STA
         └───────────────────────────────────────────────────────────────┘
 ```
 
-Every LLM notebook is guarded by a `RUN_API` flag (default `False`): the whole non-API path — prompt assembly, payload construction, splitter, coverage, rubric — is verified against a deterministic stub that writes nothing to `results/`. Set it to `True` only for the billed run. Generation is resumable: an existing output file is never regenerated, so an interrupted run resumes where it stopped.
+Every LLM notebook is guarded by a `RUN_API` flag (default `False`): the whole non-API path (prompt assembly, payload construction, splitter, coverage, rubric) is verified against a deterministic stub that writes nothing to `results/`. Set it to `True` only for the billed run. Generation is resumable: an existing output file is never regenerated, so an interrupted run resumes where it stopped.
 
 ## LLM configuration
 
@@ -263,7 +263,7 @@ Parameters are centralised in `utils/llm.py`.
 | Local judge, cross vendor (NB 05) | `gpt-4o-mini` (OpenAI) | 900 | default |
 | Ichmoukhamedov metrics (NB 06) | `claude-sonnet-4-6` | 700 | default (1.0) |
 
-The whole-model ceiling is deliberately 8× the per-feature one: one answer carries nine `[FEATURE]` blocks plus a recommendation. The first run used 4096 and truncated two answers **silently**, because `stop_reason` was not persisted on the JSON/vision paths — see the warning in the global-track section. Both fields are now written on every path and `assert_not_truncated` gates the write.
+The whole-model ceiling is deliberately 8× the per-feature one: one answer carries nine `[FEATURE]` blocks plus a recommendation. The first run used 4096 and truncated two answers **silently**, because `stop_reason` was not persisted on the JSON/vision paths, see the warning in the global-track section. Both fields are now written on every path and `assert_not_truncated` gates the write.
 
 **Reproducibility note (→ Paper limitation):** Anthropic model IDs are versioned snapshots, but API behaviour (sampling, default parameters, tokenisation) can change silently between SDK releases. Results are tied to `anthropic==0.98.1` and the access date above. Future runs against the same model ID are not guaranteed to produce identical outputs.
 
@@ -280,7 +280,7 @@ It is a hard gate: a fresh generation run must not start until all tests are gre
 
 The README consistency test is part of that gate: every numeric table in both READMEs is wrapped in `<!-- AUTO-TABLE:name -->` sentinels and regenerated from `results/` by `utils/update_readme_tables.py`. A number that drifts from its artefact fails the suite, which is what keeps two judge generations from being mixed in one document.
 
-**Test status:** `pytest tests/` → **353 passed** (2026-09-28, Python 3.13, commit `441a102`).
+**Test status:** `pytest tests/` → **358 passed** (2026-09-30, Python 3.13, commit `TBD`, update to the submission commit hash after the final commit).
 
 **If a prompt is intentionally improved:**
 1. Edit the prompt file.
@@ -296,4 +296,4 @@ The README consistency test is part of that gate: every numeric table in both RE
 
 ## Context
 
-Term project (*Studienarbeit*), Information Systems, TU Dresden, supervised by Prof. Dr. Patrick Zschech. A follow-up Diplom thesis (master's-thesis equivalent) extends this work.
+Research seminar paper (*Belegarbeit*), Information Systems, TU Dresden, supervised by Prof. Dr. Patrick Zschech. A follow-up Diplom thesis (master's-thesis equivalent) extends this work.

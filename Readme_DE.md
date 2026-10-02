@@ -1,4 +1,4 @@
-# Implementierungszusammenfassung: LLM-gestützte XAI-Erklärungen für Fahrradverleih-Prognosen
+# LLM-gestützte Erklärung von Machine-Learning-Modellausgaben: Der Einfluss von XAI-Methode und Übergabeformat auf die Erklärungsqualität
 
 ## Überblick
 
@@ -9,7 +9,7 @@ in Washington D.C., ein stündlicher Fahrradverleih-Datensatz.
 
 Es werden **drei Übergabeformate** verglichen, die sich darin unterscheiden, wie das LLM
 Erklärungsinformationen erhält: als strukturiertes JSON, als Bild (Plot) oder über aktive
-Tool-Aufrufe — jeweils gegen eine deterministische Template-Baseline.
+Tool-Aufrufe, jeweils gegen eine deterministische Template-Baseline.
 
 ### Zwei Tracks
 
@@ -31,7 +31,7 @@ deterministischen Keyword-**Rubric** und einem referenz-gestützten **LLM-Judge*
 ## Projektstruktur
 
 ```
-Implementation-XAI-Stahl-ss26/
+llm-assisted-xai-explanations/
 ├── data/               # Rohdaten und aufbereitete Train/Test-Splits
 ├── models/             # Trainierte Modelle (6 .pkl-Dateien)
 ├── explanations/       # Lokale SHAP-/EBM-Erklärungen + globale Kurven, Beeswarms, Ground Truth
@@ -167,7 +167,7 @@ Für beide Modelle (XGB, EBM) wurden globale und lokale Erklärungen erstellt:
 ## Globaler Track (Haupttrack): Wie nutzt das Modell seine Features?
 
 Die Erklärungseinheit ist hier nicht eine einzelne Vorhersage, sondern die **Nutzung eines
-Features durch das Modell** — und in `04Ge` das **Gesamtmodell in einem Aufruf**. Jede
+Features durch das Modell**: und in `04Ge` das **Gesamtmodell in einem Aufruf**. Jede
 Beschreibung wird gegen eine strukturierte Ground Truth bewertet.
 
 **Globale Artefakte (G0/G1, aus `03_Explanations_Generation.ipynb`).** Je Feature eine
@@ -176,10 +176,10 @@ Shape-/Dependence-Kurve und ein Beeswarm (`explanations/global_curve_*.json`,
 einer aus den Shape-Funktionen **konstruiert** und gegen den XGB-SHAP-Swarm validiert
 (Rang-Spearman 0,883, Richtungsübereinstimmung 100 %).
 
-**Ground Truth (G3)** — `explanations/global_groundtruth/`, 18 Referenzen = 9 Features ×
+**Ground Truth (G3)**: `explanations/global_groundtruth/`, 18 Referenzen = 9 Features ×
 2 XAI-Modelle. Je Feature: Formtyp (`monotonic` / `non-monotonic` / `categorical` /
 `near-flat`), Richtung, Importance-Rang, Peak, Top-Kategorien. Mechanisch aus den
-G0-Kurven abgeleitet über **einen geteilten** `classify_shape`-Helfer — denselben, den auch
+G0-Kurven abgeleitet über **einen geteilten** `classify_shape`-Helfer, denselben, den auch
 die deterministische Baseline aufruft, sodass beide nicht mehr divergieren können. Alle 18
 Referenzen bestehen eine mechanische Re-Ableitung (`analyses/gt_verification.md`); eine
 Schwellen-Sensitivitätsanalyse lässt 15/18 Labels über das gesamte Gitter stabil, die drei
@@ -199,19 +199,23 @@ deterministischen Rubric **und** vom referenz-gestützten Judge (zwei Vendor):
 | Tool Use | 0,880 | 4,44 | 3,67 | 5,00 | 3,83 |
 <!-- /AUTO-TABLE:global-feature-de -->
 
-Die deterministische **Template-Baseline wird hier nicht geschlagen**: sie liegt mit 4,50
-nominal vorn, und **keiner** der sechs Paarvergleiche ist signifikant (Wilcoxon
-signed-rank über `(feature, xai_model)`-Paare, Holm-korrigiert, alle `p_adj = 1,0`,
-Cliff's *d* durchgehend „negligible").
+Auf dem Anthropic-Judge führt `vision` mit 4,61 nominal, die Template-Baseline liegt
+mit 4,50 auf Platz zwei; keiner der sechs Paarvergleiche ist signifikant (Wilcoxon
+signed-rank über `(feature, xai_model)`-Paare, Holm-korrigiert, alle `p_adj ≥ 0,38`,
+fünf von sechs Cliff's *d* „negligible", `json`–`vision` klein bei δ = −0,17). Auf
+dem OpenAI-Judge liegt die Template-Baseline vor allen drei LLM-Formaten, und
+template–`json` erreicht `p_adj = 0,030` bei δ = 0,57; die Überschreitung hängt
+jedoch an einem einzigen Urteil (0,067, wenn `json_ebm_weathersit` mit 5 statt 3
+bewertet wird) und übersteht die Korrektur über beide Judges nicht (0,061).
 
 > **Framing-Auflage:** Seit der Schwellen-Vereinheitlichung trifft die Baseline den Formtyp
 > *by construction*. Sie ist damit ein **strenger Referenz-Boden**, kein unabhängiger
-> Konkurrent. Die LLMs bekommen die abgeleitete Klasse nie — sie lesen Rohkurve, Plot oder
+> Konkurrent. Die LLMs bekommen die abgeleitete Klasse nie, sie lesen Rohkurve, Plot oder
 > Tool-Ausgabe und müssen near-flat selbst erkennen; ihre Fehler dort sind echt.
 > Und: Nicht-Signifikanz ist **keine** belegte Äquivalenz (dafür bräuchte es einen
 > TOST-Äquivalenztest), sondern „kein nachweisbarer Unterschied".
 
-Rubric und Judge korrelieren mit Spearman 0,499 (n = 72, p < 0,001) — interne Konsistenz
+Rubric und Judge korrelieren mit Spearman 0,458 (n = 72, p < 0,001), interne Konsistenz
 zweier GT-gebundener Scorer, keine unabhängige Kriteriumsvalidität.
 
 Der belastbare Befund ist keine Modalitäts-Rangfolge, sondern ein **Fehlermodus**:
@@ -236,7 +240,7 @@ Fünf Bedingungen × 2 XAI-Modelle. Jede Antwort muss ein starres
 `[FEATURE: name] [EFFECT] … [IMPORTANCE] …`-Schema je Feature ausgeben;
 `split_whole_model_record` zerlegt sie in **90** Per-Feature-Records, die dasselbe Rubric
 und derselbe Judge unverändert bewerten. Ein Feature, das die Antwort auslässt, zählt als
-Miss — damit wird **Coverage** direkt messbar (die Sorge aus dem Meeting: „was, wenn nur
+Miss, damit wird **Coverage** direkt messbar (die Sorge aus dem Meeting: „was, wenn nur
 5 von 9 stimmen?").
 
 <!-- AUTO-TABLE:global-whole-de -->
@@ -251,7 +255,7 @@ Miss — damit wird **Coverage** direkt messbar (die Sorge aus dem Meeting: „w
 
 Zwei Achsen, die der Per-Feature-Track nicht öffnen kann:
 
-- **Achse 1 — Repräsentation:** alle 9 Kurven/Plots (`*_all`) gegen den einen Beeswarm
+- **Achse 1, Repräsentation:** alle 9 Kurven/Plots (`*_all`) gegen den einen Beeswarm
   (`*_beeswarm`). Beide tragen *unterschiedliche* Information, werden daher **pro
   GT-Feld** bewertet. `vision_all` gibt auf **beiden** XAI-Armen alle 9 Ränge an, alle
   korrekt (`fair_total` 0,926 auf EBM, 0,889 auf XGB). Die Antworten zitieren die im
@@ -263,7 +267,7 @@ Zwei Achsen, die der Per-Feature-Track nicht öffnen kann:
   Whole-Model-Bedingung exakt richtig (**90 / 90** über die fünf Bedingungen auf beiden
   XAI-Armen). Die verbleibende Differenz zwischen `vision_all` und `json_all` auf XGB
   sitzt im Structure-Feld (0,722 vs. 0,889), nicht im Rang.
-- **Achse 2 — Mechanismus (push vs. pull)** bei konstanter Informationsmenge:
+- **Achse 2, Mechanismus (push vs. pull):**
   `tooluse_all` (pull) und `json_all` (numerisches push) liegen auf dem fairen Aggregat
   auf beiden XAI-Modellen innerhalb von 0,05, und kein push–pull-Vergleich über die vier
   (push, Arm)-Zellen überschreitet 0,05:
@@ -299,7 +303,7 @@ Direkt aus den persistierten Generierungs-Records:
 
 Zwei Dinge sind hier abzulesen. Erstens: **der Modalitätsvergleich ist nicht
 informations-gematcht.** JSON bekommt die rohe Per-Instanz-SHAP-Streuung (~12k Punkte je
-Feature), Vision nur den gerenderten Plot — ein Verhältnis von **53:1** bei den
+Feature), Vision nur den gerenderten Plot, ein Verhältnis von **53:1** bei den
 Input-Tokens. Der Vergleich misst damit auch Informations*menge*, nicht nur Modalität.
 G2b behebt das durch Aggregation auf ein Gitter; G2a bewusst nicht, und die Asymmetrie
 wirkt in eine nützliche Richtung: JSON hatte die 53-fache Informationsmenge und schlug das
@@ -311,11 +315,11 @@ gefolgt von `get_feature_curve` und, in 16 von 18 Records, `get_feature_plot`. D
 zieht also jedes Mal den vollen Rang-Kontext ab; da der Tool-Use-Prompt diese Tools bereits
 „je Feature" benennt, ist das Instruction-Following und kein emergent-agentisches Suchen.
 
-### Generierungs-Varianz (`04Gf`) — gemessen, und sie ändert die Lesart von G2a
+### Generierungs-Varianz (`04Gf`): gemessen, und sie ändert die Lesart von G2a
 
 Jede G2a-Zahl beruht auf **einer** Ziehung je Zelle bei `temperature = 1.0`. `04Gf` hat
-24 Zellen (`windspeed`, `holiday`, `weekday` — das near-flat-Stratum, in dem die gesamte
-Modalitätsvariation sitzt — plus `hr` als Decken-Kontrolle) je dreimal neu gezogen und
+24 Zellen (die drei schwach gewichteten Features `windspeed`, `holiday`,
+`weekday`, plus `hr` als Decken-Kontrolle) je dreimal neu gezogen und
 jede Ziehung mit dem Rubric **und** beiden Judges bewertet.
 
 | Instrument | Within-Cell-sd | aufzulösende Modalitätsspanne | Verhältnis |
@@ -326,22 +330,22 @@ jede Ziehung mit dem Rubric **und** beiden Judges bewertet.
 
 Eine einzelne Anthropic-Judge-Ziehung bewegt den Score um fast das Doppelte des gesamten
 Modalitätsunterschieds. Zieht man 5 000-mal je eine Ziehung pro Zelle und berichtet Ties
-explizit, treten **alle sechs möglichen Rangfolgen** auf (Anthropic-Judge: Vision führt
-strikt in 34 %, Tool-Use in 25 %, JSON in 5 %; die drei Formen liegen in 37 % gleichauf);
-die modale Rangfolge (`vision` > `tooluse` > `json`) wird in 38,5 % der Iterationen
-gezogen, die mittlere Spannweite je Ziehung beträgt 0,409. Ein zweiter Monte-Carlo-Lauf
-skaliert das auf den vollen Mean-of-18: die zehn nicht neu gezogenen Zellen bleiben bei
-ihrer beobachteten Ziehung fix, nur die acht neu gezogenen Zellen je Format werden
-resampled — mit einer per-Format-Standardabweichung von 0,08–0,10, vergleichbar mit der
-Mean-of-18-Modalitätsspanne in der G2a-Tabelle oben.
+explizit, treten **alle sechs möglichen Rangfolgen** auf. In den 63 % der Iterationen
+ohne Gleichstand zwischen den drei LLM-Formaten führt `vision` in 54 %, `tooluse` in
+39 %, `json` in 7 %, und die modale strikte Rangfolge `vision > tooluse > json` liegt
+in 42 % der ungebundenen Iterationen vorn; die mittlere Spannweite je Ziehung beträgt
+0,409. Ein zweiter Monte-Carlo-Lauf skaliert das auf den vollen Mean-of-18: die zehn
+nicht neu gezogenen Zellen bleiben bei ihrer beobachteten Ziehung fix, nur die acht neu
+gezogenen Zellen je Format werden resampled, mit einer per-Format-Standardabweichung
+von 0,08–0,10, etwa einem Viertel der Mean-of-18-Modalitätsspanne in der G2a-Tabelle oben.
 
 Zwei Konsequenzen. Der **Nullbefund wird stärker** auf dem Anthropic-Judge: „kein
 nachweisbarer Modalitätsunterschied" gilt aus einem härteren Grund als bloß kleinen
-Effekten — eine einzelne Ziehung kann nicht auflösen, welche von `vision` und `tooluse`
+Effekten, eine einzelne Ziehung kann nicht auflösen, welche von `vision` und `tooluse`
 oben steht. Jede Aussage, die auf der *nominalen Spitze* aufbaut, ist dagegen ein
 Artefakt der einen gezogenen Stichprobe und darf nicht in den Text; stabil ist nur `json`
 am unteren Ende (in 89 % der Full-18-Iterationen letzter Platz). Die Decken-Kontrolle
-verhält sich wie erwartet: `hr` zeigt beim Rubric und beim Anthropic-Judge sd = 0,000 —
+verhält sich wie erwartet: `hr` zeigt beim Rubric und beim Anthropic-Judge sd = 0,000,
 die Varianz sitzt ausschließlich im near-flat-Stratum. Ein Vorbehalt auf der Judge-Seite:
 der OpenAI-Judge zeigt auch auf den Kontrollzellen sd = 0,385, wo Rubric und
 Anthropic-Judge beide 0 liefern. Ein Teil der gemessenen Streuung ist also judge-seitig.
@@ -350,12 +354,13 @@ Anthropic-Judge beide 0 liefern. Ein Teil der gemessenen Streuung ist also judge
 
 Beide Tracks werden von zwei Vendor unter identischem Rubric bewertet. Cross-Vendor
 Krippendorff-α: per-Feature Faithfulness 0,481 / Clarity 0,435 / Completeness n/a
-(beide Judges vergeben auf allen 72 Records den Wert 5 — der Kriterien-Deckeneffekt macht
+(beide Judges vergeben auf allen 72 Records den Wert 5, der Kriterien-Deckeneffekt macht
 α undefiniert, nicht null); Whole-Model 0,295 / 0,396 / 0,638. Die Reliabilität ist
-**bestenfalls moderat**. OpenAI bewertet Faithfulness systematisch strenger (Δ ≈ 0,7 im
-Whole-Model auf `vision_all`) — ein **Kalibrierungs-Offset**, keine Rang-Uneinigkeit: die
-Reihenfolge der Bedingungen ist unter beiden Vendor weitgehend gleich. Also **relative**
-Vergleiche berichten, keine absoluten Niveaus.
+**bestenfalls moderat**. OpenAI bewertet Faithfulness im Whole-Model-Track
+systematisch strenger (im Mittel etwa 1,0 Punkt, 1,17 auf `vision_all`), und die
+beiden Vendor ordnen die Bedingungen unterschiedlich: das Beeswarm-Paar dreht sich
+um, und `json_all` fällt bei OpenAI vom zweiten auf den vierten Platz. Daher
+Vergleiche **innerhalb eines Vendors** berichten, keine absoluten Niveaus.
 
 ---
 
@@ -363,7 +368,7 @@ Vergleiche berichten, keine absoluten Niveaus.
 
 Der ursprüngliche Track: Erklärungseinheit ist **eine einzelne Vorhersage** („warum bekam
 diese Stunde diesen Wert?"). Er bleibt im Repository und wird weiter reproduziert, trägt
-aber seit dem 30.06. nicht mehr die Kernaussage — die Aufgabe ist zu leicht, drei von vier
+aber seit dem 30.06. nicht mehr die Kernaussage, die Aufgabe ist zu leicht, drei von vier
 Pipelines sitzen bei Faithfulness am Skalenmaximum (s. Kernbefunde). Die Schritte 4 bis 6
 beschreiben diesen Track.
 
@@ -463,11 +468,13 @@ Mittelwerte über 20 Erklärungen pro Pipeline (2 XAI-Modelle × 10 Instanzen):
 - **v3** (Opus 4.8, unabhängiges Modell): strengstes Urteil. Ein systematischer Offset Opus < Sonnet
   ist *konsistent mit* einem Self-Preference-Bias, aber **nicht** dessen Beweis.
 - **Cross-Vendor (erledigt):** Der Cross-Vendor-Judge ist **gelaufen**, für beide Tracks und in
-  voller Breite — lokal (`results/eval_llm_judge_openai.json`, α in
+  voller Breite, lokal (`results/eval_llm_judge_openai.json`, α in
   `results/eval_krippendorff_alpha.csv`) und global (`results/global_judge_openai/` 72 Records,
   `results/global_whole_judge_openai/` 90 Records). Er ist damit kein offener Punkt mehr, sondern
-  ein Ergebnis: Faithfulness-α 0,481 (G2a) bzw. **0,295** (G2b), OpenAI systematisch strenger, aber
-  **rang-gleich**. Details im Abschnitt „Judge-Robustheit" des globalen Tracks.
+  ein Ergebnis: Faithfulness-α 0,481 (G2a) bzw. **0,295** (G2b), OpenAI im Whole-Model-Track systematisch
+  strenger (im Mittel etwa 1,0 Punkt), und die beiden Vendor ordnen die Bedingungen
+  **unterschiedlich** (das Beeswarm-Paar dreht sich um, `json_all` fällt bei OpenAI vom
+  zweiten auf den vierten Platz). Details im Abschnitt „Judge-Robustheit" des globalen Tracks.
 
 **Tool-Use-Kontext für den Judge:** v3 (Opus) erhält das vollständige Tool-Call-Transkript
 (Aufrufe + Ergebnisse) als Teil von `ground_truth`, sodass per Tool abgerufene Zahlen
@@ -535,9 +542,9 @@ Die Suite umfasst Sampling-Determinismus, Generierungs-Loop-Persistenz/Resume, J
 Der Prompt-Regressionstest (`test_prompt_golden.py`) friert die SHA-256-Hashes und kritischen Constraint-Phrasen aller drei Pipeline-Prompts ein (Vorzeichen- und Rangtreue für `yr=0`, Phase-3-Fix).
 Er ist ein hartes Gate: ein frischer Generierungslauf darf erst starten, wenn alle Tests grün sind.
 
-Der README-Konsistenztest gehört zu diesem Gate: jede numerische Tabelle in beiden READMEs ist in `<!-- AUTO-TABLE:name -->`-Sentinels gefasst und wird von `utils/update_readme_tables.py` aus `results/` regeneriert. Eine Zahl, die von ihrem Artefakt abweicht, lässt die Suite rot werden — genau das verhindert, dass wieder zwei Judge-Generationen in einem Dokument stehen.
+Der README-Konsistenztest gehört zu diesem Gate: jede numerische Tabelle in beiden READMEs ist in `<!-- AUTO-TABLE:name -->`-Sentinels gefasst und wird von `utils/update_readme_tables.py` aus `results/` regeneriert. Eine Zahl, die von ihrem Artefakt abweicht, lässt die Suite rot werden, genau das verhindert, dass wieder zwei Judge-Generationen in einem Dokument stehen.
 
-**Test-Status:** `pytest tests/` → **353 passed** (2026-09-28, Python 3.13, Commit `441a102`).
+**Test-Status:** `pytest tests/` → **358 passed** (2026-09-30, Python 3.13, Commit `TBD`, nach dem finalen Commit den Hash hier eintragen).
 
 **Wenn ein Prompt absichtlich verbessert wird:**
 1. Prompt-Datei bearbeiten.
@@ -582,7 +589,7 @@ Der lokale Track läuft auf dem n=20-Validitäts-Sample (10 Instanzen × 2 XAI-M
 globale auf allen 9 Features × 2 XAI-Modellen.
 
 Jedes LLM-Notebook ist durch ein `RUN_API`-Flag abgesichert (Default `False`): der gesamte
-Nicht-API-Pfad — Prompt-Assemblierung, Payload-Bau, Splitter, Coverage, Rubric — wird gegen
+Nicht-API-Pfad (Prompt-Assemblierung, Payload-Bau, Splitter, Coverage, Rubric) wird gegen
 einen deterministischen Stub verifiziert, der **nichts** nach `results/` schreibt. Erst
 `True` löst den abgerechneten Lauf aus. Die Generierung ist resumable: eine bereits
 existierende Ausgabedatei wird nie neu erzeugt, ein abgebrochener Lauf setzt dort fort, wo
@@ -594,22 +601,26 @@ er stehen geblieben ist.
 
 > **Status:** Alle Zahlen hier stammen aus den auto-generierten Tabellen oben. Frühere
 > README-Fassungen zitierten einen überholten Judge-Lauf (Faithfulness 4,40 / 4,35 / 3,80,
-> Clarity ≥ 4,55) — diese Werte sind **ungültig** und wurden ersetzt.
+> Clarity ≥ 4,55), diese Werte sind **ungültig** und wurden ersetzt.
 
 ### Globaler Track (trägt die Aussage)
 
-1. **Aufgabenkomplexität moderiert den LLM-Mehrwert.** Bei der eng definierten
-   Einzel-Feature-Beschreibung (G2a) erreicht ein **deterministisches Template** die Treue der
-   LLM-Pipelines — es liegt mit 4,50 nominal sogar vorn (json 4,28, vision 4,39, tooluse 4,39),
-   ohne dass ein Unterschied nachweisbar wäre (alle sechs Paarvergleiche `p_adj = 1,0`, Cliff's
-   *d* „negligible"). Der Mehrwert des LLM entsteht erst bei der komplexeren
-   **Whole-Model**-Aufgabe (G2b): Coverage, Rang-Kontext, Pull statt Push. Das ist die tragende
-   Aussage — und ausdrücklich **nicht** „LLM schlägt Template".
+1. **Der Template-Befund hängt am Judge-Vendor.** Bei der eng definierten
+   Einzel-Feature-Beschreibung (G2a) ist auf dem Anthropic-Judge kein Unterschied
+   zwischen Template und den drei LLM-Formaten nachweisbar (`vision` 4,61 führt
+   nominal, Template 4,50, `tooluse` 4,44, `json` 4,28; alle sechs Paarvergleiche
+   `p_adj ≥ 0,38`, fünf von sechs Cliff's *d* „negligible"). Auf dem OpenAI-Judge liegt
+   das Template vor allen drei LLM-Formaten; template–`json` erreicht `p_adj = 0,030`
+   bei δ = 0,57, hängt aber an einem einzigen Urteil und übersteht die Korrektur über
+   beide Judges nicht (0,061). Zur Whole-Model-Aufgabe (G2b) wurde kein
+   `template_all` gefahren, und pull liegt dort innerhalb von 0,05 zu numerischem
+   push; die Aussage „LLM schlägt Template bei komplexeren Aufgaben" lässt sich mit
+   diesen Daten daher nicht treffen.
 
 2. **Über-Attribution vernachlässigbarer Features ist der durchgängige Fehlermodus.**
-   Judge-Faithfulness nach Formtyp: near-flat **3,70** (n = 20) ≪ categorical 4,43 (n = 28)
-   < non-monotonic 4,88 (n = 16) < monotonic 5,00 (n = 8). Konvergent belegt über Rubric, Judge
-   und qualitative Fehleranalyse — der robusteste inhaltliche Befund. Genau an der
+   Judge-Faithfulness nach Formtyp: near-flat **3,85** (n = 20) ≪ categorical 4,54 (n = 28)
+   < non-monotonic 4,81 (n = 16) < monotonic 5,00 (n = 8). Konvergent belegt über Rubric, Judge
+   und qualitative Fehleranalyse, der robusteste inhaltliche Befund. Genau an der
    near-flat-Grenze ist auch die Klassenzuordnung am wenigsten robust, was den Befund erklärt
    und zugleich limitiert.
 
@@ -627,9 +638,11 @@ er stehen geblieben ist.
    *einfachen* Aufgabe, keine Eigenschaft der Metrik.
 
 5. **Judge-Robustheit ist cross-vendor abgesichert, aber moderat.** Faithfulness-α 0,481 (G2a)
-   bzw. **0,295** (G2b) liegen unter 0,667; OpenAI bewertet systematisch strenger (Δ ≈ 0,7 auf
-   `vision_all`). Das **Ranking** bleibt unter beiden Vendor weitgehend gleich → **relative**
-   Vergleiche berichten, keine absoluten Niveaus.
+   bzw. **0,295** (G2b) liegen unter 0,667; OpenAI bewertet Faithfulness im Whole-Model-Track
+   systematisch strenger (im Mittel etwa 1,0 Punkt, 1,17 auf `vision_all`), und die beiden
+   Vendor ordnen die Bedingungen **unterschiedlich** (das Beeswarm-Paar dreht sich um, und
+   `json_all` fällt bei OpenAI vom zweiten auf den vierten Platz). Daher **Vergleiche
+   innerhalb eines Vendors** berichten, keine absoluten Niveaus.
 
 ### Lokaler Track (Vergleichsbasis, n = 20 je Pipeline)
 
@@ -655,6 +668,6 @@ er stehen geblieben ist.
    ~4,3× Kosten und ~2,9× Latenz, im Schnitt 6,2 Tool-Calls.
 
 10. **Dieser Ceiling ist der Grund für den globalen Track.** Eine Einzelinstanz-Erklärung ist
-    eine leichte Aufgabe — sie nennt drei Treiber, und jede numerische Pipeline trifft sie. Die
+    eine leichte Aufgabe, sie nennt drei Treiber, und jede numerische Pipeline trifft sie. Die
     Unterschiede, um die es der Arbeit geht, zeigen sich erst, wenn die Aufgabe schwerer wird:
     eine ganze Feature-Beziehung oder das Gesamtmodell zu beschreiben.

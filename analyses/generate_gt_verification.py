@@ -174,7 +174,7 @@ def build_report() -> str:
         L.append("- none below the threshold.")
     L.append("")
     L.append("All other features are well-supported (min. samples ≥ 300). `weathersit` "
-             "category 4 (heavy rain/thunderstorm) has only 3 training rows — its high rank "
+             "category 4 (heavy rain/thunderstorm) has only 3 training rows, its high rank "
              "is not domain-reliable; the reference note records this and that true weather "
              "severity is monotone 1>2>3>4.")
     L.append("")
@@ -203,7 +203,7 @@ def build_report() -> str:
     L.append("")
     L.append(f"These {len(fragile)} feature{'s' if len(fragile) != 1 else ''} sit near a "
              "classification boundary (e.g. `ebm/temp` has reversal 0.191, just above "
-             "mono_tol 0.15 — an inverted-U that is domain-correct as non-monotonic). They "
+             "mono_tol 0.15, an inverted-U that is domain-correct as non-monotonic). They "
              "are the references to eyeball on the plot; the baseline thresholds classify "
              "all of them defensibly.")
     L.append("")

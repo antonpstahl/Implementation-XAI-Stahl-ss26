@@ -8,18 +8,18 @@ judge input. The stripper is fixed at `utils/llm.py`; this script fixes the
 persisted data:
 
   * records that are being *regenerated* anyway (XGB records that also need the
-    new titled plots) are left alone — the C1 deletion cell handles them;
+    new titled plots) are left alone, the C1 deletion cell handles them;
   * variance `gen0` records that are byte copies of a G2a record are deleted
     here so `04Gf` (`seed_generation_zero`) can re-seed them from the freshly
     re-stripped G2a record + its new judge verdicts;
   * every other leaked record is re-stripped in place, its rubric before/after
-    is checked (must be equal — verified 2026-09-29), and its matching judge
+    is checked (must be equal, verified 2026-09-29), and its matching judge
     verdicts (both vendors) are deleted so the idempotent `run_global_judge`
     re-scores it;
   * the G2b raw `vision_all_ebm` and `vision_beeswarm_ebm` records are
     additionally re-split with `write_split_records`, and the script confirms
     that the split files are byte-identical to what was there before (per the
-    plan — the leaked block sits before the first `[FEATURE:]` header and the
+    plan, the leaked block sits before the first `[FEATURE:]` header and the
     splitter drops that preamble).
 
 Dry-run by default (prints the plan and a rubric-parity table); `--apply` writes.
@@ -51,13 +51,13 @@ STAMP = "2026-09-29"
 
 
 def _feature_names() -> list[str]:
-    """The 9 predictors, in the training-column order — read from a global
+    """The 9 predictors, in the training-column order, read from a global
     explanation JSON so the list stays in sync with the data pipeline."""
     p = ROOT / "explanations" / "global_ebm_poisson_log.json"
     return [f["feature"] for f in json.loads(p.read_text())["global_importance"]]
 
 # Records that will be *regenerated* in Part C (they see the new titled plots),
-# so B3 does not touch them — C1 deletes and C2/C4/C5 regenerate.
+# so B3 does not touch them, C1 deletes and C2/C4/C5 regenerate.
 _REGEN_G2A = re.compile(r"^(vision|tooluse)_xgb_[a-z]+\.json$")
 _REGEN_VAR = re.compile(r"^(vision|tooluse)_xgb_[a-z]+_gen[012]\.json$")
 _REGEN_WHOLE_RAW = re.compile(r"^(vision_all|tooluse_all|vision_beeswarm)_xgb\.json$")
@@ -248,7 +248,7 @@ def main() -> int:
     print(f"\n=== restrip_scratchpad ({mode}) ===")
     for k, v in total.items():
         print(f"  {k:20s} {v}")
-    print("\nParity table (rubric before / after — must be equal):")
+    print("\nParity table (rubric before / after, must be equal):")
     for row in parity_rows:
         print(row)
     print(f"\nRubric mismatches: {parity_mismatch}")

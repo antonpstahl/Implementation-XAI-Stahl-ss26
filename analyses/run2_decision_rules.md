@@ -9,7 +9,7 @@
 Scope: fair-plots + scratchpad rerun (2026-09-29). Reference:
 `planning/Fair_Plots_Rerun_Plan.md`, §D4 "Interpretation rules".
 
-## RQ1 — did the missing XGB plot title cause the whole-model rank collapse?
+## RQ1: did the missing XGB plot title cause the whole-model rank collapse?
 
 The single measurement is the G2b `vision_all` XGB "rank stated" count out of 9
 (features whose rank the XGB whole-model answer names).

@@ -1,5 +1,5 @@
 """Delete every persisted record whose generation saw the old, un-titled XGB
-plots — G2a XGB records for the vision/tooluse pipelines, the corresponding
+plots, G2a XGB records for the vision/tooluse pipelines, the corresponding
 variance draws, and the G2b whole-model conditions vision_all / tooluse_all /
 vision_beeswarm on the XGB side. Judge verdicts are removed alongside so the
 idempotent 05G/05Gb re-scores after regeneration.

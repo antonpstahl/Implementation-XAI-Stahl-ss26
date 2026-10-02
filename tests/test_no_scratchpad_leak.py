@@ -15,7 +15,7 @@ truncated draw with an unclosed `<analysis>`. It is excluded from analysis
 elsewhere (utils.rubric / 04Gf cell 7) and the unclosed block is intentional
 evidence of the truncation.
 
-Regex is case-sensitive to match `utils.llm.strip_scratchpad` — a hypothetical
+Regex is case-sensitive to match `utils.llm.strip_scratchpad`, a hypothetical
 `<Thinking>` tag flagged here but not stripped there would be a bug, not two
 consistent decisions.
 """

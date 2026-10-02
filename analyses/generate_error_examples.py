@@ -24,10 +24,10 @@ FAIL_THRESHOLD = 3  # faithfulness <= this counts as a failure worth showing
 # Authored interpretation per shape type (the excerpts below substantiate it).
 INTERPRETATION = {
     "near-flat": (
-        "The dominant failure. Two recurring modes: (1) **missing negligibility** — "
+        "The dominant failure. Two recurring modes: (1) **missing negligibility**, "
         "the feature is described as a meaningful driver instead of being flagged as "
         "negligible (e.g. 'a strong monotone decline reaching -0.7'); (2) **fabricated "
-        "structure** — inventing a peak / non-monotonic shape the flat curve does not "
+        "structure**, inventing a peak / non-monotonic shape the flat curve does not "
         "have. All four handover formats over-attribute here; the `template` baseline "
         "is not worse than the LLM formats on this stratum (n = 5 per format, so no "
         "ordering among them is read into it)."
@@ -62,7 +62,7 @@ def build_report() -> str:
     lines: list[str] = []
     w = lines.append
 
-    w("# Qualitative error analysis — global explanations by shape type\n")
+    w("# Qualitative error analysis, global explanations by shape type\n")
     w("Reference-based judge (`claude-opus-4-8`) `faithfulness` reasoning for the "
       "**failure cases** (score ≤ {}), grouped by ground-truth shape type. "
       "Auto-generated from `results/global_judge/` by "
@@ -92,13 +92,13 @@ def build_report() -> str:
         fails = sorted((r for r in rs if r["faithfulness"] <= FAIL_THRESHOLD),
                        key=lambda r: r["faithfulness"])
         if not fails:
-            w("_No failures at this threshold — all explanations scored above "
+            w("_No failures at this threshold, all explanations scored above "
               f"{FAIL_THRESHOLD}._\n")
             continue
         w(f"**Failure excerpts ({len(fails)} of {len(rs)}):**\n")
         for r in fails:
             tag = f"{r['form_pipeline']} · {r['xai_model']} · {r['feature']}"
-            w(f"- **[faith={r['faithfulness']}] {tag}** — "
+            w(f"- **[faith={r['faithfulness']}] {tag}**, "
               f"{r['faithfulness_reasoning']}")
         w("")
 
